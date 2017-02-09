@@ -63,6 +63,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.TimeBox = new System.Windows.Forms.GroupBox();
+            this.Timedelay = new System.Windows.Forms.NumericUpDown();
             this.L_time = new System.Windows.Forms.Label();
             this.Time_min = new System.Windows.Forms.NumericUpDown();
             this.Time_max = new System.Windows.Forms.NumericUpDown();
@@ -159,7 +160,7 @@
             this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Condition = new System.Windows.Forms.GroupBox();
-            this.L_UB_Th = new System.Windows.Forms.Label();
+            this.UB_th = new System.Windows.Forms.NumericUpDown();
             this.Encounter_th = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.Lv_max = new System.Windows.Forms.NumericUpDown();
@@ -169,7 +170,7 @@
             this.Stationary = new System.Windows.Forms.RadioButton();
             this.L_Lv = new System.Windows.Forms.Label();
             this.Wild = new System.Windows.Forms.RadioButton();
-            this.LV = new System.Windows.Forms.NumericUpDown();
+            this.Lv_min = new System.Windows.Forms.NumericUpDown();
             this.Honey = new System.Windows.Forms.CheckBox();
             this.Sync = new System.Windows.Forms.CheckBox();
             this.UB = new System.Windows.Forms.CheckBox();
@@ -182,13 +183,14 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.L_timedelay = new System.Windows.Forms.Label();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.Timedelay = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.SearchSeedBox.SuspendLayout();
             this.SearchTool.SuspendLayout();
             this.TimeBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).BeginInit();
@@ -227,12 +229,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.BS_5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.Condition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -590,6 +592,7 @@
             // 
             // TimeBox
             // 
+            this.TimeBox.Controls.Add(this.L_timedelay);
             this.TimeBox.Controls.Add(this.Timedelay);
             this.TimeBox.Controls.Add(this.L_time);
             this.TimeBox.Controls.Add(this.Time_min);
@@ -601,10 +604,29 @@
             this.TimeBox.Controls.Add(this.L_NPC);
             this.TimeBox.Location = new System.Drawing.Point(15, 558);
             this.TimeBox.Name = "TimeBox";
-            this.TimeBox.Size = new System.Drawing.Size(266, 138);
+            this.TimeBox.Size = new System.Drawing.Size(399, 103);
             this.TimeBox.TabIndex = 10;
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
+            // 
+            // Timedelay
+            // 
+            this.Timedelay.AccessibleName = "";
+            this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Timedelay.Location = new System.Drawing.Point(72, 64);
+            this.Timedelay.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.Timedelay.Name = "Timedelay";
+            this.Timedelay.Size = new System.Drawing.Size(48, 22);
+            this.Timedelay.TabIndex = 51;
+            this.Timedelay.Value = new decimal(new int[] {
+            236,
+            0,
+            0,
+            0});
             // 
             // L_time
             // 
@@ -656,9 +678,9 @@
             // TimeResult
             // 
             this.TimeResult.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimeResult.Location = new System.Drawing.Point(15, 101);
+            this.TimeResult.Location = new System.Drawing.Point(199, 62);
             this.TimeResult.Name = "TimeResult";
-            this.TimeResult.Size = new System.Drawing.Size(237, 22);
+            this.TimeResult.Size = new System.Drawing.Size(185, 22);
             this.TimeResult.TabIndex = 50;
             // 
             // label8
@@ -672,9 +694,9 @@
             // 
             // CalcTime
             // 
-            this.CalcTime.Location = new System.Drawing.Point(181, 61);
+            this.CalcTime.Location = new System.Drawing.Point(134, 61);
             this.CalcTime.Name = "CalcTime";
-            this.CalcTime.Size = new System.Drawing.Size(75, 23);
+            this.CalcTime.Size = new System.Drawing.Size(59, 23);
             this.CalcTime.TabIndex = 49;
             this.CalcTime.Text = "计算";
             this.CalcTime.UseVisualStyleBackColor = true;
@@ -684,7 +706,7 @@
             // 
             this.NPC.AccessibleName = "";
             this.NPC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NPC.Location = new System.Drawing.Point(70, 61);
+            this.NPC.Location = new System.Drawing.Point(320, 22);
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
@@ -692,7 +714,7 @@
             // L_NPC
             // 
             this.L_NPC.AutoSize = true;
-            this.L_NPC.Location = new System.Drawing.Point(19, 66);
+            this.L_NPC.Location = new System.Drawing.Point(269, 27);
             this.L_NPC.Name = "L_NPC";
             this.L_NPC.Size = new System.Drawing.Size(41, 13);
             this.L_NPC.TabIndex = 47;
@@ -717,7 +739,7 @@
             // L_Framecorrection
             // 
             this.L_Framecorrection.AutoSize = true;
-            this.L_Framecorrection.Location = new System.Drawing.Point(14, 75);
+            this.L_Framecorrection.Location = new System.Drawing.Point(14, 71);
             this.L_Framecorrection.Name = "L_Framecorrection";
             this.L_Framecorrection.Size = new System.Drawing.Size(55, 13);
             this.L_Framecorrection.TabIndex = 61;
@@ -727,7 +749,7 @@
             // 
             this.Framecorrection.AccessibleName = "";
             this.Framecorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Framecorrection.Location = new System.Drawing.Point(82, 70);
+            this.Framecorrection.Location = new System.Drawing.Point(82, 66);
             this.Framecorrection.Maximum = new decimal(new int[] {
             31,
             0,
@@ -740,7 +762,7 @@
             // AroundTarget
             // 
             this.AroundTarget.AutoSize = true;
-            this.AroundTarget.Location = new System.Drawing.Point(144, 74);
+            this.AroundTarget.Location = new System.Drawing.Point(144, 70);
             this.AroundTarget.Name = "AroundTarget";
             this.AroundTarget.Size = new System.Drawing.Size(86, 17);
             this.AroundTarget.TabIndex = 10;
@@ -750,7 +772,7 @@
             // L_frame
             // 
             this.L_frame.AutoSize = true;
-            this.L_frame.Location = new System.Drawing.Point(12, 38);
+            this.L_frame.Location = new System.Drawing.Point(12, 34);
             this.L_frame.Name = "L_frame";
             this.L_frame.Size = new System.Drawing.Size(55, 13);
             this.L_frame.TabIndex = 46;
@@ -759,7 +781,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(149, 40);
+            this.label7.Location = new System.Drawing.Point(149, 36);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 13);
             this.label7.TabIndex = 42;
@@ -769,7 +791,7 @@
             // 
             this.Frame_max.AccessibleName = "";
             this.Frame_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Frame_max.Location = new System.Drawing.Point(166, 35);
+            this.Frame_max.Location = new System.Drawing.Point(166, 31);
             this.Frame_max.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -788,7 +810,7 @@
             // 
             this.Frame_min.AccessibleName = "";
             this.Frame_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Frame_min.Location = new System.Drawing.Point(82, 35);
+            this.Frame_min.Location = new System.Drawing.Point(82, 31);
             this.Frame_min.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -1727,7 +1749,7 @@
             // 
             // Condition
             // 
-            this.Condition.Controls.Add(this.L_UB_Th);
+            this.Condition.Controls.Add(this.UB_th);
             this.Condition.Controls.Add(this.Encounter_th);
             this.Condition.Controls.Add(this.label9);
             this.Condition.Controls.Add(this.Lv_max);
@@ -1737,7 +1759,7 @@
             this.Condition.Controls.Add(this.Stationary);
             this.Condition.Controls.Add(this.L_Lv);
             this.Condition.Controls.Add(this.Wild);
-            this.Condition.Controls.Add(this.LV);
+            this.Condition.Controls.Add(this.Lv_min);
             this.Condition.Controls.Add(this.Honey);
             this.Condition.Controls.Add(this.Sync);
             this.Condition.Controls.Add(this.UB);
@@ -1751,20 +1773,25 @@
             this.Condition.TabStop = false;
             this.Condition.Text = "条件设置";
             // 
-            // L_UB_Th
+            // UB_th
             // 
-            this.L_UB_Th.AutoSize = true;
-            this.L_UB_Th.Location = new System.Drawing.Point(199, 75);
-            this.L_UB_Th.Name = "L_UB_Th";
-            this.L_UB_Th.Size = new System.Drawing.Size(55, 13);
-            this.L_UB_Th.TabIndex = 66;
-            this.L_UB_Th.Text = "遇敌阈值";
+            this.UB_th.AccessibleName = "";
+            this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UB_th.Location = new System.Drawing.Point(203, 71);
+            this.UB_th.Name = "UB_th";
+            this.UB_th.Size = new System.Drawing.Size(34, 22);
+            this.UB_th.TabIndex = 67;
+            this.UB_th.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             // 
             // Encounter_th
             // 
             this.Encounter_th.AccessibleName = "";
             this.Encounter_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Encounter_th.Location = new System.Drawing.Point(264, 70);
+            this.Encounter_th.Location = new System.Drawing.Point(257, 71);
             this.Encounter_th.Name = "Encounter_th";
             this.Encounter_th.Size = new System.Drawing.Size(34, 22);
             this.Encounter_th.TabIndex = 51;
@@ -1777,7 +1804,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(322, 111);
+            this.label9.Location = new System.Drawing.Point(320, 114);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 24;
@@ -1787,7 +1814,7 @@
             // 
             this.Lv_max.AccessibleName = "IV_min";
             this.Lv_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_max.Location = new System.Drawing.Point(345, 105);
+            this.Lv_max.Location = new System.Drawing.Point(343, 108);
             this.Lv_max.Name = "Lv_max";
             this.Lv_max.Size = new System.Drawing.Size(44, 22);
             this.Lv_max.TabIndex = 65;
@@ -1817,7 +1844,7 @@
             "♂7：♀1",
             "♂3：♀1",
             "♂1：♀3"});
-            this.GenderRatio.Location = new System.Drawing.Point(308, 71);
+            this.GenderRatio.Location = new System.Drawing.Point(311, 71);
             this.GenderRatio.Name = "GenderRatio";
             this.GenderRatio.Size = new System.Drawing.Size(79, 21);
             this.GenderRatio.TabIndex = 8;
@@ -1847,11 +1874,11 @@
             // L_Lv
             // 
             this.L_Lv.AutoSize = true;
-            this.L_Lv.Location = new System.Drawing.Point(240, 110);
+            this.L_Lv.Location = new System.Drawing.Point(206, 112);
             this.L_Lv.Name = "L_Lv";
-            this.L_Lv.Size = new System.Drawing.Size(19, 13);
+            this.L_Lv.Size = new System.Drawing.Size(55, 13);
             this.L_Lv.TabIndex = 41;
-            this.L_Lv.Text = "Lv";
+            this.L_Lv.Text = "等级范围";
             // 
             // Wild
             // 
@@ -1864,15 +1891,15 @@
             this.Wild.UseVisualStyleBackColor = true;
             this.Wild.CheckedChanged += new System.EventHandler(this.Wild_CheckedChanged);
             // 
-            // LV
+            // Lv_min
             // 
-            this.LV.AccessibleName = "IV_min";
-            this.LV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LV.Location = new System.Drawing.Point(269, 105);
-            this.LV.Name = "LV";
-            this.LV.Size = new System.Drawing.Size(44, 22);
-            this.LV.TabIndex = 60;
-            this.LV.Value = new decimal(new int[] {
+            this.Lv_min.AccessibleName = "";
+            this.Lv_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lv_min.Location = new System.Drawing.Point(267, 108);
+            this.Lv_min.Name = "Lv_min";
+            this.Lv_min.Size = new System.Drawing.Size(44, 22);
+            this.Lv_min.TabIndex = 60;
+            this.Lv_min.Value = new decimal(new int[] {
             60,
             0,
             0,
@@ -1924,7 +1951,7 @@
             // L_Poke
             // 
             this.L_Poke.AutoSize = true;
-            this.L_Poke.Location = new System.Drawing.Point(80, 110);
+            this.L_Poke.Location = new System.Drawing.Point(14, 113);
             this.L_Poke.Name = "L_Poke";
             this.L_Poke.Size = new System.Drawing.Size(43, 13);
             this.L_Poke.TabIndex = 37;
@@ -1933,7 +1960,7 @@
             // Poke
             // 
             this.Poke.FormattingEnabled = true;
-            this.Poke.Location = new System.Drawing.Point(134, 106);
+            this.Poke.Location = new System.Drawing.Point(68, 109);
             this.Poke.Name = "Poke";
             this.Poke.Size = new System.Drawing.Size(100, 21);
             this.Poke.TabIndex = 36;
@@ -1998,6 +2025,15 @@
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
             // 
+            // L_timedelay
+            // 
+            this.L_timedelay.AutoSize = true;
+            this.L_timedelay.Location = new System.Drawing.Point(15, 66);
+            this.L_timedelay.Name = "L_timedelay";
+            this.L_timedelay.Size = new System.Drawing.Size(55, 13);
+            this.L_timedelay.TabIndex = 52;
+            this.L_timedelay.Text = "时间修正";
+            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2010,25 +2046,6 @@
             this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
-            // Timedelay
-            // 
-            this.Timedelay.AccessibleName = "";
-            this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Timedelay.Location = new System.Drawing.Point(122, 61);
-            this.Timedelay.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.Timedelay.Name = "Timedelay";
-            this.Timedelay.Size = new System.Drawing.Size(48, 22);
-            this.Timedelay.TabIndex = 51;
-            this.Timedelay.Value = new decimal(new int[] {
-            236,
-            0,
-            0,
-            0});
             // 
             // Form1
             // 
@@ -2052,6 +2069,7 @@
             this.SearchTool.ResumeLayout(false);
             this.TimeBox.ResumeLayout(false);
             this.TimeBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).EndInit();
@@ -2094,12 +2112,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.Condition.ResumeLayout(false);
             this.Condition.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2211,7 +2229,7 @@
         private System.Windows.Forms.NumericUpDown Frame_min;
         private System.Windows.Forms.TextBox TimeResult;
         private System.Windows.Forms.Label L_Lv;
-        private System.Windows.Forms.NumericUpDown LV;
+        private System.Windows.Forms.NumericUpDown Lv_min;
         private System.Windows.Forms.CheckBox DisableFilters;
         private System.Windows.Forms.Label L_Framecorrection;
         private System.Windows.Forms.NumericUpDown Framecorrection;
@@ -2257,8 +2275,9 @@
         private System.Windows.Forms.Label L_Lv_S;
         private System.Windows.Forms.NumericUpDown Lv_Search;
         private System.Windows.Forms.CheckBox UBOnly;
-        private System.Windows.Forms.Label L_UB_Th;
         private System.Windows.Forms.NumericUpDown Timedelay;
+        private System.Windows.Forms.NumericUpDown UB_th;
+        private System.Windows.Forms.Label L_timedelay;
     }
 }
 

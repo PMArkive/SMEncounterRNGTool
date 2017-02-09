@@ -44,8 +44,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-
-        public const int UB_th = 30;
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -249,7 +248,6 @@ namespace SMEncounterRNGTool
             if (UB.Checked)
             {
                 Wild.Checked = true;
-                GenderRatio.SelectedIndex = 0;
                 UBOnly.Enabled = true;
             }
             else
@@ -262,12 +260,12 @@ namespace SMEncounterRNGTool
         {
             if (Stationary.Checked)
             {
-                GenderRatio.SelectedIndex = 0;
-                UB.Checked = Honey.Checked = false;
-                Fix3v.Checked = true;
-                GenderRatio.Enabled = UB.Enabled  = UBOnly.Enabled = Honey.Enabled = Fix3v.Enabled = false;
-                label9.Visible = L_Lv_S.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = false;
-                Lv_max.Visible = Lv_Search.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = false;
+                GenderRatio.SelectedIndex = 0;  UB.Checked = Honey.Checked = false; UB_CheckedChanged(null, null);
+                GenderRatio.Visible = UB.Visible = Honey.Visible = UB_th.Visible = Encounter_th.Visible = false;
+                Fix3v.Checked = true; Fix3v.Enabled = false;
+                //AlwaysSynced.Visible = true;
+                label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = false;
+                Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = false;
             }
         }
 
@@ -276,14 +274,14 @@ namespace SMEncounterRNGTool
             if (Wild.Checked)
             {
                 GenderRatio.SelectedIndex = 1;
-                GenderRatio.Enabled = UB.Enabled =  Honey.Enabled = Fix3v.Enabled = true;
-                Fix3v.Checked = false;
-
-                label9.Visible = L_Lv_S.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = true;
-                Lv_max.Visible = Lv_Search.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = true;
+                GenderRatio.Visible = UB.Visible = Honey.Visible = UB_th.Visible = Encounter_th.Visible = true;
+                Fix3v.Checked = false; Fix3v.Enabled = true;
+                AlwaysSynced.Checked = false;
+                //AlwaysSynced.Visible = false;
+                label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = true;
+                Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = true;
             }
         }
-
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
         {
@@ -301,23 +299,30 @@ namespace SMEncounterRNGTool
             Sync.Checked = (SyncNature.SelectedIndex > 0);
         }
         #endregion
+
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AlwaysSynced.Checked = (Poke.SelectedIndex > 5);
+            AlwaysSynced.Checked = (Poke.SelectedIndex > 5)&& (Poke.SelectedIndex < 10);
             for (int i = 0; i < 6; i++)
             {
                 BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
             }
             switch (Poke.SelectedIndex)
             {
-                case 3: NPC.Value = 1; LV.Value = 60; break; // Tapu Fini
-                case 4: NPC.Value = 2; LV.Value = 55; break; // Solgaleo
-                case 5: NPC.Value = 3; LV.Value = 55; break; // Lunala
-                case 6: NPC.Value = 8; LV.Value = 40; break; // Type:Null
-                case 7: NPC.Value = 6; LV.Value = 50; break; // Magearna sometimes NPC# =7
-                case 8: NPC.Value = 3; LV.Value = 50; break; // Zygarde-10%
-                case 9: NPC.Value = 3; LV.Value = 50; break; // Zygarde-50%
-                default: NPC.Value = 0; LV.Value = 60; break;
+                case 3: NPC.Value = 1; Lv_Search.Value = 60; break; // Tapu Fini
+                case 4: NPC.Value = 2; Lv_Search.Value = 55; break; // Solgaleo
+                case 5: NPC.Value = 3; Lv_Search.Value = 55; break; // Lunala
+                case 6: NPC.Value = 8; Lv_Search.Value = 40; break; // Type:Null
+                case 7: NPC.Value = 6; Lv_Search.Value = 50; break; // Magearna sometimes NPC# =7
+                case 8: NPC.Value = 3; Lv_Search.Value = 50; break; // Zygarde-10%
+                case 9: NPC.Value = 3; Lv_Search.Value = 50; break; // Zygarde-50%
+                case 10: NPC.Value = 0; Lv_Search.Value = 55; break; //
+                case 11: Lv_Search.Value = 65; break; //
+                case 13: Lv_Search.Value = 65; break; //
+                case 14: NPC.Value = 0; Lv_Search.Value = 65; break; //
+                case 16: Lv_Search.Value = 70; break; //
+                case 17: Lv_Search.Value = 75; break; //
+                default: NPC.Value = 0; Lv_Search.Value = 60; break;
             }
         }
 
@@ -521,8 +526,9 @@ namespace SMEncounterRNGTool
                 gender_ratio = gender_threshold,
                 nogender = GenderRatio.SelectedIndex == 0,
                 Sync = Sync.Checked,
-                Lv_min = (int)LV.Value,
+                Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
+                UB_th=(int)UB_th.Value,
             };
             return rng;
         }
@@ -564,10 +570,10 @@ namespace SMEncounterRNGTool
                 if (EncounteredOnly.Checked && result.Encounter >= Encounter_th.Value)
                     return false;
 
-                if (!UB.Checked && setting.Lv != 0 && setting.Lv != result.Lv)
+                if (result.UbValue >= UB_th.Value && setting.Lv != 0 && setting.Lv != result.Lv)
                     return false;
 
-                if (UBOnly.Checked && result.UbValue >= UB_th)
+                if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
             }
 
@@ -593,7 +599,7 @@ namespace SMEncounterRNGTool
             if (!Advanced.Checked)
             {
                 Encounter = (result.Encounter < 13) ? "O" : "X";
-                UbValue = (result.UbValue < UB_th) && (result.UbValue > -1) ? "O" : "X";
+                UbValue = (result.UbValue < UB_th.Value) && (result.UbValue > -1) ? "O" : "X";
             }
 
             DataGridViewRow row = new DataGridViewRow();

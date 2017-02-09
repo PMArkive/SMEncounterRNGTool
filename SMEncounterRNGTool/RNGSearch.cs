@@ -20,6 +20,7 @@ namespace SMEncounterRNGTool
         public bool Honey, UB, UB_S, Wild;
         public bool Sync = false;
         public int Lv_max, Lv_min;
+        public int UB_th;
 
         public class RNGResult
         {
@@ -65,7 +66,7 @@ namespace SMEncounterRNGTool
             if (UB)
             {
                 st.UbValue = (int)(sfmt.NextUInt64() % 100);
-                UB_S = st.UbValue < Form1.UB_th;
+                UB_S = st.UbValue < UB_th;
                 Fix3v = UB_S;
             }
 
@@ -151,7 +152,7 @@ namespace SMEncounterRNGTool
             }
 
             //Gender
-            if (nogender)
+            if (nogender || UB_S)
                 st.Gender = 0;
             else
                 st.Gender = ((int)(sfmt.NextUInt64() % 252) >= gender_ratio) ? 1 : 2;
