@@ -37,7 +37,7 @@ namespace SMEncounterRNGTool
             public int Encounter = -1;
             public int Gender;
             public int Ability = -1;
-            public int UbValue = -1;
+            public int UbValue = 100;
             public int Slot = -1;
             public int Lv = -1;
             public int Item = -1;
@@ -80,18 +80,16 @@ namespace SMEncounterRNGTool
                 st.Item = (int)(sfmt.NextUInt64() % 60);
             }
 
-            for (int i = 0; i < FrameCorrection; i++)
+            //Something
+            for (int i = 0; i < 60 + FrameCorrection; i++)
                 sfmt.NextUInt64();
 
-            //謎の消費 -- Something
-            for (int i = 0; i < 60; i++)
-                sfmt.NextUInt64();
-
-            //暗号化定数 -- Encryption Constant
+            //Encryption Constant
             st.EC = (uint)(sfmt.NextUInt64() & 0xFFFFFFFF);
 
-            //性格値 -- PID
+            //PID
             int roll_count = ShinyCharm ? 3 : 1;
+            if (UB_S) roll_count = 1;
             for (int i = 0; i < roll_count; i++) //pid
             {
                 st.PID = (uint)(sfmt.NextUInt64() & 0xFFFFFFFF);

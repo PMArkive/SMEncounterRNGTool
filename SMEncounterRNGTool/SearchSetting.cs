@@ -102,25 +102,9 @@ namespace SMEncounterRNGTool
 
         public bool validStatus(RNGSearch.RNGResult result, SearchSetting setting)
         {
-            int[] stats = new int[6];
-            setting.p_Status = new int[6];
-            int[] IV = new int[6];
-
             for (int i = 0; i < 6; i++)
-            {
-                IV[i] = result.IVs[i];
-                stats[i] = setting.Status[i];
-            }
-
-            p_Status[0] = (int)(((setting.BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
-            for (int i = 1; i < 6; i++)
-                p_Status[i] = (int)(((int)(((setting.BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
-
-            result.p_Status = setting.p_Status;
-            
-            for (int i = 0; i < 6; i++)
-                if (stats[i] != 0 && stats[i] != p_Status[i]) return false;
-
+                if (setting.Status[i] != 0 && setting.Status[i] != p_Status[i])
+                    return false;
             return true;
         }
 

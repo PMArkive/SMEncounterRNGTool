@@ -70,5 +70,29 @@ namespace SMEncounterRNGTool.Properties {
                 this["Advance"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal Seed {
+            get {
+                return ((decimal)(this["Seed"]));
+            }
+            set {
+                this["Seed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Method {
+            get {
+                return ((bool)(this["Method"]));
+            }
+            set {
+                this["Method"] = value;
+            }
+        }
     }
 }

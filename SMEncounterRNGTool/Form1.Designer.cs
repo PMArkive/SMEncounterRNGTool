@@ -63,6 +63,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.TimeBox = new System.Windows.Forms.GroupBox();
+            this.L_timedelay = new System.Windows.Forms.Label();
             this.Timedelay = new System.Windows.Forms.NumericUpDown();
             this.L_time = new System.Windows.Forms.Label();
             this.Time_min = new System.Windows.Forms.NumericUpDown();
@@ -82,6 +83,8 @@
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
             this.CalcList = new System.Windows.Forms.Button();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
+            this.ByIVs = new System.Windows.Forms.RadioButton();
+            this.ByStats = new System.Windows.Forms.RadioButton();
             this.UBOnly = new System.Windows.Forms.CheckBox();
             this.L_Slot = new System.Windows.Forms.Label();
             this.Slot = new System.Windows.Forms.ComboBox();
@@ -89,39 +92,6 @@
             this.L_Ability = new System.Windows.Forms.Label();
             this.Lv_Search = new System.Windows.Forms.NumericUpDown();
             this.Ability = new System.Windows.Forms.ComboBox();
-            this.SearchMethod = new System.Windows.Forms.TabControl();
-            this.ByIVs = new System.Windows.Forms.TabPage();
-            this.ivmin0 = new System.Windows.Forms.NumericUpDown();
-            this.ivmin1 = new System.Windows.Forms.NumericUpDown();
-            this.ivmin2 = new System.Windows.Forms.NumericUpDown();
-            this.ivmin3 = new System.Windows.Forms.NumericUpDown();
-            this.ivmin4 = new System.Windows.Forms.NumericUpDown();
-            this.ivmin5 = new System.Windows.Forms.NumericUpDown();
-            this.ivmax0 = new System.Windows.Forms.NumericUpDown();
-            this.ivmax1 = new System.Windows.Forms.NumericUpDown();
-            this.ivmax2 = new System.Windows.Forms.NumericUpDown();
-            this.ivmax3 = new System.Windows.Forms.NumericUpDown();
-            this.ivmax4 = new System.Windows.Forms.NumericUpDown();
-            this.ivmax5 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ByStats = new System.Windows.Forms.TabPage();
-            this.Stat0 = new System.Windows.Forms.NumericUpDown();
-            this.Stat1 = new System.Windows.Forms.NumericUpDown();
-            this.Stat2 = new System.Windows.Forms.NumericUpDown();
-            this.Stat3 = new System.Windows.Forms.NumericUpDown();
-            this.Stat4 = new System.Windows.Forms.NumericUpDown();
-            this.Stat5 = new System.Windows.Forms.NumericUpDown();
-            this.BS_0 = new System.Windows.Forms.NumericUpDown();
-            this.BS_1 = new System.Windows.Forms.NumericUpDown();
-            this.BS_2 = new System.Windows.Forms.NumericUpDown();
-            this.BS_3 = new System.Windows.Forms.NumericUpDown();
-            this.BS_4 = new System.Windows.Forms.NumericUpDown();
-            this.BS_5 = new System.Windows.Forms.NumericUpDown();
             this.DisableFilters = new System.Windows.Forms.CheckBox();
             this.L_S = new System.Windows.Forms.Label();
             this.EncounteredOnly = new System.Windows.Forms.CheckBox();
@@ -137,6 +107,41 @@
             this.HiddenPower = new System.Windows.Forms.ComboBox();
             this.Nature = new System.Windows.Forms.ComboBox();
             this.L_HP = new System.Windows.Forms.Label();
+            this.StatPanel = new System.Windows.Forms.Panel();
+            this.L_Stats = new System.Windows.Forms.Label();
+            this.L_BS = new System.Windows.Forms.Label();
+            this.Stat0 = new System.Windows.Forms.NumericUpDown();
+            this.Stat1 = new System.Windows.Forms.NumericUpDown();
+            this.BS_5 = new System.Windows.Forms.NumericUpDown();
+            this.Stat2 = new System.Windows.Forms.NumericUpDown();
+            this.BS_4 = new System.Windows.Forms.NumericUpDown();
+            this.Stat3 = new System.Windows.Forms.NumericUpDown();
+            this.BS_3 = new System.Windows.Forms.NumericUpDown();
+            this.Stat4 = new System.Windows.Forms.NumericUpDown();
+            this.BS_2 = new System.Windows.Forms.NumericUpDown();
+            this.Stat5 = new System.Windows.Forms.NumericUpDown();
+            this.BS_1 = new System.Windows.Forms.NumericUpDown();
+            this.BS_0 = new System.Windows.Forms.NumericUpDown();
+            this.IVPanel = new System.Windows.Forms.Panel();
+            this.L_IVRange = new System.Windows.Forms.Label();
+            this.ivmin0 = new System.Windows.Forms.NumericUpDown();
+            this.ivmax0 = new System.Windows.Forms.NumericUpDown();
+            this.ivmin1 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ivmin2 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ivmin3 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ivmin4 = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ivmin5 = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ivmax1 = new System.Windows.Forms.NumericUpDown();
+            this.ivmax5 = new System.Windows.Forms.NumericUpDown();
+            this.ivmax2 = new System.Windows.Forms.NumericUpDown();
+            this.ivmax4 = new System.Windows.Forms.NumericUpDown();
+            this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
             this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -163,9 +168,9 @@
             this.UB_th = new System.Windows.Forms.NumericUpDown();
             this.Encounter_th = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.GenderRatio = new System.Windows.Forms.ComboBox();
             this.Lv_max = new System.Windows.Forms.NumericUpDown();
             this.AlwaysSynced = new System.Windows.Forms.CheckBox();
-            this.GenderRatio = new System.Windows.Forms.ComboBox();
             this.SyncNature = new System.Windows.Forms.ComboBox();
             this.Stationary = new System.Windows.Forms.RadioButton();
             this.L_Lv = new System.Windows.Forms.Label();
@@ -183,8 +188,8 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.L_timedelay = new System.Windows.Forms.Label();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.Reset = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.SearchSeedBox.SuspendLayout();
@@ -200,33 +205,32 @@
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).BeginInit();
             this.SearchSettingBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_Search)).BeginInit();
-            this.SearchMethod.SuspendLayout();
-            this.ByIVs.SuspendLayout();
+            this.StatPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_0)).BeginInit();
+            this.IVPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax5)).BeginInit();
-            this.ByStats.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.Condition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
@@ -263,8 +267,6 @@
             // 
             // SearchSeedBox
             // 
-            this.SearchSeedBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchSeedBox.Controls.Add(this.L_clocklist);
             this.SearchSeedBox.Controls.Add(this.EndClockInput);
             this.SearchSeedBox.Controls.Add(this.Search);
@@ -293,7 +295,7 @@
             this.SearchSeedBox.Controls.Add(this.button9);
             this.SearchSeedBox.Location = new System.Drawing.Point(6, 6);
             this.SearchSeedBox.Name = "SearchSeedBox";
-            this.SearchSeedBox.Size = new System.Drawing.Size(1178, 152);
+            this.SearchSeedBox.Size = new System.Drawing.Size(949, 152);
             this.SearchSeedBox.TabIndex = 6;
             this.SearchSeedBox.TabStop = false;
             this.SearchSeedBox.Text = "输入指针";
@@ -609,6 +611,15 @@
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
             // 
+            // L_timedelay
+            // 
+            this.L_timedelay.AutoSize = true;
+            this.L_timedelay.Location = new System.Drawing.Point(15, 66);
+            this.L_timedelay.Name = "L_timedelay";
+            this.L_timedelay.Size = new System.Drawing.Size(55, 13);
+            this.L_timedelay.TabIndex = 52;
+            this.L_timedelay.Text = "时间修正";
+            // 
             // Timedelay
             // 
             this.Timedelay.AccessibleName = "";
@@ -751,10 +762,15 @@
             this.Framecorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Framecorrection.Location = new System.Drawing.Point(82, 66);
             this.Framecorrection.Maximum = new decimal(new int[] {
-            31,
+            10,
             0,
             0,
             0});
+            this.Framecorrection.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            -2147483648});
             this.Framecorrection.Name = "Framecorrection";
             this.Framecorrection.Size = new System.Drawing.Size(35, 22);
             this.Framecorrection.TabIndex = 61;
@@ -837,6 +853,9 @@
             // 
             // SearchSettingBox
             // 
+            this.SearchSettingBox.Controls.Add(this.Reset);
+            this.SearchSettingBox.Controls.Add(this.ByIVs);
+            this.SearchSettingBox.Controls.Add(this.ByStats);
             this.SearchSettingBox.Controls.Add(this.UBOnly);
             this.SearchSettingBox.Controls.Add(this.L_Slot);
             this.SearchSettingBox.Controls.Add(this.Slot);
@@ -844,7 +863,6 @@
             this.SearchSettingBox.Controls.Add(this.L_Ability);
             this.SearchSettingBox.Controls.Add(this.Lv_Search);
             this.SearchSettingBox.Controls.Add(this.Ability);
-            this.SearchSettingBox.Controls.Add(this.SearchMethod);
             this.SearchSettingBox.Controls.Add(this.DisableFilters);
             this.SearchSettingBox.Controls.Add(this.L_S);
             this.SearchSettingBox.Controls.Add(this.EncounteredOnly);
@@ -860,12 +878,37 @@
             this.SearchSettingBox.Controls.Add(this.HiddenPower);
             this.SearchSettingBox.Controls.Add(this.Nature);
             this.SearchSettingBox.Controls.Add(this.L_HP);
+            this.SearchSettingBox.Controls.Add(this.StatPanel);
+            this.SearchSettingBox.Controls.Add(this.IVPanel);
             this.SearchSettingBox.Location = new System.Drawing.Point(15, 169);
             this.SearchSettingBox.Name = "SearchSettingBox";
             this.SearchSettingBox.Size = new System.Drawing.Size(399, 265);
             this.SearchSettingBox.TabIndex = 3;
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
+            // 
+            // ByIVs
+            // 
+            this.ByIVs.AutoSize = true;
+            this.ByIVs.Location = new System.Drawing.Point(18, 22);
+            this.ByIVs.Name = "ByIVs";
+            this.ByIVs.Size = new System.Drawing.Size(85, 17);
+            this.ByIVs.TabIndex = 72;
+            this.ByIVs.TabStop = true;
+            this.ByIVs.Text = "通过个体值";
+            this.ByIVs.UseVisualStyleBackColor = true;
+            this.ByIVs.CheckedChanged += new System.EventHandler(this.SearchMethod_CheckedChanged);
+            // 
+            // ByStats
+            // 
+            this.ByStats.AutoSize = true;
+            this.ByStats.Location = new System.Drawing.Point(104, 22);
+            this.ByStats.Name = "ByStats";
+            this.ByStats.Size = new System.Drawing.Size(85, 17);
+            this.ByStats.TabIndex = 71;
+            this.ByStats.TabStop = true;
+            this.ByStats.Text = "通过能力值";
+            this.ByStats.UseVisualStyleBackColor = true;
             // 
             // UBOnly
             // 
@@ -946,486 +989,6 @@
             this.Ability.Size = new System.Drawing.Size(74, 21);
             this.Ability.TabIndex = 63;
             // 
-            // SearchMethod
-            // 
-            this.SearchMethod.Controls.Add(this.ByIVs);
-            this.SearchMethod.Controls.Add(this.ByStats);
-            this.SearchMethod.Location = new System.Drawing.Point(46, 30);
-            this.SearchMethod.Name = "SearchMethod";
-            this.SearchMethod.SelectedIndex = 0;
-            this.SearchMethod.Size = new System.Drawing.Size(149, 225);
-            this.SearchMethod.TabIndex = 62;
-            // 
-            // ByIVs
-            // 
-            this.ByIVs.Controls.Add(this.ivmin0);
-            this.ByIVs.Controls.Add(this.ivmin1);
-            this.ByIVs.Controls.Add(this.ivmin2);
-            this.ByIVs.Controls.Add(this.ivmin3);
-            this.ByIVs.Controls.Add(this.ivmin4);
-            this.ByIVs.Controls.Add(this.ivmin5);
-            this.ByIVs.Controls.Add(this.ivmax0);
-            this.ByIVs.Controls.Add(this.ivmax1);
-            this.ByIVs.Controls.Add(this.ivmax2);
-            this.ByIVs.Controls.Add(this.ivmax3);
-            this.ByIVs.Controls.Add(this.ivmax4);
-            this.ByIVs.Controls.Add(this.ivmax5);
-            this.ByIVs.Controls.Add(this.label1);
-            this.ByIVs.Controls.Add(this.label2);
-            this.ByIVs.Controls.Add(this.label3);
-            this.ByIVs.Controls.Add(this.label4);
-            this.ByIVs.Controls.Add(this.label5);
-            this.ByIVs.Controls.Add(this.label6);
-            this.ByIVs.Location = new System.Drawing.Point(4, 22);
-            this.ByIVs.Name = "ByIVs";
-            this.ByIVs.Padding = new System.Windows.Forms.Padding(3);
-            this.ByIVs.Size = new System.Drawing.Size(141, 199);
-            this.ByIVs.TabIndex = 0;
-            this.ByIVs.Text = "通过个体值";
-            this.ByIVs.UseVisualStyleBackColor = true;
-            // 
-            // ivmin0
-            // 
-            this.ivmin0.AccessibleName = "IV_min";
-            this.ivmin0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmin0.Location = new System.Drawing.Point(9, 16);
-            this.ivmin0.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmin0.Name = "ivmin0";
-            this.ivmin0.Size = new System.Drawing.Size(49, 22);
-            this.ivmin0.TabIndex = 6;
-            // 
-            // ivmin1
-            // 
-            this.ivmin1.AccessibleName = "IV_min";
-            this.ivmin1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmin1.Location = new System.Drawing.Point(9, 46);
-            this.ivmin1.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmin1.Name = "ivmin1";
-            this.ivmin1.Size = new System.Drawing.Size(49, 22);
-            this.ivmin1.TabIndex = 7;
-            // 
-            // ivmin2
-            // 
-            this.ivmin2.AccessibleName = "IV_min";
-            this.ivmin2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmin2.Location = new System.Drawing.Point(9, 76);
-            this.ivmin2.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmin2.Name = "ivmin2";
-            this.ivmin2.Size = new System.Drawing.Size(49, 22);
-            this.ivmin2.TabIndex = 8;
-            // 
-            // ivmin3
-            // 
-            this.ivmin3.AccessibleName = "IV_min";
-            this.ivmin3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmin3.Location = new System.Drawing.Point(9, 106);
-            this.ivmin3.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmin3.Name = "ivmin3";
-            this.ivmin3.Size = new System.Drawing.Size(49, 22);
-            this.ivmin3.TabIndex = 9;
-            // 
-            // ivmin4
-            // 
-            this.ivmin4.AccessibleName = "IV_min";
-            this.ivmin4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmin4.Location = new System.Drawing.Point(9, 136);
-            this.ivmin4.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmin4.Name = "ivmin4";
-            this.ivmin4.Size = new System.Drawing.Size(49, 22);
-            this.ivmin4.TabIndex = 10;
-            // 
-            // ivmin5
-            // 
-            this.ivmin5.AccessibleName = "IV_min";
-            this.ivmin5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmin5.Location = new System.Drawing.Point(9, 166);
-            this.ivmin5.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmin5.Name = "ivmin5";
-            this.ivmin5.Size = new System.Drawing.Size(49, 22);
-            this.ivmin5.TabIndex = 11;
-            // 
-            // ivmax0
-            // 
-            this.ivmax0.AccessibleName = "IV_max";
-            this.ivmax0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmax0.Location = new System.Drawing.Point(84, 16);
-            this.ivmax0.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmax0.Name = "ivmax0";
-            this.ivmax0.Size = new System.Drawing.Size(49, 22);
-            this.ivmax0.TabIndex = 12;
-            this.ivmax0.Value = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            // 
-            // ivmax1
-            // 
-            this.ivmax1.AccessibleName = "IV_max";
-            this.ivmax1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmax1.Location = new System.Drawing.Point(84, 46);
-            this.ivmax1.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmax1.Name = "ivmax1";
-            this.ivmax1.Size = new System.Drawing.Size(49, 22);
-            this.ivmax1.TabIndex = 13;
-            this.ivmax1.Value = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            // 
-            // ivmax2
-            // 
-            this.ivmax2.AccessibleName = "IV_max";
-            this.ivmax2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmax2.Location = new System.Drawing.Point(84, 76);
-            this.ivmax2.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmax2.Name = "ivmax2";
-            this.ivmax2.Size = new System.Drawing.Size(49, 22);
-            this.ivmax2.TabIndex = 14;
-            this.ivmax2.Value = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            // 
-            // ivmax3
-            // 
-            this.ivmax3.AccessibleName = "IV_max";
-            this.ivmax3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmax3.Location = new System.Drawing.Point(84, 106);
-            this.ivmax3.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmax3.Name = "ivmax3";
-            this.ivmax3.Size = new System.Drawing.Size(49, 22);
-            this.ivmax3.TabIndex = 15;
-            this.ivmax3.Value = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            // 
-            // ivmax4
-            // 
-            this.ivmax4.AccessibleName = "IV_max";
-            this.ivmax4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmax4.Location = new System.Drawing.Point(84, 136);
-            this.ivmax4.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmax4.Name = "ivmax4";
-            this.ivmax4.Size = new System.Drawing.Size(49, 22);
-            this.ivmax4.TabIndex = 16;
-            this.ivmax4.Value = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            // 
-            // ivmax5
-            // 
-            this.ivmax5.AccessibleName = "IV_max";
-            this.ivmax5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ivmax5.Location = new System.Drawing.Point(84, 166);
-            this.ivmax5.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.ivmax5.Name = "ivmax5";
-            this.ivmax5.Size = new System.Drawing.Size(49, 22);
-            this.ivmax5.TabIndex = 17;
-            this.ivmax5.Value = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "~";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "~";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 82);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 13);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "~";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(64, 112);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "~";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(64, 142);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(14, 13);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "~";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(64, 172);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 13);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "~";
-            // 
-            // ByStats
-            // 
-            this.ByStats.Controls.Add(this.Stat0);
-            this.ByStats.Controls.Add(this.Stat1);
-            this.ByStats.Controls.Add(this.Stat2);
-            this.ByStats.Controls.Add(this.Stat3);
-            this.ByStats.Controls.Add(this.Stat4);
-            this.ByStats.Controls.Add(this.Stat5);
-            this.ByStats.Controls.Add(this.BS_0);
-            this.ByStats.Controls.Add(this.BS_1);
-            this.ByStats.Controls.Add(this.BS_2);
-            this.ByStats.Controls.Add(this.BS_3);
-            this.ByStats.Controls.Add(this.BS_4);
-            this.ByStats.Controls.Add(this.BS_5);
-            this.ByStats.Location = new System.Drawing.Point(4, 22);
-            this.ByStats.Name = "ByStats";
-            this.ByStats.Padding = new System.Windows.Forms.Padding(3);
-            this.ByStats.Size = new System.Drawing.Size(141, 199);
-            this.ByStats.TabIndex = 1;
-            this.ByStats.Text = "通过能力值";
-            this.ByStats.UseVisualStyleBackColor = true;
-            // 
-            // Stat0
-            // 
-            this.Stat0.AccessibleName = "";
-            this.Stat0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stat0.Location = new System.Drawing.Point(80, 16);
-            this.Stat0.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.Stat0.Name = "Stat0";
-            this.Stat0.Size = new System.Drawing.Size(55, 22);
-            this.Stat0.TabIndex = 31;
-            // 
-            // Stat1
-            // 
-            this.Stat1.AccessibleName = "";
-            this.Stat1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stat1.Location = new System.Drawing.Point(80, 46);
-            this.Stat1.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.Stat1.Name = "Stat1";
-            this.Stat1.Size = new System.Drawing.Size(55, 22);
-            this.Stat1.TabIndex = 32;
-            // 
-            // Stat2
-            // 
-            this.Stat2.AccessibleName = "";
-            this.Stat2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stat2.Location = new System.Drawing.Point(80, 76);
-            this.Stat2.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.Stat2.Name = "Stat2";
-            this.Stat2.Size = new System.Drawing.Size(55, 22);
-            this.Stat2.TabIndex = 33;
-            // 
-            // Stat3
-            // 
-            this.Stat3.AccessibleName = "";
-            this.Stat3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stat3.Location = new System.Drawing.Point(80, 106);
-            this.Stat3.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.Stat3.Name = "Stat3";
-            this.Stat3.Size = new System.Drawing.Size(55, 22);
-            this.Stat3.TabIndex = 34;
-            // 
-            // Stat4
-            // 
-            this.Stat4.AccessibleName = "";
-            this.Stat4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stat4.Location = new System.Drawing.Point(80, 136);
-            this.Stat4.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.Stat4.Name = "Stat4";
-            this.Stat4.Size = new System.Drawing.Size(55, 22);
-            this.Stat4.TabIndex = 35;
-            // 
-            // Stat5
-            // 
-            this.Stat5.AccessibleName = "";
-            this.Stat5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stat5.Location = new System.Drawing.Point(80, 166);
-            this.Stat5.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.Stat5.Name = "Stat5";
-            this.Stat5.Size = new System.Drawing.Size(55, 22);
-            this.Stat5.TabIndex = 36;
-            // 
-            // BS_0
-            // 
-            this.BS_0.AccessibleName = "";
-            this.BS_0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BS_0.Location = new System.Drawing.Point(7, 16);
-            this.BS_0.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.BS_0.Name = "BS_0";
-            this.BS_0.Size = new System.Drawing.Size(55, 22);
-            this.BS_0.TabIndex = 0;
-            // 
-            // BS_1
-            // 
-            this.BS_1.AccessibleName = "";
-            this.BS_1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BS_1.Location = new System.Drawing.Point(7, 46);
-            this.BS_1.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.BS_1.Name = "BS_1";
-            this.BS_1.Size = new System.Drawing.Size(55, 22);
-            this.BS_1.TabIndex = 1;
-            // 
-            // BS_2
-            // 
-            this.BS_2.AccessibleName = "";
-            this.BS_2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BS_2.Location = new System.Drawing.Point(7, 76);
-            this.BS_2.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.BS_2.Name = "BS_2";
-            this.BS_2.Size = new System.Drawing.Size(55, 22);
-            this.BS_2.TabIndex = 2;
-            // 
-            // BS_3
-            // 
-            this.BS_3.AccessibleName = "";
-            this.BS_3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BS_3.Location = new System.Drawing.Point(7, 106);
-            this.BS_3.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.BS_3.Name = "BS_3";
-            this.BS_3.Size = new System.Drawing.Size(55, 22);
-            this.BS_3.TabIndex = 3;
-            // 
-            // BS_4
-            // 
-            this.BS_4.AccessibleName = "";
-            this.BS_4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BS_4.Location = new System.Drawing.Point(7, 136);
-            this.BS_4.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.BS_4.Name = "BS_4";
-            this.BS_4.Size = new System.Drawing.Size(55, 22);
-            this.BS_4.TabIndex = 4;
-            // 
-            // BS_5
-            // 
-            this.BS_5.AccessibleName = "";
-            this.BS_5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BS_5.Location = new System.Drawing.Point(7, 166);
-            this.BS_5.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.BS_5.Name = "BS_5";
-            this.BS_5.Size = new System.Drawing.Size(55, 22);
-            this.BS_5.TabIndex = 5;
-            // 
             // DisableFilters
             // 
             this.DisableFilters.AutoSize = true;
@@ -1439,7 +1002,7 @@
             // L_S
             // 
             this.L_S.AutoSize = true;
-            this.L_S.Location = new System.Drawing.Point(8, 220);
+            this.L_S.Location = new System.Drawing.Point(8, 230);
             this.L_S.Name = "L_S";
             this.L_S.Size = new System.Drawing.Size(31, 13);
             this.L_S.TabIndex = 29;
@@ -1458,7 +1021,7 @@
             // L_C
             // 
             this.L_C.AutoSize = true;
-            this.L_C.Location = new System.Drawing.Point(8, 160);
+            this.L_C.Location = new System.Drawing.Point(8, 170);
             this.L_C.Name = "L_C";
             this.L_C.Size = new System.Drawing.Size(31, 13);
             this.L_C.TabIndex = 27;
@@ -1477,7 +1040,7 @@
             // L_B
             // 
             this.L_B.AutoSize = true;
-            this.L_B.Location = new System.Drawing.Point(8, 130);
+            this.L_B.Location = new System.Drawing.Point(8, 140);
             this.L_B.Name = "L_B";
             this.L_B.Size = new System.Drawing.Size(31, 13);
             this.L_B.TabIndex = 26;
@@ -1486,7 +1049,7 @@
             // L_H
             // 
             this.L_H.AutoSize = true;
-            this.L_H.Location = new System.Drawing.Point(12, 70);
+            this.L_H.Location = new System.Drawing.Point(12, 80);
             this.L_H.Name = "L_H";
             this.L_H.Size = new System.Drawing.Size(22, 13);
             this.L_H.TabIndex = 24;
@@ -1495,7 +1058,7 @@
             // L_A
             // 
             this.L_A.AutoSize = true;
-            this.L_A.Location = new System.Drawing.Point(8, 100);
+            this.L_A.Location = new System.Drawing.Point(8, 110);
             this.L_A.Name = "L_A";
             this.L_A.Size = new System.Drawing.Size(31, 13);
             this.L_A.TabIndex = 25;
@@ -1504,7 +1067,7 @@
             // L_D
             // 
             this.L_D.AutoSize = true;
-            this.L_D.Location = new System.Drawing.Point(8, 190);
+            this.L_D.Location = new System.Drawing.Point(8, 200);
             this.L_D.Name = "L_D";
             this.L_D.Size = new System.Drawing.Size(31, 13);
             this.L_D.TabIndex = 28;
@@ -1560,6 +1123,500 @@
             this.L_HP.Size = new System.Drawing.Size(31, 13);
             this.L_HP.TabIndex = 34;
             this.L_HP.Text = "觉醒";
+            // 
+            // StatPanel
+            // 
+            this.StatPanel.Controls.Add(this.L_Stats);
+            this.StatPanel.Controls.Add(this.L_BS);
+            this.StatPanel.Controls.Add(this.Stat0);
+            this.StatPanel.Controls.Add(this.Stat1);
+            this.StatPanel.Controls.Add(this.BS_5);
+            this.StatPanel.Controls.Add(this.Stat2);
+            this.StatPanel.Controls.Add(this.BS_4);
+            this.StatPanel.Controls.Add(this.Stat3);
+            this.StatPanel.Controls.Add(this.BS_3);
+            this.StatPanel.Controls.Add(this.Stat4);
+            this.StatPanel.Controls.Add(this.BS_2);
+            this.StatPanel.Controls.Add(this.Stat5);
+            this.StatPanel.Controls.Add(this.BS_1);
+            this.StatPanel.Controls.Add(this.BS_0);
+            this.StatPanel.Location = new System.Drawing.Point(40, 45);
+            this.StatPanel.Name = "StatPanel";
+            this.StatPanel.Size = new System.Drawing.Size(147, 209);
+            this.StatPanel.TabIndex = 42;
+            // 
+            // L_Stats
+            // 
+            this.L_Stats.AutoSize = true;
+            this.L_Stats.Location = new System.Drawing.Point(87, 6);
+            this.L_Stats.Name = "L_Stats";
+            this.L_Stats.Size = new System.Drawing.Size(43, 13);
+            this.L_Stats.TabIndex = 74;
+            this.L_Stats.Text = "能力值";
+            // 
+            // L_BS
+            // 
+            this.L_BS.AutoSize = true;
+            this.L_BS.Location = new System.Drawing.Point(18, 6);
+            this.L_BS.Name = "L_BS";
+            this.L_BS.Size = new System.Drawing.Size(43, 13);
+            this.L_BS.TabIndex = 73;
+            this.L_BS.Text = "种族值";
+            // 
+            // Stat0
+            // 
+            this.Stat0.AccessibleName = "";
+            this.Stat0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stat0.Location = new System.Drawing.Point(80, 32);
+            this.Stat0.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.Stat0.Name = "Stat0";
+            this.Stat0.Size = new System.Drawing.Size(55, 22);
+            this.Stat0.TabIndex = 31;
+            // 
+            // Stat1
+            // 
+            this.Stat1.AccessibleName = "";
+            this.Stat1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stat1.Location = new System.Drawing.Point(80, 62);
+            this.Stat1.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.Stat1.Name = "Stat1";
+            this.Stat1.Size = new System.Drawing.Size(55, 22);
+            this.Stat1.TabIndex = 32;
+            // 
+            // BS_5
+            // 
+            this.BS_5.AccessibleName = "";
+            this.BS_5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BS_5.Location = new System.Drawing.Point(11, 182);
+            this.BS_5.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.BS_5.Name = "BS_5";
+            this.BS_5.Size = new System.Drawing.Size(55, 22);
+            this.BS_5.TabIndex = 5;
+            // 
+            // Stat2
+            // 
+            this.Stat2.AccessibleName = "";
+            this.Stat2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stat2.Location = new System.Drawing.Point(80, 92);
+            this.Stat2.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.Stat2.Name = "Stat2";
+            this.Stat2.Size = new System.Drawing.Size(55, 22);
+            this.Stat2.TabIndex = 33;
+            // 
+            // BS_4
+            // 
+            this.BS_4.AccessibleName = "";
+            this.BS_4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BS_4.Location = new System.Drawing.Point(11, 152);
+            this.BS_4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.BS_4.Name = "BS_4";
+            this.BS_4.Size = new System.Drawing.Size(55, 22);
+            this.BS_4.TabIndex = 4;
+            // 
+            // Stat3
+            // 
+            this.Stat3.AccessibleName = "";
+            this.Stat3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stat3.Location = new System.Drawing.Point(80, 122);
+            this.Stat3.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.Stat3.Name = "Stat3";
+            this.Stat3.Size = new System.Drawing.Size(55, 22);
+            this.Stat3.TabIndex = 34;
+            // 
+            // BS_3
+            // 
+            this.BS_3.AccessibleName = "";
+            this.BS_3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BS_3.Location = new System.Drawing.Point(11, 122);
+            this.BS_3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.BS_3.Name = "BS_3";
+            this.BS_3.Size = new System.Drawing.Size(55, 22);
+            this.BS_3.TabIndex = 3;
+            // 
+            // Stat4
+            // 
+            this.Stat4.AccessibleName = "";
+            this.Stat4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stat4.Location = new System.Drawing.Point(80, 152);
+            this.Stat4.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.Stat4.Name = "Stat4";
+            this.Stat4.Size = new System.Drawing.Size(55, 22);
+            this.Stat4.TabIndex = 35;
+            // 
+            // BS_2
+            // 
+            this.BS_2.AccessibleName = "";
+            this.BS_2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BS_2.Location = new System.Drawing.Point(11, 92);
+            this.BS_2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.BS_2.Name = "BS_2";
+            this.BS_2.Size = new System.Drawing.Size(55, 22);
+            this.BS_2.TabIndex = 2;
+            // 
+            // Stat5
+            // 
+            this.Stat5.AccessibleName = "";
+            this.Stat5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stat5.Location = new System.Drawing.Point(80, 182);
+            this.Stat5.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.Stat5.Name = "Stat5";
+            this.Stat5.Size = new System.Drawing.Size(55, 22);
+            this.Stat5.TabIndex = 36;
+            // 
+            // BS_1
+            // 
+            this.BS_1.AccessibleName = "";
+            this.BS_1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BS_1.Location = new System.Drawing.Point(11, 62);
+            this.BS_1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.BS_1.Name = "BS_1";
+            this.BS_1.Size = new System.Drawing.Size(55, 22);
+            this.BS_1.TabIndex = 1;
+            // 
+            // BS_0
+            // 
+            this.BS_0.AccessibleName = "";
+            this.BS_0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BS_0.Location = new System.Drawing.Point(11, 32);
+            this.BS_0.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.BS_0.Name = "BS_0";
+            this.BS_0.Size = new System.Drawing.Size(55, 22);
+            this.BS_0.TabIndex = 0;
+            // 
+            // IVPanel
+            // 
+            this.IVPanel.Controls.Add(this.L_IVRange);
+            this.IVPanel.Controls.Add(this.ivmin0);
+            this.IVPanel.Controls.Add(this.ivmax0);
+            this.IVPanel.Controls.Add(this.ivmin1);
+            this.IVPanel.Controls.Add(this.label6);
+            this.IVPanel.Controls.Add(this.ivmin2);
+            this.IVPanel.Controls.Add(this.label5);
+            this.IVPanel.Controls.Add(this.ivmin3);
+            this.IVPanel.Controls.Add(this.label4);
+            this.IVPanel.Controls.Add(this.ivmin4);
+            this.IVPanel.Controls.Add(this.label3);
+            this.IVPanel.Controls.Add(this.ivmin5);
+            this.IVPanel.Controls.Add(this.label2);
+            this.IVPanel.Controls.Add(this.label1);
+            this.IVPanel.Controls.Add(this.ivmax1);
+            this.IVPanel.Controls.Add(this.ivmax5);
+            this.IVPanel.Controls.Add(this.ivmax2);
+            this.IVPanel.Controls.Add(this.ivmax4);
+            this.IVPanel.Controls.Add(this.ivmax3);
+            this.IVPanel.Location = new System.Drawing.Point(40, 45);
+            this.IVPanel.Name = "IVPanel";
+            this.IVPanel.Size = new System.Drawing.Size(147, 209);
+            this.IVPanel.TabIndex = 24;
+            // 
+            // L_IVRange
+            // 
+            this.L_IVRange.AutoSize = true;
+            this.L_IVRange.Location = new System.Drawing.Point(10, 6);
+            this.L_IVRange.Name = "L_IVRange";
+            this.L_IVRange.Size = new System.Drawing.Size(67, 13);
+            this.L_IVRange.TabIndex = 73;
+            this.L_IVRange.Text = "个体值范围";
+            // 
+            // ivmin0
+            // 
+            this.ivmin0.AccessibleName = "";
+            this.ivmin0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmin0.Location = new System.Drawing.Point(11, 32);
+            this.ivmin0.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmin0.Name = "ivmin0";
+            this.ivmin0.Size = new System.Drawing.Size(49, 22);
+            this.ivmin0.TabIndex = 6;
+            // 
+            // ivmax0
+            // 
+            this.ivmax0.AccessibleName = "";
+            this.ivmax0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmax0.Location = new System.Drawing.Point(86, 32);
+            this.ivmax0.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmax0.Name = "ivmax0";
+            this.ivmax0.Size = new System.Drawing.Size(49, 22);
+            this.ivmax0.TabIndex = 12;
+            this.ivmax0.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            // 
+            // ivmin1
+            // 
+            this.ivmin1.AccessibleName = "";
+            this.ivmin1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmin1.Location = new System.Drawing.Point(11, 62);
+            this.ivmin1.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmin1.Name = "ivmin1";
+            this.ivmin1.Size = new System.Drawing.Size(49, 22);
+            this.ivmin1.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(66, 188);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(14, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "~";
+            // 
+            // ivmin2
+            // 
+            this.ivmin2.AccessibleName = "";
+            this.ivmin2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmin2.Location = new System.Drawing.Point(11, 92);
+            this.ivmin2.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmin2.Name = "ivmin2";
+            this.ivmin2.Size = new System.Drawing.Size(49, 22);
+            this.ivmin2.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(66, 158);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(14, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "~";
+            // 
+            // ivmin3
+            // 
+            this.ivmin3.AccessibleName = "";
+            this.ivmin3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmin3.Location = new System.Drawing.Point(11, 122);
+            this.ivmin3.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmin3.Name = "ivmin3";
+            this.ivmin3.Size = new System.Drawing.Size(49, 22);
+            this.ivmin3.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(66, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(14, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "~";
+            // 
+            // ivmin4
+            // 
+            this.ivmin4.AccessibleName = "";
+            this.ivmin4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmin4.Location = new System.Drawing.Point(11, 152);
+            this.ivmin4.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmin4.Name = "ivmin4";
+            this.ivmin4.Size = new System.Drawing.Size(49, 22);
+            this.ivmin4.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(66, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(14, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "~";
+            // 
+            // ivmin5
+            // 
+            this.ivmin5.AccessibleName = "";
+            this.ivmin5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmin5.Location = new System.Drawing.Point(11, 182);
+            this.ivmin5.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmin5.Name = "ivmin5";
+            this.ivmin5.Size = new System.Drawing.Size(49, 22);
+            this.ivmin5.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(66, 68);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(14, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "~";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(66, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(14, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "~";
+            // 
+            // ivmax1
+            // 
+            this.ivmax1.AccessibleName = "";
+            this.ivmax1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmax1.Location = new System.Drawing.Point(86, 62);
+            this.ivmax1.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmax1.Name = "ivmax1";
+            this.ivmax1.Size = new System.Drawing.Size(49, 22);
+            this.ivmax1.TabIndex = 13;
+            this.ivmax1.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            // 
+            // ivmax5
+            // 
+            this.ivmax5.AccessibleName = "";
+            this.ivmax5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmax5.Location = new System.Drawing.Point(86, 182);
+            this.ivmax5.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmax5.Name = "ivmax5";
+            this.ivmax5.Size = new System.Drawing.Size(49, 22);
+            this.ivmax5.TabIndex = 17;
+            this.ivmax5.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            // 
+            // ivmax2
+            // 
+            this.ivmax2.AccessibleName = "";
+            this.ivmax2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmax2.Location = new System.Drawing.Point(86, 92);
+            this.ivmax2.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmax2.Name = "ivmax2";
+            this.ivmax2.Size = new System.Drawing.Size(49, 22);
+            this.ivmax2.TabIndex = 14;
+            this.ivmax2.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            // 
+            // ivmax4
+            // 
+            this.ivmax4.AccessibleName = "";
+            this.ivmax4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmax4.Location = new System.Drawing.Point(86, 152);
+            this.ivmax4.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmax4.Name = "ivmax4";
+            this.ivmax4.Size = new System.Drawing.Size(49, 22);
+            this.ivmax4.TabIndex = 16;
+            this.ivmax4.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            // 
+            // ivmax3
+            // 
+            this.ivmax3.AccessibleName = "";
+            this.ivmax3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ivmax3.Location = new System.Drawing.Point(86, 122);
+            this.ivmax3.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.ivmax3.Name = "ivmax3";
+            this.ivmax3.Size = new System.Drawing.Size(49, 22);
+            this.ivmax3.TabIndex = 15;
+            this.ivmax3.Value = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
             // 
             // DGV
             // 
@@ -1752,9 +1809,9 @@
             this.Condition.Controls.Add(this.UB_th);
             this.Condition.Controls.Add(this.Encounter_th);
             this.Condition.Controls.Add(this.label9);
+            this.Condition.Controls.Add(this.GenderRatio);
             this.Condition.Controls.Add(this.Lv_max);
             this.Condition.Controls.Add(this.AlwaysSynced);
-            this.Condition.Controls.Add(this.GenderRatio);
             this.Condition.Controls.Add(this.SyncNature);
             this.Condition.Controls.Add(this.Stationary);
             this.Condition.Controls.Add(this.L_Lv);
@@ -1777,9 +1834,9 @@
             // 
             this.UB_th.AccessibleName = "";
             this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UB_th.Location = new System.Drawing.Point(203, 71);
+            this.UB_th.Location = new System.Drawing.Point(152, 102);
             this.UB_th.Name = "UB_th";
-            this.UB_th.Size = new System.Drawing.Size(34, 22);
+            this.UB_th.Size = new System.Drawing.Size(46, 22);
             this.UB_th.TabIndex = 67;
             this.UB_th.Value = new decimal(new int[] {
             30,
@@ -1791,9 +1848,9 @@
             // 
             this.Encounter_th.AccessibleName = "";
             this.Encounter_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Encounter_th.Location = new System.Drawing.Point(257, 71);
+            this.Encounter_th.Location = new System.Drawing.Point(338, 64);
             this.Encounter_th.Name = "Encounter_th";
-            this.Encounter_th.Size = new System.Drawing.Size(34, 22);
+            this.Encounter_th.Size = new System.Drawing.Size(48, 22);
             this.Encounter_th.TabIndex = 51;
             this.Encounter_th.Value = new decimal(new int[] {
             13,
@@ -1804,36 +1861,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(320, 114);
+            this.label9.Location = new System.Drawing.Point(253, 69);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 24;
             this.label9.Text = "~";
-            // 
-            // Lv_max
-            // 
-            this.Lv_max.AccessibleName = "IV_min";
-            this.Lv_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_max.Location = new System.Drawing.Point(343, 108);
-            this.Lv_max.Name = "Lv_max";
-            this.Lv_max.Size = new System.Drawing.Size(44, 22);
-            this.Lv_max.TabIndex = 65;
-            this.Lv_max.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            // 
-            // AlwaysSynced
-            // 
-            this.AlwaysSynced.AutoSize = true;
-            this.AlwaysSynced.Location = new System.Drawing.Point(167, 35);
-            this.AlwaysSynced.Name = "AlwaysSynced";
-            this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
-            this.AlwaysSynced.TabIndex = 9;
-            this.AlwaysSynced.Text = "必定同步";
-            this.AlwaysSynced.UseVisualStyleBackColor = true;
-            this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
             // 
             // GenderRatio
             // 
@@ -1844,15 +1876,40 @@
             "♂7：♀1",
             "♂3：♀1",
             "♂1：♀3"});
-            this.GenderRatio.Location = new System.Drawing.Point(311, 71);
+            this.GenderRatio.Location = new System.Drawing.Point(307, 103);
             this.GenderRatio.Name = "GenderRatio";
             this.GenderRatio.Size = new System.Drawing.Size(79, 21);
             this.GenderRatio.TabIndex = 8;
             // 
+            // Lv_max
+            // 
+            this.Lv_max.AccessibleName = "IV_min";
+            this.Lv_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lv_max.Location = new System.Drawing.Point(270, 64);
+            this.Lv_max.Name = "Lv_max";
+            this.Lv_max.Size = new System.Drawing.Size(44, 22);
+            this.Lv_max.TabIndex = 65;
+            this.Lv_max.Value = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
+            // 
+            // AlwaysSynced
+            // 
+            this.AlwaysSynced.AutoSize = true;
+            this.AlwaysSynced.Location = new System.Drawing.Point(168, 28);
+            this.AlwaysSynced.Name = "AlwaysSynced";
+            this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
+            this.AlwaysSynced.TabIndex = 9;
+            this.AlwaysSynced.Text = "必定同步";
+            this.AlwaysSynced.UseVisualStyleBackColor = true;
+            this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
+            // 
             // SyncNature
             // 
             this.SyncNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SyncNature.Location = new System.Drawing.Point(311, 33);
+            this.SyncNature.Location = new System.Drawing.Point(306, 26);
             this.SyncNature.Name = "SyncNature";
             this.SyncNature.Size = new System.Drawing.Size(79, 21);
             this.SyncNature.TabIndex = 3;
@@ -1862,19 +1919,19 @@
             // 
             this.Stationary.AutoSize = true;
             this.Stationary.Checked = true;
-            this.Stationary.Location = new System.Drawing.Point(17, 35);
+            this.Stationary.Location = new System.Drawing.Point(11, 67);
             this.Stationary.Name = "Stationary";
             this.Stationary.Size = new System.Drawing.Size(49, 17);
             this.Stationary.TabIndex = 0;
             this.Stationary.TabStop = true;
             this.Stationary.Text = "定点";
             this.Stationary.UseVisualStyleBackColor = true;
-            this.Stationary.CheckedChanged += new System.EventHandler(this.Stationary_CheckedChanged);
+            this.Stationary.CheckedChanged += new System.EventHandler(this.Method_CheckedChanged);
             // 
             // L_Lv
             // 
             this.L_Lv.AutoSize = true;
-            this.L_Lv.Location = new System.Drawing.Point(206, 112);
+            this.L_Lv.Location = new System.Drawing.Point(153, 69);
             this.L_Lv.Name = "L_Lv";
             this.L_Lv.Size = new System.Drawing.Size(55, 13);
             this.L_Lv.TabIndex = 41;
@@ -1883,24 +1940,24 @@
             // Wild
             // 
             this.Wild.AutoSize = true;
-            this.Wild.Location = new System.Drawing.Point(17, 73);
+            this.Wild.Location = new System.Drawing.Point(91, 67);
             this.Wild.Name = "Wild";
             this.Wild.Size = new System.Drawing.Size(49, 17);
             this.Wild.TabIndex = 1;
             this.Wild.Text = "野生";
             this.Wild.UseVisualStyleBackColor = true;
-            this.Wild.CheckedChanged += new System.EventHandler(this.Wild_CheckedChanged);
+            this.Wild.CheckedChanged += new System.EventHandler(this.Method_CheckedChanged);
             // 
             // Lv_min
             // 
             this.Lv_min.AccessibleName = "";
             this.Lv_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_min.Location = new System.Drawing.Point(267, 108);
+            this.Lv_min.Location = new System.Drawing.Point(208, 64);
             this.Lv_min.Name = "Lv_min";
             this.Lv_min.Size = new System.Drawing.Size(44, 22);
             this.Lv_min.TabIndex = 60;
             this.Lv_min.Value = new decimal(new int[] {
-            60,
+            42,
             0,
             0,
             0});
@@ -1908,7 +1965,7 @@
             // Honey
             // 
             this.Honey.AutoSize = true;
-            this.Honey.Location = new System.Drawing.Point(76, 73);
+            this.Honey.Location = new System.Drawing.Point(225, 105);
             this.Honey.Name = "Honey";
             this.Honey.Size = new System.Drawing.Size(62, 17);
             this.Honey.TabIndex = 2;
@@ -1918,7 +1975,7 @@
             // Sync
             // 
             this.Sync.AutoSize = true;
-            this.Sync.Location = new System.Drawing.Point(260, 35);
+            this.Sync.Location = new System.Drawing.Point(249, 28);
             this.Sync.Name = "Sync";
             this.Sync.Size = new System.Drawing.Size(50, 17);
             this.Sync.TabIndex = 7;
@@ -1928,7 +1985,7 @@
             // UB
             // 
             this.UB.AutoSize = true;
-            this.UB.Location = new System.Drawing.Point(148, 73);
+            this.UB.Location = new System.Drawing.Point(91, 105);
             this.UB.Name = "UB";
             this.UB.Size = new System.Drawing.Size(41, 17);
             this.UB.TabIndex = 4;
@@ -1941,7 +1998,7 @@
             this.Fix3v.AutoSize = true;
             this.Fix3v.Checked = true;
             this.Fix3v.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Fix3v.Location = new System.Drawing.Point(85, 35);
+            this.Fix3v.Location = new System.Drawing.Point(11, 105);
             this.Fix3v.Name = "Fix3v";
             this.Fix3v.Size = new System.Drawing.Size(63, 17);
             this.Fix3v.TabIndex = 1;
@@ -1951,7 +2008,7 @@
             // L_Poke
             // 
             this.L_Poke.AutoSize = true;
-            this.L_Poke.Location = new System.Drawing.Point(14, 113);
+            this.L_Poke.Location = new System.Drawing.Point(11, 30);
             this.L_Poke.Name = "L_Poke";
             this.L_Poke.Size = new System.Drawing.Size(43, 13);
             this.L_Poke.TabIndex = 37;
@@ -1960,7 +2017,7 @@
             // Poke
             // 
             this.Poke.FormattingEnabled = true;
-            this.Poke.Location = new System.Drawing.Point(68, 109);
+            this.Poke.Location = new System.Drawing.Point(61, 26);
             this.Poke.Name = "Poke";
             this.Poke.Size = new System.Drawing.Size(100, 21);
             this.Poke.TabIndex = 36;
@@ -2025,15 +2082,6 @@
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
             // 
-            // L_timedelay
-            // 
-            this.L_timedelay.AutoSize = true;
-            this.L_timedelay.Location = new System.Drawing.Point(15, 66);
-            this.L_timedelay.Name = "L_timedelay";
-            this.L_timedelay.Size = new System.Drawing.Size(55, 13);
-            this.L_timedelay.TabIndex = 52;
-            this.L_timedelay.Text = "时间修正";
-            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2044,8 +2092,19 @@
             this.Seed.Size = new System.Drawing.Size(78, 22);
             this.Seed.TabIndex = 0;
             this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
+            // 
+            // Reset
+            // 
+            this.Reset.Location = new System.Drawing.Point(302, 16);
+            this.Reset.Name = "Reset";
+            this.Reset.Size = new System.Drawing.Size(75, 23);
+            this.Reset.TabIndex = 73;
+            this.Reset.Text = "重置";
+            this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // Form1
             // 
@@ -2081,34 +2140,34 @@
             this.SearchSettingBox.ResumeLayout(false);
             this.SearchSettingBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_Search)).EndInit();
-            this.SearchMethod.ResumeLayout(false);
-            this.ByIVs.ResumeLayout(false);
-            this.ByIVs.PerformLayout();
+            this.StatPanel.ResumeLayout(false);
+            this.StatPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Stat5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_0)).EndInit();
+            this.IVPanel.ResumeLayout(false);
+            this.IVPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax5)).EndInit();
-            this.ByStats.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Stat0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Stat5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.Condition.ResumeLayout(false);
             this.Condition.PerformLayout();
@@ -2233,9 +2292,6 @@
         private System.Windows.Forms.CheckBox DisableFilters;
         private System.Windows.Forms.Label L_Framecorrection;
         private System.Windows.Forms.NumericUpDown Framecorrection;
-        private System.Windows.Forms.TabControl SearchMethod;
-        private System.Windows.Forms.TabPage ByIVs;
-        private System.Windows.Forms.TabPage ByStats;
         private System.Windows.Forms.DataGridView DGV;
         private System.Windows.Forms.NumericUpDown Stat0;
         private System.Windows.Forms.NumericUpDown Stat1;
@@ -2278,6 +2334,14 @@
         private System.Windows.Forms.NumericUpDown Timedelay;
         private System.Windows.Forms.NumericUpDown UB_th;
         private System.Windows.Forms.Label L_timedelay;
+        private System.Windows.Forms.Panel StatPanel;
+        private System.Windows.Forms.RadioButton ByIVs;
+        private System.Windows.Forms.Panel IVPanel;
+        private System.Windows.Forms.RadioButton ByStats;
+        private System.Windows.Forms.Label L_IVRange;
+        private System.Windows.Forms.Label L_Stats;
+        private System.Windows.Forms.Label L_BS;
+        private System.Windows.Forms.Button Reset;
     }
 }
 

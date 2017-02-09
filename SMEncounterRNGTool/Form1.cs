@@ -44,7 +44,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -98,24 +98,33 @@ namespace SMEncounterRNGTool
             {
                 Poke.Items.Add(SearchSetting.pokedex[i, 0]);
             }
+
             HiddenPower.SelectedIndex = 0;
             Nature.SelectedIndex = 0;
-            GenderRatio.SelectedIndex = 0;
             SyncNature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
             Slot.SelectedIndex = 0;
-            GenderRatio.SelectedIndex = 0;
 
-            Stationary_CheckedChanged(null, null);
-
+            Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
             TSV.Value = Properties.Settings.Default.TSV;
+            Advanced.Checked = Properties.Settings.Default.Advance;
+
             if (Properties.Settings.Default.ClockInput)
                 StartClockInput.Checked = true;
             else
                 EndClockInput.Checked = true;
-            Advanced.Checked = Properties.Settings.Default.Advance;
+
+            if (Properties.Settings.Default.Method)
+                Stationary.Checked = true;
+            else
+                Wild.Checked = true;
+            ByIVs.Checked = true;
+
+            Advanced_CheckedChanged(null, null);
+            Method_CheckedChanged(null, null);
+            SearchMethod_CheckedChanged(null, null);
         }
 
         #region SearchSeedfunction
@@ -241,6 +250,14 @@ namespace SMEncounterRNGTool
         {
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
+            UB_th.Visible = Advanced.Checked;
+        }
+
+
+        private void Seed_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Seed = Seed.Value;
+            Properties.Settings.Default.Save();
         }
 
         private void UB_CheckedChanged(object sender, EventArgs e)
@@ -252,35 +269,32 @@ namespace SMEncounterRNGTool
             }
             else
             {
-                UBOnly.Enabled = false;
+                UBOnly.Checked = UBOnly.Enabled = false;
             }
         }
 
-        private void Stationary_CheckedChanged(object sender, EventArgs e)
+        private void Method_CheckedChanged(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Method = Stationary.Checked;
+            Properties.Settings.Default.Save();
+            Fix3v.Enabled = Wild.Checked;
+            GenderRatio.Visible = UB.Visible = Honey.Visible = UB_th.Visible = Encounter_th.Visible = Wild.Checked;
+            label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
+            Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
+            //AlwaysSynced.Visible = Stationary.Checked;
             if (Stationary.Checked)
             {
-                GenderRatio.SelectedIndex = 0;  UB.Checked = Honey.Checked = false; UB_CheckedChanged(null, null);
-                GenderRatio.Visible = UB.Visible = Honey.Visible = UB_th.Visible = Encounter_th.Visible = false;
-                Fix3v.Checked = true; Fix3v.Enabled = false;
-                //AlwaysSynced.Visible = true;
-                label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = false;
-                Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = false;
+                GenderRatio.SelectedIndex = 0;
+                UB.Checked = Honey.Checked = false;
+                Fix3v.Checked = true;
             }
-        }
-
-        private void Wild_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Wild.Checked)
+            else
             {
                 GenderRatio.SelectedIndex = 1;
-                GenderRatio.Visible = UB.Visible = Honey.Visible = UB_th.Visible = Encounter_th.Visible = true;
-                Fix3v.Checked = false; Fix3v.Enabled = true;
+                Fix3v.Checked = false;
                 AlwaysSynced.Checked = false;
-                //AlwaysSynced.Visible = false;
-                label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = true;
-                Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = true;
             }
+            UB_CheckedChanged(null, null);
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -297,12 +311,20 @@ namespace SMEncounterRNGTool
         private void SyncNature_SelectedIndexChanged(object sender, EventArgs e)
         {
             Sync.Checked = (SyncNature.SelectedIndex > 0);
+            if (AlwaysSynced.Checked)
+                Nature.SelectedIndex = SyncNature.SelectedIndex;
+        }
+
+        private void SearchMethod_CheckedChanged(object sender, EventArgs e)
+        {
+            IVPanel.Visible = ByIVs.Checked;
+            StatPanel.Visible = ByStats.Checked;
         }
         #endregion
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AlwaysSynced.Checked = (Poke.SelectedIndex > 5)&& (Poke.SelectedIndex < 10);
+            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 10);
             for (int i = 0; i < 6; i++)
             {
                 BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
@@ -398,8 +420,22 @@ namespace SMEncounterRNGTool
             }
         }
 
+        private void Reset_Click(object sender, EventArgs e)
+        {
+            HiddenPower.SelectedIndex = 0;
+            if (!AlwaysSynced.Checked) Nature.SelectedIndex = 0;
+            Gender.SelectedIndex = 0;
+            Ability.SelectedIndex = 0;
+            Slot.SelectedIndex = 0;
 
-
+            Lv_Search.Value = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                IVlow[i].Value = 0;
+                IVup[i].Value = 31;
+                Stat[i].Value = 0;
+            }
+        }
 
         #region Search
 
@@ -459,16 +495,16 @@ namespace SMEncounterRNGTool
                 seed = (SFMT)sfmt.DeepCopy();
                 RNGSearch.RNGResult result = rng.Generate(seed);
 
-                switch(blink_flag)
+                switch (blink_flag)
                 {
                     case 0:
                         if (result.Blink == 1) blink_flag = 1; break;
                     case 1:
-                        blink_flag = (result.row_r % 3) == 0? 36 :30 ; result.Blink = 5; break;
+                        blink_flag = (result.row_r % 3) == 0 ? 36 : 30; result.Blink = 5; break;
                     default:
                         result.Blink = blink_flag; blink_flag = 0; break;
                 }
-                
+
                 if (!frameMatch(result, setting))
                     continue;
 
@@ -528,7 +564,7 @@ namespace SMEncounterRNGTool
                 Sync = Sync.Checked,
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
-                UB_th=(int)UB_th.Value,
+                UB_th = (int)UB_th.Value,
             };
             return rng;
         }
@@ -544,10 +580,10 @@ namespace SMEncounterRNGTool
             if (ShinyOnly.Checked && !result.Shiny)
                 return false;
 
-            if (SearchMethod.SelectedIndex == 0 && !setting.validIVs(result.IVs))
+            if (ByIVs.Checked && !setting.validIVs(result.IVs))
                 return false;
 
-            if (SearchMethod.SelectedIndex == 1 && !setting.validStatus(result, setting))
+            if (ByStats.Checked && !setting.validStatus(result, setting))
                 return false;
 
             if (!setting.mezapa_check(result.IVs))
@@ -592,19 +628,18 @@ namespace SMEncounterRNGTool
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
             string Lv = (result.Item == -1) ? "-" : result.Lv.ToString();
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
-            string UbValue = (result.UbValue == -1) ? "-" : result.UbValue.ToString();
+            string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string[] status = new string[6];
 
 
             if (!Advanced.Checked)
             {
-                Encounter = (result.Encounter < 13) ? "O" : "X";
-                UbValue = (result.UbValue < UB_th.Value) && (result.UbValue > -1) ? "O" : "X";
+                Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
+                UbValue = result.UbValue < UB_th.Value ? "O" : "X";
             }
 
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
-
 
             row.SetValues(
                 i, d, BlinkFlag,
