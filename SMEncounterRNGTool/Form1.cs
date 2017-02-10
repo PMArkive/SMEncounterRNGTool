@@ -250,7 +250,7 @@ namespace SMEncounterRNGTool
         {
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
-            UB_th.Visible = Advanced.Checked;
+            UB_th.Visible = Advanced.Checked && Wild.Checked;
         }
 
 
@@ -278,7 +278,8 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Method = Stationary.Checked;
             Properties.Settings.Default.Save();
             Fix3v.Enabled = Wild.Checked;
-            GenderRatio.Visible = UB.Visible = Honey.Visible = UB_th.Visible = Encounter_th.Visible = Wild.Checked;
+            UB_th.Visible = Advanced.Checked && Wild.Checked;
+            GenderRatio.Visible = UB.Visible = Honey.Visible =  Encounter_th.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
             //AlwaysSynced.Visible = Stationary.Checked;
