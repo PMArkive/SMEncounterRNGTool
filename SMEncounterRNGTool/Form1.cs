@@ -99,6 +99,8 @@ namespace SMEncounterRNGTool
                 Poke.Items.Add(SearchSetting.pokedex[i, 0]);
             }
 
+            RNGSearch.Rand = new List<ulong>();
+
             HiddenPower.SelectedIndex = 0;
             Nature.SelectedIndex = 0;
             SyncNature.SelectedIndex = 0;
@@ -279,7 +281,7 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Save();
             Fix3v.Enabled = Wild.Checked;
             UB_th.Visible = Advanced.Checked && Wild.Checked;
-            GenderRatio.Visible = UB.Visible = Honey.Visible =  Encounter_th.Visible = Wild.Checked;
+            GenderRatio.Visible = UB.Visible = Honey.Visible = Encounter_th.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
             //AlwaysSynced.Visible = Stationary.Checked;
@@ -491,10 +493,16 @@ namespace SMEncounterRNGTool
                 sfmt.NextUInt64();
 
             int blink_flag = 0;
-            for (int i = min; i <= max; i++, sfmt.NextUInt64())
+
+            RNGSearch.Rand.Clear();
+            for (int i = 0; i < 150; i++)
             {
-                seed = (SFMT)sfmt.DeepCopy();
-                RNGSearch.RNGResult result = rng.Generate(seed);
+                RNGSearch.Rand.Add(sfmt.NextUInt64());
+            }
+
+            for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
+            {
+                RNGSearch.RNGResult result = rng.Generate();
 
                 switch (blink_flag)
                 {
@@ -509,8 +517,9 @@ namespace SMEncounterRNGTool
                 if (!frameMatch(result, setting))
                     continue;
 
-
                 list.Add(getRow_Sta(i, rng, result, DGV));
+
+                if (list.Count > 100000) break;
             }
             DGV.Rows.AddRange(list.ToArray());
             DGV.CurrentCell = null;

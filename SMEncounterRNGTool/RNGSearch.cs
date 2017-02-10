@@ -21,6 +21,10 @@ namespace SMEncounterRNGTool
         public bool Sync = false;
         public int Lv_max, Lv_min;
         public int UB_th;
+        public static List<ulong> Rand;
+
+        private int index;
+
 
         public class RNGResult
         {
@@ -43,56 +47,56 @@ namespace SMEncounterRNGTool
             public int Item = -1;
         }
 
-        public RNGResult Generate(SFMT sfmt)
+        public RNGResult Generate()
         {
             RNGResult st = new RNGResult();
 
-            SFMT tmp = (SFMT)sfmt.DeepCopy();
+            index = 0;
+
             //シンクロ -- Synchronize
-            st.row_r = tmp.NextUInt64();
+            st.row_r = currentrand();
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
             if (Sync && (!Honey || !UB))
-                st.Synchronize = (int)(sfmt.NextUInt64() % 100) >= 50;
+                st.Synchronize = (int)(getrand() % 100) >= 50;
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
             if (!Honey && Wild)
-                st.Encounter = (int)(sfmt.NextUInt64() % 100);
+                st.Encounter = (int)(getrand() % 100);
             if (Honey)
                 st.Encounter = -1;
 
             if (UB)
             {
-                st.UbValue = (int)(sfmt.NextUInt64() % 100);
+                st.UbValue = (int)(getrand() % 100);
                 UB_S = st.UbValue < UB_th;
                 Fix3v = UB_S;
             }
 
             if (Sync && Honey && UB)
-                st.Synchronize = (int)(sfmt.NextUInt64() % 100) >= 50;
+                st.Synchronize = (int)(getrand() % 100) >= 50;
 
             if (Wild && !UB_S)
             {
-                st.Slot = getslot((int)(sfmt.NextUInt64() % 100));
-                st.Lv = (int)(sfmt.NextUInt64() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
-                st.Item = (int)(sfmt.NextUInt64() % 60);
+                st.Slot = getslot((int)(getrand() % 100));
+                st.Lv = (int)(getrand() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
+                st.Item = (int)(getrand() % 60);
             }
 
             //Something
-            for (int i = 0; i < 60 + FrameCorrection; i++)
-                sfmt.NextUInt64();
+                index += 60 + FrameCorrection;
 
             //Encryption Constant
-            st.EC = (uint)(sfmt.NextUInt64() & 0xFFFFFFFF);
+            st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
             int roll_count = ShinyCharm ? 3 : 1;
             if (UB_S) roll_count = 1;
             for (int i = 0; i < roll_count; i++) //pid
             {
-                st.PID = (uint)(sfmt.NextUInt64() & 0xFFFFFFFF);
+                st.PID = (uint)(getrand() & 0xFFFFFFFF);
                 st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
                 if (st.PSV == TSV)
                 {
@@ -103,10 +107,11 @@ namespace SMEncounterRNGTool
 
             //IV
             int[] IV = new int[6] { 0, 0, 0, 0, 0, 0 };
+
             int cnt = Fix3v ? 3 : 0;
             while (cnt > 0)
             {
-                int ran = (int)(sfmt.NextUInt64() % 6);
+                int ran = (int)(getrand() % 6);
                 if (IV[ran] != 32)
                 {
                     IV[ran] = 32;
@@ -122,41 +127,47 @@ namespace SMEncounterRNGTool
                 }
                 else
                 {
-                    IV[i] = (int)(sfmt.NextUInt64() & 0x1F);
+                    IV[i] = (int)(getrand() & 0x1F);
                 }
             }
             st.IVs = (int[])IV.Clone();
 
             //Something
             if (AlwaysSynchro)
-                sfmt.NextUInt64();
+                index++;
 
             //Ability
             if (!Fix3v)
-                st.Ability = (int)(sfmt.NextUInt64() & 1) + 1;
+                st.Ability = (int)(getrand() & 1) + 1;
 
             //Nature
-            if (!st.Synchronize)
-                st.Nature = (int)(sfmt.NextUInt64() % 25);
-            else
+            st.Nature = (int)(currentrand() % 25);
+            if (st.Synchronize)
             {
-                if (Synchro_Stat >= 0)
-                    st.Nature = Synchro_Stat;
-                else
-                {
-                    tmp = (SFMT)sfmt.DeepCopy();
-                    st.Nature = (int)(tmp.NextUInt64() % 25);
-                }
+                if (Synchro_Stat >= 0) st.Nature = Synchro_Stat;
             }
+            else
+            index++;
 
             //Gender
             if (nogender || UB_S)
                 st.Gender = 0;
             else
-                st.Gender = ((int)(sfmt.NextUInt64() % 252) >= gender_ratio) ? 1 : 2;
+                st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
             return st;
         }
+
+        private ulong getrand()
+        {
+            return Rand[index++];
+        }
+
+        private ulong currentrand()
+        {
+            return Rand[index];
+        }
+
 
         public static int getslot(int rand)
         {
