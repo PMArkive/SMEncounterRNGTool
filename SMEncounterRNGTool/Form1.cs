@@ -654,13 +654,13 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d, BlinkFlag,
                 result.IVs[0], result.IVs[1], result.IVs[2], result.IVs[3], result.IVs[4], result.IVs[5],
-                true_nature, SynchronizeFlag, SearchSetting.genderstr[result.Gender], Ability, result.Clock, result.PSV, Encounter, Slot, Lv, Item, UbValue, result.row_r.ToString("X16")
+                true_nature, SynchronizeFlag, SearchSetting.genderstr[result.Gender], Ability, result.Clock, result.PSV, Encounter, Slot, Lv, Item, UbValue, result.row_r.ToString("X16"),
+                result.row_r % 6, result.row_r % 25, result.row_r % 32, result.row_r % 100
                 );
 
             if (result.Shiny)
-            {
                 row.DefaultCellStyle.BackColor = Color.LightCyan;
-            }
+
             return row;
         }
 

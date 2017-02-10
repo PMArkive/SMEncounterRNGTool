@@ -18,7 +18,7 @@ namespace SMEncounterRNGTool
         public bool Fix3v;
         public bool ShinyCharm;
         public bool Honey, UB, UB_S, Wild;
-        public bool Sync = false;
+        public bool Sync;
         public int Lv_max, Lv_min;
         public int UB_th;
         public static List<ulong> Rand;
@@ -122,13 +122,9 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++) //IV
             {
                 if (IV[i] == 32)
-                {
                     IV[i] = 31;
-                }
                 else
-                {
                     IV[i] = (int)(getrand() & 0x1F);
-                }
             }
             st.IVs = (int[])IV.Clone();
 
@@ -147,7 +143,7 @@ namespace SMEncounterRNGTool
                 if (Synchro_Stat >= 0) st.Nature = Synchro_Stat;
             }
             else
-            index++;
+                index++;
 
             //Gender
             if (nogender || UB_S)
@@ -167,7 +163,6 @@ namespace SMEncounterRNGTool
         {
             return Rand[index];
         }
-
 
         public static int getslot(int rand)
         {
