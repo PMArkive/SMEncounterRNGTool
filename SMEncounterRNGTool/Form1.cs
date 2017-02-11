@@ -338,22 +338,20 @@ namespace SMEncounterRNGTool
             {
                 BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
             }
+            Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             switch (Poke.SelectedIndex)
             {
-                case 3: NPC.Value = 1; Lv_Search.Value = 60; break; // Tapu Fini
-                case 4: NPC.Value = 2; Lv_Search.Value = 55; break; // Solgaleo
-                case 5: NPC.Value = 3; Lv_Search.Value = 55; break; // Lunala
-                case 6: NPC.Value = 8; Lv_Search.Value = 40; break; // Type:Null
-                case 7: NPC.Value = 6; Lv_Search.Value = 50; break; // Magearna sometimes NPC# =7
-                case 8: NPC.Value = 3; Lv_Search.Value = 50; break; // Zygarde-10%
-                case 9: NPC.Value = 3; Lv_Search.Value = 50; break; // Zygarde-50%
-                case 10: NPC.Value = 0; Lv_Search.Value = 55; UB_th.Value = 15; break; //
-                case 11: Lv_Search.Value = 65; break; //
-                case 13: Lv_Search.Value = 65; break; //
-                case 14: NPC.Value = 0; Lv_Search.Value = 65; break; //
-                case 16: Lv_Search.Value = 70; break; //
-                case 17: Lv_Search.Value = 75; UB_th.Value = 5; break; //
-                default: NPC.Value = 0; Lv_Search.Value = 60; break;
+                case 3: NPC.Value = 1;  break; // Tapu Fini
+                case 4: NPC.Value = 2;  break; // Solgaleo
+                case 5: NPC.Value = 3;  break; // Lunala
+                case 6: NPC.Value = 8;  break; // Type:Null
+                case 7: NPC.Value = 6;  break; // Magearna sometimes NPC# =7
+                case 8: NPC.Value = 3;  break; // Zygarde-10%
+                case 9: NPC.Value = 3;  break; // Zygarde-50%
+                case 10: NPC.Value = 0;  UB_th.Value = 15; break; //
+                case 14: NPC.Value = 0;  break; //
+                case 17: UB_th.Value = 5; break; //
+                default: NPC.Value = 0; break;
             }
         }
 
@@ -578,6 +576,7 @@ namespace SMEncounterRNGTool
                 gender_ratio = gender_threshold,
                 nogender = GenderRatio.SelectedIndex == 0,
                 Sync = Sync.Checked,
+                PokeLv = (Poke.SelectedIndex == -1) ? -1 : SearchSetting.PokeLevel[Poke.SelectedIndex],
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
@@ -610,13 +609,7 @@ namespace SMEncounterRNGTool
                 if (setting.Nature != -1 && setting.Nature != result.Nature)
                     return false;
 
-                if (setting.Gender != 0 && setting.Gender != result.Gender)
-                    return false;
-
-                if (setting.Ability != 0 && setting.Ability != result.Ability)
-                    return false;
-
-                if (setting.Slot != 0 && setting.Slot != result.Slot)
+                if (setting.Lv != 0 && setting.Lv != result.Lv)
                     return false;
 
                 if (EncounteredOnly.Checked && result.Encounter >= Encounter_th.Value)
@@ -625,8 +618,18 @@ namespace SMEncounterRNGTool
                 if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
 
-                if (result.UbValue >= UB_th.Value && setting.Lv != 0 && setting.Lv != result.Lv)
-                    return false;
+                if (!UB.Checked || result.UbValue >= UB_th.Value)
+                {
+
+                    if (setting.Slot != 0 && setting.Slot != result.Slot)
+                        return false;
+
+                    if (setting.Gender != 0 && setting.Gender != result.Gender)
+                        return false;
+
+                    if (setting.Ability != 0 && setting.Ability != result.Ability)
+                        return false;
+                }
             }
 
             return true;
@@ -642,7 +645,7 @@ namespace SMEncounterRNGTool
             string Ability = (result.Ability == -1) ? "-" : result.Ability.ToString();
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
-            string Lv = (result.Item == -1) ? "-" : result.Lv.ToString();
+            string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string[] status = new string[6];

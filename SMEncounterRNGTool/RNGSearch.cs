@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMEncounterRNGTool
 {
@@ -20,6 +17,7 @@ namespace SMEncounterRNGTool
         public bool Honey, UB, UB_S, Wild;
         public bool Sync;
         public int Lv_max, Lv_min;
+        public int PokeLv;
         public int UB_th;
         public static List<ulong> Rand;
 
@@ -73,6 +71,9 @@ namespace SMEncounterRNGTool
 
             if (UB && !Honey)
                 st.UbValue = getUBValue();
+
+            if (UB_S || !Wild)
+                st.Lv = PokeLv;
 
             if (Wild && !UB_S)
             {

@@ -28,6 +28,12 @@ namespace SMEncounterRNGTool
             { "奈克洛兹玛", "97", "107", "101", "127", "89", "79" },
         };
 
+        public static int[] PokeLevel =
+        {
+            60,60,60,60,55,55,40,50,50,50, //Stationary
+            55,65,60,65,65,60,70,75        //UB
+        };
+
         #endregion
         #region calc_data
         public double[,] natures_mag =
@@ -85,7 +91,7 @@ namespace SMEncounterRNGTool
         public int HPType = -1;
         public int Ability = -1;
         public int Gender = -1;
-        public int[] IVup, IVlow, BS,Status, p_Status;
+        public int[] IVup, IVlow, BS, Status, p_Status;
         public bool Skip;
         public int Lv;
         public int Slot;
@@ -119,7 +125,7 @@ namespace SMEncounterRNGTool
 
             p_Status[0] = (int)(((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
             for (int i = 1; i < 6; i++)
-                 p_Status[i] = (int)(((int)(((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
+                p_Status[i] = (int)(((int)(((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
 
             result.p_Status = setting.p_Status;
 
