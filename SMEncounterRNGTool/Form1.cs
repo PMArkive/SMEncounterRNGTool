@@ -247,34 +247,17 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Save();
         }
 
-
         private void Advanced_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
         }
 
-
         private void Seed_ValueChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.Seed = Seed.Value;
             Properties.Settings.Default.Save();
         }
-
-        private void UB_CheckedChanged(object sender, EventArgs e)
-        {
-            UBOnly.Enabled = UB_th.Enabled = UB.Checked;
-            if (UB.Checked)
-                Wild.Checked = true;
-            else
-                UBOnly.Checked = false;
-        }
-
-        private void Honey_CheckedChanged(object sender, EventArgs e)
-        {
-            Encounter_th.Enabled = !Honey.Checked;
-        }
-
 
         private void Method_CheckedChanged(object sender, EventArgs e)
         {
@@ -298,9 +281,24 @@ namespace SMEncounterRNGTool
                 GenderRatio.SelectedIndex = 1;
                 Fix3v.Checked = false;
                 AlwaysSynced.Checked = false;
+                EncounteredOnly.Checked = true;
             }
             UB_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
+        }
+
+        private void UB_CheckedChanged(object sender, EventArgs e)
+        {
+            UBOnly.Enabled = UB_th.Enabled = UB.Checked;
+            if (UB.Checked)
+                Wild.Checked = true;
+            else
+                UBOnly.Checked = false;
+        }
+
+        private void Honey_CheckedChanged(object sender, EventArgs e)
+        {
+            Encounter_th.Enabled = !Honey.Checked;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -341,15 +339,15 @@ namespace SMEncounterRNGTool
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             switch (Poke.SelectedIndex)
             {
-                case 3: NPC.Value = 1;  break; // Tapu Fini
-                case 4: NPC.Value = 2;  break; // Solgaleo
-                case 5: NPC.Value = 3;  break; // Lunala
-                case 6: NPC.Value = 8;  break; // Type:Null
-                case 7: NPC.Value = 6;  break; // Magearna sometimes NPC# =7
-                case 8: NPC.Value = 3;  break; // Zygarde-10%
-                case 9: NPC.Value = 3;  break; // Zygarde-50%
-                case 10: NPC.Value = 0;  UB_th.Value = 15; break; //
-                case 14: NPC.Value = 0;  break; //
+                case 3: NPC.Value = 1; break; // Tapu Fini
+                case 4: NPC.Value = 2; break; // Solgaleo
+                case 5: NPC.Value = 3; break; // Lunala
+                case 6: NPC.Value = 8; break; // Type:Null
+                case 7: NPC.Value = 6; break; // Magearna sometimes NPC# =7
+                case 8: NPC.Value = 3; break; // Zygarde-10%
+                case 9: NPC.Value = 3; break; // Zygarde-50%
+                case 10: NPC.Value = 0; UB_th.Value = 15; break; //
+                case 14: NPC.Value = 0; break; //
                 case 17: UB_th.Value = 5; break; //
                 default: NPC.Value = 0; break;
             }
@@ -414,17 +412,26 @@ namespace SMEncounterRNGTool
 
         private void CalcTime_Click(object sender, EventArgs e)
         {
-
-            try
+            int min = (int)Time_min.Value;
+            int max = (int)Time_max.Value;
+            int totaltime;
+            int honeytime = (int)Timedelay.Value;
+            if (Honey.Checked)
             {
-                int totaltime = CalcFrame((int)Time_min.Value, (int)Time_max.Value) - (int)Timedelay.Value / 2;
-                float realtime = (float)totaltime / 30;
-                TimeResult.Text = $"计时器设置为{totaltime * 2}帧," + realtime.ToString("F") + "秒";
+                int tmp = max - honeytime / 2;
+                while (tmp < max)
+                {
+                    tmp++;
+                    if (CalcFrame(tmp, max) <= honeytime)
+                        break;
+                }
+                totaltime = CalcFrame(min, tmp - 1);
             }
-            catch
-            {
+            else
+                totaltime = CalcFrame(min, max);
 
-            }
+            float realtime = (float)totaltime / 30;
+            TimeResult.Text = $"计时器设置为{totaltime * 2}帧," + realtime.ToString("F") + "秒";
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -604,11 +611,11 @@ namespace SMEncounterRNGTool
             if (!setting.mezapa_check(result.IVs))
                 return false;
 
+            if (setting.Nature != -1 && setting.Nature != result.Nature)
+                return false;
+
             if (Wild.Checked)
             {
-                if (setting.Nature != -1 && setting.Nature != result.Nature)
-                    return false;
-
                 if (setting.Lv != 0 && setting.Lv != result.Lv)
                     return false;
 
@@ -620,7 +627,6 @@ namespace SMEncounterRNGTool
 
                 if (!UB.Checked || result.UbValue >= UB_th.Value)
                 {
-
                     if (setting.Slot != 0 && setting.Slot != result.Slot)
                         return false;
 
@@ -655,6 +661,7 @@ namespace SMEncounterRNGTool
             {
                 Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
+                if (UbValue == "O") Slot = "UB";
             }
 
             DataGridViewRow row = new DataGridViewRow();
@@ -663,7 +670,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d, BlinkFlag,
                 result.IVs[0], result.IVs[1], result.IVs[2], result.IVs[3], result.IVs[4], result.IVs[5],
-                true_nature, SynchronizeFlag, SearchSetting.genderstr[result.Gender], Ability, result.Clock, result.PSV, Encounter, Slot, Lv, Item, UbValue, result.row_r.ToString("X16"),
+                true_nature, SynchronizeFlag, result.Clock, result.PSV, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, result.row_r.ToString("X16"),
                 result.row_r % 6, result.row_r % 25, result.row_r % 32, result.row_r % 100
                 );
 

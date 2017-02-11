@@ -145,8 +145,8 @@
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
             this.Condition = new System.Windows.Forms.GroupBox();
-            this.UB_th = new System.Windows.Forms.NumericUpDown();
-            this.Encounter_th = new System.Windows.Forms.NumericUpDown();
+            this.L_UB_th = new System.Windows.Forms.Label();
+            this.L_Encounter_th = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.GenderRatio = new System.Windows.Forms.ComboBox();
             this.Lv_max = new System.Windows.Forms.NumericUpDown();
@@ -162,14 +162,14 @@
             this.Fix3v = new System.Windows.Forms.CheckBox();
             this.L_Poke = new System.Windows.Forms.Label();
             this.Poke = new System.Windows.Forms.ComboBox();
+            this.UB_th = new System.Windows.Forms.NumericUpDown();
+            this.Encounter_th = new System.Windows.Forms.NumericUpDown();
             this.TSV = new System.Windows.Forms.NumericUpDown();
             this.L_Seed = new System.Windows.Forms.Label();
             this.L_TSV = new System.Windows.Forms.Label();
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.L_Encounter_th = new System.Windows.Forms.Label();
-            this.L_UB_th = new System.Windows.Forms.Label();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -182,14 +182,14 @@
             this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -239,10 +239,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.Condition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
             this.SuspendLayout();
@@ -640,7 +640,7 @@
             this.Timedelay.Size = new System.Drawing.Size(48, 22);
             this.Timedelay.TabIndex = 51;
             this.Timedelay.Value = new decimal(new int[] {
-            200,
+            192,
             0,
             0,
             0});
@@ -1662,14 +1662,14 @@
             this.dgv_S,
             this.dgv_nature,
             this.dgv_synced,
-            this.dgv_gender,
-            this.dgv_ability,
             this.dgv_needle,
             this.dgv_psv,
-            this.dgv_encounter,
             this.dgv_slot,
             this.dgv_lv,
+            this.dgv_gender,
+            this.dgv_ability,
             this.dgv_item,
+            this.dgv_encounter,
             this.dgv_ubvalue,
             this.dgv_rand,
             this.M6,
@@ -1726,33 +1726,23 @@
             this.Condition.TabStop = false;
             this.Condition.Text = "条件设置";
             // 
-            // UB_th
+            // L_UB_th
             // 
-            this.UB_th.AccessibleName = "";
-            this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UB_th.Location = new System.Drawing.Point(249, 103);
-            this.UB_th.Name = "UB_th";
-            this.UB_th.Size = new System.Drawing.Size(44, 22);
-            this.UB_th.TabIndex = 67;
-            this.UB_th.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
+            this.L_UB_th.AutoSize = true;
+            this.L_UB_th.Location = new System.Drawing.Point(191, 106);
+            this.L_UB_th.Name = "L_UB_th";
+            this.L_UB_th.Size = new System.Drawing.Size(58, 13);
+            this.L_UB_th.TabIndex = 69;
+            this.L_UB_th.Text = "UB出现率";
             // 
-            // Encounter_th
+            // L_Encounter_th
             // 
-            this.Encounter_th.AccessibleName = "";
-            this.Encounter_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Encounter_th.Location = new System.Drawing.Point(341, 64);
-            this.Encounter_th.Name = "Encounter_th";
-            this.Encounter_th.Size = new System.Drawing.Size(44, 22);
-            this.Encounter_th.TabIndex = 51;
-            this.Encounter_th.Value = new decimal(new int[] {
-            13,
-            0,
-            0,
-            0});
+            this.L_Encounter_th.AutoSize = true;
+            this.L_Encounter_th.Location = new System.Drawing.Point(296, 69);
+            this.L_Encounter_th.Name = "L_Encounter_th";
+            this.L_Encounter_th.Size = new System.Drawing.Size(43, 13);
+            this.L_Encounter_th.TabIndex = 68;
+            this.L_Encounter_th.Text = "遇敌率";
             // 
             // label9
             // 
@@ -1786,7 +1776,7 @@
             this.Lv_max.Size = new System.Drawing.Size(44, 22);
             this.Lv_max.TabIndex = 65;
             this.Lv_max.Value = new decimal(new int[] {
-            45,
+            19,
             0,
             0,
             0});
@@ -1853,7 +1843,7 @@
             this.Lv_min.Size = new System.Drawing.Size(44, 22);
             this.Lv_min.TabIndex = 60;
             this.Lv_min.Value = new decimal(new int[] {
-            42,
+            16,
             0,
             0,
             0});
@@ -1920,6 +1910,34 @@
             this.Poke.TabIndex = 36;
             this.Poke.SelectedIndexChanged += new System.EventHandler(this.Poke_SelectedIndexChanged);
             // 
+            // UB_th
+            // 
+            this.UB_th.AccessibleName = "";
+            this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UB_th.Location = new System.Drawing.Point(249, 103);
+            this.UB_th.Name = "UB_th";
+            this.UB_th.Size = new System.Drawing.Size(44, 22);
+            this.UB_th.TabIndex = 67;
+            this.UB_th.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // Encounter_th
+            // 
+            this.Encounter_th.AccessibleName = "";
+            this.Encounter_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Encounter_th.Location = new System.Drawing.Point(341, 64);
+            this.Encounter_th.Name = "Encounter_th";
+            this.Encounter_th.Size = new System.Drawing.Size(44, 22);
+            this.Encounter_th.TabIndex = 51;
+            this.Encounter_th.Value = new decimal(new int[] {
+            13,
+            0,
+            0,
+            0});
+            // 
             // TSV
             // 
             this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1978,24 +1996,6 @@
             this.Advanced.Text = "高级模式";
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
-            // 
-            // L_Encounter_th
-            // 
-            this.L_Encounter_th.AutoSize = true;
-            this.L_Encounter_th.Location = new System.Drawing.Point(296, 69);
-            this.L_Encounter_th.Name = "L_Encounter_th";
-            this.L_Encounter_th.Size = new System.Drawing.Size(43, 13);
-            this.L_Encounter_th.TabIndex = 68;
-            this.L_Encounter_th.Text = "遇敌率";
-            // 
-            // L_UB_th
-            // 
-            this.L_UB_th.AutoSize = true;
-            this.L_UB_th.Location = new System.Drawing.Point(191, 106);
-            this.L_UB_th.Name = "L_UB_th";
-            this.L_UB_th.Size = new System.Drawing.Size(58, 13);
-            this.L_UB_th.TabIndex = 69;
-            this.L_UB_th.Text = "UB出现率";
             // 
             // Seed
             // 
@@ -2077,18 +2077,6 @@
             this.dgv_synced.Name = "dgv_synced";
             this.dgv_synced.Width = 55;
             // 
-            // dgv_gender
-            // 
-            this.dgv_gender.HeaderText = "性别";
-            this.dgv_gender.Name = "dgv_gender";
-            this.dgv_gender.Width = 55;
-            // 
-            // dgv_ability
-            // 
-            this.dgv_ability.HeaderText = "特性";
-            this.dgv_ability.Name = "dgv_ability";
-            this.dgv_ability.Width = 55;
-            // 
             // dgv_needle
             // 
             this.dgv_needle.HeaderText = "针";
@@ -2100,12 +2088,6 @@
             this.dgv_psv.HeaderText = "PSV";
             this.dgv_psv.Name = "dgv_psv";
             this.dgv_psv.Width = 45;
-            // 
-            // dgv_encounter
-            // 
-            this.dgv_encounter.HeaderText = "遇敌";
-            this.dgv_encounter.Name = "dgv_encounter";
-            this.dgv_encounter.Width = 55;
             // 
             // dgv_slot
             // 
@@ -2119,11 +2101,29 @@
             this.dgv_lv.Name = "dgv_lv";
             this.dgv_lv.Width = 30;
             // 
+            // dgv_gender
+            // 
+            this.dgv_gender.HeaderText = "性别";
+            this.dgv_gender.Name = "dgv_gender";
+            this.dgv_gender.Width = 55;
+            // 
+            // dgv_ability
+            // 
+            this.dgv_ability.HeaderText = "特性";
+            this.dgv_ability.Name = "dgv_ability";
+            this.dgv_ability.Width = 55;
+            // 
             // dgv_item
             // 
             this.dgv_item.HeaderText = "道具";
             this.dgv_item.Name = "dgv_item";
             this.dgv_item.Width = 55;
+            // 
+            // dgv_encounter
+            // 
+            this.dgv_encounter.HeaderText = "遇敌";
+            this.dgv_encounter.Name = "dgv_encounter";
+            this.dgv_encounter.Width = 55;
             // 
             // dgv_ubvalue
             // 
@@ -2226,10 +2226,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.Condition.ResumeLayout(false);
             this.Condition.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
             this.ResumeLayout(false);
@@ -2389,14 +2389,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_S;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_nature;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_synced;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_gender;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_ability;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_needle;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_psv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_encounter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_slot;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_lv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_gender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_ability;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_encounter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_ubvalue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_rand;
         private System.Windows.Forms.DataGridViewTextBoxColumn M6;
