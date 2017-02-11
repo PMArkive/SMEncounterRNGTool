@@ -116,10 +116,8 @@ namespace SMEncounterRNGTool
             }
 
             for (int i = 0; i < 6; i++)
-            {
                 if (st.IVs[i] != 31)
                     st.IVs[i] = (int)(getrand() & 0x1F);
-            }
 
             //Something
             if (AlwaysSynchro)

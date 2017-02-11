@@ -622,10 +622,10 @@ namespace SMEncounterRNGTool
                 if (EncounteredOnly.Checked && result.Encounter >= Encounter_th.Value)
                     return false;
 
-                if (result.UbValue >= UB_th.Value && setting.Lv != 0 && setting.Lv != result.Lv)
+                if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
 
-                if (UBOnly.Checked && result.UbValue >= UB_th.Value)
+                if (result.UbValue >= UB_th.Value && setting.Lv != 0 && setting.Lv != result.Lv)
                     return false;
             }
 

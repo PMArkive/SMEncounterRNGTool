@@ -96,7 +96,6 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++)
                 if (IVlow[i] > IV[i] || IV[i] > IVup[i])
                     return false;
-
             return true;
         }
 
