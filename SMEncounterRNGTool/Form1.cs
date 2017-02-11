@@ -252,7 +252,6 @@ namespace SMEncounterRNGTool
         {
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
-            UB_th.Visible = Advanced.Checked && Wild.Checked;
         }
 
 
@@ -264,27 +263,30 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
+            UBOnly.Enabled = UB_th.Enabled = UB.Checked;
             if (UB.Checked)
-            {
                 Wild.Checked = true;
-                UBOnly.Enabled = true;
-            }
             else
-            {
-                UBOnly.Checked = UBOnly.Enabled = false;
-            }
+                UBOnly.Checked = false;
         }
+
+        private void Honey_CheckedChanged(object sender, EventArgs e)
+        {
+            Encounter_th.Enabled = !Honey.Checked;
+        }
+
 
         private void Method_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.Method = Stationary.Checked;
             Properties.Settings.Default.Save();
-            Fix3v.Enabled = Wild.Checked;
-            UB_th.Visible = Advanced.Checked && Wild.Checked;
-            GenderRatio.Visible = UB.Visible = Honey.Visible = Encounter_th.Visible = Wild.Checked;
+
+            L_UB_th.Visible = L_Encounter_th.Visible = Wild.Checked;
+            GenderRatio.Visible = UB.Visible = UB_th.Visible = Honey.Visible = Encounter_th.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
-            //AlwaysSynced.Visible = Stationary.Checked;
+
+            AlwaysSynced.Enabled = Stationary.Checked;
             if (Stationary.Checked)
             {
                 GenderRatio.SelectedIndex = 0;
@@ -298,6 +300,7 @@ namespace SMEncounterRNGTool
                 AlwaysSynced.Checked = false;
             }
             UB_CheckedChanged(null, null);
+            Honey_CheckedChanged(null, null);
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -327,7 +330,10 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 10);
+            UB.Checked = Wild.Checked = Poke.SelectedIndex > 9;
+            Stationary.Checked = Poke.SelectedIndex < 10;
+            AlwaysSynced.Checked = Poke.SelectedIndex > 5;
+            Method_CheckedChanged(null, null);
             for (int i = 0; i < 6; i++)
             {
                 BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
@@ -341,12 +347,12 @@ namespace SMEncounterRNGTool
                 case 7: NPC.Value = 6; Lv_Search.Value = 50; break; // Magearna sometimes NPC# =7
                 case 8: NPC.Value = 3; Lv_Search.Value = 50; break; // Zygarde-10%
                 case 9: NPC.Value = 3; Lv_Search.Value = 50; break; // Zygarde-50%
-                case 10: NPC.Value = 0; Lv_Search.Value = 55; break; //
+                case 10: NPC.Value = 0; Lv_Search.Value = 55; UB_th.Value = 15; break; //
                 case 11: Lv_Search.Value = 65; break; //
                 case 13: Lv_Search.Value = 65; break; //
                 case 14: NPC.Value = 0; Lv_Search.Value = 65; break; //
                 case 16: Lv_Search.Value = 70; break; //
-                case 17: Lv_Search.Value = 75; break; //
+                case 17: Lv_Search.Value = 75; UB_th.Value = 5; break; //
                 default: NPC.Value = 0; Lv_Search.Value = 60; break;
             }
         }
@@ -566,7 +572,7 @@ namespace SMEncounterRNGTool
                 FrameCorrection = (int)Framecorrection.Value,
                 Honey = Honey.Checked,
                 UB = UB.Checked,
-                ShinyCharm = ShinyCharm.Checked,
+                ShinyCharm = ShinyCharm.Checked && (Wild.Checked || Poke.SelectedIndex == 6),
                 Wild = Wild.Checked,
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,

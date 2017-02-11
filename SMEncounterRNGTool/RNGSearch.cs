@@ -58,25 +58,21 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
-            if (Sync && (!Honey || !UB))
+            if (UB && Honey)
+                st.UbValue = getUBValue();
+
+            if (Sync)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
-            if (!Honey && Wild)
+            if (Wild && !Honey)
                 st.Encounter = (int)(getrand() % 100);
-            if (Honey)
+            else
                 st.Encounter = -1;
 
-            if (UB)
-            {
-                st.UbValue = (int)(getrand() % 100);
-                UB_S = st.UbValue < UB_th;
-                Fix3v = UB_S;
-            }
-
-            if (Sync && Honey && UB)
-                st.Synchronize = (int)(getrand() % 100) >= 50;
+            if (UB && !Honey)
+                st.UbValue = getUBValue();
 
             if (Wild && !UB_S)
             {
@@ -86,7 +82,7 @@ namespace SMEncounterRNGTool
             }
 
             //Something
-                index += 60 + FrameCorrection;
+            Advance(60 + FrameCorrection);
 
             //Encryption Constant
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
@@ -106,31 +102,28 @@ namespace SMEncounterRNGTool
             }
 
             //IV
-            int[] IV = new int[6] { 0, 0, 0, 0, 0, 0 };
+            st.IVs = new int[6] { 0, 0, 0, 0, 0, 0 };
 
             int cnt = Fix3v ? 3 : 0;
             while (cnt > 0)
             {
                 int ran = (int)(getrand() % 6);
-                if (IV[ran] != 32)
+                if (st.IVs[ran] != 31)
                 {
-                    IV[ran] = 32;
+                    st.IVs[ran] = 31;
                     cnt--;
                 }
             }
 
-            for (int i = 0; i < 6; i++) //IV
+            for (int i = 0; i < 6; i++)
             {
-                if (IV[i] == 32)
-                    IV[i] = 31;
-                else
-                    IV[i] = (int)(getrand() & 0x1F);
+                if (st.IVs[i] != 31)
+                    st.IVs[i] = (int)(getrand() & 0x1F);
             }
-            st.IVs = (int[])IV.Clone();
 
             //Something
             if (AlwaysSynchro)
-                index++;
+                Advance(1);
 
             //Ability
             if (!Fix3v)
@@ -162,6 +155,18 @@ namespace SMEncounterRNGTool
         private ulong currentrand()
         {
             return Rand[index];
+        }
+
+        private void Advance(int d)
+        {
+            index += d;
+        }
+
+        private int getUBValue()
+        {
+            int UbValue = (int)(getrand() % 100);
+            Fix3v = UB_S = UbValue < UB_th;
+            return UbValue;
         }
 
         public static int getslot(int rand)
