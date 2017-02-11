@@ -170,7 +170,6 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -196,6 +195,13 @@
             this.M25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QRBox = new System.Windows.Forms.GroupBox();
+            this.L_QRList = new System.Windows.Forms.Label();
+            this.QRSearch = new System.Windows.Forms.Button();
+            this.L_QRresult = new System.Windows.Forms.Label();
+            this.QRList = new System.Windows.Forms.TextBox();
+            this.QRResult = new System.Windows.Forms.ListBox();
+            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.SearchSeedBox.SuspendLayout();
@@ -244,6 +250,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
+            this.QRBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -262,6 +269,7 @@
             // 
             // SearchSeed
             // 
+            this.SearchSeed.Controls.Add(this.QRBox);
             this.SearchSeed.Controls.Add(this.SearchSeedBox);
             this.SearchSeed.Location = new System.Drawing.Point(4, 22);
             this.SearchSeed.Name = "SearchSeed";
@@ -304,7 +312,7 @@
             this.SearchSeedBox.Size = new System.Drawing.Size(949, 152);
             this.SearchSeedBox.TabIndex = 6;
             this.SearchSeedBox.TabStop = false;
-            this.SearchSeedBox.Text = "输入指针";
+            this.SearchSeedBox.Text = "输入读档界面指针";
             // 
             // L_clocklist
             // 
@@ -1997,20 +2005,6 @@
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
             // 
-            // Seed
-            // 
-            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(833, 19);
-            this.Seed.Name = "Seed";
-            this.Seed.Size = new System.Drawing.Size(78, 22);
-            this.Seed.TabIndex = 0;
-            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
-            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
-            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
             // dgv_Frame
             // 
             this.dgv_Frame.HeaderText = "帧数";
@@ -2161,6 +2155,78 @@
             this.M100.Name = "M100";
             this.M100.Width = 40;
             // 
+            // QRBox
+            // 
+            this.QRBox.Controls.Add(this.QRResult);
+            this.QRBox.Controls.Add(this.L_QRList);
+            this.QRBox.Controls.Add(this.QRSearch);
+            this.QRBox.Controls.Add(this.L_QRresult);
+            this.QRBox.Controls.Add(this.QRList);
+            this.QRBox.Location = new System.Drawing.Point(6, 164);
+            this.QRBox.Name = "QRBox";
+            this.QRBox.Size = new System.Drawing.Size(390, 306);
+            this.QRBox.TabIndex = 7;
+            this.QRBox.TabStop = false;
+            this.QRBox.Text = "输入QR指针序列";
+            // 
+            // L_QRList
+            // 
+            this.L_QRList.AutoSize = true;
+            this.L_QRList.Location = new System.Drawing.Point(29, 44);
+            this.L_QRList.Name = "L_QRList";
+            this.L_QRList.Size = new System.Drawing.Size(55, 13);
+            this.L_QRList.TabIndex = 27;
+            this.L_QRList.Text = "指针序列";
+            // 
+            // QRSearch
+            // 
+            this.QRSearch.Location = new System.Drawing.Point(283, 81);
+            this.QRSearch.Name = "QRSearch";
+            this.QRSearch.Size = new System.Drawing.Size(72, 27);
+            this.QRSearch.TabIndex = 26;
+            this.QRSearch.Text = "检索";
+            this.QRSearch.UseVisualStyleBackColor = true;
+            this.QRSearch.Click += new System.EventHandler(this.QRSearch_Click);
+            // 
+            // L_QRresult
+            // 
+            this.L_QRresult.AutoSize = true;
+            this.L_QRresult.Location = new System.Drawing.Point(29, 128);
+            this.L_QRresult.Name = "L_QRresult";
+            this.L_QRresult.Size = new System.Drawing.Size(55, 13);
+            this.L_QRresult.TabIndex = 23;
+            this.L_QRresult.Text = "检索结果";
+            // 
+            // QRList
+            // 
+            this.QRList.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QRList.Location = new System.Drawing.Point(89, 39);
+            this.QRList.Name = "QRList";
+            this.QRList.Size = new System.Drawing.Size(266, 22);
+            this.QRList.TabIndex = 24;
+            // 
+            // QRResult
+            // 
+            this.QRResult.FormattingEnabled = true;
+            this.QRResult.Location = new System.Drawing.Point(88, 128);
+            this.QRResult.Name = "QRResult";
+            this.QRResult.Size = new System.Drawing.Size(267, 160);
+            this.QRResult.TabIndex = 28;
+            // 
+            // Seed
+            // 
+            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Seed.Hexadecimal = true;
+            this.Seed.Location = new System.Drawing.Point(833, 19);
+            this.Seed.Name = "Seed";
+            this.Seed.Size = new System.Drawing.Size(78, 22);
+            this.Seed.TabIndex = 0;
+            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
+            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
+            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2231,6 +2297,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
+            this.QRBox.ResumeLayout(false);
+            this.QRBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2403,6 +2471,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn M25;
         private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
+        private System.Windows.Forms.GroupBox QRBox;
+        private System.Windows.Forms.ListBox QRResult;
+        private System.Windows.Forms.Label L_QRList;
+        private System.Windows.Forms.Button QRSearch;
+        private System.Windows.Forms.Label L_QRresult;
+        private System.Windows.Forms.TextBox QRList;
     }
 }
 

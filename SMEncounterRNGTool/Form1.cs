@@ -225,6 +225,58 @@ namespace SMEncounterRNGTool
             else
                 SeedResults.Text = "";
         }
+
+        private void QRSearch_Click(object sender, EventArgs e)
+        {
+            uint InitialSeed = (uint)Seed.Value;
+            int min = (int)Frame_min.Value;
+            int max = (int)Frame_max.Value;
+            if (QRList.Text == "")
+                return;
+            string[] str = QRList.Text.Split(',');
+            try
+            {
+                int[] Clock_List = str.Select(s => int.Parse(s)).ToArray();
+                int[] temp_List = new int[Clock_List.Length];
+
+                SFMT sfmt = new SFMT(InitialSeed);
+                SFMT seed = new SFMT(InitialSeed);
+                bool flag = false;
+
+                QRResult.Items.Clear();
+
+                for (int i = 0; i < min; i++)
+                    sfmt.NextUInt64();
+
+                int cnt = 0;
+                int tmp = 0;
+                for (int i = min; i <= max; i++, sfmt.NextUInt64())
+                {
+                    seed = (SFMT)sfmt.DeepCopy();
+
+                    for (int j = 0; j < Clock_List.Length; j++)
+                        temp_List[j] = (int)(seed.NextUInt64() % 17);
+
+                    if (temp_List.SequenceEqual(Clock_List))
+                        flag = true;
+
+                    if (flag)
+                    {
+                        flag = false;
+                        QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧");
+                        cnt++;
+                        tmp = i + Clock_List.Length + 1;
+                    }
+                }
+
+                if (cnt == 1)
+                    Time_min.Value = tmp;
+            }
+            catch
+            {
+                Error("指针输入格式不正确");
+            }
+        }
         #endregion
 
 
@@ -653,8 +705,9 @@ namespace SMEncounterRNGTool
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
-            string randstr = result.EC.ToString("X8") + result.PID.ToString("X8");
+            string randstr = result.EC.ToString("X8") + " "+ result.PID.ToString("X8");
 
+            dgv_rand.HeaderText = Advanced.Checked ? "加密常数+PID" : "乱数列";
 
             if (!Advanced.Checked)
             {
@@ -681,6 +734,5 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
-
     }
 }
