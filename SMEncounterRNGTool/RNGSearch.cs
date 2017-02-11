@@ -119,14 +119,10 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] != 31)
                     st.IVs[i] = (int)(getrand() & 0x1F);
-
-            //Something
-            if (AlwaysSynchro)
-                Advance(1);
-
+            
             //Ability
-            if (!Fix3v)
-                st.Ability = (int)(getrand() & 1) + 1;
+            if ((Wild || AlwaysSynchro) && (!UB_S))
+            st.Ability = (int)(getrand() & 1) + 1;
 
             //Nature
             st.Nature = (int)(currentrand() % 25);

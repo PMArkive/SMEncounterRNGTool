@@ -270,10 +270,11 @@ namespace SMEncounterRNGTool
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
 
             AlwaysSynced.Enabled = Stationary.Checked;
+            Honey.Checked = Wild.Checked;
             if (Stationary.Checked)
             {
                 GenderRatio.SelectedIndex = 0;
-                UB.Checked = Honey.Checked = false;
+                UB.Checked = false;
                 Fix3v.Checked = true;
             }
             else
@@ -290,9 +291,7 @@ namespace SMEncounterRNGTool
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
             UBOnly.Enabled = UB_th.Enabled = UB.Checked;
-            if (UB.Checked)
-                Wild.Checked = true;
-            else
+            if (!UB.Checked)
                 UBOnly.Checked = false;
         }
 
@@ -330,7 +329,7 @@ namespace SMEncounterRNGTool
         {
             UB.Checked = Wild.Checked = Poke.SelectedIndex > 9;
             Stationary.Checked = Poke.SelectedIndex < 10;
-            AlwaysSynced.Checked = Poke.SelectedIndex > 5;
+            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 10);
             Method_CheckedChanged(null, null);
             for (int i = 0; i < 6; i++)
             {
@@ -577,7 +576,7 @@ namespace SMEncounterRNGTool
                 FrameCorrection = (int)Framecorrection.Value,
                 Honey = Honey.Checked,
                 UB = UB.Checked,
-                ShinyCharm = ShinyCharm.Checked && (Wild.Checked || Poke.SelectedIndex == 6),
+                ShinyCharm = ShinyCharm.Checked && Wild.Checked,
                 Wild = Wild.Checked,
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,
@@ -654,7 +653,7 @@ namespace SMEncounterRNGTool
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
-            string[] status = new string[6];
+            string randstr = result.EC.ToString("X8") + result.PID.ToString("X8");
 
 
             if (!Advanced.Checked)
@@ -662,6 +661,7 @@ namespace SMEncounterRNGTool
                 Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
+                randstr = result.row_r.ToString("X16");
             }
 
             DataGridViewRow row = new DataGridViewRow();
@@ -670,7 +670,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d, BlinkFlag,
                 result.IVs[0], result.IVs[1], result.IVs[2], result.IVs[3], result.IVs[4], result.IVs[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, result.row_r.ToString("X16"),
+                true_nature, SynchronizeFlag, result.Clock, result.PSV, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, randstr,
                 result.row_r % 6, result.row_r % 25, result.row_r % 32, result.row_r % 100
                 );
 
