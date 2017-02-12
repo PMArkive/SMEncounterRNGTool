@@ -316,10 +316,6 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Method = Stationary.Checked;
             Properties.Settings.Default.Save();
 
-            L_UB_th.Visible = L_Encounter_th.Visible = Wild.Checked;
-            GenderRatio.Visible = UB.Visible = UB_th.Visible = Honey.Visible = Encounter_th.Visible = Wild.Checked;
-            label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
-            Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
 
             AlwaysSynced.Enabled = Stationary.Checked;
             Honey.Checked = Wild.Checked;
@@ -338,6 +334,11 @@ namespace SMEncounterRNGTool
             }
             UB_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
+
+            L_UB_th.Visible = L_Encounter_th.Visible = Wild.Checked;
+            GenderRatio.Visible = UB.Visible = UB_th.Visible = Honey.Visible = Encounter_th.Visible = Wild.Checked;
+            label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
+            Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
         }
 
         private void UB_CheckedChanged(object sender, EventArgs e)
