@@ -350,6 +350,7 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             Encounter_th.Enabled = !Honey.Checked;
+            L_timedelay.Visible = Timedelay.Visible = Honey.Checked;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)

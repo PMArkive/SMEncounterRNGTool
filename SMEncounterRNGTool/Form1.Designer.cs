@@ -34,6 +34,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchSeed = new System.Windows.Forms.TabPage();
+            this.QRBox = new System.Windows.Forms.GroupBox();
+            this.QRResult = new System.Windows.Forms.ListBox();
+            this.L_QRList = new System.Windows.Forms.Label();
+            this.QRSearch = new System.Windows.Forms.Button();
+            this.L_QRresult = new System.Windows.Forms.Label();
+            this.QRList = new System.Windows.Forms.TextBox();
             this.SearchSeedBox = new System.Windows.Forms.GroupBox();
             this.L_clocklist = new System.Windows.Forms.Label();
             this.EndClockInput = new System.Windows.Forms.RadioButton();
@@ -144,6 +150,31 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
+            this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_H = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_B = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Condition = new System.Windows.Forms.GroupBox();
             this.L_UB_th = new System.Windows.Forms.Label();
             this.L_Encounter_th = new System.Windows.Forms.Label();
@@ -170,40 +201,10 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_H = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_B = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QRBox = new System.Windows.Forms.GroupBox();
-            this.L_QRList = new System.Windows.Forms.Label();
-            this.QRSearch = new System.Windows.Forms.Button();
-            this.L_QRresult = new System.Windows.Forms.Label();
-            this.QRList = new System.Windows.Forms.TextBox();
-            this.QRResult = new System.Windows.Forms.ListBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
+            this.QRBox.SuspendLayout();
             this.SearchSeedBox.SuspendLayout();
             this.SearchTool.SuspendLayout();
             this.TimeBox.SuspendLayout();
@@ -250,7 +251,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
-            this.QRBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -278,6 +278,64 @@
             this.SearchSeed.TabIndex = 0;
             this.SearchSeed.Text = "检索Seed";
             this.SearchSeed.UseVisualStyleBackColor = true;
+            // 
+            // QRBox
+            // 
+            this.QRBox.Controls.Add(this.QRResult);
+            this.QRBox.Controls.Add(this.L_QRList);
+            this.QRBox.Controls.Add(this.QRSearch);
+            this.QRBox.Controls.Add(this.L_QRresult);
+            this.QRBox.Controls.Add(this.QRList);
+            this.QRBox.Location = new System.Drawing.Point(17, 164);
+            this.QRBox.Name = "QRBox";
+            this.QRBox.Size = new System.Drawing.Size(379, 306);
+            this.QRBox.TabIndex = 7;
+            this.QRBox.TabStop = false;
+            this.QRBox.Text = "输入QR指针序列";
+            // 
+            // QRResult
+            // 
+            this.QRResult.FormattingEnabled = true;
+            this.QRResult.Location = new System.Drawing.Point(75, 128);
+            this.QRResult.Name = "QRResult";
+            this.QRResult.Size = new System.Drawing.Size(267, 160);
+            this.QRResult.TabIndex = 28;
+            // 
+            // L_QRList
+            // 
+            this.L_QRList.AutoSize = true;
+            this.L_QRList.Location = new System.Drawing.Point(16, 44);
+            this.L_QRList.Name = "L_QRList";
+            this.L_QRList.Size = new System.Drawing.Size(55, 13);
+            this.L_QRList.TabIndex = 27;
+            this.L_QRList.Text = "指针序列";
+            // 
+            // QRSearch
+            // 
+            this.QRSearch.Location = new System.Drawing.Point(270, 81);
+            this.QRSearch.Name = "QRSearch";
+            this.QRSearch.Size = new System.Drawing.Size(72, 27);
+            this.QRSearch.TabIndex = 26;
+            this.QRSearch.Text = "检索";
+            this.QRSearch.UseVisualStyleBackColor = true;
+            this.QRSearch.Click += new System.EventHandler(this.QRSearch_Click);
+            // 
+            // L_QRresult
+            // 
+            this.L_QRresult.AutoSize = true;
+            this.L_QRresult.Location = new System.Drawing.Point(16, 128);
+            this.L_QRresult.Name = "L_QRresult";
+            this.L_QRresult.Size = new System.Drawing.Size(55, 13);
+            this.L_QRresult.TabIndex = 23;
+            this.L_QRresult.Text = "检索结果";
+            // 
+            // QRList
+            // 
+            this.QRList.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QRList.Location = new System.Drawing.Point(76, 39);
+            this.QRList.Name = "QRList";
+            this.QRList.Size = new System.Drawing.Size(266, 22);
+            this.QRList.TabIndex = 24;
             // 
             // SearchSeedBox
             // 
@@ -307,9 +365,9 @@
             this.SearchSeedBox.Controls.Add(this.button10);
             this.SearchSeedBox.Controls.Add(this.button8);
             this.SearchSeedBox.Controls.Add(this.button9);
-            this.SearchSeedBox.Location = new System.Drawing.Point(6, 6);
+            this.SearchSeedBox.Location = new System.Drawing.Point(17, 22);
             this.SearchSeedBox.Name = "SearchSeedBox";
-            this.SearchSeedBox.Size = new System.Drawing.Size(949, 152);
+            this.SearchSeedBox.Size = new System.Drawing.Size(938, 136);
             this.SearchSeedBox.TabIndex = 6;
             this.SearchSeedBox.TabStop = false;
             this.SearchSeedBox.Text = "输入读档界面指针";
@@ -317,7 +375,7 @@
             // L_clocklist
             // 
             this.L_clocklist.AutoSize = true;
-            this.L_clocklist.Location = new System.Drawing.Point(237, 105);
+            this.L_clocklist.Location = new System.Drawing.Point(227, 100);
             this.L_clocklist.Name = "L_clocklist";
             this.L_clocklist.Size = new System.Drawing.Size(55, 13);
             this.L_clocklist.TabIndex = 22;
@@ -326,7 +384,7 @@
             // EndClockInput
             // 
             this.EndClockInput.AutoSize = true;
-            this.EndClockInput.Location = new System.Drawing.Point(23, 108);
+            this.EndClockInput.Location = new System.Drawing.Point(13, 103);
             this.EndClockInput.Name = "EndClockInput";
             this.EndClockInput.Size = new System.Drawing.Size(73, 17);
             this.EndClockInput.TabIndex = 18;
@@ -337,7 +395,7 @@
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(865, 98);
+            this.Search.Location = new System.Drawing.Point(855, 93);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(72, 27);
             this.Search.TabIndex = 21;
@@ -347,7 +405,7 @@
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(140, 98);
+            this.Clear.Location = new System.Drawing.Point(130, 93);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(72, 27);
             this.Clear.TabIndex = 17;
@@ -357,7 +415,7 @@
             // 
             // Back
             // 
-            this.Back.Location = new System.Drawing.Point(865, 38);
+            this.Back.Location = new System.Drawing.Point(855, 33);
             this.Back.Name = "Back";
             this.Back.Size = new System.Drawing.Size(72, 27);
             this.Back.TabIndex = 7;
@@ -368,7 +426,7 @@
             // L_SeedResult
             // 
             this.L_SeedResult.AutoSize = true;
-            this.L_SeedResult.Location = new System.Drawing.Point(533, 105);
+            this.L_SeedResult.Location = new System.Drawing.Point(523, 100);
             this.L_SeedResult.Name = "L_SeedResult";
             this.L_SeedResult.Size = new System.Drawing.Size(55, 13);
             this.L_SeedResult.TabIndex = 6;
@@ -377,7 +435,7 @@
             // SeedResults
             // 
             this.SeedResults.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SeedResults.Location = new System.Drawing.Point(613, 100);
+            this.SeedResults.Location = new System.Drawing.Point(603, 95);
             this.SeedResults.Name = "SeedResults";
             this.SeedResults.Size = new System.Drawing.Size(227, 22);
             this.SeedResults.TabIndex = 20;
@@ -385,7 +443,7 @@
             // Clock_List
             // 
             this.Clock_List.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Clock_List.Location = new System.Drawing.Point(317, 100);
+            this.Clock_List.Location = new System.Drawing.Point(307, 95);
             this.Clock_List.Name = "Clock_List";
             this.Clock_List.Size = new System.Drawing.Size(191, 22);
             this.Clock_List.TabIndex = 19;
@@ -394,7 +452,7 @@
             // 
             this.StartClockInput.AutoSize = true;
             this.StartClockInput.Checked = true;
-            this.StartClockInput.Location = new System.Drawing.Point(23, 85);
+            this.StartClockInput.Location = new System.Drawing.Point(13, 80);
             this.StartClockInput.Name = "StartClockInput";
             this.StartClockInput.Size = new System.Drawing.Size(73, 17);
             this.StartClockInput.TabIndex = 7;
@@ -407,7 +465,7 @@
             // 
             this.button0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button0.BackgroundImage")));
             this.button0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button0.Location = new System.Drawing.Point(21, 31);
+            this.button0.Location = new System.Drawing.Point(11, 26);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(40, 40);
             this.button0.TabIndex = 16;
@@ -418,7 +476,7 @@
             // 
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(70, 31);
+            this.button1.Location = new System.Drawing.Point(60, 26);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(40, 40);
             this.button1.TabIndex = 0;
@@ -429,7 +487,7 @@
             // 
             this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button16.Location = new System.Drawing.Point(805, 31);
+            this.button16.Location = new System.Drawing.Point(795, 26);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(40, 40);
             this.button16.TabIndex = 15;
@@ -440,7 +498,7 @@
             // 
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Location = new System.Drawing.Point(119, 31);
+            this.button2.Location = new System.Drawing.Point(109, 26);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(40, 40);
             this.button2.TabIndex = 1;
@@ -451,7 +509,7 @@
             // 
             this.button15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button15.BackgroundImage")));
             this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button15.Location = new System.Drawing.Point(756, 31);
+            this.button15.Location = new System.Drawing.Point(746, 26);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(40, 40);
             this.button15.TabIndex = 14;
@@ -462,7 +520,7 @@
             // 
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Location = new System.Drawing.Point(168, 31);
+            this.button3.Location = new System.Drawing.Point(158, 26);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(40, 40);
             this.button3.TabIndex = 2;
@@ -473,7 +531,7 @@
             // 
             this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
             this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button14.Location = new System.Drawing.Point(707, 31);
+            this.button14.Location = new System.Drawing.Point(697, 26);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(40, 40);
             this.button14.TabIndex = 13;
@@ -484,7 +542,7 @@
             // 
             this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Location = new System.Drawing.Point(217, 31);
+            this.button4.Location = new System.Drawing.Point(207, 26);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(40, 40);
             this.button4.TabIndex = 3;
@@ -495,7 +553,7 @@
             // 
             this.button13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button13.BackgroundImage")));
             this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button13.Location = new System.Drawing.Point(658, 31);
+            this.button13.Location = new System.Drawing.Point(648, 26);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(40, 40);
             this.button13.TabIndex = 12;
@@ -506,7 +564,7 @@
             // 
             this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.Location = new System.Drawing.Point(266, 31);
+            this.button5.Location = new System.Drawing.Point(256, 26);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(40, 40);
             this.button5.TabIndex = 4;
@@ -517,7 +575,7 @@
             // 
             this.button12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button12.BackgroundImage")));
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button12.Location = new System.Drawing.Point(609, 31);
+            this.button12.Location = new System.Drawing.Point(599, 26);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(40, 40);
             this.button12.TabIndex = 11;
@@ -528,7 +586,7 @@
             // 
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.Location = new System.Drawing.Point(315, 31);
+            this.button6.Location = new System.Drawing.Point(305, 26);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(40, 40);
             this.button6.TabIndex = 5;
@@ -539,7 +597,7 @@
             // 
             this.button11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button11.BackgroundImage")));
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button11.Location = new System.Drawing.Point(560, 31);
+            this.button11.Location = new System.Drawing.Point(550, 26);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(40, 40);
             this.button11.TabIndex = 10;
@@ -550,7 +608,7 @@
             // 
             this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button7.Location = new System.Drawing.Point(364, 31);
+            this.button7.Location = new System.Drawing.Point(354, 26);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(40, 40);
             this.button7.TabIndex = 6;
@@ -561,7 +619,7 @@
             // 
             this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button10.Location = new System.Drawing.Point(511, 31);
+            this.button10.Location = new System.Drawing.Point(501, 26);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(40, 40);
             this.button10.TabIndex = 9;
@@ -572,7 +630,7 @@
             // 
             this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button8.Location = new System.Drawing.Point(413, 31);
+            this.button8.Location = new System.Drawing.Point(403, 26);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(40, 40);
             this.button8.TabIndex = 7;
@@ -583,7 +641,7 @@
             // 
             this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button9.Location = new System.Drawing.Point(462, 31);
+            this.button9.Location = new System.Drawing.Point(452, 26);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(40, 40);
             this.button9.TabIndex = 8;
@@ -609,8 +667,8 @@
             // TimeBox
             // 
             this.TimeBox.Controls.Add(this.L_timedelay);
-            this.TimeBox.Controls.Add(this.Timedelay);
             this.TimeBox.Controls.Add(this.L_time);
+            this.TimeBox.Controls.Add(this.Timedelay);
             this.TimeBox.Controls.Add(this.Time_min);
             this.TimeBox.Controls.Add(this.Time_max);
             this.TimeBox.Controls.Add(this.TimeResult);
@@ -628,7 +686,7 @@
             // L_timedelay
             // 
             this.L_timedelay.AutoSize = true;
-            this.L_timedelay.Location = new System.Drawing.Point(15, 66);
+            this.L_timedelay.Location = new System.Drawing.Point(275, 27);
             this.L_timedelay.Name = "L_timedelay";
             this.L_timedelay.Size = new System.Drawing.Size(55, 13);
             this.L_timedelay.TabIndex = 52;
@@ -638,7 +696,7 @@
             // 
             this.Timedelay.AccessibleName = "";
             this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Timedelay.Location = new System.Drawing.Point(72, 64);
+            this.Timedelay.Location = new System.Drawing.Point(332, 22);
             this.Timedelay.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -703,7 +761,7 @@
             // TimeResult
             // 
             this.TimeResult.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimeResult.Location = new System.Drawing.Point(199, 62);
+            this.TimeResult.Location = new System.Drawing.Point(195, 64);
             this.TimeResult.Name = "TimeResult";
             this.TimeResult.Size = new System.Drawing.Size(185, 22);
             this.TimeResult.TabIndex = 50;
@@ -719,7 +777,7 @@
             // 
             // CalcTime
             // 
-            this.CalcTime.Location = new System.Drawing.Point(134, 61);
+            this.CalcTime.Location = new System.Drawing.Point(130, 64);
             this.CalcTime.Name = "CalcTime";
             this.CalcTime.Size = new System.Drawing.Size(59, 23);
             this.CalcTime.TabIndex = 49;
@@ -731,7 +789,7 @@
             // 
             this.NPC.AccessibleName = "";
             this.NPC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NPC.Location = new System.Drawing.Point(320, 22);
+            this.NPC.Location = new System.Drawing.Point(66, 64);
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
@@ -739,7 +797,7 @@
             // L_NPC
             // 
             this.L_NPC.AutoSize = true;
-            this.L_NPC.Location = new System.Drawing.Point(269, 27);
+            this.L_NPC.Location = new System.Drawing.Point(15, 69);
             this.L_NPC.Name = "L_NPC";
             this.L_NPC.Size = new System.Drawing.Size(41, 13);
             this.L_NPC.TabIndex = 47;
@@ -1706,6 +1764,156 @@
             this.DGV.Size = new System.Drawing.Size(767, 721);
             this.DGV.TabIndex = 2;
             // 
+            // dgv_Frame
+            // 
+            this.dgv_Frame.HeaderText = "帧数";
+            this.dgv_Frame.Name = "dgv_Frame";
+            this.dgv_Frame.Width = 55;
+            // 
+            // dgv_deviation
+            // 
+            this.dgv_deviation.HeaderText = "偏差";
+            this.dgv_deviation.Name = "dgv_deviation";
+            this.dgv_deviation.Width = 55;
+            // 
+            // dgv_blink
+            // 
+            this.dgv_blink.HeaderText = "眨眼";
+            this.dgv_blink.Name = "dgv_blink";
+            this.dgv_blink.Width = 55;
+            // 
+            // dgv_H
+            // 
+            this.dgv_H.HeaderText = "HP";
+            this.dgv_H.Name = "dgv_H";
+            this.dgv_H.Width = 30;
+            // 
+            // dgv_A
+            // 
+            this.dgv_A.HeaderText = "Atk";
+            this.dgv_A.Name = "dgv_A";
+            this.dgv_A.Width = 30;
+            // 
+            // dgv_B
+            // 
+            this.dgv_B.HeaderText = "Def";
+            this.dgv_B.Name = "dgv_B";
+            this.dgv_B.Width = 30;
+            // 
+            // dgv_C
+            // 
+            this.dgv_C.HeaderText = "SpA";
+            this.dgv_C.Name = "dgv_C";
+            this.dgv_C.Width = 30;
+            // 
+            // dgv_D
+            // 
+            this.dgv_D.HeaderText = "SpD";
+            this.dgv_D.Name = "dgv_D";
+            this.dgv_D.Width = 30;
+            // 
+            // dgv_S
+            // 
+            this.dgv_S.HeaderText = "Spe";
+            this.dgv_S.Name = "dgv_S";
+            this.dgv_S.Width = 30;
+            // 
+            // dgv_nature
+            // 
+            this.dgv_nature.HeaderText = "性格";
+            this.dgv_nature.Name = "dgv_nature";
+            this.dgv_nature.Width = 55;
+            // 
+            // dgv_synced
+            // 
+            this.dgv_synced.HeaderText = "同步";
+            this.dgv_synced.Name = "dgv_synced";
+            this.dgv_synced.Width = 55;
+            // 
+            // dgv_needle
+            // 
+            this.dgv_needle.HeaderText = "针";
+            this.dgv_needle.Name = "dgv_needle";
+            this.dgv_needle.Width = 30;
+            // 
+            // dgv_psv
+            // 
+            this.dgv_psv.HeaderText = "PSV";
+            this.dgv_psv.Name = "dgv_psv";
+            this.dgv_psv.Width = 45;
+            // 
+            // dgv_slot
+            // 
+            this.dgv_slot.HeaderText = "种类";
+            this.dgv_slot.Name = "dgv_slot";
+            this.dgv_slot.Width = 55;
+            // 
+            // dgv_lv
+            // 
+            this.dgv_lv.HeaderText = "Lv";
+            this.dgv_lv.Name = "dgv_lv";
+            this.dgv_lv.Width = 30;
+            // 
+            // dgv_gender
+            // 
+            this.dgv_gender.HeaderText = "性别";
+            this.dgv_gender.Name = "dgv_gender";
+            this.dgv_gender.Width = 55;
+            // 
+            // dgv_ability
+            // 
+            this.dgv_ability.HeaderText = "特性";
+            this.dgv_ability.Name = "dgv_ability";
+            this.dgv_ability.Width = 55;
+            // 
+            // dgv_item
+            // 
+            this.dgv_item.HeaderText = "道具";
+            this.dgv_item.Name = "dgv_item";
+            this.dgv_item.Width = 55;
+            // 
+            // dgv_encounter
+            // 
+            this.dgv_encounter.HeaderText = "遇敌";
+            this.dgv_encounter.Name = "dgv_encounter";
+            this.dgv_encounter.Width = 55;
+            // 
+            // dgv_ubvalue
+            // 
+            this.dgv_ubvalue.HeaderText = "UB";
+            this.dgv_ubvalue.Name = "dgv_ubvalue";
+            this.dgv_ubvalue.Width = 30;
+            // 
+            // dgv_rand
+            // 
+            this.dgv_rand.HeaderText = "乱数值";
+            this.dgv_rand.Name = "dgv_rand";
+            this.dgv_rand.Width = 120;
+            // 
+            // M6
+            // 
+            this.M6.HeaderText = "M6";
+            this.M6.Name = "M6";
+            this.M6.Width = 30;
+            // 
+            // M25
+            // 
+            this.M25.HeaderText = "M25";
+            this.M25.Name = "M25";
+            this.M25.Width = 30;
+            // 
+            // M32
+            // 
+            this.M32.HeaderText = "M32";
+            this.M32.Name = "M32";
+            this.M32.Width = 30;
+            // 
+            // M100
+            // 
+            this.M100.HeaderText = "M100";
+            this.M100.Name = "M100";
+            this.M100.Width = 40;
+            // 
             // Condition
             // 
             this.Condition.Controls.Add(this.L_UB_th);
@@ -1755,7 +1963,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(226, 69);
+            this.label9.Location = new System.Drawing.Point(227, 69);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 24;
@@ -1781,7 +1989,7 @@
             this.Lv_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lv_max.Location = new System.Drawing.Point(242, 64);
             this.Lv_max.Name = "Lv_max";
-            this.Lv_max.Size = new System.Drawing.Size(44, 22);
+            this.Lv_max.Size = new System.Drawing.Size(35, 22);
             this.Lv_max.TabIndex = 65;
             this.Lv_max.Value = new decimal(new int[] {
             19,
@@ -1846,9 +2054,9 @@
             // 
             this.Lv_min.AccessibleName = "";
             this.Lv_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_min.Location = new System.Drawing.Point(180, 64);
+            this.Lv_min.Location = new System.Drawing.Point(189, 64);
             this.Lv_min.Name = "Lv_min";
-            this.Lv_min.Size = new System.Drawing.Size(44, 22);
+            this.Lv_min.Size = new System.Drawing.Size(35, 22);
             this.Lv_min.TabIndex = 60;
             this.Lv_min.Value = new decimal(new int[] {
             16,
@@ -2005,214 +2213,6 @@
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
             // 
-            // dgv_Frame
-            // 
-            this.dgv_Frame.HeaderText = "帧数";
-            this.dgv_Frame.Name = "dgv_Frame";
-            this.dgv_Frame.Width = 55;
-            // 
-            // dgv_deviation
-            // 
-            this.dgv_deviation.HeaderText = "偏差";
-            this.dgv_deviation.Name = "dgv_deviation";
-            this.dgv_deviation.Width = 55;
-            // 
-            // dgv_blink
-            // 
-            this.dgv_blink.HeaderText = "眨眼";
-            this.dgv_blink.Name = "dgv_blink";
-            this.dgv_blink.Width = 55;
-            // 
-            // dgv_H
-            // 
-            this.dgv_H.HeaderText = "HP";
-            this.dgv_H.Name = "dgv_H";
-            this.dgv_H.Width = 30;
-            // 
-            // dgv_A
-            // 
-            this.dgv_A.HeaderText = "Atk";
-            this.dgv_A.Name = "dgv_A";
-            this.dgv_A.Width = 30;
-            // 
-            // dgv_B
-            // 
-            this.dgv_B.HeaderText = "Def";
-            this.dgv_B.Name = "dgv_B";
-            this.dgv_B.Width = 30;
-            // 
-            // dgv_C
-            // 
-            this.dgv_C.HeaderText = "SpA";
-            this.dgv_C.Name = "dgv_C";
-            this.dgv_C.Width = 30;
-            // 
-            // dgv_D
-            // 
-            this.dgv_D.HeaderText = "SpD";
-            this.dgv_D.Name = "dgv_D";
-            this.dgv_D.Width = 30;
-            // 
-            // dgv_S
-            // 
-            this.dgv_S.HeaderText = "Spe";
-            this.dgv_S.Name = "dgv_S";
-            this.dgv_S.Width = 30;
-            // 
-            // dgv_nature
-            // 
-            this.dgv_nature.HeaderText = "性格";
-            this.dgv_nature.Name = "dgv_nature";
-            this.dgv_nature.Width = 55;
-            // 
-            // dgv_synced
-            // 
-            this.dgv_synced.HeaderText = "同步";
-            this.dgv_synced.Name = "dgv_synced";
-            this.dgv_synced.Width = 55;
-            // 
-            // dgv_needle
-            // 
-            this.dgv_needle.HeaderText = "针";
-            this.dgv_needle.Name = "dgv_needle";
-            this.dgv_needle.Width = 30;
-            // 
-            // dgv_psv
-            // 
-            this.dgv_psv.HeaderText = "PSV";
-            this.dgv_psv.Name = "dgv_psv";
-            this.dgv_psv.Width = 45;
-            // 
-            // dgv_slot
-            // 
-            this.dgv_slot.HeaderText = "种类";
-            this.dgv_slot.Name = "dgv_slot";
-            this.dgv_slot.Width = 55;
-            // 
-            // dgv_lv
-            // 
-            this.dgv_lv.HeaderText = "Lv";
-            this.dgv_lv.Name = "dgv_lv";
-            this.dgv_lv.Width = 30;
-            // 
-            // dgv_gender
-            // 
-            this.dgv_gender.HeaderText = "性别";
-            this.dgv_gender.Name = "dgv_gender";
-            this.dgv_gender.Width = 55;
-            // 
-            // dgv_ability
-            // 
-            this.dgv_ability.HeaderText = "特性";
-            this.dgv_ability.Name = "dgv_ability";
-            this.dgv_ability.Width = 55;
-            // 
-            // dgv_item
-            // 
-            this.dgv_item.HeaderText = "道具";
-            this.dgv_item.Name = "dgv_item";
-            this.dgv_item.Width = 55;
-            // 
-            // dgv_encounter
-            // 
-            this.dgv_encounter.HeaderText = "遇敌";
-            this.dgv_encounter.Name = "dgv_encounter";
-            this.dgv_encounter.Width = 55;
-            // 
-            // dgv_ubvalue
-            // 
-            this.dgv_ubvalue.HeaderText = "UB";
-            this.dgv_ubvalue.Name = "dgv_ubvalue";
-            this.dgv_ubvalue.Width = 30;
-            // 
-            // dgv_rand
-            // 
-            this.dgv_rand.HeaderText = "乱数值";
-            this.dgv_rand.Name = "dgv_rand";
-            this.dgv_rand.Width = 120;
-            // 
-            // M6
-            // 
-            this.M6.HeaderText = "M6";
-            this.M6.Name = "M6";
-            this.M6.Width = 30;
-            // 
-            // M25
-            // 
-            this.M25.HeaderText = "M25";
-            this.M25.Name = "M25";
-            this.M25.Width = 30;
-            // 
-            // M32
-            // 
-            this.M32.HeaderText = "M32";
-            this.M32.Name = "M32";
-            this.M32.Width = 30;
-            // 
-            // M100
-            // 
-            this.M100.HeaderText = "M100";
-            this.M100.Name = "M100";
-            this.M100.Width = 40;
-            // 
-            // QRBox
-            // 
-            this.QRBox.Controls.Add(this.QRResult);
-            this.QRBox.Controls.Add(this.L_QRList);
-            this.QRBox.Controls.Add(this.QRSearch);
-            this.QRBox.Controls.Add(this.L_QRresult);
-            this.QRBox.Controls.Add(this.QRList);
-            this.QRBox.Location = new System.Drawing.Point(6, 164);
-            this.QRBox.Name = "QRBox";
-            this.QRBox.Size = new System.Drawing.Size(390, 306);
-            this.QRBox.TabIndex = 7;
-            this.QRBox.TabStop = false;
-            this.QRBox.Text = "输入QR指针序列";
-            // 
-            // L_QRList
-            // 
-            this.L_QRList.AutoSize = true;
-            this.L_QRList.Location = new System.Drawing.Point(29, 44);
-            this.L_QRList.Name = "L_QRList";
-            this.L_QRList.Size = new System.Drawing.Size(55, 13);
-            this.L_QRList.TabIndex = 27;
-            this.L_QRList.Text = "指针序列";
-            // 
-            // QRSearch
-            // 
-            this.QRSearch.Location = new System.Drawing.Point(283, 81);
-            this.QRSearch.Name = "QRSearch";
-            this.QRSearch.Size = new System.Drawing.Size(72, 27);
-            this.QRSearch.TabIndex = 26;
-            this.QRSearch.Text = "检索";
-            this.QRSearch.UseVisualStyleBackColor = true;
-            this.QRSearch.Click += new System.EventHandler(this.QRSearch_Click);
-            // 
-            // L_QRresult
-            // 
-            this.L_QRresult.AutoSize = true;
-            this.L_QRresult.Location = new System.Drawing.Point(29, 128);
-            this.L_QRresult.Name = "L_QRresult";
-            this.L_QRresult.Size = new System.Drawing.Size(55, 13);
-            this.L_QRresult.TabIndex = 23;
-            this.L_QRresult.Text = "检索结果";
-            // 
-            // QRList
-            // 
-            this.QRList.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QRList.Location = new System.Drawing.Point(89, 39);
-            this.QRList.Name = "QRList";
-            this.QRList.Size = new System.Drawing.Size(266, 22);
-            this.QRList.TabIndex = 24;
-            // 
-            // QRResult
-            // 
-            this.QRResult.FormattingEnabled = true;
-            this.QRResult.Location = new System.Drawing.Point(88, 128);
-            this.QRResult.Name = "QRResult";
-            this.QRResult.Size = new System.Drawing.Size(267, 160);
-            this.QRResult.TabIndex = 28;
-            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2244,6 +2244,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.SearchSeed.ResumeLayout(false);
+            this.QRBox.ResumeLayout(false);
+            this.QRBox.PerformLayout();
             this.SearchSeedBox.ResumeLayout(false);
             this.SearchSeedBox.PerformLayout();
             this.SearchTool.ResumeLayout(false);
@@ -2297,8 +2299,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
-            this.QRBox.ResumeLayout(false);
-            this.QRBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
