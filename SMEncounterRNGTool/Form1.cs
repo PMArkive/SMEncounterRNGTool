@@ -630,7 +630,7 @@ namespace SMEncounterRNGTool
                 FrameCorrection = (int)Framecorrection.Value,
                 Honey = Honey.Checked,
                 UB = UB.Checked,
-                ShinyCharm = ShinyCharm.Checked && Wild.Checked,
+                ShinyCharm = ShinyCharm.Checked,
                 Wild = Wild.Checked,
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,

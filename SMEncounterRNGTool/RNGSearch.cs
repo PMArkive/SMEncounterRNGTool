@@ -7,23 +7,24 @@ namespace SMEncounterRNGTool
     {
         // Search Settings
         public int TSV;
-        public int gender_ratio;
-        public bool nogender;
+
+        public bool Sync;
         public bool AlwaysSynchro;
         public int Synchro_Stat;
         public int FrameCorrection;
         public bool Fix3v;
         public bool ShinyCharm;
-        public bool Honey, UB, UB_S, Wild;
-        public bool Sync;
-        public int Lv_max, Lv_min;
+
+        public bool lengendary;
         public int PokeLv;
+
+        public bool Wild, Honey, UB;
+        public int Lv_max, Lv_min;
         public int UB_th;
-        public static List<ulong> Rand;
-
-        private int index;
-
-
+        public bool UB_S = false;
+        public bool nogender;
+        public int gender_ratio;
+        
         public class RNGResult
         {
             public int Nature;
@@ -50,13 +51,12 @@ namespace SMEncounterRNGTool
             RNGResult st = new RNGResult();
 
             index = 0;
-
             //シンクロ -- Synchronize
             st.row_r = currentrand();
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
-            if (UB && Honey)
+            if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
             if (Sync)
@@ -69,12 +69,15 @@ namespace SMEncounterRNGTool
             else
                 st.Encounter = -1;
 
-            if (UB && !Honey)
+            if (Wild && UB && !Honey)
                 st.UbValue = getUBValue();
 
-            if (UB_S || !Wild)
+            //UB is determined above
+            lengendary = UB_S || !Wild;
+            if (lengendary)
                 st.Lv = PokeLv;
 
+            // Wild Normal Pokemon
             if (Wild && !UB_S)
             {
                 st.Slot = getslot((int)(getrand() % 100));
@@ -82,15 +85,18 @@ namespace SMEncounterRNGTool
                 st.Item = (int)(getrand() % 60);
             }
 
+            //Blinking process?
+            Advance(FrameCorrection);
+
             //Something
-            Advance(60 + FrameCorrection);
+            Advance(60);
 
             //Encryption Constant
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
             int roll_count = ShinyCharm ? 3 : 1;
-            if (UB_S) roll_count = 1;
+            if (lengendary) roll_count = 1;
             for (int i = 0; i < roll_count; i++) //pid
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
@@ -142,6 +148,8 @@ namespace SMEncounterRNGTool
             return st;
         }
 
+        public static List<ulong> Rand;
+        private int index;
         private ulong getrand()
         {
             return Rand[index++];
