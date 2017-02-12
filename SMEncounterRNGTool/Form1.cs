@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using static PKHeX.Util;
@@ -496,7 +495,8 @@ namespace SMEncounterRNGTool
             Ability.SelectedIndex = 0;
             Slot.SelectedIndex = 0;
 
-            Lv_Search.Value = 0;
+            if (ByIVs.Checked)
+                Lv_Search.Value = 0;
             for (int i = 0; i < 6; i++)
             {
                 IVlow[i].Value = 0;
@@ -709,7 +709,7 @@ namespace SMEncounterRNGTool
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
-            string randstr = result.EC.ToString("X8") + " "+ result.PID.ToString("X8");
+            string randstr = result.EC.ToString("X8") + " " + result.PID.ToString("X8");
 
             dgv_rand.HeaderText = Advanced.Checked ? "加密常数+PID" : "乱数值";
 
