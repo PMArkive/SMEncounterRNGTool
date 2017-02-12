@@ -406,6 +406,7 @@ namespace SMEncounterRNGTool
             }
         }
 
+        #region TimerCalculateFunction
         private int CalcFrame(int min, int max)
         {
             uint InitialSeed = (uint)Seed.Value;
@@ -503,6 +504,7 @@ namespace SMEncounterRNGTool
                 Stat[i].Value = 0;
             }
         }
+        #endregion
 
         #region Search
 
@@ -709,7 +711,7 @@ namespace SMEncounterRNGTool
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string randstr = result.EC.ToString("X8") + " "+ result.PID.ToString("X8");
 
-            dgv_rand.HeaderText = Advanced.Checked ? "加密常数+PID" : "乱数列";
+            dgv_rand.HeaderText = Advanced.Checked ? "加密常数+PID" : "乱数值";
 
             if (!Advanced.Checked)
             {
@@ -726,7 +728,7 @@ namespace SMEncounterRNGTool
                 i, d, BlinkFlag,
                 result.IVs[0], result.IVs[1], result.IVs[2], result.IVs[3], result.IVs[4], result.IVs[5],
                 true_nature, SynchronizeFlag, result.Clock, result.PSV, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, randstr,
-                result.row_r % 6, result.row_r % 25, result.row_r % 32, result.row_r % 100
+                result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );
 
             if (result.Shiny)
