@@ -128,6 +128,12 @@ namespace SMEncounterRNGTool
             SearchMethod_CheckedChanged(null, null);
         }
 
+
+        private void BlogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://followmetogetic.com/blog/smrngsoftware");
+        }
+
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)
         {
@@ -731,5 +737,6 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
+
     }
 }
