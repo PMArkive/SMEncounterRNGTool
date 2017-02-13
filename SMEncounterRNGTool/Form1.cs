@@ -391,23 +391,16 @@ namespace SMEncounterRNGTool
             AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 13);
             Method_CheckedChanged(null, null);
             for (int i = 0; i < 6; i++)
-            {
                 BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
-            }
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
             switch (Poke.SelectedIndex)
             {
+                case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;break;
+                case 12: Fix3v.Checked = false;break;
                 case 13: UB_th.Value = 15; break; //
                 case 20: UB_th.Value = 5; break; //
             }
-            if (Poke.SelectedIndex == 11)
-            {
-                Fix3v.Checked = false;
-                GenderRatio.SelectedIndex = 2;
-            }
-            if (Poke.SelectedIndex == 12)
-                Fix3v.Checked = false;
         }
 
         #region TimerCalculateFunction

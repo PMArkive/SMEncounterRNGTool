@@ -132,13 +132,11 @@
             int[] IV = new int[6];
 
             for (int i = 0; i < 6; i++)
-            {
                 IV[i] = result.IVs[i];
-            }
 
-            p_Status[0] = (int)(((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
+            p_Status[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
             for (int i = 1; i < 6; i++)
-                p_Status[i] = (int)(((int)(((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
+                p_Status[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
 
             result.p_Status = setting.p_Status;
 
