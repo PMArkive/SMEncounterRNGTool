@@ -200,8 +200,10 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
+            this.BlinkOnly = new System.Windows.Forms.CheckBox();
+            this.SyncOnly = new System.Windows.Forms.CheckBox();
+            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.QRBox.SuspendLayout();
@@ -676,7 +678,7 @@
             this.TimeBox.Controls.Add(this.CalcTime);
             this.TimeBox.Controls.Add(this.NPC);
             this.TimeBox.Controls.Add(this.L_NPC);
-            this.TimeBox.Location = new System.Drawing.Point(15, 558);
+            this.TimeBox.Location = new System.Drawing.Point(15, 584);
             this.TimeBox.Name = "TimeBox";
             this.TimeBox.Size = new System.Drawing.Size(399, 103);
             this.TimeBox.TabIndex = 10;
@@ -812,7 +814,7 @@
             this.RNGInfo.Controls.Add(this.label7);
             this.RNGInfo.Controls.Add(this.Frame_max);
             this.RNGInfo.Controls.Add(this.Frame_min);
-            this.RNGInfo.Location = new System.Drawing.Point(15, 440);
+            this.RNGInfo.Location = new System.Drawing.Point(15, 466);
             this.RNGInfo.Name = "RNGInfo";
             this.RNGInfo.Size = new System.Drawing.Size(266, 112);
             this.RNGInfo.TabIndex = 40;
@@ -915,7 +917,7 @@
             // 
             // CalcList
             // 
-            this.CalcList.Location = new System.Drawing.Point(317, 480);
+            this.CalcList.Location = new System.Drawing.Point(317, 506);
             this.CalcList.Name = "CalcList";
             this.CalcList.Size = new System.Drawing.Size(82, 36);
             this.CalcList.TabIndex = 41;
@@ -925,6 +927,8 @@
             // 
             // SearchSettingBox
             // 
+            this.SearchSettingBox.Controls.Add(this.SyncOnly);
+            this.SearchSettingBox.Controls.Add(this.BlinkOnly);
             this.SearchSettingBox.Controls.Add(this.Reset);
             this.SearchSettingBox.Controls.Add(this.ByIVs);
             this.SearchSettingBox.Controls.Add(this.ByStats);
@@ -954,7 +958,7 @@
             this.SearchSettingBox.Controls.Add(this.IVPanel);
             this.SearchSettingBox.Location = new System.Drawing.Point(15, 169);
             this.SearchSettingBox.Name = "SearchSettingBox";
-            this.SearchSettingBox.Size = new System.Drawing.Size(399, 265);
+            this.SearchSettingBox.Size = new System.Drawing.Size(399, 291);
             this.SearchSettingBox.TabIndex = 3;
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
@@ -995,7 +999,7 @@
             // UBOnly
             // 
             this.UBOnly.AutoSize = true;
-            this.UBOnly.Location = new System.Drawing.Point(203, 200);
+            this.UBOnly.Location = new System.Drawing.Point(203, 199);
             this.UBOnly.Name = "UBOnly";
             this.UBOnly.Size = new System.Drawing.Size(77, 17);
             this.UBOnly.TabIndex = 70;
@@ -1074,7 +1078,7 @@
             // DisableFilters
             // 
             this.DisableFilters.AutoSize = true;
-            this.DisableFilters.Location = new System.Drawing.Point(302, 227);
+            this.DisableFilters.Location = new System.Drawing.Point(299, 254);
             this.DisableFilters.Name = "DisableFilters";
             this.DisableFilters.Size = new System.Drawing.Size(74, 17);
             this.DisableFilters.TabIndex = 51;
@@ -1093,7 +1097,7 @@
             // EncounteredOnly
             // 
             this.EncounteredOnly.AutoSize = true;
-            this.EncounteredOnly.Location = new System.Drawing.Point(203, 227);
+            this.EncounteredOnly.Location = new System.Drawing.Point(299, 199);
             this.EncounteredOnly.Name = "EncounteredOnly";
             this.EncounteredOnly.Size = new System.Drawing.Size(86, 17);
             this.EncounteredOnly.TabIndex = 33;
@@ -1112,11 +1116,11 @@
             // ShinyOnly
             // 
             this.ShinyOnly.AutoSize = true;
-            this.ShinyOnly.Location = new System.Drawing.Point(302, 200);
+            this.ShinyOnly.Location = new System.Drawing.Point(299, 227);
             this.ShinyOnly.Name = "ShinyOnly";
-            this.ShinyOnly.Size = new System.Drawing.Size(86, 17);
+            this.ShinyOnly.Size = new System.Drawing.Size(74, 17);
             this.ShinyOnly.TabIndex = 8;
-            this.ShinyOnly.Text = "只显示异色";
+            this.ShinyOnly.Text = "仅异色帧";
             this.ShinyOnly.UseVisualStyleBackColor = true;
             // 
             // L_B
@@ -2077,6 +2081,7 @@
             this.Sync.TabIndex = 7;
             this.Sync.Text = "同步";
             this.Sync.UseVisualStyleBackColor = true;
+            this.Sync.CheckedChanged += new System.EventHandler(this.Sync_CheckedChanged);
             // 
             // UB
             // 
@@ -2206,6 +2211,38 @@
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
             // 
+            // BlogLink
+            // 
+            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BlogLink.AutoSize = true;
+            this.BlogLink.Location = new System.Drawing.Point(726, 24);
+            this.BlogLink.Name = "BlogLink";
+            this.BlogLink.Size = new System.Drawing.Size(55, 13);
+            this.BlogLink.TabIndex = 6;
+            this.BlogLink.TabStop = true;
+            this.BlogLink.Text = "使用指南";
+            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
+            // 
+            // BlinkOnly
+            // 
+            this.BlinkOnly.AutoSize = true;
+            this.BlinkOnly.Location = new System.Drawing.Point(203, 254);
+            this.BlinkOnly.Name = "BlinkOnly";
+            this.BlinkOnly.Size = new System.Drawing.Size(74, 17);
+            this.BlinkOnly.TabIndex = 74;
+            this.BlinkOnly.Text = "仅眨眼帧";
+            this.BlinkOnly.UseVisualStyleBackColor = true;
+            // 
+            // SyncOnly
+            // 
+            this.SyncOnly.AutoSize = true;
+            this.SyncOnly.Location = new System.Drawing.Point(203, 227);
+            this.SyncOnly.Name = "SyncOnly";
+            this.SyncOnly.Size = new System.Drawing.Size(74, 17);
+            this.SyncOnly.TabIndex = 75;
+            this.SyncOnly.Text = "仅同步帧";
+            this.SyncOnly.UseVisualStyleBackColor = true;
+            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2219,18 +2256,6 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
-            // BlogLink
-            // 
-            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(726, 24);
-            this.BlogLink.Name = "BlogLink";
-            this.BlogLink.Size = new System.Drawing.Size(55, 13);
-            this.BlogLink.TabIndex = 6;
-            this.BlogLink.TabStop = true;
-            this.BlogLink.Text = "使用指南";
-            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
             // 
             // Form1
             // 
@@ -2483,6 +2508,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
         private System.Windows.Forms.LinkLabel BlogLink;
+        private System.Windows.Forms.CheckBox BlinkOnly;
+        private System.Windows.Forms.CheckBox SyncOnly;
     }
 }
 

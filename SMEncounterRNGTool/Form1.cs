@@ -579,6 +579,12 @@ namespace SMEncounterRNGTool
             if (ShinyOnly.Checked && !result.Shiny)
                 return false;
 
+            if (BlinkOnly.Checked && result.Blink < 5)
+                return false;
+
+            if (SyncOnly.Checked && result.Synchronize == false)
+                return false;
+
             if (ByIVs.Checked && !setting.validIVs(result.IVs))
                 return false;
 
@@ -641,7 +647,9 @@ namespace SMEncounterRNGTool
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
                 randstr = result.row_r.ToString("X16");
-                if (result.Item < 50)
+                if (result.Item == -1)
+                    Item = "-";
+                else if (result.Item < 50)
                     Item = "50%";
                 else if (result.Item < 55)
                     Item = "5%";
@@ -744,5 +752,10 @@ namespace SMEncounterRNGTool
             }
         }
         #endregion
+
+        private void Sync_CheckedChanged(object sender, EventArgs e)
+        {
+            SyncOnly.Enabled = Sync.Checked;
+        }
     }
 }
