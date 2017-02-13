@@ -2128,7 +2128,7 @@
             this.UB_th.Size = new System.Drawing.Size(44, 22);
             this.UB_th.TabIndex = 67;
             this.UB_th.Value = new decimal(new int[] {
-            30,
+            15,
             0,
             0,
             0});

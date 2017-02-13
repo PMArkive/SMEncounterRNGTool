@@ -14,8 +14,7 @@ namespace SMEncounterRNGTool
         public int FrameCorrection;
         public bool Fix3v;
         public bool ShinyCharm;
-
-        public bool lengendary;
+        
         public int PokeLv;
 
         public bool Wild, Honey, UB;
@@ -73,16 +72,17 @@ namespace SMEncounterRNGTool
                 st.UbValue = getUBValue();
 
             //UB is determined above
-            lengendary = UB_S || !Wild;
+            bool lengendary = UB_S || !Wild;
             if (lengendary)
                 st.Lv = PokeLv;
 
             // Wild Normal Pokemon
-            if (Wild && !UB_S)
+            bool Wild_S = Wild && !UB_S;
+            if (Wild_S)
             {
                 st.Slot = getslot((int)(getrand() % 100));
                 st.Lv = (int)(getrand() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
-                st.Item = (int)(getrand() % 60);
+                Advance(1);
             }
 
             //Blinking process?
@@ -144,6 +144,9 @@ namespace SMEncounterRNGTool
                 st.Gender = 0;
             else
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
+
+            if (Wild_S)
+                st.Item = (int)(getrand() % 100);
 
             return st;
         }
