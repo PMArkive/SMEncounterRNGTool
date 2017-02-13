@@ -227,7 +227,7 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
-        
+
         #region validcheck
         private void TSV_ValueChanged(object sender, EventArgs e)
         {
@@ -641,6 +641,12 @@ namespace SMEncounterRNGTool
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
                 randstr = result.row_r.ToString("X16");
+                if (result.Item < 50)
+                    Item = "50%";
+                else if (result.Item < 55)
+                    Item = "5%";
+                else
+                    Item = "无";
             }
 
             DataGridViewRow row = new DataGridViewRow();
@@ -660,7 +666,7 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
-        
+
         #region Misc Function
         private void BlogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
