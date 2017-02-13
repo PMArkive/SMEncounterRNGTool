@@ -380,29 +380,22 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UB.Checked = Wild.Checked = Poke.SelectedIndex > 9;
-            Stationary.Checked = Poke.SelectedIndex < 10;
-            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 10);
+            UB.Checked = Wild.Checked = Poke.SelectedIndex > 11;
+            Stationary.Checked = Poke.SelectedIndex < 12;
+            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 12);
             Method_CheckedChanged(null, null);
             for (int i = 0; i < 6; i++)
             {
                 BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
             }
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
+            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
             switch (Poke.SelectedIndex)
             {
-                case 3: NPC.Value = 1; break; // Tapu Fini
-                case 4: NPC.Value = 2; break; // Solgaleo
-                case 5: NPC.Value = 3; break; // Lunala
-                case 6: NPC.Value = 8; break; // Type:Null
-                case 7: NPC.Value = 6; break; // Magearna sometimes NPC# =7
-                case 8: NPC.Value = 3; break; // Zygarde-10%
-                case 9: NPC.Value = 3; break; // Zygarde-50%
-                case 10: NPC.Value = 0; UB_th.Value = 15; break; //
-                case 14: NPC.Value = 0; break; //
-                case 17: UB_th.Value = 5; break; //
-                default: NPC.Value = 0; break;
+                case 12: UB_th.Value = 15; break; //
+                case 19: UB_th.Value = 5; break; //
             }
+                GenderRatio.SelectedIndex = (Poke.SelectedIndex == 11) ? 2 : 0;
         }
 
         #region TimerCalculateFunction
