@@ -401,7 +401,11 @@ namespace SMEncounterRNGTool
                 case 12: UB_th.Value = 15; break; //
                 case 19: UB_th.Value = 5; break; //
             }
-                GenderRatio.SelectedIndex = (Poke.SelectedIndex == 11) ? 2 : 0;
+            if (Poke.SelectedIndex == 11)
+            {
+                Fix3v.Checked = false;
+                GenderRatio.SelectedIndex = 2;
+            }
         }
 
         #region TimerCalculateFunction
