@@ -2246,7 +2246,7 @@
             this.Controls.Add(this.Seed);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "遇敌乱数工具v0.72beta @wwwwwwzx";
+            this.Text = "遇敌乱数工具 @wwwwwwzx";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.SearchSeed.ResumeLayout(false);

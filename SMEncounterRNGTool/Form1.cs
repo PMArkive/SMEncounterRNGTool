@@ -43,10 +43,11 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-
+        private string version = "0.73beta";
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Text = $"遇敌乱数工具 v{version} @wwwwwwzx";
             Type dgvtype = typeof(DataGridView);
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
@@ -126,12 +127,6 @@ namespace SMEncounterRNGTool
             Advanced_CheckedChanged(null, null);
             Method_CheckedChanged(null, null);
             SearchMethod_CheckedChanged(null, null);
-        }
-
-
-        private void BlogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://followmetogetic.com/blog/smrngsoftware");
         }
 
         #region SearchSeedfunction
@@ -231,60 +226,8 @@ namespace SMEncounterRNGTool
                 SeedResults.Text = "";
         }
 
-        private void QRSearch_Click(object sender, EventArgs e)
-        {
-            uint InitialSeed = (uint)Seed.Value;
-            int min = (int)Frame_min.Value;
-            int max = (int)Frame_max.Value;
-            if (QRList.Text == "")
-                return;
-            string[] str = QRList.Text.Split(',');
-            try
-            {
-                int[] Clock_List = str.Select(s => int.Parse(s)).ToArray();
-                int[] temp_List = new int[Clock_List.Length];
-
-                SFMT sfmt = new SFMT(InitialSeed);
-                SFMT seed = new SFMT(InitialSeed);
-                bool flag = false;
-
-                QRResult.Items.Clear();
-
-                for (int i = 0; i < min; i++)
-                    sfmt.NextUInt64();
-
-                int cnt = 0;
-                int tmp = 0;
-                for (int i = min; i <= max; i++, sfmt.NextUInt64())
-                {
-                    seed = (SFMT)sfmt.DeepCopy();
-
-                    for (int j = 0; j < Clock_List.Length; j++)
-                        temp_List[j] = (int)(seed.NextUInt64() % 17);
-
-                    if (temp_List.SequenceEqual(Clock_List))
-                        flag = true;
-
-                    if (flag)
-                    {
-                        flag = false;
-                        QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧");
-                        cnt++;
-                        tmp = i + Clock_List.Length + 1;
-                    }
-                }
-
-                if (cnt == 1)
-                    Time_min.Value = tmp;
-            }
-            catch
-            {
-                Error("指针输入格式不正确");
-            }
-        }
         #endregion
-
-
+        
         #region validcheck
         private void TSV_ValueChanged(object sender, EventArgs e)
         {
@@ -383,25 +326,6 @@ namespace SMEncounterRNGTool
             StatPanel.Visible = ByStats.Checked;
         }
         #endregion
-
-        private void Poke_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UB.Checked = Wild.Checked = Poke.SelectedIndex > 12;
-            Stationary.Checked = Poke.SelectedIndex < 13;
-            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 13);
-            Method_CheckedChanged(null, null);
-            for (int i = 0; i < 6; i++)
-                BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
-            Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
-            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
-            switch (Poke.SelectedIndex)
-            {
-                case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;break;
-                case 12: Fix3v.Checked = false;break;
-                case 13: UB_th.Value = 15; break; //
-                case 20: UB_th.Value = 5; break; //
-            }
-        }
 
         #region TimerCalculateFunction
         private int CalcFrame(int min, int max)
@@ -736,6 +660,83 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
+        
+        #region Misc Function
+        private void BlogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://followmetogetic.com/blog/smrngsoftware");
+        }
 
+        private void QRSearch_Click(object sender, EventArgs e)
+        {
+            uint InitialSeed = (uint)Seed.Value;
+            int min = (int)Frame_min.Value;
+            int max = (int)Frame_max.Value;
+            if (QRList.Text == "")
+                return;
+            string[] str = QRList.Text.Split(',');
+            try
+            {
+                int[] Clock_List = str.Select(s => int.Parse(s)).ToArray();
+                int[] temp_List = new int[Clock_List.Length];
+
+                SFMT sfmt = new SFMT(InitialSeed);
+                SFMT seed = new SFMT(InitialSeed);
+                bool flag = false;
+
+                QRResult.Items.Clear();
+
+                for (int i = 0; i < min; i++)
+                    sfmt.NextUInt64();
+
+                int cnt = 0;
+                int tmp = 0;
+                for (int i = min; i <= max; i++, sfmt.NextUInt64())
+                {
+                    seed = (SFMT)sfmt.DeepCopy();
+
+                    for (int j = 0; j < Clock_List.Length; j++)
+                        temp_List[j] = (int)(seed.NextUInt64() % 17);
+
+                    if (temp_List.SequenceEqual(Clock_List))
+                        flag = true;
+
+                    if (flag)
+                    {
+                        flag = false;
+                        QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧");
+                        cnt++;
+                        tmp = i + Clock_List.Length + 1;
+                    }
+                }
+
+                if (cnt == 1)
+                    Time_min.Value = tmp;
+            }
+            catch
+            {
+                Error("指针输入格式不正确");
+            }
+        }
+
+        private void Poke_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UB.Checked = Wild.Checked = Poke.SelectedIndex > 12;
+            Stationary.Checked = Poke.SelectedIndex < 13;
+            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 13);
+            Method_CheckedChanged(null, null);
+            for (int i = 0; i < 6; i++)
+                BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
+            Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
+            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
+            switch (Poke.SelectedIndex)
+            {
+                case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
+                case 12: Fix3v.Checked = false; break;
+                case 13: UB_th.Value = 15; break; //
+                case 20: UB_th.Value = 5; break; //
+            }
+        }
+        #endregion
     }
 }
