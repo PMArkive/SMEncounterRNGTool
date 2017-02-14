@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -89,6 +90,8 @@
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
             this.CalcList = new System.Windows.Forms.Button();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
+            this.ShowStats = new System.Windows.Forms.CheckBox();
+            this.BlinkOnly = new System.Windows.Forms.CheckBox();
             this.Reset = new System.Windows.Forms.Button();
             this.ByIVs = new System.Windows.Forms.RadioButton();
             this.ByStats = new System.Windows.Forms.RadioButton();
@@ -174,6 +177,8 @@
             this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.Condition = new System.Windows.Forms.GroupBox();
             this.L_UB_th = new System.Windows.Forms.Label();
             this.L_Encounter_th = new System.Windows.Forms.Label();
@@ -199,10 +204,7 @@
             this.L_TSV = new System.Windows.Forms.Label();
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
-            this.BlinkOnly = new System.Windows.Forms.CheckBox();
-            this.SyncOnly = new System.Windows.Forms.CheckBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
@@ -247,6 +249,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
+            this.DGVMenuStrip.SuspendLayout();
             this.Condition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).BeginInit();
@@ -927,7 +930,7 @@
             // 
             // SearchSettingBox
             // 
-            this.SearchSettingBox.Controls.Add(this.SyncOnly);
+            this.SearchSettingBox.Controls.Add(this.ShowStats);
             this.SearchSettingBox.Controls.Add(this.BlinkOnly);
             this.SearchSettingBox.Controls.Add(this.Reset);
             this.SearchSettingBox.Controls.Add(this.ByIVs);
@@ -963,6 +966,26 @@
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
             // 
+            // ShowStats
+            // 
+            this.ShowStats.AutoSize = true;
+            this.ShowStats.Location = new System.Drawing.Point(203, 227);
+            this.ShowStats.Name = "ShowStats";
+            this.ShowStats.Size = new System.Drawing.Size(86, 17);
+            this.ShowStats.TabIndex = 75;
+            this.ShowStats.Text = "能力值显示";
+            this.ShowStats.UseVisualStyleBackColor = true;
+            // 
+            // BlinkOnly
+            // 
+            this.BlinkOnly.AutoSize = true;
+            this.BlinkOnly.Location = new System.Drawing.Point(203, 254);
+            this.BlinkOnly.Name = "BlinkOnly";
+            this.BlinkOnly.Size = new System.Drawing.Size(74, 17);
+            this.BlinkOnly.TabIndex = 74;
+            this.BlinkOnly.Text = "仅眨眼帧";
+            this.BlinkOnly.UseVisualStyleBackColor = true;
+            // 
             // Reset
             // 
             this.Reset.Location = new System.Drawing.Point(302, 16);
@@ -976,7 +999,7 @@
             // ByIVs
             // 
             this.ByIVs.AutoSize = true;
-            this.ByIVs.Location = new System.Drawing.Point(18, 22);
+            this.ByIVs.Location = new System.Drawing.Point(18, 42);
             this.ByIVs.Name = "ByIVs";
             this.ByIVs.Size = new System.Drawing.Size(85, 17);
             this.ByIVs.TabIndex = 72;
@@ -988,13 +1011,14 @@
             // ByStats
             // 
             this.ByStats.AutoSize = true;
-            this.ByStats.Location = new System.Drawing.Point(104, 22);
+            this.ByStats.Location = new System.Drawing.Point(104, 42);
             this.ByStats.Name = "ByStats";
             this.ByStats.Size = new System.Drawing.Size(85, 17);
             this.ByStats.TabIndex = 71;
             this.ByStats.TabStop = true;
             this.ByStats.Text = "通过能力值";
             this.ByStats.UseVisualStyleBackColor = true;
+            this.ByStats.CheckedChanged += new System.EventHandler(this.SearchMethod_CheckedChanged);
             // 
             // UBOnly
             // 
@@ -1088,7 +1112,7 @@
             // L_S
             // 
             this.L_S.AutoSize = true;
-            this.L_S.Location = new System.Drawing.Point(8, 230);
+            this.L_S.Location = new System.Drawing.Point(8, 250);
             this.L_S.Name = "L_S";
             this.L_S.Size = new System.Drawing.Size(31, 13);
             this.L_S.TabIndex = 29;
@@ -1107,7 +1131,7 @@
             // L_C
             // 
             this.L_C.AutoSize = true;
-            this.L_C.Location = new System.Drawing.Point(8, 170);
+            this.L_C.Location = new System.Drawing.Point(8, 190);
             this.L_C.Name = "L_C";
             this.L_C.Size = new System.Drawing.Size(31, 13);
             this.L_C.TabIndex = 27;
@@ -1126,7 +1150,7 @@
             // L_B
             // 
             this.L_B.AutoSize = true;
-            this.L_B.Location = new System.Drawing.Point(8, 140);
+            this.L_B.Location = new System.Drawing.Point(8, 160);
             this.L_B.Name = "L_B";
             this.L_B.Size = new System.Drawing.Size(31, 13);
             this.L_B.TabIndex = 26;
@@ -1135,7 +1159,7 @@
             // L_H
             // 
             this.L_H.AutoSize = true;
-            this.L_H.Location = new System.Drawing.Point(12, 80);
+            this.L_H.Location = new System.Drawing.Point(12, 100);
             this.L_H.Name = "L_H";
             this.L_H.Size = new System.Drawing.Size(22, 13);
             this.L_H.TabIndex = 24;
@@ -1144,7 +1168,7 @@
             // L_A
             // 
             this.L_A.AutoSize = true;
-            this.L_A.Location = new System.Drawing.Point(8, 110);
+            this.L_A.Location = new System.Drawing.Point(8, 130);
             this.L_A.Name = "L_A";
             this.L_A.Size = new System.Drawing.Size(31, 13);
             this.L_A.TabIndex = 25;
@@ -1153,7 +1177,7 @@
             // L_D
             // 
             this.L_D.AutoSize = true;
-            this.L_D.Location = new System.Drawing.Point(8, 200);
+            this.L_D.Location = new System.Drawing.Point(8, 220);
             this.L_D.Name = "L_D";
             this.L_D.Size = new System.Drawing.Size(31, 13);
             this.L_D.TabIndex = 28;
@@ -1226,7 +1250,7 @@
             this.StatPanel.Controls.Add(this.Stat5);
             this.StatPanel.Controls.Add(this.BS_1);
             this.StatPanel.Controls.Add(this.BS_0);
-            this.StatPanel.Location = new System.Drawing.Point(40, 45);
+            this.StatPanel.Location = new System.Drawing.Point(40, 65);
             this.StatPanel.Name = "StatPanel";
             this.StatPanel.Size = new System.Drawing.Size(147, 209);
             this.StatPanel.TabIndex = 42;
@@ -1438,7 +1462,7 @@
             this.IVPanel.Controls.Add(this.ivmax2);
             this.IVPanel.Controls.Add(this.ivmax4);
             this.IVPanel.Controls.Add(this.ivmax3);
-            this.IVPanel.Location = new System.Drawing.Point(40, 45);
+            this.IVPanel.Location = new System.Drawing.Point(40, 65);
             this.IVPanel.Name = "IVPanel";
             this.IVPanel.Size = new System.Drawing.Size(147, 209);
             this.IVPanel.TabIndex = 24;
@@ -1719,7 +1743,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Frame,
             this.dgv_deviation,
@@ -1745,9 +1769,10 @@
             this.M6,
             this.M32,
             this.M100});
+            this.DGV.ContextMenuStrip = this.DGVMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1763,7 +1788,10 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.DGV.RowHeadersWidth = 21;
+            this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
+            this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV.Size = new System.Drawing.Size(767, 721);
             this.DGV.TabIndex = 2;
             // 
@@ -1783,7 +1811,7 @@
             // 
             this.dgv_blink.HeaderText = "眨眼";
             this.dgv_blink.Name = "dgv_blink";
-            this.dgv_blink.Width = 55;
+            this.dgv_blink.Width = 40;
             // 
             // dgv_H
             // 
@@ -1825,13 +1853,13 @@
             // 
             this.dgv_nature.HeaderText = "性格";
             this.dgv_nature.Name = "dgv_nature";
-            this.dgv_nature.Width = 55;
+            this.dgv_nature.Width = 50;
             // 
             // dgv_synced
             // 
             this.dgv_synced.HeaderText = "同步";
             this.dgv_synced.Name = "dgv_synced";
-            this.dgv_synced.Width = 55;
+            this.dgv_synced.Width = 40;
             // 
             // dgv_needle
             // 
@@ -1843,13 +1871,13 @@
             // 
             this.dgv_psv.HeaderText = "PSV";
             this.dgv_psv.Name = "dgv_psv";
-            this.dgv_psv.Width = 45;
+            this.dgv_psv.Width = 40;
             // 
             // dgv_slot
             // 
             this.dgv_slot.HeaderText = "种类";
             this.dgv_slot.Name = "dgv_slot";
-            this.dgv_slot.Width = 55;
+            this.dgv_slot.Width = 40;
             // 
             // dgv_lv
             // 
@@ -1861,25 +1889,25 @@
             // 
             this.dgv_gender.HeaderText = "性别";
             this.dgv_gender.Name = "dgv_gender";
-            this.dgv_gender.Width = 55;
+            this.dgv_gender.Width = 40;
             // 
             // dgv_ability
             // 
             this.dgv_ability.HeaderText = "特性";
             this.dgv_ability.Name = "dgv_ability";
-            this.dgv_ability.Width = 55;
+            this.dgv_ability.Width = 40;
             // 
             // dgv_item
             // 
             this.dgv_item.HeaderText = "道具";
             this.dgv_item.Name = "dgv_item";
-            this.dgv_item.Width = 55;
+            this.dgv_item.Width = 40;
             // 
             // dgv_encounter
             // 
             this.dgv_encounter.HeaderText = "遇敌";
             this.dgv_encounter.Name = "dgv_encounter";
-            this.dgv_encounter.Width = 55;
+            this.dgv_encounter.Width = 40;
             // 
             // dgv_ubvalue
             // 
@@ -1891,7 +1919,7 @@
             // 
             this.dgv_rand.HeaderText = "乱数值";
             this.dgv_rand.Name = "dgv_rand";
-            this.dgv_rand.Width = 120;
+            this.dgv_rand.Width = 130;
             // 
             // M6
             // 
@@ -1910,6 +1938,20 @@
             this.M100.HeaderText = "M100";
             this.M100.Name = "M100";
             this.M100.Width = 40;
+            // 
+            // DGVMenuStrip
+            // 
+            this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SetTargetFrame});
+            this.DGVMenuStrip.Name = "MenuStrip1";
+            this.DGVMenuStrip.Size = new System.Drawing.Size(135, 26);
+            // 
+            // SetTargetFrame
+            // 
+            this.SetTargetFrame.Name = "SetTargetFrame";
+            this.SetTargetFrame.Size = new System.Drawing.Size(134, 22);
+            this.SetTargetFrame.Text = "设为目标帧";
+            this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
             // 
             // Condition
             // 
@@ -2081,7 +2123,6 @@
             this.Sync.TabIndex = 7;
             this.Sync.Text = "同步";
             this.Sync.UseVisualStyleBackColor = true;
-            this.Sync.CheckedChanged += new System.EventHandler(this.Sync_CheckedChanged);
             // 
             // UB
             // 
@@ -2223,26 +2264,6 @@
             this.BlogLink.Text = "使用指南";
             this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
             // 
-            // BlinkOnly
-            // 
-            this.BlinkOnly.AutoSize = true;
-            this.BlinkOnly.Location = new System.Drawing.Point(203, 254);
-            this.BlinkOnly.Name = "BlinkOnly";
-            this.BlinkOnly.Size = new System.Drawing.Size(74, 17);
-            this.BlinkOnly.TabIndex = 74;
-            this.BlinkOnly.Text = "仅眨眼帧";
-            this.BlinkOnly.UseVisualStyleBackColor = true;
-            // 
-            // SyncOnly
-            // 
-            this.SyncOnly.AutoSize = true;
-            this.SyncOnly.Location = new System.Drawing.Point(203, 227);
-            this.SyncOnly.Name = "SyncOnly";
-            this.SyncOnly.Size = new System.Drawing.Size(74, 17);
-            this.SyncOnly.TabIndex = 75;
-            this.SyncOnly.Text = "仅同步帧";
-            this.SyncOnly.UseVisualStyleBackColor = true;
-            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2323,6 +2344,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
+            this.DGVMenuStrip.ResumeLayout(false);
             this.Condition.ResumeLayout(false);
             this.Condition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).EndInit();
@@ -2364,7 +2386,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox SearchSeedBox;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.Button Clear;
@@ -2483,6 +2504,11 @@
         private System.Windows.Forms.Button QRSearch;
         private System.Windows.Forms.Label L_QRresult;
         private System.Windows.Forms.TextBox QRList;
+        private System.Windows.Forms.LinkLabel BlogLink;
+        private System.Windows.Forms.CheckBox BlinkOnly;
+        private System.Windows.Forms.CheckBox ShowStats;
+        private System.Windows.Forms.ContextMenuStrip DGVMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem SetTargetFrame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_deviation;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_blink;
@@ -2507,9 +2533,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn M6;
         private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
-        private System.Windows.Forms.LinkLabel BlogLink;
-        private System.Windows.Forms.CheckBox BlinkOnly;
-        private System.Windows.Forms.CheckBox SyncOnly;
     }
 }
 

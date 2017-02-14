@@ -48,6 +48,8 @@ namespace SMEncounterRNGTool
         private void Form1_Load(object sender, EventArgs e)
         {
             Text = $"遇敌乱数工具 v{version} @wwwwwwzx";
+
+            DGV.Columns[20].DefaultCellStyle.Font = new Font("Consolas", 9);
             Type dgvtype = typeof(DataGridView);
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
@@ -324,6 +326,7 @@ namespace SMEncounterRNGTool
         {
             IVPanel.Visible = ByIVs.Checked;
             StatPanel.Visible = ByStats.Checked;
+            ShowStats.Enabled = ShowStats.Checked = ByStats.Checked;
         }
         #endregion
 
@@ -571,8 +574,7 @@ namespace SMEncounterRNGTool
         private bool frameMatch(RNGSearch.RNGResult result, SearchSetting setting)
         {
             setting.getStatus(result, setting);
-
-            //ここで弾く
+            
             if (setting.Skip)
                 return true;
 
@@ -580,9 +582,6 @@ namespace SMEncounterRNGTool
                 return false;
 
             if (BlinkOnly.Checked && result.Blink < 5)
-                return false;
-
-            if (SyncOnly.Checked && result.Synchronize == false)
                 return false;
 
             if (ByIVs.Checked && !setting.validIVs(result.IVs))
@@ -657,15 +656,23 @@ namespace SMEncounterRNGTool
                     Item = "无";
             }
 
+            int[] Status = new int[6] {0,0,0,0,0,0};
+            if (ShowStats.Checked)
+                Status = result.p_Status;
+            else
+                Status = result.IVs;
+
+
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
 
             row.SetValues(
                 i, d, BlinkFlag,
-                result.IVs[0], result.IVs[1], result.IVs[2], result.IVs[3], result.IVs[4], result.IVs[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, randstr,
+                Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, randstr,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );
+            
 
             if (result.Shiny)
                 row.DefaultCellStyle.BackColor = Color.LightCyan;
@@ -753,9 +760,16 @@ namespace SMEncounterRNGTool
         }
         #endregion
 
-        private void Sync_CheckedChanged(object sender, EventArgs e)
+        private void SetTargetFrame_Click(object sender, EventArgs e)
         {
-            SyncOnly.Enabled = Sync.Checked;
+            try
+            {
+                Time_max.Value = Convert.ToDecimal(DGV.CurrentRow.Cells[0].Value);
+            }
+            catch (NullReferenceException)
+            {
+                Error("请选择");
+            }
         }
     }
 }
