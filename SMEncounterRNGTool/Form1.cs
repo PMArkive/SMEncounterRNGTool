@@ -97,9 +97,7 @@ namespace SMEncounterRNGTool
                 Gender.Items.Add(t);
 
             for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
-            {
                 Poke.Items.Add(SearchSetting.pokedex[i, 0]);
-            }
 
             RNGSearch.Rand = new List<ulong>();
 
@@ -124,6 +122,7 @@ namespace SMEncounterRNGTool
                 Stationary.Checked = true;
             else
                 Wild.Checked = true;
+
             ByIVs.Checked = true;
 
             Advanced_CheckedChanged(null, null);
@@ -266,7 +265,6 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Method = Stationary.Checked;
             Properties.Settings.Default.Save();
 
-
             AlwaysSynced.Enabled = Stationary.Checked;
             Honey.Checked = Wild.Checked;
             if (Stationary.Checked)
@@ -294,7 +292,11 @@ namespace SMEncounterRNGTool
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
             UBOnly.Enabled = UB_th.Enabled = UB.Checked;
-            if (!UB.Checked)
+            if (UB.Checked)
+            {
+                UB_th.Value = Honey.Checked ? 15 : 30;
+            }
+            else
                 UBOnly.Checked = false;
         }
 
@@ -302,6 +304,8 @@ namespace SMEncounterRNGTool
         {
             Encounter_th.Enabled = !Honey.Checked;
             L_timedelay.Visible = Timedelay.Visible = Honey.Checked;
+            if (UB.Checked)
+                UB_th.Value = Honey.Checked ? 15 : 30;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -574,7 +578,7 @@ namespace SMEncounterRNGTool
         private bool frameMatch(RNGSearch.RNGResult result, SearchSetting setting)
         {
             setting.getStatus(result, setting);
-            
+
             if (setting.Skip)
                 return true;
 
@@ -655,12 +659,11 @@ namespace SMEncounterRNGTool
                     Item = "无";
             }
 
-            int[] Status = new int[6] {0,0,0,0,0,0};
+            int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
                 Status = result.p_Status;
             else
                 Status = result.IVs;
-
 
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
@@ -671,7 +674,6 @@ namespace SMEncounterRNGTool
                 true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue, randstr,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );
-            
 
             if (result.Shiny)
                 row.DefaultCellStyle.BackColor = Color.LightCyan;
