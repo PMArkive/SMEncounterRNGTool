@@ -14,7 +14,7 @@ namespace SMEncounterRNGTool
         public int FrameCorrection;
         public bool Fix3v;
         public bool ShinyCharm;
-        
+
         public int PokeLv;
 
         public bool Wild, Honey, UB;
@@ -23,7 +23,7 @@ namespace SMEncounterRNGTool
         public bool UB_S = false;
         public bool nogender;
         public int gender_ratio;
-        
+
         public class RNGResult
         {
             public int Nature;
@@ -109,13 +109,13 @@ namespace SMEncounterRNGTool
             }
 
             //IV
-            st.IVs = new int[6] { 0, 0, 0, 0, 0, 0 };
+            st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
 
             int cnt = Fix3v ? 3 : 0;
             while (cnt > 0)
             {
                 int ran = (int)(getrand() % 6);
-                if (st.IVs[ran] != 31)
+                if (st.IVs[ran] < 0)
                 {
                     st.IVs[ran] = 31;
                     cnt--;
@@ -123,12 +123,12 @@ namespace SMEncounterRNGTool
             }
 
             for (int i = 0; i < 6; i++)
-                if (st.IVs[i] != 31)
+                if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
-            
+
             //Ability
             if (Wild_S || AlwaysSynchro)
-            st.Ability = (int)(getrand() & 1) + 1;
+                st.Ability = (int)(getrand() & 1) + 1;
 
             //Nature
             st.Nature = (int)(currentrand() % 25);
