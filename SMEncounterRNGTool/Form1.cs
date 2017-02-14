@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.73beta";
+        private string version = "0.74beta";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -630,7 +630,6 @@ namespace SMEncounterRNGTool
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             string BlinkFlag = (result.Blink == 1 ? "★" : "-");
             BlinkFlag = result.Blink > 1 ? result.Blink.ToString() : BlinkFlag;
-            string Ability = (result.Ability == -1) ? "-" : result.Ability.ToString();
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
@@ -669,7 +668,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d, BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter, UbValue, randstr,
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue, randstr,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );
             

@@ -38,7 +38,7 @@ namespace SMEncounterRNGTool
 
             public int Encounter = -1;
             public int Gender;
-            public int Ability = -1;
+            public int Ability = 1;
             public int UbValue = 100;
             public int Slot = -1;
             public int Lv = -1;
@@ -127,7 +127,7 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand() & 0x1F);
             
             //Ability
-            if ((Wild || AlwaysSynchro) && (!UB_S))
+            if (Wild_S || AlwaysSynchro)
             st.Ability = (int)(getrand() & 1) + 1;
 
             //Nature
@@ -145,6 +145,7 @@ namespace SMEncounterRNGTool
             else
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
+            //Item
             if (Wild_S)
                 st.Item = (int)(getrand() % 100);
 

@@ -266,10 +266,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.SearchSeed);
             this.tabControl1.Controls.Add(this.SearchTool);
-            this.tabControl1.Location = new System.Drawing.Point(11, 40);
+            this.tabControl1.Location = new System.Drawing.Point(12, 40);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1198, 756);
+            this.tabControl1.Size = new System.Drawing.Size(1221, 761);
             this.tabControl1.TabIndex = 0;
             // 
             // SearchSeed
@@ -279,7 +279,7 @@
             this.SearchSeed.Location = new System.Drawing.Point(4, 22);
             this.SearchSeed.Name = "SearchSeed";
             this.SearchSeed.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchSeed.Size = new System.Drawing.Size(1190, 730);
+            this.SearchSeed.Size = new System.Drawing.Size(1213, 735);
             this.SearchSeed.TabIndex = 0;
             this.SearchSeed.Text = "检索Seed";
             this.SearchSeed.UseVisualStyleBackColor = true;
@@ -664,7 +664,7 @@
             this.SearchTool.Location = new System.Drawing.Point(4, 22);
             this.SearchTool.Name = "SearchTool";
             this.SearchTool.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchTool.Size = new System.Drawing.Size(1190, 730);
+            this.SearchTool.Size = new System.Drawing.Size(1213, 735);
             this.SearchTool.TabIndex = 1;
             this.SearchTool.Text = "个体筛选";
             this.SearchTool.UseVisualStyleBackColor = true;
@@ -681,7 +681,7 @@
             this.TimeBox.Controls.Add(this.CalcTime);
             this.TimeBox.Controls.Add(this.NPC);
             this.TimeBox.Controls.Add(this.L_NPC);
-            this.TimeBox.Location = new System.Drawing.Point(15, 584);
+            this.TimeBox.Location = new System.Drawing.Point(15, 572);
             this.TimeBox.Name = "TimeBox";
             this.TimeBox.Size = new System.Drawing.Size(399, 103);
             this.TimeBox.TabIndex = 10;
@@ -729,14 +729,14 @@
             // 
             this.Time_min.AccessibleName = "";
             this.Time_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Time_min.Location = new System.Drawing.Point(81, 22);
+            this.Time_min.Location = new System.Drawing.Point(82, 22);
             this.Time_min.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.Time_min.Name = "Time_min";
-            this.Time_min.Size = new System.Drawing.Size(64, 22);
+            this.Time_min.Size = new System.Drawing.Size(75, 22);
             this.Time_min.TabIndex = 43;
             this.Time_min.Value = new decimal(new int[] {
             417,
@@ -748,14 +748,14 @@
             // 
             this.Time_max.AccessibleName = "";
             this.Time_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Time_max.Location = new System.Drawing.Point(181, 22);
+            this.Time_max.Location = new System.Drawing.Point(176, 22);
             this.Time_max.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.Time_max.Name = "Time_max";
-            this.Time_max.Size = new System.Drawing.Size(64, 22);
+            this.Time_max.Size = new System.Drawing.Size(75, 22);
             this.Time_max.TabIndex = 44;
             this.Time_max.Value = new decimal(new int[] {
             5000,
@@ -774,7 +774,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(156, 27);
+            this.label8.Location = new System.Drawing.Point(161, 27);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 13);
             this.label8.TabIndex = 45;
@@ -819,7 +819,7 @@
             this.RNGInfo.Controls.Add(this.Frame_min);
             this.RNGInfo.Location = new System.Drawing.Point(15, 466);
             this.RNGInfo.Name = "RNGInfo";
-            this.RNGInfo.Size = new System.Drawing.Size(266, 112);
+            this.RNGInfo.Size = new System.Drawing.Size(266, 100);
             this.RNGInfo.TabIndex = 40;
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
@@ -855,7 +855,7 @@
             // AroundTarget
             // 
             this.AroundTarget.AutoSize = true;
-            this.AroundTarget.Location = new System.Drawing.Point(144, 70);
+            this.AroundTarget.Location = new System.Drawing.Point(163, 70);
             this.AroundTarget.Name = "AroundTarget";
             this.AroundTarget.Size = new System.Drawing.Size(86, 17);
             this.AroundTarget.TabIndex = 10;
@@ -874,7 +874,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(149, 36);
+            this.label7.Location = new System.Drawing.Point(161, 36);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 13);
             this.label7.TabIndex = 42;
@@ -884,14 +884,14 @@
             // 
             this.Frame_max.AccessibleName = "";
             this.Frame_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Frame_max.Location = new System.Drawing.Point(166, 31);
+            this.Frame_max.Location = new System.Drawing.Point(176, 31);
             this.Frame_max.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.Frame_max.Name = "Frame_max";
-            this.Frame_max.Size = new System.Drawing.Size(64, 22);
+            this.Frame_max.Size = new System.Drawing.Size(75, 22);
             this.Frame_max.TabIndex = 41;
             this.Frame_max.Value = new decimal(new int[] {
             5000,
@@ -910,7 +910,7 @@
             0,
             0});
             this.Frame_min.Name = "Frame_min";
-            this.Frame_min.Size = new System.Drawing.Size(64, 22);
+            this.Frame_min.Size = new System.Drawing.Size(75, 22);
             this.Frame_min.TabIndex = 40;
             this.Frame_min.Value = new decimal(new int[] {
             417,
@@ -1792,7 +1792,7 @@
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV.Size = new System.Drawing.Size(767, 721);
+            this.DGV.Size = new System.Drawing.Size(790, 726);
             this.DGV.TabIndex = 2;
             // 
             // dgv_Frame
@@ -2197,7 +2197,7 @@
             // 
             this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSV.Location = new System.Drawing.Point(959, 19);
+            this.TSV.Location = new System.Drawing.Point(983, 19);
             this.TSV.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -2212,7 +2212,7 @@
             // 
             this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(795, 24);
+            this.L_Seed.Location = new System.Drawing.Point(819, 24);
             this.L_Seed.Name = "L_Seed";
             this.L_Seed.Size = new System.Drawing.Size(32, 13);
             this.L_Seed.TabIndex = 2;
@@ -2222,7 +2222,7 @@
             // 
             this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_TSV.AutoSize = true;
-            this.L_TSV.Location = new System.Drawing.Point(921, 24);
+            this.L_TSV.Location = new System.Drawing.Point(945, 24);
             this.L_TSV.Name = "L_TSV";
             this.L_TSV.Size = new System.Drawing.Size(28, 13);
             this.L_TSV.TabIndex = 3;
@@ -2232,7 +2232,7 @@
             // 
             this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShinyCharm.AutoSize = true;
-            this.ShinyCharm.Location = new System.Drawing.Point(1023, 22);
+            this.ShinyCharm.Location = new System.Drawing.Point(1047, 22);
             this.ShinyCharm.Name = "ShinyCharm";
             this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
             this.ShinyCharm.TabIndex = 4;
@@ -2244,7 +2244,7 @@
             // 
             this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Advanced.AutoSize = true;
-            this.Advanced.Location = new System.Drawing.Point(1107, 22);
+            this.Advanced.Location = new System.Drawing.Point(1131, 22);
             this.Advanced.Name = "Advanced";
             this.Advanced.Size = new System.Drawing.Size(74, 17);
             this.Advanced.TabIndex = 5;
@@ -2256,7 +2256,7 @@
             // 
             this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(726, 24);
+            this.BlogLink.Location = new System.Drawing.Point(750, 24);
             this.BlogLink.Name = "BlogLink";
             this.BlogLink.Size = new System.Drawing.Size(55, 13);
             this.BlogLink.TabIndex = 6;
@@ -2269,7 +2269,7 @@
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(833, 19);
+            this.Seed.Location = new System.Drawing.Point(857, 19);
             this.Seed.Name = "Seed";
             this.Seed.Size = new System.Drawing.Size(78, 22);
             this.Seed.TabIndex = 0;
@@ -2282,7 +2282,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1221, 808);
+            this.ClientSize = new System.Drawing.Size(1245, 813);
             this.Controls.Add(this.BlogLink);
             this.Controls.Add(this.Advanced);
             this.Controls.Add(this.ShinyCharm);
