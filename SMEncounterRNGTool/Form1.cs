@@ -162,17 +162,16 @@ namespace SMEncounterRNGTool
             string number = str.Remove(0, str.IndexOf("button") + 6);
 
             if (tmp.Text == "")
-            {
                 tmp.Text += Convert_Clock(number);
-            }
             else
-            {
                 tmp.Text += "," + Convert_Clock(number);
-            }
-            if (tmp.Text.Where(c => c == ',').Count() < 3)
-                return;
+
             if (QRInput.Checked)
+            {
+                if (QRList.Text.Where(c => c == ',').Count() < 3)
+                    return;
                 QRSearch_Click(null, null);
+            }
             else
                 SearchforSeed(null, null);
         }
