@@ -124,6 +124,7 @@ namespace SMEncounterRNGTool
                 Wild.Checked = true;
 
             ByIVs.Checked = true;
+            BySaveScreen.Checked = true;
 
             Advanced_CheckedChanged(null, null);
             Method_CheckedChanged(null, null);
@@ -133,13 +134,14 @@ namespace SMEncounterRNGTool
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)
         {
-            Clock_List.Text = "";
+           ((QRInput.Checked) ? QRList : Clock_List).Text = "";
         }
 
         private void Back_Click(object sender, EventArgs e)
         {
-            string str = Clock_List.Text;
-            if (Clock_List.Text != "")
+            TextBox tmp = (QRInput.Checked) ? QRList : Clock_List;
+            string str = tmp.Text;
+            if (tmp.Text != "")
             {
                 if (str.LastIndexOf(",") != -1)
                 {
@@ -150,29 +152,37 @@ namespace SMEncounterRNGTool
                     str = "";
                 }
             }
-            Clock_List.Text = str;
+            tmp.Text = str;
         }
 
         private void Get_Clock_Number(object sender, EventArgs e)
         {
+            TextBox tmp = (QRInput.Checked) ? QRList : Clock_List;
             string str = ((Button)sender).Name;
             string number = str.Remove(0, str.IndexOf("button") + 6);
 
-            if (Clock_List.Text == "")
+            if (tmp.Text == "")
             {
-                Clock_List.Text += Convert_Clock(number);
+                tmp.Text += Convert_Clock(number);
             }
             else
             {
-                Clock_List.Text += "," + Convert_Clock(number);
+                tmp.Text += "," + Convert_Clock(number);
             }
-            SearchforSeed(null, null);
+            if (tmp.Text.Where(c => c == ',').Count() < 3)
+                return;
+            if (QRInput.Checked)
+                QRSearch_Click(null, null);
+            else
+                SearchforSeed(null, null);
         }
+
+ 
 
         private string Convert_Clock(string n)
         {
             int tmp = Convert.ToInt32(n);
-            if (EndClockInput.Checked)
+            if (EndClockInput.Checked && !QRInput.Checked)
             {
                 if (tmp >= 4)
                 {
@@ -186,7 +196,6 @@ namespace SMEncounterRNGTool
             }
             return n;
         }
-
 
         private void SearchforSeed(object sender, EventArgs e)
         {
@@ -226,7 +235,58 @@ namespace SMEncounterRNGTool
             else
                 SeedResults.Text = "";
         }
+        
+        private void QRSearch_Click(object sender, EventArgs e)
+        {
+            uint InitialSeed = (uint)Seed.Value;
+            int min = (int)Frame_min.Value;
+            int max = (int)Frame_max.Value;
+            if (QRList.Text == "")
+                return;
+            string[] str = QRList.Text.Split(',');
+            try
+            {
+                int[] Clock_List = str.Select(s => int.Parse(s)).ToArray();
+                int[] temp_List = new int[Clock_List.Length];
 
+                SFMT sfmt = new SFMT(InitialSeed);
+                SFMT seed = new SFMT(InitialSeed);
+                bool flag = false;
+
+                QRResult.Items.Clear();
+
+                for (int i = 0; i < min; i++)
+                    sfmt.NextUInt64();
+
+                int cnt = 0;
+                int tmp = 0;
+                for (int i = min; i <= max; i++, sfmt.NextUInt64())
+                {
+                    seed = (SFMT)sfmt.DeepCopy();
+
+                    for (int j = 0; j < Clock_List.Length; j++)
+                        temp_List[j] = (int)(seed.NextUInt64() % 17);
+
+                    if (temp_List.SequenceEqual(Clock_List))
+                        flag = true;
+
+                    if (flag)
+                    {
+                        flag = false;
+                        QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧");
+                        cnt++;
+                        tmp = i + Clock_List.Length + 1;
+                    }
+                }
+
+                if (cnt == 1)
+                    Time_min.Value = tmp;
+            }
+            catch
+            {
+                Error("指针输入格式不正确");
+            }
+        }
         #endregion
 
         #region validcheck
@@ -687,58 +747,6 @@ namespace SMEncounterRNGTool
         private void BlogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://followmetogetic.com/blog/smrngsoftware");
-        }
-
-        private void QRSearch_Click(object sender, EventArgs e)
-        {
-            uint InitialSeed = (uint)Seed.Value;
-            int min = (int)Frame_min.Value;
-            int max = (int)Frame_max.Value;
-            if (QRList.Text == "")
-                return;
-            string[] str = QRList.Text.Split(',');
-            try
-            {
-                int[] Clock_List = str.Select(s => int.Parse(s)).ToArray();
-                int[] temp_List = new int[Clock_List.Length];
-
-                SFMT sfmt = new SFMT(InitialSeed);
-                SFMT seed = new SFMT(InitialSeed);
-                bool flag = false;
-
-                QRResult.Items.Clear();
-
-                for (int i = 0; i < min; i++)
-                    sfmt.NextUInt64();
-
-                int cnt = 0;
-                int tmp = 0;
-                for (int i = min; i <= max; i++, sfmt.NextUInt64())
-                {
-                    seed = (SFMT)sfmt.DeepCopy();
-
-                    for (int j = 0; j < Clock_List.Length; j++)
-                        temp_List[j] = (int)(seed.NextUInt64() % 17);
-
-                    if (temp_List.SequenceEqual(Clock_List))
-                        flag = true;
-
-                    if (flag)
-                    {
-                        flag = false;
-                        QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧");
-                        cnt++;
-                        tmp = i + Clock_List.Length + 1;
-                    }
-                }
-
-                if (cnt == 1)
-                    Time_min.Value = tmp;
-            }
-            catch
-            {
-                Error("指针输入格式不正确");
-            }
         }
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)

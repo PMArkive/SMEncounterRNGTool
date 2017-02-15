@@ -35,6 +35,30 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchSeed = new System.Windows.Forms.TabPage();
+            this.BySaveScreen = new System.Windows.Forms.RadioButton();
+            this.QRInput = new System.Windows.Forms.RadioButton();
+            this.InputBox = new System.Windows.Forms.GroupBox();
+            this.button16 = new System.Windows.Forms.Button();
+            this.EndClockInput = new System.Windows.Forms.RadioButton();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.Clear = new System.Windows.Forms.Button();
+            this.StartClockInput = new System.Windows.Forms.RadioButton();
+            this.button10 = new System.Windows.Forms.Button();
+            this.Back = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
             this.QRBox = new System.Windows.Forms.GroupBox();
             this.QRResult = new System.Windows.Forms.ListBox();
             this.L_QRList = new System.Windows.Forms.Label();
@@ -43,31 +67,10 @@
             this.QRList = new System.Windows.Forms.TextBox();
             this.SearchSeedBox = new System.Windows.Forms.GroupBox();
             this.L_clocklist = new System.Windows.Forms.Label();
-            this.EndClockInput = new System.Windows.Forms.RadioButton();
             this.Search = new System.Windows.Forms.Button();
-            this.Clear = new System.Windows.Forms.Button();
-            this.Back = new System.Windows.Forms.Button();
             this.L_SeedResult = new System.Windows.Forms.Label();
             this.SeedResults = new System.Windows.Forms.TextBox();
             this.Clock_List = new System.Windows.Forms.TextBox();
-            this.StartClockInput = new System.Windows.Forms.RadioButton();
-            this.button0 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.TimeBox = new System.Windows.Forms.GroupBox();
             this.L_timedelay = new System.Windows.Forms.Label();
@@ -208,6 +211,7 @@
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
+            this.InputBox.SuspendLayout();
             this.QRBox.SuspendLayout();
             this.SearchSeedBox.SuspendLayout();
             this.SearchTool.SuspendLayout();
@@ -274,6 +278,9 @@
             // 
             // SearchSeed
             // 
+            this.SearchSeed.Controls.Add(this.BySaveScreen);
+            this.SearchSeed.Controls.Add(this.QRInput);
+            this.SearchSeed.Controls.Add(this.InputBox);
             this.SearchSeed.Controls.Add(this.QRBox);
             this.SearchSeed.Controls.Add(this.SearchSeedBox);
             this.SearchSeed.Location = new System.Drawing.Point(4, 22);
@@ -284,6 +291,292 @@
             this.SearchSeed.Text = "检索Seed";
             this.SearchSeed.UseVisualStyleBackColor = true;
             // 
+            // BySaveScreen
+            // 
+            this.BySaveScreen.AutoSize = true;
+            this.BySaveScreen.BackColor = System.Drawing.Color.White;
+            this.BySaveScreen.Location = new System.Drawing.Point(36, 168);
+            this.BySaveScreen.Name = "BySaveScreen";
+            this.BySaveScreen.Size = new System.Drawing.Size(146, 17);
+            this.BySaveScreen.TabIndex = 29;
+            this.BySaveScreen.TabStop = true;
+            this.BySaveScreen.Text = "读档指针序列检索Seed";
+            this.BySaveScreen.UseVisualStyleBackColor = false;
+            // 
+            // QRInput
+            // 
+            this.QRInput.AutoSize = true;
+            this.QRInput.BackColor = System.Drawing.Color.White;
+            this.QRInput.Location = new System.Drawing.Point(429, 168);
+            this.QRInput.Name = "QRInput";
+            this.QRInput.Size = new System.Drawing.Size(137, 17);
+            this.QRInput.TabIndex = 30;
+            this.QRInput.TabStop = true;
+            this.QRInput.Text = "QR指针序列检索位置";
+            this.QRInput.UseVisualStyleBackColor = false;
+            // 
+            // InputBox
+            // 
+            this.InputBox.Controls.Add(this.button16);
+            this.InputBox.Controls.Add(this.EndClockInput);
+            this.InputBox.Controls.Add(this.button9);
+            this.InputBox.Controls.Add(this.button8);
+            this.InputBox.Controls.Add(this.Clear);
+            this.InputBox.Controls.Add(this.StartClockInput);
+            this.InputBox.Controls.Add(this.button10);
+            this.InputBox.Controls.Add(this.Back);
+            this.InputBox.Controls.Add(this.button7);
+            this.InputBox.Controls.Add(this.button11);
+            this.InputBox.Controls.Add(this.button6);
+            this.InputBox.Controls.Add(this.button12);
+            this.InputBox.Controls.Add(this.button5);
+            this.InputBox.Controls.Add(this.button0);
+            this.InputBox.Controls.Add(this.button13);
+            this.InputBox.Controls.Add(this.button1);
+            this.InputBox.Controls.Add(this.button4);
+            this.InputBox.Controls.Add(this.button14);
+            this.InputBox.Controls.Add(this.button2);
+            this.InputBox.Controls.Add(this.button3);
+            this.InputBox.Controls.Add(this.button15);
+            this.InputBox.Location = new System.Drawing.Point(18, 15);
+            this.InputBox.Name = "InputBox";
+            this.InputBox.Size = new System.Drawing.Size(851, 138);
+            this.InputBox.TabIndex = 29;
+            this.InputBox.TabStop = false;
+            this.InputBox.Text = "输入工具";
+            // 
+            // button16
+            // 
+            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button16.Location = new System.Drawing.Point(802, 31);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(40, 40);
+            this.button16.TabIndex = 15;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // EndClockInput
+            // 
+            this.EndClockInput.AutoSize = true;
+            this.EndClockInput.Location = new System.Drawing.Point(18, 109);
+            this.EndClockInput.Name = "EndClockInput";
+            this.EndClockInput.Size = new System.Drawing.Size(73, 17);
+            this.EndClockInput.TabIndex = 18;
+            this.EndClockInput.Text = "结束位置";
+            this.EndClockInput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.EndClockInput.UseVisualStyleBackColor = true;
+            this.EndClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
+            // 
+            // button9
+            // 
+            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button9.Location = new System.Drawing.Point(459, 31);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(40, 40);
+            this.button9.TabIndex = 8;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button8
+            // 
+            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button8.Location = new System.Drawing.Point(410, 31);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(40, 40);
+            this.button8.TabIndex = 7;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // Clear
+            // 
+            this.Clear.Location = new System.Drawing.Point(254, 96);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(72, 27);
+            this.Clear.TabIndex = 17;
+            this.Clear.Text = "清空";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
+            // StartClockInput
+            // 
+            this.StartClockInput.AutoSize = true;
+            this.StartClockInput.Checked = true;
+            this.StartClockInput.Location = new System.Drawing.Point(18, 86);
+            this.StartClockInput.Name = "StartClockInput";
+            this.StartClockInput.Size = new System.Drawing.Size(73, 17);
+            this.StartClockInput.TabIndex = 7;
+            this.StartClockInput.TabStop = true;
+            this.StartClockInput.Text = "开始位置";
+            this.StartClockInput.UseVisualStyleBackColor = true;
+            this.StartClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
+            // 
+            // button10
+            // 
+            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button10.Location = new System.Drawing.Point(508, 31);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(40, 40);
+            this.button10.TabIndex = 9;
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // Back
+            // 
+            this.Back.Location = new System.Drawing.Point(116, 96);
+            this.Back.Name = "Back";
+            this.Back.Size = new System.Drawing.Size(72, 27);
+            this.Back.TabIndex = 7;
+            this.Back.Text = "后退";
+            this.Back.UseVisualStyleBackColor = true;
+            this.Back.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button7.Location = new System.Drawing.Point(361, 31);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(40, 40);
+            this.button7.TabIndex = 6;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button11
+            // 
+            this.button11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button11.BackgroundImage")));
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button11.Location = new System.Drawing.Point(557, 31);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(40, 40);
+            this.button11.TabIndex = 10;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.Location = new System.Drawing.Point(312, 31);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(40, 40);
+            this.button6.TabIndex = 5;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button12
+            // 
+            this.button12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button12.BackgroundImage")));
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button12.Location = new System.Drawing.Point(606, 31);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(40, 40);
+            this.button12.TabIndex = 11;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button5.Location = new System.Drawing.Point(263, 31);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(40, 40);
+            this.button5.TabIndex = 4;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button0
+            // 
+            this.button0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button0.BackgroundImage")));
+            this.button0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button0.Location = new System.Drawing.Point(18, 31);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(40, 40);
+            this.button0.TabIndex = 16;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button13
+            // 
+            this.button13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button13.BackgroundImage")));
+            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button13.Location = new System.Drawing.Point(655, 31);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(40, 40);
+            this.button13.TabIndex = 12;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Location = new System.Drawing.Point(67, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Location = new System.Drawing.Point(214, 31);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(40, 40);
+            this.button4.TabIndex = 3;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button14
+            // 
+            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
+            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button14.Location = new System.Drawing.Point(704, 31);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(40, 40);
+            this.button14.TabIndex = 13;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Location = new System.Drawing.Point(116, 31);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(40, 40);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Location = new System.Drawing.Point(165, 31);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(40, 40);
+            this.button3.TabIndex = 2;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button15
+            // 
+            this.button15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button15.BackgroundImage")));
+            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button15.Location = new System.Drawing.Point(753, 31);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(40, 40);
+            this.button15.TabIndex = 14;
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
             // QRBox
             // 
             this.QRBox.Controls.Add(this.QRResult);
@@ -291,19 +584,18 @@
             this.QRBox.Controls.Add(this.QRSearch);
             this.QRBox.Controls.Add(this.L_QRresult);
             this.QRBox.Controls.Add(this.QRList);
-            this.QRBox.Location = new System.Drawing.Point(17, 164);
+            this.QRBox.Location = new System.Drawing.Point(410, 182);
             this.QRBox.Name = "QRBox";
-            this.QRBox.Size = new System.Drawing.Size(379, 306);
+            this.QRBox.Size = new System.Drawing.Size(379, 238);
             this.QRBox.TabIndex = 7;
             this.QRBox.TabStop = false;
-            this.QRBox.Text = "输入QR指针序列";
             // 
             // QRResult
             // 
             this.QRResult.FormattingEnabled = true;
             this.QRResult.Location = new System.Drawing.Point(75, 128);
             this.QRResult.Name = "QRResult";
-            this.QRResult.Size = new System.Drawing.Size(267, 160);
+            this.QRResult.Size = new System.Drawing.Size(267, 95);
             this.QRResult.TabIndex = 28;
             // 
             // L_QRList
@@ -345,62 +637,28 @@
             // SearchSeedBox
             // 
             this.SearchSeedBox.Controls.Add(this.L_clocklist);
-            this.SearchSeedBox.Controls.Add(this.EndClockInput);
             this.SearchSeedBox.Controls.Add(this.Search);
-            this.SearchSeedBox.Controls.Add(this.Clear);
-            this.SearchSeedBox.Controls.Add(this.Back);
             this.SearchSeedBox.Controls.Add(this.L_SeedResult);
             this.SearchSeedBox.Controls.Add(this.SeedResults);
             this.SearchSeedBox.Controls.Add(this.Clock_List);
-            this.SearchSeedBox.Controls.Add(this.StartClockInput);
-            this.SearchSeedBox.Controls.Add(this.button0);
-            this.SearchSeedBox.Controls.Add(this.button1);
-            this.SearchSeedBox.Controls.Add(this.button16);
-            this.SearchSeedBox.Controls.Add(this.button2);
-            this.SearchSeedBox.Controls.Add(this.button15);
-            this.SearchSeedBox.Controls.Add(this.button3);
-            this.SearchSeedBox.Controls.Add(this.button14);
-            this.SearchSeedBox.Controls.Add(this.button4);
-            this.SearchSeedBox.Controls.Add(this.button13);
-            this.SearchSeedBox.Controls.Add(this.button5);
-            this.SearchSeedBox.Controls.Add(this.button12);
-            this.SearchSeedBox.Controls.Add(this.button6);
-            this.SearchSeedBox.Controls.Add(this.button11);
-            this.SearchSeedBox.Controls.Add(this.button7);
-            this.SearchSeedBox.Controls.Add(this.button10);
-            this.SearchSeedBox.Controls.Add(this.button8);
-            this.SearchSeedBox.Controls.Add(this.button9);
-            this.SearchSeedBox.Location = new System.Drawing.Point(17, 22);
+            this.SearchSeedBox.Location = new System.Drawing.Point(18, 182);
             this.SearchSeedBox.Name = "SearchSeedBox";
-            this.SearchSeedBox.Size = new System.Drawing.Size(938, 136);
+            this.SearchSeedBox.Size = new System.Drawing.Size(386, 200);
             this.SearchSeedBox.TabIndex = 6;
             this.SearchSeedBox.TabStop = false;
-            this.SearchSeedBox.Text = "输入读档界面指针";
             // 
             // L_clocklist
             // 
             this.L_clocklist.AutoSize = true;
-            this.L_clocklist.Location = new System.Drawing.Point(227, 100);
+            this.L_clocklist.Location = new System.Drawing.Point(15, 44);
             this.L_clocklist.Name = "L_clocklist";
             this.L_clocklist.Size = new System.Drawing.Size(55, 13);
             this.L_clocklist.TabIndex = 22;
             this.L_clocklist.Text = "指针序列";
             // 
-            // EndClockInput
-            // 
-            this.EndClockInput.AutoSize = true;
-            this.EndClockInput.Location = new System.Drawing.Point(13, 103);
-            this.EndClockInput.Name = "EndClockInput";
-            this.EndClockInput.Size = new System.Drawing.Size(73, 17);
-            this.EndClockInput.TabIndex = 18;
-            this.EndClockInput.Text = "结束位置";
-            this.EndClockInput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.EndClockInput.UseVisualStyleBackColor = true;
-            this.EndClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
-            // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(855, 93);
+            this.Search.Location = new System.Drawing.Point(271, 81);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(72, 27);
             this.Search.TabIndex = 21;
@@ -408,30 +666,10 @@
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.SearchforSeed);
             // 
-            // Clear
-            // 
-            this.Clear.Location = new System.Drawing.Point(130, 93);
-            this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(72, 27);
-            this.Clear.TabIndex = 17;
-            this.Clear.Text = "清空";
-            this.Clear.UseVisualStyleBackColor = true;
-            this.Clear.Click += new System.EventHandler(this.Clear_Click);
-            // 
-            // Back
-            // 
-            this.Back.Location = new System.Drawing.Point(855, 33);
-            this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(72, 27);
-            this.Back.TabIndex = 7;
-            this.Back.Text = "后退";
-            this.Back.UseVisualStyleBackColor = true;
-            this.Back.Click += new System.EventHandler(this.Back_Click);
-            // 
             // L_SeedResult
             // 
             this.L_SeedResult.AutoSize = true;
-            this.L_SeedResult.Location = new System.Drawing.Point(523, 100);
+            this.L_SeedResult.Location = new System.Drawing.Point(17, 128);
             this.L_SeedResult.Name = "L_SeedResult";
             this.L_SeedResult.Size = new System.Drawing.Size(55, 13);
             this.L_SeedResult.TabIndex = 6;
@@ -440,218 +678,18 @@
             // SeedResults
             // 
             this.SeedResults.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SeedResults.Location = new System.Drawing.Point(603, 95);
+            this.SeedResults.Location = new System.Drawing.Point(78, 128);
             this.SeedResults.Name = "SeedResults";
-            this.SeedResults.Size = new System.Drawing.Size(227, 22);
+            this.SeedResults.Size = new System.Drawing.Size(266, 22);
             this.SeedResults.TabIndex = 20;
             // 
             // Clock_List
             // 
             this.Clock_List.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Clock_List.Location = new System.Drawing.Point(307, 95);
+            this.Clock_List.Location = new System.Drawing.Point(76, 39);
             this.Clock_List.Name = "Clock_List";
-            this.Clock_List.Size = new System.Drawing.Size(191, 22);
+            this.Clock_List.Size = new System.Drawing.Size(267, 22);
             this.Clock_List.TabIndex = 19;
-            // 
-            // StartClockInput
-            // 
-            this.StartClockInput.AutoSize = true;
-            this.StartClockInput.Checked = true;
-            this.StartClockInput.Location = new System.Drawing.Point(13, 80);
-            this.StartClockInput.Name = "StartClockInput";
-            this.StartClockInput.Size = new System.Drawing.Size(73, 17);
-            this.StartClockInput.TabIndex = 7;
-            this.StartClockInput.TabStop = true;
-            this.StartClockInput.Text = "开始位置";
-            this.StartClockInput.UseVisualStyleBackColor = true;
-            this.StartClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
-            // 
-            // button0
-            // 
-            this.button0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button0.BackgroundImage")));
-            this.button0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button0.Location = new System.Drawing.Point(11, 26);
-            this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(40, 40);
-            this.button0.TabIndex = 16;
-            this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(60, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button16
-            // 
-            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
-            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button16.Location = new System.Drawing.Point(795, 26);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(40, 40);
-            this.button16.TabIndex = 15;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Location = new System.Drawing.Point(109, 26);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 40);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button15
-            // 
-            this.button15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button15.BackgroundImage")));
-            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button15.Location = new System.Drawing.Point(746, 26);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(40, 40);
-            this.button15.TabIndex = 14;
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Location = new System.Drawing.Point(158, 26);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 40);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button14
-            // 
-            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
-            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button14.Location = new System.Drawing.Point(697, 26);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(40, 40);
-            this.button14.TabIndex = 13;
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Location = new System.Drawing.Point(207, 26);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(40, 40);
-            this.button4.TabIndex = 3;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button13
-            // 
-            this.button13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button13.BackgroundImage")));
-            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button13.Location = new System.Drawing.Point(648, 26);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(40, 40);
-            this.button13.TabIndex = 12;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.Location = new System.Drawing.Point(256, 26);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(40, 40);
-            this.button5.TabIndex = 4;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button12
-            // 
-            this.button12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button12.BackgroundImage")));
-            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button12.Location = new System.Drawing.Point(599, 26);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(40, 40);
-            this.button12.TabIndex = 11;
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.Location = new System.Drawing.Point(305, 26);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(40, 40);
-            this.button6.TabIndex = 5;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button11
-            // 
-            this.button11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button11.BackgroundImage")));
-            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button11.Location = new System.Drawing.Point(550, 26);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(40, 40);
-            this.button11.TabIndex = 10;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button7
-            // 
-            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button7.Location = new System.Drawing.Point(354, 26);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(40, 40);
-            this.button7.TabIndex = 6;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button10
-            // 
-            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button10.Location = new System.Drawing.Point(501, 26);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(40, 40);
-            this.button10.TabIndex = 9;
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button8
-            // 
-            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button8.Location = new System.Drawing.Point(403, 26);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(40, 40);
-            this.button8.TabIndex = 7;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button9
-            // 
-            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button9.Location = new System.Drawing.Point(452, 26);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(40, 40);
-            this.button9.TabIndex = 8;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.Get_Clock_Number);
             // 
             // SearchTool
             // 
@@ -2296,6 +2334,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.SearchSeed.ResumeLayout(false);
+            this.SearchSeed.PerformLayout();
+            this.InputBox.ResumeLayout(false);
+            this.InputBox.PerformLayout();
             this.QRBox.ResumeLayout(false);
             this.QRBox.PerformLayout();
             this.SearchSeedBox.ResumeLayout(false);
@@ -2533,6 +2574,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn M6;
         private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
+        private System.Windows.Forms.GroupBox InputBox;
+        private System.Windows.Forms.RadioButton QRInput;
+        private System.Windows.Forms.RadioButton BySaveScreen;
     }
 }
 
