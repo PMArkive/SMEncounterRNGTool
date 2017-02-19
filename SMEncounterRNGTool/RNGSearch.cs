@@ -58,8 +58,7 @@ namespace SMEncounterRNGTool
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
-            if (Sync)
-                st.Synchronize = (int)(getrand() % 100) >= 50;
+            st.Synchronize = (int)(getrand() % 100) >= 50 && Sync;
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
