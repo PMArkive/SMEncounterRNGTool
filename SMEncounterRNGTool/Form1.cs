@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.75beta";
+        private string version = "0.76beta";
 
         private void Form1_Load(object sender, EventArgs e)
         {
