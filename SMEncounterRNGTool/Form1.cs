@@ -457,23 +457,24 @@ namespace SMEncounterRNGTool
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
             int totaltime;
+            int tmp = min;
             int honeytime = (int)Timedelay.Value;
             if (Honey.Checked)
             {
-                int tmp = max - honeytime / 2;
+               tmp  = max - honeytime / 2;
                 while (tmp < max)
                 {
                     tmp++;
                     if (CalcFrame(tmp, max) <= honeytime)
                         break;
                 }
-                totaltime = CalcFrame(min, tmp - 1);
+                totaltime = CalcFrame(min, tmp);
             }
             else
                 totaltime = CalcFrame(min, max);
 
             float realtime = (float)totaltime / 30;
-            TimeResult.Text = $"计时器设置为{totaltime * 2}帧," + realtime.ToString("F") + "秒";
+            TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒" ;
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -792,6 +793,7 @@ namespace SMEncounterRNGTool
                 if (tmp.Contains(CurrSeed.Text))
                 {
                     Result_Text.Text = $"{i} F";
+                    Frame_min.Value = i;
                     return;
                 }
             }

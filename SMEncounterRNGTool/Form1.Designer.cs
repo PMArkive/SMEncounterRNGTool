@@ -212,8 +212,8 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.CurrSeed = new System.Windows.Forms.TextBox();
+            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -796,7 +796,7 @@
             this.Timedelay.Size = new System.Drawing.Size(48, 22);
             this.Timedelay.TabIndex = 51;
             this.Timedelay.Value = new decimal(new int[] {
-            192,
+            206,
             0,
             0,
             0});
@@ -2340,6 +2340,13 @@
             this.BlogLink.Text = "使用指南";
             this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
             // 
+            // CurrSeed
+            // 
+            this.CurrSeed.Location = new System.Drawing.Point(14, 36);
+            this.CurrSeed.Name = "CurrSeed";
+            this.CurrSeed.Size = new System.Drawing.Size(100, 20);
+            this.CurrSeed.TabIndex = 54;
+            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2353,13 +2360,6 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
-            // CurrSeed
-            // 
-            this.CurrSeed.Location = new System.Drawing.Point(14, 36);
-            this.CurrSeed.Name = "CurrSeed";
-            this.CurrSeed.Size = new System.Drawing.Size(100, 20);
-            this.CurrSeed.TabIndex = 54;
             // 
             // Form1
             // 
