@@ -1,0 +1,116 @@
+﻿! Interface Customization File
+! lang_en.txt = English
+! lang_jp.txt = Japanese
+! lang_fr.txt = French
+! lang_de.txt = German
+! lang_es.txt = Spanish
+! lang_it.txt = Italian
+! lang_ko.txt = Korean
+! lang_cn.txt = Simplified Chinese
+! lang_zh.txt = Traditional Chinese
+! lang_pt.txt = Portuguese
+! Make sure that each edit has a ' = ' between Control name and new Text!
+! -----------------------------------------------------
+- DO NOT CHANGE THIS SECTION EXCEPT FORM NAME & TITLE
+! Form1 = SM遇敌乱数工具
+- Change stuff below this line, not above.
+---------------------Global Setting------------------------
+L_Seed = Seed
+L_TSV = TSV
+ShinyCharm = 闪耀护符
+Advanced = 高级模式
+BlogLink = 使用指南
+SearchSeed = Seed检索
+SearchTool = 个体检索
+---------------------TabPage1----------------------------------
+InputBox = 输入
+Back = 后退
+Clear = 清空
+StartClockInput = 开始位置
+EndClockInput = 结束位置
+QRInput = 通过QR指针定位当前位置
+BySaveScreen = 通过读档界面指针检索Seed
+L_clocklist = 指针列表
+Search = 检索
+L_SeedResult = 检索结果
+L_QRList = 指针列表
+QRSearch = 检索
+L_QRresult = 检索结果
+---------------------TabPage2----------------------------------
+---
+Condition = 条件设置
+L_Poke = 宝可梦
+UB = UB
+Honey = 甜甜蜜
+Wild = 野生
+Stationary = 定点
+Sync = 同步
+AlwaysSynced = 必定同步
+Fix3v = 固定3V
+L_UB_th = UB遇见率
+L_Encounter_th = 遇敌率
+L_Lv = Lv范围
+---
+SearchSettingBox = 个体筛选
+L_H = HP
+L_A = 攻击
+L_B = 防御
+L_C = 特攻
+L_D = 特防
+L_S = 速度
+ByIVs = 通过个体值
+ByStats = 通过能力值
+L_IVRange = 个体值范围
+L_Stats = 能力值
+L_BS = 种族值
+L_nature = 性格
+L_gender = 性别
+L_HP = 觉醒力量
+L_Ability = 特性
+L_Lv_S = Lv
+L_Slot = 种类
+DisableFilters = 取消筛选
+EncounteredOnly = 只显示遇敌
+ShinyOnly = 仅异色帧
+UBOnly = 只显示UB
+BlinkOnly = 仅眨眼帧
+ShowStats = 显示能力值
+Reset = 重置
+---
+RNGInfo = 乱数信息
+CalcList = 检索
+L_NPC = NPC数
+AroundTarget = 目标帧 ±100F
+L_frame = 帧数范围
+L_Framecorrection = 帧数修正
+---
+TimeBox = 时间计算
+L_time = 计时范围
+CalcTime = 计算
+L_timedelay = 时间修正
+---
+SetTargetFrame = 设为目标帧
+dgv_Frame = 帧
+dgv_deviation = 偏移
+dgv_blink = 眨眼
+dgv_H = HP
+dgv_A = Atk
+dgv_B = Def
+dgv_C = SpA
+dgv_D = SpD
+dgv_S = Spe
+dgv_nature = 性格
+dgv_synced = 同步
+dgv_needle = 帧
+dgv_psv = PSV
+dgv_slot = 种类
+dgv_lv = Lv
+dgv_gender = 性别
+dgv_ability = 特性
+dgv_item = 持有物
+dgv_encounter = 遇敌
+dgv_ubvalue = UB
+dgv_rand = 乱数值
+---
+SearchByRand = 通过当前乱数值检索
+SearchByCurrSeed1 = 检索

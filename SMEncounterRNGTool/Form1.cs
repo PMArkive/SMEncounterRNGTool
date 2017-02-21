@@ -43,19 +43,52 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.76beta";
+        private string version = "0.77beta";
 
+        #region Translation
+        private string curlanguage;
+        private static readonly string[] langlist = { "en", "cn" };
+        private static readonly string[] None_STR = { "None", "无" };
+        private static readonly string[] RN_STR = { "Random Number", "乱数值" };
+        private static readonly string[] EC_STR = { "EC", "加密常数" };
+        private static readonly string[] PID_STR = { "PID", "PID" };
+        private static readonly string[] NORESULT_STR = { "Not Found", "未找到" };
+        private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
+
+        private void ChangeLanguage(object sender, EventArgs e)
+        {
+            string lang = langlist[lindex];
+
+            if (lang == curlanguage)
+                return;
+
+            curlanguage = lang;
+            TranslateInterface(this, curlanguage); // Translate the UI to language.
+            Properties.Settings.Default.Language = curlanguage;
+            Properties.Settings.Default.Save();
+            TranslateInterface(this, lang);
+            Text = Text + $" v{version} @wwwwwwzx";
+
+            SearchSetting.naturestr = getStringList("Natures", curlanguage);
+            SearchSetting.hpstr = getStringList("Types", curlanguage);
+            string[] species = getStringList("Species", curlanguage);
+
+            for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
+                this.HiddenPower.Items[i] = SearchSetting.hpstr[i];
+
+            for (int i = 0; i < SearchSetting.naturestr.Length; i++)
+                this.Nature.Items[i + 1] = this.SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
+
+            for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
+                this.Poke.Items[i] = species[SearchSetting.pokedex[i, 0]];
+        }
+        #endregion
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = $"遇敌乱数工具 v{version} @wwwwwwzx";
-
             DGV.Columns[20].DefaultCellStyle.Font = new Font("Consolas", 9);
             Type dgvtype = typeof(DataGridView);
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
-
-            foreach (string t in SearchSetting.hpstr)
-                HiddenPower.Items.Add(t);
 
             IVlow.Add(ivmin0);
             IVlow.Add(ivmin1);
@@ -87,17 +120,28 @@ namespace SMEncounterRNGTool
 
             Nature.Items.Add("-");
             SyncNature.Items.Add("-");
+            HiddenPower.Items.Add("-");
             foreach (string t in SearchSetting.naturestr)
             {
-                Nature.Items.Add(t);
-                SyncNature.Items.Add(t);
+                Nature.Items.Add("");
+                SyncNature.Items.Add("");
             }
+            for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
+                Poke.Items.Add("");
+            for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
+                HiddenPower.Items.Add("");
 
             foreach (string t in SearchSetting.genderstr)
                 Gender.Items.Add(t);
 
-            for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
-                Poke.Items.Add(SearchSetting.pokedex[i, 0]);
+            string l = Properties.Settings.Default.Language;
+            int lang = Array.IndexOf(langlist, l);
+            if (lang < 0) lang = Array.IndexOf(langlist, "en");
+
+            lindex = lang;
+
+            ChangeLanguage(null, null);
+
 
             RNGSearch.Rand = new List<ulong>();
 
@@ -461,7 +505,7 @@ namespace SMEncounterRNGTool
             int honeytime = (int)Timedelay.Value;
             if (Honey.Checked)
             {
-               tmp  = max - honeytime / 2;
+                tmp = max - honeytime / 2;
                 while (tmp < max)
                 {
                     tmp++;
@@ -474,7 +518,7 @@ namespace SMEncounterRNGTool
                 totaltime = CalcFrame(min, max);
 
             float realtime = (float)totaltime / 30;
-            TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒" ;
+            TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒";
             if (Advanced.Checked) TimeResult.Text = $"实际击中{tmp}F";
         }
 
@@ -701,7 +745,7 @@ namespace SMEncounterRNGTool
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string randstr = result.row_r.ToString("X16");
-            dgv_rand.HeaderText = Advanced.Checked ? "乱数值" : "加密常数+PID";
+            dgv_rand.HeaderText = Advanced.Checked ? RN_STR[lindex] : EC_STR[lindex] +"+"+ PID_STR[lindex];
 
             if (!Advanced.Checked)
             {
@@ -716,7 +760,7 @@ namespace SMEncounterRNGTool
                 else if (result.Item < 55)
                     Item = "5%";
                 else
-                    Item = "无";
+                    Item = None_STR[lindex];
             }
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
@@ -756,7 +800,7 @@ namespace SMEncounterRNGTool
             AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 13);
             Method_CheckedChanged(null, null);
             for (int i = 0; i < 6; i++)
-                BS[i].Value = Convert.ToInt32(SearchSetting.pokedex[Poke.SelectedIndex, i + 1]);
+                BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
             switch (Poke.SelectedIndex)
@@ -798,7 +842,7 @@ namespace SMEncounterRNGTool
                     return;
                 }
             }
-            Result_Text.Text = "未找到";
+            Result_Text.Text = NORESULT_STR[lindex];
         }
     }
 }

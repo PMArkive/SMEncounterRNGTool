@@ -1,0 +1,116 @@
+﻿! Interface Customization File
+! lang_en.txt = English
+! lang_jp.txt = Japanese
+! lang_fr.txt = French
+! lang_de.txt = German
+! lang_es.txt = Spanish
+! lang_it.txt = Italian
+! lang_ko.txt = Korean
+! lang_cn.txt = Simplified Chinese
+! lang_zh.txt = Traditional Chinese
+! lang_pt.txt = Portuguese
+! Make sure that each edit has a ' = ' between Control name and new Text!
+! -----------------------------------------------------
+- DO NOT CHANGE THIS SECTION EXCEPT FORM NAME & TITLE
+! Form1 = SMEncounterRNGTool
+- Change stuff below this line, not above.
+---------------------Global Setting------------------------
+L_Seed = Seed
+L_TSV = TSV
+ShinyCharm = Shiny Charm
+Advanced = Advanced
+BlogLink = User Guide(CHS)
+SearchSeed = Seed Search
+SearchTool = Individual Search
+---------------------TabPage1----------------------------------
+InputBox = Input Keyboard
+Back = Back
+Clear = Clear
+StartClockInput = Start Position
+EndClockInput = End Position
+QRInput = Locate Current Frame via QR
+BySaveScreen = Find Initial Seed via Continue Screen
+L_clocklist = Needle List
+Search = Search
+L_SeedResult = Results
+L_QRList = Needle List
+QRSearch = Search
+L_QRresult = Results
+---------------------TabPage2----------------------------------
+---
+Condition = Conditions
+L_Poke = Pokemon
+UB = UB
+Honey = Honey
+Wild = Wild
+Stationary = Stationary
+Sync = Sync
+AlwaysSynced = AlwaysSynced
+Fix3v = 3IVs
+L_UB_th = UB Rate
+L_Encounter_th = ENC Rate
+L_Lv = Lv Range
+---
+SearchSettingBox = Filters
+L_H = HP
+L_A = Atk
+L_B = Def
+L_C = SpA
+L_D = SpD
+L_S = Spe
+ByIVs = Using IVs
+ByStats = Using Stats
+L_IVRange = IVs Range
+L_Stats = Stats
+L_BS = Base Stats
+L_nature = Nature
+L_gender = Gender
+L_HP = Hidden Power
+L_Ability = Ability
+L_Lv_S = Lv
+L_Slot = Encounter Slot
+DisableFilters = Disable Filters
+EncounteredOnly = ENC Only
+ShinyOnly = Shiny Only
+UBOnly = UB Only
+BlinkOnly = Blink F Only
+ShowStats = Show Stats
+Reset = Reset
+---
+RNGInfo = RNG Info
+CalcList = Search
+L_NPC = # of NPCs
+AroundTarget = Target ±100F
+L_frame = Frame Range
+L_Framecorrection = F Correction
+---
+TimeBox = Time Calculator
+L_timedelay = Time Delay
+L_time = Timing Range
+CalcTime = Calc
+---
+SetTargetFrame = Set as Target Frame
+dgv_Frame = Frame
+dgv_deviation = Shift
+dgv_blink = Blink
+dgv_H = HP
+dgv_A = Atk
+dgv_B = Def
+dgv_C = SpA
+dgv_D = SpD
+dgv_S = Spe
+dgv_nature = Nature
+dgv_synced = Sync?
+dgv_needle = Clk
+dgv_psv = PSV
+dgv_slot = Slot
+dgv_lv = Lv
+dgv_gender = Gender
+dgv_ability = Ability
+dgv_item = Item
+dgv_encounter = ENC?
+dgv_ubvalue = UB?
+dgv_rand = Random Number
+---
+SearchByRand = Search by Current Seed
+SearchByCurrSeed1 = Search

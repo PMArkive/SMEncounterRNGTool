@@ -73,6 +73,7 @@
             this.Clock_List = new System.Windows.Forms.TextBox();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.SearchByRand = new System.Windows.Forms.GroupBox();
+            this.CurrSeed = new System.Windows.Forms.TextBox();
             this.Result_Text = new System.Windows.Forms.Label();
             this.SearchByCurrSeed1 = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
@@ -211,8 +212,7 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.CurrSeed = new System.Windows.Forms.TextBox();
+            this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
@@ -432,7 +432,7 @@
             // 
             // Back
             // 
-            this.Back.Location = new System.Drawing.Point(116, 96);
+            this.Back.Location = new System.Drawing.Point(144, 96);
             this.Back.Name = "Back";
             this.Back.Size = new System.Drawing.Size(72, 27);
             this.Back.TabIndex = 7;
@@ -726,6 +726,13 @@
             this.SearchByRand.TabStop = false;
             this.SearchByRand.Text = "乱数值检索";
             // 
+            // CurrSeed
+            // 
+            this.CurrSeed.Location = new System.Drawing.Point(14, 36);
+            this.CurrSeed.Name = "CurrSeed";
+            this.CurrSeed.Size = new System.Drawing.Size(100, 20);
+            this.CurrSeed.TabIndex = 54;
+            // 
             // Result_Text
             // 
             this.Result_Text.AutoSize = true;
@@ -767,7 +774,7 @@
             // L_timedelay
             // 
             this.L_timedelay.AutoSize = true;
-            this.L_timedelay.Location = new System.Drawing.Point(275, 27);
+            this.L_timedelay.Location = new System.Drawing.Point(272, 27);
             this.L_timedelay.Name = "L_timedelay";
             this.L_timedelay.Size = new System.Drawing.Size(55, 13);
             this.L_timedelay.TabIndex = 52;
@@ -776,7 +783,7 @@
             // L_time
             // 
             this.L_time.AutoSize = true;
-            this.L_time.Location = new System.Drawing.Point(15, 27);
+            this.L_time.Location = new System.Drawing.Point(8, 27);
             this.L_time.Name = "L_time";
             this.L_time.Size = new System.Drawing.Size(55, 13);
             this.L_time.TabIndex = 40;
@@ -870,7 +877,7 @@
             // 
             this.NPC.AccessibleName = "";
             this.NPC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NPC.Location = new System.Drawing.Point(66, 64);
+            this.NPC.Location = new System.Drawing.Point(81, 64);
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
@@ -878,7 +885,7 @@
             // L_NPC
             // 
             this.L_NPC.AutoSize = true;
-            this.L_NPC.Location = new System.Drawing.Point(15, 69);
+            this.L_NPC.Location = new System.Drawing.Point(23, 68);
             this.L_NPC.Name = "L_NPC";
             this.L_NPC.Size = new System.Drawing.Size(41, 13);
             this.L_NPC.TabIndex = 47;
@@ -903,7 +910,7 @@
             // L_Framecorrection
             // 
             this.L_Framecorrection.AutoSize = true;
-            this.L_Framecorrection.Location = new System.Drawing.Point(14, 71);
+            this.L_Framecorrection.Location = new System.Drawing.Point(9, 71);
             this.L_Framecorrection.Name = "L_Framecorrection";
             this.L_Framecorrection.Size = new System.Drawing.Size(55, 13);
             this.L_Framecorrection.TabIndex = 61;
@@ -941,7 +948,7 @@
             // L_frame
             // 
             this.L_frame.AutoSize = true;
-            this.L_frame.Location = new System.Drawing.Point(12, 34);
+            this.L_frame.Location = new System.Drawing.Point(7, 34);
             this.L_frame.Name = "L_frame";
             this.L_frame.Size = new System.Drawing.Size(55, 13);
             this.L_frame.TabIndex = 46;
@@ -1188,7 +1195,7 @@
             // L_S
             // 
             this.L_S.AutoSize = true;
-            this.L_S.Location = new System.Drawing.Point(8, 250);
+            this.L_S.Location = new System.Drawing.Point(10, 250);
             this.L_S.Name = "L_S";
             this.L_S.Size = new System.Drawing.Size(31, 13);
             this.L_S.TabIndex = 29;
@@ -1207,7 +1214,7 @@
             // L_C
             // 
             this.L_C.AutoSize = true;
-            this.L_C.Location = new System.Drawing.Point(8, 190);
+            this.L_C.Location = new System.Drawing.Point(10, 190);
             this.L_C.Name = "L_C";
             this.L_C.Size = new System.Drawing.Size(31, 13);
             this.L_C.TabIndex = 27;
@@ -1226,7 +1233,7 @@
             // L_B
             // 
             this.L_B.AutoSize = true;
-            this.L_B.Location = new System.Drawing.Point(8, 160);
+            this.L_B.Location = new System.Drawing.Point(10, 160);
             this.L_B.Name = "L_B";
             this.L_B.Size = new System.Drawing.Size(31, 13);
             this.L_B.TabIndex = 26;
@@ -1235,7 +1242,7 @@
             // L_H
             // 
             this.L_H.AutoSize = true;
-            this.L_H.Location = new System.Drawing.Point(12, 100);
+            this.L_H.Location = new System.Drawing.Point(10, 100);
             this.L_H.Name = "L_H";
             this.L_H.Size = new System.Drawing.Size(22, 13);
             this.L_H.TabIndex = 24;
@@ -1244,7 +1251,7 @@
             // L_A
             // 
             this.L_A.AutoSize = true;
-            this.L_A.Location = new System.Drawing.Point(8, 130);
+            this.L_A.Location = new System.Drawing.Point(10, 130);
             this.L_A.Name = "L_A";
             this.L_A.Size = new System.Drawing.Size(31, 13);
             this.L_A.TabIndex = 25;
@@ -1253,7 +1260,7 @@
             // L_D
             // 
             this.L_D.AutoSize = true;
-            this.L_D.Location = new System.Drawing.Point(8, 220);
+            this.L_D.Location = new System.Drawing.Point(10, 220);
             this.L_D.Name = "L_D";
             this.L_D.Size = new System.Drawing.Size(31, 13);
             this.L_D.TabIndex = 28;
@@ -1334,7 +1341,7 @@
             // L_Stats
             // 
             this.L_Stats.AutoSize = true;
-            this.L_Stats.Location = new System.Drawing.Point(87, 6);
+            this.L_Stats.Location = new System.Drawing.Point(86, 7);
             this.L_Stats.Name = "L_Stats";
             this.L_Stats.Size = new System.Drawing.Size(43, 13);
             this.L_Stats.TabIndex = 74;
@@ -1343,7 +1350,7 @@
             // L_BS
             // 
             this.L_BS.AutoSize = true;
-            this.L_BS.Location = new System.Drawing.Point(18, 6);
+            this.L_BS.Location = new System.Drawing.Point(16, 7);
             this.L_BS.Name = "L_BS";
             this.L_BS.Size = new System.Drawing.Size(43, 13);
             this.L_BS.TabIndex = 73;
@@ -2036,7 +2043,6 @@
             this.Condition.Controls.Add(this.label9);
             this.Condition.Controls.Add(this.GenderRatio);
             this.Condition.Controls.Add(this.Lv_max);
-            this.Condition.Controls.Add(this.AlwaysSynced);
             this.Condition.Controls.Add(this.SyncNature);
             this.Condition.Controls.Add(this.Stationary);
             this.Condition.Controls.Add(this.L_Lv);
@@ -2050,6 +2056,7 @@
             this.Condition.Controls.Add(this.Poke);
             this.Condition.Controls.Add(this.UB_th);
             this.Condition.Controls.Add(this.Encounter_th);
+            this.Condition.Controls.Add(this.AlwaysSynced);
             this.Condition.Location = new System.Drawing.Point(15, 15);
             this.Condition.Name = "Condition";
             this.Condition.Size = new System.Drawing.Size(399, 148);
@@ -2069,7 +2076,7 @@
             // L_Encounter_th
             // 
             this.L_Encounter_th.AutoSize = true;
-            this.L_Encounter_th.Location = new System.Drawing.Point(296, 69);
+            this.L_Encounter_th.Location = new System.Drawing.Point(285, 68);
             this.L_Encounter_th.Name = "L_Encounter_th";
             this.L_Encounter_th.Size = new System.Drawing.Size(43, 13);
             this.L_Encounter_th.TabIndex = 68;
@@ -2115,7 +2122,7 @@
             // AlwaysSynced
             // 
             this.AlwaysSynced.AutoSize = true;
-            this.AlwaysSynced.Location = new System.Drawing.Point(168, 28);
+            this.AlwaysSynced.Location = new System.Drawing.Point(165, 28);
             this.AlwaysSynced.Name = "AlwaysSynced";
             this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
             this.AlwaysSynced.TabIndex = 9;
@@ -2136,7 +2143,7 @@
             // 
             this.Stationary.AutoSize = true;
             this.Stationary.Checked = true;
-            this.Stationary.Location = new System.Drawing.Point(11, 67);
+            this.Stationary.Location = new System.Drawing.Point(10, 67);
             this.Stationary.Name = "Stationary";
             this.Stationary.Size = new System.Drawing.Size(49, 17);
             this.Stationary.TabIndex = 0;
@@ -2148,7 +2155,7 @@
             // L_Lv
             // 
             this.L_Lv.AutoSize = true;
-            this.L_Lv.Location = new System.Drawing.Point(122, 69);
+            this.L_Lv.Location = new System.Drawing.Point(130, 69);
             this.L_Lv.Name = "L_Lv";
             this.L_Lv.Size = new System.Drawing.Size(55, 13);
             this.L_Lv.TabIndex = 41;
@@ -2157,7 +2164,7 @@
             // Wild
             // 
             this.Wild.AutoSize = true;
-            this.Wild.Location = new System.Drawing.Point(73, 67);
+            this.Wild.Location = new System.Drawing.Point(82, 67);
             this.Wild.Name = "Wild";
             this.Wild.Size = new System.Drawing.Size(49, 17);
             this.Wild.TabIndex = 1;
@@ -2182,7 +2189,7 @@
             // Honey
             // 
             this.Honey.AutoSize = true;
-            this.Honey.Location = new System.Drawing.Point(73, 105);
+            this.Honey.Location = new System.Drawing.Point(82, 105);
             this.Honey.Name = "Honey";
             this.Honey.Size = new System.Drawing.Size(62, 17);
             this.Honey.TabIndex = 2;
@@ -2193,7 +2200,7 @@
             // Sync
             // 
             this.Sync.AutoSize = true;
-            this.Sync.Location = new System.Drawing.Point(249, 28);
+            this.Sync.Location = new System.Drawing.Point(257, 28);
             this.Sync.Name = "Sync";
             this.Sync.Size = new System.Drawing.Size(50, 17);
             this.Sync.TabIndex = 7;
@@ -2216,7 +2223,7 @@
             this.Fix3v.AutoSize = true;
             this.Fix3v.Checked = true;
             this.Fix3v.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Fix3v.Location = new System.Drawing.Point(11, 105);
+            this.Fix3v.Location = new System.Drawing.Point(10, 105);
             this.Fix3v.Name = "Fix3v";
             this.Fix3v.Size = new System.Drawing.Size(63, 17);
             this.Fix3v.TabIndex = 1;
@@ -2226,7 +2233,7 @@
             // L_Poke
             // 
             this.L_Poke.AutoSize = true;
-            this.L_Poke.Location = new System.Drawing.Point(11, 30);
+            this.L_Poke.Location = new System.Drawing.Point(7, 30);
             this.L_Poke.Name = "L_Poke";
             this.L_Poke.Size = new System.Drawing.Size(43, 13);
             this.L_Poke.TabIndex = 37;
@@ -2235,7 +2242,7 @@
             // Poke
             // 
             this.Poke.FormattingEnabled = true;
-            this.Poke.Location = new System.Drawing.Point(61, 26);
+            this.Poke.Location = new System.Drawing.Point(58, 26);
             this.Poke.Name = "Poke";
             this.Poke.Size = new System.Drawing.Size(100, 21);
             this.Poke.TabIndex = 36;
@@ -2273,7 +2280,7 @@
             // 
             this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSV.Location = new System.Drawing.Point(982, 19);
+            this.TSV.Location = new System.Drawing.Point(966, 19);
             this.TSV.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -2288,7 +2295,7 @@
             // 
             this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(818, 24);
+            this.L_Seed.Location = new System.Drawing.Point(802, 24);
             this.L_Seed.Name = "L_Seed";
             this.L_Seed.Size = new System.Drawing.Size(32, 13);
             this.L_Seed.TabIndex = 2;
@@ -2298,7 +2305,7 @@
             // 
             this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_TSV.AutoSize = true;
-            this.L_TSV.Location = new System.Drawing.Point(944, 24);
+            this.L_TSV.Location = new System.Drawing.Point(928, 24);
             this.L_TSV.Name = "L_TSV";
             this.L_TSV.Size = new System.Drawing.Size(28, 13);
             this.L_TSV.TabIndex = 3;
@@ -2308,7 +2315,7 @@
             // 
             this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShinyCharm.AutoSize = true;
-            this.ShinyCharm.Location = new System.Drawing.Point(1046, 22);
+            this.ShinyCharm.Location = new System.Drawing.Point(1051, 22);
             this.ShinyCharm.Name = "ShinyCharm";
             this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
             this.ShinyCharm.TabIndex = 4;
@@ -2320,7 +2327,7 @@
             // 
             this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Advanced.AutoSize = true;
-            this.Advanced.Location = new System.Drawing.Point(1130, 22);
+            this.Advanced.Location = new System.Drawing.Point(1131, 22);
             this.Advanced.Name = "Advanced";
             this.Advanced.Size = new System.Drawing.Size(74, 17);
             this.Advanced.TabIndex = 5;
@@ -2332,7 +2339,7 @@
             // 
             this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(749, 24);
+            this.BlogLink.Location = new System.Drawing.Point(598, 24);
             this.BlogLink.Name = "BlogLink";
             this.BlogLink.Size = new System.Drawing.Size(55, 13);
             this.BlogLink.TabIndex = 6;
@@ -2340,19 +2347,26 @@
             this.BlogLink.Text = "使用指南";
             this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
             // 
-            // CurrSeed
+            // Lang
             // 
-            this.CurrSeed.Location = new System.Drawing.Point(14, 36);
-            this.CurrSeed.Name = "CurrSeed";
-            this.CurrSeed.Size = new System.Drawing.Size(100, 20);
-            this.CurrSeed.TabIndex = 54;
+            this.Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Lang.FormattingEnabled = true;
+            this.Lang.Items.AddRange(new object[] {
+            "English",
+            "简体中文"});
+            this.Lang.Location = new System.Drawing.Point(711, 20);
+            this.Lang.Name = "Lang";
+            this.Lang.Size = new System.Drawing.Size(76, 21);
+            this.Lang.TabIndex = 7;
+            this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(856, 19);
+            this.Seed.Location = new System.Drawing.Point(840, 19);
             this.Seed.Name = "Seed";
             this.Seed.Size = new System.Drawing.Size(78, 22);
             this.Seed.TabIndex = 0;
@@ -2366,6 +2380,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1244, 873);
+            this.Controls.Add(this.Lang);
             this.Controls.Add(this.BlogLink);
             this.Controls.Add(this.Advanced);
             this.Controls.Add(this.ShinyCharm);
@@ -2490,7 +2505,6 @@
         private System.Windows.Forms.Label L_clocklist;
         private System.Windows.Forms.RadioButton Wild;
         private System.Windows.Forms.RadioButton Stationary;
-        private System.Windows.Forms.CheckBox Sync;
         private System.Windows.Forms.ComboBox SyncNature;
         private System.Windows.Forms.GroupBox SearchSettingBox;
         private System.Windows.Forms.Label L_S;
@@ -2625,10 +2639,11 @@
         private System.Windows.Forms.RadioButton QRInput;
         private System.Windows.Forms.RadioButton BySaveScreen;
         private System.Windows.Forms.GroupBox SearchByRand;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label Result_Text;
         private System.Windows.Forms.Button SearchByCurrSeed1;
         private System.Windows.Forms.TextBox CurrSeed;
+        private System.Windows.Forms.ComboBox Lang;
+        private System.Windows.Forms.CheckBox Sync;
     }
 }
 

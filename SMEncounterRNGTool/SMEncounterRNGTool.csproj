@@ -105,6 +105,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\lang_en.txt" />
     <Content Include="Resources\pic_Clock_0.png" />
     <Content Include="Resources\pic_Clock_1.png" />
     <Content Include="Resources\pic_Clock_10.png" />
@@ -122,6 +123,13 @@
     <Content Include="Resources\pic_Clock_7.png" />
     <Content Include="Resources\pic_Clock_8.png" />
     <Content Include="Resources\pic_Clock_9.png" />
+    <Content Include="Resources\lang_cn.txt" />
+    <Content Include="Resources\text_Natures_cn.txt" />
+    <Content Include="Resources\text_Natures_en.txt" />
+    <Content Include="Resources\text_Species_cn.txt" />
+    <Content Include="Resources\text_Species_en.txt" />
+    <Content Include="Resources\text_Types_cn.txt" />
+    <Content Include="Resources\text_Types_en.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
