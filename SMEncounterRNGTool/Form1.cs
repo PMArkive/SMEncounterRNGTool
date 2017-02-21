@@ -134,7 +134,7 @@ namespace SMEncounterRNGTool
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)
         {
-           ((QRInput.Checked) ? QRList : Clock_List).Text = "";
+            ((QRInput.Checked) ? QRList : Clock_List).Text = "";
         }
 
         private void Back_Click(object sender, EventArgs e)
@@ -176,7 +176,7 @@ namespace SMEncounterRNGTool
                 SearchforSeed(null, null);
         }
 
- 
+
 
         private string Convert_Clock(string n)
         {
@@ -234,7 +234,7 @@ namespace SMEncounterRNGTool
             else
                 SeedResults.Text = "";
         }
-        
+
         private void QRSearch_Click(object sender, EventArgs e)
         {
             uint InitialSeed = (uint)Seed.Value;
@@ -311,6 +311,7 @@ namespace SMEncounterRNGTool
         {
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
+            SearchByRand.Visible = Advanced.Checked;
         }
 
         private void Seed_ValueChanged(object sender, EventArgs e)
@@ -536,7 +537,6 @@ namespace SMEncounterRNGTool
             }
 
             SFMT sfmt = new SFMT(InitialSeed);
-            SFMT seed = new SFMT(InitialSeed);
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
@@ -698,16 +698,15 @@ namespace SMEncounterRNGTool
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
-            string randstr = result.EC.ToString("X8") + " " + result.PID.ToString("X8");
-
-            dgv_rand.HeaderText = Advanced.Checked ? "加密常数+PID" : "乱数值";
+            string randstr = result.row_r.ToString("X16");
+            dgv_rand.HeaderText = Advanced.Checked ? "乱数值" : "加密常数+PID";
 
             if (!Advanced.Checked)
             {
                 Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
-                randstr = result.row_r.ToString("X16");
+                randstr = result.EC.ToString("X8") + " " + result.PID.ToString("X8");
                 if (result.Item == -1)
                     Item = "-";
                 else if (result.Item < 50)
@@ -778,6 +777,25 @@ namespace SMEncounterRNGTool
             {
                 Error("请选择");
             }
+        }
+
+        private void SearchByCurrSeed1_Click(object sender, EventArgs e)
+        {
+            SFMT sfmt = new SFMT((uint)Seed.Value);
+            for (int i = 0; i < 417; i++)
+                sfmt.NextUInt64();
+            if (CurrSeed.Text == "")
+                return;
+            for (int i = 417; i < Frame_max.Value; i++)
+            {
+                string tmp = sfmt.NextInt64().ToString("X16");
+                if (tmp.Contains(CurrSeed.Text))
+                {
+                    Result_Text.Text = $"{i} F";
+                    return;
+                }
+            }
+            Result_Text.Text = "未找到";
         }
     }
 }

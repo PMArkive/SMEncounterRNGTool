@@ -72,6 +72,9 @@
             this.SeedResults = new System.Windows.Forms.TextBox();
             this.Clock_List = new System.Windows.Forms.TextBox();
             this.SearchTool = new System.Windows.Forms.TabPage();
+            this.SearchByRand = new System.Windows.Forms.GroupBox();
+            this.Result_Text = new System.Windows.Forms.Label();
+            this.SearchByCurrSeed1 = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
             this.L_timedelay = new System.Windows.Forms.Label();
             this.L_time = new System.Windows.Forms.Label();
@@ -208,13 +211,16 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.CurrSeed = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
             this.QRBox.SuspendLayout();
             this.SearchSeedBox.SuspendLayout();
             this.SearchTool.SuspendLayout();
+            this.SearchByRand.SuspendLayout();
             this.TimeBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).BeginInit();
@@ -273,7 +279,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 40);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1221, 761);
+            this.tabControl1.Size = new System.Drawing.Size(1220, 821);
             this.tabControl1.TabIndex = 0;
             // 
             // SearchSeed
@@ -286,7 +292,7 @@
             this.SearchSeed.Location = new System.Drawing.Point(4, 22);
             this.SearchSeed.Name = "SearchSeed";
             this.SearchSeed.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchSeed.Size = new System.Drawing.Size(1213, 735);
+            this.SearchSeed.Size = new System.Drawing.Size(1212, 795);
             this.SearchSeed.TabIndex = 0;
             this.SearchSeed.Text = "检索Seed";
             this.SearchSeed.UseVisualStyleBackColor = true;
@@ -693,6 +699,7 @@
             // 
             // SearchTool
             // 
+            this.SearchTool.Controls.Add(this.SearchByRand);
             this.SearchTool.Controls.Add(this.TimeBox);
             this.SearchTool.Controls.Add(this.RNGInfo);
             this.SearchTool.Controls.Add(this.CalcList);
@@ -702,10 +709,41 @@
             this.SearchTool.Location = new System.Drawing.Point(4, 22);
             this.SearchTool.Name = "SearchTool";
             this.SearchTool.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchTool.Size = new System.Drawing.Size(1213, 735);
+            this.SearchTool.Size = new System.Drawing.Size(1212, 795);
             this.SearchTool.TabIndex = 1;
             this.SearchTool.Text = "个体筛选";
             this.SearchTool.UseVisualStyleBackColor = true;
+            // 
+            // SearchByRand
+            // 
+            this.SearchByRand.Controls.Add(this.CurrSeed);
+            this.SearchByRand.Controls.Add(this.Result_Text);
+            this.SearchByRand.Controls.Add(this.SearchByCurrSeed1);
+            this.SearchByRand.Location = new System.Drawing.Point(15, 681);
+            this.SearchByRand.Name = "SearchByRand";
+            this.SearchByRand.Size = new System.Drawing.Size(399, 75);
+            this.SearchByRand.TabIndex = 42;
+            this.SearchByRand.TabStop = false;
+            this.SearchByRand.Text = "乱数值检索";
+            // 
+            // Result_Text
+            // 
+            this.Result_Text.AutoSize = true;
+            this.Result_Text.Location = new System.Drawing.Point(246, 39);
+            this.Result_Text.Name = "Result_Text";
+            this.Result_Text.Size = new System.Drawing.Size(19, 13);
+            this.Result_Text.TabIndex = 53;
+            this.Result_Text.Text = "- F";
+            // 
+            // SearchByCurrSeed1
+            // 
+            this.SearchByCurrSeed1.Location = new System.Drawing.Point(130, 34);
+            this.SearchByCurrSeed1.Name = "SearchByCurrSeed1";
+            this.SearchByCurrSeed1.Size = new System.Drawing.Size(59, 23);
+            this.SearchByCurrSeed1.TabIndex = 53;
+            this.SearchByCurrSeed1.Text = "检索";
+            this.SearchByCurrSeed1.UseVisualStyleBackColor = true;
+            this.SearchByCurrSeed1.Click += new System.EventHandler(this.SearchByCurrSeed1_Click);
             // 
             // TimeBox
             // 
@@ -1830,7 +1868,7 @@
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV.Size = new System.Drawing.Size(790, 726);
+            this.DGV.Size = new System.Drawing.Size(789, 786);
             this.DGV.TabIndex = 2;
             // 
             // dgv_Frame
@@ -2235,7 +2273,7 @@
             // 
             this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSV.Location = new System.Drawing.Point(983, 19);
+            this.TSV.Location = new System.Drawing.Point(982, 19);
             this.TSV.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -2250,7 +2288,7 @@
             // 
             this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(819, 24);
+            this.L_Seed.Location = new System.Drawing.Point(818, 24);
             this.L_Seed.Name = "L_Seed";
             this.L_Seed.Size = new System.Drawing.Size(32, 13);
             this.L_Seed.TabIndex = 2;
@@ -2260,7 +2298,7 @@
             // 
             this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_TSV.AutoSize = true;
-            this.L_TSV.Location = new System.Drawing.Point(945, 24);
+            this.L_TSV.Location = new System.Drawing.Point(944, 24);
             this.L_TSV.Name = "L_TSV";
             this.L_TSV.Size = new System.Drawing.Size(28, 13);
             this.L_TSV.TabIndex = 3;
@@ -2270,7 +2308,7 @@
             // 
             this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShinyCharm.AutoSize = true;
-            this.ShinyCharm.Location = new System.Drawing.Point(1047, 22);
+            this.ShinyCharm.Location = new System.Drawing.Point(1046, 22);
             this.ShinyCharm.Name = "ShinyCharm";
             this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
             this.ShinyCharm.TabIndex = 4;
@@ -2282,7 +2320,7 @@
             // 
             this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Advanced.AutoSize = true;
-            this.Advanced.Location = new System.Drawing.Point(1131, 22);
+            this.Advanced.Location = new System.Drawing.Point(1130, 22);
             this.Advanced.Name = "Advanced";
             this.Advanced.Size = new System.Drawing.Size(74, 17);
             this.Advanced.TabIndex = 5;
@@ -2294,7 +2332,7 @@
             // 
             this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(750, 24);
+            this.BlogLink.Location = new System.Drawing.Point(749, 24);
             this.BlogLink.Name = "BlogLink";
             this.BlogLink.Size = new System.Drawing.Size(55, 13);
             this.BlogLink.TabIndex = 6;
@@ -2307,7 +2345,7 @@
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(857, 19);
+            this.Seed.Location = new System.Drawing.Point(856, 19);
             this.Seed.Name = "Seed";
             this.Seed.Size = new System.Drawing.Size(78, 22);
             this.Seed.TabIndex = 0;
@@ -2316,11 +2354,18 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // CurrSeed
+            // 
+            this.CurrSeed.Location = new System.Drawing.Point(14, 36);
+            this.CurrSeed.Name = "CurrSeed";
+            this.CurrSeed.Size = new System.Drawing.Size(100, 20);
+            this.CurrSeed.TabIndex = 54;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1245, 813);
+            this.ClientSize = new System.Drawing.Size(1244, 873);
             this.Controls.Add(this.BlogLink);
             this.Controls.Add(this.Advanced);
             this.Controls.Add(this.ShinyCharm);
@@ -2342,6 +2387,8 @@
             this.SearchSeedBox.ResumeLayout(false);
             this.SearchSeedBox.PerformLayout();
             this.SearchTool.ResumeLayout(false);
+            this.SearchByRand.ResumeLayout(false);
+            this.SearchByRand.PerformLayout();
             this.TimeBox.ResumeLayout(false);
             this.TimeBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).EndInit();
@@ -2577,6 +2624,11 @@
         private System.Windows.Forms.GroupBox InputBox;
         private System.Windows.Forms.RadioButton QRInput;
         private System.Windows.Forms.RadioButton BySaveScreen;
+        private System.Windows.Forms.GroupBox SearchByRand;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label Result_Text;
+        private System.Windows.Forms.Button SearchByCurrSeed1;
+        private System.Windows.Forms.TextBox CurrSeed;
     }
 }
 
