@@ -475,6 +475,7 @@ namespace SMEncounterRNGTool
 
             float realtime = (float)totaltime / 30;
             TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒" ;
+            if (Advanced.Checked) TimeResult.Text = $"实际击中{tmp}F";
         }
 
         private void Reset_Click(object sender, EventArgs e)
