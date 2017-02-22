@@ -205,34 +205,31 @@ namespace SMEncounterRNGTool
         public static int getframeshift()
         {
             int t_index = 0;
-            int[] remain_frame = new int[npcnumber + 1];
-            bool[] blink_flag = new bool[npcnumber + 1];
+            int remain_frame = 0;
+            bool blink_flag = false;
             for (int totalframe = 0; totalframe < frameofhoney; totalframe++)
             {
-                for (int i = 0; i < npcnumber + 1; i++)
-                {
-                    if (remain_frame[i] > 0)
-                        remain_frame[i]--;
+                if (remain_frame > 0)
+                    remain_frame--;
 
-                    if (remain_frame[i] == 0)
+                if (remain_frame == 0)
+                {
+                    //Blinking
+                    if (blink_flag)
                     {
-                        //Blinking
-                        if (blink_flag[i])
-                        {
-                            if ((int)(Rand[t_index++] % 3) == 0)
-                                remain_frame[i] = 36;
-                            else
-                                remain_frame[i] = 30;
-                            blink_flag[i] = false;
-                        }
-                        //Not Blinking
+                        if ((int)(Rand[t_index++] % 3) == 0)
+                            remain_frame = 36;
                         else
+                            remain_frame = 30;
+                        blink_flag = false;
+                    }
+                    //Not Blinking
+                    else
+                    {
+                        if ((int)(Rand[t_index++] & 0x7F) == 0)
                         {
-                            if ((int)(Rand[t_index++] & 0x7F) == 0)
-                            {
-                                remain_frame[i] = 5;
-                                blink_flag[i] = true;
-                            }
+                            remain_frame = 5;
+                            blink_flag = true;
                         }
                     }
                 }
