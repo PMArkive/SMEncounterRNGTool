@@ -851,8 +851,7 @@ namespace SMEncounterRNGTool
             }
             Result_Text.Text = NORESULT_STR[lindex];
         }
+
         #endregion
-
-
     }
 }

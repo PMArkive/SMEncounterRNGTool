@@ -77,6 +77,7 @@
             this.Result_Text = new System.Windows.Forms.Label();
             this.SearchByCurrSeed1 = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
+            this.TimeResult = new System.Windows.Forms.Label();
             this.L_timedelay = new System.Windows.Forms.Label();
             this.L_time = new System.Windows.Forms.Label();
             this.Timedelay = new System.Windows.Forms.NumericUpDown();
@@ -213,7 +214,6 @@
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.TimeResult = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -771,10 +771,18 @@
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
             // 
+            // TimeResult
+            // 
+            this.TimeResult.AutoSize = true;
+            this.TimeResult.Location = new System.Drawing.Point(18, 105);
+            this.TimeResult.Name = "TimeResult";
+            this.TimeResult.Size = new System.Drawing.Size(0, 13);
+            this.TimeResult.TabIndex = 55;
+            // 
             // L_timedelay
             // 
             this.L_timedelay.AutoSize = true;
-            this.L_timedelay.Location = new System.Drawing.Point(23, 66);
+            this.L_timedelay.Location = new System.Drawing.Point(18, 68);
             this.L_timedelay.Name = "L_timedelay";
             this.L_timedelay.Size = new System.Drawing.Size(55, 13);
             this.L_timedelay.TabIndex = 52;
@@ -783,7 +791,7 @@
             // L_time
             // 
             this.L_time.AutoSize = true;
-            this.L_time.Location = new System.Drawing.Point(8, 27);
+            this.L_time.Location = new System.Drawing.Point(18, 27);
             this.L_time.Name = "L_time";
             this.L_time.Size = new System.Drawing.Size(55, 13);
             this.L_time.TabIndex = 40;
@@ -793,7 +801,7 @@
             // 
             this.Timedelay.AccessibleName = "";
             this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Timedelay.Location = new System.Drawing.Point(83, 61);
+            this.Timedelay.Location = new System.Drawing.Point(94, 63);
             this.Timedelay.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -812,7 +820,7 @@
             // 
             this.Time_min.AccessibleName = "";
             this.Time_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Time_min.Location = new System.Drawing.Point(82, 22);
+            this.Time_min.Location = new System.Drawing.Point(94, 22);
             this.Time_min.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -831,7 +839,7 @@
             // 
             this.Time_max.AccessibleName = "";
             this.Time_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Time_max.Location = new System.Drawing.Point(176, 22);
+            this.Time_max.Location = new System.Drawing.Point(188, 22);
             this.Time_max.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -849,7 +857,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(161, 27);
+            this.label8.Location = new System.Drawing.Point(173, 27);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 13);
             this.label8.TabIndex = 45;
@@ -859,7 +867,7 @@
             // 
             this.CalcTime.Location = new System.Drawing.Point(321, 58);
             this.CalcTime.Name = "CalcTime";
-            this.CalcTime.Size = new System.Drawing.Size(59, 23);
+            this.CalcTime.Size = new System.Drawing.Size(56, 27);
             this.CalcTime.TabIndex = 49;
             this.CalcTime.Text = "计算";
             this.CalcTime.UseVisualStyleBackColor = true;
@@ -869,7 +877,7 @@
             // 
             this.NPC.AccessibleName = "";
             this.NPC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NPC.Location = new System.Drawing.Point(242, 61);
+            this.NPC.Location = new System.Drawing.Point(242, 63);
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
@@ -877,7 +885,7 @@
             // L_NPC
             // 
             this.L_NPC.AutoSize = true;
-            this.L_NPC.Location = new System.Drawing.Point(184, 65);
+            this.L_NPC.Location = new System.Drawing.Point(181, 68);
             this.L_NPC.Name = "L_NPC";
             this.L_NPC.Size = new System.Drawing.Size(41, 13);
             this.L_NPC.TabIndex = 47;
@@ -912,7 +920,7 @@
             // 
             this.Framecorrection.AccessibleName = "";
             this.Framecorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Framecorrection.Location = new System.Drawing.Point(82, 66);
+            this.Framecorrection.Location = new System.Drawing.Point(98, 66);
             this.Framecorrection.Maximum = new decimal(new int[] {
             10,
             0,
@@ -940,7 +948,7 @@
             // L_frame
             // 
             this.L_frame.AutoSize = true;
-            this.L_frame.Location = new System.Drawing.Point(7, 34);
+            this.L_frame.Location = new System.Drawing.Point(9, 34);
             this.L_frame.Name = "L_frame";
             this.L_frame.Size = new System.Drawing.Size(55, 13);
             this.L_frame.TabIndex = 46;
@@ -1333,7 +1341,7 @@
             // L_Stats
             // 
             this.L_Stats.AutoSize = true;
-            this.L_Stats.Location = new System.Drawing.Point(86, 7);
+            this.L_Stats.Location = new System.Drawing.Point(80, 7);
             this.L_Stats.Name = "L_Stats";
             this.L_Stats.Size = new System.Drawing.Size(43, 13);
             this.L_Stats.TabIndex = 74;
@@ -1342,7 +1350,7 @@
             // L_BS
             // 
             this.L_BS.AutoSize = true;
-            this.L_BS.Location = new System.Drawing.Point(16, 7);
+            this.L_BS.Location = new System.Drawing.Point(11, 7);
             this.L_BS.Name = "L_BS";
             this.L_BS.Size = new System.Drawing.Size(43, 13);
             this.L_BS.TabIndex = 73;
@@ -2366,14 +2374,6 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
-            // TimeResult
-            // 
-            this.TimeResult.AutoSize = true;
-            this.TimeResult.Location = new System.Drawing.Point(22, 105);
-            this.TimeResult.Name = "TimeResult";
-            this.TimeResult.Size = new System.Drawing.Size(0, 13);
-            this.TimeResult.TabIndex = 55;
             // 
             // Form1
             // 
