@@ -529,8 +529,8 @@ namespace SMEncounterRNGTool
 
             switch (lindex)
             {
-                case 0: TimeResult.Text = $"Set Eontimer for {totaltime * 2}F, " + realtime.ToString("F") + "secs" + ((Advanced.Checked)? $"实际击中{tmp}F" : ""); break;
-                case 1: TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒" + ((Advanced.Checked) ? $"Actually you're hitting {tmp}F" : ""); break;
+                case 0: TimeResult.Text = $"Set Eontimer for {totaltime * 2}F, " + realtime.ToString("F") + "secs." + ((Advanced.Checked)? $"Actually you're hitting {tmp}F" : ""); break;
+                case 1: TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒。" + ((Advanced.Checked) ? $"实际击中{tmp}F" : ""); break;
             }
         }
 
