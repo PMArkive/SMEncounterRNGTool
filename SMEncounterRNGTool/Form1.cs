@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.78beta";
+        private string version = "0.79beta";
 
         #region Translation
         private string curlanguage;
@@ -439,7 +439,7 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region TimerCalculateFunction
-        private int CalcFrame(int min, int max)
+        private int[] CalcFrame(int min, int max)
         {
             uint InitialSeed = (uint)Seed.Value;
             int NPC_n = (int)NPC.Value + 1;
@@ -451,10 +451,13 @@ namespace SMEncounterRNGTool
             int n_count = 0;
 
             int[] remain_frame = new int[NPC_n];
-            int total_frame = 0;
+            //total_frame[0] Start total_frame[1] Duration
+            int[] total_frame = new int[2];
             bool[] blink_flag = new bool[NPC_n];
 
-            while (min + n_count < max)
+            int timer = 0;
+
+            while (min + n_count <= max)
             {
                 //NPC Loop
                 for (int i = 0; i < NPC_n; i++)
@@ -486,7 +489,9 @@ namespace SMEncounterRNGTool
                         }
                     }
                 }
-                total_frame++;
+                total_frame[timer]++;
+                if (min + n_count == max)
+                    timer = 1;
             }
             return total_frame;
         }
@@ -501,7 +506,7 @@ namespace SMEncounterRNGTool
             {
                 for (int tmp = max - honeytime; tmp <= max; tmp++)
                 {
-                    if ((CalcFrame(tmp, max + 1) > honeytime) && (CalcFrame(tmp, max) <= honeytime))
+                    if ((CalcFrame(tmp, max + 1)[0] > honeytime) && (CalcFrame(tmp, max)[0] <= honeytime))
                         CalcTime_Output(min, tmp);
                 }
             }
@@ -513,13 +518,24 @@ namespace SMEncounterRNGTool
 
         private void CalcTime_Output(int min, int max)
         {
-            int totaltime = CalcFrame(min, max);
-            float realtime = (float)totaltime / 30;
+            int[] totaltime = CalcFrame(min, max);
+            float realtime = (float)totaltime[0] / 30;
             string str = "";
+            if (totaltime[1] > 0)
+            {
+                str = $" { totaltime[0] * 2} - { totaltime[0] * 2 + totaltime[1] * 2 - 1}F ({realtime.ToString("F")} - ";
+                realtime = realtime + (float)totaltime[1] / 30 - (float)1 / 60;
+                str = str + $"{realtime.ToString("F")}s).";
+            }
+            else
+            {
+                str = $" { totaltime[0] * 2} F ";
+                str = str + $"({realtime.ToString("F")} s).";
+            }
             switch (lindex)
             {
-                case 0: str = $"Set Eontimer for {totaltime * 2}F (" + realtime.ToString("F") + " s)." + (Honey.Checked ? $" You're hitting {max}F" : ""); break;
-                case 1: str = $"计时器设置为{totaltime * 2}F (" + realtime.ToString("F") + "秒)。" + (Honey.Checked ? $" 实际击中 {max}F" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (Honey.Checked ? $" You're hitting {max} F" : ""); break;
+                case 1: str = "计时器设置为" + str + (Honey.Checked ? $" 实际击中 {max} F" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
