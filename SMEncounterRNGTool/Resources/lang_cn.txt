@@ -83,6 +83,7 @@ L_NPC = NPC数
 AroundTarget = 目标帧 ±100F
 L_frame = 帧数范围
 L_Framecorrection = 帧数修正
+ShowFrameShift = 显示帧数漂移（甜甜蜜）
 ---
 TimeBox = 时间计算
 L_time = 计时范围

@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.77beta";
+        private string version = "0.78beta";
 
         #region Translation
         private string curlanguage;
@@ -85,6 +85,8 @@ namespace SMEncounterRNGTool
 
             for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
                 this.Poke.Items[i] = species[SearchSetting.pokedex[i, 0]];
+            this.Poke.Items[9] = this.Poke.Items[9] + "-10%";
+            this.Poke.Items[10] = this.Poke.Items[10] + "-50%";
         }
         #endregion
 
@@ -219,8 +221,6 @@ namespace SMEncounterRNGTool
             else
                 SearchforSeed(null, null);
         }
-
-
 
         private string Convert_Clock(string n)
         {
@@ -504,11 +504,10 @@ namespace SMEncounterRNGTool
                 tmp = max - honeytime / 2;
                 while (tmp < max)
                 {
-                    tmp++;
-                    if (CalcFrame(tmp, max) <= honeytime)
+                    if (CalcFrame(++tmp, max) <= honeytime)
                         break;
                 }
-                totaltime = CalcFrame(min, tmp);
+                totaltime = CalcFrame(min, --tmp);
             }
             else
                 totaltime = CalcFrame(min, max);
@@ -576,6 +575,12 @@ namespace SMEncounterRNGTool
             {
                 min = (int)Frame_min.Value;
                 max = (int)Frame_max.Value;
+            }
+
+            if (ShowFrameShift.Checked)
+            {
+                RNGSearch.frameofhoney = (int)Timedelay.Value / 2;
+                RNGSearch.npcnumber = (int)NPC.Value;
             }
 
             SFMT sfmt = new SFMT(InitialSeed);
@@ -759,6 +764,9 @@ namespace SMEncounterRNGTool
                     Item = None_STR[lindex];
             }
 
+            if (ShowFrameShift.Checked)
+                d = RNGSearch.getframeshift();
+
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
                 Status = result.p_Status;
@@ -769,7 +777,7 @@ namespace SMEncounterRNGTool
             row.CreateCells(dgv);
 
             row.SetValues(
-                i, d, BlinkFlag,
+                i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
                 true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue, randstr,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100

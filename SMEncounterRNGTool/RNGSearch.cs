@@ -24,6 +24,9 @@ namespace SMEncounterRNGTool
         public bool nogender;
         public int gender_ratio;
 
+        public static int frameofhoney = 204;
+        public static int npcnumber = 0;
+
         public class RNGResult
         {
             public int Nature;
@@ -86,7 +89,7 @@ namespace SMEncounterRNGTool
 
             //Blinking process?
             if (!Wild_S)
-            Advance(FrameCorrection);
+                Advance(FrameCorrection);
 
             //Something
             Advance(60);
@@ -197,6 +200,44 @@ namespace SMEncounterRNGTool
             if (rand < 99)
                 return 9;
             return 10;
+        }
+
+        public static int getframeshift()
+        {
+            int t_index = 0;
+            int[] remain_frame = new int[npcnumber + 1];
+            bool[] blink_flag = new bool[npcnumber + 1];
+            for (int totalframe = 0; totalframe < frameofhoney; totalframe++)
+            {
+                for (int i = 0; i < npcnumber + 1; i++)
+                {
+                    if (remain_frame[i] > 0)
+                        remain_frame[i]--;
+
+                    if (remain_frame[i] == 0)
+                    {
+                        //Blinking
+                        if (blink_flag[i])
+                        {
+                            if ((int)(Rand[t_index++] % 3) == 0)
+                                remain_frame[i] = 36;
+                            else
+                                remain_frame[i] = 30;
+                            blink_flag[i] = false;
+                        }
+                        //Not Blinking
+                        else
+                        {
+                            if ((int)(Rand[t_index++] & 0x7F) == 0)
+                            {
+                                remain_frame[i] = 5;
+                                blink_flag[i] = true;
+                            }
+                        }
+                    }
+                }
+            }
+            return t_index;
         }
     }
 }

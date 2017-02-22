@@ -83,6 +83,7 @@ L_NPC = # of NPCs
 AroundTarget = Target ±100F
 L_frame = Frame Range
 L_Framecorrection = Frame Correction
+ShowFrameShift = Show Frame Shift(Honey)
 ---
 TimeBox = Time Calculator
 L_timedelay = Time Delay
