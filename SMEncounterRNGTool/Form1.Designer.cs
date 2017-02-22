@@ -77,8 +77,7 @@
             this.Result_Text = new System.Windows.Forms.Label();
             this.SearchByCurrSeed1 = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
-            this.ShowFrameShift = new System.Windows.Forms.CheckBox();
-            this.TimeResult = new System.Windows.Forms.Label();
+            this.TimeResult = new System.Windows.Forms.ListBox();
             this.L_timedelay = new System.Windows.Forms.Label();
             this.L_time = new System.Windows.Forms.Label();
             this.Timedelay = new System.Windows.Forms.NumericUpDown();
@@ -89,14 +88,15 @@
             this.NPC = new System.Windows.Forms.NumericUpDown();
             this.L_NPC = new System.Windows.Forms.Label();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
+            this.ShowFrameShift = new System.Windows.Forms.CheckBox();
             this.L_Framecorrection = new System.Windows.Forms.Label();
             this.Framecorrection = new System.Windows.Forms.NumericUpDown();
             this.AroundTarget = new System.Windows.Forms.CheckBox();
+            this.CalcList = new System.Windows.Forms.Button();
             this.L_frame = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.Frame_max = new System.Windows.Forms.NumericUpDown();
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
-            this.CalcList = new System.Windows.Forms.Button();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
             this.ShowStats = new System.Windows.Forms.CheckBox();
             this.BlinkOnly = new System.Windows.Forms.CheckBox();
@@ -161,30 +161,6 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
-            this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_H = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_B = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.Condition = new System.Windows.Forms.GroupBox();
@@ -214,6 +190,32 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
+            this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_H = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_B = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
@@ -280,7 +282,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1220, 837);
+            this.tabControl1.Size = new System.Drawing.Size(1245, 837);
             this.tabControl1.TabIndex = 0;
             // 
             // SearchSeed
@@ -293,7 +295,7 @@
             this.SearchSeed.Location = new System.Drawing.Point(4, 22);
             this.SearchSeed.Name = "SearchSeed";
             this.SearchSeed.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchSeed.Size = new System.Drawing.Size(1212, 811);
+            this.SearchSeed.Size = new System.Drawing.Size(1237, 811);
             this.SearchSeed.TabIndex = 0;
             this.SearchSeed.Text = "检索Seed";
             this.SearchSeed.UseVisualStyleBackColor = true;
@@ -709,7 +711,7 @@
             this.SearchTool.Location = new System.Drawing.Point(4, 22);
             this.SearchTool.Name = "SearchTool";
             this.SearchTool.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchTool.Size = new System.Drawing.Size(1212, 811);
+            this.SearchTool.Size = new System.Drawing.Size(1237, 811);
             this.SearchTool.TabIndex = 1;
             this.SearchTool.Text = "个体筛选";
             this.SearchTool.UseVisualStyleBackColor = true;
@@ -719,7 +721,7 @@
             this.SearchByRand.Controls.Add(this.CurrSeed);
             this.SearchByRand.Controls.Add(this.Result_Text);
             this.SearchByRand.Controls.Add(this.SearchByCurrSeed1);
-            this.SearchByRand.Location = new System.Drawing.Point(15, 714);
+            this.SearchByRand.Location = new System.Drawing.Point(15, 231);
             this.SearchByRand.Name = "SearchByRand";
             this.SearchByRand.Size = new System.Drawing.Size(399, 75);
             this.SearchByRand.TabIndex = 42;
@@ -764,30 +766,20 @@
             this.TimeBox.Controls.Add(this.CalcTime);
             this.TimeBox.Controls.Add(this.NPC);
             this.TimeBox.Controls.Add(this.L_NPC);
-            this.TimeBox.Location = new System.Drawing.Point(15, 572);
+            this.TimeBox.Location = new System.Drawing.Point(825, 128);
             this.TimeBox.Name = "TimeBox";
-            this.TimeBox.Size = new System.Drawing.Size(399, 136);
+            this.TimeBox.Size = new System.Drawing.Size(399, 178);
             this.TimeBox.TabIndex = 10;
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
             // 
-            // ShowFrameShift
-            // 
-            this.ShowFrameShift.AutoSize = true;
-            this.ShowFrameShift.Location = new System.Drawing.Point(259, 31);
-            this.ShowFrameShift.Name = "ShowFrameShift";
-            this.ShowFrameShift.Size = new System.Drawing.Size(140, 17);
-            this.ShowFrameShift.TabIndex = 43;
-            this.ShowFrameShift.Text = "显示帧数偏移(甜甜蜜)";
-            this.ShowFrameShift.UseVisualStyleBackColor = true;
-            // 
             // TimeResult
             // 
-            this.TimeResult.AutoSize = true;
-            this.TimeResult.Location = new System.Drawing.Point(18, 105);
+            this.TimeResult.FormattingEnabled = true;
+            this.TimeResult.Location = new System.Drawing.Point(12, 90);
             this.TimeResult.Name = "TimeResult";
-            this.TimeResult.Size = new System.Drawing.Size(0, 13);
-            this.TimeResult.TabIndex = 55;
+            this.TimeResult.Size = new System.Drawing.Size(376, 82);
+            this.TimeResult.TabIndex = 53;
             // 
             // L_timedelay
             // 
@@ -912,12 +904,22 @@
             this.RNGInfo.Controls.Add(this.label7);
             this.RNGInfo.Controls.Add(this.Frame_max);
             this.RNGInfo.Controls.Add(this.Frame_min);
-            this.RNGInfo.Location = new System.Drawing.Point(15, 466);
+            this.RNGInfo.Location = new System.Drawing.Point(825, 20);
             this.RNGInfo.Name = "RNGInfo";
             this.RNGInfo.Size = new System.Drawing.Size(399, 100);
             this.RNGInfo.TabIndex = 40;
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
+            // 
+            // ShowFrameShift
+            // 
+            this.ShowFrameShift.AutoSize = true;
+            this.ShowFrameShift.Location = new System.Drawing.Point(149, 70);
+            this.ShowFrameShift.Name = "ShowFrameShift";
+            this.ShowFrameShift.Size = new System.Drawing.Size(140, 17);
+            this.ShowFrameShift.TabIndex = 43;
+            this.ShowFrameShift.Text = "显示帧数偏移(甜甜蜜)";
+            this.ShowFrameShift.UseVisualStyleBackColor = true;
             // 
             // L_Framecorrection
             // 
@@ -950,12 +952,22 @@
             // AroundTarget
             // 
             this.AroundTarget.AutoSize = true;
-            this.AroundTarget.Location = new System.Drawing.Point(163, 70);
+            this.AroundTarget.Location = new System.Drawing.Point(281, 32);
             this.AroundTarget.Name = "AroundTarget";
             this.AroundTarget.Size = new System.Drawing.Size(86, 17);
             this.AroundTarget.TabIndex = 10;
             this.AroundTarget.Text = "目标帧±100";
             this.AroundTarget.UseVisualStyleBackColor = true;
+            // 
+            // CalcList
+            // 
+            this.CalcList.Location = new System.Drawing.Point(304, 63);
+            this.CalcList.Name = "CalcList";
+            this.CalcList.Size = new System.Drawing.Size(84, 25);
+            this.CalcList.TabIndex = 41;
+            this.CalcList.Text = "检索";
+            this.CalcList.UseVisualStyleBackColor = true;
+            this.CalcList.Click += new System.EventHandler(this.CalcList_Click);
             // 
             // L_frame
             // 
@@ -1013,16 +1025,6 @@
             0,
             0});
             // 
-            // CalcList
-            // 
-            this.CalcList.Location = new System.Drawing.Point(306, 52);
-            this.CalcList.Name = "CalcList";
-            this.CalcList.Size = new System.Drawing.Size(82, 36);
-            this.CalcList.TabIndex = 41;
-            this.CalcList.Text = "检索";
-            this.CalcList.UseVisualStyleBackColor = true;
-            this.CalcList.Click += new System.EventHandler(this.CalcList_Click);
-            // 
             // SearchSettingBox
             // 
             this.SearchSettingBox.Controls.Add(this.ShowStats);
@@ -1054,7 +1056,7 @@
             this.SearchSettingBox.Controls.Add(this.L_HP);
             this.SearchSettingBox.Controls.Add(this.StatPanel);
             this.SearchSettingBox.Controls.Add(this.IVPanel);
-            this.SearchSettingBox.Location = new System.Drawing.Point(15, 169);
+            this.SearchSettingBox.Location = new System.Drawing.Point(420, 15);
             this.SearchSettingBox.Name = "SearchSettingBox";
             this.SearchSettingBox.Size = new System.Drawing.Size(399, 291);
             this.SearchSettingBox.TabIndex = 3;
@@ -1861,6 +1863,8 @@
             this.dgv_encounter,
             this.dgv_ubvalue,
             this.dgv_rand,
+            this.dgv_pid,
+            this.dgv_EC,
             this.M6,
             this.M32,
             this.M100});
@@ -1873,7 +1877,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DGV.Location = new System.Drawing.Point(423, 3);
+            this.DGV.Location = new System.Drawing.Point(0, 312);
             this.DGV.Name = "DGV";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -1883,156 +1887,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.DGV.RowHeadersWidth = 21;
+            this.DGV.RowHeadersWidth = 18;
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV.Size = new System.Drawing.Size(789, 802);
+            this.DGV.Size = new System.Drawing.Size(1237, 503);
             this.DGV.TabIndex = 2;
-            // 
-            // dgv_Frame
-            // 
-            this.dgv_Frame.HeaderText = "帧数";
-            this.dgv_Frame.Name = "dgv_Frame";
-            this.dgv_Frame.Width = 55;
-            // 
-            // dgv_deviation
-            // 
-            this.dgv_deviation.HeaderText = "偏差";
-            this.dgv_deviation.Name = "dgv_deviation";
-            this.dgv_deviation.Width = 55;
-            // 
-            // dgv_blink
-            // 
-            this.dgv_blink.HeaderText = "眨眼";
-            this.dgv_blink.Name = "dgv_blink";
-            this.dgv_blink.Width = 40;
-            // 
-            // dgv_H
-            // 
-            this.dgv_H.HeaderText = "HP";
-            this.dgv_H.Name = "dgv_H";
-            this.dgv_H.Width = 30;
-            // 
-            // dgv_A
-            // 
-            this.dgv_A.HeaderText = "Atk";
-            this.dgv_A.Name = "dgv_A";
-            this.dgv_A.Width = 30;
-            // 
-            // dgv_B
-            // 
-            this.dgv_B.HeaderText = "Def";
-            this.dgv_B.Name = "dgv_B";
-            this.dgv_B.Width = 30;
-            // 
-            // dgv_C
-            // 
-            this.dgv_C.HeaderText = "SpA";
-            this.dgv_C.Name = "dgv_C";
-            this.dgv_C.Width = 30;
-            // 
-            // dgv_D
-            // 
-            this.dgv_D.HeaderText = "SpD";
-            this.dgv_D.Name = "dgv_D";
-            this.dgv_D.Width = 30;
-            // 
-            // dgv_S
-            // 
-            this.dgv_S.HeaderText = "Spe";
-            this.dgv_S.Name = "dgv_S";
-            this.dgv_S.Width = 30;
-            // 
-            // dgv_nature
-            // 
-            this.dgv_nature.HeaderText = "性格";
-            this.dgv_nature.Name = "dgv_nature";
-            this.dgv_nature.Width = 50;
-            // 
-            // dgv_synced
-            // 
-            this.dgv_synced.HeaderText = "同步";
-            this.dgv_synced.Name = "dgv_synced";
-            this.dgv_synced.Width = 40;
-            // 
-            // dgv_needle
-            // 
-            this.dgv_needle.HeaderText = "针";
-            this.dgv_needle.Name = "dgv_needle";
-            this.dgv_needle.Width = 30;
-            // 
-            // dgv_psv
-            // 
-            this.dgv_psv.HeaderText = "PSV";
-            this.dgv_psv.Name = "dgv_psv";
-            this.dgv_psv.Width = 40;
-            // 
-            // dgv_slot
-            // 
-            this.dgv_slot.HeaderText = "种类";
-            this.dgv_slot.Name = "dgv_slot";
-            this.dgv_slot.Width = 40;
-            // 
-            // dgv_lv
-            // 
-            this.dgv_lv.HeaderText = "Lv";
-            this.dgv_lv.Name = "dgv_lv";
-            this.dgv_lv.Width = 30;
-            // 
-            // dgv_gender
-            // 
-            this.dgv_gender.HeaderText = "性别";
-            this.dgv_gender.Name = "dgv_gender";
-            this.dgv_gender.Width = 40;
-            // 
-            // dgv_ability
-            // 
-            this.dgv_ability.HeaderText = "特性";
-            this.dgv_ability.Name = "dgv_ability";
-            this.dgv_ability.Width = 40;
-            // 
-            // dgv_item
-            // 
-            this.dgv_item.HeaderText = "道具";
-            this.dgv_item.Name = "dgv_item";
-            this.dgv_item.Width = 40;
-            // 
-            // dgv_encounter
-            // 
-            this.dgv_encounter.HeaderText = "遇敌";
-            this.dgv_encounter.Name = "dgv_encounter";
-            this.dgv_encounter.Width = 40;
-            // 
-            // dgv_ubvalue
-            // 
-            this.dgv_ubvalue.HeaderText = "UB";
-            this.dgv_ubvalue.Name = "dgv_ubvalue";
-            this.dgv_ubvalue.Width = 30;
-            // 
-            // dgv_rand
-            // 
-            this.dgv_rand.HeaderText = "乱数值";
-            this.dgv_rand.Name = "dgv_rand";
-            this.dgv_rand.Width = 130;
-            // 
-            // M6
-            // 
-            this.M6.HeaderText = "M6";
-            this.M6.Name = "M6";
-            this.M6.Width = 30;
-            // 
-            // M32
-            // 
-            this.M32.HeaderText = "M32";
-            this.M32.Name = "M32";
-            this.M32.Width = 30;
-            // 
-            // M100
-            // 
-            this.M100.HeaderText = "M100";
-            this.M100.Name = "M100";
-            this.M100.Width = 40;
             // 
             // DGVMenuStrip
             // 
@@ -2292,7 +2152,7 @@
             // 
             this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSV.Location = new System.Drawing.Point(966, 9);
+            this.TSV.Location = new System.Drawing.Point(991, 9);
             this.TSV.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -2307,7 +2167,7 @@
             // 
             this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(802, 14);
+            this.L_Seed.Location = new System.Drawing.Point(827, 14);
             this.L_Seed.Name = "L_Seed";
             this.L_Seed.Size = new System.Drawing.Size(32, 13);
             this.L_Seed.TabIndex = 2;
@@ -2317,7 +2177,7 @@
             // 
             this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_TSV.AutoSize = true;
-            this.L_TSV.Location = new System.Drawing.Point(928, 14);
+            this.L_TSV.Location = new System.Drawing.Point(953, 14);
             this.L_TSV.Name = "L_TSV";
             this.L_TSV.Size = new System.Drawing.Size(28, 13);
             this.L_TSV.TabIndex = 3;
@@ -2327,7 +2187,7 @@
             // 
             this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShinyCharm.AutoSize = true;
-            this.ShinyCharm.Location = new System.Drawing.Point(1051, 12);
+            this.ShinyCharm.Location = new System.Drawing.Point(1076, 12);
             this.ShinyCharm.Name = "ShinyCharm";
             this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
             this.ShinyCharm.TabIndex = 4;
@@ -2339,7 +2199,7 @@
             // 
             this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Advanced.AutoSize = true;
-            this.Advanced.Location = new System.Drawing.Point(1131, 12);
+            this.Advanced.Location = new System.Drawing.Point(1156, 12);
             this.Advanced.Name = "Advanced";
             this.Advanced.Size = new System.Drawing.Size(74, 17);
             this.Advanced.TabIndex = 5;
@@ -2351,7 +2211,7 @@
             // 
             this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(598, 14);
+            this.BlogLink.Location = new System.Drawing.Point(623, 14);
             this.BlogLink.Name = "BlogLink";
             this.BlogLink.Size = new System.Drawing.Size(55, 13);
             this.BlogLink.TabIndex = 6;
@@ -2367,18 +2227,174 @@
             this.Lang.Items.AddRange(new object[] {
             "English",
             "简体中文"});
-            this.Lang.Location = new System.Drawing.Point(711, 10);
+            this.Lang.Location = new System.Drawing.Point(736, 10);
             this.Lang.Name = "Lang";
             this.Lang.Size = new System.Drawing.Size(76, 21);
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // dgv_Frame
+            // 
+            this.dgv_Frame.HeaderText = "帧数";
+            this.dgv_Frame.Name = "dgv_Frame";
+            this.dgv_Frame.Width = 55;
+            // 
+            // dgv_deviation
+            // 
+            this.dgv_deviation.HeaderText = "偏差";
+            this.dgv_deviation.Name = "dgv_deviation";
+            this.dgv_deviation.Width = 55;
+            // 
+            // dgv_blink
+            // 
+            this.dgv_blink.HeaderText = "眨眼";
+            this.dgv_blink.Name = "dgv_blink";
+            this.dgv_blink.Width = 40;
+            // 
+            // dgv_H
+            // 
+            this.dgv_H.HeaderText = "HP";
+            this.dgv_H.Name = "dgv_H";
+            this.dgv_H.Width = 30;
+            // 
+            // dgv_A
+            // 
+            this.dgv_A.HeaderText = "Atk";
+            this.dgv_A.Name = "dgv_A";
+            this.dgv_A.Width = 30;
+            // 
+            // dgv_B
+            // 
+            this.dgv_B.HeaderText = "Def";
+            this.dgv_B.Name = "dgv_B";
+            this.dgv_B.Width = 30;
+            // 
+            // dgv_C
+            // 
+            this.dgv_C.HeaderText = "SpA";
+            this.dgv_C.Name = "dgv_C";
+            this.dgv_C.Width = 30;
+            // 
+            // dgv_D
+            // 
+            this.dgv_D.HeaderText = "SpD";
+            this.dgv_D.Name = "dgv_D";
+            this.dgv_D.Width = 30;
+            // 
+            // dgv_S
+            // 
+            this.dgv_S.HeaderText = "Spe";
+            this.dgv_S.Name = "dgv_S";
+            this.dgv_S.Width = 30;
+            // 
+            // dgv_nature
+            // 
+            this.dgv_nature.HeaderText = "性格";
+            this.dgv_nature.Name = "dgv_nature";
+            this.dgv_nature.Width = 55;
+            // 
+            // dgv_synced
+            // 
+            this.dgv_synced.HeaderText = "同步";
+            this.dgv_synced.Name = "dgv_synced";
+            this.dgv_synced.Width = 45;
+            // 
+            // dgv_needle
+            // 
+            this.dgv_needle.HeaderText = "针";
+            this.dgv_needle.Name = "dgv_needle";
+            this.dgv_needle.Width = 35;
+            // 
+            // dgv_psv
+            // 
+            this.dgv_psv.HeaderText = "PSV";
+            this.dgv_psv.Name = "dgv_psv";
+            this.dgv_psv.Width = 40;
+            // 
+            // dgv_slot
+            // 
+            this.dgv_slot.HeaderText = "种类";
+            this.dgv_slot.Name = "dgv_slot";
+            this.dgv_slot.Width = 40;
+            // 
+            // dgv_lv
+            // 
+            this.dgv_lv.HeaderText = "Lv";
+            this.dgv_lv.Name = "dgv_lv";
+            this.dgv_lv.Width = 30;
+            // 
+            // dgv_gender
+            // 
+            this.dgv_gender.HeaderText = "性别";
+            this.dgv_gender.Name = "dgv_gender";
+            this.dgv_gender.Width = 45;
+            // 
+            // dgv_ability
+            // 
+            this.dgv_ability.HeaderText = "特性";
+            this.dgv_ability.Name = "dgv_ability";
+            this.dgv_ability.Width = 45;
+            // 
+            // dgv_item
+            // 
+            this.dgv_item.HeaderText = "道具";
+            this.dgv_item.Name = "dgv_item";
+            this.dgv_item.Width = 45;
+            // 
+            // dgv_encounter
+            // 
+            this.dgv_encounter.HeaderText = "遇敌";
+            this.dgv_encounter.Name = "dgv_encounter";
+            this.dgv_encounter.Width = 45;
+            // 
+            // dgv_ubvalue
+            // 
+            this.dgv_ubvalue.HeaderText = "UB";
+            this.dgv_ubvalue.Name = "dgv_ubvalue";
+            this.dgv_ubvalue.Width = 35;
+            // 
+            // dgv_rand
+            // 
+            this.dgv_rand.HeaderText = "乱数值";
+            this.dgv_rand.Name = "dgv_rand";
+            this.dgv_rand.Width = 125;
+            // 
+            // dgv_pid
+            // 
+            this.dgv_pid.HeaderText = "PID";
+            this.dgv_pid.Name = "dgv_pid";
+            this.dgv_pid.Width = 65;
+            // 
+            // dgv_EC
+            // 
+            this.dgv_EC.HeaderText = "加密常数";
+            this.dgv_EC.Name = "dgv_EC";
+            this.dgv_EC.Width = 65;
+            // 
+            // M6
+            // 
+            this.M6.HeaderText = "M6";
+            this.M6.Name = "M6";
+            this.M6.Width = 30;
+            // 
+            // M32
+            // 
+            this.M32.HeaderText = "M32";
+            this.M32.Name = "M32";
+            this.M32.Width = 30;
+            // 
+            // M100
+            // 
+            this.M100.HeaderText = "M100";
+            this.M100.Name = "M100";
+            this.M100.Width = 40;
             // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(840, 9);
+            this.Seed.Location = new System.Drawing.Point(865, 9);
             this.Seed.Name = "Seed";
             this.Seed.Size = new System.Drawing.Size(78, 22);
             this.Seed.TabIndex = 0;
@@ -2391,7 +2407,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 873);
+            this.ClientSize = new System.Drawing.Size(1269, 873);
             this.Controls.Add(this.Lang);
             this.Controls.Add(this.BlogLink);
             this.Controls.Add(this.Advanced);
@@ -2622,6 +2638,17 @@
         private System.Windows.Forms.CheckBox ShowStats;
         private System.Windows.Forms.ContextMenuStrip DGVMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem SetTargetFrame;
+        private System.Windows.Forms.GroupBox InputBox;
+        private System.Windows.Forms.RadioButton QRInput;
+        private System.Windows.Forms.RadioButton BySaveScreen;
+        private System.Windows.Forms.GroupBox SearchByRand;
+        private System.Windows.Forms.Label Result_Text;
+        private System.Windows.Forms.Button SearchByCurrSeed1;
+        private System.Windows.Forms.TextBox CurrSeed;
+        private System.Windows.Forms.ComboBox Lang;
+        private System.Windows.Forms.CheckBox Sync;
+        private System.Windows.Forms.CheckBox ShowFrameShift;
+        private System.Windows.Forms.ListBox TimeResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_deviation;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_blink;
@@ -2643,20 +2670,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_encounter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_ubvalue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_rand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn M6;
         private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
-        private System.Windows.Forms.GroupBox InputBox;
-        private System.Windows.Forms.RadioButton QRInput;
-        private System.Windows.Forms.RadioButton BySaveScreen;
-        private System.Windows.Forms.GroupBox SearchByRand;
-        private System.Windows.Forms.Label Result_Text;
-        private System.Windows.Forms.Button SearchByCurrSeed1;
-        private System.Windows.Forms.TextBox CurrSeed;
-        private System.Windows.Forms.ComboBox Lang;
-        private System.Windows.Forms.CheckBox Sync;
-        private System.Windows.Forms.Label TimeResult;
-        private System.Windows.Forms.CheckBox ShowFrameShift;
     }
 }
 

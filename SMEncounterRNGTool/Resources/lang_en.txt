@@ -106,12 +106,14 @@ dgv_needle = Clk
 dgv_psv = PSV
 dgv_slot = Slot
 dgv_lv = Lv
-dgv_gender = F/M
+dgv_gender = Gender
 dgv_ability = Ability
 dgv_item = Item
-dgv_encounter = ENC?
+dgv_encounter = Enctr?
 dgv_ubvalue = UB?
 dgv_rand = Random Number
+dgv_PID = PID
+dgv_EC = EC
 ---
 SearchByRand = Search by Current Seed
 SearchByCurrSeed1 = Search

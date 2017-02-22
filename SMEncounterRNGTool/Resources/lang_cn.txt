@@ -112,6 +112,8 @@ dgv_item = 持有物
 dgv_encounter = 遇敌
 dgv_ubvalue = UB
 dgv_rand = 乱数值
+dgv_PID = PID
+dgv_EC = 加密常数
 ---
 SearchByRand = 通过当前乱数值检索
 SearchByCurrSeed1 = 检索

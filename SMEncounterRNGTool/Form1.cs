@@ -49,9 +49,6 @@ namespace SMEncounterRNGTool
         private string curlanguage;
         private static readonly string[] langlist = { "en", "cn" };
         private static readonly string[] None_STR = { "None", "无" };
-        private static readonly string[] RN_STR = { "Random Number", "乱数值" };
-        private static readonly string[] EC_STR = { "EC", "加密常数" };
-        private static readonly string[] PID_STR = { "PID", "PID" };
         private static readonly string[] NORESULT_STR = { "Not Found", "未找到" };
         private static readonly string[] NOSELECTION_STR = { "Please Select", "请选择" };
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
@@ -93,6 +90,8 @@ namespace SMEncounterRNGTool
         private void Form1_Load(object sender, EventArgs e)
         {
             DGV.Columns[20].DefaultCellStyle.Font = new Font("Consolas", 9);
+            DGV.Columns[21].DefaultCellStyle.Font = new Font("Consolas", 9);
+            DGV.Columns[22].DefaultCellStyle.Font = new Font("Consolas", 9);
             Type dgvtype = typeof(DataGridView);
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
@@ -455,7 +454,6 @@ namespace SMEncounterRNGTool
             int total_frame = 0;
             bool[] blink_flag = new bool[NPC_n];
 
-
             while (min + n_count < max)
             {
                 //NPC Loop
@@ -495,31 +493,35 @@ namespace SMEncounterRNGTool
 
         private void CalcTime_Click(object sender, EventArgs e)
         {
+            TimeResult.Items.Clear();
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
-            int totaltime;
-            int tmp = min;
-            int honeytime = (int)Timedelay.Value;
+            int honeytime = (int)Timedelay.Value / 2;
             if (Honey.Checked)
             {
-                tmp = max - honeytime / 2;
-                while (tmp < max)
+                for (int tmp = max - honeytime; tmp <= max; tmp++)
                 {
-                    if (CalcFrame(++tmp, max) <= honeytime)
-                        break;
+                    if ((CalcFrame(tmp, max + 1) > honeytime) && (CalcFrame(tmp, max) <= honeytime))
+                        CalcTime_Output(min, tmp);
                 }
-                totaltime = CalcFrame(min, --tmp);
             }
             else
-                totaltime = CalcFrame(min, max);
+            {
+                CalcTime_Output(min, max);
+            }
+        }
 
+        private void CalcTime_Output(int min, int max)
+        {
+            int totaltime = CalcFrame(min, max);
             float realtime = (float)totaltime / 30;
-
+            string str="";
             switch (lindex)
             {
-                case 0: TimeResult.Text = $"Set Eontimer for {totaltime * 2}F (" + realtime.ToString("F") + "Secs). " + ((Advanced.Checked) ? $"Actually you're hitting {tmp}F" : ""); break;
-                case 1: TimeResult.Text = $"计时器设置为{totaltime * 2}F (" + realtime.ToString("F") + "秒)。" + ((Advanced.Checked) ? $"实际击中{tmp}F" : ""); break;
+                case 0: str= $"Set Eontimer for {totaltime * 2}F (" + realtime.ToString("F") + " s)." + (Honey.Checked ? $" You're hitting {max}F" :""); break;
+                case 1: str= $"计时器设置为{totaltime * 2}F (" + realtime.ToString("F") + $"秒)。" + (Honey.Checked ? $" 实际击中 {max}F" : ""); break;
             }
+            TimeResult.Items.Add(str);
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -747,14 +749,14 @@ namespace SMEncounterRNGTool
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string randstr = result.row_r.ToString("X16");
-            dgv_rand.HeaderText = Advanced.Checked ? RN_STR[lindex] : EC_STR[lindex] + "+" + PID_STR[lindex];
+            string PID = result.PID.ToString("X8");
+            string EC = result.EC.ToString("X8");
 
             if (!Advanced.Checked)
             {
                 Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
-                randstr = result.EC.ToString("X8") + " " + result.PID.ToString("X8");
                 if (result.Item == -1)
                     Item = "-";
                 else if (result.Item < 50)
@@ -780,7 +782,8 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue, randstr,
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue, 
+                randstr, PID , EC,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );
 
