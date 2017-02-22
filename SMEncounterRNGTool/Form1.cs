@@ -515,11 +515,11 @@ namespace SMEncounterRNGTool
         {
             int totaltime = CalcFrame(min, max);
             float realtime = (float)totaltime / 30;
-            string str="";
+            string str = "";
             switch (lindex)
             {
-                case 0: str= $"Set Eontimer for {totaltime * 2}F (" + realtime.ToString("F") + " s)." + (Honey.Checked ? $" You're hitting {max}F" :""); break;
-                case 1: str= $"计时器设置为{totaltime * 2}F (" + realtime.ToString("F") + $"秒)。" + (Honey.Checked ? $" 实际击中 {max}F" : ""); break;
+                case 0: str = $"Set Eontimer for {totaltime * 2}F (" + realtime.ToString("F") + " s)." + (Honey.Checked ? $" You're hitting {max}F" : ""); break;
+                case 1: str = $"计时器设置为{totaltime * 2}F (" + realtime.ToString("F") + "秒)。" + (Honey.Checked ? $" 实际击中 {max}F" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -782,8 +782,8 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue, 
-                randstr, PID , EC,
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue,
+                randstr, PID, EC,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );
 

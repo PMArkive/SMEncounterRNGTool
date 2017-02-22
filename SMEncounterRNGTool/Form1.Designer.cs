@@ -914,7 +914,7 @@
             // ShowFrameShift
             // 
             this.ShowFrameShift.AutoSize = true;
-            this.ShowFrameShift.Location = new System.Drawing.Point(149, 70);
+            this.ShowFrameShift.Location = new System.Drawing.Point(147, 70);
             this.ShowFrameShift.Name = "ShowFrameShift";
             this.ShowFrameShift.Size = new System.Drawing.Size(140, 17);
             this.ShowFrameShift.TabIndex = 43;
