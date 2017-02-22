@@ -322,7 +322,7 @@ namespace SMEncounterRNGTool
                         flag = false;
                         switch (lindex)
                         {
-                            case 0: QRResult.Items.Add($"The last clock is at {i + Clock_List.Length - 1}F, you're at {i + Clock_List.Length + 1}F after quiting QR");break;
+                            case 0: QRResult.Items.Add($"The last clock is at {i + Clock_List.Length - 1}F, you're at {i + Clock_List.Length + 1}F after quiting QR"); break;
                             case 1: QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧"); break;
                         }
                         cnt++;
@@ -335,7 +335,7 @@ namespace SMEncounterRNGTool
             }
             catch
             {
-                Error(SETTINGERROR_STR[lindex]+L_QRList.Text);
+                Error(SETTINGERROR_STR[lindex] + L_QRList.Text);
             }
         }
         #endregion
@@ -529,8 +529,8 @@ namespace SMEncounterRNGTool
 
             switch (lindex)
             {
-                case 0: TimeResult.Text = $"Set Eontimer for {totaltime * 2}F, " + realtime.ToString("F") + "secs." + ((Advanced.Checked)? $"Actually you're hitting {tmp}F" : ""); break;
-                case 1: TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒。" + ((Advanced.Checked) ? $"实际击中{tmp}F" : ""); break;
+                case 0: TimeResult.Text = $"Set Eontimer for {totaltime * 2}F (" + realtime.ToString("F") + "Secs). " + ((Advanced.Checked) ? $"Actually you're hitting {tmp}F" : ""); break;
+                case 1: TimeResult.Text = $"计时器设置为{totaltime * 2}F (" + realtime.ToString("F") + "秒)。" + ((Advanced.Checked) ? $"实际击中{tmp}F" : ""); break;
             }
         }
 

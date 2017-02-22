@@ -82,7 +82,6 @@
             this.Timedelay = new System.Windows.Forms.NumericUpDown();
             this.Time_min = new System.Windows.Forms.NumericUpDown();
             this.Time_max = new System.Windows.Forms.NumericUpDown();
-            this.TimeResult = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.CalcTime = new System.Windows.Forms.Button();
             this.NPC = new System.Windows.Forms.NumericUpDown();
@@ -214,6 +213,7 @@
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.TimeResult = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -754,12 +754,12 @@
             // 
             // TimeBox
             // 
+            this.TimeBox.Controls.Add(this.TimeResult);
             this.TimeBox.Controls.Add(this.L_timedelay);
             this.TimeBox.Controls.Add(this.L_time);
             this.TimeBox.Controls.Add(this.Timedelay);
             this.TimeBox.Controls.Add(this.Time_min);
             this.TimeBox.Controls.Add(this.Time_max);
-            this.TimeBox.Controls.Add(this.TimeResult);
             this.TimeBox.Controls.Add(this.label8);
             this.TimeBox.Controls.Add(this.CalcTime);
             this.TimeBox.Controls.Add(this.NPC);
@@ -845,14 +845,6 @@
             0,
             0,
             0});
-            // 
-            // TimeResult
-            // 
-            this.TimeResult.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimeResult.Location = new System.Drawing.Point(14, 93);
-            this.TimeResult.Name = "TimeResult";
-            this.TimeResult.Size = new System.Drawing.Size(366, 22);
-            this.TimeResult.TabIndex = 50;
             // 
             // label8
             // 
@@ -2375,6 +2367,14 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // TimeResult
+            // 
+            this.TimeResult.AutoSize = true;
+            this.TimeResult.Location = new System.Drawing.Point(22, 105);
+            this.TimeResult.Name = "TimeResult";
+            this.TimeResult.Size = new System.Drawing.Size(0, 13);
+            this.TimeResult.TabIndex = 55;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2563,7 +2563,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown Frame_max;
         private System.Windows.Forms.NumericUpDown Frame_min;
-        private System.Windows.Forms.TextBox TimeResult;
         private System.Windows.Forms.Label L_Lv;
         private System.Windows.Forms.NumericUpDown Lv_min;
         private System.Windows.Forms.CheckBox DisableFilters;
@@ -2644,6 +2643,7 @@
         private System.Windows.Forms.TextBox CurrSeed;
         private System.Windows.Forms.ComboBox Lang;
         private System.Windows.Forms.CheckBox Sync;
+        private System.Windows.Forms.Label TimeResult;
     }
 }
 
