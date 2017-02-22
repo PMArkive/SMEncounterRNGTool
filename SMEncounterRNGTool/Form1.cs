@@ -402,12 +402,13 @@ namespace SMEncounterRNGTool
             }
             else
                 UBOnly.Checked = false;
+            Timedelay.Value = UB.Checked ? 192 : 204;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             Encounter_th.Enabled = !Honey.Checked;
-            L_timedelay.Visible = Timedelay.Visible = Honey.Checked;
+            ShowFrameShift.Visible = L_timedelay.Visible = Timedelay.Visible = Honey.Checked;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
         }
