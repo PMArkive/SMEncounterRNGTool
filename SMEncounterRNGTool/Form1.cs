@@ -53,6 +53,10 @@ namespace SMEncounterRNGTool
         private static readonly string[] EC_STR = { "EC", "加密常数" };
         private static readonly string[] PID_STR = { "PID", "PID" };
         private static readonly string[] NORESULT_STR = { "Not Found", "未找到" };
+        private static readonly string[] NOSELECTION_STR = { "Please Select", "请选择" };
+        private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
+        private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
+
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
 
         private void ChangeLanguage(object sender, EventArgs e)
@@ -83,6 +87,7 @@ namespace SMEncounterRNGTool
                 this.Poke.Items[i] = species[SearchSetting.pokedex[i, 0]];
         }
         #endregion
+
         private void Form1_Load(object sender, EventArgs e)
         {
             DGV.Columns[20].DefaultCellStyle.Font = new Font("Consolas", 9);
@@ -141,7 +146,6 @@ namespace SMEncounterRNGTool
             lindex = lang;
 
             ChangeLanguage(null, null);
-
 
             RNGSearch.Rand = new List<ulong>();
 
@@ -248,11 +252,11 @@ namespace SMEncounterRNGTool
                 var text = "";
                 try
                 {
-                    SeedResults.Text = "请稍后";
+                    SeedResults.Text = WAIT_STR[lindex];
                     var results = SFMTSeedAPI.request(Clock_List.Text);
                     if (results == null || results.Count() == 0)
                     {
-                        text = "未找到";
+                        text = NORESULT_STR[lindex];
                     }
                     else
                     {
@@ -316,7 +320,11 @@ namespace SMEncounterRNGTool
                     if (flag)
                     {
                         flag = false;
-                        QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧");
+                        switch (lindex)
+                        {
+                            case 0: QRResult.Items.Add($"The last clock is at {i + Clock_List.Length - 1}F, you're at {i + Clock_List.Length + 1}F after quiting QR");break;
+                            case 1: QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧"); break;
+                        }
                         cnt++;
                         tmp = i + Clock_List.Length + 1;
                     }
@@ -327,7 +335,7 @@ namespace SMEncounterRNGTool
             }
             catch
             {
-                Error("指针输入格式不正确");
+                Error(SETTINGERROR_STR[lindex]+L_QRList.Text);
             }
         }
         #endregion
@@ -518,8 +526,12 @@ namespace SMEncounterRNGTool
                 totaltime = CalcFrame(min, max);
 
             float realtime = (float)totaltime / 30;
-            TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒";
-            if (Advanced.Checked) TimeResult.Text = $"实际击中{tmp}F";
+
+            switch (lindex)
+            {
+                case 0: TimeResult.Text = $"Set Eontimer for {totaltime * 2}F, " + realtime.ToString("F") + "secs" + ((Advanced.Checked)? $"实际击中{tmp}F" : ""); break;
+                case 1: TimeResult.Text = $"计时器设置为{totaltime * 2}F," + realtime.ToString("F") + "秒" + ((Advanced.Checked) ? $"Actually you're hitting {tmp}F" : ""); break;
+            }
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -546,23 +558,19 @@ namespace SMEncounterRNGTool
         private void CalcList_Click(object sender, EventArgs e)
         {
             if (Frame_min.Value > Frame_max.Value)
-                Error("帧数上限小于下限");
+                Error(SETTINGERROR_STR[lindex] + L_frame.Text);
             else if (ivmin0.Value > ivmax0.Value)
-                Error("HP上限小于下限");
+                Error(SETTINGERROR_STR[lindex] + L_H.Text);
             else if (ivmin1.Value > ivmax1.Value)
-                Error("攻击上限小于下限");
+                Error(SETTINGERROR_STR[lindex] + L_A.Text);
             else if (ivmin2.Value > ivmax2.Value)
-                Error("防御上限小于下限");
+                Error(SETTINGERROR_STR[lindex] + L_B.Text);
             else if (ivmin3.Value > ivmax3.Value)
-                Error("特攻上限小于下限");
+                Error(SETTINGERROR_STR[lindex] + L_C.Text);
             else if (ivmin4.Value > ivmax4.Value)
-                Error("特防上限小于下限");
+                Error(SETTINGERROR_STR[lindex] + L_D.Text);
             else if (ivmin5.Value > ivmax5.Value)
-                Error("速度上限小于下限");
-            else if (0 > TSV.Value || TSV.Value > 4095)
-                Error("TSV不正确");
-            else if (!Wild.Checked && !Stationary.Checked)
-                Error("条件设置不合理");
+                Error(SETTINGERROR_STR[lindex] + L_S.Text);
             else
                 StationarySearch();
         }
@@ -745,7 +753,7 @@ namespace SMEncounterRNGTool
             string Item = (result.Item == -1) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string randstr = result.row_r.ToString("X16");
-            dgv_rand.HeaderText = Advanced.Checked ? RN_STR[lindex] : EC_STR[lindex] +"+"+ PID_STR[lindex];
+            dgv_rand.HeaderText = Advanced.Checked ? RN_STR[lindex] : EC_STR[lindex] + "+" + PID_STR[lindex];
 
             if (!Advanced.Checked)
             {
@@ -811,7 +819,6 @@ namespace SMEncounterRNGTool
                 case 20: UB_th.Value = 5; break; //
             }
         }
-        #endregion
 
         private void SetTargetFrame_Click(object sender, EventArgs e)
         {
@@ -821,7 +828,7 @@ namespace SMEncounterRNGTool
             }
             catch (NullReferenceException)
             {
-                Error("请选择");
+                Error(NOSELECTION_STR[lindex]);
             }
         }
 
@@ -844,5 +851,8 @@ namespace SMEncounterRNGTool
             }
             Result_Text.Text = NORESULT_STR[lindex];
         }
+        #endregion
+
+
     }
 }

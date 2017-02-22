@@ -192,7 +192,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.GenderRatio = new System.Windows.Forms.ComboBox();
             this.Lv_max = new System.Windows.Forms.NumericUpDown();
-            this.AlwaysSynced = new System.Windows.Forms.CheckBox();
             this.SyncNature = new System.Windows.Forms.ComboBox();
             this.Stationary = new System.Windows.Forms.RadioButton();
             this.L_Lv = new System.Windows.Forms.Label();
@@ -206,6 +205,7 @@
             this.Poke = new System.Windows.Forms.ComboBox();
             this.UB_th = new System.Windows.Forms.NumericUpDown();
             this.Encounter_th = new System.Windows.Forms.NumericUpDown();
+            this.AlwaysSynced = new System.Windows.Forms.CheckBox();
             this.TSV = new System.Windows.Forms.NumericUpDown();
             this.L_Seed = new System.Windows.Forms.Label();
             this.L_TSV = new System.Windows.Forms.Label();
@@ -592,16 +592,16 @@
             this.QRBox.Controls.Add(this.QRList);
             this.QRBox.Location = new System.Drawing.Point(410, 182);
             this.QRBox.Name = "QRBox";
-            this.QRBox.Size = new System.Drawing.Size(379, 238);
+            this.QRBox.Size = new System.Drawing.Size(450, 243);
             this.QRBox.TabIndex = 7;
             this.QRBox.TabStop = false;
             // 
             // QRResult
             // 
             this.QRResult.FormattingEnabled = true;
-            this.QRResult.Location = new System.Drawing.Point(75, 128);
+            this.QRResult.Location = new System.Drawing.Point(92, 128);
             this.QRResult.Name = "QRResult";
-            this.QRResult.Size = new System.Drawing.Size(267, 95);
+            this.QRResult.Size = new System.Drawing.Size(337, 95);
             this.QRResult.TabIndex = 28;
             // 
             // L_QRList
@@ -615,7 +615,7 @@
             // 
             // QRSearch
             // 
-            this.QRSearch.Location = new System.Drawing.Point(270, 81);
+            this.QRSearch.Location = new System.Drawing.Point(357, 81);
             this.QRSearch.Name = "QRSearch";
             this.QRSearch.Size = new System.Drawing.Size(72, 27);
             this.QRSearch.TabIndex = 26;
@@ -635,9 +635,9 @@
             // QRList
             // 
             this.QRList.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QRList.Location = new System.Drawing.Point(76, 39);
+            this.QRList.Location = new System.Drawing.Point(92, 39);
             this.QRList.Name = "QRList";
-            this.QRList.Size = new System.Drawing.Size(266, 22);
+            this.QRList.Size = new System.Drawing.Size(337, 22);
             this.QRList.TabIndex = 24;
             // 
             // SearchSeedBox
@@ -719,7 +719,7 @@
             this.SearchByRand.Controls.Add(this.CurrSeed);
             this.SearchByRand.Controls.Add(this.Result_Text);
             this.SearchByRand.Controls.Add(this.SearchByCurrSeed1);
-            this.SearchByRand.Location = new System.Drawing.Point(15, 681);
+            this.SearchByRand.Location = new System.Drawing.Point(15, 714);
             this.SearchByRand.Name = "SearchByRand";
             this.SearchByRand.Size = new System.Drawing.Size(399, 75);
             this.SearchByRand.TabIndex = 42;
@@ -766,7 +766,7 @@
             this.TimeBox.Controls.Add(this.L_NPC);
             this.TimeBox.Location = new System.Drawing.Point(15, 572);
             this.TimeBox.Name = "TimeBox";
-            this.TimeBox.Size = new System.Drawing.Size(399, 103);
+            this.TimeBox.Size = new System.Drawing.Size(399, 136);
             this.TimeBox.TabIndex = 10;
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
@@ -774,7 +774,7 @@
             // L_timedelay
             // 
             this.L_timedelay.AutoSize = true;
-            this.L_timedelay.Location = new System.Drawing.Point(272, 27);
+            this.L_timedelay.Location = new System.Drawing.Point(23, 66);
             this.L_timedelay.Name = "L_timedelay";
             this.L_timedelay.Size = new System.Drawing.Size(55, 13);
             this.L_timedelay.TabIndex = 52;
@@ -793,7 +793,7 @@
             // 
             this.Timedelay.AccessibleName = "";
             this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Timedelay.Location = new System.Drawing.Point(332, 22);
+            this.Timedelay.Location = new System.Drawing.Point(83, 61);
             this.Timedelay.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -849,9 +849,9 @@
             // TimeResult
             // 
             this.TimeResult.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimeResult.Location = new System.Drawing.Point(195, 64);
+            this.TimeResult.Location = new System.Drawing.Point(14, 93);
             this.TimeResult.Name = "TimeResult";
-            this.TimeResult.Size = new System.Drawing.Size(185, 22);
+            this.TimeResult.Size = new System.Drawing.Size(366, 22);
             this.TimeResult.TabIndex = 50;
             // 
             // label8
@@ -865,7 +865,7 @@
             // 
             // CalcTime
             // 
-            this.CalcTime.Location = new System.Drawing.Point(130, 64);
+            this.CalcTime.Location = new System.Drawing.Point(321, 58);
             this.CalcTime.Name = "CalcTime";
             this.CalcTime.Size = new System.Drawing.Size(59, 23);
             this.CalcTime.TabIndex = 49;
@@ -877,7 +877,7 @@
             // 
             this.NPC.AccessibleName = "";
             this.NPC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NPC.Location = new System.Drawing.Point(81, 64);
+            this.NPC.Location = new System.Drawing.Point(242, 61);
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
@@ -885,7 +885,7 @@
             // L_NPC
             // 
             this.L_NPC.AutoSize = true;
-            this.L_NPC.Location = new System.Drawing.Point(23, 68);
+            this.L_NPC.Location = new System.Drawing.Point(184, 65);
             this.L_NPC.Name = "L_NPC";
             this.L_NPC.Size = new System.Drawing.Size(41, 13);
             this.L_NPC.TabIndex = 47;
@@ -2119,17 +2119,6 @@
             0,
             0});
             // 
-            // AlwaysSynced
-            // 
-            this.AlwaysSynced.AutoSize = true;
-            this.AlwaysSynced.Location = new System.Drawing.Point(165, 28);
-            this.AlwaysSynced.Name = "AlwaysSynced";
-            this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
-            this.AlwaysSynced.TabIndex = 9;
-            this.AlwaysSynced.Text = "必定同步";
-            this.AlwaysSynced.UseVisualStyleBackColor = true;
-            this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
-            // 
             // SyncNature
             // 
             this.SyncNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2275,6 +2264,17 @@
             0,
             0,
             0});
+            // 
+            // AlwaysSynced
+            // 
+            this.AlwaysSynced.AutoSize = true;
+            this.AlwaysSynced.Location = new System.Drawing.Point(165, 28);
+            this.AlwaysSynced.Name = "AlwaysSynced";
+            this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
+            this.AlwaysSynced.TabIndex = 9;
+            this.AlwaysSynced.Text = "必定同步";
+            this.AlwaysSynced.UseVisualStyleBackColor = true;
+            this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
             // 
             // TSV
             // 
