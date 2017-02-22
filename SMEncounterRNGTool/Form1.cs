@@ -502,11 +502,15 @@ namespace SMEncounterRNGTool
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
             int honeytime = (int)Timedelay.Value / 2;
+            int[] tmptimer = new int[2];
             if (Honey.Checked)
             {
-                for (int tmp = max - honeytime; tmp <= max; tmp++)
+                for (int tmp = max - (int)(NPC.Value + 1) * honeytime; tmp <= max; tmp++)
                 {
-                    if ((CalcFrame(tmp, max + 1)[0] > honeytime) && (CalcFrame(tmp, max)[0] <= honeytime))
+                    tmptimer = CalcFrame(tmp, max);
+                    if ((tmptimer[0] + tmptimer[1] > honeytime) && (tmptimer[0] <= honeytime))
+                        CalcTime_Output(min, tmp);
+                    if ((tmptimer[0] == honeytime) && (tmptimer[1] == 0))
                         CalcTime_Output(min, tmp);
                 }
             }
