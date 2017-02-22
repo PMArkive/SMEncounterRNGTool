@@ -21,7 +21,7 @@ ShinyCharm = 闪耀护符
 Advanced = 高级模式
 BlogLink = 使用指南
 SearchSeed = Seed检索
-SearchTool = 个体检索
+SearchTool = 目标检索
 ---------------------TabPage1----------------------------------
 InputBox = 输入
 Back = 后退
@@ -49,7 +49,7 @@ AlwaysSynced = 必定同步
 Fix3v = 固定3V
 L_UB_th = UB遇见率
 L_Encounter_th = 遇敌率
-L_Lv = Lv范围
+L_Lv = 等级范围
 ---
 SearchSettingBox = 个体筛选
 L_H = HP

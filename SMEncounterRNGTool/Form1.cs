@@ -192,13 +192,9 @@ namespace SMEncounterRNGTool
             if (tmp.Text != "")
             {
                 if (str.LastIndexOf(",") != -1)
-                {
                     str = str.Remove(str.LastIndexOf(","));
-                }
                 else
-                {
                     str = "";
-                }
             }
             tmp.Text = str;
         }
@@ -232,13 +228,9 @@ namespace SMEncounterRNGTool
             if (EndClockInput.Checked && !QRInput.Checked)
             {
                 if (tmp >= 4)
-                {
                     tmp -= 4;
-                }
                 else
-                {
                     tmp += 13;
-                }
                 n = tmp.ToString();
             }
             return n;
@@ -477,13 +469,9 @@ namespace SMEncounterRNGTool
                         if (blink_flag[i])
                         {
                             if ((int)(sfmt.NextUInt64() % 3) == 0)
-                            {
                                 remain_frame[i] = 36;
-                            }
                             else
-                            {
                                 remain_frame[i] = 30;
-                            }
                             n_count++;
                             blink_flag[i] = false;
                         }
@@ -835,11 +823,11 @@ namespace SMEncounterRNGTool
         private void SearchByCurrSeed1_Click(object sender, EventArgs e)
         {
             SFMT sfmt = new SFMT((uint)Seed.Value);
-            for (int i = 0; i < 417; i++)
+            for (int i = 0; i < Frame_min.Value; i++)
                 sfmt.NextUInt64();
             if (CurrSeed.Text == "")
                 return;
-            for (int i = 417; i < Frame_max.Value; i++)
+            for (int i = (int)Frame_min.Value; i < Frame_max.Value; i++)
             {
                 string tmp = sfmt.NextInt64().ToString("X16");
                 if (tmp.Contains(CurrSeed.Text))
