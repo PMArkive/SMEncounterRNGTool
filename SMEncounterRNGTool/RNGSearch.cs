@@ -85,6 +85,7 @@ namespace SMEncounterRNGTool
             }
 
             //Blinking process?
+            if (!Wild_S)
             Advance(FrameCorrection);
 
             //Something
