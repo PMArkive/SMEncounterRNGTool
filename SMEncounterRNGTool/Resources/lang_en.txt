@@ -91,6 +91,7 @@ L_time = Timing Range
 CalcTime = Calc
 ---
 SetTargetFrame = Set as Target Frame
+SHControlPanel = Show/Hide Control Panel
 dgv_Frame = Frame
 dgv_deviation = Shift
 dgv_blink = Blink

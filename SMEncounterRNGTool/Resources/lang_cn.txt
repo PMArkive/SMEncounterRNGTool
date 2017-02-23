@@ -91,6 +91,7 @@ CalcTime = 计算
 L_timedelay = 时间修正
 ---
 SetTargetFrame = 设为目标帧
+SHControlPanel = 显示/隐藏控制面板
 dgv_Frame = 帧
 dgv_deviation = 偏移
 dgv_blink = 眨眼

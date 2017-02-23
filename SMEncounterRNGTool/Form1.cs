@@ -873,5 +873,21 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
+
+        private void HideControlPanel(object sender, EventArgs e)
+        {
+            if (ControlPanel.Visible)
+            {
+                ControlPanel.Visible = false;
+                DGV.Height += ControlPanel.Height;
+                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y - ControlPanel.Height);
+            }
+            else
+            {
+                ControlPanel.Visible = true;
+                DGV.Height -= ControlPanel.Height;
+                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y + ControlPanel.Height);
+            }
+        }
     }
 }
