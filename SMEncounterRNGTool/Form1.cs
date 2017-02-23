@@ -524,22 +524,11 @@ namespace SMEncounterRNGTool
         {
             int[] totaltime = CalcFrame(min, max);
             float realtime = (float)totaltime[0] / 30;
-            string str = "";
-            if (totaltime[1] > 0)
-            {
-                str = $" { totaltime[0] * 2} + { totaltime[1] * 2 - 1}F ({realtime.ToString("F")} + ";
-                realtime = (float)totaltime[1] / 30 - (float)1 / 60;
-                str = str + $"{realtime.ToString("F")}s).";
-            }
-            else
-            {
-                str = $" { totaltime[0] * 2}F ";
-                str = str + $"({realtime.ToString("F")}s).";
-            }
+            string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) + {totaltime[1] * 2}F. ";
             switch (lindex)
             {
                 case 0: str = "Set Eontimer for" + str + (Honey.Checked ? $" Use Honey at {max}F" : ""); break;
-                case 1: str = "计时器设置为" + str + (Honey.Checked ? $" 在 {max}F 用蜂蜜" : ""); break;
+                case 1: str = "计时器设置为" + str + (Honey.Checked ? $" 在 {max} 帧用蜂蜜" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -831,6 +820,8 @@ namespace SMEncounterRNGTool
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
+            if (Poke.SelectedIndex > 12)
+                Timedelay.Value = SearchSetting.honeydelay[Poke.SelectedIndex - 13];
             switch (Poke.SelectedIndex)
             {
                 case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;

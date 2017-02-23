@@ -47,6 +47,11 @@
             0,0,0,0,0,0,0,0        //UB
         };
 
+        public static int[] honeydelay =
+        {
+            212,196,196,200,238,238,192,188,
+        };
+
         #endregion
         #region calc_data
         public double[,] natures_mag =
