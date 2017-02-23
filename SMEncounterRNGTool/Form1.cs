@@ -398,10 +398,10 @@ namespace SMEncounterRNGTool
             if (UB.Checked)
             {
                 UB_th.Value = Honey.Checked ? 15 : 30;
+                Timedelay.Value = 192;
             }
             else
                 UBOnly.Checked = false;
-            Timedelay.Value = UB.Checked ? 192 : 204;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
@@ -527,19 +527,19 @@ namespace SMEncounterRNGTool
             string str = "";
             if (totaltime[1] > 0)
             {
-                str = $" { totaltime[0] * 2} - { totaltime[0] * 2 + totaltime[1] * 2 - 1}F ({realtime.ToString("F")} - ";
-                realtime = realtime + (float)totaltime[1] / 30 - (float)1 / 60;
+                str = $" { totaltime[0] * 2} + { totaltime[1] * 2 - 1}F ({realtime.ToString("F")} + ";
+                realtime = (float)totaltime[1] / 30 - (float)1 / 60;
                 str = str + $"{realtime.ToString("F")}s).";
             }
             else
             {
-                str = $" { totaltime[0] * 2} F ";
-                str = str + $"({realtime.ToString("F")} s).";
+                str = $" { totaltime[0] * 2}F ";
+                str = str + $"({realtime.ToString("F")}s).";
             }
             switch (lindex)
             {
-                case 0: str = "Set Eontimer for" + str + (Honey.Checked ? $" You're hitting {max} F" : ""); break;
-                case 1: str = "计时器设置为" + str + (Honey.Checked ? $" 实际击中 {max} F" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (Honey.Checked ? $" Use Honey at {max}F" : ""); break;
+                case 1: str = "计时器设置为" + str + (Honey.Checked ? $" 在 {max}F 用蜂蜜" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -866,6 +866,8 @@ namespace SMEncounterRNGTool
                 {
                     Result_Text.Text = $"{i} F";
                     Frame_min.Value = i;
+                    Reset_Click(null, null);
+                    CalcList_Click(null, null);
                     return;
                 }
             }

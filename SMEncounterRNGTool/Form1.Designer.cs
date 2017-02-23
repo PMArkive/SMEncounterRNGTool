@@ -1076,7 +1076,7 @@
             this.Timedelay.Size = new System.Drawing.Size(48, 22);
             this.Timedelay.TabIndex = 51;
             this.Timedelay.Value = new decimal(new int[] {
-            204,
+            200,
             0,
             0,
             0});
