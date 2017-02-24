@@ -148,6 +148,14 @@ namespace SMEncounterRNGTool
 
             ChangeLanguage(null, null);
 
+            string TimeResultInstructText="";
+            switch(lang)
+            {
+                case 0: TimeResultInstructText = "Format: Time in Frame (Time in Second) <Frame Lifetime>"; break;
+                case 1: TimeResultInstructText = "格式：帧数 (秒数) <持续时间>"; break;
+            }
+            TimeResult.Items.Add(TimeResultInstructText);
+
             RNGSearch.Rand = new List<ulong>();
 
             HiddenPower.SelectedIndex = 0;
