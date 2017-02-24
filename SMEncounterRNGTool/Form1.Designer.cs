@@ -111,6 +111,7 @@
             this.NPC = new System.Windows.Forms.NumericUpDown();
             this.L_NPC = new System.Windows.Forms.Label();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
+            this.Slot = new System.Windows.Forms.TextBox();
             this.ShowStats = new System.Windows.Forms.CheckBox();
             this.BlinkOnly = new System.Windows.Forms.CheckBox();
             this.Reset = new System.Windows.Forms.Button();
@@ -182,6 +183,17 @@
             this.Frame_max = new System.Windows.Forms.NumericUpDown();
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
+            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
+            this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSV = new System.Windows.Forms.NumericUpDown();
+            this.L_Seed = new System.Windows.Forms.Label();
+            this.L_TSV = new System.Windows.Forms.Label();
+            this.ShinyCharm = new System.Windows.Forms.CheckBox();
+            this.Advanced = new System.Windows.Forms.CheckBox();
+            this.BlogLink = new System.Windows.Forms.LinkLabel();
+            this.Lang = new System.Windows.Forms.ComboBox();
+            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -206,21 +218,7 @@
             this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
-            this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSV = new System.Windows.Forms.NumericUpDown();
-            this.L_Seed = new System.Windows.Forms.Label();
-            this.L_TSV = new System.Windows.Forms.Label();
-            this.ShinyCharm = new System.Windows.Forms.CheckBox();
-            this.Advanced = new System.Windows.Forms.CheckBox();
-            this.BlogLink = new System.Windows.Forms.LinkLabel();
-            this.Lang = new System.Windows.Forms.ComboBox();
-            this.Slot = new System.Windows.Forms.TextBox();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -1205,10 +1203,17 @@
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
             // 
+            // Slot
+            // 
+            this.Slot.Location = new System.Drawing.Point(203, 61);
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(74, 20);
+            this.Slot.TabIndex = 55;
+            // 
             // ShowStats
             // 
             this.ShowStats.AutoSize = true;
-            this.ShowStats.Location = new System.Drawing.Point(203, 227);
+            this.ShowStats.Location = new System.Drawing.Point(203, 254);
             this.ShowStats.Name = "ShowStats";
             this.ShowStats.Size = new System.Drawing.Size(86, 17);
             this.ShowStats.TabIndex = 75;
@@ -1218,7 +1223,7 @@
             // BlinkOnly
             // 
             this.BlinkOnly.AutoSize = true;
-            this.BlinkOnly.Location = new System.Drawing.Point(203, 254);
+            this.BlinkOnly.Location = new System.Drawing.Point(299, 199);
             this.BlinkOnly.Name = "BlinkOnly";
             this.BlinkOnly.Size = new System.Drawing.Size(74, 17);
             this.BlinkOnly.TabIndex = 74;
@@ -1340,7 +1345,7 @@
             // EncounteredOnly
             // 
             this.EncounteredOnly.AutoSize = true;
-            this.EncounteredOnly.Location = new System.Drawing.Point(299, 199);
+            this.EncounteredOnly.Location = new System.Drawing.Point(203, 227);
             this.EncounteredOnly.Name = "EncounteredOnly";
             this.EncounteredOnly.Size = new System.Drawing.Size(86, 17);
             this.EncounteredOnly.TabIndex = 33;
@@ -2109,8 +2114,6 @@
             this.dgv_rand,
             this.dgv_pid,
             this.dgv_EC,
-            this.M6,
-            this.M32,
             this.M100});
             this.DGV.ContextMenuStrip = this.DGVMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -2138,6 +2141,127 @@
             this.DGV.Size = new System.Drawing.Size(1208, 338);
             this.DGV.TabIndex = 2;
             this.DGV.DoubleClick += new System.EventHandler(this.SetTargetFrame_Click);
+            // 
+            // DGVMenuStrip
+            // 
+            this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SetTargetFrame,
+            this.SHControlPanel});
+            this.DGVMenuStrip.Name = "MenuStrip1";
+            this.DGVMenuStrip.Size = new System.Drawing.Size(176, 48);
+            this.DGVMenuStrip.Click += new System.EventHandler(this.HideControlPanel);
+            // 
+            // SetTargetFrame
+            // 
+            this.SetTargetFrame.Name = "SetTargetFrame";
+            this.SetTargetFrame.Size = new System.Drawing.Size(175, 22);
+            this.SetTargetFrame.Text = "设为目标帧";
+            this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
+            // 
+            // SHControlPanel
+            // 
+            this.SHControlPanel.Name = "SHControlPanel";
+            this.SHControlPanel.Size = new System.Drawing.Size(175, 22);
+            this.SHControlPanel.Text = "显示/隐藏控制面板";
+            // 
+            // TSV
+            // 
+            this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TSV.Location = new System.Drawing.Point(971, 9);
+            this.TSV.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.TSV.Name = "TSV";
+            this.TSV.Size = new System.Drawing.Size(54, 22);
+            this.TSV.TabIndex = 1;
+            this.TSV.ValueChanged += new System.EventHandler(this.TSV_ValueChanged);
+            // 
+            // L_Seed
+            // 
+            this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.L_Seed.AutoSize = true;
+            this.L_Seed.Location = new System.Drawing.Point(807, 14);
+            this.L_Seed.Name = "L_Seed";
+            this.L_Seed.Size = new System.Drawing.Size(32, 13);
+            this.L_Seed.TabIndex = 2;
+            this.L_Seed.Text = "Seed";
+            // 
+            // L_TSV
+            // 
+            this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.L_TSV.AutoSize = true;
+            this.L_TSV.Location = new System.Drawing.Point(933, 14);
+            this.L_TSV.Name = "L_TSV";
+            this.L_TSV.Size = new System.Drawing.Size(28, 13);
+            this.L_TSV.TabIndex = 3;
+            this.L_TSV.Text = "TSV";
+            // 
+            // ShinyCharm
+            // 
+            this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ShinyCharm.AutoSize = true;
+            this.ShinyCharm.Location = new System.Drawing.Point(1056, 12);
+            this.ShinyCharm.Name = "ShinyCharm";
+            this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
+            this.ShinyCharm.TabIndex = 4;
+            this.ShinyCharm.Text = "闪耀护符";
+            this.ShinyCharm.UseVisualStyleBackColor = true;
+            this.ShinyCharm.CheckedChanged += new System.EventHandler(this.ShinyCharm_CheckedChanged);
+            // 
+            // Advanced
+            // 
+            this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Advanced.AutoSize = true;
+            this.Advanced.Location = new System.Drawing.Point(1136, 12);
+            this.Advanced.Name = "Advanced";
+            this.Advanced.Size = new System.Drawing.Size(74, 17);
+            this.Advanced.TabIndex = 5;
+            this.Advanced.Text = "高级模式";
+            this.Advanced.UseVisualStyleBackColor = true;
+            this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
+            // 
+            // BlogLink
+            // 
+            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BlogLink.AutoSize = true;
+            this.BlogLink.Location = new System.Drawing.Point(603, 14);
+            this.BlogLink.Name = "BlogLink";
+            this.BlogLink.Size = new System.Drawing.Size(55, 13);
+            this.BlogLink.TabIndex = 6;
+            this.BlogLink.TabStop = true;
+            this.BlogLink.Text = "使用指南";
+            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
+            // 
+            // Lang
+            // 
+            this.Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Lang.FormattingEnabled = true;
+            this.Lang.Items.AddRange(new object[] {
+            "English",
+            "简体中文"});
+            this.Lang.Location = new System.Drawing.Point(716, 10);
+            this.Lang.Name = "Lang";
+            this.Lang.Size = new System.Drawing.Size(76, 21);
+            this.Lang.TabIndex = 7;
+            this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // Seed
+            // 
+            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Seed.Hexadecimal = true;
+            this.Seed.Location = new System.Drawing.Point(845, 9);
+            this.Seed.Name = "Seed";
+            this.Seed.Size = new System.Drawing.Size(78, 22);
+            this.Seed.TabIndex = 0;
+            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
+            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
+            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
             // dgv_Frame
             // 
@@ -2283,151 +2407,11 @@
             this.dgv_EC.Name = "dgv_EC";
             this.dgv_EC.Width = 65;
             // 
-            // M6
-            // 
-            this.M6.HeaderText = "M6";
-            this.M6.Name = "M6";
-            this.M6.Width = 30;
-            // 
-            // M32
-            // 
-            this.M32.HeaderText = "M32";
-            this.M32.Name = "M32";
-            this.M32.Width = 30;
-            // 
             // M100
             // 
             this.M100.HeaderText = "M100";
             this.M100.Name = "M100";
             this.M100.Width = 40;
-            // 
-            // DGVMenuStrip
-            // 
-            this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SetTargetFrame,
-            this.SHControlPanel});
-            this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(176, 48);
-            this.DGVMenuStrip.Click += new System.EventHandler(this.HideControlPanel);
-            // 
-            // SetTargetFrame
-            // 
-            this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(175, 22);
-            this.SetTargetFrame.Text = "设为目标帧";
-            this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
-            // 
-            // SHControlPanel
-            // 
-            this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(175, 22);
-            this.SHControlPanel.Text = "显示/隐藏控制面板";
-            // 
-            // TSV
-            // 
-            this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSV.Location = new System.Drawing.Point(971, 9);
-            this.TSV.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.TSV.Name = "TSV";
-            this.TSV.Size = new System.Drawing.Size(54, 22);
-            this.TSV.TabIndex = 1;
-            this.TSV.ValueChanged += new System.EventHandler(this.TSV_ValueChanged);
-            // 
-            // L_Seed
-            // 
-            this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(807, 14);
-            this.L_Seed.Name = "L_Seed";
-            this.L_Seed.Size = new System.Drawing.Size(32, 13);
-            this.L_Seed.TabIndex = 2;
-            this.L_Seed.Text = "Seed";
-            // 
-            // L_TSV
-            // 
-            this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.L_TSV.AutoSize = true;
-            this.L_TSV.Location = new System.Drawing.Point(933, 14);
-            this.L_TSV.Name = "L_TSV";
-            this.L_TSV.Size = new System.Drawing.Size(28, 13);
-            this.L_TSV.TabIndex = 3;
-            this.L_TSV.Text = "TSV";
-            // 
-            // ShinyCharm
-            // 
-            this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShinyCharm.AutoSize = true;
-            this.ShinyCharm.Location = new System.Drawing.Point(1056, 12);
-            this.ShinyCharm.Name = "ShinyCharm";
-            this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
-            this.ShinyCharm.TabIndex = 4;
-            this.ShinyCharm.Text = "闪耀护符";
-            this.ShinyCharm.UseVisualStyleBackColor = true;
-            this.ShinyCharm.CheckedChanged += new System.EventHandler(this.ShinyCharm_CheckedChanged);
-            // 
-            // Advanced
-            // 
-            this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Advanced.AutoSize = true;
-            this.Advanced.Location = new System.Drawing.Point(1136, 12);
-            this.Advanced.Name = "Advanced";
-            this.Advanced.Size = new System.Drawing.Size(74, 17);
-            this.Advanced.TabIndex = 5;
-            this.Advanced.Text = "高级模式";
-            this.Advanced.UseVisualStyleBackColor = true;
-            this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
-            // 
-            // BlogLink
-            // 
-            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(603, 14);
-            this.BlogLink.Name = "BlogLink";
-            this.BlogLink.Size = new System.Drawing.Size(55, 13);
-            this.BlogLink.TabIndex = 6;
-            this.BlogLink.TabStop = true;
-            this.BlogLink.Text = "使用指南";
-            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
-            // 
-            // Lang
-            // 
-            this.Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Lang.FormattingEnabled = true;
-            this.Lang.Items.AddRange(new object[] {
-            "English",
-            "简体中文"});
-            this.Lang.Location = new System.Drawing.Point(716, 10);
-            this.Lang.Name = "Lang";
-            this.Lang.Size = new System.Drawing.Size(76, 21);
-            this.Lang.TabIndex = 7;
-            this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
-            // 
-            // Slot
-            // 
-            this.Slot.Location = new System.Drawing.Point(203, 61);
-            this.Slot.Name = "Slot";
-            this.Slot.Size = new System.Drawing.Size(74, 20);
-            this.Slot.TabIndex = 55;
-            // 
-            // Seed
-            // 
-            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(845, 9);
-            this.Seed.Name = "Seed";
-            this.Seed.Size = new System.Drawing.Size(78, 22);
-            this.Seed.TabIndex = 0;
-            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
-            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
-            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
             // Form1
             // 
@@ -2677,6 +2661,8 @@
         private System.Windows.Forms.Label L_UB_th;
         private System.Windows.Forms.Label L_Encounter_th;
         private System.Windows.Forms.CheckBox ShowResultsAfterHoney;
+        private System.Windows.Forms.CheckBox ConsiderHoneyCorrection;
+        private System.Windows.Forms.TextBox Slot;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_deviation;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_blink;
@@ -2701,11 +2687,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_rand;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn M6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
-        private System.Windows.Forms.CheckBox ConsiderHoneyCorrection;
-        private System.Windows.Forms.TextBox Slot;
     }
 }
 

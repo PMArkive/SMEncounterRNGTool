@@ -7,7 +7,7 @@ namespace SMEncounterRNGTool
     {
         // Search Settings
         public int TSV;
-        
+
         public bool AlwaysSynchro;
         public int Synchro_Stat;
         public int FrameCorrection;
@@ -52,8 +52,8 @@ namespace SMEncounterRNGTool
             RNGResult st = new RNGResult();
             index = init;
 
-            //シンクロ -- Synchronize
-            st.row_r = currentrand();
+            //Synchronize
+            st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
@@ -112,7 +112,6 @@ namespace SMEncounterRNGTool
 
             //IV
             st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
-
             int cnt = Fix3v ? 3 : 0;
             while (cnt > 0)
             {

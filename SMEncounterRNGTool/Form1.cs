@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.81beta";
+        private string version = "0.82beta";
 
         #region Translation
         private string curlanguage;
@@ -148,8 +148,8 @@ namespace SMEncounterRNGTool
 
             ChangeLanguage(null, null);
 
-            string TimeResultInstructText="";
-            switch(lang)
+            string TimeResultInstructText = "";
+            switch (lang)
             {
                 case 0: TimeResultInstructText = "Format: Time in Frame (Time in Second) <Frame Lifetime>"; break;
                 case 1: TimeResultInstructText = "格式：帧数 (秒数) <持续时间>"; break;
@@ -809,8 +809,7 @@ namespace SMEncounterRNGTool
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
                 true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Honeyframeadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
-                randstr, PID, EC,
-                result.row_r % 6, result.row_r % 32, result.row_r % 100
+                randstr, PID, EC, result.row_r % 100
                 );
 
             if (result.Shiny)
