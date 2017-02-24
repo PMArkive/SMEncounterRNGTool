@@ -419,14 +419,8 @@ namespace SMEncounterRNGTool
                 EncounteredOnly.Checked = true;
         }
 
-        private void AlwaysSynced_CheckedChanged(object sender, EventArgs e)
-        {
-            Sync.Checked = AlwaysSynced.Checked;
-        }
-
         private void SyncNature_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Sync.Checked = (SyncNature.SelectedIndex > 0);
             if (AlwaysSynced.Checked)
                 Nature.SelectedIndex = SyncNature.SelectedIndex;
         }
@@ -685,7 +679,6 @@ namespace SMEncounterRNGTool
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,
                 nogender = GenderRatio.SelectedIndex == 0,
-                Sync = Sync.Checked,
                 PokeLv = (Poke.SelectedIndex == -1) ? -1 : SearchSetting.PokeLevel[Poke.SelectedIndex],
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,

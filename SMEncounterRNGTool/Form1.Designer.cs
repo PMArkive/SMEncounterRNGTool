@@ -85,7 +85,6 @@
             this.Wild = new System.Windows.Forms.RadioButton();
             this.Lv_min = new System.Windows.Forms.NumericUpDown();
             this.Honey = new System.Windows.Forms.CheckBox();
-            this.Sync = new System.Windows.Forms.CheckBox();
             this.UB = new System.Windows.Forms.CheckBox();
             this.Fix3v = new System.Windows.Forms.CheckBox();
             this.L_Poke = new System.Windows.Forms.Label();
@@ -743,7 +742,6 @@
             this.Condition.Controls.Add(this.Wild);
             this.Condition.Controls.Add(this.Lv_min);
             this.Condition.Controls.Add(this.Honey);
-            this.Condition.Controls.Add(this.Sync);
             this.Condition.Controls.Add(this.UB);
             this.Condition.Controls.Add(this.Fix3v);
             this.Condition.Controls.Add(this.L_Poke);
@@ -880,16 +878,6 @@
             this.Honey.UseVisualStyleBackColor = true;
             this.Honey.CheckedChanged += new System.EventHandler(this.Honey_CheckedChanged);
             // 
-            // Sync
-            // 
-            this.Sync.AutoSize = true;
-            this.Sync.Location = new System.Drawing.Point(257, 28);
-            this.Sync.Name = "Sync";
-            this.Sync.Size = new System.Drawing.Size(50, 17);
-            this.Sync.TabIndex = 7;
-            this.Sync.Text = "同步";
-            this.Sync.UseVisualStyleBackColor = true;
-            // 
             // UB
             // 
             this.UB.AutoSize = true;
@@ -968,7 +956,6 @@
             this.AlwaysSynced.TabIndex = 9;
             this.AlwaysSynced.Text = "必定同步";
             this.AlwaysSynced.UseVisualStyleBackColor = true;
-            this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
             // 
             // SearchByRand
             // 
@@ -1077,14 +1064,14 @@
             // 
             this.HoneyCorrection.AccessibleName = "";
             this.HoneyCorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HoneyCorrection.Location = new System.Drawing.Point(232, 61);
+            this.HoneyCorrection.Location = new System.Drawing.Point(242, 61);
             this.HoneyCorrection.Maximum = new decimal(new int[] {
-            10000000,
+            50,
             0,
             0,
             0});
             this.HoneyCorrection.Name = "HoneyCorrection";
-            this.HoneyCorrection.Size = new System.Drawing.Size(48, 22);
+            this.HoneyCorrection.Size = new System.Drawing.Size(38, 22);
             this.HoneyCorrection.TabIndex = 51;
             this.HoneyCorrection.Value = new decimal(new int[] {
             3,
@@ -2678,7 +2665,6 @@
         private System.Windows.Forms.Button SearchByCurrSeed1;
         private System.Windows.Forms.TextBox CurrSeed;
         private System.Windows.Forms.ComboBox Lang;
-        private System.Windows.Forms.CheckBox Sync;
         private System.Windows.Forms.CheckBox ShowFrameShift;
         private System.Windows.Forms.ListBox TimeResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;

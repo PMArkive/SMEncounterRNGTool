@@ -44,7 +44,6 @@ UB = UB
 Honey = 甜甜蜜
 Wild = 野生
 Stationary = 定点
-Sync = 同步
 AlwaysSynced = 必定同步
 Fix3v = 固定3V
 L_UB_th = UB遇见率

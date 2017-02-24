@@ -44,7 +44,6 @@ UB = UB
 Honey = Honey
 Wild = Wild
 Stationary = Stationary
-Sync = Sync
 AlwaysSynced = AlwaysSynced
 Fix3v = 3IVs
 L_UB_th = UB Rate

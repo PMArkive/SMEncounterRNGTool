@@ -7,8 +7,7 @@ namespace SMEncounterRNGTool
     {
         // Search Settings
         public int TSV;
-
-        public bool Sync;
+        
         public bool AlwaysSynchro;
         public int Synchro_Stat;
         public int FrameCorrection;
@@ -61,7 +60,7 @@ namespace SMEncounterRNGTool
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
-            st.Synchronize = (int)(getrand() % 100) >= 50 && Sync;
+            st.Synchronize = (int)(getrand() % 100) >= 50;
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
