@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.80beta";
+        private string version = "0.81beta";
 
         #region Translation
         private string curlanguage;
@@ -406,12 +406,12 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
-            L_timedelay.Visible = ShowFrameShift.Visible = ShowResultsAfterHoney.Visible = L_HoneyCorrection.Visible = HoneyCorrection.Visible = Honey.Checked;
-            ShowFrameShift.Checked = Honey.Checked;
+            ConsiderHoneyCorrection.Visible = ShowResultsAfterHoney.Visible = L_Correction.Visible = HoneyCorrection.Visible = Honey.Checked;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
             if (!Honey.Checked)
                 ShowResultsAfterHoney.Checked = false;
+            ConsiderHoneyCorrection.Checked = Honey.Checked && !ShowResultsAfterHoney.Checked;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -424,6 +424,11 @@ namespace SMEncounterRNGTool
         {
             if (AlwaysSynced.Checked)
                 Nature.SelectedIndex = SyncNature.SelectedIndex;
+        }
+
+        private void ShowResultsAfterHoney_CheckedChanged(object sender, EventArgs e)
+        {
+            ConsiderHoneyCorrection.Checked = Honey.Checked && !ShowResultsAfterHoney.Checked;
         }
 
         private void SearchMethod_CheckedChanged(object sender, EventArgs e)
@@ -499,7 +504,7 @@ namespace SMEncounterRNGTool
             int max = (int)Time_max.Value;
             int honeytime = RNGSearch.honeytime;
             int[] tmptimer = new int[2];
-            if (Honey.Checked)
+            if (ConsiderHoneyCorrection.Checked)
             {
                 for (int tmp = max - (int)(NPC.Value + 1) * honeytime; tmp <= max; tmp++)
                 {
@@ -520,11 +525,11 @@ namespace SMEncounterRNGTool
         {
             int[] totaltime = CalcFrame(min, max);
             float realtime = (float)totaltime[0] / 30;
-            string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) + {totaltime[1] * 2}F. ";
+            string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
             switch (lindex)
             {
-                case 0: str = "Set Eontimer for" + str + (Honey.Checked ? $" Use Honey at {max}F" : ""); break;
-                case 1: str = "计时器设置为" + str + (Honey.Checked ? $" 在 {max} 帧用蜂蜜" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (ConsiderHoneyCorrection.Checked ? $" Use Honey at {max}F" : ""); break;
+                case 1: str = "计时器设置为" + str + (ConsiderHoneyCorrection.Checked ? $" 在 {max} 帧用蜂蜜" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -587,7 +592,7 @@ namespace SMEncounterRNGTool
             int RandBuffSize = 150;
             int init = 0; // Startindex of Pokemon generation
 
-            if (ShowFrameShift.Checked)
+            if (Honey.Checked)
             {
                 RNGSearch.npcnumber = (int)NPC.Value + 1;
                 RandBuffSize = RNGSearch.npcnumber * RNGSearch.honeytime + 50;
@@ -782,8 +787,7 @@ namespace SMEncounterRNGTool
                     Item = None_STR[lindex];
             }
 
-            if (ShowFrameShift.Checked)
-                d = RNGSearch.getframeshift((int)HoneyCorrection.Value);
+            string Honeyframeadvance = (Honey.Checked) ? RNGSearch.getframeshift((int)HoneyCorrection.Value).ToString() : "-";
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
@@ -797,7 +801,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter, UbValue,
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Honeyframeadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
                 randstr, PID, EC,
                 result.row_r % 6, result.row_r % 32, result.row_r % 100
                 );

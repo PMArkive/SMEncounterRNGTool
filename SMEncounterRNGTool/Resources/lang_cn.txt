@@ -83,14 +83,13 @@ L_NPC = NPC数
 AroundTarget = 目标帧 ±100F
 L_frame = 帧数范围
 L_Framecorrection = 帧数修正
-ShowFrameShift = 显示帧数漂移(甜甜蜜)
 ShowResultsAfterHoney = 显示甜甜蜜后结果
 ---
 TimeBox = 时间计算
 L_time = 计时范围
 CalcTime = 计算
-L_timedelay = 甜甜蜜动画:186F=3.1s
-L_HoneyCorrection = 甜甜蜜帧数修正
+ConsiderHoneyCorrection = 考虑甜甜蜜修正
+L_Correction = 修正
 ---
 SetTargetFrame = 设为目标帧
 SHControlPanel = 显示/隐藏控制面板
@@ -107,13 +106,14 @@ dgv_nature = 性格
 dgv_synced = 同步
 dgv_needle = 帧
 dgv_psv = PSV
+dgv_honey = 蜜
+dgv_ubvalue = UB
 dgv_slot = 种类
 dgv_lv = Lv
 dgv_gender = 性别
 dgv_ability = 特性
 dgv_item = 持有物
 dgv_encounter = 遇敌
-dgv_ubvalue = UB
 dgv_rand = 乱数值
 dgv_PID = PID
 dgv_EC = 加密常数

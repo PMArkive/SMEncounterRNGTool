@@ -83,12 +83,11 @@ L_NPC = # of NPCs
 AroundTarget = Target ±100F
 L_frame = Frame Range
 L_Framecorrection = Frame Correction
-ShowFrameShift = Show Frame Shift(Honey)
-ShowResultsAfterHoney = Show results after honey
+ShowResultsAfterHoney = Show Results after Honey
 ---
 TimeBox = Time Calculator
-L_timedelay = Honey Anime:186F=3.1s
-L_HoneyCorrection = Honey Correction
+ConsiderHoneyCorrection = Consider Honey Correction
+L_Correction = Correction
 L_time = Timing Range
 CalcTime = Calc
 ---
@@ -107,13 +106,14 @@ dgv_nature = Nature
 dgv_synced = Sync?
 dgv_needle = Clk
 dgv_psv = PSV
+dgv_honey = Honey
+dgv_ubvalue = UB?
 dgv_slot = Slot
 dgv_lv = Lv
 dgv_gender = Gender
 dgv_ability = Ability
 dgv_item = Item
 dgv_encounter = Enctr?
-dgv_ubvalue = UB?
 dgv_rand = Random Number
 dgv_PID = PID
 dgv_EC = EC
