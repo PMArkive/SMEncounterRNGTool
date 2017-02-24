@@ -88,7 +88,8 @@ ShowFrameShift = 显示帧数漂移(甜甜蜜)
 TimeBox = 时间计算
 L_time = 计时范围
 CalcTime = 计算
-L_timedelay = 时间修正
+L_timedelay = 甜甜蜜动画:186F=3.1s
+L_HoneyCorrection = 甜甜蜜帧数修正
 ---
 SetTargetFrame = 设为目标帧
 SHControlPanel = 显示/隐藏控制面板

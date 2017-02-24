@@ -24,7 +24,7 @@ namespace SMEncounterRNGTool
         public bool nogender;
         public int gender_ratio;
 
-        public static int frameofhoney = 204;
+        public static int honeytime = 93; //186F =3.1s
         public static int npcnumber = 0;
 
         public class RNGResult
@@ -202,34 +202,36 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
-        public static int getframeshift()
+        public static int getframeshift(int t_index)
         {
-            int t_index = 0;
-            int remain_frame = 0;
-            bool blink_flag = false;
-            for (int totalframe = 0; totalframe < frameofhoney; totalframe++)
+            int[] remain_frame = new int[npcnumber];
+            bool[] blink_flag = new bool[npcnumber];
+            for (int totalframe = 0; totalframe < honeytime; totalframe++)
             {
-                if (remain_frame > 0)
-                    remain_frame--;
-
-                if (remain_frame == 0)
+                for (int i = 0; i < npcnumber; i++)
                 {
-                    //Blinking
-                    if (blink_flag)
+                    if (remain_frame[i] > 0)
+                        remain_frame[i]--;
+
+                    if (remain_frame[i] == 0)
                     {
-                        if ((int)(Rand[t_index++] % 3) == 0)
-                            remain_frame = 36;
-                        else
-                            remain_frame = 30;
-                        blink_flag = false;
-                    }
-                    //Not Blinking
-                    else
-                    {
-                        if ((int)(Rand[t_index++] & 0x7F) == 0)
+                        //Blinking
+                        if (blink_flag[i])
                         {
-                            remain_frame = 5;
-                            blink_flag = true;
+                            if ((int)(Rand[t_index++] % 3) == 0)
+                                remain_frame[i] = 36;
+                            else
+                                remain_frame[i] = 30;
+                            blink_flag[i] = false;
+                        }
+                        //Not Blinking
+                        else
+                        {
+                            if ((int)(Rand[t_index++] & 0x7F) == 0)
+                            {
+                                remain_frame[i] = 5;
+                                blink_flag[i] = true;
+                            }
                         }
                     }
                 }

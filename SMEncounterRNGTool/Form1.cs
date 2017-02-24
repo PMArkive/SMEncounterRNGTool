@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.79beta";
+        private string version = "0.80beta";
 
         #region Translation
         private string curlanguage;
@@ -398,7 +398,7 @@ namespace SMEncounterRNGTool
             if (UB.Checked)
             {
                 UB_th.Value = Honey.Checked ? 15 : 30;
-                Timedelay.Value = 192;
+                HoneyCorrection.Value = 3;
             }
             else
                 UBOnly.Checked = false;
@@ -407,7 +407,8 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             Encounter_th.Enabled = !Honey.Checked;
-            ShowFrameShift.Visible = L_timedelay.Visible = Timedelay.Visible = Honey.Checked;
+            L_timedelay.Visible = ShowFrameShift.Visible = L_HoneyCorrection.Visible = HoneyCorrection.Visible = Honey.Checked;
+            ShowFrameShift.Checked = Honey.Checked;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
         }
@@ -501,17 +502,17 @@ namespace SMEncounterRNGTool
             TimeResult.Items.Clear();
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
-            int honeytime = (int)Timedelay.Value / 2;
+            int honeytime = RNGSearch.honeytime;
             int[] tmptimer = new int[2];
             if (Honey.Checked)
             {
-                for (int tmp = max - (int)(NPC.Value + 1) * honeytime; tmp <= max; tmp++)
+                for (int tmp = max - (int)(NPC.Value + 1) * RNGSearch.honeytime; tmp <= max; tmp++)
                 {
                     tmptimer = CalcFrame(tmp, max);
                     if ((tmptimer[0] + tmptimer[1] > honeytime) && (tmptimer[0] <= honeytime))
-                        CalcTime_Output(min, tmp);
+                        CalcTime_Output(min, tmp - (int)HoneyCorrection.Value);
                     if ((tmptimer[0] == honeytime) && (tmptimer[1] == 0))
-                        CalcTime_Output(min, tmp);
+                        CalcTime_Output(min, tmp - (int)HoneyCorrection.Value);
                 }
             }
             else
@@ -588,11 +589,11 @@ namespace SMEncounterRNGTool
                 min = (int)Frame_min.Value;
                 max = (int)Frame_max.Value;
             }
-
+            int RandBuffSize = 150;
             if (ShowFrameShift.Checked)
             {
-                RNGSearch.frameofhoney = (int)Timedelay.Value / 2;
-                RNGSearch.npcnumber = (int)NPC.Value;
+                RNGSearch.npcnumber = (int)NPC.Value + 1;
+                RandBuffSize = RNGSearch.npcnumber * RNGSearch.honeytime + 50;
             }
 
             SFMT sfmt = new SFMT(InitialSeed);
@@ -608,7 +609,7 @@ namespace SMEncounterRNGTool
             int blink_flag = 0;
 
             RNGSearch.Rand.Clear();
-            for (int i = 0; i < 150; i++)
+            for (int i = 0; i < RandBuffSize; i++)
             {
                 RNGSearch.Rand.Add(sfmt.NextUInt64());
             }
@@ -777,7 +778,7 @@ namespace SMEncounterRNGTool
             }
 
             if (ShowFrameShift.Checked)
-                d = RNGSearch.getframeshift();
+                d = RNGSearch.getframeshift((int)HoneyCorrection.Value);
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
@@ -821,7 +822,7 @@ namespace SMEncounterRNGTool
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
             if (Poke.SelectedIndex > 12)
-                Timedelay.Value = SearchSetting.honeydelay[Poke.SelectedIndex - 13];
+                HoneyCorrection.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - 13];
             switch (Poke.SelectedIndex)
             {
                 case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;

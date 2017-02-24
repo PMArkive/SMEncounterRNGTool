@@ -99,10 +99,11 @@
             this.SearchByCurrSeed1 = new System.Windows.Forms.Button();
             this.CalcList = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
-            this.TimeResult = new System.Windows.Forms.ListBox();
             this.L_timedelay = new System.Windows.Forms.Label();
+            this.TimeResult = new System.Windows.Forms.ListBox();
+            this.L_HoneyCorrection = new System.Windows.Forms.Label();
             this.L_time = new System.Windows.Forms.Label();
-            this.Timedelay = new System.Windows.Forms.NumericUpDown();
+            this.HoneyCorrection = new System.Windows.Forms.NumericUpDown();
             this.Time_min = new System.Windows.Forms.NumericUpDown();
             this.Time_max = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -233,7 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             this.SearchByRand.SuspendLayout();
             this.TimeBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HoneyCorrection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).BeginInit();
@@ -1019,10 +1020,11 @@
             // 
             // TimeBox
             // 
-            this.TimeBox.Controls.Add(this.TimeResult);
             this.TimeBox.Controls.Add(this.L_timedelay);
+            this.TimeBox.Controls.Add(this.TimeResult);
+            this.TimeBox.Controls.Add(this.L_HoneyCorrection);
             this.TimeBox.Controls.Add(this.L_time);
-            this.TimeBox.Controls.Add(this.Timedelay);
+            this.TimeBox.Controls.Add(this.HoneyCorrection);
             this.TimeBox.Controls.Add(this.Time_min);
             this.TimeBox.Controls.Add(this.Time_max);
             this.TimeBox.Controls.Add(this.label8);
@@ -1036,6 +1038,15 @@
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
             // 
+            // L_timedelay
+            // 
+            this.L_timedelay.AutoSize = true;
+            this.L_timedelay.Location = new System.Drawing.Point(264, 27);
+            this.L_timedelay.Name = "L_timedelay";
+            this.L_timedelay.Size = new System.Drawing.Size(79, 13);
+            this.L_timedelay.TabIndex = 54;
+            this.L_timedelay.Text = "蜂蜜时间186F";
+            // 
             // TimeResult
             // 
             this.TimeResult.FormattingEnabled = true;
@@ -1044,39 +1055,39 @@
             this.TimeResult.Size = new System.Drawing.Size(365, 108);
             this.TimeResult.TabIndex = 53;
             // 
-            // L_timedelay
+            // L_HoneyCorrection
             // 
-            this.L_timedelay.AutoSize = true;
-            this.L_timedelay.Location = new System.Drawing.Point(139, 65);
-            this.L_timedelay.Name = "L_timedelay";
-            this.L_timedelay.Size = new System.Drawing.Size(55, 13);
-            this.L_timedelay.TabIndex = 52;
-            this.L_timedelay.Text = "时间修正";
+            this.L_HoneyCorrection.AutoSize = true;
+            this.L_HoneyCorrection.Location = new System.Drawing.Point(135, 65);
+            this.L_HoneyCorrection.Name = "L_HoneyCorrection";
+            this.L_HoneyCorrection.Size = new System.Drawing.Size(91, 13);
+            this.L_HoneyCorrection.TabIndex = 52;
+            this.L_HoneyCorrection.Text = "甜甜蜜帧数修正";
             // 
             // L_time
             // 
             this.L_time.AutoSize = true;
-            this.L_time.Location = new System.Drawing.Point(18, 27);
+            this.L_time.Location = new System.Drawing.Point(11, 27);
             this.L_time.Name = "L_time";
             this.L_time.Size = new System.Drawing.Size(55, 13);
             this.L_time.TabIndex = 40;
             this.L_time.Text = "计时范围";
             // 
-            // Timedelay
+            // HoneyCorrection
             // 
-            this.Timedelay.AccessibleName = "";
-            this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Timedelay.Location = new System.Drawing.Point(215, 60);
-            this.Timedelay.Maximum = new decimal(new int[] {
+            this.HoneyCorrection.AccessibleName = "";
+            this.HoneyCorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HoneyCorrection.Location = new System.Drawing.Point(232, 61);
+            this.HoneyCorrection.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.Timedelay.Name = "Timedelay";
-            this.Timedelay.Size = new System.Drawing.Size(48, 22);
-            this.Timedelay.TabIndex = 51;
-            this.Timedelay.Value = new decimal(new int[] {
-            200,
+            this.HoneyCorrection.Name = "HoneyCorrection";
+            this.HoneyCorrection.Size = new System.Drawing.Size(48, 22);
+            this.HoneyCorrection.TabIndex = 51;
+            this.HoneyCorrection.Value = new decimal(new int[] {
+            3,
             0,
             0,
             0});
@@ -1085,7 +1096,7 @@
             // 
             this.Time_min.AccessibleName = "";
             this.Time_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Time_min.Location = new System.Drawing.Point(94, 22);
+            this.Time_min.Location = new System.Drawing.Point(87, 22);
             this.Time_min.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -1104,7 +1115,7 @@
             // 
             this.Time_max.AccessibleName = "";
             this.Time_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Time_max.Location = new System.Drawing.Point(188, 22);
+            this.Time_max.Location = new System.Drawing.Point(181, 22);
             this.Time_max.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -1122,7 +1133,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(173, 27);
+            this.label8.Location = new System.Drawing.Point(166, 27);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 13);
             this.label8.TabIndex = 45;
@@ -1130,7 +1141,7 @@
             // 
             // CalcTime
             // 
-            this.CalcTime.Location = new System.Drawing.Point(283, 59);
+            this.CalcTime.Location = new System.Drawing.Point(313, 57);
             this.CalcTime.Name = "CalcTime";
             this.CalcTime.Size = new System.Drawing.Size(56, 27);
             this.CalcTime.TabIndex = 49;
@@ -1142,7 +1153,7 @@
             // 
             this.NPC.AccessibleName = "";
             this.NPC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NPC.Location = new System.Drawing.Point(84, 60);
+            this.NPC.Location = new System.Drawing.Point(77, 60);
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
@@ -1150,7 +1161,7 @@
             // L_NPC
             // 
             this.L_NPC.AutoSize = true;
-            this.L_NPC.Location = new System.Drawing.Point(18, 65);
+            this.L_NPC.Location = new System.Drawing.Point(11, 65);
             this.L_NPC.Name = "L_NPC";
             this.L_NPC.Size = new System.Drawing.Size(41, 13);
             this.L_NPC.TabIndex = 47;
@@ -2461,7 +2472,7 @@
             this.SearchByRand.PerformLayout();
             this.TimeBox.ResumeLayout(false);
             this.TimeBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HoneyCorrection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).EndInit();
@@ -2635,9 +2646,9 @@
         private System.Windows.Forms.Label L_Lv_S;
         private System.Windows.Forms.NumericUpDown Lv_Search;
         private System.Windows.Forms.CheckBox UBOnly;
-        private System.Windows.Forms.NumericUpDown Timedelay;
+        private System.Windows.Forms.NumericUpDown HoneyCorrection;
         private System.Windows.Forms.NumericUpDown UB_th;
-        private System.Windows.Forms.Label L_timedelay;
+        private System.Windows.Forms.Label L_HoneyCorrection;
         private System.Windows.Forms.Panel StatPanel;
         private System.Windows.Forms.RadioButton ByIVs;
         private System.Windows.Forms.Panel IVPanel;
@@ -2698,6 +2709,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
         private System.Windows.Forms.Panel ControlPanel;
         private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
+        private System.Windows.Forms.Label L_timedelay;
     }
 }
 

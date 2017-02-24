@@ -47,9 +47,9 @@
             0,0,0,0,0,0,0,0        //UB
         };
 
-        public static int[] honeydelay =
+        public static int[] honeycorrection =
         {
-            212,196,196,200,238,238,192,188,
+            13,5,5,7,26,26,3,1,
         };
 
         #endregion
