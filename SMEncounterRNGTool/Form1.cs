@@ -155,7 +155,6 @@ namespace SMEncounterRNGTool
             SyncNature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
-            Slot.SelectedIndex = 0;
 
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
@@ -540,7 +539,7 @@ namespace SMEncounterRNGTool
             if (!AlwaysSynced.Checked) Nature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
-            Slot.SelectedIndex = 0;
+            Slot.Text = "";
 
             if (ByIVs.Checked)
                 Lv_Search.Value = 0;
@@ -663,7 +662,7 @@ namespace SMEncounterRNGTool
                 HPType = HiddenPower.SelectedIndex - 1,
                 Gender = Gender.SelectedIndex,
                 Ability = Ability.SelectedIndex,
-                Slot = Slot.SelectedIndex,
+                Slot = SearchSetting.TranslateSlot(Slot.Text),
                 IVlow = IVlow,
                 IVup = IVup,
                 BS = BS,
@@ -742,7 +741,7 @@ namespace SMEncounterRNGTool
 
                 if (!UB.Checked || result.UbValue >= UB_th.Value)
                 {
-                    if (setting.Slot != 0 && setting.Slot != result.Slot)
+                    if (setting.Slot[0] && !setting.Slot[result.Slot])
                         return false;
 
                     if (setting.Gender != 0 && setting.Gender != result.Gender)

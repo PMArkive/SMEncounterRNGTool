@@ -118,7 +118,6 @@
             this.ByStats = new System.Windows.Forms.RadioButton();
             this.UBOnly = new System.Windows.Forms.CheckBox();
             this.L_Slot = new System.Windows.Forms.Label();
-            this.Slot = new System.Windows.Forms.ComboBox();
             this.L_Lv_S = new System.Windows.Forms.Label();
             this.L_Ability = new System.Windows.Forms.Label();
             this.Lv_Search = new System.Windows.Forms.NumericUpDown();
@@ -220,6 +219,7 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
+            this.Slot = new System.Windows.Forms.TextBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
@@ -1169,6 +1169,7 @@
             // 
             // SearchSettingBox
             // 
+            this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.ShowStats);
             this.SearchSettingBox.Controls.Add(this.BlinkOnly);
             this.SearchSettingBox.Controls.Add(this.Reset);
@@ -1176,7 +1177,6 @@
             this.SearchSettingBox.Controls.Add(this.ByStats);
             this.SearchSettingBox.Controls.Add(this.UBOnly);
             this.SearchSettingBox.Controls.Add(this.L_Slot);
-            this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.L_Lv_S);
             this.SearchSettingBox.Controls.Add(this.L_Ability);
             this.SearchSettingBox.Controls.Add(this.Lv_Search);
@@ -1273,31 +1273,11 @@
             // L_Slot
             // 
             this.L_Slot.AutoSize = true;
-            this.L_Slot.Location = new System.Drawing.Point(203, 142);
+            this.L_Slot.Location = new System.Drawing.Point(203, 41);
             this.L_Slot.Name = "L_Slot";
             this.L_Slot.Size = new System.Drawing.Size(31, 13);
             this.L_Slot.TabIndex = 69;
             this.L_Slot.Text = "种类";
-            // 
-            // Slot
-            // 
-            this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Slot.Items.AddRange(new object[] {
-            "-",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.Slot.Location = new System.Drawing.Point(203, 163);
-            this.Slot.Name = "Slot";
-            this.Slot.Size = new System.Drawing.Size(74, 21);
-            this.Slot.TabIndex = 68;
             // 
             // L_Lv_S
             // 
@@ -1311,7 +1291,7 @@
             // L_Ability
             // 
             this.L_Ability.AutoSize = true;
-            this.L_Ability.Location = new System.Drawing.Point(203, 92);
+            this.L_Ability.Location = new System.Drawing.Point(203, 142);
             this.L_Ability.Name = "L_Ability";
             this.L_Ability.Size = new System.Drawing.Size(31, 13);
             this.L_Ability.TabIndex = 64;
@@ -1333,7 +1313,7 @@
             "-",
             "1",
             "2"});
-            this.Ability.Location = new System.Drawing.Point(203, 113);
+            this.Ability.Location = new System.Drawing.Point(203, 163);
             this.Ability.Name = "Ability";
             this.Ability.Size = new System.Drawing.Size(74, 21);
             this.Ability.TabIndex = 63;
@@ -1425,7 +1405,7 @@
             // L_gender
             // 
             this.L_gender.AutoSize = true;
-            this.L_gender.Location = new System.Drawing.Point(203, 42);
+            this.L_gender.Location = new System.Drawing.Point(203, 92);
             this.L_gender.Name = "L_gender";
             this.L_gender.Size = new System.Drawing.Size(31, 13);
             this.L_gender.TabIndex = 39;
@@ -1434,7 +1414,7 @@
             // Gender
             // 
             this.Gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Gender.Location = new System.Drawing.Point(203, 63);
+            this.Gender.Location = new System.Drawing.Point(203, 113);
             this.Gender.Name = "Gender";
             this.Gender.Size = new System.Drawing.Size(74, 21);
             this.Gender.TabIndex = 38;
@@ -2428,6 +2408,13 @@
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
+            // Slot
+            // 
+            this.Slot.Location = new System.Drawing.Point(203, 61);
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(74, 20);
+            this.Slot.TabIndex = 55;
+            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2650,7 +2637,6 @@
         private System.Windows.Forms.NumericUpDown Lv_max;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label L_Slot;
-        private System.Windows.Forms.ComboBox Slot;
         private System.Windows.Forms.Label L_Lv_S;
         private System.Windows.Forms.NumericUpDown Lv_Search;
         private System.Windows.Forms.CheckBox UBOnly;
@@ -2719,6 +2705,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn M32;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
         private System.Windows.Forms.CheckBox ConsiderHoneyCorrection;
+        private System.Windows.Forms.TextBox Slot;
     }
 }
 

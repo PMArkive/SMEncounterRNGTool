@@ -112,7 +112,7 @@
         public int[] IVup, IVlow, BS, Status, p_Status;
         public bool Skip;
         public int Lv;
-        public int Slot;
+        public bool[] Slot;
 
 
         public bool validIVs(int[] IV)
@@ -148,13 +148,34 @@
             return;
         }
 
-
         public bool mezapa_check(int[] IV)
         {
             if (HPType == -1)
                 return true;
             var val = 15 * ((IV[0] & 1) + 2 * (IV[1] & 1) + 4 * (IV[2] & 1) + 8 * (IV[5] & 1) + 16 * (IV[3] & 1) + 32 * (IV[4] & 1)) / 63;
             return val == HPType;
+        }
+
+        public static bool[] TranslateSlot(string slottext)
+        {
+            bool[] SlotArray = new bool[11];
+            if (slottext=="")
+                return SlotArray;
+            try
+            {
+                string[] slotstrarray=slottext.Split(' ',',');
+                uint tmp;
+                for (int i = 0; i < slotstrarray.Length; i++)
+                {
+                    uint.TryParse(slotstrarray[i], out tmp);
+                    if ((tmp < 11) && (tmp > 0))
+                        SlotArray[tmp] = true;
+                }
+                SlotArray[0] = true; //Text is valid
+            }
+            catch
+            { }
+            return SlotArray;
         }
     }
 }
