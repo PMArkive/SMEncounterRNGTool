@@ -46,6 +46,7 @@ Wild = 野生
 Stationary = 定点
 AlwaysSynced = 必定同步
 Fix3v = 固定3V
+L_SyncNature = 同步性格
 L_UB_th = UB遇见率
 L_Encounter_th = 遇敌率
 L_Lv = 等级范围

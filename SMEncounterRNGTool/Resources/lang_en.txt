@@ -45,6 +45,7 @@ Honey = Honey
 Wild = Wild
 Stationary = Stationary
 AlwaysSynced = AlwaysSynced
+L_SyncNature = Nature
 Fix3v = 3IVs
 L_UB_th = UB Rate
 L_Encounter_th = ENC Rate

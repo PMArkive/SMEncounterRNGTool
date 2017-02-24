@@ -23,7 +23,7 @@ namespace SMEncounterRNGTool
         public bool nogender;
         public int gender_ratio;
 
-        public static int honeytime = 93; //186F =3.1s
+        public const int honeytime = 93; //186F =3.1s
         public static int npcnumber = 0;
 
         public class RNGResult

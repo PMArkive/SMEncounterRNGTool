@@ -500,7 +500,7 @@ namespace SMEncounterRNGTool
             int[] tmptimer = new int[2];
             if (Honey.Checked)
             {
-                for (int tmp = max - (int)(NPC.Value + 1) * RNGSearch.honeytime; tmp <= max; tmp++)
+                for (int tmp = max - (int)(NPC.Value + 1) * honeytime; tmp <= max; tmp++)
                 {
                     tmptimer = CalcFrame(tmp, max);
                     if ((tmptimer[0] + tmptimer[1] > honeytime) && (tmptimer[0] <= honeytime))

@@ -74,6 +74,7 @@
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.Condition = new System.Windows.Forms.GroupBox();
+            this.L_SyncNature = new System.Windows.Forms.Label();
             this.L_UB_th = new System.Windows.Forms.Label();
             this.L_Encounter_th = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -731,6 +732,7 @@
             // 
             // Condition
             // 
+            this.Condition.Controls.Add(this.L_SyncNature);
             this.Condition.Controls.Add(this.L_UB_th);
             this.Condition.Controls.Add(this.L_Encounter_th);
             this.Condition.Controls.Add(this.label9);
@@ -756,10 +758,19 @@
             this.Condition.TabStop = false;
             this.Condition.Text = "条件设置";
             // 
+            // L_SyncNature
+            // 
+            this.L_SyncNature.AutoSize = true;
+            this.L_SyncNature.Location = new System.Drawing.Point(161, 31);
+            this.L_SyncNature.Name = "L_SyncNature";
+            this.L_SyncNature.Size = new System.Drawing.Size(55, 13);
+            this.L_SyncNature.TabIndex = 70;
+            this.L_SyncNature.Text = "同步性格";
+            // 
             // L_UB_th
             // 
             this.L_UB_th.AutoSize = true;
-            this.L_UB_th.Location = new System.Drawing.Point(191, 106);
+            this.L_UB_th.Location = new System.Drawing.Point(285, 103);
             this.L_UB_th.Name = "L_UB_th";
             this.L_UB_th.Size = new System.Drawing.Size(58, 13);
             this.L_UB_th.TabIndex = 69;
@@ -792,7 +803,7 @@
             "♂7：♀1",
             "♂3：♀1",
             "♂1：♀3"});
-            this.GenderRatio.Location = new System.Drawing.Point(306, 103);
+            this.GenderRatio.Location = new System.Drawing.Point(200, 100);
             this.GenderRatio.Name = "GenderRatio";
             this.GenderRatio.Size = new System.Drawing.Size(79, 21);
             this.GenderRatio.TabIndex = 8;
@@ -814,7 +825,7 @@
             // SyncNature
             // 
             this.SyncNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SyncNature.Location = new System.Drawing.Point(306, 26);
+            this.SyncNature.Location = new System.Drawing.Point(216, 26);
             this.SyncNature.Name = "SyncNature";
             this.SyncNature.Size = new System.Drawing.Size(79, 21);
             this.SyncNature.TabIndex = 3;
@@ -923,7 +934,7 @@
             // 
             this.UB_th.AccessibleName = "";
             this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UB_th.Location = new System.Drawing.Point(249, 103);
+            this.UB_th.Location = new System.Drawing.Point(343, 100);
             this.UB_th.Name = "UB_th";
             this.UB_th.Size = new System.Drawing.Size(44, 22);
             this.UB_th.TabIndex = 67;
@@ -937,7 +948,7 @@
             // 
             this.Encounter_th.AccessibleName = "";
             this.Encounter_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Encounter_th.Location = new System.Drawing.Point(341, 64);
+            this.Encounter_th.Location = new System.Drawing.Point(343, 64);
             this.Encounter_th.Name = "Encounter_th";
             this.Encounter_th.Size = new System.Drawing.Size(44, 22);
             this.Encounter_th.TabIndex = 51;
@@ -950,7 +961,7 @@
             // AlwaysSynced
             // 
             this.AlwaysSynced.AutoSize = true;
-            this.AlwaysSynced.Location = new System.Drawing.Point(165, 28);
+            this.AlwaysSynced.Location = new System.Drawing.Point(301, 30);
             this.AlwaysSynced.Name = "AlwaysSynced";
             this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
             this.AlwaysSynced.TabIndex = 9;
@@ -2696,6 +2707,7 @@
         private System.Windows.Forms.Panel ControlPanel;
         private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
         private System.Windows.Forms.Label L_timedelay;
+        private System.Windows.Forms.Label L_SyncNature;
     }
 }
 
