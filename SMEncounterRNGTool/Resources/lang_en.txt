@@ -84,6 +84,7 @@ AroundTarget = Target ±100F
 L_frame = Frame Range
 L_Framecorrection = Frame Correction
 ShowFrameShift = Show Frame Shift(Honey)
+ShowResultsAfterHoney = Show results after honey
 ---
 TimeBox = Time Calculator
 L_timedelay = Honey Anime:186F=3.1s

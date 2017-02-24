@@ -385,7 +385,7 @@ namespace SMEncounterRNGTool
             }
             UB_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
-            
+
             GenderRatio.Visible = UB.Visible = Honey.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
@@ -406,10 +406,12 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
-            L_timedelay.Visible = ShowFrameShift.Visible = L_HoneyCorrection.Visible = HoneyCorrection.Visible = Honey.Checked;
+            L_timedelay.Visible = ShowFrameShift.Visible = ShowResultsAfterHoney.Visible = L_HoneyCorrection.Visible = HoneyCorrection.Visible = Honey.Checked;
             ShowFrameShift.Checked = Honey.Checked;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
+            if (!Honey.Checked)
+                ShowResultsAfterHoney.Checked = false;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -583,10 +585,18 @@ namespace SMEncounterRNGTool
                 max = (int)Frame_max.Value;
             }
             int RandBuffSize = 150;
+            int init = 0; // Startindex of Pokemon generation
+
             if (ShowFrameShift.Checked)
             {
                 RNGSearch.npcnumber = (int)NPC.Value + 1;
                 RandBuffSize = RNGSearch.npcnumber * RNGSearch.honeytime + 50;
+            }
+
+            if (ShowResultsAfterHoney.Checked)
+            {
+                RNGSearch.npcnumber = (int)NPC.Value + 1;
+                RandBuffSize = RNGSearch.npcnumber * RNGSearch.honeytime + 200;
             }
 
             SFMT sfmt = new SFMT(InitialSeed);
@@ -609,7 +619,10 @@ namespace SMEncounterRNGTool
 
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
-                RNGSearch.RNGResult result = rng.Generate();
+                if (ShowResultsAfterHoney.Checked)
+                    init = RNGSearch.getframeshift((int)HoneyCorrection.Value);
+
+                RNGSearch.RNGResult result = rng.Generate(init);
 
                 switch (blink_flag)
                 {

@@ -47,11 +47,11 @@ namespace SMEncounterRNGTool
             public int Item = -1;
         }
 
-        public RNGResult Generate()
+        public RNGResult Generate(int init)
         {
             RNGResult st = new RNGResult();
+            index = init;
 
-            index = 0;
             //シンクロ -- Synchronize
             st.row_r = currentrand();
             st.Clock = (int)(st.row_r % 17);
@@ -87,7 +87,7 @@ namespace SMEncounterRNGTool
             }
 
             //Blinking process?
-            if (!Wild_S)
+            if (UB_S)
                 Advance(FrameCorrection);
 
             //Something

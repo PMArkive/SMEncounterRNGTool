@@ -84,6 +84,7 @@ AroundTarget = 目标帧 ±100F
 L_frame = 帧数范围
 L_Framecorrection = 帧数修正
 ShowFrameShift = 显示帧数漂移(甜甜蜜)
+ShowResultsAfterHoney = 显示甜甜蜜后结果
 ---
 TimeBox = 时间计算
 L_time = 计时范围

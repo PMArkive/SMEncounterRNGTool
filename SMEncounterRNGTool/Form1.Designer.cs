@@ -174,6 +174,7 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
+            this.ShowResultsAfterHoney = new System.Windows.Forms.CheckBox();
             this.ShowFrameShift = new System.Windows.Forms.CheckBox();
             this.L_Framecorrection = new System.Windows.Forms.Label();
             this.Framecorrection = new System.Windows.Forms.NumericUpDown();
@@ -720,7 +721,6 @@
             // 
             this.ControlPanel.Controls.Add(this.Condition);
             this.ControlPanel.Controls.Add(this.SearchByRand);
-            this.ControlPanel.Controls.Add(this.CalcList);
             this.ControlPanel.Controls.Add(this.TimeBox);
             this.ControlPanel.Controls.Add(this.SearchSettingBox);
             this.ControlPanel.Controls.Add(this.RNGInfo);
@@ -1008,7 +1008,7 @@
             // 
             // CalcList
             // 
-            this.CalcList.Location = new System.Drawing.Point(288, 263);
+            this.CalcList.Location = new System.Drawing.Point(281, 93);
             this.CalcList.Name = "CalcList";
             this.CalcList.Size = new System.Drawing.Size(104, 28);
             this.CalcList.TabIndex = 41;
@@ -1967,7 +1967,9 @@
             // 
             // RNGInfo
             // 
+            this.RNGInfo.Controls.Add(this.ShowResultsAfterHoney);
             this.RNGInfo.Controls.Add(this.ShowFrameShift);
+            this.RNGInfo.Controls.Add(this.CalcList);
             this.RNGInfo.Controls.Add(this.L_Framecorrection);
             this.RNGInfo.Controls.Add(this.Framecorrection);
             this.RNGInfo.Controls.Add(this.AroundTarget);
@@ -1977,10 +1979,20 @@
             this.RNGInfo.Controls.Add(this.Frame_min);
             this.RNGInfo.Location = new System.Drawing.Point(7, 157);
             this.RNGInfo.Name = "RNGInfo";
-            this.RNGInfo.Size = new System.Drawing.Size(399, 100);
+            this.RNGInfo.Size = new System.Drawing.Size(396, 134);
             this.RNGInfo.TabIndex = 40;
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
+            // 
+            // ShowResultsAfterHoney
+            // 
+            this.ShowResultsAfterHoney.AutoSize = true;
+            this.ShowResultsAfterHoney.Location = new System.Drawing.Point(12, 100);
+            this.ShowResultsAfterHoney.Name = "ShowResultsAfterHoney";
+            this.ShowResultsAfterHoney.Size = new System.Drawing.Size(122, 17);
+            this.ShowResultsAfterHoney.TabIndex = 62;
+            this.ShowResultsAfterHoney.Text = "显示甜甜蜜后结果";
+            this.ShowResultsAfterHoney.UseVisualStyleBackColor = true;
             // 
             // ShowFrameShift
             // 
@@ -2708,6 +2720,7 @@
         private System.Windows.Forms.Label L_SyncNature;
         private System.Windows.Forms.Label L_UB_th;
         private System.Windows.Forms.Label L_Encounter_th;
+        private System.Windows.Forms.CheckBox ShowResultsAfterHoney;
     }
 }
 
