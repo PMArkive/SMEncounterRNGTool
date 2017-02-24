@@ -2005,20 +2005,20 @@
             // 
             this.Framecorrection.AccessibleName = "";
             this.Framecorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Framecorrection.Location = new System.Drawing.Point(98, 66);
+            this.Framecorrection.Location = new System.Drawing.Point(96, 66);
             this.Framecorrection.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.Framecorrection.Name = "Framecorrection";
+            this.Framecorrection.Size = new System.Drawing.Size(35, 22);
+            this.Framecorrection.TabIndex = 61;
+            this.Framecorrection.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.Framecorrection.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            -2147483648});
-            this.Framecorrection.Name = "Framecorrection";
-            this.Framecorrection.Size = new System.Drawing.Size(35, 22);
-            this.Framecorrection.TabIndex = 61;
             // 
             // AroundTarget
             // 
