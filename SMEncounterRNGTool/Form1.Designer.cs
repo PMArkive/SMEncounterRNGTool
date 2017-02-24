@@ -761,7 +761,7 @@
             // L_SyncNature
             // 
             this.L_SyncNature.AutoSize = true;
-            this.L_SyncNature.Location = new System.Drawing.Point(161, 31);
+            this.L_SyncNature.Location = new System.Drawing.Point(161, 29);
             this.L_SyncNature.Name = "L_SyncNature";
             this.L_SyncNature.Size = new System.Drawing.Size(55, 13);
             this.L_SyncNature.TabIndex = 70;
@@ -770,7 +770,7 @@
             // L_UB_th
             // 
             this.L_UB_th.AutoSize = true;
-            this.L_UB_th.Location = new System.Drawing.Point(285, 103);
+            this.L_UB_th.Location = new System.Drawing.Point(293, 69);
             this.L_UB_th.Name = "L_UB_th";
             this.L_UB_th.Size = new System.Drawing.Size(58, 13);
             this.L_UB_th.TabIndex = 69;
@@ -779,7 +779,7 @@
             // L_Encounter_th
             // 
             this.L_Encounter_th.AutoSize = true;
-            this.L_Encounter_th.Location = new System.Drawing.Point(285, 68);
+            this.L_Encounter_th.Location = new System.Drawing.Point(293, 106);
             this.L_Encounter_th.Name = "L_Encounter_th";
             this.L_Encounter_th.Size = new System.Drawing.Size(43, 13);
             this.L_Encounter_th.TabIndex = 68;
@@ -788,7 +788,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(227, 69);
+            this.label9.Location = new System.Drawing.Point(166, 106);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 24;
@@ -803,16 +803,16 @@
             "♂7：♀1",
             "♂3：♀1",
             "♂1：♀3"});
-            this.GenderRatio.Location = new System.Drawing.Point(200, 100);
+            this.GenderRatio.Location = new System.Drawing.Point(137, 66);
             this.GenderRatio.Name = "GenderRatio";
-            this.GenderRatio.Size = new System.Drawing.Size(79, 21);
+            this.GenderRatio.Size = new System.Drawing.Size(76, 21);
             this.GenderRatio.TabIndex = 8;
             // 
             // Lv_max
             // 
             this.Lv_max.AccessibleName = "IV_min";
             this.Lv_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_max.Location = new System.Drawing.Point(242, 64);
+            this.Lv_max.Location = new System.Drawing.Point(181, 101);
             this.Lv_max.Name = "Lv_max";
             this.Lv_max.Size = new System.Drawing.Size(35, 22);
             this.Lv_max.TabIndex = 65;
@@ -825,9 +825,9 @@
             // SyncNature
             // 
             this.SyncNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SyncNature.Location = new System.Drawing.Point(216, 26);
+            this.SyncNature.Location = new System.Drawing.Point(227, 26);
             this.SyncNature.Name = "SyncNature";
-            this.SyncNature.Size = new System.Drawing.Size(79, 21);
+            this.SyncNature.Size = new System.Drawing.Size(65, 21);
             this.SyncNature.TabIndex = 3;
             this.SyncNature.SelectedIndexChanged += new System.EventHandler(this.SyncNature_SelectedIndexChanged);
             // 
@@ -847,7 +847,7 @@
             // L_Lv
             // 
             this.L_Lv.AutoSize = true;
-            this.L_Lv.Location = new System.Drawing.Point(130, 69);
+            this.L_Lv.Location = new System.Drawing.Point(69, 106);
             this.L_Lv.Name = "L_Lv";
             this.L_Lv.Size = new System.Drawing.Size(55, 13);
             this.L_Lv.TabIndex = 41;
@@ -868,7 +868,7 @@
             // 
             this.Lv_min.AccessibleName = "";
             this.Lv_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_min.Location = new System.Drawing.Point(189, 64);
+            this.Lv_min.Location = new System.Drawing.Point(128, 101);
             this.Lv_min.Name = "Lv_min";
             this.Lv_min.Size = new System.Drawing.Size(35, 22);
             this.Lv_min.TabIndex = 60;
@@ -881,7 +881,7 @@
             // Honey
             // 
             this.Honey.AutoSize = true;
-            this.Honey.Location = new System.Drawing.Point(82, 105);
+            this.Honey.Location = new System.Drawing.Point(230, 105);
             this.Honey.Name = "Honey";
             this.Honey.Size = new System.Drawing.Size(62, 17);
             this.Honey.TabIndex = 2;
@@ -892,7 +892,7 @@
             // UB
             // 
             this.UB.AutoSize = true;
-            this.UB.Location = new System.Drawing.Point(148, 105);
+            this.UB.Location = new System.Drawing.Point(230, 68);
             this.UB.Name = "UB";
             this.UB.Size = new System.Drawing.Size(41, 17);
             this.UB.TabIndex = 4;
@@ -934,7 +934,7 @@
             // 
             this.UB_th.AccessibleName = "";
             this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UB_th.Location = new System.Drawing.Point(343, 100);
+            this.UB_th.Location = new System.Drawing.Point(352, 66);
             this.UB_th.Name = "UB_th";
             this.UB_th.Size = new System.Drawing.Size(44, 22);
             this.UB_th.TabIndex = 67;
@@ -948,7 +948,7 @@
             // 
             this.Encounter_th.AccessibleName = "";
             this.Encounter_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Encounter_th.Location = new System.Drawing.Point(343, 64);
+            this.Encounter_th.Location = new System.Drawing.Point(352, 101);
             this.Encounter_th.Name = "Encounter_th";
             this.Encounter_th.Size = new System.Drawing.Size(44, 22);
             this.Encounter_th.TabIndex = 51;
@@ -961,7 +961,7 @@
             // AlwaysSynced
             // 
             this.AlwaysSynced.AutoSize = true;
-            this.AlwaysSynced.Location = new System.Drawing.Point(301, 30);
+            this.AlwaysSynced.Location = new System.Drawing.Point(298, 28);
             this.AlwaysSynced.Name = "AlwaysSynced";
             this.AlwaysSynced.Size = new System.Drawing.Size(74, 17);
             this.AlwaysSynced.TabIndex = 9;
@@ -2655,8 +2655,6 @@
         private System.Windows.Forms.Label L_Stats;
         private System.Windows.Forms.Label L_BS;
         private System.Windows.Forms.Button Reset;
-        private System.Windows.Forms.Label L_UB_th;
-        private System.Windows.Forms.Label L_Encounter_th;
         private System.Windows.Forms.GroupBox QRBox;
         private System.Windows.Forms.ListBox QRResult;
         private System.Windows.Forms.Label L_QRList;
@@ -2708,6 +2706,8 @@
         private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
         private System.Windows.Forms.Label L_timedelay;
         private System.Windows.Forms.Label L_SyncNature;
+        private System.Windows.Forms.Label L_UB_th;
+        private System.Windows.Forms.Label L_Encounter_th;
     }
 }
 

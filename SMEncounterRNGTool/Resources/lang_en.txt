@@ -44,11 +44,11 @@ UB = UB
 Honey = Honey
 Wild = Wild
 Stationary = Stationary
-AlwaysSynced = AlwaysSynced
-L_SyncNature = Nature
+AlwaysSynced = Always Synced
+L_SyncNature = Sync Nature
 Fix3v = 3IVs
 L_UB_th = UB Rate
-L_Encounter_th = ENC Rate
+L_Encounter_th = Enctr Rate
 L_Lv = Lv Range
 ---
 SearchSettingBox = Filters

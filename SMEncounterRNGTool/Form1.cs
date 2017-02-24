@@ -385,16 +385,15 @@ namespace SMEncounterRNGTool
             }
             UB_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
-
-            L_UB_th.Visible = L_Encounter_th.Visible = Wild.Checked;
-            GenderRatio.Visible = UB.Visible = UB_th.Visible = Honey.Visible = Encounter_th.Visible = Wild.Checked;
+            
+            GenderRatio.Visible = UB.Visible = Honey.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
-            Lv_min.Visible = Lv_max.Visible = Slot.Visible = EncounteredOnly.Visible = Gender.Visible = UBOnly.Visible = Ability.Visible = Wild.Checked;
+            Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
         }
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            UBOnly.Enabled = UB_th.Enabled = UB.Checked;
+            UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
             if (UB.Checked)
             {
                 UB_th.Value = Honey.Checked ? 15 : 30;
@@ -406,7 +405,7 @@ namespace SMEncounterRNGTool
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
-            Encounter_th.Enabled = !Honey.Checked;
+            L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
             L_timedelay.Visible = ShowFrameShift.Visible = L_HoneyCorrection.Visible = HoneyCorrection.Visible = Honey.Checked;
             ShowFrameShift.Checked = Honey.Checked;
             if (UB.Checked)
