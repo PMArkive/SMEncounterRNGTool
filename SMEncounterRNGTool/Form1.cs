@@ -415,12 +415,14 @@ namespace SMEncounterRNGTool
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
-            if (Honey.Checked)
-                Timedelay.Value = 186;
-            else
-                ShowResultsAfterDelay.Checked = false;
-            ConsiderDelay.Checked = Honey.Checked && !ShowResultsAfterDelay.Checked;
+            ConsiderDelay.Checked = Honey.Checked;
             ConsiderDelay_CheckedChanged(null, null);
+            ConsiderDelay.Enabled = !Honey.Checked;
+            if (Honey.Checked)
+            {
+                Timedelay.Value = 186;
+                Timedelay.Enabled = false;
+            }
         }
 
         private void ConsiderDelay_CheckedChanged(object sender, EventArgs e)
@@ -452,6 +454,15 @@ namespace SMEncounterRNGTool
         private void Timedelay_ValueChanged(object sender, EventArgs e)
         {
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
+        }
+        
+        private void NPC_ValueChanged(object sender, EventArgs e)
+        {
+            RNGSearch.npcnumber = (int)NPC.Value + 1;
+            if (NPC.Value == 0)
+                BlinkOnly.Enabled = true;
+            else
+                BlinkOnly.Enabled = BlinkOnly.Checked = false;
         }
         #endregion
 
@@ -544,8 +555,8 @@ namespace SMEncounterRNGTool
             string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
             switch (lindex)
             {
-                case 0: str = "Set Eontimer for" + str + (ConsiderDelay.Checked ? $" Use Honey at {max}F" : ""); break;
-                case 1: str = "计时器设置为" + str + (ConsiderDelay.Checked ? $" 在 {max} 帧用蜂蜜" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (ConsiderDelay.Checked ? $" Hit frame {max}" : ""); break;
+                case 1: str = "计时器设置为" + str + (ConsiderDelay.Checked ? $" 在 {max} 帧按A" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -609,16 +620,10 @@ namespace SMEncounterRNGTool
             int init = 0; // Startindex of Pokemon Generation
 
             if (ConsiderDelay.Checked)
-            {
-                RNGSearch.npcnumber = (int)NPC.Value + 1;
                 RandBuffSize = RNGSearch.npcnumber * RNGSearch.delaytime + 50;
-            }
 
             if (ShowResultsAfterDelay.Checked)
-            {
-                RNGSearch.npcnumber = (int)NPC.Value + 1;
                 RandBuffSize = RNGSearch.npcnumber * RNGSearch.delaytime + 200;
-            }
 
             SFMT sfmt = new SFMT(InitialSeed);
             List<DataGridViewRow> list = new List<DataGridViewRow>();
@@ -806,7 +811,7 @@ namespace SMEncounterRNGTool
                     Item = None_STR[lindex];
             }
 
-            string frameadvance = (ConsiderDelay.Checked) ? RNGSearch.getframeshift((int)Correction.Value).ToString() : "-";
+            string frameadvance = (ConsiderDelay.Checked) ? RNGSearch.getframeshift((int)Correction.Value).ToString("+#;-#;0") : "-";
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
@@ -931,6 +936,5 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
-
     }
 }

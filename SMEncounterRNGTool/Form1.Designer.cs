@@ -184,18 +184,6 @@
             this.Frame_max = new System.Windows.Forms.NumericUpDown();
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
-            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
-            this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
-            this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSV = new System.Windows.Forms.NumericUpDown();
-            this.L_Seed = new System.Windows.Forms.Label();
-            this.L_TSV = new System.Windows.Forms.Label();
-            this.ShinyCharm = new System.Windows.Forms.CheckBox();
-            this.Advanced = new System.Windows.Forms.CheckBox();
-            this.BlogLink = new System.Windows.Forms.LinkLabel();
-            this.Lang = new System.Windows.Forms.ComboBox();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -221,6 +209,18 @@
             this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
+            this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
+            this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSV = new System.Windows.Forms.NumericUpDown();
+            this.L_Seed = new System.Windows.Forms.Label();
+            this.L_TSV = new System.Windows.Forms.Label();
+            this.ShinyCharm = new System.Windows.Forms.CheckBox();
+            this.Advanced = new System.Windows.Forms.CheckBox();
+            this.BlogLink = new System.Windows.Forms.LinkLabel();
+            this.Lang = new System.Windows.Forms.ComboBox();
+            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -1180,6 +1180,7 @@
             this.NPC.Name = "NPC";
             this.NPC.Size = new System.Drawing.Size(38, 22);
             this.NPC.TabIndex = 40;
+            this.NPC.ValueChanged += new System.EventHandler(this.NPC_ValueChanged);
             // 
             // L_NPC
             // 
@@ -1230,7 +1231,7 @@
             // 
             // Slot
             // 
-            this.Slot.Location = new System.Drawing.Point(203, 61);
+            this.Slot.Location = new System.Drawing.Point(200, 61);
             this.Slot.Name = "Slot";
             this.Slot.Size = new System.Drawing.Size(74, 20);
             this.Slot.TabIndex = 55;
@@ -1238,7 +1239,7 @@
             // ShowStats
             // 
             this.ShowStats.AutoSize = true;
-            this.ShowStats.Location = new System.Drawing.Point(203, 254);
+            this.ShowStats.Location = new System.Drawing.Point(200, 254);
             this.ShowStats.Name = "ShowStats";
             this.ShowStats.Size = new System.Drawing.Size(86, 17);
             this.ShowStats.TabIndex = 75;
@@ -1292,7 +1293,7 @@
             // UBOnly
             // 
             this.UBOnly.AutoSize = true;
-            this.UBOnly.Location = new System.Drawing.Point(203, 199);
+            this.UBOnly.Location = new System.Drawing.Point(200, 199);
             this.UBOnly.Name = "UBOnly";
             this.UBOnly.Size = new System.Drawing.Size(77, 17);
             this.UBOnly.TabIndex = 70;
@@ -1303,7 +1304,7 @@
             // L_Slot
             // 
             this.L_Slot.AutoSize = true;
-            this.L_Slot.Location = new System.Drawing.Point(203, 41);
+            this.L_Slot.Location = new System.Drawing.Point(200, 41);
             this.L_Slot.Name = "L_Slot";
             this.L_Slot.Size = new System.Drawing.Size(31, 13);
             this.L_Slot.TabIndex = 69;
@@ -1321,7 +1322,7 @@
             // L_Ability
             // 
             this.L_Ability.AutoSize = true;
-            this.L_Ability.Location = new System.Drawing.Point(203, 142);
+            this.L_Ability.Location = new System.Drawing.Point(200, 142);
             this.L_Ability.Name = "L_Ability";
             this.L_Ability.Size = new System.Drawing.Size(31, 13);
             this.L_Ability.TabIndex = 64;
@@ -1343,7 +1344,7 @@
             "-",
             "1",
             "2"});
-            this.Ability.Location = new System.Drawing.Point(203, 163);
+            this.Ability.Location = new System.Drawing.Point(200, 163);
             this.Ability.Name = "Ability";
             this.Ability.Size = new System.Drawing.Size(74, 21);
             this.Ability.TabIndex = 63;
@@ -1370,7 +1371,7 @@
             // EncounteredOnly
             // 
             this.EncounteredOnly.AutoSize = true;
-            this.EncounteredOnly.Location = new System.Drawing.Point(203, 227);
+            this.EncounteredOnly.Location = new System.Drawing.Point(200, 227);
             this.EncounteredOnly.Name = "EncounteredOnly";
             this.EncounteredOnly.Size = new System.Drawing.Size(86, 17);
             this.EncounteredOnly.TabIndex = 33;
@@ -1435,7 +1436,7 @@
             // L_gender
             // 
             this.L_gender.AutoSize = true;
-            this.L_gender.Location = new System.Drawing.Point(203, 92);
+            this.L_gender.Location = new System.Drawing.Point(200, 92);
             this.L_gender.Name = "L_gender";
             this.L_gender.Size = new System.Drawing.Size(31, 13);
             this.L_gender.TabIndex = 39;
@@ -1444,7 +1445,7 @@
             // Gender
             // 
             this.Gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Gender.Location = new System.Drawing.Point(203, 113);
+            this.Gender.Location = new System.Drawing.Point(200, 113);
             this.Gender.Name = "Gender";
             this.Gender.Size = new System.Drawing.Size(74, 21);
             this.Gender.TabIndex = 38;
@@ -2166,135 +2167,6 @@
             this.DGV.TabIndex = 2;
             this.DGV.DoubleClick += new System.EventHandler(this.SetTargetFrame_Click);
             // 
-            // DGVMenuStrip
-            // 
-            this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SetTargetFrame,
-            this.SHControlPanel,
-            this.HighLightFrameAfter});
-            this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 70);
-            // 
-            // SetTargetFrame
-            // 
-            this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
-            this.SetTargetFrame.Text = "设为目标帧";
-            this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
-            // 
-            // SHControlPanel
-            // 
-            this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
-            this.SHControlPanel.Text = "显示/隐藏控制面板";
-            this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
-            // 
-            // HighLightFrameAfter
-            // 
-            this.HighLightFrameAfter.Name = "HighLightFrameAfter";
-            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
-            this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
-            this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
-            // 
-            // TSV
-            // 
-            this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSV.Location = new System.Drawing.Point(971, 9);
-            this.TSV.Maximum = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.TSV.Name = "TSV";
-            this.TSV.Size = new System.Drawing.Size(54, 22);
-            this.TSV.TabIndex = 1;
-            this.TSV.ValueChanged += new System.EventHandler(this.TSV_ValueChanged);
-            // 
-            // L_Seed
-            // 
-            this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(807, 14);
-            this.L_Seed.Name = "L_Seed";
-            this.L_Seed.Size = new System.Drawing.Size(32, 13);
-            this.L_Seed.TabIndex = 2;
-            this.L_Seed.Text = "Seed";
-            // 
-            // L_TSV
-            // 
-            this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.L_TSV.AutoSize = true;
-            this.L_TSV.Location = new System.Drawing.Point(933, 14);
-            this.L_TSV.Name = "L_TSV";
-            this.L_TSV.Size = new System.Drawing.Size(28, 13);
-            this.L_TSV.TabIndex = 3;
-            this.L_TSV.Text = "TSV";
-            // 
-            // ShinyCharm
-            // 
-            this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShinyCharm.AutoSize = true;
-            this.ShinyCharm.Location = new System.Drawing.Point(1056, 12);
-            this.ShinyCharm.Name = "ShinyCharm";
-            this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
-            this.ShinyCharm.TabIndex = 4;
-            this.ShinyCharm.Text = "闪耀护符";
-            this.ShinyCharm.UseVisualStyleBackColor = true;
-            this.ShinyCharm.CheckedChanged += new System.EventHandler(this.ShinyCharm_CheckedChanged);
-            // 
-            // Advanced
-            // 
-            this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Advanced.AutoSize = true;
-            this.Advanced.Location = new System.Drawing.Point(1136, 12);
-            this.Advanced.Name = "Advanced";
-            this.Advanced.Size = new System.Drawing.Size(74, 17);
-            this.Advanced.TabIndex = 5;
-            this.Advanced.Text = "高级模式";
-            this.Advanced.UseVisualStyleBackColor = true;
-            this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
-            // 
-            // BlogLink
-            // 
-            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(603, 14);
-            this.BlogLink.Name = "BlogLink";
-            this.BlogLink.Size = new System.Drawing.Size(55, 13);
-            this.BlogLink.TabIndex = 6;
-            this.BlogLink.TabStop = true;
-            this.BlogLink.Text = "使用指南";
-            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
-            // 
-            // Lang
-            // 
-            this.Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Lang.FormattingEnabled = true;
-            this.Lang.Items.AddRange(new object[] {
-            "English",
-            "简体中文"});
-            this.Lang.Location = new System.Drawing.Point(716, 10);
-            this.Lang.Name = "Lang";
-            this.Lang.Size = new System.Drawing.Size(76, 21);
-            this.Lang.TabIndex = 7;
-            this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
-            // 
-            // Seed
-            // 
-            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(845, 9);
-            this.Seed.Name = "Seed";
-            this.Seed.Size = new System.Drawing.Size(78, 22);
-            this.Seed.TabIndex = 0;
-            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
-            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
-            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
             // dgv_Frame
             // 
             this.dgv_Frame.HeaderText = "帧数";
@@ -2444,6 +2316,135 @@
             this.M100.HeaderText = "M100";
             this.M100.Name = "M100";
             this.M100.Width = 40;
+            // 
+            // DGVMenuStrip
+            // 
+            this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SetTargetFrame,
+            this.SHControlPanel,
+            this.HighLightFrameAfter});
+            this.DGVMenuStrip.Name = "MenuStrip1";
+            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 70);
+            // 
+            // SetTargetFrame
+            // 
+            this.SetTargetFrame.Name = "SetTargetFrame";
+            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
+            this.SetTargetFrame.Text = "设为目标帧";
+            this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
+            // 
+            // SHControlPanel
+            // 
+            this.SHControlPanel.Name = "SHControlPanel";
+            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
+            this.SHControlPanel.Text = "显示/隐藏控制面板";
+            this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
+            // 
+            // HighLightFrameAfter
+            // 
+            this.HighLightFrameAfter.Name = "HighLightFrameAfter";
+            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
+            this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
+            this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
+            // 
+            // TSV
+            // 
+            this.TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TSV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TSV.Location = new System.Drawing.Point(971, 9);
+            this.TSV.Maximum = new decimal(new int[] {
+            4095,
+            0,
+            0,
+            0});
+            this.TSV.Name = "TSV";
+            this.TSV.Size = new System.Drawing.Size(54, 22);
+            this.TSV.TabIndex = 1;
+            this.TSV.ValueChanged += new System.EventHandler(this.TSV_ValueChanged);
+            // 
+            // L_Seed
+            // 
+            this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.L_Seed.AutoSize = true;
+            this.L_Seed.Location = new System.Drawing.Point(807, 14);
+            this.L_Seed.Name = "L_Seed";
+            this.L_Seed.Size = new System.Drawing.Size(32, 13);
+            this.L_Seed.TabIndex = 2;
+            this.L_Seed.Text = "Seed";
+            // 
+            // L_TSV
+            // 
+            this.L_TSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.L_TSV.AutoSize = true;
+            this.L_TSV.Location = new System.Drawing.Point(933, 14);
+            this.L_TSV.Name = "L_TSV";
+            this.L_TSV.Size = new System.Drawing.Size(28, 13);
+            this.L_TSV.TabIndex = 3;
+            this.L_TSV.Text = "TSV";
+            // 
+            // ShinyCharm
+            // 
+            this.ShinyCharm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ShinyCharm.AutoSize = true;
+            this.ShinyCharm.Location = new System.Drawing.Point(1056, 12);
+            this.ShinyCharm.Name = "ShinyCharm";
+            this.ShinyCharm.Size = new System.Drawing.Size(74, 17);
+            this.ShinyCharm.TabIndex = 4;
+            this.ShinyCharm.Text = "闪耀护符";
+            this.ShinyCharm.UseVisualStyleBackColor = true;
+            this.ShinyCharm.CheckedChanged += new System.EventHandler(this.ShinyCharm_CheckedChanged);
+            // 
+            // Advanced
+            // 
+            this.Advanced.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Advanced.AutoSize = true;
+            this.Advanced.Location = new System.Drawing.Point(1136, 12);
+            this.Advanced.Name = "Advanced";
+            this.Advanced.Size = new System.Drawing.Size(74, 17);
+            this.Advanced.TabIndex = 5;
+            this.Advanced.Text = "高级模式";
+            this.Advanced.UseVisualStyleBackColor = true;
+            this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
+            // 
+            // BlogLink
+            // 
+            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BlogLink.AutoSize = true;
+            this.BlogLink.Location = new System.Drawing.Point(603, 14);
+            this.BlogLink.Name = "BlogLink";
+            this.BlogLink.Size = new System.Drawing.Size(55, 13);
+            this.BlogLink.TabIndex = 6;
+            this.BlogLink.TabStop = true;
+            this.BlogLink.Text = "使用指南";
+            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
+            // 
+            // Lang
+            // 
+            this.Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Lang.FormattingEnabled = true;
+            this.Lang.Items.AddRange(new object[] {
+            "English",
+            "简体中文"});
+            this.Lang.Location = new System.Drawing.Point(716, 10);
+            this.Lang.Name = "Lang";
+            this.Lang.Size = new System.Drawing.Size(76, 21);
+            this.Lang.TabIndex = 7;
+            this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // Seed
+            // 
+            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Seed.Hexadecimal = true;
+            this.Seed.Location = new System.Drawing.Point(845, 9);
+            this.Seed.Name = "Seed";
+            this.Seed.Size = new System.Drawing.Size(78, 22);
+            this.Seed.TabIndex = 0;
+            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
+            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
+            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
             // Form1
             // 

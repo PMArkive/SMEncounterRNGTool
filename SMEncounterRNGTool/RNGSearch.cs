@@ -24,7 +24,7 @@ namespace SMEncounterRNGTool
         public int gender_ratio;
 
         public static int delaytime = 93; //For honey 186F =3.1s
-        public static int npcnumber = 0;
+        public static int npcnumber = 1;
 
         public class RNGResult
         {
