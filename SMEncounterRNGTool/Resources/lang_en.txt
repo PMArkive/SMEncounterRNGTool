@@ -120,4 +120,4 @@ dgv_PID = PID
 dgv_EC = EC
 ---
 SearchByRand = Search by Current Seed
-SearchByCurrSeed1 = Search
+SearchByCurrSeed = Search

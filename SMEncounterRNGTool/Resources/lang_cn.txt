@@ -120,4 +120,4 @@ dgv_PID = PID
 dgv_EC = 加密常数
 ---
 SearchByRand = 通过当前乱数值检索
-SearchByCurrSeed1 = 检索
+SearchByCurrSeed = 检索
