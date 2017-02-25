@@ -89,9 +89,9 @@ namespace SMEncounterRNGTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DGV.Columns[20].DefaultCellStyle.Font = new Font("Consolas", 9);
-            DGV.Columns[21].DefaultCellStyle.Font = new Font("Consolas", 9);
-            DGV.Columns[22].DefaultCellStyle.Font = new Font("Consolas", 9);
+            DGV.Columns["dgv_Rand"].DefaultCellStyle.Font = new Font("Consolas", 9);
+            DGV.Columns["dgv_PID"].DefaultCellStyle.Font = new Font("Consolas", 9);
+            DGV.Columns["dgv_EC"].DefaultCellStyle.Font = new Font("Consolas", 9);
             Type dgvtype = typeof(DataGridView);
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
@@ -404,7 +404,7 @@ namespace SMEncounterRNGTool
             if (UB.Checked)
             {
                 UB_th.Value = Honey.Checked ? 15 : 30;
-                HoneyCorrection.Value = 3;
+                Correction.Value = 3;
             }
             else
                 UBOnly.Checked = false;
@@ -413,12 +413,12 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
-            ConsiderHoneyCorrection.Visible = ShowResultsAfterHoney.Visible = L_Correction.Visible = HoneyCorrection.Visible = Honey.Checked;
+            Timedelay.Value = 186;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
             if (!Honey.Checked)
-                ShowResultsAfterHoney.Checked = false;
-            ConsiderHoneyCorrection.Checked = Honey.Checked && !ShowResultsAfterHoney.Checked;
+                ShowResultsAfterDelay.Checked = false;
+            ConsiderDelay.Checked = Honey.Checked && !ShowResultsAfterDelay.Checked;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -433,9 +433,9 @@ namespace SMEncounterRNGTool
                 Nature.SelectedIndex = SyncNature.SelectedIndex;
         }
 
-        private void ShowResultsAfterHoney_CheckedChanged(object sender, EventArgs e)
+        private void ShowResultsAfterDelay_CheckedChanged(object sender, EventArgs e)
         {
-            ConsiderHoneyCorrection.Checked = Honey.Checked && !ShowResultsAfterHoney.Checked;
+            HighLightFrameAfter.Visible = ConsiderDelay.Checked = !ShowResultsAfterDelay.Checked;
         }
 
         private void SearchMethod_CheckedChanged(object sender, EventArgs e)
@@ -459,7 +459,7 @@ namespace SMEncounterRNGTool
             int n_count = 0;
 
             int[] remain_frame = new int[NPC_n];
-            //total_frame[0] Start total_frame[1] Duration
+            //total_frame[0] Start; total_frame[1] Duration
             int[] total_frame = new int[2];
             bool[] blink_flag = new bool[NPC_n];
 
@@ -509,17 +509,17 @@ namespace SMEncounterRNGTool
             TimeResult.Items.Clear();
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
-            int honeytime = RNGSearch.honeytime;
+            int delaytime = RNGSearch.delaytime;
             int[] tmptimer = new int[2];
-            if (ConsiderHoneyCorrection.Checked)
+            if (ConsiderDelay.Checked)
             {
-                for (int tmp = max - (int)(NPC.Value + 1) * honeytime; tmp <= max; tmp++)
+                for (int tmp = max - (int)(NPC.Value + 1) * delaytime; tmp <= max; tmp++)
                 {
                     tmptimer = CalcFrame(tmp, max);
-                    if ((tmptimer[0] + tmptimer[1] > honeytime) && (tmptimer[0] <= honeytime))
-                        CalcTime_Output(min, tmp - (int)HoneyCorrection.Value);
-                    if ((tmptimer[0] == honeytime) && (tmptimer[1] == 0))
-                        CalcTime_Output(min, tmp - (int)HoneyCorrection.Value);
+                    if ((tmptimer[0] + tmptimer[1] > delaytime) && (tmptimer[0] <= delaytime))
+                        CalcTime_Output(min, tmp - (int)Correction.Value);
+                    if ((tmptimer[0] == delaytime) && (tmptimer[1] == 0))
+                        CalcTime_Output(min, tmp - (int)Correction.Value);
                 }
             }
             else
@@ -535,8 +535,8 @@ namespace SMEncounterRNGTool
             string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
             switch (lindex)
             {
-                case 0: str = "Set Eontimer for" + str + (ConsiderHoneyCorrection.Checked ? $" Use Honey at {max}F" : ""); break;
-                case 1: str = "计时器设置为" + str + (ConsiderHoneyCorrection.Checked ? $" 在 {max} 帧用蜂蜜" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (ConsiderDelay.Checked ? $" Use Honey at {max}F" : ""); break;
+                case 1: str = "计时器设置为" + str + (ConsiderDelay.Checked ? $" 在 {max} 帧用蜂蜜" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -597,18 +597,20 @@ namespace SMEncounterRNGTool
                 max = (int)Frame_max.Value;
             }
             int RandBuffSize = 150;
-            int init = 0; // Startindex of Pokemon generation
+            int init = 0; // Startindex of Pokemon Generation
 
-            if (Honey.Checked)
+            if (ConsiderDelay.Checked)
             {
                 RNGSearch.npcnumber = (int)NPC.Value + 1;
-                RandBuffSize = RNGSearch.npcnumber * RNGSearch.honeytime + 50;
+                RNGSearch.delaytime = (int)Timedelay.Value / 2;
+                RandBuffSize = RNGSearch.npcnumber * RNGSearch.delaytime + 50;
             }
 
-            if (ShowResultsAfterHoney.Checked)
+            if (ShowResultsAfterDelay.Checked)
             {
                 RNGSearch.npcnumber = (int)NPC.Value + 1;
-                RandBuffSize = RNGSearch.npcnumber * RNGSearch.honeytime + 200;
+                RNGSearch.delaytime = (int)Timedelay.Value /2 ;
+                RandBuffSize = RNGSearch.npcnumber * RNGSearch.delaytime + 200;
             }
 
             SFMT sfmt = new SFMT(InitialSeed);
@@ -631,19 +633,22 @@ namespace SMEncounterRNGTool
 
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
-                if (ShowResultsAfterHoney.Checked)
-                    init = RNGSearch.getframeshift((int)HoneyCorrection.Value);
+                if (ShowResultsAfterDelay.Checked)
+                    init = RNGSearch.getframeshift((int)Correction.Value);
 
                 RNGSearch.RNGResult result = rng.Generate(init);
 
-                switch (blink_flag)
+                if (NPC.Value == 0)
                 {
-                    case 0:
-                        if (result.Blink == 1) blink_flag = 1; break;
-                    case 1:
-                        blink_flag = (result.row_r % 3) == 0 ? 36 : 30; result.Blink = 5; break;
-                    default:
-                        result.Blink = blink_flag; blink_flag = 0; break;
+                    switch (blink_flag)
+                    {
+                        case 0:
+                            if (result.Blink == 1) blink_flag = 1; break;
+                        case 1:
+                            blink_flag = (result.row_r % 3) == 0 ? 36 : 30; result.Blink = 5; break;
+                        default:
+                            result.Blink = blink_flag; blink_flag = 0; break;
+                    }
                 }
 
                 if (!frameMatch(result, setting))
@@ -794,7 +799,7 @@ namespace SMEncounterRNGTool
                     Item = None_STR[lindex];
             }
 
-            string Honeyframeadvance = (Honey.Checked) ? RNGSearch.getframeshift((int)HoneyCorrection.Value).ToString() : "-";
+            string frameadvance = (ConsiderDelay.Checked) ? RNGSearch.getframeshift((int)Correction.Value).ToString() : "-";
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
@@ -808,7 +813,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), Honeyframeadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
                 randstr, PID, EC, result.row_r % 100
                 );
 
@@ -837,7 +842,7 @@ namespace SMEncounterRNGTool
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
             if (Poke.SelectedIndex > 12)
-                HoneyCorrection.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - 13];
+                Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - 13];
             switch (Poke.SelectedIndex)
             {
                 case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
@@ -859,7 +864,44 @@ namespace SMEncounterRNGTool
             }
         }
 
-        private void SearchByCurrSeed1_Click(object sender, EventArgs e)
+        private void HideControlPanel(object sender, EventArgs e)
+        {
+            if (ControlPanel.Visible)
+            {
+                ControlPanel.Visible = false;
+                DGV.Height += ControlPanel.Height;
+                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y - ControlPanel.Height);
+            }
+            else
+            {
+                ControlPanel.Visible = true;
+                DGV.Height -= ControlPanel.Height;
+                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y + ControlPanel.Height);
+            }
+        }
+
+        private void HighLightFrameAfter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int FrameAfter = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Frame"].Value) + Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Delay"].Value);
+                int currentrowindex = DGV.CurrentRow.Index;
+                for (int i = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Delay"].Value); i > 0; i--)
+                {
+                    if (FrameAfter == Convert.ToInt32(DGV.Rows[currentrowindex + i].Cells[0].Value))
+                    {
+                        DGV.Rows[currentrowindex + i].DefaultCellStyle.BackColor = Color.Yellow;
+                        return;
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                Error(NOSELECTION_STR[lindex]);
+            }
+        }
+
+        private void SearchByCurrSeed_Click(object sender, EventArgs e)
         {
             SFMT sfmt = new SFMT((uint)Seed.Value);
             for (int i = 0; i < Frame_min.Value; i++)
@@ -882,21 +924,5 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
-
-        private void HideControlPanel(object sender, EventArgs e)
-        {
-            if (ControlPanel.Visible)
-            {
-                ControlPanel.Visible = false;
-                DGV.Height += ControlPanel.Height;
-                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y - ControlPanel.Height);
-            }
-            else
-            {
-                ControlPanel.Visible = true;
-                DGV.Height -= ControlPanel.Height;
-                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y + ControlPanel.Height);
-            }
-        }
     }
 }

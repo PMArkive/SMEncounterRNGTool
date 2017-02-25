@@ -83,16 +83,17 @@ L_NPC = NPC数
 AroundTarget = 目标帧 ±100F
 L_frame = 帧数范围
 L_Framecorrection = 帧数修正
-ShowResultsAfterHoney = 显示甜甜蜜后结果
+ShowResultsAfterDelay = 显示延时后结果
 ---
 TimeBox = 时间计算
 L_time = 计时范围
 CalcTime = 计算
-ConsiderHoneyCorrection = 考虑甜甜蜜修正
+ConsiderDelay = 考虑时间延迟
 L_Correction = 修正
 ---
 SetTargetFrame = 设为目标帧
 SHControlPanel = 显示/隐藏控制面板
+HighLightFrameAfter = 高亮延时后击中帧
 dgv_Frame = 帧
 dgv_deviation = 偏移
 dgv_blink = 眨眼

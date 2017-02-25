@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchSeed = new System.Windows.Forms.TabPage();
             this.BySaveScreen = new System.Windows.Forms.RadioButton();
@@ -97,13 +97,14 @@
             this.SearchByRand = new System.Windows.Forms.GroupBox();
             this.CurrSeed = new System.Windows.Forms.TextBox();
             this.Result_Text = new System.Windows.Forms.Label();
-            this.SearchByCurrSeed1 = new System.Windows.Forms.Button();
+            this.SearchByCurrSeed = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
-            this.ConsiderHoneyCorrection = new System.Windows.Forms.CheckBox();
+            this.Timedelay = new System.Windows.Forms.NumericUpDown();
+            this.ConsiderDelay = new System.Windows.Forms.CheckBox();
             this.TimeResult = new System.Windows.Forms.ListBox();
             this.L_Correction = new System.Windows.Forms.Label();
             this.L_time = new System.Windows.Forms.Label();
-            this.HoneyCorrection = new System.Windows.Forms.NumericUpDown();
+            this.Correction = new System.Windows.Forms.NumericUpDown();
             this.Time_min = new System.Windows.Forms.NumericUpDown();
             this.Time_max = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -174,7 +175,7 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
-            this.ShowResultsAfterHoney = new System.Windows.Forms.CheckBox();
+            this.ShowResultsAfterDelay = new System.Windows.Forms.CheckBox();
             this.L_Framecorrection = new System.Windows.Forms.Label();
             this.Framecorrection = new System.Windows.Forms.NumericUpDown();
             this.AroundTarget = new System.Windows.Forms.CheckBox();
@@ -183,17 +184,6 @@
             this.Frame_max = new System.Windows.Forms.NumericUpDown();
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
-            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
-            this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSV = new System.Windows.Forms.NumericUpDown();
-            this.L_Seed = new System.Windows.Forms.Label();
-            this.L_TSV = new System.Windows.Forms.Label();
-            this.ShinyCharm = new System.Windows.Forms.CheckBox();
-            this.Advanced = new System.Windows.Forms.CheckBox();
-            this.BlogLink = new System.Windows.Forms.LinkLabel();
-            this.Lang = new System.Windows.Forms.ComboBox();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -207,7 +197,7 @@
             this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_honey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -219,6 +209,18 @@
             this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.M100 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
+            this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
+            this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSV = new System.Windows.Forms.NumericUpDown();
+            this.L_Seed = new System.Windows.Forms.Label();
+            this.L_TSV = new System.Windows.Forms.Label();
+            this.ShinyCharm = new System.Windows.Forms.CheckBox();
+            this.Advanced = new System.Windows.Forms.CheckBox();
+            this.BlogLink = new System.Windows.Forms.LinkLabel();
+            this.Lang = new System.Windows.Forms.ComboBox();
+            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -233,7 +235,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             this.SearchByRand.SuspendLayout();
             this.TimeBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.HoneyCorrection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Correction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).BeginInit();
@@ -981,7 +984,7 @@
             // 
             this.SearchByRand.Controls.Add(this.CurrSeed);
             this.SearchByRand.Controls.Add(this.Result_Text);
-            this.SearchByRand.Controls.Add(this.SearchByCurrSeed1);
+            this.SearchByRand.Controls.Add(this.SearchByCurrSeed);
             this.SearchByRand.Location = new System.Drawing.Point(817, 216);
             this.SearchByRand.Name = "SearchByRand";
             this.SearchByRand.Size = new System.Drawing.Size(388, 75);
@@ -1005,23 +1008,24 @@
             this.Result_Text.TabIndex = 53;
             this.Result_Text.Text = "- F";
             // 
-            // SearchByCurrSeed1
+            // SearchByCurrSeed
             // 
-            this.SearchByCurrSeed1.Location = new System.Drawing.Point(163, 34);
-            this.SearchByCurrSeed1.Name = "SearchByCurrSeed1";
-            this.SearchByCurrSeed1.Size = new System.Drawing.Size(59, 23);
-            this.SearchByCurrSeed1.TabIndex = 53;
-            this.SearchByCurrSeed1.Text = "检索";
-            this.SearchByCurrSeed1.UseVisualStyleBackColor = true;
-            this.SearchByCurrSeed1.Click += new System.EventHandler(this.SearchByCurrSeed1_Click);
+            this.SearchByCurrSeed.Location = new System.Drawing.Point(163, 34);
+            this.SearchByCurrSeed.Name = "SearchByCurrSeed";
+            this.SearchByCurrSeed.Size = new System.Drawing.Size(59, 23);
+            this.SearchByCurrSeed.TabIndex = 53;
+            this.SearchByCurrSeed.Text = "检索";
+            this.SearchByCurrSeed.UseVisualStyleBackColor = true;
+            this.SearchByCurrSeed.Click += new System.EventHandler(this.SearchByCurrSeed_Click);
             // 
             // TimeBox
             // 
-            this.TimeBox.Controls.Add(this.ConsiderHoneyCorrection);
+            this.TimeBox.Controls.Add(this.Timedelay);
+            this.TimeBox.Controls.Add(this.ConsiderDelay);
             this.TimeBox.Controls.Add(this.TimeResult);
             this.TimeBox.Controls.Add(this.L_Correction);
             this.TimeBox.Controls.Add(this.L_time);
-            this.TimeBox.Controls.Add(this.HoneyCorrection);
+            this.TimeBox.Controls.Add(this.Correction);
             this.TimeBox.Controls.Add(this.Time_min);
             this.TimeBox.Controls.Add(this.Time_max);
             this.TimeBox.Controls.Add(this.label8);
@@ -1035,15 +1039,34 @@
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
             // 
-            // ConsiderHoneyCorrection
+            // Timedelay
             // 
-            this.ConsiderHoneyCorrection.AutoSize = true;
-            this.ConsiderHoneyCorrection.Location = new System.Drawing.Point(12, 64);
-            this.ConsiderHoneyCorrection.Name = "ConsiderHoneyCorrection";
-            this.ConsiderHoneyCorrection.Size = new System.Drawing.Size(110, 17);
-            this.ConsiderHoneyCorrection.TabIndex = 63;
-            this.ConsiderHoneyCorrection.Text = "考虑甜甜蜜修正";
-            this.ConsiderHoneyCorrection.UseVisualStyleBackColor = true;
+            this.Timedelay.AccessibleName = "";
+            this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Timedelay.Location = new System.Drawing.Point(135, 59);
+            this.Timedelay.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.Timedelay.Name = "Timedelay";
+            this.Timedelay.Size = new System.Drawing.Size(55, 22);
+            this.Timedelay.TabIndex = 64;
+            this.Timedelay.Value = new decimal(new int[] {
+            186,
+            0,
+            0,
+            0});
+            // 
+            // ConsiderDelay
+            // 
+            this.ConsiderDelay.AutoSize = true;
+            this.ConsiderDelay.Location = new System.Drawing.Point(14, 62);
+            this.ConsiderDelay.Name = "ConsiderDelay";
+            this.ConsiderDelay.Size = new System.Drawing.Size(98, 17);
+            this.ConsiderDelay.TabIndex = 63;
+            this.ConsiderDelay.Text = "考虑时间延迟";
+            this.ConsiderDelay.UseVisualStyleBackColor = true;
             // 
             // TimeResult
             // 
@@ -1056,7 +1079,7 @@
             // L_Correction
             // 
             this.L_Correction.AutoSize = true;
-            this.L_Correction.Location = new System.Drawing.Point(185, 65);
+            this.L_Correction.Location = new System.Drawing.Point(212, 63);
             this.L_Correction.Name = "L_Correction";
             this.L_Correction.Size = new System.Drawing.Size(31, 13);
             this.L_Correction.TabIndex = 52;
@@ -1071,20 +1094,20 @@
             this.L_time.TabIndex = 40;
             this.L_time.Text = "计时范围";
             // 
-            // HoneyCorrection
+            // Correction
             // 
-            this.HoneyCorrection.AccessibleName = "";
-            this.HoneyCorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HoneyCorrection.Location = new System.Drawing.Point(242, 61);
-            this.HoneyCorrection.Maximum = new decimal(new int[] {
+            this.Correction.AccessibleName = "";
+            this.Correction.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Correction.Location = new System.Drawing.Point(269, 59);
+            this.Correction.Maximum = new decimal(new int[] {
             50,
             0,
             0,
             0});
-            this.HoneyCorrection.Name = "HoneyCorrection";
-            this.HoneyCorrection.Size = new System.Drawing.Size(38, 22);
-            this.HoneyCorrection.TabIndex = 51;
-            this.HoneyCorrection.Value = new decimal(new int[] {
+            this.Correction.Name = "Correction";
+            this.Correction.Size = new System.Drawing.Size(38, 22);
+            this.Correction.TabIndex = 51;
+            this.Correction.Value = new decimal(new int[] {
             3,
             0,
             0,
@@ -1954,7 +1977,7 @@
             // 
             // RNGInfo
             // 
-            this.RNGInfo.Controls.Add(this.ShowResultsAfterHoney);
+            this.RNGInfo.Controls.Add(this.ShowResultsAfterDelay);
             this.RNGInfo.Controls.Add(this.L_Framecorrection);
             this.RNGInfo.Controls.Add(this.Framecorrection);
             this.RNGInfo.Controls.Add(this.AroundTarget);
@@ -1969,16 +1992,16 @@
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
             // 
-            // ShowResultsAfterHoney
+            // ShowResultsAfterDelay
             // 
-            this.ShowResultsAfterHoney.AutoSize = true;
-            this.ShowResultsAfterHoney.Location = new System.Drawing.Point(164, 69);
-            this.ShowResultsAfterHoney.Name = "ShowResultsAfterHoney";
-            this.ShowResultsAfterHoney.Size = new System.Drawing.Size(122, 17);
-            this.ShowResultsAfterHoney.TabIndex = 62;
-            this.ShowResultsAfterHoney.Text = "显示甜甜蜜后结果";
-            this.ShowResultsAfterHoney.UseVisualStyleBackColor = true;
-            this.ShowResultsAfterHoney.CheckedChanged += new System.EventHandler(this.ShowResultsAfterHoney_CheckedChanged);
+            this.ShowResultsAfterDelay.AutoSize = true;
+            this.ShowResultsAfterDelay.Location = new System.Drawing.Point(164, 69);
+            this.ShowResultsAfterDelay.Name = "ShowResultsAfterDelay";
+            this.ShowResultsAfterDelay.Size = new System.Drawing.Size(110, 17);
+            this.ShowResultsAfterDelay.TabIndex = 62;
+            this.ShowResultsAfterDelay.Text = "显示延时后结果";
+            this.ShowResultsAfterDelay.UseVisualStyleBackColor = true;
+            this.ShowResultsAfterDelay.CheckedChanged += new System.EventHandler(this.ShowResultsAfterDelay_CheckedChanged);
             // 
             // L_Framecorrection
             // 
@@ -2080,14 +2103,14 @@
             this.DGV.AllowUserToResizeColumns = false;
             this.DGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Frame,
@@ -2103,7 +2126,7 @@
             this.dgv_synced,
             this.dgv_needle,
             this.dgv_psv,
-            this.dgv_honey,
+            this.dgv_Delay,
             this.dgv_ubvalue,
             this.dgv_slot,
             this.dgv_lv,
@@ -2116,24 +2139,24 @@
             this.dgv_EC,
             this.M100});
             this.DGV.ContextMenuStrip = this.DGVMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV.DefaultCellStyle = dataGridViewCellStyle5;
             this.DGV.Location = new System.Drawing.Point(3, 303);
             this.DGV.Name = "DGV";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV.RowHeadersWidth = 18;
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
@@ -2142,27 +2165,185 @@
             this.DGV.TabIndex = 2;
             this.DGV.DoubleClick += new System.EventHandler(this.SetTargetFrame_Click);
             // 
+            // dgv_Frame
+            // 
+            this.dgv_Frame.HeaderText = "帧数";
+            this.dgv_Frame.Name = "dgv_Frame";
+            this.dgv_Frame.Width = 55;
+            // 
+            // dgv_deviation
+            // 
+            this.dgv_deviation.HeaderText = "偏差";
+            this.dgv_deviation.Name = "dgv_deviation";
+            this.dgv_deviation.Width = 55;
+            // 
+            // dgv_blink
+            // 
+            this.dgv_blink.HeaderText = "眨眼";
+            this.dgv_blink.Name = "dgv_blink";
+            this.dgv_blink.Width = 40;
+            // 
+            // dgv_H
+            // 
+            this.dgv_H.HeaderText = "HP";
+            this.dgv_H.Name = "dgv_H";
+            this.dgv_H.Width = 30;
+            // 
+            // dgv_A
+            // 
+            this.dgv_A.HeaderText = "Atk";
+            this.dgv_A.Name = "dgv_A";
+            this.dgv_A.Width = 30;
+            // 
+            // dgv_B
+            // 
+            this.dgv_B.HeaderText = "Def";
+            this.dgv_B.Name = "dgv_B";
+            this.dgv_B.Width = 30;
+            // 
+            // dgv_C
+            // 
+            this.dgv_C.HeaderText = "SpA";
+            this.dgv_C.Name = "dgv_C";
+            this.dgv_C.Width = 30;
+            // 
+            // dgv_D
+            // 
+            this.dgv_D.HeaderText = "SpD";
+            this.dgv_D.Name = "dgv_D";
+            this.dgv_D.Width = 30;
+            // 
+            // dgv_S
+            // 
+            this.dgv_S.HeaderText = "Spe";
+            this.dgv_S.Name = "dgv_S";
+            this.dgv_S.Width = 30;
+            // 
+            // dgv_nature
+            // 
+            this.dgv_nature.HeaderText = "性格";
+            this.dgv_nature.Name = "dgv_nature";
+            this.dgv_nature.Width = 55;
+            // 
+            // dgv_synced
+            // 
+            this.dgv_synced.HeaderText = "同步";
+            this.dgv_synced.Name = "dgv_synced";
+            this.dgv_synced.Width = 45;
+            // 
+            // dgv_needle
+            // 
+            this.dgv_needle.HeaderText = "针";
+            this.dgv_needle.Name = "dgv_needle";
+            this.dgv_needle.Width = 35;
+            // 
+            // dgv_psv
+            // 
+            this.dgv_psv.HeaderText = "PSV";
+            this.dgv_psv.Name = "dgv_psv";
+            this.dgv_psv.Width = 40;
+            // 
+            // dgv_Delay
+            // 
+            this.dgv_Delay.HeaderText = "延迟";
+            this.dgv_Delay.Name = "dgv_Delay";
+            this.dgv_Delay.Width = 40;
+            // 
+            // dgv_ubvalue
+            // 
+            this.dgv_ubvalue.HeaderText = "UB";
+            this.dgv_ubvalue.Name = "dgv_ubvalue";
+            this.dgv_ubvalue.Width = 35;
+            // 
+            // dgv_slot
+            // 
+            this.dgv_slot.HeaderText = "种类";
+            this.dgv_slot.Name = "dgv_slot";
+            this.dgv_slot.Width = 40;
+            // 
+            // dgv_lv
+            // 
+            this.dgv_lv.HeaderText = "Lv";
+            this.dgv_lv.Name = "dgv_lv";
+            this.dgv_lv.Width = 30;
+            // 
+            // dgv_gender
+            // 
+            this.dgv_gender.HeaderText = "性别";
+            this.dgv_gender.Name = "dgv_gender";
+            this.dgv_gender.Width = 45;
+            // 
+            // dgv_ability
+            // 
+            this.dgv_ability.HeaderText = "特性";
+            this.dgv_ability.Name = "dgv_ability";
+            this.dgv_ability.Width = 45;
+            // 
+            // dgv_item
+            // 
+            this.dgv_item.HeaderText = "道具";
+            this.dgv_item.Name = "dgv_item";
+            this.dgv_item.Width = 45;
+            // 
+            // dgv_encounter
+            // 
+            this.dgv_encounter.HeaderText = "遇敌";
+            this.dgv_encounter.Name = "dgv_encounter";
+            this.dgv_encounter.Width = 45;
+            // 
+            // dgv_rand
+            // 
+            this.dgv_rand.HeaderText = "乱数值";
+            this.dgv_rand.Name = "dgv_rand";
+            this.dgv_rand.Width = 125;
+            // 
+            // dgv_pid
+            // 
+            this.dgv_pid.HeaderText = "PID";
+            this.dgv_pid.Name = "dgv_pid";
+            this.dgv_pid.Width = 65;
+            // 
+            // dgv_EC
+            // 
+            this.dgv_EC.HeaderText = "加密常数";
+            this.dgv_EC.Name = "dgv_EC";
+            this.dgv_EC.Width = 65;
+            // 
+            // M100
+            // 
+            this.M100.HeaderText = "M100";
+            this.M100.Name = "M100";
+            this.M100.Width = 40;
+            // 
             // DGVMenuStrip
             // 
             this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SetTargetFrame,
-            this.SHControlPanel});
+            this.SHControlPanel,
+            this.HighLightFrameAfter});
             this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(176, 48);
-            this.DGVMenuStrip.Click += new System.EventHandler(this.HideControlPanel);
+            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 70);
             // 
             // SetTargetFrame
             // 
             this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(175, 22);
+            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
             this.SetTargetFrame.Text = "设为目标帧";
             this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
             // 
             // SHControlPanel
             // 
             this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(175, 22);
+            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
             this.SHControlPanel.Text = "显示/隐藏控制面板";
+            this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
+            // 
+            // HighLightFrameAfter
+            // 
+            this.HighLightFrameAfter.Name = "HighLightFrameAfter";
+            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
+            this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
+            this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
             // 
             // TSV
             // 
@@ -2263,156 +2444,6 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
-            // dgv_Frame
-            // 
-            this.dgv_Frame.HeaderText = "帧数";
-            this.dgv_Frame.Name = "dgv_Frame";
-            this.dgv_Frame.Width = 55;
-            // 
-            // dgv_deviation
-            // 
-            this.dgv_deviation.HeaderText = "偏差";
-            this.dgv_deviation.Name = "dgv_deviation";
-            this.dgv_deviation.Width = 55;
-            // 
-            // dgv_blink
-            // 
-            this.dgv_blink.HeaderText = "眨眼";
-            this.dgv_blink.Name = "dgv_blink";
-            this.dgv_blink.Width = 40;
-            // 
-            // dgv_H
-            // 
-            this.dgv_H.HeaderText = "HP";
-            this.dgv_H.Name = "dgv_H";
-            this.dgv_H.Width = 30;
-            // 
-            // dgv_A
-            // 
-            this.dgv_A.HeaderText = "Atk";
-            this.dgv_A.Name = "dgv_A";
-            this.dgv_A.Width = 30;
-            // 
-            // dgv_B
-            // 
-            this.dgv_B.HeaderText = "Def";
-            this.dgv_B.Name = "dgv_B";
-            this.dgv_B.Width = 30;
-            // 
-            // dgv_C
-            // 
-            this.dgv_C.HeaderText = "SpA";
-            this.dgv_C.Name = "dgv_C";
-            this.dgv_C.Width = 30;
-            // 
-            // dgv_D
-            // 
-            this.dgv_D.HeaderText = "SpD";
-            this.dgv_D.Name = "dgv_D";
-            this.dgv_D.Width = 30;
-            // 
-            // dgv_S
-            // 
-            this.dgv_S.HeaderText = "Spe";
-            this.dgv_S.Name = "dgv_S";
-            this.dgv_S.Width = 30;
-            // 
-            // dgv_nature
-            // 
-            this.dgv_nature.HeaderText = "性格";
-            this.dgv_nature.Name = "dgv_nature";
-            this.dgv_nature.Width = 55;
-            // 
-            // dgv_synced
-            // 
-            this.dgv_synced.HeaderText = "同步";
-            this.dgv_synced.Name = "dgv_synced";
-            this.dgv_synced.Width = 45;
-            // 
-            // dgv_needle
-            // 
-            this.dgv_needle.HeaderText = "针";
-            this.dgv_needle.Name = "dgv_needle";
-            this.dgv_needle.Width = 35;
-            // 
-            // dgv_psv
-            // 
-            this.dgv_psv.HeaderText = "PSV";
-            this.dgv_psv.Name = "dgv_psv";
-            this.dgv_psv.Width = 40;
-            // 
-            // dgv_honey
-            // 
-            this.dgv_honey.HeaderText = "蜜";
-            this.dgv_honey.Name = "dgv_honey";
-            this.dgv_honey.Width = 40;
-            // 
-            // dgv_ubvalue
-            // 
-            this.dgv_ubvalue.HeaderText = "UB";
-            this.dgv_ubvalue.Name = "dgv_ubvalue";
-            this.dgv_ubvalue.Width = 35;
-            // 
-            // dgv_slot
-            // 
-            this.dgv_slot.HeaderText = "种类";
-            this.dgv_slot.Name = "dgv_slot";
-            this.dgv_slot.Width = 40;
-            // 
-            // dgv_lv
-            // 
-            this.dgv_lv.HeaderText = "Lv";
-            this.dgv_lv.Name = "dgv_lv";
-            this.dgv_lv.Width = 30;
-            // 
-            // dgv_gender
-            // 
-            this.dgv_gender.HeaderText = "性别";
-            this.dgv_gender.Name = "dgv_gender";
-            this.dgv_gender.Width = 45;
-            // 
-            // dgv_ability
-            // 
-            this.dgv_ability.HeaderText = "特性";
-            this.dgv_ability.Name = "dgv_ability";
-            this.dgv_ability.Width = 45;
-            // 
-            // dgv_item
-            // 
-            this.dgv_item.HeaderText = "道具";
-            this.dgv_item.Name = "dgv_item";
-            this.dgv_item.Width = 45;
-            // 
-            // dgv_encounter
-            // 
-            this.dgv_encounter.HeaderText = "遇敌";
-            this.dgv_encounter.Name = "dgv_encounter";
-            this.dgv_encounter.Width = 45;
-            // 
-            // dgv_rand
-            // 
-            this.dgv_rand.HeaderText = "乱数值";
-            this.dgv_rand.Name = "dgv_rand";
-            this.dgv_rand.Width = 125;
-            // 
-            // dgv_pid
-            // 
-            this.dgv_pid.HeaderText = "PID";
-            this.dgv_pid.Name = "dgv_pid";
-            this.dgv_pid.Width = 65;
-            // 
-            // dgv_EC
-            // 
-            this.dgv_EC.HeaderText = "加密常数";
-            this.dgv_EC.Name = "dgv_EC";
-            this.dgv_EC.Width = 65;
-            // 
-            // M100
-            // 
-            this.M100.HeaderText = "M100";
-            this.M100.Name = "M100";
-            this.M100.Width = 40;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2451,7 +2482,8 @@
             this.SearchByRand.PerformLayout();
             this.TimeBox.ResumeLayout(false);
             this.TimeBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.HoneyCorrection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Correction)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).EndInit();
@@ -2624,7 +2656,7 @@
         private System.Windows.Forms.Label L_Lv_S;
         private System.Windows.Forms.NumericUpDown Lv_Search;
         private System.Windows.Forms.CheckBox UBOnly;
-        private System.Windows.Forms.NumericUpDown HoneyCorrection;
+        private System.Windows.Forms.NumericUpDown Correction;
         private System.Windows.Forms.NumericUpDown UB_th;
         private System.Windows.Forms.Label L_Correction;
         private System.Windows.Forms.Panel StatPanel;
@@ -2644,25 +2676,26 @@
         private System.Windows.Forms.LinkLabel BlogLink;
         private System.Windows.Forms.CheckBox BlinkOnly;
         private System.Windows.Forms.CheckBox ShowStats;
-        private System.Windows.Forms.ContextMenuStrip DGVMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem SetTargetFrame;
         private System.Windows.Forms.GroupBox InputBox;
         private System.Windows.Forms.RadioButton QRInput;
         private System.Windows.Forms.RadioButton BySaveScreen;
         private System.Windows.Forms.GroupBox SearchByRand;
         private System.Windows.Forms.Label Result_Text;
-        private System.Windows.Forms.Button SearchByCurrSeed1;
+        private System.Windows.Forms.Button SearchByCurrSeed;
         private System.Windows.Forms.TextBox CurrSeed;
         private System.Windows.Forms.ComboBox Lang;
         private System.Windows.Forms.ListBox TimeResult;
         private System.Windows.Forms.Panel ControlPanel;
-        private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
         private System.Windows.Forms.Label L_SyncNature;
         private System.Windows.Forms.Label L_UB_th;
         private System.Windows.Forms.Label L_Encounter_th;
-        private System.Windows.Forms.CheckBox ShowResultsAfterHoney;
-        private System.Windows.Forms.CheckBox ConsiderHoneyCorrection;
+        private System.Windows.Forms.CheckBox ShowResultsAfterDelay;
+        private System.Windows.Forms.CheckBox ConsiderDelay;
         private System.Windows.Forms.TextBox Slot;
+        private System.Windows.Forms.ContextMenuStrip DGVMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem SetTargetFrame;
+        private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
+        private System.Windows.Forms.ToolStripMenuItem HighLightFrameAfter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_deviation;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_blink;
@@ -2676,7 +2709,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_synced;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_needle;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_psv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_honey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Delay;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_ubvalue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_slot;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_lv;
@@ -2688,6 +2721,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn M100;
+        private System.Windows.Forms.NumericUpDown Timedelay;
     }
 }
 

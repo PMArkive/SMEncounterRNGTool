@@ -83,16 +83,17 @@ L_NPC = # of NPCs
 AroundTarget = Target ±100F
 L_frame = Frame Range
 L_Framecorrection = Frame Correction
-ShowResultsAfterHoney = Show Results after Honey
+ShowResultsAfterDelay = Show Results after Delay
 ---
 TimeBox = Time Calculator
-ConsiderHoneyCorrection = Consider Honey Correction
+ConsiderDelay = Consider Time Delay
 L_Correction = Correction
 L_time = Timing Range
 CalcTime = Calc
 ---
 SetTargetFrame = Set as Target Frame
 SHControlPanel = Show/Hide Control Panel
+HighLightFrameAfter = Highlight Frame After Delay
 dgv_Frame = Frame
 dgv_deviation = Shift
 dgv_blink = Blink

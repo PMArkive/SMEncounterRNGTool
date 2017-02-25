@@ -23,7 +23,7 @@ namespace SMEncounterRNGTool
         public bool nogender;
         public int gender_ratio;
 
-        public const int honeytime = 93; //186F =3.1s
+        public static int delaytime = 93; //For honey 186F =3.1s
         public static int npcnumber = 0;
 
         public class RNGResult
@@ -204,7 +204,7 @@ namespace SMEncounterRNGTool
         {
             int[] remain_frame = new int[npcnumber];
             bool[] blink_flag = new bool[npcnumber];
-            for (int totalframe = 0; totalframe < honeytime; totalframe++)
+            for (int totalframe = 0; totalframe < delaytime; totalframe++)
             {
                 for (int i = 0; i < npcnumber; i++)
                 {
