@@ -81,9 +81,9 @@ namespace SMEncounterRNGTool
                 this.Nature.Items[i + 1] = this.SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
 
             for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
-                this.Poke.Items[i] = species[SearchSetting.pokedex[i, 0]];
-            this.Poke.Items[9] = this.Poke.Items[9] + "-10%";
-            this.Poke.Items[10] = this.Poke.Items[10] + "-50%";
+                this.Poke.Items[i + 1] = species[SearchSetting.pokedex[i, 0]];
+            this.Poke.Items[10] += "-10%";
+            this.Poke.Items[11] += "-50%";
         }
         #endregion
 
@@ -127,6 +127,7 @@ namespace SMEncounterRNGTool
             Nature.Items.Add("-");
             SyncNature.Items.Add("-");
             HiddenPower.Items.Add("-");
+            Poke.Items.Add("-");
             foreach (string t in SearchSetting.naturestr)
             {
                 Nature.Items.Add("");
@@ -163,6 +164,7 @@ namespace SMEncounterRNGTool
             SyncNature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
+            Poke.SelectedIndex = 0;
 
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
@@ -375,7 +377,6 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Method = Stationary.Checked;
             Properties.Settings.Default.Save();
 
-            AlwaysSynced.Enabled = Stationary.Checked;
             Honey.Checked = Wild.Checked;
             if (Stationary.Checked)
             {
@@ -451,12 +452,12 @@ namespace SMEncounterRNGTool
             StatPanel.Visible = ByStats.Checked;
             ShowStats.Enabled = ShowStats.Checked = ByStats.Checked;
         }
-        
+
         private void Timedelay_ValueChanged(object sender, EventArgs e)
         {
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
         }
-        
+
         private void NPC_ValueChanged(object sender, EventArgs e)
         {
             RNGSearch.npcnumber = (int)NPC.Value + 1;
@@ -621,7 +622,7 @@ namespace SMEncounterRNGTool
             int init = 0; // Startindex of Pokemon Generation
 
             if (ConsiderDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50 , RandBuffSize);
+                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
 
             if (ShowResultsAfterDelay.Checked)
                 RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 200, RandBuffSize);
@@ -724,7 +725,7 @@ namespace SMEncounterRNGTool
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,
                 nogender = GenderRatio.SelectedIndex == 0,
-                PokeLv = (Poke.SelectedIndex == -1) ? -1 : SearchSetting.PokeLevel[Poke.SelectedIndex],
+                PokeLv = (Poke.SelectedIndex == 0) ? -1 : SearchSetting.PokeLevel[Poke.SelectedIndex - 1],
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
@@ -849,24 +850,29 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UB.Checked = Wild.Checked = Poke.SelectedIndex > 12;
-            Stationary.Checked = Poke.SelectedIndex < 13;
-            AlwaysSynced.Checked = (Poke.SelectedIndex > 5) && (Poke.SelectedIndex < 13);
+            const int UB_StartIndex = 14;
+            const int AlwaysSyn_Index = 7;
+            Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
+            Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
+            if (Poke.SelectedIndex == 0) return;
+            UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
+            Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
+            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSyn_Index) && (Poke.SelectedIndex < UB_StartIndex);
             Method_CheckedChanged(null, null);
             for (int i = 0; i < 6; i++)
-                BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex, i + 1];
-            Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex];
-            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex];
-            if (Poke.SelectedIndex > 12)
+                BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
+            Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
+            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex - 1];
+            if (Poke.SelectedIndex >= UB_StartIndex)
             {
-                Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - 13];
+                Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
                 UB_th.Value = 15;
             }
             switch (Poke.SelectedIndex)
             {
-                case 11: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
-                case 12: Fix3v.Checked = false; break;
-                case 20: UB_th.Value = 5; break; //
+                case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
+                case UB_StartIndex - 1: Fix3v.Checked = false; break;
+                case UB_StartIndex + 7: UB_th.Value = 5; break; //
             }
         }
 

@@ -2033,7 +2033,7 @@
             this.Framecorrection.Size = new System.Drawing.Size(35, 22);
             this.Framecorrection.TabIndex = 61;
             this.Framecorrection.Value = new decimal(new int[] {
-            6,
+            5,
             0,
             0,
             0});
