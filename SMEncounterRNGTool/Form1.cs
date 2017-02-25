@@ -415,8 +415,6 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
-            if (UB.Checked)
-                UB_th.Value = Honey.Checked ? 15 : 30;
             ConsiderDelay.Checked = ShowResultsAfterDelay.Checked = Honey.Checked;
             ConsiderDelay_CheckedChanged(null, null);
             ConsiderDelay.Enabled = !Honey.Checked;
@@ -841,7 +839,7 @@ namespace SMEncounterRNGTool
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
                 true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
-                randstr, PID, EC, result.row_r % 100
+                randstr, PID, EC
                 );
 
             if (result.Shiny)
