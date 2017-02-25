@@ -26,6 +26,11 @@ namespace SMEncounterRNGTool
         public static int delaytime = 93; //For honey 186F =3.1s
         public static int npcnumber = 1;
 
+        public static int[] remain_frame;
+        public static bool[] blink_flag;
+
+        public static bool PreProcessed = false;
+
         public class RNGResult
         {
             public int Nature;
@@ -60,7 +65,10 @@ namespace SMEncounterRNGTool
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
-            st.Synchronize = (int)(getrand() % 100) >= 50;
+            if (UB_S)
+                st.Synchronize = blink_process();
+            else
+                st.Synchronize = (int)(getrand() % 100) >= 50;
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
@@ -87,8 +95,8 @@ namespace SMEncounterRNGTool
             }
 
             //Blinking process?
-            if (UB_S)
-                Advance(FrameCorrection);
+            //if (UB_S)
+            //    Advance(FrameCorrection);
 
             //Something
             Advance(60);
@@ -202,8 +210,8 @@ namespace SMEncounterRNGTool
 
         public static int getframeshift(int t_index)
         {
-            int[] remain_frame = new int[npcnumber];
-            bool[] blink_flag = new bool[npcnumber];
+            remain_frame = new int[npcnumber];
+            blink_flag = new bool[npcnumber];
             for (int totalframe = 0; totalframe < delaytime; totalframe++)
             {
                 for (int i = 0; i < npcnumber; i++)
@@ -235,6 +243,50 @@ namespace SMEncounterRNGTool
                 }
             }
             return t_index;
+        }
+
+        public bool blink_process()
+        {
+            bool tmp = false;
+            if (!PreProcessed)
+            {
+                remain_frame = new int[npcnumber];
+                blink_flag = new bool[npcnumber];
+            }
+            for (int totalframe = 0; totalframe < 10; totalframe++)
+            {
+                for (int i = 0; i < npcnumber; i++)
+                {
+                    if (remain_frame[i] > 0)
+                        remain_frame[i]--;
+
+                    if (remain_frame[i] == 0)
+                    {
+                        //Blinking
+                        if (blink_flag[i])
+                        {
+                            if ((int)(getrand() % 3) == 0)
+                                remain_frame[i] = 36;
+                            else
+                                remain_frame[i] = 30;
+                            blink_flag[i] = false;
+                        }
+                        //Not Blinking
+                        else
+                        {
+                            if ((int)(getrand() & 0x7F) == 0)
+                            {
+                                remain_frame[i] = 5;
+                                blink_flag[i] = true;
+                            }
+                        }
+                    }
+                }
+                if (totalframe == 6)
+                    tmp = (int)(getrand() % 100) >= 50;
+            }
+            PreProcessed = false;
+            return tmp;
         }
     }
 }

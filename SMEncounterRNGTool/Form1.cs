@@ -646,7 +646,10 @@ namespace SMEncounterRNGTool
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
                 if (ShowResultsAfterDelay.Checked)
+                {
                     init = RNGSearch.getframeshift((int)Correction.Value);
+                    RNGSearch.PreProcessed = true;
+                }
 
                 RNGSearch.RNGResult result = rng.Generate(init);
 
