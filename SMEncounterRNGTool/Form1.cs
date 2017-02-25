@@ -891,9 +891,9 @@ namespace SMEncounterRNGTool
         {
             try
             {
-                int FrameAfter = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Frame"].Value) + Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Delay"].Value);
+                int FrameAfter = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Frame"].Value) + Convert.ToInt32(DGV.CurrentRow.Cells["dgv_delay"].Value);
                 int currentrowindex = DGV.CurrentRow.Index;
-                for (int i = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Delay"].Value); i > 0; i--)
+                for (int i = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_delay"].Value); i > 0; i--)
                 {
                     if (FrameAfter == Convert.ToInt32(DGV.Rows[currentrowindex + i].Cells[0].Value))
                     {
