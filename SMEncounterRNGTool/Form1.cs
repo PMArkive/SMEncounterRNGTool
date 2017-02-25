@@ -405,7 +405,7 @@ namespace SMEncounterRNGTool
             UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
             if (UB.Checked)
             {
-                UB_th.Value = Honey.Checked ? 15 : 30;
+                UB_th.Value = 30;
                 Correction.Value = 3;
             }
             else
@@ -417,7 +417,7 @@ namespace SMEncounterRNGTool
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
-            ConsiderDelay.Checked = Honey.Checked;
+            ConsiderDelay.Checked = ShowResultsAfterDelay.Checked = Honey.Checked;
             ConsiderDelay_CheckedChanged(null, null);
             ConsiderDelay.Enabled = !Honey.Checked;
             if (Honey.Checked)
@@ -876,13 +876,12 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex >= UB_StartIndex)
             {
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
-                UB_th.Value = 15;
+                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UB_StartIndex];
             }
             switch (Poke.SelectedIndex)
             {
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
                 case UB_StartIndex - 1: Fix3v.Checked = false; break;
-                case UB_StartIndex + 7: UB_th.Value = 5; break; //
             }
         }
 

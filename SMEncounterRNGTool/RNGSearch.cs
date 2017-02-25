@@ -65,19 +65,19 @@ namespace SMEncounterRNGTool
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
-            if (UB_S)
-                st.Synchronize = blink_process(10,6);
-            if (Wild && !UB_S)
-                st.Synchronize = (int)(getrand() % 100) >= 50;
-            if (!Wild)
-                st.Synchronize = blink_process(FrameCorrection, FrameCorrection - 4);
-            if (AlwaysSynchro)
-                st.Synchronize = true;
-
             if (Wild && !Honey)
                 st.Encounter = (int)(getrand() % 100);
             else
                 st.Encounter = -1;
+
+            if (UB_S)
+                st.Synchronize = blink_process(10);
+            if (Wild && !UB_S)
+                st.Synchronize = (int)(getrand() % 100) >= 50;
+            if (!Wild)
+                st.Synchronize = blink_process(FrameCorrection);
+            if (AlwaysSynchro)
+                st.Synchronize = true;
 
             if (Wild && UB && !Honey)
                 st.UbValue = getUBValue();
@@ -248,7 +248,7 @@ namespace SMEncounterRNGTool
             return index;
         }
 
-        private bool blink_process(int t_total, int sync_position)
+        private bool blink_process(int t_total)
         {
             bool tmp = false;
             if (!PreProcessed)
@@ -257,10 +257,11 @@ namespace SMEncounterRNGTool
                 remain_frame = new int[npcnumber];
                 blink_flag = new bool[npcnumber];
             }
-            for (int totalframe = 0; totalframe < t_total; totalframe++)
+            for (int totalframe = 1; totalframe <= t_total; totalframe++)
             {
                 time_elapse();
-                if (totalframe == sync_position)
+                // 3/30s before finishing
+                if (totalframe == t_total - 3) 
                     tmp = (int)(getrand() % 100) >= 50;
             }
             PreProcessed = false;

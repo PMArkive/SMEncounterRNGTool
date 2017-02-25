@@ -47,6 +47,11 @@
             0,0,0,0,0,0,0,0        //UB
         };
 
+        public readonly static int[] UB_rate =
+        {
+            30,30,30,30,30,30,5,
+        };
+
         public readonly static int[] honeycorrection =
         {
             13,5,5,7,26,26,1,1,
