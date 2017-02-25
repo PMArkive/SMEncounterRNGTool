@@ -4,7 +4,7 @@
     class SearchSetting
     {
         #region pokedex
-        public static int[,] pokedex =
+        public readonly static int[,] pokedex =
         {
             { 785, 70, 115, 85, 95, 75, 130},   //Tapu Koko
             { 786, 70, 85, 75, 130, 115, 95},   //Tapu Lele
@@ -29,7 +29,7 @@
             { 800, 97, 107, 101, 127, 89, 79 }, //Necrozma
         };
 
-        public static int[] PokeLevel =
+        public readonly static int[] PokeLevel =
         {
             60,60,60,60,
             55,55,5,
@@ -38,7 +38,7 @@
             55,65,60,65,65,60,70,75        //UB
         };
 
-        public static int[] NPC =
+        public readonly static int[] NPC =
         {
             0,0,0,1,//Tapus
             2,6,3,
@@ -47,14 +47,14 @@
             0,0,0,0,0,0,0,0        //UB
         };
 
-        public static int[] honeycorrection =
+        public readonly static int[] honeycorrection =
         {
             13,5,5,7,26,26,1,1,
         };
 
         #endregion
         #region calc_data
-        public double[,] natures_mag =
+        public readonly double[,] natures_mag =
         {
             { 1, 1, 1, 1, 1, 1 },
             { 1, 1.1, 0.9, 1, 1, 1 },

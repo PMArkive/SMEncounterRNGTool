@@ -634,12 +634,22 @@ namespace SMEncounterRNGTool
             var setting = getSettings();
             var rng = getRNGSettings();
 
-            for (int i = 0; i < min; i++)
+            for (int i = 0; i < min - 2; i++)
                 sfmt.NextUInt64();
 
             int blink_flag = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                switch (blink_flag)
+                {
+                    case 0:
+                        if ((sfmt.NextUInt64() & 0x7F) == 0) blink_flag = 1; break;
+                    case 1:
+                        blink_flag = (sfmt.NextUInt64() % 3) == 0 ? 36 : 30; break;
+                }
+            }
 
-            RNGSearch.Rand.Clear();
+                RNGSearch.Rand.Clear();
             for (int i = 0; i < RandBuffSize; i++)
             {
                 RNGSearch.Rand.Add(sfmt.NextUInt64());
