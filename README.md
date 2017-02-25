@@ -18,7 +18,7 @@ Malie Garden = 26<br>
 Resolution Cave = 1<br>
 Ten Carat Hill - Farthest Hollow = 1<br>
 
-UB Rate(%):<br>
+UB Ratio(%):<br>
 Wela Volcano Park = 30<br>
 Diglett's Tunnel = 80 (Default) <br>
 Melemele Meadow = ?<br>

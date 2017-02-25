@@ -18,7 +18,7 @@ namespace SMEncounterRNGTool
 
         public bool Wild, Honey, UB;
         public int Lv_max, Lv_min;
-        public int UB_th;
+        public int UB_ratio;
         public bool UB_S = false;
         public bool nogender;
         public int gender_ratio;
@@ -179,7 +179,7 @@ namespace SMEncounterRNGTool
         private int getUBValue()
         {
             int UbValue = (int)(getrand() % 100);
-            Fix3v = UB_S = UbValue < UB_th;
+            Fix3v = UB_S = UbValue < UB_ratio;
             return UbValue;
         }
 

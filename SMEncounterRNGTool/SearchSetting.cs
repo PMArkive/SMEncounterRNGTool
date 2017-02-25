@@ -47,7 +47,7 @@
             0,0,0,0,0,0,0,0        //UB
         };
 
-        public readonly static int[] UB_rate =
+        public readonly static int[] UB_ratio =
         {
             80,30,30,30,30,30,30,5
         };
