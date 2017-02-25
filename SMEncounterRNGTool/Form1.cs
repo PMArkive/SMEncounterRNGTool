@@ -413,12 +413,21 @@ namespace SMEncounterRNGTool
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
-            Timedelay.Value = 186;
             if (UB.Checked)
                 UB_th.Value = Honey.Checked ? 15 : 30;
-            if (!Honey.Checked)
+            if (Honey.Checked)
+                Timedelay.Value = 186;
+            else
                 ShowResultsAfterDelay.Checked = false;
             ConsiderDelay.Checked = Honey.Checked && !ShowResultsAfterDelay.Checked;
+            ConsiderDelay_CheckedChanged(null, null);
+        }
+
+        private void ConsiderDelay_CheckedChanged(object sender, EventArgs e)
+        {
+            Timedelay.Enabled = Correction.Enabled = ShowResultsAfterDelay.Enabled = HighLightFrameAfter.Enabled = ConsiderDelay.Checked;
+            if (!ConsiderDelay.Checked)
+                ShowResultsAfterDelay.Checked = false;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -433,16 +442,16 @@ namespace SMEncounterRNGTool
                 Nature.SelectedIndex = SyncNature.SelectedIndex;
         }
 
-        private void ShowResultsAfterDelay_CheckedChanged(object sender, EventArgs e)
-        {
-            HighLightFrameAfter.Visible = ConsiderDelay.Checked = !ShowResultsAfterDelay.Checked;
-        }
-
         private void SearchMethod_CheckedChanged(object sender, EventArgs e)
         {
             IVPanel.Visible = ByIVs.Checked;
             StatPanel.Visible = ByStats.Checked;
             ShowStats.Enabled = ShowStats.Checked = ByStats.Checked;
+        }
+        
+        private void Timedelay_ValueChanged(object sender, EventArgs e)
+        {
+            RNGSearch.delaytime = (int)Timedelay.Value / 2;
         }
         #endregion
 
@@ -602,14 +611,12 @@ namespace SMEncounterRNGTool
             if (ConsiderDelay.Checked)
             {
                 RNGSearch.npcnumber = (int)NPC.Value + 1;
-                RNGSearch.delaytime = (int)Timedelay.Value / 2;
                 RandBuffSize = RNGSearch.npcnumber * RNGSearch.delaytime + 50;
             }
 
             if (ShowResultsAfterDelay.Checked)
             {
                 RNGSearch.npcnumber = (int)NPC.Value + 1;
-                RNGSearch.delaytime = (int)Timedelay.Value /2 ;
                 RandBuffSize = RNGSearch.npcnumber * RNGSearch.delaytime + 200;
             }
 
@@ -924,5 +931,6 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
+
     }
 }
