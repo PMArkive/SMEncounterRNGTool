@@ -47,7 +47,7 @@ Stationary = Stationary
 AlwaysSynced = Always Synced
 L_SyncNature = Sync Nature
 Fix3v = 3IVs
-L_UB_ratio = UB Ratio
+L_UB_th = UB Rate
 L_Encounter_th = Enctr Rate
 L_Lv = Lv Range
 ---

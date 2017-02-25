@@ -75,7 +75,7 @@
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.Condition = new System.Windows.Forms.GroupBox();
             this.L_SyncNature = new System.Windows.Forms.Label();
-            this.L_UB_ratio = new System.Windows.Forms.Label();
+            this.L_UB_th = new System.Windows.Forms.Label();
             this.L_Encounter_th = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.GenderRatio = new System.Windows.Forms.ComboBox();
@@ -90,7 +90,7 @@
             this.Fix3v = new System.Windows.Forms.CheckBox();
             this.L_Poke = new System.Windows.Forms.Label();
             this.Poke = new System.Windows.Forms.ComboBox();
-            this.UB_ratio = new System.Windows.Forms.NumericUpDown();
+            this.UB_th = new System.Windows.Forms.NumericUpDown();
             this.Encounter_th = new System.Windows.Forms.NumericUpDown();
             this.AlwaysSynced = new System.Windows.Forms.CheckBox();
             this.CalcList = new System.Windows.Forms.Button();
@@ -230,7 +230,7 @@
             this.Condition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UB_ratio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             this.SearchByRand.SuspendLayout();
             this.TimeBox.SuspendLayout();
@@ -734,7 +734,7 @@
             // Condition
             // 
             this.Condition.Controls.Add(this.L_SyncNature);
-            this.Condition.Controls.Add(this.L_UB_ratio);
+            this.Condition.Controls.Add(this.L_UB_th);
             this.Condition.Controls.Add(this.L_Encounter_th);
             this.Condition.Controls.Add(this.label9);
             this.Condition.Controls.Add(this.GenderRatio);
@@ -749,7 +749,7 @@
             this.Condition.Controls.Add(this.Fix3v);
             this.Condition.Controls.Add(this.L_Poke);
             this.Condition.Controls.Add(this.Poke);
-            this.Condition.Controls.Add(this.UB_ratio);
+            this.Condition.Controls.Add(this.UB_th);
             this.Condition.Controls.Add(this.Encounter_th);
             this.Condition.Controls.Add(this.AlwaysSynced);
             this.Condition.Location = new System.Drawing.Point(7, 3);
@@ -768,14 +768,14 @@
             this.L_SyncNature.TabIndex = 70;
             this.L_SyncNature.Text = "同步性格";
             // 
-            // L_UB_ratio
+            // L_UB_th
             // 
-            this.L_UB_ratio.AutoSize = true;
-            this.L_UB_ratio.Location = new System.Drawing.Point(293, 69);
-            this.L_UB_ratio.Name = "L_UB_ratio";
-            this.L_UB_ratio.Size = new System.Drawing.Size(58, 13);
-            this.L_UB_ratio.TabIndex = 69;
-            this.L_UB_ratio.Text = "UB出现率";
+            this.L_UB_th.AutoSize = true;
+            this.L_UB_th.Location = new System.Drawing.Point(293, 69);
+            this.L_UB_th.Name = "L_UB_th";
+            this.L_UB_th.Size = new System.Drawing.Size(58, 13);
+            this.L_UB_th.TabIndex = 69;
+            this.L_UB_th.Text = "UB出现率";
             // 
             // L_Encounter_th
             // 
@@ -931,15 +931,15 @@
             this.Poke.TabIndex = 36;
             this.Poke.SelectedIndexChanged += new System.EventHandler(this.Poke_SelectedIndexChanged);
             // 
-            // UB_ratio
+            // UB_th
             // 
-            this.UB_ratio.AccessibleName = "";
-            this.UB_ratio.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UB_ratio.Location = new System.Drawing.Point(352, 66);
-            this.UB_ratio.Name = "UB_ratio";
-            this.UB_ratio.Size = new System.Drawing.Size(44, 22);
-            this.UB_ratio.TabIndex = 67;
-            this.UB_ratio.Value = new decimal(new int[] {
+            this.UB_th.AccessibleName = "";
+            this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UB_th.Location = new System.Drawing.Point(352, 66);
+            this.UB_th.Name = "UB_th";
+            this.UB_th.Size = new System.Drawing.Size(44, 22);
+            this.UB_th.TabIndex = 67;
+            this.UB_th.Value = new decimal(new int[] {
             15,
             0,
             0,
@@ -2475,7 +2475,7 @@
             this.Condition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UB_ratio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             this.SearchByRand.ResumeLayout(false);
             this.SearchByRand.PerformLayout();
@@ -2656,7 +2656,7 @@
         private System.Windows.Forms.NumericUpDown Lv_Search;
         private System.Windows.Forms.CheckBox UBOnly;
         private System.Windows.Forms.NumericUpDown Correction;
-        private System.Windows.Forms.NumericUpDown UB_ratio;
+        private System.Windows.Forms.NumericUpDown UB_th;
         private System.Windows.Forms.Label L_Correction;
         private System.Windows.Forms.Panel StatPanel;
         private System.Windows.Forms.RadioButton ByIVs;
@@ -2686,7 +2686,7 @@
         private System.Windows.Forms.ListBox TimeResult;
         private System.Windows.Forms.Panel ControlPanel;
         private System.Windows.Forms.Label L_SyncNature;
-        private System.Windows.Forms.Label L_UB_ratio;
+        private System.Windows.Forms.Label L_UB_th;
         private System.Windows.Forms.Label L_Encounter_th;
         private System.Windows.Forms.CheckBox ShowResultsAfterDelay;
         private System.Windows.Forms.CheckBox ConsiderDelay;

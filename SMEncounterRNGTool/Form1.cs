@@ -402,10 +402,10 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            UBOnly.Visible = L_UB_ratio.Visible = UB_ratio.Visible = UB.Checked;
+            UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
             if (UB.Checked)
             {
-                UB_ratio.Value = 30;
+                UB_th.Value = 30;
                 Correction.Value = 3;
             }
             else
@@ -736,7 +736,7 @@ namespace SMEncounterRNGTool
                 PokeLv = (Poke.SelectedIndex == 0) ? -1 : SearchSetting.PokeLevel[Poke.SelectedIndex - 1],
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
-                UB_ratio = (int)UB_ratio.Value,
+                UB_th = (int)UB_th.Value,
             };
             return rng;
         }
@@ -774,10 +774,10 @@ namespace SMEncounterRNGTool
                 if (EncounteredOnly.Checked && result.Encounter >= Encounter_th.Value)
                     return false;
 
-                if (UBOnly.Checked && result.UbValue >= UB_ratio.Value)
+                if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
 
-                if (!UB.Checked || result.UbValue >= UB_ratio.Value)
+                if (!UB.Checked || result.UbValue >= UB_th.Value)
                 {
                     if (setting.Slot[0] && !setting.Slot[result.Slot])
                         return false;
@@ -812,7 +812,7 @@ namespace SMEncounterRNGTool
             if (!Advanced.Checked)
             {
                 Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
-                UbValue = result.UbValue < UB_ratio.Value ? "O" : "X";
+                UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
                 if (result.Item == -1)
                     Item = "-";
@@ -874,7 +874,7 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex >= UB_StartIndex)
             {
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
-                UB_ratio.Value = SearchSetting.UB_ratio[Poke.SelectedIndex - UB_StartIndex];
+                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UB_StartIndex];
             }
             switch (Poke.SelectedIndex)
             {
