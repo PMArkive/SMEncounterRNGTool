@@ -159,11 +159,11 @@
         public static bool[] TranslateSlot(string slottext)
         {
             bool[] SlotArray = new bool[11];
-            if (slottext=="")
+            if (slottext == "")
                 return SlotArray;
             try
             {
-                string[] slotstrarray=slottext.Split(' ',',');
+                string[] slotstrarray = slottext.Split(' ', ',');
                 uint tmp;
                 for (int i = 0; i < slotstrarray.Length; i++)
                 {

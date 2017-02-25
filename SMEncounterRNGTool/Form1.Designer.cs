@@ -2024,11 +2024,16 @@
             0,
             0,
             0});
+            this.Framecorrection.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
             this.Framecorrection.Name = "Framecorrection";
             this.Framecorrection.Size = new System.Drawing.Size(35, 22);
             this.Framecorrection.TabIndex = 61;
             this.Framecorrection.Value = new decimal(new int[] {
-            10,
+            6,
             0,
             0,
             0});

@@ -66,9 +66,11 @@ namespace SMEncounterRNGTool
                 st.UbValue = getUBValue();
 
             if (UB_S)
-                st.Synchronize = blink_process();
-            else
+                st.Synchronize = blink_process(10,6);
+            if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
+            if (!Wild)
+                st.Synchronize = blink_process(FrameCorrection, FrameCorrection - 4);
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
@@ -93,10 +95,6 @@ namespace SMEncounterRNGTool
                 st.Lv = (int)(getrand() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
                 Advance(1);
             }
-
-            //Blinking process?
-            if (!Wild)
-                Advance(FrameCorrection);
 
             //Something
             Advance(60);
@@ -246,24 +244,23 @@ namespace SMEncounterRNGTool
             remain_frame = new int[npcnumber];
             blink_flag = new bool[npcnumber];
             for (int totalframe = 0; totalframe < delaytime; totalframe++)
-            {
                 time_elapse();
-            }
             return index;
         }
 
-        public bool blink_process()
+        private bool blink_process(int t_total, int sync_position)
         {
             bool tmp = false;
             if (!PreProcessed)
             {
+                //Reset NPC Status
                 remain_frame = new int[npcnumber];
                 blink_flag = new bool[npcnumber];
             }
-            for (int totalframe = 0; totalframe < 10; totalframe++)
+            for (int totalframe = 0; totalframe < t_total; totalframe++)
             {
                 time_elapse();
-                if (totalframe == 6)
+                if (totalframe == sync_position)
                     tmp = (int)(getrand() % 100) >= 50;
             }
             PreProcessed = false;

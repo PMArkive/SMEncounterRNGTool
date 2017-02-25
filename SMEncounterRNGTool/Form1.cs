@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.82beta";
+        private string version = "0.83beta";
 
         #region Translation
         private string curlanguage;
@@ -393,6 +393,7 @@ namespace SMEncounterRNGTool
             UB_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
 
+            L_Framecorrection.Visible = Framecorrection.Visible = Stationary.Checked;
             GenderRatio.Visible = UB.Visible = Honey.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
@@ -912,9 +913,8 @@ namespace SMEncounterRNGTool
                     }
                 }
             }
-            catch (NullReferenceException)
+            catch
             {
-                Error(NOSELECTION_STR[lindex]);
             }
         }
 
