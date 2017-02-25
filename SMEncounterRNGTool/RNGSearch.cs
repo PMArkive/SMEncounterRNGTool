@@ -95,8 +95,8 @@ namespace SMEncounterRNGTool
             }
 
             //Blinking process?
-            //if (UB_S)
-            //    Advance(FrameCorrection);
+            if (!Wild)
+                Advance(FrameCorrection);
 
             //Something
             Advance(60);
@@ -162,18 +162,18 @@ namespace SMEncounterRNGTool
         }
 
         public static List<ulong> Rand;
-        private int index;
-        private ulong getrand()
+        private static int index;
+        private static ulong getrand()
         {
             return Rand[index++];
         }
 
-        private ulong currentrand()
+        private static ulong currentrand()
         {
             return Rand[index];
         }
 
-        private void Advance(int d)
+        private static void Advance(int d)
         {
             index += d;
         }
@@ -208,41 +208,48 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
-        public static int getframeshift(int t_index)
+        // 1/30s elapsed
+        private static void time_elapse()
         {
-            remain_frame = new int[npcnumber];
-            blink_flag = new bool[npcnumber];
-            for (int totalframe = 0; totalframe < delaytime; totalframe++)
+            for (int i = 0; i < npcnumber; i++)
             {
-                for (int i = 0; i < npcnumber; i++)
-                {
-                    if (remain_frame[i] > 0)
-                        remain_frame[i]--;
+                if (remain_frame[i] > 0)
+                    remain_frame[i]--;
 
-                    if (remain_frame[i] == 0)
+                if (remain_frame[i] == 0)
+                {
+                    //Blinking
+                    if (blink_flag[i])
                     {
-                        //Blinking
-                        if (blink_flag[i])
-                        {
-                            if ((int)(Rand[t_index++] % 3) == 0)
-                                remain_frame[i] = 36;
-                            else
-                                remain_frame[i] = 30;
-                            blink_flag[i] = false;
-                        }
-                        //Not Blinking
+                        if ((int)(getrand() % 3) == 0)
+                            remain_frame[i] = 36;
                         else
+                            remain_frame[i] = 30;
+                        blink_flag[i] = false;
+                    }
+                    //Not Blinking
+                    else
+                    {
+                        if ((int)(getrand() & 0x7F) == 0)
                         {
-                            if ((int)(Rand[t_index++] & 0x7F) == 0)
-                            {
-                                remain_frame[i] = 5;
-                                blink_flag[i] = true;
-                            }
+                            remain_frame[i] = 5;
+                            blink_flag[i] = true;
                         }
                     }
                 }
             }
-            return t_index;
+        }
+
+        public static int getframeshift(int t_index)
+        {
+            index = t_index;
+            remain_frame = new int[npcnumber];
+            blink_flag = new bool[npcnumber];
+            for (int totalframe = 0; totalframe < delaytime; totalframe++)
+            {
+                time_elapse();
+            }
+            return index;
         }
 
         public bool blink_process()
@@ -255,38 +262,13 @@ namespace SMEncounterRNGTool
             }
             for (int totalframe = 0; totalframe < 10; totalframe++)
             {
-                for (int i = 0; i < npcnumber; i++)
-                {
-                    if (remain_frame[i] > 0)
-                        remain_frame[i]--;
-
-                    if (remain_frame[i] == 0)
-                    {
-                        //Blinking
-                        if (blink_flag[i])
-                        {
-                            if ((int)(getrand() % 3) == 0)
-                                remain_frame[i] = 36;
-                            else
-                                remain_frame[i] = 30;
-                            blink_flag[i] = false;
-                        }
-                        //Not Blinking
-                        else
-                        {
-                            if ((int)(getrand() & 0x7F) == 0)
-                            {
-                                remain_frame[i] = 5;
-                                blink_flag[i] = true;
-                            }
-                        }
-                    }
-                }
+                time_elapse();
                 if (totalframe == 6)
                     tmp = (int)(getrand() % 100) >= 50;
             }
             PreProcessed = false;
             return tmp;
         }
+
     }
 }

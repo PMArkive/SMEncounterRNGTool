@@ -15,5 +15,5 @@ Verdant Cavern = 5<br>
 Lush Jungle = 7<br>
 Haina Desert = 3<br>
 Malie Garden = 26<br>
-Resolution Cave = 3<br>
+Resolution Cave = 1<br>
 Ten Carat Hill - Farthest Hollow = 1

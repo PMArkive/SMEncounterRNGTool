@@ -49,7 +49,7 @@
 
         public static int[] honeycorrection =
         {
-            13,5,5,7,26,26,3,1,
+            13,5,5,7,26,26,1,1,
         };
 
         #endregion
