@@ -10,7 +10,6 @@ namespace SMEncounterRNGTool
 
         public bool AlwaysSynchro;
         public int Synchro_Stat;
-        public int FrameCorrection;
         public bool Fix3v;
         public bool ShinyCharm;
 

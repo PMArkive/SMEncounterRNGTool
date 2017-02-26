@@ -176,8 +176,6 @@
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
             this.ShowResultsAfterDelay = new System.Windows.Forms.CheckBox();
-            this.L_Framecorrection = new System.Windows.Forms.Label();
-            this.Framecorrection = new System.Windows.Forms.NumericUpDown();
             this.AroundTarget = new System.Windows.Forms.CheckBox();
             this.L_frame = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -268,7 +266,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).BeginInit();
             this.RNGInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Framecorrection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
@@ -1051,11 +1048,6 @@
             this.Timedelay.Name = "Timedelay";
             this.Timedelay.Size = new System.Drawing.Size(55, 22);
             this.Timedelay.TabIndex = 64;
-            this.Timedelay.Value = new decimal(new int[] {
-            186,
-            0,
-            0,
-            0});
             this.Timedelay.ValueChanged += new System.EventHandler(this.Timedelay_ValueChanged);
             // 
             // ConsiderDelay
@@ -1108,11 +1100,6 @@
             this.Correction.Name = "Correction";
             this.Correction.Size = new System.Drawing.Size(38, 22);
             this.Correction.TabIndex = 51;
-            this.Correction.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
             this.Correction.ValueChanged += new System.EventHandler(this.Correction_ValueChanged);
             // 
             // Time_min
@@ -1981,8 +1968,6 @@
             // RNGInfo
             // 
             this.RNGInfo.Controls.Add(this.ShowResultsAfterDelay);
-            this.RNGInfo.Controls.Add(this.L_Framecorrection);
-            this.RNGInfo.Controls.Add(this.Framecorrection);
             this.RNGInfo.Controls.Add(this.AroundTarget);
             this.RNGInfo.Controls.Add(this.L_frame);
             this.RNGInfo.Controls.Add(this.label7);
@@ -2004,39 +1989,6 @@
             this.ShowResultsAfterDelay.TabIndex = 62;
             this.ShowResultsAfterDelay.Text = "显示延时后结果";
             this.ShowResultsAfterDelay.UseVisualStyleBackColor = true;
-            // 
-            // L_Framecorrection
-            // 
-            this.L_Framecorrection.AutoSize = true;
-            this.L_Framecorrection.Location = new System.Drawing.Point(194, 69);
-            this.L_Framecorrection.Name = "L_Framecorrection";
-            this.L_Framecorrection.Size = new System.Drawing.Size(55, 13);
-            this.L_Framecorrection.TabIndex = 61;
-            this.L_Framecorrection.Text = "帧数修正";
-            // 
-            // Framecorrection
-            // 
-            this.Framecorrection.AccessibleName = "";
-            this.Framecorrection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Framecorrection.Location = new System.Drawing.Point(281, 64);
-            this.Framecorrection.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.Framecorrection.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.Framecorrection.Name = "Framecorrection";
-            this.Framecorrection.Size = new System.Drawing.Size(35, 22);
-            this.Framecorrection.TabIndex = 61;
-            this.Framecorrection.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             // 
             // AroundTarget
             // 
@@ -2520,7 +2472,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).EndInit();
             this.RNGInfo.ResumeLayout(false);
             this.RNGInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Framecorrection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
@@ -2637,8 +2588,6 @@
         private System.Windows.Forms.Label L_Lv;
         private System.Windows.Forms.NumericUpDown Lv_min;
         private System.Windows.Forms.CheckBox DisableFilters;
-        private System.Windows.Forms.Label L_Framecorrection;
-        private System.Windows.Forms.NumericUpDown Framecorrection;
         private System.Windows.Forms.DataGridView DGV;
         private System.Windows.Forms.NumericUpDown Stat0;
         private System.Windows.Forms.NumericUpDown Stat1;
