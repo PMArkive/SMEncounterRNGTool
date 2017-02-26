@@ -12,8 +12,8 @@ Supporting the following Pokemon:
 Wela Volcano Park = 30<br>
 Diglett's Tunnel* = 80<br>
 Melemele Meadow* = 30<br>
-Verdant Cavern* = ? <br>
-Lush Jungle* = ? <br>
+Verdant Cavern* = 50<br>
+Lush Jungle* = 15<br>
 Haina Desert = 30<br>
 Malie Garden* = 30<br>
 Resolution Cave* = 80<br>
