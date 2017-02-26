@@ -875,6 +875,8 @@ namespace SMEncounterRNGTool
             }
             switch (Poke.SelectedIndex)
             {
+                case AlwaysSync_Index - 2: Correction.Value = 1; break;
+                case AlwaysSync_Index - 1: Correction.Value = 1; break;
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
                 case UB_StartIndex - 1: Fix3v.Checked = false; break;
             }
