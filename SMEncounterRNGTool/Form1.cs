@@ -669,7 +669,7 @@ namespace SMEncounterRNGTool
                             result.Blink = blink_flag; blink_flag = 0; break;
                     }
                 }
-                else
+                else if (Advanced.Checked)
                 {
                     if (result.Blink == 1)
                         blink_flag = 41 * (int)NPC.Value;
