@@ -2033,6 +2033,11 @@
             0,
             0,
             0});
+            this.Frame_max.Minimum = new decimal(new int[] {
+            418,
+            0,
+            0,
+            0});
             this.Frame_max.Name = "Frame_max";
             this.Frame_max.Size = new System.Drawing.Size(75, 22);
             this.Frame_max.TabIndex = 41;
@@ -2052,11 +2057,16 @@
             0,
             0,
             0});
+            this.Frame_min.Minimum = new decimal(new int[] {
+            418,
+            0,
+            0,
+            0});
             this.Frame_min.Name = "Frame_min";
             this.Frame_min.Size = new System.Drawing.Size(75, 22);
             this.Frame_min.TabIndex = 40;
             this.Frame_min.Value = new decimal(new int[] {
-            417,
+            418,
             0,
             0,
             0});

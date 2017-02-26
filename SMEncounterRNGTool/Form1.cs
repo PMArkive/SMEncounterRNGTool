@@ -631,19 +631,40 @@ namespace SMEncounterRNGTool
             var setting = getSettings();
             var rng = getRNGSettings();
 
-            for (int i = 0; i < min - 2; i++)
-                sfmt.NextUInt64();
-
             int blink_flag = 0;
-            for (int i = 0; i < 2; i++)
+            int saferange = 41 * (int)NPC.Value;
+
+            if (saferange == 0)
             {
-                switch (blink_flag)
+                for (int i = 0; i < min - 2; i++)
+                    sfmt.NextUInt64();
+                for (int i = 0; i < 2; i++)
                 {
-                    case 0:
-                        if ((sfmt.NextUInt64() & 0x7F) == 0) blink_flag = 1; break;
-                    case 1:
-                        blink_flag = (sfmt.NextUInt64() % 3) == 0 ? 36 : 30; break;
+                    switch (blink_flag)
+                    {
+                        case 0:
+                            if ((sfmt.NextUInt64() & 0x7F) == 0) blink_flag = 1; break;
+                        case 1:
+                            blink_flag = (sfmt.NextUInt64() % 3) == 0 ? 36 : 30; break;
+                    }
                 }
+            }
+            else if (!Honey.Checked)
+            {
+                for (int i = 0; i < Math.Max(418, min - saferange); i++)
+                    sfmt.NextUInt64();
+                for (int i = Math.Max(418, min - saferange); i < min; i++)
+                {
+                    if ((sfmt.NextUInt64() & 0x7F) == 0)
+                        blink_flag = saferange;
+                    else
+                    if (blink_flag > 0) blink_flag--;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < min; i++)
+                    sfmt.NextUInt64();
             }
 
             RNGSearch.Rand.Clear();
@@ -669,10 +690,10 @@ namespace SMEncounterRNGTool
                             result.Blink = blink_flag; blink_flag = 0; break;
                     }
                 }
-                else if (Advanced.Checked)
+                else if (!Honey.Checked)
                 {
                     if (result.Blink == 1)
-                        blink_flag = 41 * (int)NPC.Value;
+                        blink_flag = saferange;
                     else if (blink_flag > 0)
                     {
                         blink_flag--;
@@ -803,7 +824,7 @@ namespace SMEncounterRNGTool
             string true_nature = SearchSetting.naturestr[result.Nature];
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             string BlinkFlag = (result.Blink == 1 ? "★" : "-");
-            BlinkFlag = result.Blink == -1 ? "X" : BlinkFlag;
+            BlinkFlag = result.Blink == -1 ? "?" : BlinkFlag;
             BlinkFlag = result.Blink > 1 ? result.Blink.ToString() : BlinkFlag;
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();

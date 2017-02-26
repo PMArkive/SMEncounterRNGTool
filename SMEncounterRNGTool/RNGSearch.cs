@@ -77,9 +77,13 @@ namespace SMEncounterRNGTool
             if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
             if (!Wild)
-                st.Synchronize = blink_process(2, 3);
-            if (AlwaysSynchro)
-                st.Synchronize = true;
+            {
+                if (AlwaysSynchro)
+                    st.Synchronize = true;
+                else
+                    st.Synchronize = blink_process(2, 3);
+            }
+
 
             if (Wild && UB && !Honey)
                 st.UbValue = getUBValue();
