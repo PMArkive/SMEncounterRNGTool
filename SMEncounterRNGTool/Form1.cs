@@ -383,6 +383,7 @@ namespace SMEncounterRNGTool
                 GenderRatio.SelectedIndex = 0;
                 UB.Checked = false;
                 Fix3v.Checked = true;
+                Correction.Value = 0;
             }
             else
             {
@@ -392,9 +393,9 @@ namespace SMEncounterRNGTool
                 EncounteredOnly.Checked = true;
             }
             UB_CheckedChanged(null, null);
+            ConsiderDelay_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
 
-            L_Framecorrection.Visible = Framecorrection.Visible = Stationary.Checked;
             GenderRatio.Visible = UB.Visible = Honey.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
@@ -403,33 +404,29 @@ namespace SMEncounterRNGTool
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
             UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
-            if (UB.Checked)
-            {
-                UB_th.Value = 30;
-                Correction.Value = 3;
-            }
-            else
+            if (!UB.Checked)
                 UBOnly.Checked = false;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
             L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
-            ConsiderDelay.Checked = ShowResultsAfterDelay.Checked = Honey.Checked;
-            ConsiderDelay_CheckedChanged(null, null);
-            ConsiderDelay.Enabled = !Honey.Checked;
             if (Honey.Checked)
             {
                 Timedelay.Value = 186;
                 Timedelay.Enabled = false;
             }
+            else if (Wild.Checked)
+            {
+                Timedelay.Value = 0;
+            }
+            ConsiderDelay.Enabled = !Honey.Checked;
         }
 
         private void ConsiderDelay_CheckedChanged(object sender, EventArgs e)
         {
+            ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
             Timedelay.Enabled = Correction.Enabled = ShowResultsAfterDelay.Enabled = HighLightFrameAfter.Enabled = ConsiderDelay.Checked;
-            if (!ConsiderDelay.Checked)
-                ShowResultsAfterDelay.Checked = false;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -454,6 +451,7 @@ namespace SMEncounterRNGTool
         private void Timedelay_ValueChanged(object sender, EventArgs e)
         {
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
+            ConsiderDelay.Checked = Timedelay.Value != 0;
         }
 
         private void Correction_ValueChanged(object sender, EventArgs e)
@@ -721,7 +719,6 @@ namespace SMEncounterRNGTool
                 Synchro_Stat = SyncNature.SelectedIndex - 1,
                 TSV = (int)TSV.Value,
                 AlwaysSynchro = AlwaysSynced.Checked,
-                FrameCorrection = (int)Framecorrection.Value,
                 Honey = Honey.Checked,
                 UB = UB.Checked,
                 ShinyCharm = ShinyCharm.Checked,
@@ -856,14 +853,13 @@ namespace SMEncounterRNGTool
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
             const int UB_StartIndex = 14;
-            const int AlwaysSyn_Index = 7;
+            const int AlwaysSync_Index = 7;
             Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
             if (Poke.SelectedIndex == 0) return;
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
-            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSyn_Index) && (Poke.SelectedIndex < UB_StartIndex);
-            Method_CheckedChanged(null, null);
+            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
@@ -872,6 +868,10 @@ namespace SMEncounterRNGTool
             {
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
                 UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UB_StartIndex];
+            }
+            else
+            {
+                Timedelay.Value = SearchSetting.timedelay[Poke.SelectedIndex - 1];
             }
             switch (Poke.SelectedIndex)
             {
