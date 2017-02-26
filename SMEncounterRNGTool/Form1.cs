@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.85beta";
+        private string version = "0.86beta";
 
         #region Translation
         private string curlanguage;
@@ -456,6 +456,11 @@ namespace SMEncounterRNGTool
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
         }
 
+        private void Correction_ValueChanged(object sender, EventArgs e)
+        {
+            RNGSearch.delaycorrection = (int)Correction.Value;
+        }
+
         private void NPC_ValueChanged(object sender, EventArgs e)
         {
             RNGSearch.npcnumber = (int)NPC.Value + 1;
@@ -617,7 +622,6 @@ namespace SMEncounterRNGTool
                 max = (int)Frame_max.Value;
             }
             int RandBuffSize = 150;
-            int init = 0; // Startindex of Pokemon Generation
 
             if (ConsiderDelay.Checked)
                 RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
@@ -647,7 +651,8 @@ namespace SMEncounterRNGTool
                 }
             }
 
-                RNGSearch.Rand.Clear();
+            RNGSearch.Rand.Clear();
+
             for (int i = 0; i < RandBuffSize; i++)
             {
                 RNGSearch.Rand.Add(sfmt.NextUInt64());
@@ -655,13 +660,7 @@ namespace SMEncounterRNGTool
 
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
-                if (ShowResultsAfterDelay.Checked)
-                {
-                    init = RNGSearch.getframeshift((int)Correction.Value);
-                    RNGSearch.PreProcessed = true;
-                }
-
-                RNGSearch.RNGResult result = rng.Generate(init);
+                RNGSearch.RNGResult result = rng.Generate();
 
                 if (NPC.Value == 0)
                 {
@@ -737,6 +736,7 @@ namespace SMEncounterRNGTool
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
+                Considerdelay = ShowResultsAfterDelay.Checked,
             };
             return rng;
         }
@@ -824,7 +824,7 @@ namespace SMEncounterRNGTool
                     Item = None_STR[lindex];
             }
 
-            string frameadvance = (ConsiderDelay.Checked) ? RNGSearch.getframeshift((int)Correction.Value).ToString("+#;-#;0") : "-";
+            string frameadvance = (ConsiderDelay.Checked) ? result.frameshift.ToString("+#;-#;0") : "-";
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)

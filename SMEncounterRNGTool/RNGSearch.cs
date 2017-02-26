@@ -22,14 +22,13 @@ namespace SMEncounterRNGTool
         public bool UB_S = false;
         public bool nogender;
         public int gender_ratio;
-
+        
+        public bool Considerdelay;
+        public static int delaycorrection = 3;
         public static int delaytime = 93; //For honey 186F =3.1s
         public static int npcnumber = 1;
-
         public static int[] remain_frame;
         public static bool[] blink_flag;
-
-        public static bool PreProcessed = false;
 
         public class RNGResult
         {
@@ -42,6 +41,7 @@ namespace SMEncounterRNGTool
             public bool Shiny;
             public bool Synchronize;
             public int Blink;
+            public int frameshift;
 
             public int Encounter = -1;
             public int Gender;
@@ -52,15 +52,18 @@ namespace SMEncounterRNGTool
             public int Item = -1;
         }
 
-        public RNGResult Generate(int init)
+        public RNGResult Generate()
         {
             RNGResult st = new RNGResult();
-            index = init;
+            index = 0;
 
             //Synchronize
             st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
+            
+            if (Considerdelay)
+                st.frameshift = getframeshift();
 
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
@@ -238,9 +241,9 @@ namespace SMEncounterRNGTool
             }
         }
 
-        public static int getframeshift(int t_index)
+        private static int getframeshift()
         {
-            index = t_index;
+            index = delaycorrection;
             remain_frame = new int[npcnumber];
             blink_flag = new bool[npcnumber];
             for (int totalframe = 0; totalframe < delaytime; totalframe++)
@@ -250,8 +253,9 @@ namespace SMEncounterRNGTool
 
         private bool blink_process(int t_total)
         {
+            //for sync
             bool tmp = false;
-            if (!PreProcessed)
+            if (!Considerdelay)
             {
                 //Reset NPC Status
                 remain_frame = new int[npcnumber];
@@ -264,7 +268,6 @@ namespace SMEncounterRNGTool
                 if (totalframe == t_total - 3) 
                     tmp = (int)(getrand() % 100) >= 50;
             }
-            PreProcessed = false;
             return tmp;
         }
 
