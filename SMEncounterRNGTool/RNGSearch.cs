@@ -30,6 +30,9 @@ namespace SMEncounterRNGTool
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
+        public static bool IsSolgaleo;
+        public static bool IsLunala;
+
         public class RNGResult
         {
             public int Nature;
@@ -62,8 +65,17 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
+            ResetNPCStatus();
+
             if (Considerdelay)
-                st.frameshift = getframeshift();
+            {
+                if (IsSolgaleo)
+                    st.frameshift = SolLunaDelay(77);
+                else if (IsLunala)
+                    st.frameshift = SolLunaDelay(74);
+                else
+                    st.frameshift = getframeshift();
+            }
 
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
@@ -74,16 +86,15 @@ namespace SMEncounterRNGTool
                 st.Encounter = -1;
 
             if (UB_S)
-                st.Synchronize = blink_process(7, 3);
+                st.Synchronize = blink_process(7);
             if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
             if (!Wild)
-                if (ConsiderBlink) //Always ture？
-                    st.Synchronize = blink_process(2, 3);
-                else
-                    st.Synchronize = (int)(getrand() % 100) >= 50;
-            if (AlwaysSynchro)
-                st.Synchronize = true;
+                if (AlwaysSynchro)
+                    st.Synchronize = true;
+                else if (ConsiderBlink)
+                    st.Synchronize = blink_process(2);
+
 
 
             if (Wild && UB && !Honey)
@@ -253,20 +264,25 @@ namespace SMEncounterRNGTool
         {
             // Frame correction before time delay starts
             index = PreDelayCorrection;
-            ResetNPCStatus();
             // Get NPC Status before blinking process
             time_elapse(delaytime);
             return index;
         }
 
-        private bool blink_process(int t_pre, int t_post)
+        private static int SolLunaDelay(int crydelay)
+        {
+            time_elapse(delaytime - crydelay);
+            Advance(1);     //Cry Inside Time Delay
+            time_elapse(crydelay);
+            return index;
+        }
+
+        private bool blink_process(int t_pre)
         {
             bool sync = false;
-            if (!Considerdelay)
-                ResetNPCStatus();
             time_elapse(t_pre);
             sync = (int)(getrand() % 100) >= 50;
-            time_elapse(t_post);
+            time_elapse(3);
             return sync;
         }
 

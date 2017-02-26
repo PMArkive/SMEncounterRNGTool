@@ -50,9 +50,9 @@
         public readonly static int[] timedelay =
         {
             0,0,0,0,
-            288,282,0,
-            0,0,0,0,
-            0,0,
+            288,282,38,
+            38,38,38,38,
+            38,38,
         };
 
         public readonly static int[] UB_rate =
