@@ -669,6 +669,16 @@ namespace SMEncounterRNGTool
                             result.Blink = blink_flag; blink_flag = 0; break;
                     }
                 }
+                else
+                {
+                    if (result.Blink == 1)
+                        blink_flag = 41 * (int)NPC.Value;
+                    else if (blink_flag > 0)
+                    {
+                        blink_flag--;
+                        result.Blink = -1;
+                    }
+                }
 
                 if (!frameMatch(result, setting))
                     continue;
@@ -793,6 +803,7 @@ namespace SMEncounterRNGTool
             string true_nature = SearchSetting.naturestr[result.Nature];
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             string BlinkFlag = (result.Blink == 1 ? "★" : "-");
+            BlinkFlag = result.Blink == -1 ? "X" : BlinkFlag;
             BlinkFlag = result.Blink > 1 ? result.Blink.ToString() : BlinkFlag;
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();

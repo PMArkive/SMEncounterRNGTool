@@ -1100,6 +1100,11 @@
             this.Correction.Name = "Correction";
             this.Correction.Size = new System.Drawing.Size(38, 22);
             this.Correction.TabIndex = 51;
+            this.Correction.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             this.Correction.ValueChanged += new System.EventHandler(this.Correction_ValueChanged);
             // 
             // Time_min
