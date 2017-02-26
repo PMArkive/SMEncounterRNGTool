@@ -22,9 +22,9 @@ namespace SMEncounterRNGTool
         public bool UB_S = false;
         public bool nogender;
         public int gender_ratio;
-        
+
         public bool Considerdelay;
-        public static int delaycorrection = 3;
+        public static int PreDelayCorrection = 3;
         public static int delaytime = 93; //For honey 186F =3.1s
         public static int npcnumber = 1;
         public static int[] remain_frame;
@@ -61,7 +61,7 @@ namespace SMEncounterRNGTool
             st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
-            
+
             if (Considerdelay)
                 st.frameshift = getframeshift();
 
@@ -243,9 +243,11 @@ namespace SMEncounterRNGTool
 
         private static int getframeshift()
         {
-            index = delaycorrection;
+            // Frame correction before time delay starts
+            index = PreDelayCorrection;
             remain_frame = new int[npcnumber];
             blink_flag = new bool[npcnumber];
+            // Get NPC Status before blinking process
             for (int totalframe = 0; totalframe < delaytime; totalframe++)
                 time_elapse();
             return index;
@@ -254,21 +256,22 @@ namespace SMEncounterRNGTool
         private bool blink_process(int t_total)
         {
             //for sync
-            bool tmp = false;
+            bool sync = false;
             if (!Considerdelay)
             {
                 //Reset NPC Status
                 remain_frame = new int[npcnumber];
                 blink_flag = new bool[npcnumber];
             }
+            // t_total = 10 for UB, 5-6 for tapu
             for (int totalframe = 1; totalframe <= t_total; totalframe++)
             {
                 time_elapse();
                 // 3/30s before finishing
-                if (totalframe == t_total - 3) 
-                    tmp = (int)(getrand() % 100) >= 50;
+                if (totalframe == t_total - 3)
+                    sync = (int)(getrand() % 100) >= 50;
             }
-            return tmp;
+            return sync;
         }
 
     }
