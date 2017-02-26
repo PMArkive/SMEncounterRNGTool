@@ -41,7 +41,7 @@
         public readonly static int[] NPC =
         {
             0,0,0,1,//Tapus
-            2,6,3,
+            2,2,3,
             8,6,3,3,
             3,4, //Stationary
             0,0,0,0,0,0,0,0        //UB

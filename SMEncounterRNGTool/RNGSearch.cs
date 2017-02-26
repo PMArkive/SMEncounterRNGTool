@@ -74,11 +74,11 @@ namespace SMEncounterRNGTool
                 st.Encounter = -1;
 
             if (UB_S)
-                st.Synchronize = blink_process(10);
+                st.Synchronize = blink_process(7, 3);
             if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
             if (!Wild)
-                st.Synchronize = blink_process(FrameCorrection);
+                st.Synchronize = blink_process(2, 3);
             if (AlwaysSynchro)
                 st.Synchronize = true;
 
@@ -209,29 +209,26 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
-        // 1/30s elapsed
-        private static void time_elapse()
+        // 1/30s*n elapsed
+        private static void time_elapse(int n)
         {
-            for (int i = 0; i < npcnumber; i++)
+            for (int totalframe = 0; totalframe < n; totalframe++)
             {
-                if (remain_frame[i] > 0)
-                    remain_frame[i]--;
-
-                if (remain_frame[i] == 0)
+                for (int i = 0; i < npcnumber; i++)
                 {
-                    //Blinking
-                    if (blink_flag[i])
+                    if (remain_frame[i] > 0)
+                        remain_frame[i]--;
+
+                    if (remain_frame[i] == 0)
                     {
-                        if ((int)(getrand() % 3) == 0)
-                            remain_frame[i] = 36;
-                        else
-                            remain_frame[i] = 30;
-                        blink_flag[i] = false;
-                    }
-                    //Not Blinking
-                    else
-                    {
-                        if ((int)(getrand() & 0x7F) == 0)
+                        //Blinking
+                        if (blink_flag[i])
+                        {
+                            remain_frame[i] = (int)(getrand() % 3) == 0 ? 36 : 30;
+                            blink_flag[i] = false;
+                        }
+                        //Not Blinking
+                        else if ((int)(getrand() & 0x7F) == 0)
                         {
                             remain_frame[i] = 5;
                             blink_flag[i] = true;
@@ -241,36 +238,30 @@ namespace SMEncounterRNGTool
             }
         }
 
+        private static void ResetNPCStatus()
+        {
+            remain_frame = new int[npcnumber];
+            blink_flag = new bool[npcnumber];
+        }
+
         private static int getframeshift()
         {
             // Frame correction before time delay starts
             index = PreDelayCorrection;
-            remain_frame = new int[npcnumber];
-            blink_flag = new bool[npcnumber];
+            ResetNPCStatus();
             // Get NPC Status before blinking process
-            for (int totalframe = 0; totalframe < delaytime; totalframe++)
-                time_elapse();
+            time_elapse(delaytime);
             return index;
         }
 
-        private bool blink_process(int t_total)
+        private bool blink_process(int t_pre, int t_post)
         {
-            //for sync
             bool sync = false;
             if (!Considerdelay)
-            {
-                //Reset NPC Status
-                remain_frame = new int[npcnumber];
-                blink_flag = new bool[npcnumber];
-            }
-            // t_total = 10 for UB, 5-6 for tapu
-            for (int totalframe = 1; totalframe <= t_total; totalframe++)
-            {
-                time_elapse();
-                // 3/30s before finishing
-                if (totalframe == t_total - 3)
-                    sync = (int)(getrand() % 100) >= 50;
-            }
+                ResetNPCStatus();
+            time_elapse(t_pre);
+            sync = (int)(getrand() % 100) >= 50;
+            time_elapse(t_post);
             return sync;
         }
 

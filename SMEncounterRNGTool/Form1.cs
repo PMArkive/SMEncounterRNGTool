@@ -458,7 +458,7 @@ namespace SMEncounterRNGTool
 
         private void Correction_ValueChanged(object sender, EventArgs e)
         {
-            RNGSearch.delaycorrection = (int)Correction.Value;
+            RNGSearch.PreDelayCorrection = (int)Correction.Value;
         }
 
         private void NPC_ValueChanged(object sender, EventArgs e)
@@ -503,10 +503,7 @@ namespace SMEncounterRNGTool
                         //Blinking
                         if (blink_flag[i])
                         {
-                            if ((int)(sfmt.NextUInt64() % 3) == 0)
-                                remain_frame[i] = 36;
-                            else
-                                remain_frame[i] = 30;
+                            remain_frame[i] = (int)(sfmt.NextUInt64() % 3) == 0 ? 36 : 30;
                             n_count++;
                             blink_flag[i] = false;
                         }
