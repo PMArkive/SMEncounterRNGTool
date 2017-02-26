@@ -84,6 +84,7 @@ AroundTarget = Target ±100F
 L_frame = Frame Range
 L_Framecorrection = Frame Correction
 ShowResultsAfterDelay = Show Results after Delay
+ConsiderBlink = Consider Blinking (Sync)
 ---
 TimeBox = Time Calculator
 ConsiderDelay = Consider Time Delay

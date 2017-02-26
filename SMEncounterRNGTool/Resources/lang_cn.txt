@@ -84,6 +84,7 @@ AroundTarget = 目标帧 ±100F
 L_frame = 帧数范围
 L_Framecorrection = 帧数修正
 ShowResultsAfterDelay = 显示延时后结果
+ConsiderBlink = 考虑眨眼影响（同步）
 ---
 TimeBox = 时间计算
 L_time = 计时范围

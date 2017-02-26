@@ -762,6 +762,7 @@ namespace SMEncounterRNGTool
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
                 Considerdelay = ShowResultsAfterDelay.Checked,
+                ConsiderBlink = ConsiderBlink.Checked,
             };
             return rng;
         }

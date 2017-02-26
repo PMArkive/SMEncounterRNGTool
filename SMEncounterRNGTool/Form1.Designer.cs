@@ -218,6 +218,7 @@
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.ConsiderBlink = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -1972,6 +1973,7 @@
             // 
             // RNGInfo
             // 
+            this.RNGInfo.Controls.Add(this.ConsiderBlink);
             this.RNGInfo.Controls.Add(this.ShowResultsAfterDelay);
             this.RNGInfo.Controls.Add(this.AroundTarget);
             this.RNGInfo.Controls.Add(this.L_frame);
@@ -2411,6 +2413,16 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // ConsiderBlink
+            // 
+            this.ConsiderBlink.AutoSize = true;
+            this.ConsiderBlink.Location = new System.Drawing.Point(182, 69);
+            this.ConsiderBlink.Name = "ConsiderBlink";
+            this.ConsiderBlink.Size = new System.Drawing.Size(110, 17);
+            this.ConsiderBlink.TabIndex = 63;
+            this.ConsiderBlink.Text = "考虑眨眼影响（同步）";
+            this.ConsiderBlink.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2685,6 +2697,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_rand;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
+        private System.Windows.Forms.CheckBox ConsiderBlink;
     }
 }
 
