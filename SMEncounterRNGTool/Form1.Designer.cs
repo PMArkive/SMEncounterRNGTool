@@ -219,7 +219,7 @@
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.GoodFOnly = new System.Windows.Forms.CheckBox();
+            this.SafeFOnly = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -1187,7 +1187,7 @@
             // 
             // SearchSettingBox
             // 
-            this.SearchSettingBox.Controls.Add(this.GoodFOnly);
+            this.SearchSettingBox.Controls.Add(this.SafeFOnly);
             this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.ShowStats);
             this.SearchSettingBox.Controls.Add(this.BlinkOnly);
@@ -2425,15 +2425,15 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
-            // GoodFOnly
+            // SafeFOnly
             // 
-            this.GoodFOnly.AutoSize = true;
-            this.GoodFOnly.Location = new System.Drawing.Point(299, 199);
-            this.GoodFOnly.Name = "GoodFOnly";
-            this.GoodFOnly.Size = new System.Drawing.Size(74, 17);
-            this.GoodFOnly.TabIndex = 76;
-            this.GoodFOnly.Text = "仅准确帧";
-            this.GoodFOnly.UseVisualStyleBackColor = true;
+            this.SafeFOnly.AutoSize = true;
+            this.SafeFOnly.Location = new System.Drawing.Point(299, 199);
+            this.SafeFOnly.Name = "SafeFOnly";
+            this.SafeFOnly.Size = new System.Drawing.Size(74, 17);
+            this.SafeFOnly.TabIndex = 76;
+            this.SafeFOnly.Text = "仅准确帧";
+            this.SafeFOnly.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2710,7 +2710,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.CheckBox ConsiderBlink;
-        private System.Windows.Forms.CheckBox GoodFOnly;
+        private System.Windows.Forms.CheckBox SafeFOnly;
     }
 }
 

@@ -466,11 +466,11 @@ namespace SMEncounterRNGTool
             if (NPC.Value == 0)
             {
                 BlinkOnly.Visible = true;
-                GoodFOnly.Visible = GoodFOnly.Checked = false;
+                SafeFOnly.Visible = SafeFOnly.Checked = false;
             }
             else
             {
-                GoodFOnly.Visible = true;
+                SafeFOnly.Visible = true;
                 BlinkOnly.Visible = BlinkOnly.Checked = false;
             }
         }
@@ -531,6 +531,8 @@ namespace SMEncounterRNGTool
             return total_frame;
         }
 
+        private bool showdelay { get { return ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;}}
+
         private void CalcTime_Click(object sender, EventArgs e)
         {
             TimeResult.Items.Clear();
@@ -538,7 +540,7 @@ namespace SMEncounterRNGTool
             int max = (int)Time_max.Value;
             int delaytime = RNGSearch.delaytime;
             int[] tmptimer = new int[2];
-            if (ConsiderDelay.Checked)
+            if (showdelay)
             {
                 for (int tmp = max - (int)(NPC.Value + 1) * delaytime; tmp <= max; tmp++)
                 {
@@ -562,8 +564,8 @@ namespace SMEncounterRNGTool
             string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
             switch (lindex)
             {
-                case 0: str = "Set Eontimer for" + str + (ConsiderDelay.Checked ? $" Hit frame {max}" : ""); break;
-                case 1: str = "计时器设置为" + str + (ConsiderDelay.Checked ? $" 在 {max} 帧按A" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (showdelay ? $" Hit frame {max}" : ""); break;
+                case 1: str = "计时器设置为" + str + (showdelay ? $" 在 {max} 帧按A" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -787,7 +789,7 @@ namespace SMEncounterRNGTool
             if (BlinkOnly.Checked && result.Blink < 5)
                 return false;
 
-            if (GoodFOnly.Checked && result.Blink < 0)
+            if (SafeFOnly.Checked && result.Blink < 0)
                 return false;
 
             if (ByIVs.Checked && !setting.validIVs(result.IVs))

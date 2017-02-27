@@ -68,14 +68,7 @@ namespace SMEncounterRNGTool
             ResetNPCStatus();
 
             if (Considerdelay)
-            {
-                if (IsSolgaleo)
-                    st.frameshift = SolLunaDelay(77);
-                else if (IsLunala)
-                    st.frameshift = SolLunaDelay(74);
-                else
-                    st.frameshift = getframeshift();
-            }
+                st.frameshift = getframeshift();
 
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
@@ -94,7 +87,7 @@ namespace SMEncounterRNGTool
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process(2);
-            
+
             if (Wild && UB && !Honey)
                 st.UbValue = getUBValue();
 
@@ -262,15 +255,15 @@ namespace SMEncounterRNGTool
         {
             // Frame correction before time delay starts
             index = PreDelayCorrection;
-            time_elapse(delaytime);
-            return index;
-        }
-
-        private static int SolLunaDelay(int crydelay)
-        {
-            time_elapse(delaytime - crydelay);
-            Advance(1);     //Cry Inside Time Delay
-            time_elapse(crydelay);
+            if (IsSolgaleo || IsLunala)
+            {
+                int crydelay = IsSolgaleo ? 77 : 74;
+                time_elapse(delaytime - crydelay);
+                Advance(1);     //Cry Inside Time Delay
+                time_elapse(crydelay);
+            }
+            else
+                time_elapse(delaytime);
             return index;
         }
 
