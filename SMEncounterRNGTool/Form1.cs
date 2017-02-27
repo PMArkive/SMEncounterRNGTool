@@ -641,13 +641,6 @@ namespace SMEncounterRNGTool
                 min = (int)Frame_min.Value;
                 max = (int)Frame_max.Value;
             }
-            int RandBuffSize = 150;
-
-            if (ConsiderDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
-
-            if (ShowResultsAfterDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 200, RandBuffSize);
 
             SFMT sfmt = new SFMT(InitialSeed);
             List<DataGridViewRow> list = new List<DataGridViewRow>();
@@ -692,12 +685,7 @@ namespace SMEncounterRNGTool
                     sfmt.NextUInt64();
             }
 
-            RNGSearch.Rand.Clear();
-
-            for (int i = 0; i < RandBuffSize; i++)
-            {
-                RNGSearch.Rand.Add(sfmt.NextUInt64());
-            }
+            createRNGbuffer(sfmt);
 
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
@@ -747,40 +735,25 @@ namespace SMEncounterRNGTool
                 sfmt.NextUInt64();
 
             int npcnumber = RNGSearch.npcnumber = NPCStatus.npcnumber = (int)NPC.Value + 1;
+
             NPCStatus st = new NPCStatus();
             NPCStatus.smft = (SFMT)sfmt.DeepCopy();
             RNGSearch.ResetNPCStatus();
 
             List<DataGridViewRow> list = new List<DataGridViewRow>();
-
             DGV.Rows.Clear();
 
             var setting = getSettings();
             var rng = getRNGSettings();
 
-            int RandBuffSize = 150;
-
-            if (ConsiderDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
-
-            if (ShowResultsAfterDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 200, RandBuffSize);
-
-            RNGSearch.Rand.Clear();
-            for (int i = 0; i < RandBuffSize; i++)
-            {
-                RNGSearch.Rand.Add(sfmt.NextUInt64());
-            }
+            createRNGbuffer(sfmt);
 
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
             for (int i = 0; i <= totaltime; i++)
             {
-                for (int j = 0; j < npcnumber; j++)
-                {
-                    RNGSearch.remain_frame[j] = st.remain_frame[j];
-                    RNGSearch.blink_flag[j] = st.blink_flag[j];
-                }
+                RNGSearch.remain_frame = (int[])st.remain_frame.Clone();
+                RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
                 RNGSearch.RNGResult result = rng.Generate();
                 result.realtime = i;
@@ -802,6 +775,23 @@ namespace SMEncounterRNGTool
             }
             DGV.Rows.AddRange(list.ToArray());
             DGV.CurrentCell = null;
+        }
+
+        private void createRNGbuffer(SFMT sfmt)
+        {
+            int RandBuffSize = 150;
+
+            if (ConsiderDelay.Checked)
+                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
+
+            if (ShowResultsAfterDelay.Checked)
+                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 200, RandBuffSize);
+
+            RNGSearch.Rand.Clear();
+            for (int i = 0; i < RandBuffSize; i++)
+            {
+                RNGSearch.Rand.Add(sfmt.NextUInt64());
+            }
         }
 
         private SearchSetting getSettings()
