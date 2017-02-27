@@ -21,8 +21,8 @@ namespace SMEncounterRNGTool
         public bool UB_S = false;
         public bool nogender;
         public int gender_ratio;
-        public bool createtimeline = false;
 
+        public static bool createtimeline;
         public static bool Considerdelay;
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
@@ -67,10 +67,12 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
+            // Reset NPC Status
             if (!createtimeline || Honey)
                 ResetNPCStatus();
 
-            // Get NPC Status
+            // ---Start here when press A button---
+            
             if (Considerdelay)
                 st.frameshift = getframeshift();
 
@@ -81,13 +83,15 @@ namespace SMEncounterRNGTool
             //Synchronize
             if (UB_S)
                 st.Synchronize = blink_process(7);
-            if (Wild && !UB_S)
+            else if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
-            if (!Wild)
+            else if (!Wild)
+            {
                 if (AlwaysSynchro)
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process(2);
+            }
 
             // Encounter
             if (Wild && !Honey)
@@ -153,7 +157,6 @@ namespace SMEncounterRNGTool
                     cnt--;
                 }
             }
-
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
@@ -190,15 +193,12 @@ namespace SMEncounterRNGTool
         public static void CreateBuffer(SFMT sfmt)
         {
             int RandBuffSize = 200;
-
             if (Considerdelay)
                 RandBuffSize += npcnumber * delaytime;
 
             Rand.Clear();
             for (int i = 0; i < RandBuffSize; i++)
-            {
                 Rand.Add(sfmt.NextUInt64());
-            }
         }
 
         private static ulong getrand()

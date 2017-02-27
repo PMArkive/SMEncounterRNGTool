@@ -623,7 +623,6 @@ namespace SMEncounterRNGTool
 
         private void StationarySearch()
         {
-            uint InitialSeed = (uint)Seed.Value;
             int max, min;
             if (AroundTarget.Checked)
             {
@@ -636,17 +635,17 @@ namespace SMEncounterRNGTool
                 max = (int)Frame_max.Value;
             }
 
-            SFMT sfmt = new SFMT(InitialSeed);
+            SFMT sfmt = new SFMT((uint)Seed.Value);
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
             var setting = getSettings();
             var rng = getRNGSettings();
 
+            //Blink flag history
             int blink_flag = 0;
-            int saferange = 41 * (int)NPC.Value;
-
-            if (saferange == 0)
+            int UnsafeRange = 41 * (int)NPC.Value;
+            if (UnsafeRange == 0)
             {
                 for (int i = 0; i < min - 2; i++)
                     sfmt.NextUInt64();
@@ -663,12 +662,12 @@ namespace SMEncounterRNGTool
             }
             else if (!Honey.Checked)
             {
-                for (int i = 0; i < Math.Max(418, min - saferange); i++)
+                for (int i = 0; i < Math.Max(418, min - UnsafeRange); i++)
                     sfmt.NextUInt64();
-                for (int i = Math.Max(418, min - saferange); i < min; i++)
+                for (int i = Math.Max(418, min - UnsafeRange); i < min; i++)
                 {
                     if ((sfmt.NextUInt64() & 0x7F) == 0)
-                        blink_flag = saferange;
+                        blink_flag = UnsafeRange;
                     else
                     if (blink_flag > 0) blink_flag--;
                 }
@@ -700,7 +699,7 @@ namespace SMEncounterRNGTool
                 else if (!Honey.Checked)
                 {
                     if (result.Blink == 1)
-                        blink_flag = saferange;
+                        blink_flag = UnsafeRange;
                     else if (blink_flag > 0)
                     {
                         blink_flag--;
@@ -766,7 +765,7 @@ namespace SMEncounterRNGTool
             DGV.Rows.AddRange(list.ToArray());
             DGV.CurrentCell = null;
         }
-        
+
         private NPCStatus CreateNPCStatus(SFMT sfmt)
         {
             NPCStatus.npcnumber = (int)NPC.Value + 1;
@@ -808,6 +807,7 @@ namespace SMEncounterRNGTool
                 case 4: gender_threshold = 189; break;
             }
 
+            RNGSearch.createtimeline = CreateTimeline.Checked;
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
@@ -832,7 +832,6 @@ namespace SMEncounterRNGTool
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
-                createtimeline = CreateTimeline.Checked
             };
             return rng;
         }
