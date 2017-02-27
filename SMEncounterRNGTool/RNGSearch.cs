@@ -96,8 +96,6 @@ namespace SMEncounterRNGTool
             // Encounter
             if (Wild && !Honey)
                 st.Encounter = (int)(getrand() % 100);
-            else
-                st.Encounter = -1;
 
             // UB w/o Honey
             if (Wild && UB && !Honey)

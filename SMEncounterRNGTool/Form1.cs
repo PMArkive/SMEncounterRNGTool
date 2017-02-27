@@ -898,9 +898,14 @@ namespace SMEncounterRNGTool
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             if ((result.UbValue < UB_th.Value) && (ConsiderDelay.Checked) && (!ShowResultsAfterDelay.Checked))
                 result.Blink = -1;
-            string BlinkFlag = (result.Blink == 1 ? "★" : "-");
-            BlinkFlag = result.Blink == -1 ? "?" : BlinkFlag;
-            BlinkFlag = result.Blink > 1 ? result.Blink.ToString() : BlinkFlag;
+            string BlinkFlag = "";
+            switch (result.Blink)
+            {
+                case -1: BlinkFlag = "?"; break;
+                case 0: BlinkFlag = "-"; break;
+                case 1: BlinkFlag = "★"; break;
+                default: BlinkFlag = result.Blink.ToString(); break;
+            }
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
