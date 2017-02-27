@@ -477,7 +477,6 @@ namespace SMEncounterRNGTool
             }
         }
 
-
         private void AlwaysSynced_CheckedChanged(object sender, EventArgs e)
         {
             if (AlwaysSynced.Checked)
@@ -913,18 +912,20 @@ namespace SMEncounterRNGTool
 
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
-            ConsiderBlink.Checked = ConsiderBlink.Visible = Poke.SelectedIndex < AlwaysSync_Index;
 
             RNGSearch.IsSolgaleo = (Poke.SelectedIndex == AlwaysSync_Index - 2);
             RNGSearch.IsLunala = (Poke.SelectedIndex == AlwaysSync_Index - 1);
-
-            if (Poke.SelectedIndex == 0) return;
 
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);
 
+            ConsiderBlink.Checked = ConsiderBlink.Visible = Poke.SelectedIndex < AlwaysSync_Index;
+
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
+
+            if (Poke.SelectedIndex == 0) return;
+
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
