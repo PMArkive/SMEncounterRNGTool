@@ -60,24 +60,27 @@ namespace SMEncounterRNGTool
             RNGResult st = new RNGResult();
             index = 0;
 
-            //Synchronize
             st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
             ResetNPCStatus();
 
+            // Get NPC Status
             if (Considerdelay)
                 st.frameshift = getframeshift();
 
+            // UB using\ honey
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
+            // Encounter
             if (Wild && !Honey)
                 st.Encounter = (int)(getrand() % 100);
             else
                 st.Encounter = -1;
 
+            //Synchronize
             if (UB_S)
                 st.Synchronize = blink_process(7);
             if (Wild && !UB_S)
@@ -88,8 +91,13 @@ namespace SMEncounterRNGTool
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process(2);
 
+            // UB w/o Honey
             if (Wild && UB && !Honey)
+            {
                 st.UbValue = getUBValue();
+                if (UB_S)
+                    st.Synchronize = blink_process(7); //need tests
+            }
 
             //UB is determined above
             bool lengendary = UB_S || !Wild;
