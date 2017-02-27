@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using static PKHeX.Util;
 
 namespace SMEncounterRNGTool
 {
