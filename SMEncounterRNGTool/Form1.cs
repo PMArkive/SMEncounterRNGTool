@@ -48,7 +48,6 @@ namespace SMEncounterRNGTool
         #region Translation
         private string curlanguage;
         private static readonly string[] langlist = { "en", "cn" };
-        private static readonly string[] None_STR = { "None", "无" };
         private static readonly string[] NORESULT_STR = { "Not Found", "未找到" };
         private static readonly string[] NOSELECTION_STR = { "Please Select", "请选择" };
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
@@ -393,7 +392,6 @@ namespace SMEncounterRNGTool
                 Fix3v.Checked = false;
                 AlwaysSynced.Checked = false;
                 EncounteredOnly.Checked = true;
-                ConsiderBlink.Visible = false;
             }
             UB_CheckedChanged(null, null);
             ConsiderDelay_CheckedChanged(null, null);
@@ -481,6 +479,10 @@ namespace SMEncounterRNGTool
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
             TimeSpan.Enabled = CreateTimeline.Checked;
+            BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            if (CreateTimeline.Checked)
+                BlinkOnly.Checked = SafeFOnly.Checked = false;
+
         }
         #endregion
 
@@ -921,14 +923,12 @@ namespace SMEncounterRNGTool
                 Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
                 UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
-                if (result.Item == -1)
-                    Item = "-";
-                else if (result.Item < 50)
+                if (result.Item < 50)
                     Item = "50%";
                 else if (result.Item < 55)
                     Item = "5%";
                 else
-                    Item = None_STR[lindex];
+                    Item = "-";
                 time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
             }
 
@@ -976,10 +976,8 @@ namespace SMEncounterRNGTool
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);
 
-            ConsiderBlink.Checked = ConsiderBlink.Visible = Poke.SelectedIndex < AlwaysSync_Index;
-
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
-
+            ConsiderBlink.Checked = !AlwaysSynced.Checked;
             if (Poke.SelectedIndex == 0) return;
 
             for (int i = 0; i < 6; i++)

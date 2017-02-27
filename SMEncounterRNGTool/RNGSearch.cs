@@ -53,7 +53,7 @@ namespace SMEncounterRNGTool
             public int UbValue = 100;
             public int Slot = -1;
             public int Lv = -1;
-            public int Item = -1;
+            public int Item = 100;
 
             public int realtime = -1;
         }
@@ -81,10 +81,13 @@ namespace SMEncounterRNGTool
                 st.UbValue = getUBValue();
 
             //Synchronize
-            if (UB_S)
-                st.Synchronize = blink_process(7);
-            else if (Wild && !UB_S)
+            if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
+            else if(UB_S)
+            {
+                if (ConsiderBlink)
+                st.Synchronize = blink_process(7);
+            }
             else if (!Wild)
             {
                 if (AlwaysSynchro)
