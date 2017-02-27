@@ -93,7 +93,6 @@
             this.UB_th = new System.Windows.Forms.NumericUpDown();
             this.Encounter_th = new System.Windows.Forms.NumericUpDown();
             this.AlwaysSynced = new System.Windows.Forms.CheckBox();
-            this.CalcList = new System.Windows.Forms.Button();
             this.SearchByRand = new System.Windows.Forms.GroupBox();
             this.CurrSeed = new System.Windows.Forms.TextBox();
             this.Result_Text = new System.Windows.Forms.Label();
@@ -176,9 +175,13 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
+            this.L_TimeSpan = new System.Windows.Forms.Label();
             this.ConsiderBlink = new System.Windows.Forms.CheckBox();
+            this.TimeSpan = new System.Windows.Forms.NumericUpDown();
             this.ShowResultsAfterDelay = new System.Windows.Forms.CheckBox();
             this.AroundTarget = new System.Windows.Forms.CheckBox();
+            this.CreateTimeline = new System.Windows.Forms.CheckBox();
+            this.CalcList = new System.Windows.Forms.Button();
             this.L_frame = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.Frame_max = new System.Windows.Forms.NumericUpDown();
@@ -208,6 +211,7 @@
             this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
@@ -268,6 +272,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).BeginInit();
             this.RNGInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeSpan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
@@ -719,7 +724,6 @@
             // ControlPanel
             // 
             this.ControlPanel.Controls.Add(this.Condition);
-            this.ControlPanel.Controls.Add(this.CalcList);
             this.ControlPanel.Controls.Add(this.SearchByRand);
             this.ControlPanel.Controls.Add(this.TimeBox);
             this.ControlPanel.Controls.Add(this.SearchSettingBox);
@@ -968,16 +972,6 @@
             this.AlwaysSynced.Text = "必定同步";
             this.AlwaysSynced.UseVisualStyleBackColor = true;
             this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
-            // 
-            // CalcList
-            // 
-            this.CalcList.Location = new System.Drawing.Point(299, 262);
-            this.CalcList.Name = "CalcList";
-            this.CalcList.Size = new System.Drawing.Size(104, 28);
-            this.CalcList.TabIndex = 41;
-            this.CalcList.Text = "检索";
-            this.CalcList.UseVisualStyleBackColor = true;
-            this.CalcList.Click += new System.EventHandler(this.CalcList_Click);
             // 
             // SearchByRand
             // 
@@ -1986,29 +1980,61 @@
             // 
             // RNGInfo
             // 
+            this.RNGInfo.Controls.Add(this.L_TimeSpan);
             this.RNGInfo.Controls.Add(this.ConsiderBlink);
+            this.RNGInfo.Controls.Add(this.TimeSpan);
             this.RNGInfo.Controls.Add(this.ShowResultsAfterDelay);
             this.RNGInfo.Controls.Add(this.AroundTarget);
+            this.RNGInfo.Controls.Add(this.CreateTimeline);
+            this.RNGInfo.Controls.Add(this.CalcList);
             this.RNGInfo.Controls.Add(this.L_frame);
             this.RNGInfo.Controls.Add(this.label7);
             this.RNGInfo.Controls.Add(this.Frame_max);
             this.RNGInfo.Controls.Add(this.Frame_min);
             this.RNGInfo.Location = new System.Drawing.Point(7, 157);
             this.RNGInfo.Name = "RNGInfo";
-            this.RNGInfo.Size = new System.Drawing.Size(396, 99);
+            this.RNGInfo.Size = new System.Drawing.Size(399, 134);
             this.RNGInfo.TabIndex = 40;
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
             // 
+            // L_TimeSpan
+            // 
+            this.L_TimeSpan.AutoSize = true;
+            this.L_TimeSpan.Location = new System.Drawing.Point(125, 101);
+            this.L_TimeSpan.Name = "L_TimeSpan";
+            this.L_TimeSpan.Size = new System.Drawing.Size(41, 13);
+            this.L_TimeSpan.TabIndex = 67;
+            this.L_TimeSpan.Text = "时长/s";
+            // 
             // ConsiderBlink
             // 
             this.ConsiderBlink.AutoSize = true;
-            this.ConsiderBlink.Location = new System.Drawing.Point(182, 68);
+            this.ConsiderBlink.Location = new System.Drawing.Point(164, 68);
             this.ConsiderBlink.Name = "ConsiderBlink";
             this.ConsiderBlink.Size = new System.Drawing.Size(146, 17);
             this.ConsiderBlink.TabIndex = 63;
             this.ConsiderBlink.Text = "考虑眨眼影响（同步）";
             this.ConsiderBlink.UseVisualStyleBackColor = true;
+            // 
+            // TimeSpan
+            // 
+            this.TimeSpan.AccessibleName = "";
+            this.TimeSpan.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeSpan.Location = new System.Drawing.Point(206, 98);
+            this.TimeSpan.Maximum = new decimal(new int[] {
+            3600,
+            0,
+            0,
+            0});
+            this.TimeSpan.Name = "TimeSpan";
+            this.TimeSpan.Size = new System.Drawing.Size(45, 22);
+            this.TimeSpan.TabIndex = 66;
+            this.TimeSpan.Value = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
             // 
             // ShowResultsAfterDelay
             // 
@@ -2023,12 +2049,33 @@
             // AroundTarget
             // 
             this.AroundTarget.AutoSize = true;
-            this.AroundTarget.Location = new System.Drawing.Point(281, 32);
+            this.AroundTarget.Location = new System.Drawing.Point(284, 32);
             this.AroundTarget.Name = "AroundTarget";
             this.AroundTarget.Size = new System.Drawing.Size(86, 17);
             this.AroundTarget.TabIndex = 10;
             this.AroundTarget.Text = "目标帧±100";
             this.AroundTarget.UseVisualStyleBackColor = true;
+            // 
+            // CreateTimeline
+            // 
+            this.CreateTimeline.AutoSize = true;
+            this.CreateTimeline.Location = new System.Drawing.Point(10, 100);
+            this.CreateTimeline.Name = "CreateTimeline";
+            this.CreateTimeline.Size = new System.Drawing.Size(86, 17);
+            this.CreateTimeline.TabIndex = 64;
+            this.CreateTimeline.Text = "生成时间线";
+            this.CreateTimeline.UseVisualStyleBackColor = true;
+            this.CreateTimeline.CheckedChanged += new System.EventHandler(this.CreateTimeline_CheckedChanged);
+            // 
+            // CalcList
+            // 
+            this.CalcList.Location = new System.Drawing.Point(284, 96);
+            this.CalcList.Name = "CalcList";
+            this.CalcList.Size = new System.Drawing.Size(104, 28);
+            this.CalcList.TabIndex = 41;
+            this.CalcList.Text = "检索";
+            this.CalcList.UseVisualStyleBackColor = true;
+            this.CalcList.Click += new System.EventHandler(this.CalcList_Click);
             // 
             // L_frame
             // 
@@ -2135,7 +2182,8 @@
             this.dgv_encounter,
             this.dgv_rand,
             this.dgv_pid,
-            this.dgv_EC});
+            this.dgv_EC,
+            this.dgv_time});
             this.DGV.ContextMenuStrip = this.DGVMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -2307,6 +2355,12 @@
             this.dgv_EC.Name = "dgv_EC";
             this.dgv_EC.Width = 65;
             // 
+            // dgv_time
+            // 
+            this.dgv_time.HeaderText = "时间";
+            this.dgv_time.Name = "dgv_time";
+            this.dgv_time.Width = 55;
+            // 
             // DGVMenuStrip
             // 
             this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2314,26 +2368,26 @@
             this.SHControlPanel,
             this.HighLightFrameAfter});
             this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 70);
+            this.DGVMenuStrip.Size = new System.Drawing.Size(205, 70);
             // 
             // SetTargetFrame
             // 
             this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
+            this.SetTargetFrame.Size = new System.Drawing.Size(204, 22);
             this.SetTargetFrame.Text = "设为目标帧";
             this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
             // 
             // SHControlPanel
             // 
             this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
+            this.SHControlPanel.Size = new System.Drawing.Size(204, 22);
             this.SHControlPanel.Text = "显示/隐藏控制面板";
             this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
             // 
             // HighLightFrameAfter
             // 
             this.HighLightFrameAfter.Name = "HighLightFrameAfter";
-            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
+            this.HighLightFrameAfter.Size = new System.Drawing.Size(204, 22);
             this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
             this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
             // 
@@ -2512,6 +2566,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ivmax3)).EndInit();
             this.RNGInfo.ResumeLayout(false);
             this.RNGInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeSpan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
@@ -2686,6 +2741,11 @@
         private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
         private System.Windows.Forms.ToolStripMenuItem HighLightFrameAfter;
         private System.Windows.Forms.NumericUpDown Timedelay;
+        private System.Windows.Forms.CheckBox ConsiderBlink;
+        private System.Windows.Forms.CheckBox SafeFOnly;
+        private System.Windows.Forms.NumericUpDown TimeSpan;
+        private System.Windows.Forms.CheckBox CreateTimeline;
+        private System.Windows.Forms.Label L_TimeSpan;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_deviation;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_blink;
@@ -2710,8 +2770,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_rand;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
-        private System.Windows.Forms.CheckBox ConsiderBlink;
-        private System.Windows.Forms.CheckBox SafeFOnly;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
     }
 }
 

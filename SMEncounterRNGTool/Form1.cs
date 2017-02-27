@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "1.00";
+        private string version = "1.01";
 
         #region Translation
         private string curlanguage;
@@ -482,6 +482,12 @@ namespace SMEncounterRNGTool
             if (AlwaysSynced.Checked)
                 ConsiderBlink.Checked = false;
         }
+
+
+        private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
+        {
+            TimeSpan.Enabled = CreateTimeline.Checked;
+        }
         #endregion
 
         #region TimerCalculateFunction
@@ -615,6 +621,8 @@ namespace SMEncounterRNGTool
                 Error(SETTINGERROR_STR[lindex] + L_D.Text);
             else if (ivmin5.Value > ivmax5.Value)
                 Error(SETTINGERROR_STR[lindex] + L_S.Text);
+            else if (CreateTimeline.Checked)
+                createtimeline();
             else
                 StationarySearch();
         }
@@ -729,6 +737,73 @@ namespace SMEncounterRNGTool
             DGV.CurrentCell = null;
         }
 
+        private void createtimeline()
+        {
+            uint InitialSeed = (uint)Seed.Value;
+
+            SFMT sfmt = new SFMT(InitialSeed);
+
+            for (int i = 0; i < (int)Frame_min.Value; i++)
+                sfmt.NextUInt64();
+
+            int npcnumber = RNGSearch.npcnumber = NPCStatus.npcnumber = (int)NPC.Value + 1;
+            NPCStatus st = new NPCStatus();
+            NPCStatus.smft = (SFMT)sfmt.DeepCopy();
+            RNGSearch.ResetNPCStatus();
+
+            List<DataGridViewRow> list = new List<DataGridViewRow>();
+
+            DGV.Rows.Clear();
+
+            var setting = getSettings();
+            var rng = getRNGSettings();
+
+            int RandBuffSize = 150;
+
+            if (ConsiderDelay.Checked)
+                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
+
+            if (ShowResultsAfterDelay.Checked)
+                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 200, RandBuffSize);
+
+            RNGSearch.Rand.Clear();
+            for (int i = 0; i < RandBuffSize; i++)
+            {
+                RNGSearch.Rand.Add(sfmt.NextUInt64());
+            }
+
+            int totaltime = (int)TimeSpan.Value * 30;
+            int frame = (int)Frame_min.Value;
+            for (int i = 0; i <= totaltime; i++)
+            {
+                for (int j = 0; j < npcnumber; j++)
+                {
+                    RNGSearch.remain_frame[j] = st.remain_frame[j];
+                    RNGSearch.blink_flag[j] = st.blink_flag[j];
+                }
+
+                RNGSearch.RNGResult result = rng.Generate();
+                result.realtime = i;
+                int frameadvance = st.NextState();
+                frame += frameadvance;
+
+                for (int j = 0; j < frameadvance; j++)
+                {
+                    RNGSearch.Rand.RemoveAt(0);
+                    RNGSearch.Rand.Add(sfmt.NextUInt64());
+                }
+
+                if (!frameMatch(result, setting))
+                    continue;
+
+                list.Add(getRow_Sta(frame - frameadvance, rng, result, DGV));
+
+                if (list.Count > 100000) break;
+            }
+            DGV.Rows.AddRange(list.ToArray());
+            DGV.CurrentCell = null;
+        }
+
         private SearchSetting getSettings()
         {
             int[] IVup = { (int)ivmax0.Value, (int)ivmax1.Value, (int)ivmax2.Value, (int)ivmax3.Value, (int)ivmax4.Value, (int)ivmax5.Value, };
@@ -780,6 +855,7 @@ namespace SMEncounterRNGTool
                 UB_th = (int)UB_th.Value,
                 Considerdelay = ShowResultsAfterDelay.Checked,
                 ConsiderBlink = ConsiderBlink.Checked,
+                createtimeline = CreateTimeline.Checked
             };
             return rng;
         }
@@ -857,6 +933,7 @@ namespace SMEncounterRNGTool
             string randstr = result.row_r.ToString("X16");
             string PID = result.PID.ToString("X8");
             string EC = result.EC.ToString("X8");
+            string time = (CreateTimeline.Checked) ? (2 * result.realtime).ToString() + "F" : "-";
 
             if (!Advanced.Checked)
             {
@@ -871,6 +948,7 @@ namespace SMEncounterRNGTool
                     Item = "5%";
                 else
                     Item = None_STR[lindex];
+                time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
             }
 
             string frameadvance = (ConsiderDelay.Checked) ? result.frameshift.ToString("+#;-#;0") : "-";
@@ -888,7 +966,7 @@ namespace SMEncounterRNGTool
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
                 true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
-                randstr, PID, EC
+                randstr, PID, EC, time
                 );
 
             if (result.Shiny)

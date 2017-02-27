@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static PKHeX.Util;
 
 namespace SMEncounterRNGTool
 {
@@ -21,6 +22,7 @@ namespace SMEncounterRNGTool
         public bool UB_S = false;
         public bool nogender;
         public int gender_ratio;
+        public bool createtimeline = false;
 
         public bool Considerdelay;
         public static int PreDelayCorrection = 0;
@@ -53,6 +55,8 @@ namespace SMEncounterRNGTool
             public int Slot = -1;
             public int Lv = -1;
             public int Item = -1;
+
+            public int realtime = -1;
         }
 
         public RNGResult Generate()
@@ -63,8 +67,9 @@ namespace SMEncounterRNGTool
             st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
-
-            ResetNPCStatus();
+            
+            if(!createtimeline)
+               ResetNPCStatus();
 
             // Get NPC Status
             if (Considerdelay)
@@ -256,7 +261,7 @@ namespace SMEncounterRNGTool
             }
         }
 
-        private static void ResetNPCStatus()
+        public static void ResetNPCStatus()
         {
             remain_frame = new int[npcnumber];
             blink_flag = new bool[npcnumber];

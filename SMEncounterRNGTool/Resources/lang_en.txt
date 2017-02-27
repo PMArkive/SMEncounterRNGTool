@@ -86,6 +86,8 @@ L_frame = Frame Range
 L_Framecorrection = Frame Correction
 ShowResultsAfterDelay = Show Results after Delay
 ConsiderBlink = Consider Blinking (Sync)
+CreateTimeline = Create Timeline
+L_TimeSpan = Length of Time
 ---
 TimeBox = Time Calculator
 ConsiderDelay = Consider Time Delay
@@ -120,6 +122,7 @@ dgv_encounter = Enctr?
 dgv_rand = Random Number
 dgv_PID = PID
 dgv_EC = EC
+dgv_time = Time
 ---
 SearchByRand = Search by Current Seed
 SearchByCurrSeed = Search

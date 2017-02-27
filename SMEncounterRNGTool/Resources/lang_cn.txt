@@ -86,6 +86,8 @@ L_frame = 帧数范围
 L_Framecorrection = 帧数修正
 ShowResultsAfterDelay = 显示延时后结果
 ConsiderBlink = 考虑眨眼影响（同步）
+CreateTimeline = 生成时间线
+L_TimeSpan = 时间长度/秒
 ---
 TimeBox = 时间计算
 L_time = 计时范围
