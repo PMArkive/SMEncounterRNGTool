@@ -70,15 +70,9 @@ namespace SMEncounterRNGTool
             if (Considerdelay)
                 st.frameshift = getframeshift();
 
-            // UB using\ honey
+            // UB using honey
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
-
-            // Encounter
-            if (Wild && !Honey)
-                st.Encounter = (int)(getrand() % 100);
-            else
-                st.Encounter = -1;
 
             //Synchronize
             if (UB_S)
@@ -91,12 +85,21 @@ namespace SMEncounterRNGTool
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process(2);
 
+            // Encounter
+            if (Wild && !Honey)
+                st.Encounter = (int)(getrand() % 100);
+            else
+                st.Encounter = -1;
+
             // UB w/o Honey
             if (Wild && UB && !Honey)
             {
                 st.UbValue = getUBValue();
                 if (UB_S)
-                    st.Synchronize = blink_process(7); //need tests
+                {
+                    Advance(1);
+                    st.Synchronize = blink_process(0);
+                }
             }
 
             //UB is determined above
