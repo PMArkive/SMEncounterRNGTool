@@ -420,6 +420,7 @@ namespace SMEncounterRNGTool
             else if (Wild.Checked)
             {
                 Timedelay.Value = 0;
+                Correction.Value = 0;
             }
             ConsiderDelay.Enabled = !Honey.Checked;
         }
@@ -531,7 +532,7 @@ namespace SMEncounterRNGTool
             return total_frame;
         }
 
-        private bool showdelay { get { return ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;}}
+        private bool showdelay { get { return ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked; } }
 
         private void CalcTime_Click(object sender, EventArgs e)
         {
@@ -836,6 +837,8 @@ namespace SMEncounterRNGTool
             int d = i - (int)Time_max.Value;
             string true_nature = SearchSetting.naturestr[result.Nature];
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
+            if ((result.UbValue < UB_th.Value) && (ConsiderDelay.Checked) && (!ShowResultsAfterDelay.Checked))
+                result.Blink = -1;
             string BlinkFlag = (result.Blink == 1 ? "★" : "-");
             BlinkFlag = result.Blink == -1 ? "?" : BlinkFlag;
             BlinkFlag = result.Blink > 1 ? result.Blink.ToString() : BlinkFlag;
