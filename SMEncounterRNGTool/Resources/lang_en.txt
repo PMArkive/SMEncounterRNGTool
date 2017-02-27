@@ -87,7 +87,7 @@ L_Framecorrection = Frame Correction
 ShowResultsAfterDelay = Show Results after Delay
 ConsiderBlink = Consider Blinking (Sync)
 CreateTimeline = Create Timeline
-L_TimeSpan = Length of Time
+L_TimeSpan = Time Length/s
 ---
 TimeBox = Time Calculator
 ConsiderDelay = Consider Time Delay
@@ -95,6 +95,7 @@ L_Correction = Correction
 L_time = Timing Range
 CalcTime = Calc
 ---
+SetStartFrame = Set as Starting Frame Range
 SetTargetFrame = Set as Target Frame
 SHControlPanel = Show/Hide Control Panel
 HighLightFrameAfter = Highlight Frame After Delay

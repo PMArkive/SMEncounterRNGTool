@@ -1035,6 +1035,19 @@ namespace SMEncounterRNGTool
             }
         }
 
+
+        private void SetStartFrame_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Frame_min.Value = Convert.ToDecimal(DGV.CurrentRow.Cells[0].Value);
+            }
+            catch (NullReferenceException)
+            {
+                Error(NOSELECTION_STR[lindex]);
+            }
+        }
+
         private void HideControlPanel(object sender, EventArgs e)
         {
             if (ControlPanel.Visible)
@@ -1094,5 +1107,6 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
+
     }
 }

@@ -213,6 +213,7 @@
             this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SetStartFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
@@ -2023,12 +2024,12 @@
             this.TimeSpan.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeSpan.Location = new System.Drawing.Point(206, 98);
             this.TimeSpan.Maximum = new decimal(new int[] {
-            3600,
+            1000000,
             0,
             0,
             0});
             this.TimeSpan.Name = "TimeSpan";
-            this.TimeSpan.Size = new System.Drawing.Size(45, 22);
+            this.TimeSpan.Size = new System.Drawing.Size(72, 22);
             this.TimeSpan.TabIndex = 66;
             this.TimeSpan.Value = new decimal(new int[] {
             600,
@@ -2101,7 +2102,7 @@
             this.Frame_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Frame_max.Location = new System.Drawing.Point(176, 31);
             this.Frame_max.Maximum = new decimal(new int[] {
-            10000000,
+            100000000,
             0,
             0,
             0});
@@ -2125,7 +2126,7 @@
             this.Frame_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Frame_min.Location = new System.Drawing.Point(82, 31);
             this.Frame_min.Maximum = new decimal(new int[] {
-            10000000,
+            100000000,
             0,
             0,
             0});
@@ -2364,30 +2365,38 @@
             // DGVMenuStrip
             // 
             this.DGVMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SetStartFrame,
             this.SetTargetFrame,
             this.SHControlPanel,
             this.HighLightFrameAfter});
             this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(205, 70);
+            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 114);
+            // 
+            // SetStartFrame
+            // 
+            this.SetStartFrame.Name = "SetStartFrame";
+            this.SetStartFrame.Size = new System.Drawing.Size(194, 22);
+            this.SetStartFrame.Text = "设为计时起点";
+            this.SetStartFrame.Click += new System.EventHandler(this.SetStartFrame_Click);
             // 
             // SetTargetFrame
             // 
             this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(204, 22);
+            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
             this.SetTargetFrame.Text = "设为目标帧";
             this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
             // 
             // SHControlPanel
             // 
             this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(204, 22);
+            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
             this.SHControlPanel.Text = "显示/隐藏控制面板";
             this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
             // 
             // HighLightFrameAfter
             // 
             this.HighLightFrameAfter.Name = "HighLightFrameAfter";
-            this.HighLightFrameAfter.Size = new System.Drawing.Size(204, 22);
+            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
             this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
             this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
             // 
@@ -2771,6 +2780,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
+        private System.Windows.Forms.ToolStripMenuItem SetStartFrame;
     }
 }
 

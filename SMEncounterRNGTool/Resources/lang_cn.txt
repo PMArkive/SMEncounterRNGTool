@@ -95,6 +95,7 @@ CalcTime = 计算
 ConsiderDelay = 考虑时间延迟
 L_Correction = 修正
 ---
+SetStartFrame = 设为时间线起点
 SetTargetFrame = 设为目标帧
 SHControlPanel = 显示/隐藏控制面板
 HighLightFrameAfter = 高亮延时后击中帧
