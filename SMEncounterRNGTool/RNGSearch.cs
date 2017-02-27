@@ -23,11 +23,11 @@ namespace SMEncounterRNGTool
         public int gender_ratio;
         public bool createtimeline = false;
 
-        public bool Considerdelay;
+        public static bool Considerdelay;
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
-        public bool ConsiderBlink = true;
-        public static int npcnumber = 1;
+        public static bool ConsiderBlink = true;
+        public static int npcnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
@@ -186,6 +186,21 @@ namespace SMEncounterRNGTool
 
         public static List<ulong> Rand;
         private static int index;
+
+        public static void CreateBuffer(SFMT sfmt)
+        {
+            int RandBuffSize = 200;
+
+            if (Considerdelay)
+                RandBuffSize += npcnumber * delaytime;
+
+            Rand.Clear();
+            for (int i = 0; i < RandBuffSize; i++)
+            {
+                Rand.Add(sfmt.NextUInt64());
+            }
+        }
+
         private static ulong getrand()
         {
             return Rand[index++];
@@ -231,7 +246,7 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
-        // 1/30s*n elapsed
+        // n/30s elapsed
         private static void time_elapse(int n)
         {
             for (int totalframe = 0; totalframe < n; totalframe++)

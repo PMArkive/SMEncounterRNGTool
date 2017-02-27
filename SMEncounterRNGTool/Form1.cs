@@ -188,6 +188,7 @@ namespace SMEncounterRNGTool
             Method_CheckedChanged(null, null);
             SearchMethod_CheckedChanged(null, null);
             NPC_ValueChanged(null, null);
+            CreateTimeline_CheckedChanged(null, null);
         }
 
         #region SearchSeedfunction
@@ -453,18 +454,11 @@ namespace SMEncounterRNGTool
 
         private void Timedelay_ValueChanged(object sender, EventArgs e)
         {
-            RNGSearch.delaytime = (int)Timedelay.Value / 2;
             ConsiderDelay.Checked = Timedelay.Value != 0;
-        }
-
-        private void Correction_ValueChanged(object sender, EventArgs e)
-        {
-            RNGSearch.PreDelayCorrection = (int)Correction.Value;
         }
 
         private void NPC_ValueChanged(object sender, EventArgs e)
         {
-            RNGSearch.npcnumber = (int)NPC.Value + 1;
             if (NPC.Value == 0)
             {
                 BlinkOnly.Visible = true;
@@ -685,7 +679,7 @@ namespace SMEncounterRNGTool
                     sfmt.NextUInt64();
             }
 
-            createRNGbuffer(sfmt);
+            RNGSearch.CreateBuffer(sfmt);
 
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
@@ -727,29 +721,25 @@ namespace SMEncounterRNGTool
 
         private void createtimeline()
         {
-            uint InitialSeed = (uint)Seed.Value;
-
-            SFMT sfmt = new SFMT(InitialSeed);
+            SFMT sfmt = new SFMT((uint)Seed.Value);
 
             for (int i = 0; i < (int)Frame_min.Value; i++)
                 sfmt.NextUInt64();
 
-            int npcnumber = RNGSearch.npcnumber = NPCStatus.npcnumber = (int)NPC.Value + 1;
-
-            NPCStatus st = new NPCStatus();
-            NPCStatus.smft = (SFMT)sfmt.DeepCopy();
-            RNGSearch.ResetNPCStatus();
-
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
+            var st = CreateNPCStatus(sfmt);
             var setting = getSettings();
             var rng = getRNGSettings();
 
-            createRNGbuffer(sfmt);
+            RNGSearch.ResetNPCStatus();
+            RNGSearch.CreateBuffer(sfmt);
 
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
+            int frameadvance = 0;
+
             for (int i = 0; i <= totaltime; i++)
             {
                 RNGSearch.remain_frame = (int[])st.remain_frame.Clone();
@@ -757,7 +747,7 @@ namespace SMEncounterRNGTool
 
                 RNGSearch.RNGResult result = rng.Generate();
                 result.realtime = i;
-                int frameadvance = st.NextState();
+                frameadvance = st.NextState();
                 frame += frameadvance;
 
                 for (int j = 0; j < frameadvance; j++)
@@ -776,22 +766,12 @@ namespace SMEncounterRNGTool
             DGV.Rows.AddRange(list.ToArray());
             DGV.CurrentCell = null;
         }
-
-        private void createRNGbuffer(SFMT sfmt)
+        
+        private NPCStatus CreateNPCStatus(SFMT sfmt)
         {
-            int RandBuffSize = 150;
-
-            if (ConsiderDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 50, RandBuffSize);
-
-            if (ShowResultsAfterDelay.Checked)
-                RandBuffSize = Math.Max(RNGSearch.npcnumber * RNGSearch.delaytime + 200, RandBuffSize);
-
-            RNGSearch.Rand.Clear();
-            for (int i = 0; i < RandBuffSize; i++)
-            {
-                RNGSearch.Rand.Add(sfmt.NextUInt64());
-            }
+            NPCStatus.npcnumber = (int)NPC.Value + 1;
+            NPCStatus.smft = (SFMT)sfmt.DeepCopy();
+            return new NPCStatus();
         }
 
         private SearchSetting getSettings()
@@ -827,6 +807,15 @@ namespace SMEncounterRNGTool
                 case 3: gender_threshold = 63; break;
                 case 4: gender_threshold = 189; break;
             }
+
+            RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
+            RNGSearch.PreDelayCorrection = (int)Correction.Value;
+            RNGSearch.delaytime = (int)Timedelay.Value / 2;
+            RNGSearch.ConsiderBlink = ConsiderBlink.Checked;
+            RNGSearch.npcnumber = (int)NPC.Value + 1;
+            RNGSearch.IsSolgaleo = Poke.SelectedIndex == SearchSetting.Solgaleo_index;
+            RNGSearch.IsLunala = Poke.SelectedIndex == SearchSetting.Lunala_index;
+
             var rng = new RNGSearch
             {
                 Synchro_Stat = SyncNature.SelectedIndex - 1,
@@ -843,8 +832,6 @@ namespace SMEncounterRNGTool
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
-                Considerdelay = ShowResultsAfterDelay.Checked,
-                ConsiderBlink = ConsiderBlink.Checked,
                 createtimeline = CreateTimeline.Checked
             };
             return rng;
@@ -975,14 +962,11 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            const int UB_StartIndex = 14;
-            const int AlwaysSync_Index = 7;
+            const int UB_StartIndex = SearchSetting.UB_StartIndex;
+            const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
 
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
-
-            RNGSearch.IsSolgaleo = (Poke.SelectedIndex == AlwaysSync_Index - 2);
-            RNGSearch.IsLunala = (Poke.SelectedIndex == AlwaysSync_Index - 1);
 
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;

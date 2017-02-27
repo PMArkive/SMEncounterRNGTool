@@ -29,6 +29,11 @@
             { 800, 97, 107, 101, 127, 89, 79 }, //Necrozma
         };
 
+        public const int Solgaleo_index = 5;
+        public const int Lunala_index = 6;
+        public const int UB_StartIndex = 14;
+        public const int AlwaysSync_Index = 7;
+
         public readonly static int[] PokeLevel =
         {
             60,60,60,60,

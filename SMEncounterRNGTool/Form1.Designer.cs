@@ -1103,7 +1103,6 @@
             0,
             0,
             0});
-            this.Correction.ValueChanged += new System.EventHandler(this.Correction_ValueChanged);
             // 
             // Time_min
             // 
