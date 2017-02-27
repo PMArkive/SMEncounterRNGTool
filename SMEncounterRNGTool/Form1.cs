@@ -187,6 +187,7 @@ namespace SMEncounterRNGTool
             Advanced_CheckedChanged(null, null);
             Method_CheckedChanged(null, null);
             SearchMethod_CheckedChanged(null, null);
+            NPC_ValueChanged(null, null);
         }
 
         #region SearchSeedfunction
@@ -463,9 +464,15 @@ namespace SMEncounterRNGTool
         {
             RNGSearch.npcnumber = (int)NPC.Value + 1;
             if (NPC.Value == 0)
-                BlinkOnly.Enabled = true;
+            {
+                BlinkOnly.Visible = true;
+                GoodFOnly.Visible = GoodFOnly.Checked = false;
+            }
             else
-                BlinkOnly.Enabled = BlinkOnly.Checked = false;
+            {
+                GoodFOnly.Visible = true;
+                BlinkOnly.Visible = BlinkOnly.Checked = false;
+            }
         }
         #endregion
 
@@ -778,6 +785,9 @@ namespace SMEncounterRNGTool
                 return false;
 
             if (BlinkOnly.Checked && result.Blink < 5)
+                return false;
+
+            if (GoodFOnly.Checked && result.Blink < 0)
                 return false;
 
             if (ByIVs.Checked && !setting.validIVs(result.IVs))

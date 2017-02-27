@@ -73,6 +73,7 @@ DisableFilters = 取消筛选
 EncounteredOnly = 只显示遇敌
 ShinyOnly = 仅异色帧
 UBOnly = 只显示UB
+GoodFOnly = 仅准确帧
 BlinkOnly = 仅眨眼帧
 ShowStats = 显示能力值
 Reset = 重置

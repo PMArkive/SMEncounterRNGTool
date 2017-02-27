@@ -94,9 +94,7 @@ namespace SMEncounterRNGTool
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process(2);
-
-
-
+            
             if (Wild && UB && !Honey)
                 st.UbValue = getUBValue();
 
@@ -264,7 +262,6 @@ namespace SMEncounterRNGTool
         {
             // Frame correction before time delay starts
             index = PreDelayCorrection;
-            // Get NPC Status before blinking process
             time_elapse(delaytime);
             return index;
         }
@@ -277,7 +274,7 @@ namespace SMEncounterRNGTool
             return index;
         }
 
-        private bool blink_process(int t_pre)
+        private static bool blink_process(int t_pre)
         {
             bool sync = false;
             time_elapse(t_pre);

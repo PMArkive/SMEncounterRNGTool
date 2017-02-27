@@ -175,6 +175,7 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
+            this.ConsiderBlink = new System.Windows.Forms.CheckBox();
             this.ShowResultsAfterDelay = new System.Windows.Forms.CheckBox();
             this.AroundTarget = new System.Windows.Forms.CheckBox();
             this.L_frame = new System.Windows.Forms.Label();
@@ -217,8 +218,8 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
-            this.ConsiderBlink = new System.Windows.Forms.CheckBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.GoodFOnly = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -1186,6 +1187,7 @@
             // 
             // SearchSettingBox
             // 
+            this.SearchSettingBox.Controls.Add(this.GoodFOnly);
             this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.ShowStats);
             this.SearchSettingBox.Controls.Add(this.BlinkOnly);
@@ -1987,6 +1989,16 @@
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
             // 
+            // ConsiderBlink
+            // 
+            this.ConsiderBlink.AutoSize = true;
+            this.ConsiderBlink.Location = new System.Drawing.Point(182, 68);
+            this.ConsiderBlink.Name = "ConsiderBlink";
+            this.ConsiderBlink.Size = new System.Drawing.Size(146, 17);
+            this.ConsiderBlink.TabIndex = 63;
+            this.ConsiderBlink.Text = "考虑眨眼影响（同步）";
+            this.ConsiderBlink.UseVisualStyleBackColor = true;
+            // 
             // ShowResultsAfterDelay
             // 
             this.ShowResultsAfterDelay.AutoSize = true;
@@ -2291,26 +2303,26 @@
             this.SHControlPanel,
             this.HighLightFrameAfter});
             this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(205, 70);
+            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 70);
             // 
             // SetTargetFrame
             // 
             this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(204, 22);
+            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
             this.SetTargetFrame.Text = "设为目标帧";
             this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
             // 
             // SHControlPanel
             // 
             this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(204, 22);
+            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
             this.SHControlPanel.Text = "显示/隐藏控制面板";
             this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
             // 
             // HighLightFrameAfter
             // 
             this.HighLightFrameAfter.Name = "HighLightFrameAfter";
-            this.HighLightFrameAfter.Size = new System.Drawing.Size(204, 22);
+            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
             this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
             this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
             // 
@@ -2399,16 +2411,6 @@
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
-            // ConsiderBlink
-            // 
-            this.ConsiderBlink.AutoSize = true;
-            this.ConsiderBlink.Location = new System.Drawing.Point(182, 68);
-            this.ConsiderBlink.Name = "ConsiderBlink";
-            this.ConsiderBlink.Size = new System.Drawing.Size(146, 17);
-            this.ConsiderBlink.TabIndex = 63;
-            this.ConsiderBlink.Text = "考虑眨眼影响（同步）";
-            this.ConsiderBlink.UseVisualStyleBackColor = true;
-            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2422,6 +2424,16 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
+            // 
+            // GoodFOnly
+            // 
+            this.GoodFOnly.AutoSize = true;
+            this.GoodFOnly.Location = new System.Drawing.Point(299, 199);
+            this.GoodFOnly.Name = "GoodFOnly";
+            this.GoodFOnly.Size = new System.Drawing.Size(74, 17);
+            this.GoodFOnly.TabIndex = 76;
+            this.GoodFOnly.Text = "仅准确帧";
+            this.GoodFOnly.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2698,6 +2710,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.CheckBox ConsiderBlink;
+        private System.Windows.Forms.CheckBox GoodFOnly;
     }
 }
 

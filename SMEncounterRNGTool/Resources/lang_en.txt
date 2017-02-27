@@ -73,6 +73,7 @@ DisableFilters = Disable Filters
 EncounteredOnly = Encounter Only
 ShinyOnly = Shiny Only
 UBOnly = UB Only
+GoodFOnly = Good F Only
 BlinkOnly = Blink F Only
 ShowStats = Show Stats
 Reset = Reset
