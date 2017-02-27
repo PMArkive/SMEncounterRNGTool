@@ -112,6 +112,7 @@
             this.NPC = new System.Windows.Forms.NumericUpDown();
             this.L_NPC = new System.Windows.Forms.Label();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
+            this.SafeFOnly = new System.Windows.Forms.CheckBox();
             this.Slot = new System.Windows.Forms.TextBox();
             this.ShowStats = new System.Windows.Forms.CheckBox();
             this.BlinkOnly = new System.Windows.Forms.CheckBox();
@@ -219,7 +220,6 @@
             this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.SafeFOnly = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.SearchSeed.SuspendLayout();
             this.InputBox.SuspendLayout();
@@ -967,6 +967,7 @@
             this.AlwaysSynced.TabIndex = 9;
             this.AlwaysSynced.Text = "必定同步";
             this.AlwaysSynced.UseVisualStyleBackColor = true;
+            this.AlwaysSynced.CheckedChanged += new System.EventHandler(this.AlwaysSynced_CheckedChanged);
             // 
             // CalcList
             // 
@@ -1123,7 +1124,7 @@
             this.Time_min.Size = new System.Drawing.Size(75, 22);
             this.Time_min.TabIndex = 43;
             this.Time_min.Value = new decimal(new int[] {
-            417,
+            418,
             0,
             0,
             0});
@@ -1223,6 +1224,16 @@
             this.SearchSettingBox.TabIndex = 3;
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
+            // 
+            // SafeFOnly
+            // 
+            this.SafeFOnly.AutoSize = true;
+            this.SafeFOnly.Location = new System.Drawing.Point(299, 199);
+            this.SafeFOnly.Name = "SafeFOnly";
+            this.SafeFOnly.Size = new System.Drawing.Size(74, 17);
+            this.SafeFOnly.TabIndex = 76;
+            this.SafeFOnly.Text = "仅准确帧";
+            this.SafeFOnly.UseVisualStyleBackColor = true;
             // 
             // Slot
             // 
@@ -2424,16 +2435,6 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
-            // SafeFOnly
-            // 
-            this.SafeFOnly.AutoSize = true;
-            this.SafeFOnly.Location = new System.Drawing.Point(299, 199);
-            this.SafeFOnly.Name = "SafeFOnly";
-            this.SafeFOnly.Size = new System.Drawing.Size(74, 17);
-            this.SafeFOnly.TabIndex = 76;
-            this.SafeFOnly.Text = "仅准确帧";
-            this.SafeFOnly.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

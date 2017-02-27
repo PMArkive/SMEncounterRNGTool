@@ -43,7 +43,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "0.90beta";
+        private string version = "1.00";
 
         #region Translation
         private string curlanguage;
@@ -392,6 +392,7 @@ namespace SMEncounterRNGTool
                 Fix3v.Checked = false;
                 AlwaysSynced.Checked = false;
                 EncounteredOnly.Checked = true;
+                ConsiderBlink.Visible = false;
             }
             UB_CheckedChanged(null, null);
             ConsiderDelay_CheckedChanged(null, null);
@@ -474,6 +475,13 @@ namespace SMEncounterRNGTool
                 SafeFOnly.Visible = true;
                 BlinkOnly.Visible = BlinkOnly.Checked = false;
             }
+        }
+
+
+        private void AlwaysSynced_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AlwaysSynced.Checked)
+                ConsiderBlink.Checked = false;
         }
         #endregion
 
@@ -902,15 +910,20 @@ namespace SMEncounterRNGTool
         {
             const int UB_StartIndex = 14;
             const int AlwaysSync_Index = 7;
+
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
+            ConsiderBlink.Checked = ConsiderBlink.Visible = Poke.SelectedIndex < AlwaysSync_Index;
+
             RNGSearch.IsSolgaleo = (Poke.SelectedIndex == AlwaysSync_Index - 2);
             RNGSearch.IsLunala = (Poke.SelectedIndex == AlwaysSync_Index - 1);
+
             if (Poke.SelectedIndex == 0) return;
-            ConsiderBlink.Checked = ConsiderBlink.Visible = Poke.SelectedIndex < AlwaysSync_Index;
+
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);
+
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
@@ -922,9 +935,8 @@ namespace SMEncounterRNGTool
                 UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UB_StartIndex];
             }
             else
-            {
                 Timedelay.Value = SearchSetting.timedelay[Poke.SelectedIndex - 1];
-            }
+
             switch (Poke.SelectedIndex)
             {
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
