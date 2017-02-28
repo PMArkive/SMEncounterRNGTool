@@ -723,7 +723,10 @@ namespace SMEncounterRNGTool
                 else if (!Honey.Checked)
                 {
                     if (result.Blink == 1)
+                    {
+                        if (blink_flag > 0) result.Blink = -2;
                         blink_flag = UnsafeRange;
+                    }
                     else if (blink_flag > 0)
                     {
                         blink_flag--;
@@ -930,6 +933,7 @@ namespace SMEncounterRNGTool
             string BlinkFlag = "";
             switch (result.Blink)
             {
+                case -2: BlinkFlag = "★+?";break;
                 case -1: BlinkFlag = "?"; break;
                 case 0: BlinkFlag = "-"; break;
                 case 1: BlinkFlag = "★"; break;
