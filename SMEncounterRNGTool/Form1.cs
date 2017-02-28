@@ -128,7 +128,7 @@ namespace SMEncounterRNGTool
             Stat.Add(Stat4);
             Stat.Add(Stat5);
 
-            EventIV.Add(EventIV0);
+            EventIV.Add(EventIV0); 
             EventIV.Add(EventIV1);
             EventIV.Add(EventIV2);
             EventIV.Add(EventIV3);
@@ -158,6 +158,9 @@ namespace SMEncounterRNGTool
 
             foreach (string t in SearchSetting.genderstr)
                 Gender.Items.Add(t);
+
+            for (int i = 0; i < 6; i++)
+                EventIV[i].Enabled = false;
 
             string l = Properties.Settings.Default.Language;
             int lang = Array.IndexOf(langlist, l);
@@ -419,6 +422,13 @@ namespace SMEncounterRNGTool
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
         }
 
+        private void IVLocked_CheckedChanged(object sender, EventArgs e)
+        {
+            string str = ((CheckBox)sender).Name;
+            int i = Int32.Parse(str.Remove(0, str.IndexOf("Fix") + 3));
+            EventIV[i].Enabled = ((CheckBox)sender).Checked;
+        }
+
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
             UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
@@ -497,6 +507,8 @@ namespace SMEncounterRNGTool
         {
             TimeSpan.Enabled = CreateTimeline.Checked;
             BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            Frame_max.Visible = label7.Visible = !CreateTimeline.Checked;
+            L_StartingPoint.Visible = CreateTimeline.Checked;
             if (CreateTimeline.Checked)
                 BlinkOnly.Checked = SafeFOnly.Checked = false;
         }
@@ -504,7 +516,15 @@ namespace SMEncounterRNGTool
 
         private void YourID_CheckedChanged(object sender, EventArgs e)
         {
-            Timedelay.Value = (YourID.Checked) ? 62 : 4;
+            Timedelay.Value = (YourID.Checked) ? 62 : 0;
+        }
+        
+        private void Fix3v_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Poke.SelectedIndex == 1)
+            {
+                IVsCount.Value = Fix3v.Checked ? 3 : 0;
+            }
         }
         #endregion
 
@@ -625,9 +645,7 @@ namespace SMEncounterRNGTool
 
         private void CalcList_Click(object sender, EventArgs e)
         {
-            if (Frame_min.Value > Frame_max.Value)
-                Error(SETTINGERROR_STR[lindex] + L_frame.Text);
-            else if (ivmin0.Value > ivmax0.Value)
+            if (ivmin0.Value > ivmax0.Value)
                 Error(SETTINGERROR_STR[lindex] + L_H.Text);
             else if (ivmin1.Value > ivmax1.Value)
                 Error(SETTINGERROR_STR[lindex] + L_A.Text);
@@ -641,6 +659,8 @@ namespace SMEncounterRNGTool
                 Error(SETTINGERROR_STR[lindex] + L_S.Text);
             else if (CreateTimeline.Checked)
                 createtimeline();
+            else if (Frame_min.Value > Frame_max.Value)
+                Error(SETTINGERROR_STR[lindex] + L_frame.Text);
             else
                 StationarySearch();
         }
@@ -944,6 +964,7 @@ namespace SMEncounterRNGTool
                 case 1: BlinkFlag = "★"; break;
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
+            string PSV = result.PSV.ToString("X4");
             string Ability = result.Ability.ToString();
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
@@ -975,6 +996,7 @@ namespace SMEncounterRNGTool
             {
                 if (e.AbilityLocked) Ability = "-";
                 if (e.NatureLocked) true_nature = "-";
+                if (e.ShinyLocked) PID = "-";PSV = "-";
             }
 
             string frameadvance = "-";
@@ -993,7 +1015,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter,
+                true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter,
                 randstr, PID, EC, time
                 );
 
@@ -1019,10 +1041,8 @@ namespace SMEncounterRNGTool
             Method_CheckedChanged(null, null);
             //0
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
-            Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
+            Fix3v.Enabled = (Poke.SelectedIndex < 2) || (Poke.SelectedIndex >= UB_StartIndex);
             if (Poke.SelectedIndex == 0) return;
-            //1
-            Fix3v.Visible = Poke.SelectedIndex != 1;
 
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
@@ -1038,7 +1058,7 @@ namespace SMEncounterRNGTool
 
             switch (Poke.SelectedIndex)
             {
-                case 1: ConsiderBlink.Checked = false; GenderRatio.Visible = true; break;
+                case 1: ConsiderBlink.Checked = false; GenderRatio.Visible = true;Fix3v.Checked = false; break;
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
                 case UB_StartIndex - 1: Fix3v.Checked = false; break;
             }
@@ -1056,7 +1076,7 @@ namespace SMEncounterRNGTool
                     IVs[i] = (int)EventIV[i].Value;
                 }
             }
-            if (cnt + IVsCount.Value > 5)
+            if (IVsCount.Value > 0 && cnt + IVsCount.Value > 5)
             {
                 Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
                 IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
@@ -1066,6 +1086,7 @@ namespace SMEncounterRNGTool
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (int)IVsCount.Value,
                 YourID = YourID.Checked,
+                ShinyLocked = ShinyLocked.Checked,
                 AbilityLocked = AbilityLocked.Checked,
                 NatureLocked = NatureLocked.Checked,
                 GenderLocked = GenderLocked.Checked,

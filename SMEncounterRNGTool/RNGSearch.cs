@@ -62,6 +62,7 @@ namespace SMEncounterRNGTool
             public int[] IVs;
             public int IVsCount;
             public bool YourID;
+            public bool ShinyLocked;
             public bool AbilityLocked;
             public bool NatureLocked;
             public bool GenderLocked;
@@ -219,6 +220,8 @@ namespace SMEncounterRNGTool
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
+            if (e.ShinyLocked)
+                st.Shiny = true;
             st.PID = (uint)(getrand() & 0xFFFFFFFF);
             st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
 
@@ -375,7 +378,7 @@ namespace SMEncounterRNGTool
                 time_elapse(delaytime);
             }
             else
-                time_elapse(delaytime);
+                time_elapse(2);
             return index;
         }
 

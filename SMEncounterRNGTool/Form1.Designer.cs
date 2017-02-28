@@ -138,6 +138,7 @@
             this.ivmax4 = new System.Windows.Forms.NumericUpDown();
             this.ivmax3 = new System.Windows.Forms.NumericUpDown();
             this.RNGInfo = new System.Windows.Forms.GroupBox();
+            this.L_StartingPoint = new System.Windows.Forms.Label();
             this.L_TimeSpan = new System.Windows.Forms.Label();
             this.ConsiderBlink = new System.Windows.Forms.CheckBox();
             this.TimeSpan = new System.Windows.Forms.NumericUpDown();
@@ -182,6 +183,7 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
+            this.ShinyLocked = new System.Windows.Forms.CheckBox();
             this.YourID = new System.Windows.Forms.CheckBox();
             this.AbilityLocked = new System.Windows.Forms.CheckBox();
             this.L_IVsCount = new System.Windows.Forms.Label();
@@ -535,6 +537,7 @@
             this.Fix3v.TabIndex = 1;
             this.Fix3v.Text = "固定3V";
             this.Fix3v.UseVisualStyleBackColor = true;
+            this.Fix3v.CheckedChanged += new System.EventHandler(this.Fix3v_CheckedChanged);
             // 
             // L_Poke
             // 
@@ -1599,6 +1602,7 @@
             // 
             // RNGInfo
             // 
+            this.RNGInfo.Controls.Add(this.L_StartingPoint);
             this.RNGInfo.Controls.Add(this.L_TimeSpan);
             this.RNGInfo.Controls.Add(this.ConsiderBlink);
             this.RNGInfo.Controls.Add(this.TimeSpan);
@@ -1616,6 +1620,15 @@
             this.RNGInfo.TabIndex = 40;
             this.RNGInfo.TabStop = false;
             this.RNGInfo.Text = "乱数信息";
+            // 
+            // L_StartingPoint
+            // 
+            this.L_StartingPoint.AutoSize = true;
+            this.L_StartingPoint.Location = new System.Drawing.Point(162, 34);
+            this.L_StartingPoint.Name = "L_StartingPoint";
+            this.L_StartingPoint.Size = new System.Drawing.Size(82, 13);
+            this.L_StartingPoint.TabIndex = 68;
+            this.L_StartingPoint.Text = "<-- 时间线起点";
             // 
             // L_TimeSpan
             // 
@@ -2036,6 +2049,7 @@
             // 
             // EventSetting
             // 
+            this.EventSetting.Controls.Add(this.ShinyLocked);
             this.EventSetting.Controls.Add(this.YourID);
             this.EventSetting.Controls.Add(this.AbilityLocked);
             this.EventSetting.Controls.Add(this.L_IVsCount);
@@ -2069,10 +2083,20 @@
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
             // 
+            // ShinyLocked
+            // 
+            this.ShinyLocked.AutoSize = true;
+            this.ShinyLocked.Location = new System.Drawing.Point(195, 128);
+            this.ShinyLocked.Name = "ShinyLocked";
+            this.ShinyLocked.Size = new System.Drawing.Size(74, 17);
+            this.ShinyLocked.TabIndex = 49;
+            this.ShinyLocked.Text = "固定异色";
+            this.ShinyLocked.UseVisualStyleBackColor = true;
+            // 
             // YourID
             // 
             this.YourID.AutoSize = true;
-            this.YourID.Location = new System.Drawing.Point(195, 128);
+            this.YourID.Location = new System.Drawing.Point(195, 98);
             this.YourID.Name = "YourID";
             this.YourID.Size = new System.Drawing.Size(49, 17);
             this.YourID.TabIndex = 48;
@@ -2083,17 +2107,19 @@
             // AbilityLocked
             // 
             this.AbilityLocked.AutoSize = true;
+            this.AbilityLocked.Checked = true;
+            this.AbilityLocked.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AbilityLocked.Location = new System.Drawing.Point(195, 158);
             this.AbilityLocked.Name = "AbilityLocked";
             this.AbilityLocked.Size = new System.Drawing.Size(74, 17);
             this.AbilityLocked.TabIndex = 47;
-            this.AbilityLocked.Text = "锁定特性";
+            this.AbilityLocked.Text = "固定特性";
             this.AbilityLocked.UseVisualStyleBackColor = true;
             // 
             // L_IVsCount
             // 
             this.L_IVsCount.AutoSize = true;
-            this.L_IVsCount.Location = new System.Drawing.Point(192, 66);
+            this.L_IVsCount.Location = new System.Drawing.Point(192, 39);
             this.L_IVsCount.Name = "L_IVsCount";
             this.L_IVsCount.Size = new System.Drawing.Size(50, 13);
             this.L_IVsCount.TabIndex = 46;
@@ -2103,7 +2129,7 @@
             // 
             this.IVsCount.AccessibleName = "";
             this.IVsCount.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IVsCount.Location = new System.Drawing.Point(195, 94);
+            this.IVsCount.Location = new System.Drawing.Point(195, 64);
             this.IVsCount.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2120,7 +2146,7 @@
             this.GenderLocked.Name = "GenderLocked";
             this.GenderLocked.Size = new System.Drawing.Size(74, 17);
             this.GenderLocked.TabIndex = 44;
-            this.GenderLocked.Text = "锁定性别";
+            this.GenderLocked.Text = "固定性别";
             this.GenderLocked.UseVisualStyleBackColor = true;
             // 
             // NatureLocked
@@ -2130,17 +2156,17 @@
             this.NatureLocked.Name = "NatureLocked";
             this.NatureLocked.Size = new System.Drawing.Size(74, 17);
             this.NatureLocked.TabIndex = 43;
-            this.NatureLocked.Text = "锁定性格";
+            this.NatureLocked.Text = "固定性格";
             this.NatureLocked.UseVisualStyleBackColor = true;
             // 
             // L_IVLock
             // 
             this.L_IVLock.AutoSize = true;
-            this.L_IVLock.Location = new System.Drawing.Point(145, 39);
+            this.L_IVLock.Location = new System.Drawing.Point(132, 39);
             this.L_IVLock.Name = "L_IVLock";
             this.L_IVLock.Size = new System.Drawing.Size(31, 13);
             this.L_IVLock.TabIndex = 42;
-            this.L_IVLock.Text = "锁定";
+            this.L_IVLock.Text = "固定";
             // 
             // Event_IV_Fix5
             // 
@@ -2150,6 +2176,7 @@
             this.Event_IV_Fix5.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix5.TabIndex = 41;
             this.Event_IV_Fix5.UseVisualStyleBackColor = true;
+            this.Event_IV_Fix5.CheckedChanged += new System.EventHandler(this.IVLocked_CheckedChanged);
             // 
             // Event_IV_Fix4
             // 
@@ -2159,6 +2186,7 @@
             this.Event_IV_Fix4.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix4.TabIndex = 40;
             this.Event_IV_Fix4.UseVisualStyleBackColor = true;
+            this.Event_IV_Fix4.CheckedChanged += new System.EventHandler(this.IVLocked_CheckedChanged);
             // 
             // Event_IV_Fix3
             // 
@@ -2168,6 +2196,7 @@
             this.Event_IV_Fix3.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix3.TabIndex = 39;
             this.Event_IV_Fix3.UseVisualStyleBackColor = true;
+            this.Event_IV_Fix3.CheckedChanged += new System.EventHandler(this.IVLocked_CheckedChanged);
             // 
             // Event_IV_Fix2
             // 
@@ -2177,6 +2206,7 @@
             this.Event_IV_Fix2.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix2.TabIndex = 38;
             this.Event_IV_Fix2.UseVisualStyleBackColor = true;
+            this.Event_IV_Fix2.CheckedChanged += new System.EventHandler(this.IVLocked_CheckedChanged);
             // 
             // Event_IV_Fix1
             // 
@@ -2186,6 +2216,7 @@
             this.Event_IV_Fix1.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix1.TabIndex = 37;
             this.Event_IV_Fix1.UseVisualStyleBackColor = true;
+            this.Event_IV_Fix1.CheckedChanged += new System.EventHandler(this.IVLocked_CheckedChanged);
             // 
             // Event_IV_Fix0
             // 
@@ -2195,6 +2226,7 @@
             this.Event_IV_Fix0.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix0.TabIndex = 8;
             this.Event_IV_Fix0.UseVisualStyleBackColor = true;
+            this.Event_IV_Fix0.CheckedChanged += new System.EventHandler(this.IVLocked_CheckedChanged);
             // 
             // L_Event_IV
             // 
@@ -3146,6 +3178,8 @@
         private System.Windows.Forms.NumericUpDown IVsCount;
         private System.Windows.Forms.CheckBox AbilityLocked;
         private System.Windows.Forms.CheckBox YourID;
+        private System.Windows.Forms.CheckBox ShinyLocked;
+        private System.Windows.Forms.Label L_StartingPoint;
     }
 }
 
