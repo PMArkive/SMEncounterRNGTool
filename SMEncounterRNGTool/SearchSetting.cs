@@ -48,7 +48,7 @@
 
         public readonly static int[] NPC =
         {
-            8,
+            6,
             0,0,0,1,//Tapus
             2,2,3,
             8,6,3,3,
@@ -58,7 +58,7 @@
 
         public readonly static int[] timedelay =
         {
-            38,
+            0,
             0,0,0,0,
             288,282,38,
             38,38,38,38,

@@ -933,12 +933,13 @@ namespace SMEncounterRNGTool
             string BlinkFlag = "";
             switch (result.Blink)
             {
-                case -2: BlinkFlag = "★+?";break;
+                case -2: BlinkFlag = "★+?"; break;
                 case -1: BlinkFlag = "?"; break;
                 case 0: BlinkFlag = "-"; break;
                 case 1: BlinkFlag = "★"; break;
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
+            string Ability = result.Ability.ToString();
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
@@ -951,8 +952,10 @@ namespace SMEncounterRNGTool
 
             if (!Advanced.Checked)
             {
-                Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
-                UbValue = result.UbValue < UB_th.Value ? "O" : "X";
+                if (Encounter != "-")
+                    Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
+                if (UbValue != "-")
+                    UbValue = (result.UbValue < UB_th.Value) ? "O" : "X";
                 if (UbValue == "O") Slot = "UB";
                 if (result.Item < 50)
                     Item = "50%";
@@ -961,6 +964,12 @@ namespace SMEncounterRNGTool
                 else
                     Item = "-";
                 time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
+            }
+
+            if (Poke.SelectedIndex == 1)
+            {
+                if (e.AbilityLocked) Ability = "-";
+                if (e.NatureLocked) true_nature = "-";
             }
 
             string frameadvance = (ConsiderDelay.Checked) ? result.frameshift.ToString("+#;-#;0") : "-";
@@ -977,7 +986,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], result.Ability, Item, Encounter,
+                true_nature, SynchronizeFlag, result.Clock, result.PSV.ToString("D4"), frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter,
                 randstr, PID, EC, time
                 );
 
@@ -995,20 +1004,18 @@ namespace SMEncounterRNGTool
         {
             const int UB_StartIndex = SearchSetting.UB_StartIndex;
             const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
-
-            ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
-            Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
-
-            Fix3v.Visible = Poke.SelectedIndex != 1;
-
+            //General
+            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
+            ConsiderBlink.Checked = !AlwaysSynced.Checked;
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);
-
-            GenderRatio.Visible = Poke.SelectedIndex == 1;
-            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
-            ConsiderBlink.Checked = !AlwaysSynced.Checked;
+            //0
+            ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
+            Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
             if (Poke.SelectedIndex == 0) return;
+            //1
+            Fix3v.Visible = Poke.SelectedIndex != 1;
 
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
@@ -1024,6 +1031,7 @@ namespace SMEncounterRNGTool
 
             switch (Poke.SelectedIndex)
             {
+                case 1: ConsiderBlink.Checked = false; GenderRatio.Visible = true; break;
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
                 case UB_StartIndex - 1: Fix3v.Checked = false; break;
             }
@@ -1067,7 +1075,6 @@ namespace SMEncounterRNGTool
                 Error(NOSELECTION_STR[lindex]);
             }
         }
-
 
         private void SetStartFrame_Click(object sender, EventArgs e)
         {

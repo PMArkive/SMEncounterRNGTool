@@ -2070,8 +2070,6 @@
             // AbilityLocked
             // 
             this.AbilityLocked.AutoSize = true;
-            this.AbilityLocked.Checked = true;
-            this.AbilityLocked.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AbilityLocked.Location = new System.Drawing.Point(195, 158);
             this.AbilityLocked.Name = "AbilityLocked";
             this.AbilityLocked.Size = new System.Drawing.Size(74, 17);
@@ -2105,8 +2103,6 @@
             // GenderLocked
             // 
             this.GenderLocked.AutoSize = true;
-            this.GenderLocked.Checked = true;
-            this.GenderLocked.CheckState = System.Windows.Forms.CheckState.Checked;
             this.GenderLocked.Location = new System.Drawing.Point(195, 218);
             this.GenderLocked.Name = "GenderLocked";
             this.GenderLocked.Size = new System.Drawing.Size(74, 17);
@@ -2117,8 +2113,6 @@
             // NatureLocked
             // 
             this.NatureLocked.AutoSize = true;
-            this.NatureLocked.Checked = true;
-            this.NatureLocked.CheckState = System.Windows.Forms.CheckState.Checked;
             this.NatureLocked.Location = new System.Drawing.Point(195, 188);
             this.NatureLocked.Name = "NatureLocked";
             this.NatureLocked.Size = new System.Drawing.Size(74, 17);
