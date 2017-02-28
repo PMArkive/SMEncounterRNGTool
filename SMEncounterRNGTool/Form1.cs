@@ -449,6 +449,7 @@ namespace SMEncounterRNGTool
                 Timedelay.Value = 0;
                 Correction.Value = 0;
             }
+            L_Correction.Visible = Correction.Visible = Honey.Checked;
             ConsiderDelay.Enabled = !Honey.Checked;
         }
 
@@ -475,11 +476,6 @@ namespace SMEncounterRNGTool
             IVPanel.Visible = ByIVs.Checked;
             StatPanel.Visible = ByStats.Checked;
             ShowStats.Enabled = ShowStats.Checked = ByStats.Checked;
-        }
-
-        private void Timedelay_ValueChanged(object sender, EventArgs e)
-        {
-            ConsiderDelay.Checked = Timedelay.Value != 0;
         }
 
         private void NPC_ValueChanged(object sender, EventArgs e)
@@ -889,6 +885,7 @@ namespace SMEncounterRNGTool
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
+                ShinyLocked = SearchSetting.ShinyLocked(Poke.SelectedIndex),
             };
             return rng;
         }
@@ -999,9 +996,12 @@ namespace SMEncounterRNGTool
                 if (e.IsShiny) { PID = "-"; PSV = "-"; }
             }
 
-            string frameadvance = "-";
-            if (ConsiderDelay.Checked)
-                frameadvance = (Poke.SelectedIndex == 1) ? RNGSearch.getframeshift(e).ToString("+#;-#;0") : RNGSearch.getframeshift().ToString("+#;-#;0");
+            string frameadvance = result.frameshift.ToString("+#;-#;0");
+            if (ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
+            {
+                RNGSearch.Resetindex(); RNGSearch.ResetNPCStatus();
+                frameadvance = (Poke.SelectedIndex == 1) ? rng.getframeshift(e).ToString("+#;-#;0") : rng.getframeshift().ToString("+#;-#;0");
+            }
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
@@ -1042,8 +1042,9 @@ namespace SMEncounterRNGTool
             //0
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex < 2) || (Poke.SelectedIndex >= UB_StartIndex);
-            if (Poke.SelectedIndex == 0) return;
 
+            if (Poke.SelectedIndex == 0) return;
+            ConsiderDelay.Checked = true;
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];

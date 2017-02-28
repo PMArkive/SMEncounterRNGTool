@@ -32,9 +32,18 @@
 
         public const int Solgaleo_index = 6;
         public const int Lunala_index = 7;
+        public const int TypeNull_index = 9;
         public const int Zygarde_index = 11;
         public const int UB_StartIndex = 15;
         public const int AlwaysSync_Index = 8;
+        public static bool ShinyLocked(int index)
+        {
+            if (index < TypeNull_index)
+                return true;
+            if (index > TypeNull_index && index < UB_StartIndex - 2)
+                return true;
+            return false;
+        }
 
         public readonly static int[] PokeLevel =
         {
@@ -60,9 +69,9 @@
         {
             0,
             0,0,0,0,
-            288,282,38,
-            38,38,38,38,
-            38,38,
+            288,282,34,
+            34,34,34,34,
+            34,34,
         };
 
         public readonly static int[] UB_rate =

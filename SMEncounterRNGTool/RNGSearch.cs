@@ -5,11 +5,13 @@ namespace SMEncounterRNGTool
     class RNGSearch
     {
         // Search Settings
-        public int TSV;
 
         public bool AlwaysSynchro;
         public int Synchro_Stat;
         public bool Fix3v;
+
+        public int TSV;
+        public bool ShinyLocked;
         public bool ShinyCharm;
 
         public int PokeLv;
@@ -29,6 +31,12 @@ namespace SMEncounterRNGTool
         public static int npcnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
+
+        public static void ResetNPCStatus()
+        {
+            remain_frame = new int[npcnumber];
+            blink_flag = new bool[npcnumber];
+        }
 
         public static bool IsSolgaleo;
         public static bool IsLunala;
@@ -96,14 +104,17 @@ namespace SMEncounterRNGTool
             else if (UB_S)
             {
                 if (ConsiderBlink)
-                    st.Synchronize = blink_process(7);
+                {
+                    time_elapse(7);
+                    st.Synchronize = blink_process();
+                }
             }
             else if (!Wild)
             {
                 if (AlwaysSynchro)
                     st.Synchronize = true;
                 else if (ConsiderBlink)
-                    st.Synchronize = blink_process(2);
+                    st.Synchronize = blink_process();
             }
 
             // Encounter
@@ -117,12 +128,13 @@ namespace SMEncounterRNGTool
                 if (UB_S)
                 {
                     Advance(1);
-                    st.Synchronize = blink_process(0);
+                    st.Synchronize = blink_process();
                 }
             }
 
             //UB is determined above
             bool lengendary = UB_S || !Wild;
+            bool ShinyLocked_S = UB_S || ShinyLocked;
             if (lengendary)
                 st.Lv = PokeLv;
 
@@ -153,6 +165,15 @@ namespace SMEncounterRNGTool
                 {
                     st.Shiny = true;
                     break;
+                }
+            }
+            if (ShinyLocked_S)
+            {
+                st.Shiny = false;
+                while (st.PSV == TSV)
+                {
+                    st.PID = (uint)(getrand() & 0xFFFFFFFF);
+                    st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
                 }
             }
 
@@ -220,10 +241,9 @@ namespace SMEncounterRNGTool
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
-            if (e.IsShiny)
-                st.Shiny = true;
             st.PID = (uint)(getrand() & 0xFFFFFFFF);
             st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+            st.Shiny = (e.IsShiny) ? true : (st.PSV == TSV);
 
             //IV
             st.IVs = (int[])e.IVs.Clone();
@@ -260,6 +280,7 @@ namespace SMEncounterRNGTool
 
         public static List<ulong> Rand = new List<ulong>();
         private static int index;
+        public static void Resetindex() { index = 0; }
 
         public static void CreateBuffer(SFMT sfmt)
         {
@@ -317,6 +338,52 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
+        public int getframeshift()
+        {
+            if (!Wild)
+                ButtonPressDelay();         //4-6F
+            else if (Honey)
+                index = PreDelayCorrection; //Pre-HoneyCorrection
+            time_delay();
+            return index;
+        }
+
+        public int getframeshift(EventRule e)
+        {
+            ButtonPressDelay();
+            if (e.YourID)
+            {
+                Advance(10);
+                time_delay();
+            }
+            return index;
+        }
+
+        private static void ButtonPressDelay()
+        {
+            time_elapse(2);
+        }
+
+        private static void time_delay()
+        {
+            if (IsSolgaleo || IsLunala)
+            {
+                int crydelay = IsSolgaleo ? 79 : 76;
+                time_elapse(delaytime - crydelay);
+                Advance(1);     //Cry Inside Time Delay
+                time_elapse(crydelay);
+            }
+            else
+                time_elapse(delaytime);
+        }
+
+        private static bool blink_process()
+        {
+            bool sync = (int)(getrand() % 100) >= 50;
+            time_elapse(3);
+            return sync;
+        }
+
         // n/30s elapsed
         private static void time_elapse(int n)
         {
@@ -345,51 +412,5 @@ namespace SMEncounterRNGTool
                 }
             }
         }
-
-        public static void ResetNPCStatus()
-        {
-            remain_frame = new int[npcnumber];
-            blink_flag = new bool[npcnumber];
-        }
-
-        public static int getframeshift()
-        {
-            // Frame correction before time delay starts
-            index = PreDelayCorrection;
-            if (IsSolgaleo || IsLunala)
-            {
-                int crydelay = IsSolgaleo ? 77 : 74;
-                time_elapse(delaytime - crydelay);
-                Advance(1);     //Cry Inside Time Delay
-                time_elapse(crydelay);
-            }
-            else
-                time_elapse(delaytime);
-            return index;
-        }
-
-        public static int getframeshift(EventRule e)
-        {
-            index = PreDelayCorrection;
-            if (e.YourID)
-            {
-                time_elapse(2);
-                Advance(10);
-                time_elapse(delaytime);
-            }
-            else
-                time_elapse(2);
-            return index;
-        }
-
-        private static bool blink_process(int t_pre)
-        {
-            bool sync = false;
-            time_elapse(t_pre);
-            sync = (int)(getrand() % 100) >= 50;
-            time_elapse(3);
-            return sync;
-        }
-
     }
 }

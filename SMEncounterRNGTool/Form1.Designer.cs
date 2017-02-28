@@ -668,7 +668,6 @@
             this.Timedelay.Name = "Timedelay";
             this.Timedelay.Size = new System.Drawing.Size(55, 22);
             this.Timedelay.TabIndex = 64;
-            this.Timedelay.ValueChanged += new System.EventHandler(this.Timedelay_ValueChanged);
             // 
             // ConsiderDelay
             // 
