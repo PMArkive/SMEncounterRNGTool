@@ -58,7 +58,7 @@
 
         public readonly static int[] timedelay =
         {
-            0,
+            4,
             0,0,0,0,
             288,282,38,
             38,38,38,38,
