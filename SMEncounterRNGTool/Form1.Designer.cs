@@ -183,7 +183,7 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
-            this.ShinyLocked = new System.Windows.Forms.CheckBox();
+            this.IsShiny = new System.Windows.Forms.CheckBox();
             this.YourID = new System.Windows.Forms.CheckBox();
             this.AbilityLocked = new System.Windows.Forms.CheckBox();
             this.L_IVsCount = new System.Windows.Forms.Label();
@@ -2049,7 +2049,7 @@
             // 
             // EventSetting
             // 
-            this.EventSetting.Controls.Add(this.ShinyLocked);
+            this.EventSetting.Controls.Add(this.IsShiny);
             this.EventSetting.Controls.Add(this.YourID);
             this.EventSetting.Controls.Add(this.AbilityLocked);
             this.EventSetting.Controls.Add(this.L_IVsCount);
@@ -2083,15 +2083,15 @@
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
             // 
-            // ShinyLocked
+            // IsShiny
             // 
-            this.ShinyLocked.AutoSize = true;
-            this.ShinyLocked.Location = new System.Drawing.Point(195, 128);
-            this.ShinyLocked.Name = "ShinyLocked";
-            this.ShinyLocked.Size = new System.Drawing.Size(74, 17);
-            this.ShinyLocked.TabIndex = 49;
-            this.ShinyLocked.Text = "固定异色";
-            this.ShinyLocked.UseVisualStyleBackColor = true;
+            this.IsShiny.AutoSize = true;
+            this.IsShiny.Location = new System.Drawing.Point(195, 128);
+            this.IsShiny.Name = "IsShiny";
+            this.IsShiny.Size = new System.Drawing.Size(74, 17);
+            this.IsShiny.TabIndex = 49;
+            this.IsShiny.Text = "固定异色";
+            this.IsShiny.UseVisualStyleBackColor = true;
             // 
             // YourID
             // 
@@ -3178,7 +3178,7 @@
         private System.Windows.Forms.NumericUpDown IVsCount;
         private System.Windows.Forms.CheckBox AbilityLocked;
         private System.Windows.Forms.CheckBox YourID;
-        private System.Windows.Forms.CheckBox ShinyLocked;
+        private System.Windows.Forms.CheckBox IsShiny;
         private System.Windows.Forms.Label L_StartingPoint;
     }
 }

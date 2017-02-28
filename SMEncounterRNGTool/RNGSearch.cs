@@ -62,7 +62,7 @@ namespace SMEncounterRNGTool
             public int[] IVs;
             public int IVsCount;
             public bool YourID;
-            public bool ShinyLocked;
+            public bool IsShiny;
             public bool AbilityLocked;
             public bool NatureLocked;
             public bool GenderLocked;
@@ -220,7 +220,7 @@ namespace SMEncounterRNGTool
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
-            if (e.ShinyLocked)
+            if (e.IsShiny)
                 st.Shiny = true;
             st.PID = (uint)(getrand() & 0xFFFFFFFF);
             st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;

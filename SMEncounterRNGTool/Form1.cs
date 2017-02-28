@@ -996,7 +996,7 @@ namespace SMEncounterRNGTool
             {
                 if (e.AbilityLocked) Ability = "-";
                 if (e.NatureLocked) true_nature = "-";
-                if (e.ShinyLocked) PID = "-"; PSV = "-";
+                if (e.IsShiny) PID = "-"; PSV = "-";
             }
 
             string frameadvance = "-";
@@ -1086,7 +1086,7 @@ namespace SMEncounterRNGTool
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (int)IVsCount.Value,
                 YourID = YourID.Checked,
-                ShinyLocked = ShinyLocked.Checked,
+                IsShiny = IsShiny.Checked,
                 AbilityLocked = AbilityLocked.Checked,
                 NatureLocked = NatureLocked.Checked,
                 GenderLocked = GenderLocked.Checked,

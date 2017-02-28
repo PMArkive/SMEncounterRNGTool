@@ -137,7 +137,7 @@ L_Event_IV = IVs
 L_IVsCount = Rand IV=31 count
 L_IVLock = Locked
 YourID = Your ID
-ShinyLocked = Shiny Locked
+IsShiny = Is Shiny
 AbilityLocked = Ability Locked
 NatureLocked = Nature Locked
 GenderLocked = Gender Locked
