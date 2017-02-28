@@ -996,7 +996,7 @@ namespace SMEncounterRNGTool
             {
                 if (e.AbilityLocked) Ability = "-";
                 if (e.NatureLocked) true_nature = "-";
-                if (e.IsShiny) PID = "-"; PSV = "-";
+                if (e.IsShiny) { PID = "-"; PSV = "-"; }
             }
 
             string frameadvance = "-";
