@@ -972,7 +972,7 @@ namespace SMEncounterRNGTool
                 if (e.NatureLocked) true_nature = "-";
             }
 
-            string frameadvance = (ConsiderDelay.Checked) ? result.frameshift.ToString("+#;-#;0") : "-";
+            string frameadvance = (ConsiderDelay.Checked) ? RNGSearch.getframeshift().ToString("+#;-#;0") : "-";
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)

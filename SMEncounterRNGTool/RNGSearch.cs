@@ -348,7 +348,7 @@ namespace SMEncounterRNGTool
             blink_flag = new bool[npcnumber];
         }
 
-        private static int getframeshift()
+        public static int getframeshift()
         {
             // Frame correction before time delay starts
             index = PreDelayCorrection;
