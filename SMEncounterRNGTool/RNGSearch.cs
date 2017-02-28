@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SMEncounterRNGTool
 {
@@ -39,7 +38,7 @@ namespace SMEncounterRNGTool
             public int Nature;
             public int Clock;
             public uint PID, EC, PSV;
-            public UInt64 row_r;
+            public ulong row_r;
             public int[] IVs;
             public int[] p_Status;
             public bool Shiny;
@@ -58,6 +57,15 @@ namespace SMEncounterRNGTool
             public int realtime = -1;
         }
 
+        public class EventRule
+        {
+            public int[] IVs;
+            public int IVsCount;
+            public bool AbilityLocked;
+            public bool NatureLocked;
+            public bool GenderLocked;
+        }
+
         public RNGResult Generate()
         {
             RNGResult st = new RNGResult();
@@ -72,7 +80,7 @@ namespace SMEncounterRNGTool
                 ResetNPCStatus();
 
             // ---Start here when press A button---
-            
+
             if (Considerdelay)
                 st.frameshift = getframeshift();
 
@@ -83,10 +91,10 @@ namespace SMEncounterRNGTool
             //Synchronize
             if (Wild && !UB_S)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
-            else if(UB_S)
+            else if (UB_S)
             {
                 if (ConsiderBlink)
-                st.Synchronize = blink_process(7);
+                    st.Synchronize = blink_process(7);
             }
             else if (!Wild)
             {
@@ -135,7 +143,7 @@ namespace SMEncounterRNGTool
             //PID
             int roll_count = ShinyCharm ? 3 : 1;
             if (lengendary) roll_count = 1;
-            for (int i = 0; i < roll_count; i++) //pid
+            for (int i = 0; i < roll_count; i++)
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
                 st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
@@ -188,7 +196,65 @@ namespace SMEncounterRNGTool
             return st;
         }
 
-        public static List<ulong> Rand;
+        public RNGResult GenerateEvent(EventRule e)
+        {
+            RNGResult st = new RNGResult();
+            index = 0;
+
+            st.row_r = Rand[0];
+            st.Clock = (int)(st.row_r % 17);
+            st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
+
+            // Reset NPC Status
+            if (!createtimeline)
+                ResetNPCStatus();
+
+            // ---Start here when press A button---
+
+            if (Considerdelay)
+                st.frameshift = getframeshift();
+
+            //Encryption Constant
+            st.EC = (uint)(getrand() & 0xFFFFFFFF);
+
+            //PID
+            st.PID = (uint)(getrand() & 0xFFFFFFFF);
+            st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+
+            //IV
+            st.IVs = (int[])e.IVs.Clone();
+            int cnt = e.IVsCount;
+            while (cnt > 0)
+            {
+                int ran = (int)(getrand() % 6);
+                if (st.IVs[ran] < 0)
+                {
+                    st.IVs[ran] = 31;
+                    cnt--;
+                }
+            }
+            for (int i = 0; i < 6; i++)
+                if (st.IVs[i] < 0)
+                    st.IVs[i] = (int)(getrand() & 0x1F);
+
+            //Ability
+            if (!e.AbilityLocked)
+                st.Ability = (int)(getrand() & 1) + 1;
+
+            //Nature
+            if (!e.NatureLocked)
+                st.Nature = (int)(currentrand() % 25);
+
+            //Gender
+            if (nogender || e.GenderLocked)
+                st.Gender = 0;
+            else
+                st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
+
+            return st;
+        }
+
+        public static List<ulong> Rand = new List<ulong>();
         private static int index;
 
         public static void CreateBuffer(SFMT sfmt)

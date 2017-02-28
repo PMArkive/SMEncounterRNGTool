@@ -43,7 +43,10 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> IVup = new List<NumericUpDown>();
         List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
-        private string version = "1.01";
+        List<NumericUpDown> EventIV = new List<NumericUpDown>();
+        List<CheckBox> EventIVLocked = new List<CheckBox>();
+        RNGSearch.EventRule e = new RNGSearch.EventRule();
+        private string version = "1.02";
 
         #region Translation
         private string curlanguage;
@@ -52,6 +55,7 @@ namespace SMEncounterRNGTool
         private static readonly string[] NOSELECTION_STR = { "Please Select", "请选择" };
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
+        private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
 
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
 
@@ -74,15 +78,16 @@ namespace SMEncounterRNGTool
             string[] species = getStringList("Species", curlanguage);
 
             for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
-                this.HiddenPower.Items[i] = SearchSetting.hpstr[i];
+                HiddenPower.Items[i] = SearchSetting.hpstr[i];
 
             for (int i = 0; i < SearchSetting.naturestr.Length; i++)
-                this.Nature.Items[i + 1] = this.SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
+                Nature.Items[i + 1] = SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
 
-            for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
-                this.Poke.Items[i + 1] = species[SearchSetting.pokedex[i, 0]];
-            this.Poke.Items[10] += "-10%";
-            this.Poke.Items[11] += "-50%";
+            Poke.Items[1] = EVENT_STR[lindex];
+            for (int i = 1; i < SearchSetting.pokedex.GetLength(0); i++)
+                Poke.Items[i + 1] = species[SearchSetting.pokedex[i, 0]];
+            Poke.Items[SearchSetting.Zygarde_index] += "-10%";
+            Poke.Items[SearchSetting.Zygarde_index + 1] += "-50%";
         }
         #endregion
 
@@ -123,6 +128,20 @@ namespace SMEncounterRNGTool
             Stat.Add(Stat4);
             Stat.Add(Stat5);
 
+            EventIV.Add(EventIV0);
+            EventIV.Add(EventIV1);
+            EventIV.Add(EventIV2);
+            EventIV.Add(EventIV3);
+            EventIV.Add(EventIV4);
+            EventIV.Add(EventIV5);
+
+            EventIVLocked.Add(Event_IV_Fix0);
+            EventIVLocked.Add(Event_IV_Fix1);
+            EventIVLocked.Add(Event_IV_Fix2);
+            EventIVLocked.Add(Event_IV_Fix3);
+            EventIVLocked.Add(Event_IV_Fix4);
+            EventIVLocked.Add(Event_IV_Fix5);
+
             Nature.Items.Add("-");
             SyncNature.Items.Add("-");
             HiddenPower.Items.Add("-");
@@ -155,8 +174,6 @@ namespace SMEncounterRNGTool
                 case 1: TimeResultInstructText = "格式：帧数 (秒数) <持续时间>"; break;
             }
             TimeResult.Items.Add(TimeResultInstructText);
-
-            RNGSearch.Rand = new List<ulong>();
 
             HiddenPower.SelectedIndex = 0;
             Nature.SelectedIndex = 0;
@@ -637,6 +654,8 @@ namespace SMEncounterRNGTool
                 max = (int)Frame_max.Value;
             }
 
+            bool Isevent = Poke.SelectedIndex == 1;
+
             SFMT sfmt = new SFMT((uint)Seed.Value);
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
@@ -682,9 +701,12 @@ namespace SMEncounterRNGTool
 
             RNGSearch.CreateBuffer(sfmt);
 
+            if (Isevent)
+                e = geteventsetting();
+
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
-                RNGSearch.RNGResult result = rng.Generate();
+                RNGSearch.RNGResult result = Isevent ? rng.GenerateEvent(e) : rng.Generate();
 
                 if (NPC.Value == 0)
                 {
@@ -723,6 +745,7 @@ namespace SMEncounterRNGTool
         private void createtimeline()
         {
             SFMT sfmt = new SFMT((uint)Seed.Value);
+            bool Isevent = Poke.SelectedIndex == 1;
 
             for (int i = 0; i < (int)Frame_min.Value; i++)
                 sfmt.NextUInt64();
@@ -737,6 +760,9 @@ namespace SMEncounterRNGTool
             RNGSearch.ResetNPCStatus();
             RNGSearch.CreateBuffer(sfmt);
 
+            if (Isevent)
+                e = geteventsetting();
+
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
             int frameadvance = 0;
@@ -746,7 +772,8 @@ namespace SMEncounterRNGTool
                 RNGSearch.remain_frame = (int[])st.remain_frame.Clone();
                 RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
-                RNGSearch.RNGResult result = rng.Generate();
+                RNGSearch.RNGResult result = Isevent ? rng.GenerateEvent(e) : rng.Generate();
+
                 result.realtime = i;
                 frameadvance = st.NextState();
                 frame += frameadvance;
@@ -959,10 +986,6 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Misc Function
-        private void BlogLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://followmetogetic.com/blog/smrngsoftware");
-        }
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -972,10 +995,13 @@ namespace SMEncounterRNGTool
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex == 0) || (Poke.SelectedIndex >= UB_StartIndex);
 
+            Fix3v.Visible = Poke.SelectedIndex != 1;
+
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);
 
+            GenderRatio.Visible = Poke.SelectedIndex == 1;
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             if (Poke.SelectedIndex == 0) return;
@@ -997,6 +1023,33 @@ namespace SMEncounterRNGTool
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
                 case UB_StartIndex - 1: Fix3v.Checked = false; break;
             }
+        }
+
+        private RNGSearch.EventRule geteventsetting()
+        {
+            int[] IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
+            int cnt = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                if (EventIVLocked[i].Checked)
+                {
+                    cnt++;
+                    IVs[i] = (int)EventIV[i].Value;
+                }
+            }
+            if (cnt + IVsCount.Value > 5)
+            {
+                Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
+                IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
+            }
+            return new RNGSearch.EventRule
+            {
+                IVs = (int[])IVs.Clone(),
+                IVsCount = (int)IVsCount.Value,
+                AbilityLocked = AbilityLocked.Checked,
+                NatureLocked = NatureLocked.Checked,
+                GenderLocked = GenderLocked.Checked,
+            };
         }
 
         private void SetTargetFrame_Click(object sender, EventArgs e)

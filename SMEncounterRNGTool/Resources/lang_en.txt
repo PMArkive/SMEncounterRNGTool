@@ -19,24 +19,9 @@ L_Seed = Seed
 L_TSV = TSV
 ShinyCharm = Shiny Charm
 Advanced = Advanced
-BlogLink = User Guide(CHS)
-SearchSeed = Seed Search
-SearchTool = Target Search
+SearchTarget = Target Search
+SearchTool = Tool Kit
 ---------------------TabPage1----------------------------------
-InputBox = InputBox
-Back = Back
-Clear = Clear
-StartClockInput = Start Position
-EndClockInput = End Position
-QRInput = Locate Current Frame via QR
-BySaveScreen = Find Initial Seed via Continue Screen
-L_clocklist = Needle List
-Search = Search
-L_SeedResult = Results
-L_QRList = Needle List
-QRSearch = Search
-L_QRresult = Results
----------------------TabPage2----------------------------------
 ---
 Condition = Conditions
 L_Poke = Pokemon
@@ -127,3 +112,30 @@ dgv_time = Time
 ---
 SearchByRand = Search by Current Seed
 SearchByCurrSeed = Search
+---------------------TabPage2----------------------------------
+InputBox = InputBox
+Back = Back
+Clear = Clear
+StartClockInput = Start Position
+EndClockInput = End Position
+QRInput = Locate Current Frame via QR
+BySaveScreen = Find Initial Seed via Continue Screen
+L_clocklist = Needle List
+Search = Search
+L_SeedResult = Results
+L_QRList = Needle List
+QRSearch = Search
+L_QRresult = Results
+EventSetting = Event Pokemon Setting
+L_Event_H = HP
+L_Event_A = Atk
+L_Event_B = Def
+L_Event_C = SpA
+L_Event_D = SpD
+L_Event_S = Spe
+L_Event_IV = IVs
+L_IVsCount = At least IV count
+L_IVLock = Locked
+NatureLocked = Nature Locked
+GenderLocked = Gender Locked
+AbilityLocked = Ability Locked

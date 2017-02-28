@@ -29,49 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.SearchSeed = new System.Windows.Forms.TabPage();
-            this.BySaveScreen = new System.Windows.Forms.RadioButton();
-            this.QRInput = new System.Windows.Forms.RadioButton();
-            this.InputBox = new System.Windows.Forms.GroupBox();
-            this.button16 = new System.Windows.Forms.Button();
-            this.EndClockInput = new System.Windows.Forms.RadioButton();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.Clear = new System.Windows.Forms.Button();
-            this.StartClockInput = new System.Windows.Forms.RadioButton();
-            this.button10 = new System.Windows.Forms.Button();
-            this.Back = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button0 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.QRBox = new System.Windows.Forms.GroupBox();
-            this.QRResult = new System.Windows.Forms.ListBox();
-            this.L_QRList = new System.Windows.Forms.Label();
-            this.QRSearch = new System.Windows.Forms.Button();
-            this.L_QRresult = new System.Windows.Forms.Label();
-            this.QRList = new System.Windows.Forms.TextBox();
-            this.SearchSeedBox = new System.Windows.Forms.GroupBox();
-            this.L_clocklist = new System.Windows.Forms.Label();
-            this.Search = new System.Windows.Forms.Button();
-            this.L_SeedResult = new System.Windows.Forms.Label();
-            this.SeedResults = new System.Windows.Forms.TextBox();
-            this.Clock_List = new System.Windows.Forms.TextBox();
-            this.SearchTool = new System.Windows.Forms.TabPage();
+            this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.Condition = new System.Windows.Forms.GroupBox();
             this.L_SyncNature = new System.Windows.Forms.Label();
@@ -217,20 +180,78 @@
             this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.SHControlPanel = new System.Windows.Forms.ToolStripMenuItem();
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchTool = new System.Windows.Forms.TabPage();
+            this.EventSetting = new System.Windows.Forms.GroupBox();
+            this.AbilityLocked = new System.Windows.Forms.CheckBox();
+            this.L_IVsCount = new System.Windows.Forms.Label();
+            this.IVsCount = new System.Windows.Forms.NumericUpDown();
+            this.GenderLocked = new System.Windows.Forms.CheckBox();
+            this.NatureLocked = new System.Windows.Forms.CheckBox();
+            this.L_IVLock = new System.Windows.Forms.Label();
+            this.Event_IV_Fix5 = new System.Windows.Forms.CheckBox();
+            this.Event_IV_Fix4 = new System.Windows.Forms.CheckBox();
+            this.Event_IV_Fix3 = new System.Windows.Forms.CheckBox();
+            this.Event_IV_Fix2 = new System.Windows.Forms.CheckBox();
+            this.Event_IV_Fix1 = new System.Windows.Forms.CheckBox();
+            this.Event_IV_Fix0 = new System.Windows.Forms.CheckBox();
+            this.L_Event_IV = new System.Windows.Forms.Label();
+            this.L_Event_S = new System.Windows.Forms.Label();
+            this.L_Event_C = new System.Windows.Forms.Label();
+            this.L_Event_B = new System.Windows.Forms.Label();
+            this.L_Event_H = new System.Windows.Forms.Label();
+            this.L_Event_A = new System.Windows.Forms.Label();
+            this.L_Event_D = new System.Windows.Forms.Label();
+            this.EventIV5 = new System.Windows.Forms.NumericUpDown();
+            this.EventIV4 = new System.Windows.Forms.NumericUpDown();
+            this.EventIV3 = new System.Windows.Forms.NumericUpDown();
+            this.EventIV2 = new System.Windows.Forms.NumericUpDown();
+            this.EventIV1 = new System.Windows.Forms.NumericUpDown();
+            this.EventIV0 = new System.Windows.Forms.NumericUpDown();
+            this.BySaveScreen = new System.Windows.Forms.RadioButton();
+            this.QRInput = new System.Windows.Forms.RadioButton();
+            this.InputBox = new System.Windows.Forms.GroupBox();
+            this.button16 = new System.Windows.Forms.Button();
+            this.EndClockInput = new System.Windows.Forms.RadioButton();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.Clear = new System.Windows.Forms.Button();
+            this.StartClockInput = new System.Windows.Forms.RadioButton();
+            this.button10 = new System.Windows.Forms.Button();
+            this.Back = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.QRBox = new System.Windows.Forms.GroupBox();
+            this.QRResult = new System.Windows.Forms.ListBox();
+            this.L_QRList = new System.Windows.Forms.Label();
+            this.QRSearch = new System.Windows.Forms.Button();
+            this.L_QRresult = new System.Windows.Forms.Label();
+            this.QRList = new System.Windows.Forms.TextBox();
+            this.SearchSeedBox = new System.Windows.Forms.GroupBox();
+            this.L_clocklist = new System.Windows.Forms.Label();
+            this.Search = new System.Windows.Forms.Button();
+            this.L_SeedResult = new System.Windows.Forms.Label();
+            this.SeedResults = new System.Windows.Forms.TextBox();
+            this.Clock_List = new System.Windows.Forms.TextBox();
             this.TSV = new System.Windows.Forms.NumericUpDown();
             this.L_Seed = new System.Windows.Forms.Label();
             this.L_TSV = new System.Windows.Forms.Label();
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
-            this.BlogLink = new System.Windows.Forms.LinkLabel();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
-            this.SearchSeed.SuspendLayout();
-            this.InputBox.SuspendLayout();
-            this.QRBox.SuspendLayout();
-            this.SearchSeedBox.SuspendLayout();
-            this.SearchTool.SuspendLayout();
+            this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
             this.Condition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).BeginInit();
@@ -278,6 +299,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.DGVMenuStrip.SuspendLayout();
+            this.SearchTool.SuspendLayout();
+            this.EventSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV0)).BeginInit();
+            this.InputBox.SuspendLayout();
+            this.QRBox.SuspendLayout();
+            this.SearchSeedBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
             this.SuspendLayout();
@@ -287,7 +320,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.SearchSeed);
+            this.tabControl1.Controls.Add(this.SearchTarget);
             this.tabControl1.Controls.Add(this.SearchTool);
             this.tabControl1.Location = new System.Drawing.Point(12, 18);
             this.tabControl1.Name = "tabControl1";
@@ -295,432 +328,17 @@
             this.tabControl1.Size = new System.Drawing.Size(1225, 667);
             this.tabControl1.TabIndex = 0;
             // 
-            // SearchSeed
-            // 
-            this.SearchSeed.Controls.Add(this.BySaveScreen);
-            this.SearchSeed.Controls.Add(this.QRInput);
-            this.SearchSeed.Controls.Add(this.InputBox);
-            this.SearchSeed.Controls.Add(this.QRBox);
-            this.SearchSeed.Controls.Add(this.SearchSeedBox);
-            this.SearchSeed.Location = new System.Drawing.Point(4, 22);
-            this.SearchSeed.Name = "SearchSeed";
-            this.SearchSeed.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchSeed.Size = new System.Drawing.Size(1217, 641);
-            this.SearchSeed.TabIndex = 0;
-            this.SearchSeed.Text = "检索Seed";
-            this.SearchSeed.UseVisualStyleBackColor = true;
-            // 
-            // BySaveScreen
-            // 
-            this.BySaveScreen.AutoSize = true;
-            this.BySaveScreen.BackColor = System.Drawing.Color.White;
-            this.BySaveScreen.Location = new System.Drawing.Point(36, 168);
-            this.BySaveScreen.Name = "BySaveScreen";
-            this.BySaveScreen.Size = new System.Drawing.Size(146, 17);
-            this.BySaveScreen.TabIndex = 29;
-            this.BySaveScreen.TabStop = true;
-            this.BySaveScreen.Text = "读档指针序列检索Seed";
-            this.BySaveScreen.UseVisualStyleBackColor = false;
-            // 
-            // QRInput
-            // 
-            this.QRInput.AutoSize = true;
-            this.QRInput.BackColor = System.Drawing.Color.White;
-            this.QRInput.Location = new System.Drawing.Point(429, 168);
-            this.QRInput.Name = "QRInput";
-            this.QRInput.Size = new System.Drawing.Size(137, 17);
-            this.QRInput.TabIndex = 30;
-            this.QRInput.TabStop = true;
-            this.QRInput.Text = "QR指针序列检索位置";
-            this.QRInput.UseVisualStyleBackColor = false;
-            // 
-            // InputBox
-            // 
-            this.InputBox.Controls.Add(this.button16);
-            this.InputBox.Controls.Add(this.EndClockInput);
-            this.InputBox.Controls.Add(this.button9);
-            this.InputBox.Controls.Add(this.button8);
-            this.InputBox.Controls.Add(this.Clear);
-            this.InputBox.Controls.Add(this.StartClockInput);
-            this.InputBox.Controls.Add(this.button10);
-            this.InputBox.Controls.Add(this.Back);
-            this.InputBox.Controls.Add(this.button7);
-            this.InputBox.Controls.Add(this.button11);
-            this.InputBox.Controls.Add(this.button6);
-            this.InputBox.Controls.Add(this.button12);
-            this.InputBox.Controls.Add(this.button5);
-            this.InputBox.Controls.Add(this.button0);
-            this.InputBox.Controls.Add(this.button13);
-            this.InputBox.Controls.Add(this.button1);
-            this.InputBox.Controls.Add(this.button4);
-            this.InputBox.Controls.Add(this.button14);
-            this.InputBox.Controls.Add(this.button2);
-            this.InputBox.Controls.Add(this.button3);
-            this.InputBox.Controls.Add(this.button15);
-            this.InputBox.Location = new System.Drawing.Point(18, 15);
-            this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(851, 138);
-            this.InputBox.TabIndex = 29;
-            this.InputBox.TabStop = false;
-            this.InputBox.Text = "输入工具";
-            // 
-            // button16
-            // 
-            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
-            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button16.Location = new System.Drawing.Point(802, 31);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(40, 40);
-            this.button16.TabIndex = 15;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // EndClockInput
-            // 
-            this.EndClockInput.AutoSize = true;
-            this.EndClockInput.Location = new System.Drawing.Point(18, 109);
-            this.EndClockInput.Name = "EndClockInput";
-            this.EndClockInput.Size = new System.Drawing.Size(73, 17);
-            this.EndClockInput.TabIndex = 18;
-            this.EndClockInput.Text = "结束位置";
-            this.EndClockInput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.EndClockInput.UseVisualStyleBackColor = true;
-            this.EndClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
-            // 
-            // button9
-            // 
-            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button9.Location = new System.Drawing.Point(459, 31);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(40, 40);
-            this.button9.TabIndex = 8;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button8
-            // 
-            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button8.Location = new System.Drawing.Point(410, 31);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(40, 40);
-            this.button8.TabIndex = 7;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // Clear
-            // 
-            this.Clear.Location = new System.Drawing.Point(254, 96);
-            this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(72, 27);
-            this.Clear.TabIndex = 17;
-            this.Clear.Text = "清空";
-            this.Clear.UseVisualStyleBackColor = true;
-            this.Clear.Click += new System.EventHandler(this.Clear_Click);
-            // 
-            // StartClockInput
-            // 
-            this.StartClockInput.AutoSize = true;
-            this.StartClockInput.Checked = true;
-            this.StartClockInput.Location = new System.Drawing.Point(18, 86);
-            this.StartClockInput.Name = "StartClockInput";
-            this.StartClockInput.Size = new System.Drawing.Size(73, 17);
-            this.StartClockInput.TabIndex = 7;
-            this.StartClockInput.TabStop = true;
-            this.StartClockInput.Text = "开始位置";
-            this.StartClockInput.UseVisualStyleBackColor = true;
-            this.StartClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
-            // 
-            // button10
-            // 
-            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button10.Location = new System.Drawing.Point(508, 31);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(40, 40);
-            this.button10.TabIndex = 9;
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // Back
-            // 
-            this.Back.Location = new System.Drawing.Point(144, 96);
-            this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(72, 27);
-            this.Back.TabIndex = 7;
-            this.Back.Text = "后退";
-            this.Back.UseVisualStyleBackColor = true;
-            this.Back.Click += new System.EventHandler(this.Back_Click);
-            // 
-            // button7
-            // 
-            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button7.Location = new System.Drawing.Point(361, 31);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(40, 40);
-            this.button7.TabIndex = 6;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button11
-            // 
-            this.button11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button11.BackgroundImage")));
-            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button11.Location = new System.Drawing.Point(557, 31);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(40, 40);
-            this.button11.TabIndex = 10;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.Location = new System.Drawing.Point(312, 31);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(40, 40);
-            this.button6.TabIndex = 5;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button12
-            // 
-            this.button12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button12.BackgroundImage")));
-            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button12.Location = new System.Drawing.Point(606, 31);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(40, 40);
-            this.button12.TabIndex = 11;
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.Location = new System.Drawing.Point(263, 31);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(40, 40);
-            this.button5.TabIndex = 4;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button0
-            // 
-            this.button0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button0.BackgroundImage")));
-            this.button0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button0.Location = new System.Drawing.Point(18, 31);
-            this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(40, 40);
-            this.button0.TabIndex = 16;
-            this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button13
-            // 
-            this.button13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button13.BackgroundImage")));
-            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button13.Location = new System.Drawing.Point(655, 31);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(40, 40);
-            this.button13.TabIndex = 12;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(67, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Location = new System.Drawing.Point(214, 31);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(40, 40);
-            this.button4.TabIndex = 3;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button14
-            // 
-            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
-            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button14.Location = new System.Drawing.Point(704, 31);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(40, 40);
-            this.button14.TabIndex = 13;
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Location = new System.Drawing.Point(116, 31);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 40);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Location = new System.Drawing.Point(165, 31);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 40);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // button15
-            // 
-            this.button15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button15.BackgroundImage")));
-            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button15.Location = new System.Drawing.Point(753, 31);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(40, 40);
-            this.button15.TabIndex = 14;
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.Get_Clock_Number);
-            // 
-            // QRBox
-            // 
-            this.QRBox.Controls.Add(this.QRResult);
-            this.QRBox.Controls.Add(this.L_QRList);
-            this.QRBox.Controls.Add(this.QRSearch);
-            this.QRBox.Controls.Add(this.L_QRresult);
-            this.QRBox.Controls.Add(this.QRList);
-            this.QRBox.Location = new System.Drawing.Point(410, 182);
-            this.QRBox.Name = "QRBox";
-            this.QRBox.Size = new System.Drawing.Size(450, 243);
-            this.QRBox.TabIndex = 7;
-            this.QRBox.TabStop = false;
-            // 
-            // QRResult
-            // 
-            this.QRResult.FormattingEnabled = true;
-            this.QRResult.Location = new System.Drawing.Point(92, 128);
-            this.QRResult.Name = "QRResult";
-            this.QRResult.Size = new System.Drawing.Size(337, 95);
-            this.QRResult.TabIndex = 28;
-            // 
-            // L_QRList
-            // 
-            this.L_QRList.AutoSize = true;
-            this.L_QRList.Location = new System.Drawing.Point(16, 44);
-            this.L_QRList.Name = "L_QRList";
-            this.L_QRList.Size = new System.Drawing.Size(55, 13);
-            this.L_QRList.TabIndex = 27;
-            this.L_QRList.Text = "指针序列";
-            // 
-            // QRSearch
-            // 
-            this.QRSearch.Location = new System.Drawing.Point(357, 81);
-            this.QRSearch.Name = "QRSearch";
-            this.QRSearch.Size = new System.Drawing.Size(72, 27);
-            this.QRSearch.TabIndex = 26;
-            this.QRSearch.Text = "检索";
-            this.QRSearch.UseVisualStyleBackColor = true;
-            this.QRSearch.Click += new System.EventHandler(this.QRSearch_Click);
-            // 
-            // L_QRresult
-            // 
-            this.L_QRresult.AutoSize = true;
-            this.L_QRresult.Location = new System.Drawing.Point(16, 128);
-            this.L_QRresult.Name = "L_QRresult";
-            this.L_QRresult.Size = new System.Drawing.Size(55, 13);
-            this.L_QRresult.TabIndex = 23;
-            this.L_QRresult.Text = "检索结果";
-            // 
-            // QRList
-            // 
-            this.QRList.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QRList.Location = new System.Drawing.Point(92, 39);
-            this.QRList.Name = "QRList";
-            this.QRList.Size = new System.Drawing.Size(337, 22);
-            this.QRList.TabIndex = 24;
-            // 
-            // SearchSeedBox
-            // 
-            this.SearchSeedBox.Controls.Add(this.L_clocklist);
-            this.SearchSeedBox.Controls.Add(this.Search);
-            this.SearchSeedBox.Controls.Add(this.L_SeedResult);
-            this.SearchSeedBox.Controls.Add(this.SeedResults);
-            this.SearchSeedBox.Controls.Add(this.Clock_List);
-            this.SearchSeedBox.Location = new System.Drawing.Point(18, 182);
-            this.SearchSeedBox.Name = "SearchSeedBox";
-            this.SearchSeedBox.Size = new System.Drawing.Size(386, 200);
-            this.SearchSeedBox.TabIndex = 6;
-            this.SearchSeedBox.TabStop = false;
-            // 
-            // L_clocklist
-            // 
-            this.L_clocklist.AutoSize = true;
-            this.L_clocklist.Location = new System.Drawing.Point(15, 44);
-            this.L_clocklist.Name = "L_clocklist";
-            this.L_clocklist.Size = new System.Drawing.Size(55, 13);
-            this.L_clocklist.TabIndex = 22;
-            this.L_clocklist.Text = "指针序列";
-            // 
-            // Search
-            // 
-            this.Search.Location = new System.Drawing.Point(271, 81);
-            this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(72, 27);
-            this.Search.TabIndex = 21;
-            this.Search.Text = "检索";
-            this.Search.UseVisualStyleBackColor = true;
-            this.Search.Click += new System.EventHandler(this.SearchforSeed);
-            // 
-            // L_SeedResult
-            // 
-            this.L_SeedResult.AutoSize = true;
-            this.L_SeedResult.Location = new System.Drawing.Point(17, 128);
-            this.L_SeedResult.Name = "L_SeedResult";
-            this.L_SeedResult.Size = new System.Drawing.Size(55, 13);
-            this.L_SeedResult.TabIndex = 6;
-            this.L_SeedResult.Text = "检索结果";
-            // 
-            // SeedResults
-            // 
-            this.SeedResults.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SeedResults.Location = new System.Drawing.Point(78, 128);
-            this.SeedResults.Name = "SeedResults";
-            this.SeedResults.Size = new System.Drawing.Size(266, 22);
-            this.SeedResults.TabIndex = 20;
-            // 
-            // Clock_List
-            // 
-            this.Clock_List.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Clock_List.Location = new System.Drawing.Point(76, 39);
-            this.Clock_List.Name = "Clock_List";
-            this.Clock_List.Size = new System.Drawing.Size(267, 22);
-            this.Clock_List.TabIndex = 19;
-            // 
-            // SearchTool
-            // 
-            this.SearchTool.Controls.Add(this.ControlPanel);
-            this.SearchTool.Controls.Add(this.DGV);
-            this.SearchTool.Location = new System.Drawing.Point(4, 22);
-            this.SearchTool.Name = "SearchTool";
-            this.SearchTool.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchTool.Size = new System.Drawing.Size(1217, 641);
-            this.SearchTool.TabIndex = 1;
-            this.SearchTool.Text = "个体筛选";
-            this.SearchTool.UseVisualStyleBackColor = true;
+            // SearchTarget
+            // 
+            this.SearchTarget.Controls.Add(this.ControlPanel);
+            this.SearchTarget.Controls.Add(this.DGV);
+            this.SearchTarget.Location = new System.Drawing.Point(4, 22);
+            this.SearchTarget.Name = "SearchTarget";
+            this.SearchTarget.Padding = new System.Windows.Forms.Padding(3);
+            this.SearchTarget.Size = new System.Drawing.Size(1217, 641);
+            this.SearchTarget.TabIndex = 1;
+            this.SearchTarget.Text = "个体筛选";
+            this.SearchTarget.UseVisualStyleBackColor = true;
             // 
             // ControlPanel
             // 
@@ -2369,7 +1987,7 @@
             this.SHControlPanel,
             this.HighLightFrameAfter});
             this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 114);
+            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 92);
             // 
             // SetStartFrame
             // 
@@ -2398,6 +2016,725 @@
             this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
             this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
             this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
+            // 
+            // SearchTool
+            // 
+            this.SearchTool.Controls.Add(this.EventSetting);
+            this.SearchTool.Controls.Add(this.BySaveScreen);
+            this.SearchTool.Controls.Add(this.QRInput);
+            this.SearchTool.Controls.Add(this.InputBox);
+            this.SearchTool.Controls.Add(this.QRBox);
+            this.SearchTool.Controls.Add(this.SearchSeedBox);
+            this.SearchTool.Location = new System.Drawing.Point(4, 22);
+            this.SearchTool.Name = "SearchTool";
+            this.SearchTool.Padding = new System.Windows.Forms.Padding(3);
+            this.SearchTool.Size = new System.Drawing.Size(1217, 641);
+            this.SearchTool.TabIndex = 0;
+            this.SearchTool.Text = "辅助工具";
+            this.SearchTool.UseVisualStyleBackColor = true;
+            // 
+            // EventSetting
+            // 
+            this.EventSetting.Controls.Add(this.AbilityLocked);
+            this.EventSetting.Controls.Add(this.L_IVsCount);
+            this.EventSetting.Controls.Add(this.IVsCount);
+            this.EventSetting.Controls.Add(this.GenderLocked);
+            this.EventSetting.Controls.Add(this.NatureLocked);
+            this.EventSetting.Controls.Add(this.L_IVLock);
+            this.EventSetting.Controls.Add(this.Event_IV_Fix5);
+            this.EventSetting.Controls.Add(this.Event_IV_Fix4);
+            this.EventSetting.Controls.Add(this.Event_IV_Fix3);
+            this.EventSetting.Controls.Add(this.Event_IV_Fix2);
+            this.EventSetting.Controls.Add(this.Event_IV_Fix1);
+            this.EventSetting.Controls.Add(this.Event_IV_Fix0);
+            this.EventSetting.Controls.Add(this.L_Event_IV);
+            this.EventSetting.Controls.Add(this.L_Event_S);
+            this.EventSetting.Controls.Add(this.L_Event_C);
+            this.EventSetting.Controls.Add(this.L_Event_B);
+            this.EventSetting.Controls.Add(this.L_Event_H);
+            this.EventSetting.Controls.Add(this.L_Event_A);
+            this.EventSetting.Controls.Add(this.L_Event_D);
+            this.EventSetting.Controls.Add(this.EventIV5);
+            this.EventSetting.Controls.Add(this.EventIV4);
+            this.EventSetting.Controls.Add(this.EventIV3);
+            this.EventSetting.Controls.Add(this.EventIV2);
+            this.EventSetting.Controls.Add(this.EventIV1);
+            this.EventSetting.Controls.Add(this.EventIV0);
+            this.EventSetting.Location = new System.Drawing.Point(891, 15);
+            this.EventSetting.Name = "EventSetting";
+            this.EventSetting.Size = new System.Drawing.Size(320, 257);
+            this.EventSetting.TabIndex = 31;
+            this.EventSetting.TabStop = false;
+            this.EventSetting.Text = "配信设置";
+            // 
+            // AbilityLocked
+            // 
+            this.AbilityLocked.AutoSize = true;
+            this.AbilityLocked.Checked = true;
+            this.AbilityLocked.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AbilityLocked.Location = new System.Drawing.Point(195, 158);
+            this.AbilityLocked.Name = "AbilityLocked";
+            this.AbilityLocked.Size = new System.Drawing.Size(74, 17);
+            this.AbilityLocked.TabIndex = 47;
+            this.AbilityLocked.Text = "锁定特性";
+            this.AbilityLocked.UseVisualStyleBackColor = true;
+            // 
+            // L_IVsCount
+            // 
+            this.L_IVsCount.AutoSize = true;
+            this.L_IVsCount.Location = new System.Drawing.Point(192, 66);
+            this.L_IVsCount.Name = "L_IVsCount";
+            this.L_IVsCount.Size = new System.Drawing.Size(50, 13);
+            this.L_IVsCount.TabIndex = 46;
+            this.L_IVsCount.Text = "保底V数";
+            // 
+            // IVsCount
+            // 
+            this.IVsCount.AccessibleName = "";
+            this.IVsCount.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IVsCount.Location = new System.Drawing.Point(195, 94);
+            this.IVsCount.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.IVsCount.Name = "IVsCount";
+            this.IVsCount.Size = new System.Drawing.Size(55, 22);
+            this.IVsCount.TabIndex = 45;
+            // 
+            // GenderLocked
+            // 
+            this.GenderLocked.AutoSize = true;
+            this.GenderLocked.Checked = true;
+            this.GenderLocked.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.GenderLocked.Location = new System.Drawing.Point(195, 218);
+            this.GenderLocked.Name = "GenderLocked";
+            this.GenderLocked.Size = new System.Drawing.Size(74, 17);
+            this.GenderLocked.TabIndex = 44;
+            this.GenderLocked.Text = "锁定性别";
+            this.GenderLocked.UseVisualStyleBackColor = true;
+            // 
+            // NatureLocked
+            // 
+            this.NatureLocked.AutoSize = true;
+            this.NatureLocked.Checked = true;
+            this.NatureLocked.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.NatureLocked.Location = new System.Drawing.Point(195, 188);
+            this.NatureLocked.Name = "NatureLocked";
+            this.NatureLocked.Size = new System.Drawing.Size(74, 17);
+            this.NatureLocked.TabIndex = 43;
+            this.NatureLocked.Text = "锁定性格";
+            this.NatureLocked.UseVisualStyleBackColor = true;
+            // 
+            // L_IVLock
+            // 
+            this.L_IVLock.AutoSize = true;
+            this.L_IVLock.Location = new System.Drawing.Point(145, 39);
+            this.L_IVLock.Name = "L_IVLock";
+            this.L_IVLock.Size = new System.Drawing.Size(31, 13);
+            this.L_IVLock.TabIndex = 42;
+            this.L_IVLock.Text = "锁定";
+            // 
+            // Event_IV_Fix5
+            // 
+            this.Event_IV_Fix5.AutoSize = true;
+            this.Event_IV_Fix5.Location = new System.Drawing.Point(148, 219);
+            this.Event_IV_Fix5.Name = "Event_IV_Fix5";
+            this.Event_IV_Fix5.Size = new System.Drawing.Size(15, 14);
+            this.Event_IV_Fix5.TabIndex = 41;
+            this.Event_IV_Fix5.UseVisualStyleBackColor = true;
+            // 
+            // Event_IV_Fix4
+            // 
+            this.Event_IV_Fix4.AutoSize = true;
+            this.Event_IV_Fix4.Location = new System.Drawing.Point(148, 189);
+            this.Event_IV_Fix4.Name = "Event_IV_Fix4";
+            this.Event_IV_Fix4.Size = new System.Drawing.Size(15, 14);
+            this.Event_IV_Fix4.TabIndex = 40;
+            this.Event_IV_Fix4.UseVisualStyleBackColor = true;
+            // 
+            // Event_IV_Fix3
+            // 
+            this.Event_IV_Fix3.AutoSize = true;
+            this.Event_IV_Fix3.Location = new System.Drawing.Point(148, 159);
+            this.Event_IV_Fix3.Name = "Event_IV_Fix3";
+            this.Event_IV_Fix3.Size = new System.Drawing.Size(15, 14);
+            this.Event_IV_Fix3.TabIndex = 39;
+            this.Event_IV_Fix3.UseVisualStyleBackColor = true;
+            // 
+            // Event_IV_Fix2
+            // 
+            this.Event_IV_Fix2.AutoSize = true;
+            this.Event_IV_Fix2.Location = new System.Drawing.Point(148, 129);
+            this.Event_IV_Fix2.Name = "Event_IV_Fix2";
+            this.Event_IV_Fix2.Size = new System.Drawing.Size(15, 14);
+            this.Event_IV_Fix2.TabIndex = 38;
+            this.Event_IV_Fix2.UseVisualStyleBackColor = true;
+            // 
+            // Event_IV_Fix1
+            // 
+            this.Event_IV_Fix1.AutoSize = true;
+            this.Event_IV_Fix1.Location = new System.Drawing.Point(148, 99);
+            this.Event_IV_Fix1.Name = "Event_IV_Fix1";
+            this.Event_IV_Fix1.Size = new System.Drawing.Size(15, 14);
+            this.Event_IV_Fix1.TabIndex = 37;
+            this.Event_IV_Fix1.UseVisualStyleBackColor = true;
+            // 
+            // Event_IV_Fix0
+            // 
+            this.Event_IV_Fix0.AutoSize = true;
+            this.Event_IV_Fix0.Location = new System.Drawing.Point(148, 69);
+            this.Event_IV_Fix0.Name = "Event_IV_Fix0";
+            this.Event_IV_Fix0.Size = new System.Drawing.Size(15, 14);
+            this.Event_IV_Fix0.TabIndex = 8;
+            this.Event_IV_Fix0.UseVisualStyleBackColor = true;
+            // 
+            // L_Event_IV
+            // 
+            this.L_Event_IV.AutoSize = true;
+            this.L_Event_IV.Location = new System.Drawing.Point(72, 39);
+            this.L_Event_IV.Name = "L_Event_IV";
+            this.L_Event_IV.Size = new System.Drawing.Size(43, 13);
+            this.L_Event_IV.TabIndex = 36;
+            this.L_Event_IV.Text = "个体值";
+            // 
+            // L_Event_S
+            // 
+            this.L_Event_S.AutoSize = true;
+            this.L_Event_S.Location = new System.Drawing.Point(24, 219);
+            this.L_Event_S.Name = "L_Event_S";
+            this.L_Event_S.Size = new System.Drawing.Size(31, 13);
+            this.L_Event_S.TabIndex = 35;
+            this.L_Event_S.Text = "速度";
+            // 
+            // L_Event_C
+            // 
+            this.L_Event_C.AutoSize = true;
+            this.L_Event_C.Location = new System.Drawing.Point(24, 159);
+            this.L_Event_C.Name = "L_Event_C";
+            this.L_Event_C.Size = new System.Drawing.Size(31, 13);
+            this.L_Event_C.TabIndex = 33;
+            this.L_Event_C.Text = "特攻";
+            // 
+            // L_Event_B
+            // 
+            this.L_Event_B.AutoSize = true;
+            this.L_Event_B.Location = new System.Drawing.Point(24, 129);
+            this.L_Event_B.Name = "L_Event_B";
+            this.L_Event_B.Size = new System.Drawing.Size(31, 13);
+            this.L_Event_B.TabIndex = 32;
+            this.L_Event_B.Text = "防御";
+            // 
+            // L_Event_H
+            // 
+            this.L_Event_H.AutoSize = true;
+            this.L_Event_H.Location = new System.Drawing.Point(24, 69);
+            this.L_Event_H.Name = "L_Event_H";
+            this.L_Event_H.Size = new System.Drawing.Size(22, 13);
+            this.L_Event_H.TabIndex = 30;
+            this.L_Event_H.Text = "HP";
+            // 
+            // L_Event_A
+            // 
+            this.L_Event_A.AutoSize = true;
+            this.L_Event_A.Location = new System.Drawing.Point(24, 99);
+            this.L_Event_A.Name = "L_Event_A";
+            this.L_Event_A.Size = new System.Drawing.Size(31, 13);
+            this.L_Event_A.TabIndex = 31;
+            this.L_Event_A.Text = "攻击";
+            // 
+            // L_Event_D
+            // 
+            this.L_Event_D.AutoSize = true;
+            this.L_Event_D.Location = new System.Drawing.Point(24, 189);
+            this.L_Event_D.Name = "L_Event_D";
+            this.L_Event_D.Size = new System.Drawing.Size(31, 13);
+            this.L_Event_D.TabIndex = 34;
+            this.L_Event_D.Text = "特防";
+            // 
+            // EventIV5
+            // 
+            this.EventIV5.AccessibleName = "";
+            this.EventIV5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventIV5.Location = new System.Drawing.Point(75, 214);
+            this.EventIV5.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.EventIV5.Name = "EventIV5";
+            this.EventIV5.Size = new System.Drawing.Size(55, 22);
+            this.EventIV5.TabIndex = 11;
+            // 
+            // EventIV4
+            // 
+            this.EventIV4.AccessibleName = "";
+            this.EventIV4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventIV4.Location = new System.Drawing.Point(75, 184);
+            this.EventIV4.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.EventIV4.Name = "EventIV4";
+            this.EventIV4.Size = new System.Drawing.Size(55, 22);
+            this.EventIV4.TabIndex = 10;
+            // 
+            // EventIV3
+            // 
+            this.EventIV3.AccessibleName = "";
+            this.EventIV3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventIV3.Location = new System.Drawing.Point(75, 154);
+            this.EventIV3.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.EventIV3.Name = "EventIV3";
+            this.EventIV3.Size = new System.Drawing.Size(55, 22);
+            this.EventIV3.TabIndex = 9;
+            // 
+            // EventIV2
+            // 
+            this.EventIV2.AccessibleName = "";
+            this.EventIV2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventIV2.Location = new System.Drawing.Point(75, 124);
+            this.EventIV2.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.EventIV2.Name = "EventIV2";
+            this.EventIV2.Size = new System.Drawing.Size(55, 22);
+            this.EventIV2.TabIndex = 8;
+            // 
+            // EventIV1
+            // 
+            this.EventIV1.AccessibleName = "";
+            this.EventIV1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventIV1.Location = new System.Drawing.Point(75, 94);
+            this.EventIV1.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.EventIV1.Name = "EventIV1";
+            this.EventIV1.Size = new System.Drawing.Size(55, 22);
+            this.EventIV1.TabIndex = 7;
+            // 
+            // EventIV0
+            // 
+            this.EventIV0.AccessibleName = "";
+            this.EventIV0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EventIV0.Location = new System.Drawing.Point(75, 64);
+            this.EventIV0.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.EventIV0.Name = "EventIV0";
+            this.EventIV0.Size = new System.Drawing.Size(55, 22);
+            this.EventIV0.TabIndex = 6;
+            // 
+            // BySaveScreen
+            // 
+            this.BySaveScreen.AutoSize = true;
+            this.BySaveScreen.BackColor = System.Drawing.Color.White;
+            this.BySaveScreen.Checked = true;
+            this.BySaveScreen.Location = new System.Drawing.Point(36, 168);
+            this.BySaveScreen.Name = "BySaveScreen";
+            this.BySaveScreen.Size = new System.Drawing.Size(146, 17);
+            this.BySaveScreen.TabIndex = 29;
+            this.BySaveScreen.TabStop = true;
+            this.BySaveScreen.Text = "读档指针序列检索Seed";
+            this.BySaveScreen.UseVisualStyleBackColor = false;
+            // 
+            // QRInput
+            // 
+            this.QRInput.AutoSize = true;
+            this.QRInput.BackColor = System.Drawing.Color.White;
+            this.QRInput.Location = new System.Drawing.Point(443, 168);
+            this.QRInput.Name = "QRInput";
+            this.QRInput.Size = new System.Drawing.Size(137, 17);
+            this.QRInput.TabIndex = 30;
+            this.QRInput.Text = "QR指针序列检索位置";
+            this.QRInput.UseVisualStyleBackColor = false;
+            // 
+            // InputBox
+            // 
+            this.InputBox.Controls.Add(this.button16);
+            this.InputBox.Controls.Add(this.EndClockInput);
+            this.InputBox.Controls.Add(this.button9);
+            this.InputBox.Controls.Add(this.button8);
+            this.InputBox.Controls.Add(this.Clear);
+            this.InputBox.Controls.Add(this.StartClockInput);
+            this.InputBox.Controls.Add(this.button10);
+            this.InputBox.Controls.Add(this.Back);
+            this.InputBox.Controls.Add(this.button7);
+            this.InputBox.Controls.Add(this.button11);
+            this.InputBox.Controls.Add(this.button6);
+            this.InputBox.Controls.Add(this.button12);
+            this.InputBox.Controls.Add(this.button5);
+            this.InputBox.Controls.Add(this.button0);
+            this.InputBox.Controls.Add(this.button13);
+            this.InputBox.Controls.Add(this.button1);
+            this.InputBox.Controls.Add(this.button4);
+            this.InputBox.Controls.Add(this.button14);
+            this.InputBox.Controls.Add(this.button2);
+            this.InputBox.Controls.Add(this.button3);
+            this.InputBox.Controls.Add(this.button15);
+            this.InputBox.Location = new System.Drawing.Point(18, 15);
+            this.InputBox.Name = "InputBox";
+            this.InputBox.Size = new System.Drawing.Size(856, 137);
+            this.InputBox.TabIndex = 29;
+            this.InputBox.TabStop = false;
+            this.InputBox.Text = "输入工具";
+            // 
+            // button16
+            // 
+            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button16.Location = new System.Drawing.Point(802, 31);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(40, 40);
+            this.button16.TabIndex = 15;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // EndClockInput
+            // 
+            this.EndClockInput.AutoSize = true;
+            this.EndClockInput.Location = new System.Drawing.Point(18, 109);
+            this.EndClockInput.Name = "EndClockInput";
+            this.EndClockInput.Size = new System.Drawing.Size(73, 17);
+            this.EndClockInput.TabIndex = 18;
+            this.EndClockInput.Text = "结束位置";
+            this.EndClockInput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.EndClockInput.UseVisualStyleBackColor = true;
+            this.EndClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
+            // 
+            // button9
+            // 
+            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button9.Location = new System.Drawing.Point(459, 31);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(40, 40);
+            this.button9.TabIndex = 8;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button8
+            // 
+            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button8.Location = new System.Drawing.Point(410, 31);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(40, 40);
+            this.button8.TabIndex = 7;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // Clear
+            // 
+            this.Clear.Location = new System.Drawing.Point(254, 96);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(72, 27);
+            this.Clear.TabIndex = 17;
+            this.Clear.Text = "清空";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
+            // StartClockInput
+            // 
+            this.StartClockInput.AutoSize = true;
+            this.StartClockInput.Checked = true;
+            this.StartClockInput.Location = new System.Drawing.Point(18, 86);
+            this.StartClockInput.Name = "StartClockInput";
+            this.StartClockInput.Size = new System.Drawing.Size(73, 17);
+            this.StartClockInput.TabIndex = 7;
+            this.StartClockInput.TabStop = true;
+            this.StartClockInput.Text = "开始位置";
+            this.StartClockInput.UseVisualStyleBackColor = true;
+            this.StartClockInput.CheckedChanged += new System.EventHandler(this.ClockInput_CheckedChanged);
+            // 
+            // button10
+            // 
+            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button10.Location = new System.Drawing.Point(508, 31);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(40, 40);
+            this.button10.TabIndex = 9;
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // Back
+            // 
+            this.Back.Location = new System.Drawing.Point(144, 96);
+            this.Back.Name = "Back";
+            this.Back.Size = new System.Drawing.Size(72, 27);
+            this.Back.TabIndex = 7;
+            this.Back.Text = "后退";
+            this.Back.UseVisualStyleBackColor = true;
+            this.Back.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button7.Location = new System.Drawing.Point(361, 31);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(40, 40);
+            this.button7.TabIndex = 6;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button11
+            // 
+            this.button11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button11.BackgroundImage")));
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button11.Location = new System.Drawing.Point(557, 31);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(40, 40);
+            this.button11.TabIndex = 10;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.Location = new System.Drawing.Point(312, 31);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(40, 40);
+            this.button6.TabIndex = 5;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button12
+            // 
+            this.button12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button12.BackgroundImage")));
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button12.Location = new System.Drawing.Point(606, 31);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(40, 40);
+            this.button12.TabIndex = 11;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button5.Location = new System.Drawing.Point(263, 31);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(40, 40);
+            this.button5.TabIndex = 4;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button0
+            // 
+            this.button0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button0.BackgroundImage")));
+            this.button0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button0.Location = new System.Drawing.Point(18, 31);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(40, 40);
+            this.button0.TabIndex = 16;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button13
+            // 
+            this.button13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button13.BackgroundImage")));
+            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button13.Location = new System.Drawing.Point(655, 31);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(40, 40);
+            this.button13.TabIndex = 12;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Location = new System.Drawing.Point(67, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Location = new System.Drawing.Point(214, 31);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(40, 40);
+            this.button4.TabIndex = 3;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button14
+            // 
+            this.button14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button14.BackgroundImage")));
+            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button14.Location = new System.Drawing.Point(704, 31);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(40, 40);
+            this.button14.TabIndex = 13;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Location = new System.Drawing.Point(116, 31);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(40, 40);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Location = new System.Drawing.Point(165, 31);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(40, 40);
+            this.button3.TabIndex = 2;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // button15
+            // 
+            this.button15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button15.BackgroundImage")));
+            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button15.Location = new System.Drawing.Point(753, 31);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(40, 40);
+            this.button15.TabIndex = 14;
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.Get_Clock_Number);
+            // 
+            // QRBox
+            // 
+            this.QRBox.Controls.Add(this.QRResult);
+            this.QRBox.Controls.Add(this.L_QRList);
+            this.QRBox.Controls.Add(this.QRSearch);
+            this.QRBox.Controls.Add(this.L_QRresult);
+            this.QRBox.Controls.Add(this.QRList);
+            this.QRBox.Location = new System.Drawing.Point(424, 182);
+            this.QRBox.Name = "QRBox";
+            this.QRBox.Size = new System.Drawing.Size(450, 243);
+            this.QRBox.TabIndex = 7;
+            this.QRBox.TabStop = false;
+            // 
+            // QRResult
+            // 
+            this.QRResult.FormattingEnabled = true;
+            this.QRResult.Location = new System.Drawing.Point(92, 128);
+            this.QRResult.Name = "QRResult";
+            this.QRResult.Size = new System.Drawing.Size(337, 95);
+            this.QRResult.TabIndex = 28;
+            // 
+            // L_QRList
+            // 
+            this.L_QRList.AutoSize = true;
+            this.L_QRList.Location = new System.Drawing.Point(16, 44);
+            this.L_QRList.Name = "L_QRList";
+            this.L_QRList.Size = new System.Drawing.Size(55, 13);
+            this.L_QRList.TabIndex = 27;
+            this.L_QRList.Text = "指针序列";
+            // 
+            // QRSearch
+            // 
+            this.QRSearch.Location = new System.Drawing.Point(357, 81);
+            this.QRSearch.Name = "QRSearch";
+            this.QRSearch.Size = new System.Drawing.Size(72, 27);
+            this.QRSearch.TabIndex = 26;
+            this.QRSearch.Text = "检索";
+            this.QRSearch.UseVisualStyleBackColor = true;
+            this.QRSearch.Click += new System.EventHandler(this.QRSearch_Click);
+            // 
+            // L_QRresult
+            // 
+            this.L_QRresult.AutoSize = true;
+            this.L_QRresult.Location = new System.Drawing.Point(16, 128);
+            this.L_QRresult.Name = "L_QRresult";
+            this.L_QRresult.Size = new System.Drawing.Size(55, 13);
+            this.L_QRresult.TabIndex = 23;
+            this.L_QRresult.Text = "检索结果";
+            // 
+            // QRList
+            // 
+            this.QRList.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QRList.Location = new System.Drawing.Point(92, 39);
+            this.QRList.Name = "QRList";
+            this.QRList.Size = new System.Drawing.Size(337, 22);
+            this.QRList.TabIndex = 24;
+            // 
+            // SearchSeedBox
+            // 
+            this.SearchSeedBox.Controls.Add(this.L_clocklist);
+            this.SearchSeedBox.Controls.Add(this.Search);
+            this.SearchSeedBox.Controls.Add(this.L_SeedResult);
+            this.SearchSeedBox.Controls.Add(this.SeedResults);
+            this.SearchSeedBox.Controls.Add(this.Clock_List);
+            this.SearchSeedBox.Location = new System.Drawing.Point(18, 182);
+            this.SearchSeedBox.Name = "SearchSeedBox";
+            this.SearchSeedBox.Size = new System.Drawing.Size(400, 199);
+            this.SearchSeedBox.TabIndex = 6;
+            this.SearchSeedBox.TabStop = false;
+            // 
+            // L_clocklist
+            // 
+            this.L_clocklist.AutoSize = true;
+            this.L_clocklist.Location = new System.Drawing.Point(31, 44);
+            this.L_clocklist.Name = "L_clocklist";
+            this.L_clocklist.Size = new System.Drawing.Size(55, 13);
+            this.L_clocklist.TabIndex = 22;
+            this.L_clocklist.Text = "指针序列";
+            // 
+            // Search
+            // 
+            this.Search.Location = new System.Drawing.Point(287, 81);
+            this.Search.Name = "Search";
+            this.Search.Size = new System.Drawing.Size(72, 27);
+            this.Search.TabIndex = 21;
+            this.Search.Text = "检索";
+            this.Search.UseVisualStyleBackColor = true;
+            this.Search.Click += new System.EventHandler(this.SearchforSeed);
+            // 
+            // L_SeedResult
+            // 
+            this.L_SeedResult.AutoSize = true;
+            this.L_SeedResult.Location = new System.Drawing.Point(33, 128);
+            this.L_SeedResult.Name = "L_SeedResult";
+            this.L_SeedResult.Size = new System.Drawing.Size(55, 13);
+            this.L_SeedResult.TabIndex = 6;
+            this.L_SeedResult.Text = "检索结果";
+            // 
+            // SeedResults
+            // 
+            this.SeedResults.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SeedResults.Location = new System.Drawing.Point(94, 128);
+            this.SeedResults.Name = "SeedResults";
+            this.SeedResults.Size = new System.Drawing.Size(266, 22);
+            this.SeedResults.TabIndex = 20;
+            // 
+            // Clock_List
+            // 
+            this.Clock_List.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Clock_List.Location = new System.Drawing.Point(92, 39);
+            this.Clock_List.Name = "Clock_List";
+            this.Clock_List.Size = new System.Drawing.Size(267, 22);
+            this.Clock_List.TabIndex = 19;
             // 
             // TSV
             // 
@@ -2458,18 +2795,6 @@
             this.Advanced.UseVisualStyleBackColor = true;
             this.Advanced.CheckedChanged += new System.EventHandler(this.Advanced_CheckedChanged);
             // 
-            // BlogLink
-            // 
-            this.BlogLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BlogLink.AutoSize = true;
-            this.BlogLink.Location = new System.Drawing.Point(603, 14);
-            this.BlogLink.Name = "BlogLink";
-            this.BlogLink.Size = new System.Drawing.Size(55, 13);
-            this.BlogLink.TabIndex = 6;
-            this.BlogLink.TabStop = true;
-            this.BlogLink.Text = "使用指南";
-            this.BlogLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.BlogLink_LinkClicked);
-            // 
             // Lang
             // 
             this.Lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2504,7 +2829,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1249, 686);
             this.Controls.Add(this.Lang);
-            this.Controls.Add(this.BlogLink);
             this.Controls.Add(this.Advanced);
             this.Controls.Add(this.ShinyCharm);
             this.Controls.Add(this.L_TSV);
@@ -2516,15 +2840,7 @@
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.SearchSeed.ResumeLayout(false);
-            this.SearchSeed.PerformLayout();
-            this.InputBox.ResumeLayout(false);
-            this.InputBox.PerformLayout();
-            this.QRBox.ResumeLayout(false);
-            this.QRBox.PerformLayout();
-            this.SearchSeedBox.ResumeLayout(false);
-            this.SearchSeedBox.PerformLayout();
-            this.SearchTool.ResumeLayout(false);
+            this.SearchTarget.ResumeLayout(false);
             this.ControlPanel.ResumeLayout(false);
             this.Condition.ResumeLayout(false);
             this.Condition.PerformLayout();
@@ -2579,6 +2895,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.Frame_min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.DGVMenuStrip.ResumeLayout(false);
+            this.SearchTool.ResumeLayout(false);
+            this.SearchTool.PerformLayout();
+            this.EventSetting.ResumeLayout(false);
+            this.EventSetting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EventIV0)).EndInit();
+            this.InputBox.ResumeLayout(false);
+            this.InputBox.PerformLayout();
+            this.QRBox.ResumeLayout(false);
+            this.QRBox.PerformLayout();
+            this.SearchSeedBox.ResumeLayout(false);
+            this.SearchSeedBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
             this.ResumeLayout(false);
@@ -2589,8 +2922,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage SearchSeed;
         private System.Windows.Forms.TabPage SearchTool;
+        private System.Windows.Forms.TabPage SearchTarget;
         private HexNumericUpdown Seed;
         private System.Windows.Forms.NumericUpDown TSV;
         private System.Windows.Forms.Label L_Seed;
@@ -2725,7 +3058,6 @@
         private System.Windows.Forms.Button QRSearch;
         private System.Windows.Forms.Label L_QRresult;
         private System.Windows.Forms.TextBox QRList;
-        private System.Windows.Forms.LinkLabel BlogLink;
         private System.Windows.Forms.CheckBox BlinkOnly;
         private System.Windows.Forms.CheckBox ShowStats;
         private System.Windows.Forms.GroupBox InputBox;
@@ -2780,6 +3112,32 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
         private System.Windows.Forms.ToolStripMenuItem SetStartFrame;
+        private System.Windows.Forms.GroupBox EventSetting;
+        private System.Windows.Forms.NumericUpDown EventIV5;
+        private System.Windows.Forms.NumericUpDown EventIV4;
+        private System.Windows.Forms.NumericUpDown EventIV3;
+        private System.Windows.Forms.NumericUpDown EventIV2;
+        private System.Windows.Forms.NumericUpDown EventIV1;
+        private System.Windows.Forms.NumericUpDown EventIV0;
+        private System.Windows.Forms.Label L_IVLock;
+        private System.Windows.Forms.CheckBox Event_IV_Fix5;
+        private System.Windows.Forms.CheckBox Event_IV_Fix4;
+        private System.Windows.Forms.CheckBox Event_IV_Fix3;
+        private System.Windows.Forms.CheckBox Event_IV_Fix2;
+        private System.Windows.Forms.CheckBox Event_IV_Fix1;
+        private System.Windows.Forms.CheckBox Event_IV_Fix0;
+        private System.Windows.Forms.Label L_Event_IV;
+        private System.Windows.Forms.Label L_Event_S;
+        private System.Windows.Forms.Label L_Event_C;
+        private System.Windows.Forms.Label L_Event_B;
+        private System.Windows.Forms.Label L_Event_H;
+        private System.Windows.Forms.Label L_Event_A;
+        private System.Windows.Forms.Label L_Event_D;
+        private System.Windows.Forms.CheckBox GenderLocked;
+        private System.Windows.Forms.CheckBox NatureLocked;
+        private System.Windows.Forms.Label L_IVsCount;
+        private System.Windows.Forms.NumericUpDown IVsCount;
+        private System.Windows.Forms.CheckBox AbilityLocked;
     }
 }
 

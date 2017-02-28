@@ -6,6 +6,7 @@
         #region pokedex
         public readonly static int[,] pokedex =
         {
+            { 151, 100, 100, 100, 100, 100, 100},   //Event
             { 785, 70, 115, 85, 95, 75, 130},   //Tapu Koko
             { 786, 70, 85, 75, 130, 115, 95},   //Tapu Lele
             { 787, 70, 130, 115, 85, 95, 75},   //Tapu Bulu
@@ -29,13 +30,15 @@
             { 800, 97, 107, 101, 127, 89, 79 }, //Necrozma
         };
 
-        public const int Solgaleo_index = 5;
-        public const int Lunala_index = 6;
-        public const int UB_StartIndex = 14;
-        public const int AlwaysSync_Index = 7;
+        public const int Solgaleo_index = 6;
+        public const int Lunala_index = 7;
+        public const int Zygarde_index = 11;
+        public const int UB_StartIndex = 15;
+        public const int AlwaysSync_Index = 8;
 
         public readonly static int[] PokeLevel =
         {
+            100,
             60,60,60,60,
             55,55,5,
             40,50,50,50,
@@ -45,6 +48,7 @@
 
         public readonly static int[] NPC =
         {
+            8,
             0,0,0,1,//Tapus
             2,2,3,
             8,6,3,3,
@@ -54,6 +58,7 @@
 
         public readonly static int[] timedelay =
         {
+            38,
             0,0,0,0,
             288,282,38,
             38,38,38,38,
