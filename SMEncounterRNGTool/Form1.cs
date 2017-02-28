@@ -964,7 +964,7 @@ namespace SMEncounterRNGTool
                 case 1: BlinkFlag = "★"; break;
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
-            string PSV = result.PSV.ToString("X4");
+            string PSV = result.PSV.ToString("D4");
             string Ability = result.Ability.ToString();
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
