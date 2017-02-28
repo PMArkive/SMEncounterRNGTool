@@ -128,7 +128,7 @@ namespace SMEncounterRNGTool
             Stat.Add(Stat4);
             Stat.Add(Stat5);
 
-            EventIV.Add(EventIV0); 
+            EventIV.Add(EventIV0);
             EventIV.Add(EventIV1);
             EventIV.Add(EventIV2);
             EventIV.Add(EventIV3);
@@ -518,7 +518,7 @@ namespace SMEncounterRNGTool
         {
             Timedelay.Value = (YourID.Checked) ? 62 : 0;
         }
-        
+
         private void Fix3v_CheckedChanged(object sender, EventArgs e)
         {
             if (Poke.SelectedIndex == 1)
@@ -996,7 +996,7 @@ namespace SMEncounterRNGTool
             {
                 if (e.AbilityLocked) Ability = "-";
                 if (e.NatureLocked) true_nature = "-";
-                if (e.ShinyLocked) PID = "-";PSV = "-";
+                if (e.ShinyLocked) PID = "-"; PSV = "-";
             }
 
             string frameadvance = "-";
@@ -1058,7 +1058,7 @@ namespace SMEncounterRNGTool
 
             switch (Poke.SelectedIndex)
             {
-                case 1: ConsiderBlink.Checked = false; GenderRatio.Visible = true;Fix3v.Checked = false; break;
+                case 1: ConsiderBlink.Checked = false; GenderRatio.Visible = true; Fix3v.Checked = false; break;
                 case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
                 case UB_StartIndex - 1: Fix3v.Checked = false; break;
             }

@@ -2297,7 +2297,7 @@
             this.EventIV5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventIV5.Location = new System.Drawing.Point(75, 214);
             this.EventIV5.Maximum = new decimal(new int[] {
-            256,
+            31,
             0,
             0,
             0});
@@ -2311,7 +2311,7 @@
             this.EventIV4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventIV4.Location = new System.Drawing.Point(75, 184);
             this.EventIV4.Maximum = new decimal(new int[] {
-            256,
+            31,
             0,
             0,
             0});
@@ -2325,7 +2325,7 @@
             this.EventIV3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventIV3.Location = new System.Drawing.Point(75, 154);
             this.EventIV3.Maximum = new decimal(new int[] {
-            256,
+            31,
             0,
             0,
             0});
@@ -2339,7 +2339,7 @@
             this.EventIV2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventIV2.Location = new System.Drawing.Point(75, 124);
             this.EventIV2.Maximum = new decimal(new int[] {
-            256,
+            31,
             0,
             0,
             0});
@@ -2353,7 +2353,7 @@
             this.EventIV1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventIV1.Location = new System.Drawing.Point(75, 94);
             this.EventIV1.Maximum = new decimal(new int[] {
-            256,
+            31,
             0,
             0,
             0});
@@ -2367,7 +2367,7 @@
             this.EventIV0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventIV0.Location = new System.Drawing.Point(75, 64);
             this.EventIV0.Maximum = new decimal(new int[] {
-            256,
+            31,
             0,
             0,
             0});
