@@ -136,6 +136,7 @@ L_Event_S = 速度
 L_Event_IV = 个体值
 L_IVsCount = 保底V数
 L_IVLock = 锁定
+YourID = 自ID
 NatureLocked = 锁定性格
 GenderLocked = 锁定性别
 AbilityLocked = 锁定特性

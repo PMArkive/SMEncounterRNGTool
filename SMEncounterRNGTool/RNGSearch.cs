@@ -61,6 +61,7 @@ namespace SMEncounterRNGTool
         {
             public int[] IVs;
             public int IVsCount;
+            public bool YourID;
             public bool AbilityLocked;
             public bool NatureLocked;
             public bool GenderLocked;
@@ -212,7 +213,7 @@ namespace SMEncounterRNGTool
             // ---Start here when press A button---
 
             if (Considerdelay)
-                st.frameshift = getframeshift();
+                st.frameshift = getframeshift(e);
 
             //Encryption Constant
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
@@ -358,6 +359,20 @@ namespace SMEncounterRNGTool
                 time_elapse(delaytime - crydelay);
                 Advance(1);     //Cry Inside Time Delay
                 time_elapse(crydelay);
+            }
+            else
+                time_elapse(delaytime);
+            return index;
+        }
+
+        public static int getframeshift(EventRule e)
+        {
+            index = PreDelayCorrection;
+            if (e.YourID)
+            {
+                time_elapse(2);
+                Advance(10);
+                time_elapse(delaytime);
             }
             else
                 time_elapse(delaytime);

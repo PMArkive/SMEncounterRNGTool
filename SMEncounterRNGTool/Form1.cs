@@ -499,7 +499,12 @@ namespace SMEncounterRNGTool
             BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
             if (CreateTimeline.Checked)
                 BlinkOnly.Checked = SafeFOnly.Checked = false;
+        }
 
+
+        private void YourID_CheckedChanged(object sender, EventArgs e)
+        {
+            Timedelay.Value = (YourID.Checked) ? 62 : 4;
         }
         #endregion
 
@@ -972,7 +977,9 @@ namespace SMEncounterRNGTool
                 if (e.NatureLocked) true_nature = "-";
             }
 
-            string frameadvance = (ConsiderDelay.Checked) ? RNGSearch.getframeshift().ToString("+#;-#;0") : "-";
+            string frameadvance = "-";
+            if (ConsiderDelay.Checked)
+                frameadvance = (Poke.SelectedIndex == 1) ? RNGSearch.getframeshift(e).ToString("+#;-#;0") : RNGSearch.getframeshift().ToString("+#;-#;0");
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
@@ -1058,6 +1065,7 @@ namespace SMEncounterRNGTool
             {
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (int)IVsCount.Value,
+                YourID = YourID.Checked,
                 AbilityLocked = AbilityLocked.Checked,
                 NatureLocked = NatureLocked.Checked,
                 GenderLocked = GenderLocked.Checked,
@@ -1147,6 +1155,5 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
-
     }
 }

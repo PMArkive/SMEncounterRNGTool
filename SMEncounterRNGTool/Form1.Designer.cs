@@ -182,6 +182,7 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
+            this.YourID = new System.Windows.Forms.CheckBox();
             this.AbilityLocked = new System.Windows.Forms.CheckBox();
             this.L_IVsCount = new System.Windows.Forms.Label();
             this.IVsCount = new System.Windows.Forms.NumericUpDown();
@@ -2035,6 +2036,7 @@
             // 
             // EventSetting
             // 
+            this.EventSetting.Controls.Add(this.YourID);
             this.EventSetting.Controls.Add(this.AbilityLocked);
             this.EventSetting.Controls.Add(this.L_IVsCount);
             this.EventSetting.Controls.Add(this.IVsCount);
@@ -2066,6 +2068,17 @@
             this.EventSetting.TabIndex = 31;
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
+            // 
+            // YourID
+            // 
+            this.YourID.AutoSize = true;
+            this.YourID.Location = new System.Drawing.Point(195, 128);
+            this.YourID.Name = "YourID";
+            this.YourID.Size = new System.Drawing.Size(49, 17);
+            this.YourID.TabIndex = 48;
+            this.YourID.Text = "自ID";
+            this.YourID.UseVisualStyleBackColor = true;
+            this.YourID.CheckedChanged += new System.EventHandler(this.YourID_CheckedChanged);
             // 
             // AbilityLocked
             // 
@@ -3132,6 +3145,7 @@
         private System.Windows.Forms.Label L_IVsCount;
         private System.Windows.Forms.NumericUpDown IVsCount;
         private System.Windows.Forms.CheckBox AbilityLocked;
+        private System.Windows.Forms.CheckBox YourID;
     }
 }
 

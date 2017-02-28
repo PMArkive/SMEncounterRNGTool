@@ -136,6 +136,7 @@ L_Event_S = Spe
 L_Event_IV = IVs
 L_IVsCount = At least IV count
 L_IVLock = Locked
+YourID = Your ID
 NatureLocked = Nature Locked
 GenderLocked = Gender Locked
 AbilityLocked = Ability Locked
