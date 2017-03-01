@@ -409,19 +409,14 @@ namespace SMEncounterRNGTool
 
             Honey.Checked = Wild.Checked;
             if (Stationary.Checked)
-            {
-                GenderRatio.SelectedIndex = 0;
                 UB.Checked = false;
-                Fix3v.Checked = true;
-                Correction.Value = 0;
-            }
             else
-            {
-                GenderRatio.SelectedIndex = 1;
-                Fix3v.Checked = false;
-                AlwaysSynced.Checked = false;
                 EncounteredOnly.Checked = true;
-            }
+
+            Fix3v.Checked = Stationary.Checked;
+            GenderRatio.SelectedIndex = Stationary.Checked ? 0 : 1;
+            label10.Text = Wild.Checked ? "F" : "+4F";
+
             UB_CheckedChanged(null, null);
             ConsiderDelay_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
@@ -453,20 +448,19 @@ namespace SMEncounterRNGTool
                 Timedelay.Value = 186;
                 Timedelay.Enabled = false;
             }
-            else if (Wild.Checked)
+            else 
             {
-                Timedelay.Value = 0;
                 Correction.Value = 0;
+                if (Wild.Checked) Timedelay.Value = 0;
             }
             L_Correction.Visible = Correction.Visible = Honey.Checked;
-            label10.Text = Honey.Checked ? "F" : "+4F";
             ConsiderDelay.Enabled = !Honey.Checked;
         }
 
         private void ConsiderDelay_CheckedChanged(object sender, EventArgs e)
         {
             ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
-            Timedelay.Enabled = Correction.Enabled = ShowResultsAfterDelay.Enabled = HighLightFrameAfter.Enabled = ConsiderDelay.Checked;
+            Timedelay.Enabled = ShowResultsAfterDelay.Enabled = HighLightFrameAfter.Enabled = ConsiderDelay.Checked;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
@@ -1044,12 +1038,12 @@ namespace SMEncounterRNGTool
             const int UB_StartIndex = SearchSetting.UB_StartIndex;
             const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
             //General
-            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
-            ConsiderBlink.Checked = !AlwaysSynced.Checked;
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);
-            //0
+            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
+            ConsiderBlink.Checked = !AlwaysSynced.Checked;
+            //Enable
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex < 2) || (Poke.SelectedIndex >= UB_StartIndex);
             //1

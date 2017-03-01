@@ -37,6 +37,7 @@
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.Condition = new System.Windows.Forms.GroupBox();
+            this.L_EventInstruction = new System.Windows.Forms.Label();
             this.L_SyncNature = new System.Windows.Forms.Label();
             this.L_UB_th = new System.Windows.Forms.Label();
             this.L_Encounter_th = new System.Windows.Forms.Label();
@@ -254,7 +255,6 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.L_EventInstruction = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -386,6 +386,15 @@
             this.Condition.TabIndex = 1;
             this.Condition.TabStop = false;
             this.Condition.Text = "条件设置";
+            // 
+            // L_EventInstruction
+            // 
+            this.L_EventInstruction.AutoSize = true;
+            this.L_EventInstruction.Location = new System.Drawing.Point(79, 106);
+            this.L_EventInstruction.Name = "L_EventInstruction";
+            this.L_EventInstruction.Size = new System.Drawing.Size(219, 13);
+            this.L_EventInstruction.TabIndex = 66;
+            this.L_EventInstruction.Text = "配信宝可梦其他设置在“辅助工具”标签页";
             // 
             // L_SyncNature
             // 
@@ -2105,7 +2114,7 @@
             ""});
             this.Event_PID.Location = new System.Drawing.Point(195, 126);
             this.Event_PID.Name = "Event_PID";
-            this.Event_PID.Size = new System.Drawing.Size(87, 21);
+            this.Event_PID.Size = new System.Drawing.Size(98, 21);
             this.Event_PID.TabIndex = 49;
             // 
             // YourID
@@ -2876,15 +2885,6 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
-            // 
-            // L_EventInstruction
-            // 
-            this.L_EventInstruction.AutoSize = true;
-            this.L_EventInstruction.Location = new System.Drawing.Point(79, 106);
-            this.L_EventInstruction.Name = "L_EventInstruction";
-            this.L_EventInstruction.Size = new System.Drawing.Size(219, 13);
-            this.L_EventInstruction.TabIndex = 66;
-            this.L_EventInstruction.Text = "配信宝可梦其他设置在“辅助工具”标签页";
             // 
             // Form1
             // 
