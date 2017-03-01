@@ -12,7 +12,7 @@ And ALL Pokemon RNG Researcher<br>
 - Event Pokemon via Mystery Gift: Magearna, Munchlax,etc.
 
 ## Marks under Blink Column
-- ¡ï: One person on the map will blink soon, a warning for nearby frames.
+- â˜…: One person on the map will blink soon, a warning for nearby frames.
 - ?: The spread might be affected by the history of NPC status so it's unsafe. 
 - -: The safe frames the tool can 100% predict.
 
