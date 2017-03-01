@@ -9,12 +9,21 @@ And ALL Pokemon RNG Researcher<br>
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
 - Any Wild Pokemon appear in SM (Can be shiny)
 - Pokemon given by NPC (Can be shiny): Type:Null, Porygon, Aerodactyl
-- Event Pokemon via Mystery Gift: Magearna, Munchlax,etc.
+- Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
 - ?: The spread might be affected by the history of NPC status so it's unsafe. 
 - -: The safe frames the tool can 100% predict.
+
+## Final screen when pressing A
+Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box.<br>
+(All button pressing and animation time delays were calibrated. Especailly for those who are using PokeCalcNTR.)
+- Tapus: Tapus' cry screen before the battle starts
+- Zygarde: "Zygarde has gone into a Poke Ball!"
+- Solgaleo/Lunala: No dialogue, stand in front of it
+- UBs & wild Pokemon: "Use this item" (Honey)
+- Type:Null, Porygon, Aerodactyl, Magearna, Munchlax, Machamp and other event Pokemon: "You received xxx!"
 
 ## Some Parameters:
 
