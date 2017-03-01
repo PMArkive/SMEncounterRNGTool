@@ -446,15 +446,16 @@ namespace SMEncounterRNGTool
             if (Honey.Checked)
             {
                 Timedelay.Value = 186;
-                Timedelay.Enabled = false;
+                ConsiderDelay.Checked = true;
             }
-            else 
+            else
             {
                 Correction.Value = 0;
                 if (Wild.Checked) Timedelay.Value = 0;
             }
+
             L_Correction.Visible = Correction.Visible = Honey.Checked;
-            ConsiderDelay.Enabled = !Honey.Checked;
+            Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
         }
 
         private void ConsiderDelay_CheckedChanged(object sender, EventArgs e)

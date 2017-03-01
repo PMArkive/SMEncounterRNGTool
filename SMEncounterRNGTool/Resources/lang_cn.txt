@@ -35,7 +35,7 @@ L_SyncNature = 同步性格
 L_UB_th = UB出现率
 L_Encounter_th = 遇敌率
 L_Lv = 等级范围
-L_EventInstruction = 配信宝可梦其他设置在“辅助工具”标签页
+L_EventInstruction = 配信宝可梦的其他设置在“辅助工具”标签页
 ---
 SearchSettingBox = 个体筛选
 L_H = HP

@@ -2751,7 +2751,7 @@
             this.SearchSeedBox.Controls.Add(this.Clock_List);
             this.SearchSeedBox.Location = new System.Drawing.Point(18, 182);
             this.SearchSeedBox.Name = "SearchSeedBox";
-            this.SearchSeedBox.Size = new System.Drawing.Size(400, 199);
+            this.SearchSeedBox.Size = new System.Drawing.Size(400, 243);
             this.SearchSeedBox.TabIndex = 6;
             this.SearchSeedBox.TabStop = false;
             // 
