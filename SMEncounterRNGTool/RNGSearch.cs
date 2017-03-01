@@ -235,20 +235,23 @@ namespace SMEncounterRNGTool
                 st.frameshift = getframeshift(e);
 
             //Encryption Constant & PID
-            switch (e.PIDType)
+            if (e.PIDType < 3) // =3 Fixed
             {
-                case 0:
-                    st.EC = (uint)(getrand() & 0xFFFFFFFF); st.PID = (uint)(getrand() & 0xFFFFFFFF);
-                    st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4; if (st.PSV == TSV) st.Shiny = true;
-                    break;
-                case 1:
-                    Advance(2); st.Shiny = true;
-                    break;
-                case 2:
-                    Advance(2); st.Shiny = false;
-                    break;
-                case 3:
-                    break;
+                st.EC = (uint)(getrand() & 0xFFFFFFFF);
+                st.PID = (uint)(getrand() & 0xFFFFFFFF);
+                st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+                if (st.PSV == TSV && e.PIDType < 2)
+                {
+                    if (e.PIDType == 0) // Random
+                        st.Shiny = true;
+                    else if (e.PIDType == 1) // Random NonShiny
+                    {
+                        st.PID = st.PID ^ 0x10000000;
+                        st.PSV = st.PSV ^ 0x100;
+                    }
+                }
+                else if (e.PIDType == 2)// Random Shiny
+                    st.Shiny = true;
             }
 
             //IV
