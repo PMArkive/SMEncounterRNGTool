@@ -167,14 +167,11 @@ namespace SMEncounterRNGTool
                     break;
                 }
             }
-            if (ShinyLocked_S)
+            if (ShinyLocked_S && st.PSV == TSV)
             {
                 st.Shiny = false;
-                while (st.PSV == TSV)
-                {
-                    st.PID = (uint)(getrand() & 0xFFFFFFFF);
-                    st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
-                }
+                st.PID = st.PID ^ 0x10000000;
+                st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
             }
 
             //IV
