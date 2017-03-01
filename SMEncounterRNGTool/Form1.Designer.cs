@@ -754,7 +754,7 @@
             this.Time_min.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Time_min.Location = new System.Drawing.Point(87, 22);
             this.Time_min.Maximum = new decimal(new int[] {
-            10000000,
+            100000000,
             0,
             0,
             0});
@@ -773,7 +773,7 @@
             this.Time_max.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Time_max.Location = new System.Drawing.Point(181, 22);
             this.Time_max.Maximum = new decimal(new int[] {
-            10000000,
+            100000000,
             0,
             0,
             0});
@@ -2884,7 +2884,7 @@
             // 
             this.dgv_time.HeaderText = "时间";
             this.dgv_time.Name = "dgv_time";
-            this.dgv_time.Width = 55;
+            this.dgv_time.Width = 60;
             // 
             // Form1
             // 
