@@ -1,4 +1,4 @@
-# SMEncounterRNGTool
+﻿# SMEncounterRNGTool
 A tool for Pokemon Sun & Moon RNG (including stationary and wild Pokemon). <br>
 Great thanks to:<br>
 @quan_dra: Whom I borrowed some code from<br>
@@ -28,7 +28,7 @@ Warning: Do NOT change the "Starting Frame" of timeline when you are following i
 
 ## Final screen when pressing A
 Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box.<br>
-(All button pressing and animation time delays were calibrated. Especailly for those who are using PokeCalcNTR.)
+(All button pressing and animation time delays were calibrated. Especially for those who are using PokeCalcNTR.)
 - Tapus: Tapus' cry screen before the battle starts
 - Zygarde: "Zygarde has gone into a Poke Ball!"
 - Solgaleo/Lunala: No dialogue, stand in front of it
