@@ -16,6 +16,16 @@ And ALL Pokemon RNG Researcher<br>
 - ?: The spread might be affected by the history of NPC status so it's unsafe. 
 - -: The safe frames the tool can 100% predict.
 
+### Tips for NTRer when RNG with large NPCs number<br>
+ 1. Arrive at the final screen before clicking A<br>
+ 2. Pause at a "Safe Frame" (first only check "Safe F Only" to find safe frame zone)<br>
+ 3. Put your current frame number in the first box of "frame range" and check "Create Timeline"<br>
+ 4. Click "Search", now you can see the game will follow timeline the tool created.<br>
+ 5. Now all the frame in the timeline are without ? marks, they're all SAFE and ACCESSIBLE!!<br>
+ 6. Just change the filters and make another search as usual.<br>
+ <br>
+Warning: Do NOT change the "Starting Frame" of timeline when you are following it.
+
 ## Final screen when pressing A
 Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box.<br>
 (All button pressing and animation time delays were calibrated. Especailly for those who are using PokeCalcNTR.)
