@@ -351,8 +351,8 @@ namespace SMEncounterRNGTool
         {
             if (!Wild)
                 ButtonPressDelay();         //4-6F
-            else if (Honey)
-                index = PreDelayCorrection; //Pre-HoneyCorrection
+            if (Honey)
+                index += PreDelayCorrection; //Pre-HoneyCorrection
             time_delay();
             return index;
         }

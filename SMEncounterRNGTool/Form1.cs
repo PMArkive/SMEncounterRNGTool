@@ -459,6 +459,7 @@ namespace SMEncounterRNGTool
                 Correction.Value = 0;
             }
             L_Correction.Visible = Correction.Visible = Honey.Checked;
+            label10.Text = Honey.Checked ? "F" : "+4F";
             ConsiderDelay.Enabled = !Honey.Checked;
         }
 
@@ -1051,6 +1052,8 @@ namespace SMEncounterRNGTool
             //0
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex < 2) || (Poke.SelectedIndex >= UB_StartIndex);
+            //1
+            L_EventInstruction.Visible = Poke.SelectedIndex == 1;
 
             if (Poke.SelectedIndex == 0) return;
             ConsiderDelay.Checked = true;

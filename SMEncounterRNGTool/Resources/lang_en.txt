@@ -35,6 +35,7 @@ Fix3v = 3IVs
 L_UB_th = UB Rate
 L_Encounter_th = Enctr Rate
 L_Lv = Lv Range
+L_EventInstruction = More event Pokemon settings please check "Tool Kit" Tab
 ---
 SearchSettingBox = Filters
 L_H = HP

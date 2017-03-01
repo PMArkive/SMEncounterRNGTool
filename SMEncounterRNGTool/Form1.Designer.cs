@@ -61,6 +61,7 @@
             this.Result_Text = new System.Windows.Forms.Label();
             this.SearchByCurrSeed = new System.Windows.Forms.Button();
             this.TimeBox = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.Timedelay = new System.Windows.Forms.NumericUpDown();
             this.ConsiderDelay = new System.Windows.Forms.CheckBox();
             this.TimeResult = new System.Windows.Forms.ListBox();
@@ -183,6 +184,7 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
+            this.Event_PID = new System.Windows.Forms.ComboBox();
             this.YourID = new System.Windows.Forms.CheckBox();
             this.AbilityLocked = new System.Windows.Forms.CheckBox();
             this.L_IVsCount = new System.Windows.Forms.Label();
@@ -251,8 +253,8 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
-            this.Event_PID = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.L_EventInstruction = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -358,6 +360,7 @@
             // 
             // Condition
             // 
+            this.Condition.Controls.Add(this.L_EventInstruction);
             this.Condition.Controls.Add(this.L_SyncNature);
             this.Condition.Controls.Add(this.L_UB_th);
             this.Condition.Controls.Add(this.L_Encounter_th);
@@ -636,6 +639,7 @@
             // 
             // TimeBox
             // 
+            this.TimeBox.Controls.Add(this.label10);
             this.TimeBox.Controls.Add(this.Timedelay);
             this.TimeBox.Controls.Add(this.ConsiderDelay);
             this.TimeBox.Controls.Add(this.TimeResult);
@@ -655,18 +659,28 @@
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(181, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(28, 15);
+            this.label10.TabIndex = 65;
+            this.label10.Text = "+4F";
+            // 
             // Timedelay
             // 
             this.Timedelay.AccessibleName = "";
             this.Timedelay.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Timedelay.Location = new System.Drawing.Point(135, 59);
+            this.Timedelay.Location = new System.Drawing.Point(136, 59);
             this.Timedelay.Maximum = new decimal(new int[] {
-            5000,
+            1000,
             0,
             0,
             0});
             this.Timedelay.Name = "Timedelay";
-            this.Timedelay.Size = new System.Drawing.Size(55, 22);
+            this.Timedelay.Size = new System.Drawing.Size(44, 22);
             this.Timedelay.TabIndex = 64;
             // 
             // ConsiderDelay
@@ -691,11 +705,11 @@
             // L_Correction
             // 
             this.L_Correction.AutoSize = true;
-            this.L_Correction.Location = new System.Drawing.Point(212, 63);
+            this.L_Correction.Location = new System.Drawing.Point(209, 63);
             this.L_Correction.Name = "L_Correction";
-            this.L_Correction.Size = new System.Drawing.Size(31, 13);
+            this.L_Correction.Size = new System.Drawing.Size(55, 13);
             this.L_Correction.TabIndex = 52;
-            this.L_Correction.Text = "修正";
+            this.L_Correction.Text = "甜蜜修正";
             // 
             // L_time
             // 
@@ -2082,6 +2096,18 @@
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
             // 
+            // Event_PID
+            // 
+            this.Event_PID.Items.AddRange(new object[] {
+            "",
+            "",
+            "",
+            ""});
+            this.Event_PID.Location = new System.Drawing.Point(195, 126);
+            this.Event_PID.Name = "Event_PID";
+            this.Event_PID.Size = new System.Drawing.Size(87, 21);
+            this.Event_PID.TabIndex = 49;
+            // 
             // YourID
             // 
             this.YourID.AutoSize = true;
@@ -2837,18 +2863,6 @@
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
-            // Event_PID
-            // 
-            this.Event_PID.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            ""});
-            this.Event_PID.Location = new System.Drawing.Point(195, 126);
-            this.Event_PID.Name = "Event_PID";
-            this.Event_PID.Size = new System.Drawing.Size(87, 21);
-            this.Event_PID.TabIndex = 49;
-            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2862,6 +2876,15 @@
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
+            // 
+            // L_EventInstruction
+            // 
+            this.L_EventInstruction.AutoSize = true;
+            this.L_EventInstruction.Location = new System.Drawing.Point(79, 106);
+            this.L_EventInstruction.Name = "L_EventInstruction";
+            this.L_EventInstruction.Size = new System.Drawing.Size(219, 13);
+            this.L_EventInstruction.TabIndex = 66;
+            this.L_EventInstruction.Text = "配信宝可梦其他设置在“辅助工具”标签页";
             // 
             // Form1
             // 
@@ -3181,6 +3204,8 @@
         private System.Windows.Forms.CheckBox YourID;
         private System.Windows.Forms.Label L_StartingPoint;
         private System.Windows.Forms.ComboBox Event_PID;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label L_EventInstruction;
     }
 }
 

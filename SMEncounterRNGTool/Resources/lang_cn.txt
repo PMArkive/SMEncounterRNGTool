@@ -35,6 +35,7 @@ L_SyncNature = 同步性格
 L_UB_th = UB出现率
 L_Encounter_th = 遇敌率
 L_Lv = 等级范围
+L_EventInstruction = 配信宝可梦其他设置在“辅助工具”标签页
 ---
 SearchSettingBox = 个体筛选
 L_H = HP
@@ -78,7 +79,7 @@ TimeBox = 时间计算
 L_time = 计时范围
 CalcTime = 计算
 ConsiderDelay = 考虑时间延迟
-L_Correction = 修正
+L_Correction = 甜蜜修正
 ---
 SetStartFrame = 设为时间线起点
 SetTargetFrame = 设为目标帧
