@@ -70,7 +70,7 @@ namespace SMEncounterRNGTool
             public int[] IVs;
             public int IVsCount;
             public bool YourID;
-            public bool IsShiny;
+            public int PIDType;
             public bool AbilityLocked;
             public bool NatureLocked;
             public bool GenderLocked;
@@ -237,13 +237,22 @@ namespace SMEncounterRNGTool
             if (Considerdelay)
                 st.frameshift = getframeshift(e);
 
-            //Encryption Constant
-            st.EC = (uint)(getrand() & 0xFFFFFFFF);
-
-            //PID
-            st.PID = (uint)(getrand() & 0xFFFFFFFF);
-            st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
-            st.Shiny = (e.IsShiny) ? true : (st.PSV == TSV);
+            //Encryption Constant & PID
+            switch (e.PIDType)
+            {
+                case 0:
+                    st.EC = (uint)(getrand() & 0xFFFFFFFF); st.PID = (uint)(getrand() & 0xFFFFFFFF);
+                    st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4; if (st.PSV == TSV) st.Shiny = true;
+                    break;
+                case 1:
+                    Advance(2); st.Shiny = true;
+                    break;
+                case 2:
+                    Advance(2); st.Shiny = false;
+                    break;
+                case 3:
+                    break;
+            }
 
             //IV
             st.IVs = (int[])e.IVs.Clone();

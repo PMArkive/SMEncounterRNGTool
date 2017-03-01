@@ -56,6 +56,11 @@ namespace SMEncounterRNGTool
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
         private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
+        private static readonly string[,] PIDTYPE_STR =
+        {
+            { "Random PID", "Random Shiny", "Random Nonshiny","Specified"},
+            { "随机PID", "随机闪", "随机不闪","固定"}
+        };
 
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
 
@@ -76,6 +81,9 @@ namespace SMEncounterRNGTool
             SearchSetting.naturestr = getStringList("Natures", curlanguage);
             SearchSetting.hpstr = getStringList("Types", curlanguage);
             string[] species = getStringList("Species", curlanguage);
+
+            for (int i = 0; i < 4; i++)
+                Event_PID.Items[i] = PIDTYPE_STR[lindex, i];
 
             for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
                 HiddenPower.Items[i] = SearchSetting.hpstr[i];
@@ -184,6 +192,7 @@ namespace SMEncounterRNGTool
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
             Poke.SelectedIndex = 0;
+            Event_PID.SelectedIndex = 0;
 
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
@@ -993,7 +1002,7 @@ namespace SMEncounterRNGTool
             {
                 if (e.AbilityLocked) Ability = "-";
                 if (e.NatureLocked) true_nature = "-";
-                if (e.IsShiny) { PID = "-"; PSV = "-"; }
+                if (e.PIDType != 0) { PID = "-"; PSV = "-"; EC = "-"; }
             }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
@@ -1087,7 +1096,7 @@ namespace SMEncounterRNGTool
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (int)IVsCount.Value,
                 YourID = YourID.Checked,
-                IsShiny = IsShiny.Checked,
+                PIDType = Event_PID.SelectedIndex,
                 AbilityLocked = AbilityLocked.Checked,
                 NatureLocked = NatureLocked.Checked,
                 GenderLocked = GenderLocked.Checked,

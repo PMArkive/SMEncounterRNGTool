@@ -183,7 +183,6 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
-            this.IsShiny = new System.Windows.Forms.CheckBox();
             this.YourID = new System.Windows.Forms.CheckBox();
             this.AbilityLocked = new System.Windows.Forms.CheckBox();
             this.L_IVsCount = new System.Windows.Forms.Label();
@@ -252,6 +251,7 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
+            this.Event_PID = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
@@ -2048,7 +2048,7 @@
             // 
             // EventSetting
             // 
-            this.EventSetting.Controls.Add(this.IsShiny);
+            this.EventSetting.Controls.Add(this.Event_PID);
             this.EventSetting.Controls.Add(this.YourID);
             this.EventSetting.Controls.Add(this.AbilityLocked);
             this.EventSetting.Controls.Add(this.L_IVsCount);
@@ -2081,16 +2081,6 @@
             this.EventSetting.TabIndex = 31;
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
-            // 
-            // IsShiny
-            // 
-            this.IsShiny.AutoSize = true;
-            this.IsShiny.Location = new System.Drawing.Point(195, 128);
-            this.IsShiny.Name = "IsShiny";
-            this.IsShiny.Size = new System.Drawing.Size(74, 17);
-            this.IsShiny.TabIndex = 49;
-            this.IsShiny.Text = "固定异色";
-            this.IsShiny.UseVisualStyleBackColor = true;
             // 
             // YourID
             // 
@@ -2847,6 +2837,18 @@
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
+            // Event_PID
+            // 
+            this.Event_PID.Items.AddRange(new object[] {
+            "",
+            "",
+            "",
+            ""});
+            this.Event_PID.Location = new System.Drawing.Point(195, 126);
+            this.Event_PID.Name = "Event_PID";
+            this.Event_PID.Size = new System.Drawing.Size(87, 21);
+            this.Event_PID.TabIndex = 49;
+            // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3177,8 +3179,8 @@
         private System.Windows.Forms.NumericUpDown IVsCount;
         private System.Windows.Forms.CheckBox AbilityLocked;
         private System.Windows.Forms.CheckBox YourID;
-        private System.Windows.Forms.CheckBox IsShiny;
         private System.Windows.Forms.Label L_StartingPoint;
+        private System.Windows.Forms.ComboBox Event_PID;
     }
 }
 
