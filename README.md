@@ -51,12 +51,5 @@ Ten Carat Hill - Farthest Hollow* = 5<br>
 *Default Location for UBs in this tool<br>
 
 ### Pre-Honey Correction:
-Wela Volcano Park = 9<br>
-Diglett's Tunnel* = 13<br>
-Melemele Meadow* = 5<br>
-Verdant Cavern* = 5<br>
-Lush Jungle* = 7<br>
-Haina Desert = 1<br>
-Malie Garden* = 26<br>
-Resolution Cave* = 1<br>
-Ten Carat Hill - Farthest Hollow* = 1
+
+See [Pre-Honey Correction.md](Pre-Honey Correction.md)

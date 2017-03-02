@@ -938,7 +938,7 @@ namespace SMEncounterRNGTool
             string BlinkFlag = "";
             switch (result.Blink)
             {
-                case -2: BlinkFlag = "★+?"; break;
+                case -2: BlinkFlag = "?★"; break;
                 case -1: BlinkFlag = "?"; break;
                 case 0: BlinkFlag = "-"; break;
                 case 1: BlinkFlag = "★"; break;
