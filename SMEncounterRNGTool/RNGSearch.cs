@@ -169,9 +169,9 @@ namespace SMEncounterRNGTool
             }
             if (ShinyLocked_S && st.PSV == TSV)
             {
-                st.Shiny = false;
                 st.PID = st.PID ^ 0x10000000;
-                st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+                st.PSV = st.PSV ^ 0x100;
+                st.Shiny = false;
             }
 
             //IV
