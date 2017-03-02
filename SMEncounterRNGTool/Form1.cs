@@ -192,29 +192,23 @@ namespace SMEncounterRNGTool
             SyncNature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
-            Poke.SelectedIndex = 0;
             Event_PID.SelectedIndex = 0;
 
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
             TSV.Value = Properties.Settings.Default.TSV;
             Advanced.Checked = Properties.Settings.Default.Advance;
+            Poke.SelectedIndex = Properties.Settings.Default.Pokemon;
 
             if (Properties.Settings.Default.ClockInput)
                 StartClockInput.Checked = true;
             else
                 EndClockInput.Checked = true;
 
-            if (Properties.Settings.Default.Method)
-                Stationary.Checked = true;
-            else
-                Wild.Checked = true;
-
             ByIVs.Checked = true;
             BySaveScreen.Checked = true;
 
             Advanced_CheckedChanged(null, null);
-            Method_CheckedChanged(null, null);
             SearchMethod_CheckedChanged(null, null);
             NPC_ValueChanged(null, null);
             CreateTimeline_CheckedChanged(null, null);
@@ -405,9 +399,6 @@ namespace SMEncounterRNGTool
 
         private void Method_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Method = Stationary.Checked;
-            Properties.Settings.Default.Save();
-
             Honey.Checked = Wild.Checked;
             if (Stationary.Checked)
                 UB.Checked = false;
@@ -1039,6 +1030,9 @@ namespace SMEncounterRNGTool
             const int UB_StartIndex = SearchSetting.UB_StartIndex;
             const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
             //General
+            Properties.Settings.Default.Pokemon = (byte)Poke.SelectedIndex;
+            Properties.Settings.Default.Save();
+
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
             Method_CheckedChanged(null, null);

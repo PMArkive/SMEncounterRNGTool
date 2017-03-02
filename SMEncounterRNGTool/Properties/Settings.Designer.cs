@@ -85,18 +85,6 @@ namespace SMEncounterRNGTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Method {
-            get {
-                return ((bool)(this["Method"]));
-            }
-            set {
-                this["Method"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("en")]
         public string Language {
             get {
@@ -104,6 +92,18 @@ namespace SMEncounterRNGTool.Properties {
             }
             set {
                 this["Language"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte Pokemon {
+            get {
+                return ((byte)(this["Pokemon"]));
+            }
+            set {
+                this["Pokemon"] = value;
             }
         }
     }
