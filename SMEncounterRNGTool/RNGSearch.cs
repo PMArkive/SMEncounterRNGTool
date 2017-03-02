@@ -29,14 +29,14 @@ namespace SMEncounterRNGTool
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
         public static bool ConsiderBlink = true;
-        public static int npcnumber;
+        public static int modelnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
-        public static void ResetNPCStatus()
+        public static void ResetModelStatus()
         {
-            remain_frame = new int[npcnumber];
-            blink_flag = new bool[npcnumber];
+            remain_frame = new int[modelnumber];
+            blink_flag = new bool[modelnumber];
         }
 
         public static bool IsSolgaleo;
@@ -86,9 +86,9 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
-            // Reset NPC Status
+            // Reset model Status
             if (!createtimeline || Honey)
-                ResetNPCStatus();
+                ResetModelStatus();
 
             // ---Start here when press A button---
 
@@ -116,8 +116,8 @@ namespace SMEncounterRNGTool
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
-                if ((IsSolgaleo || IsLunala) && npcnumber == 5)
-                    npcnumber = 7;// return the original value
+                if ((IsSolgaleo || IsLunala) && modelnumber == 5)
+                    modelnumber = 7;// return the original value
             }
 
             // Encounter
@@ -228,9 +228,9 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
-            // Reset NPC Status
+            // Reset model Status
             if (!createtimeline)
-                ResetNPCStatus();
+                ResetModelStatus();
 
             // ---Start here when press A button---
 
@@ -298,7 +298,7 @@ namespace SMEncounterRNGTool
         {
             int RandBuffSize = 200;
             if (CalcDelay)
-                RandBuffSize += npcnumber * delaytime;
+                RandBuffSize += modelnumber * delaytime;
 
             Rand.Clear();
             for (int i = 0; i < RandBuffSize; i++)
@@ -383,7 +383,7 @@ namespace SMEncounterRNGTool
                 int crydelay = IsSolgaleo ? 79 : 76;
 
                 time_elapse(46);
-                if (npcnumber == 7) Rearrange();
+                if (modelnumber == 7) Rearrange();
                 time_elapse(delaytime - crydelay - 46);
                 Advance(1);     //Cry Inside Time Delay
                 time_elapse(crydelay);
@@ -399,10 +399,10 @@ namespace SMEncounterRNGTool
             return sync;
         }
 
-        //NPC # change when screen turns black
+        //model # change when screen turns black
         private static void Rearrange()
         {
-            npcnumber = 5;//2 guys offline...
+            modelnumber = 5;//2 guys offline...
             int[] order = new int[5] { 0, 1, 2, 5, 6 };
             for (int i = 0; i < 5; i++)
             {
@@ -416,7 +416,7 @@ namespace SMEncounterRNGTool
         {
             for (int totalframe = 0; totalframe < n; totalframe++)
             {
-                for (int i = 0; i < npcnumber; i++)
+                for (int i = 0; i < modelnumber; i++)
                 {
                     if (remain_frame[i] > 0)
                         remain_frame[i]--;

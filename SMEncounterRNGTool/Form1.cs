@@ -774,7 +774,7 @@ namespace SMEncounterRNGTool
             var setting = getSettings();
             var rng = getRNGSettings();
 
-            RNGSearch.ResetNPCStatus();
+            RNGSearch.ResetModelStatus();
             RNGSearch.CreateBuffer(sfmt);
 
             if (IsEvent)
@@ -812,11 +812,11 @@ namespace SMEncounterRNGTool
             DGV.CurrentCell = null;
         }
 
-        private NPCStatus CreateNPCStatus(SFMT sfmt)
+        private ModelStatus CreateNPCStatus(SFMT sfmt)
         {
-            NPCStatus.npcnumber = (int)NPC.Value + 1;
-            NPCStatus.smft = (SFMT)sfmt.DeepCopy();
-            return new NPCStatus();
+            ModelStatus.Modelnumber = (int)NPC.Value + 1;
+            ModelStatus.smft = (SFMT)sfmt.DeepCopy();
+            return new ModelStatus();
         }
 
         private SearchSetting getSettings()
@@ -859,7 +859,7 @@ namespace SMEncounterRNGTool
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
             RNGSearch.ConsiderBlink = ConsiderBlink.Checked;
-            RNGSearch.npcnumber = (int)NPC.Value + 1;
+            RNGSearch.modelnumber = (int)NPC.Value + 1;
             RNGSearch.IsSolgaleo = Poke.SelectedIndex == SearchSetting.Solgaleo_index;
             RNGSearch.IsLunala = Poke.SelectedIndex == SearchSetting.Lunala_index;
 
@@ -993,7 +993,7 @@ namespace SMEncounterRNGTool
             string frameadvance = result.frameshift.ToString("+#;-#;0");
             if (ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
             {
-                RNGSearch.Resetindex(); RNGSearch.ResetNPCStatus();
+                RNGSearch.Resetindex(); RNGSearch.ResetModelStatus();
                 frameadvance = (IsEvent) ? rng.getframeshift(e).ToString("+#;-#;0") : rng.getframeshift().ToString("+#;-#;0");
             }
 
