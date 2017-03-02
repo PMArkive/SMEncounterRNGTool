@@ -66,7 +66,7 @@ Reset = Reset
 ---
 RNGInfo = RNG Info
 CalcList = Search
-L_NPC = # of NPCs
+L_Model = # of Models
 AroundTarget = Target ±100F
 L_frame = Frame Range
 L_StartingPoint = <-- Starting Frame

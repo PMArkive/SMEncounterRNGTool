@@ -55,14 +55,14 @@
             55,65,60,65,65,60,70,75        //UB
         };
 
-        public readonly static int[] NPC =
+        public readonly static int[] ModelNumber =
         {
-            4,
-            0,0,0,1,//Tapus
-            2,2,3,
-            8,6,3,3,
-            3,4, //Stationary
-            0,0,0,0,0,0,0,0        //UB
+            5,
+            1,1,1,2,//Tapus
+            3,3,4,
+            9,7,4,4,
+            4,5, //Stationary
+            1,1,1,1,1,1,1,1        //UB
         };
 
         public readonly static int[] timedelay =
