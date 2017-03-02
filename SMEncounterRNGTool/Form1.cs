@@ -1066,8 +1066,10 @@ namespace SMEncounterRNGTool
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
                     Fix3v.Checked = false; Timedelay.Value = YourID.Checked ? 62 : 0;
                     break;
-                case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2; break;
-                case UB_StartIndex - 1: Fix3v.Checked = false; break;
+                case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
+                     L_gender.Visible = Gender.Visible = true; break;
+                case UB_StartIndex - 1: Fix3v.Checked = false;
+                     L_Ability.Visible = Ability.Visible = true; break;
             }
         }
 
