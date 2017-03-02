@@ -37,19 +37,11 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 
 ## Some Parameters:
 
-### UB Rate(%):
-Wela Volcano Park = 30<br>
-Diglett's Tunnel* = 80<br>
-Melemele Meadow* = 30<br>
-Verdant Cavern* = 50<br>
-Lush Jungle* = 15<br>
-Haina Desert = 30<br>
-Malie Garden* = 30<br>
-Resolution Cave* = 80<br>
-Ten Carat Hill - Farthest Hollow* = 5<br>
+#### UB Rate(%):
+See [Here](UB Rate.md)
 
-*Default Location for UBs in this tool<br>
+#### Pre-Honey Correction:
+See [Here](Pre-Honey Correction.md)
 
-### Pre-Honey Correction:
-
-See [Pre-Honey Correction.md](Pre-Honey Correction.md)
+#### Event Pokemon Setting:
+See [Here](Event Pokemon Setting.md)
