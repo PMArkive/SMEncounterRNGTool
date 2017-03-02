@@ -79,7 +79,7 @@ TimeBox = 时间计算
 L_time = 计时范围
 CalcTime = 计算
 ConsiderDelay = 考虑时间延迟
-L_Correction = 甜蜜修正
+L_Correction = 甜甜蜜修正
 ---
 SetStartFrame = 设为时间线起点
 SetTargetFrame = 设为目标帧

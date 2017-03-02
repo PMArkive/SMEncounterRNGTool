@@ -416,7 +416,7 @@ namespace SMEncounterRNGTool
 
             Fix3v.Checked = Stationary.Checked;
             GenderRatio.SelectedIndex = Stationary.Checked ? 0 : 1;
-            label10.Text = Wild.Checked ? "F" : "+4F";
+            label10.Text = Wild.Checked ? "F" : "+4F   1F=1/60s";
 
             UB_CheckedChanged(null, null);
             ConsiderDelay_CheckedChanged(null, null);
