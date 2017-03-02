@@ -19,7 +19,7 @@ namespace SMEncounterRNGTool
         public bool Wild, Honey, UB;
         public int Lv_max, Lv_min;
         public int UB_th;
-        public bool UB_S = false;
+        public bool IsUB = false;
         public bool nogender;
         public int gender_ratio;
 
@@ -100,9 +100,9 @@ namespace SMEncounterRNGTool
                 st.UbValue = getUBValue();
 
             //Synchronize
-            if (Wild && !UB_S)
+            if (Wild && !IsUB)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
-            else if (UB_S)
+            else if (IsUB)
             {
                 if (ConsiderBlink)
                 {
@@ -116,8 +116,6 @@ namespace SMEncounterRNGTool
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
-                if ((IsSolgaleo || IsLunala) && modelnumber == 5)
-                    modelnumber = 7;// return the original value
             }
 
             // Encounter
@@ -128,7 +126,7 @@ namespace SMEncounterRNGTool
             if (Wild && UB && !Honey)
             {
                 st.UbValue = getUBValue();
-                if (UB_S)
+                if (IsUB)
                 {
                     Advance(1);
                     st.Synchronize = blink_process();
@@ -136,14 +134,14 @@ namespace SMEncounterRNGTool
             }
 
             //UB is determined above
-            bool lengendary = UB_S || !Wild;
-            bool ShinyLocked_S = UB_S || ShinyLocked;
+            bool lengendary = IsUB || !Wild;
+            bool ShinyLocked_S = IsUB || ShinyLocked;
             if (lengendary)
                 st.Lv = PokeLv;
 
             // Wild Normal Pokemon
-            bool Wild_S = Wild && !UB_S;
-            if (Wild_S)
+            bool IsWild = Wild && !IsUB;
+            if (IsWild)
             {
                 st.Slot = getslot((int)(getrand() % 100));
                 st.Lv = (int)(getrand() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
@@ -194,7 +192,7 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand() & 0x1F);
 
             //Ability
-            if (Wild_S || AlwaysSynchro)
+            if (IsWild || AlwaysSynchro)
                 st.Ability = (int)(getrand() & 1) + 1;
 
             //Nature
@@ -207,13 +205,13 @@ namespace SMEncounterRNGTool
                 index++;
 
             //Gender
-            if (nogender || UB_S)
+            if (nogender || IsUB)
                 st.Gender = 0;
             else
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
             //Item
-            if (Wild_S)
+            if (IsWild)
                 st.Item = (int)(getrand() % 100);
 
             return st;
@@ -323,7 +321,7 @@ namespace SMEncounterRNGTool
         private int getUBValue()
         {
             int UbValue = (int)(getrand() % 100);
-            Fix3v = UB_S = UbValue < UB_th;
+            Fix3v = IsUB = UbValue < UB_th;
             return UbValue;
         }
 

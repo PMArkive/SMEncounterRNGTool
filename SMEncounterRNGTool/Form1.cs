@@ -524,7 +524,6 @@ namespace SMEncounterRNGTool
         private int[] CalcFrame(int min, int max)
         {
             uint InitialSeed = (uint)Seed.Value;
-            int NPC_n = (int)NPC.Value + 1;
             SFMT sfmt = new SFMT(InitialSeed);
 
             for (int i = 0; i < min; i++)
@@ -532,17 +531,17 @@ namespace SMEncounterRNGTool
 
             int n_count = 0;
 
-            int[] remain_frame = new int[NPC_n];
+            int[] remain_frame = new int[ModelNumber];
             //total_frame[0] Start; total_frame[1] Duration
             int[] total_frame = new int[2];
-            bool[] blink_flag = new bool[NPC_n];
+            bool[] blink_flag = new bool[ModelNumber];
 
             int timer = 0;
 
             while (min + n_count <= max)
             {
                 //NPC Loop
-                for (int i = 0; i < NPC_n; i++)
+                for (int i = 0; i < ModelNumber; i++)
                 {
                     if (remain_frame[i] > 0)
                         remain_frame[i]--;
@@ -586,7 +585,7 @@ namespace SMEncounterRNGTool
             int[] tmptimer = new int[2];
             if (showdelay)
             {
-                for (int tmp = max - (int)(NPC.Value + 1) * delaytime; tmp <= max; tmp++)
+                for (int tmp = max - ModelNumber * delaytime; tmp <= max; tmp++)
                 {
                     tmptimer = CalcFrame(tmp, max);
                     if ((tmptimer[0] + tmptimer[1] > delaytime) && (tmptimer[0] <= delaytime))
@@ -634,6 +633,8 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Search
+
+        private int ModelNumber { get { return (int)NPC.Value + 1; } }
 
         private void CalcList_Click(object sender, EventArgs e)
         {
@@ -772,8 +773,8 @@ namespace SMEncounterRNGTool
 
             var st = CreateNPCStatus(sfmt);
             var setting = getSettings();
-            var rng = getRNGSettings();
 
+            var rng = getRNGSettings();
             RNGSearch.ResetModelStatus();
             RNGSearch.CreateBuffer(sfmt);
 
@@ -814,7 +815,7 @@ namespace SMEncounterRNGTool
 
         private ModelStatus CreateNPCStatus(SFMT sfmt)
         {
-            ModelStatus.Modelnumber = (int)NPC.Value + 1;
+            ModelStatus.Modelnumber = ModelNumber;
             ModelStatus.smft = (SFMT)sfmt.DeepCopy();
             return new ModelStatus();
         }
@@ -859,7 +860,7 @@ namespace SMEncounterRNGTool
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
             RNGSearch.ConsiderBlink = ConsiderBlink.Checked;
-            RNGSearch.modelnumber = (int)NPC.Value + 1;
+            RNGSearch.modelnumber = ModelNumber;
             RNGSearch.IsSolgaleo = Poke.SelectedIndex == SearchSetting.Solgaleo_index;
             RNGSearch.IsLunala = Poke.SelectedIndex == SearchSetting.Lunala_index;
 
@@ -993,9 +994,11 @@ namespace SMEncounterRNGTool
             string frameadvance = result.frameshift.ToString("+#;-#;0");
             if (ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
             {
+                if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
                 RNGSearch.Resetindex(); RNGSearch.ResetModelStatus();
                 frameadvance = (IsEvent) ? rng.getframeshift(e).ToString("+#;-#;0") : rng.getframeshift().ToString("+#;-#;0");
             }
+            if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
 
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
