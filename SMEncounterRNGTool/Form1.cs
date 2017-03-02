@@ -499,11 +499,12 @@ namespace SMEncounterRNGTool
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
             TimeSpan.Enabled = CreateTimeline.Checked;
-            BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            ShowResultsAfterDelay.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
             Frame_max.Visible = label7.Visible = !CreateTimeline.Checked;
             L_StartingPoint.Visible = CreateTimeline.Checked;
             if (CreateTimeline.Checked)
                 BlinkOnly.Checked = SafeFOnly.Checked = false;
+            ShowResultsAfterDelay.Checked = true;
         }
 
 
@@ -715,7 +716,7 @@ namespace SMEncounterRNGTool
                     sfmt.NextUInt64();
             }
 
-            RNGSearch.CreateBuffer(sfmt);
+            RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
 
             if (IsEvent)
                 e = geteventsetting();
@@ -723,6 +724,8 @@ namespace SMEncounterRNGTool
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+
+                if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
 
                 if (NPC.Value == 0)
                 {
@@ -776,7 +779,7 @@ namespace SMEncounterRNGTool
 
             var rng = getRNGSettings();
             RNGSearch.ResetModelStatus();
-            RNGSearch.CreateBuffer(sfmt);
+            RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
 
             if (IsEvent)
                 e = geteventsetting();
@@ -791,6 +794,8 @@ namespace SMEncounterRNGTool
                 RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+                
+                if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
 
                 result.realtime = i;
                 frameadvance = st.NextState();
@@ -855,7 +860,6 @@ namespace SMEncounterRNGTool
             }
 
             RNGSearch.createtimeline = CreateTimeline.Checked;
-            RNGSearch.CalcDelay = ConsiderDelay.Checked;
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
@@ -992,14 +996,6 @@ namespace SMEncounterRNGTool
             }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
-            if (ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
-            {
-                if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
-                RNGSearch.Resetindex(); RNGSearch.ResetModelStatus();
-                frameadvance = (IsEvent) ? rng.getframeshift(e).ToString("+#;-#;0") : rng.getframeshift().ToString("+#;-#;0");
-            }
-            if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
-
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
                 Status = result.p_Status;
@@ -1051,6 +1047,7 @@ namespace SMEncounterRNGTool
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex - 1];
+
             if (Poke.SelectedIndex >= UB_StartIndex)
             {
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
@@ -1066,10 +1063,12 @@ namespace SMEncounterRNGTool
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
                     Fix3v.Checked = false; Timedelay.Value = YourID.Checked ? 62 : 0;
                     break;
-                case UB_StartIndex - 2: Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
-                     L_gender.Visible = Gender.Visible = true; break;
-                case UB_StartIndex - 1: Fix3v.Checked = false;
-                     L_Ability.Visible = Ability.Visible = true; break;
+                case UB_StartIndex - 2:
+                    Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
+                    L_gender.Visible = Gender.Visible = true; break;
+                case UB_StartIndex - 1:
+                    Fix3v.Checked = false;
+                    L_Ability.Visible = Ability.Visible = true; break;
             }
         }
 

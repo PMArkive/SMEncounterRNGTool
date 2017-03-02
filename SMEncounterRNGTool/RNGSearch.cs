@@ -24,7 +24,6 @@ namespace SMEncounterRNGTool
         public int gender_ratio;
 
         public static bool createtimeline;
-        public static bool CalcDelay;
         public static bool Considerdelay;
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
@@ -92,8 +91,11 @@ namespace SMEncounterRNGTool
 
             // ---Start here when press A button---
 
-            if (Considerdelay)
-                st.frameshift = getframeshift();
+            st.frameshift = getframeshift();
+            if (!Considerdelay)
+            {
+                Resetindex();ResetModelStatus();
+            }
 
             // UB using honey
             if (Wild && UB && Honey)
@@ -292,7 +294,7 @@ namespace SMEncounterRNGTool
         private static int index;
         public static void Resetindex() { index = 0; }
 
-        public static void CreateBuffer(SFMT sfmt)
+        public static void CreateBuffer(SFMT sfmt,bool CalcDelay)
         {
             int RandBuffSize = 200;
             if (CalcDelay)
