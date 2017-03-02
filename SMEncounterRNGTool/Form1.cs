@@ -46,7 +46,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> EventIV = new List<NumericUpDown>();
         List<CheckBox> EventIVLocked = new List<CheckBox>();
         RNGSearch.EventRule e = new RNGSearch.EventRule();
-        private string version = "1.02";
+        private string version = "1.03";
 
         #region Translation
         private string curlanguage;
@@ -865,6 +865,7 @@ namespace SMEncounterRNGTool
             }
 
             RNGSearch.createtimeline = CreateTimeline.Checked;
+            RNGSearch.CalcDelay = ConsiderDelay.Checked;
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;

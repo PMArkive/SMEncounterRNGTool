@@ -24,6 +24,7 @@ namespace SMEncounterRNGTool
         public int gender_ratio;
 
         public static bool createtimeline;
+        public static bool CalcDelay;
         public static bool Considerdelay;
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
@@ -294,7 +295,7 @@ namespace SMEncounterRNGTool
         public static void CreateBuffer(SFMT sfmt)
         {
             int RandBuffSize = 200;
-            if (Considerdelay)
+            if (CalcDelay)
                 RandBuffSize += npcnumber * delaytime;
 
             Rand.Clear();
