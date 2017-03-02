@@ -28,14 +28,14 @@ namespace SMEncounterRNGTool
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
         public static bool ConsiderBlink = true;
-        public static int Modelnumber;
+        public static int npcnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
-        public static void ResetModelStatus()
+        public static void ResetNPCStatus()
         {
-            remain_frame = new int[Modelnumber];
-            blink_flag = new bool[Modelnumber];
+            remain_frame = new int[npcnumber];
+            blink_flag = new bool[npcnumber];
         }
 
         public static bool IsSolgaleo;
@@ -85,9 +85,9 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
-            // Reset Model Status
+            // Reset NPC Status
             if (!createtimeline || Honey)
-                ResetModelStatus();
+                ResetNPCStatus();
 
             // ---Start here when press A button---
 
@@ -225,9 +225,9 @@ namespace SMEncounterRNGTool
             st.Clock = (int)(st.row_r % 17);
             st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
 
-            // Reset Model Status
+            // Reset NPC Status
             if (!createtimeline)
-                ResetModelStatus();
+                ResetNPCStatus();
 
             // ---Start here when press A button---
 
@@ -295,7 +295,7 @@ namespace SMEncounterRNGTool
         {
             int RandBuffSize = 200;
             if (Considerdelay)
-                RandBuffSize += Modelnumber * delaytime;
+                RandBuffSize += npcnumber * delaytime;
 
             Rand.Clear();
             for (int i = 0; i < RandBuffSize; i++)
@@ -398,7 +398,7 @@ namespace SMEncounterRNGTool
         {
             for (int totalframe = 0; totalframe < n; totalframe++)
             {
-                for (int i = 0; i < Modelnumber; i++)
+                for (int i = 0; i < npcnumber; i++)
                 {
                     if (remain_frame[i] > 0)
                         remain_frame[i]--;

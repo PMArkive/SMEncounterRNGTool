@@ -1,22 +1,22 @@
 ﻿namespace SMEncounterRNGTool
 {
-    class ModelStatus
+    class NPCStatus
     {
         public static SFMT smft;
-        public static int Modelnumber;
+        public static int npcnumber;
         public int[] remain_frame;
         public bool[] blink_flag;
 
-        public ModelStatus()
+        public NPCStatus()
         {
-            remain_frame = new int[Modelnumber];
-            blink_flag = new bool[Modelnumber];
+            remain_frame = new int[npcnumber];
+            blink_flag = new bool[npcnumber];
         }
 
         public int NextState()
         {
             int cnt = 0;
-            for (int i = 0; i < Modelnumber; i++)
+            for (int i = 0; i < npcnumber; i++)
             {
                 if (remain_frame[i] > 0)
                     remain_frame[i]--;

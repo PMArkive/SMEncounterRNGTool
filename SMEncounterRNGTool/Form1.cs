@@ -46,7 +46,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> EventIV = new List<NumericUpDown>();
         List<CheckBox> EventIVLocked = new List<CheckBox>();
         RNGSearch.EventRule e = new RNGSearch.EventRule();
-        private string version = "1.03";
+        private string version = "1.02";
 
         #region Translation
         private string curlanguage;
@@ -216,7 +216,7 @@ namespace SMEncounterRNGTool
             Advanced_CheckedChanged(null, null);
             Method_CheckedChanged(null, null);
             SearchMethod_CheckedChanged(null, null);
-            Model_ValueChanged(null, null);
+            NPC_ValueChanged(null, null);
             CreateTimeline_CheckedChanged(null, null);
         }
 
@@ -484,9 +484,9 @@ namespace SMEncounterRNGTool
             ShowStats.Enabled = ShowStats.Checked = ByStats.Checked;
         }
 
-        private void Model_ValueChanged(object sender, EventArgs e)
+        private void NPC_ValueChanged(object sender, EventArgs e)
         {
-            if (Model.Value == 1)
+            if (NPC.Value == 0)
             {
                 BlinkOnly.Visible = true;
                 SafeFOnly.Visible = SafeFOnly.Checked = false;
@@ -535,7 +535,7 @@ namespace SMEncounterRNGTool
         private int[] CalcFrame(int min, int max)
         {
             uint InitialSeed = (uint)Seed.Value;
-            int Model_n = (int)Model.Value;
+            int NPC_n = (int)NPC.Value + 1;
             SFMT sfmt = new SFMT(InitialSeed);
 
             for (int i = 0; i < min; i++)
@@ -543,17 +543,17 @@ namespace SMEncounterRNGTool
 
             int n_count = 0;
 
-            int[] remain_frame = new int[Model_n];
+            int[] remain_frame = new int[NPC_n];
             //total_frame[0] Start; total_frame[1] Duration
             int[] total_frame = new int[2];
-            bool[] blink_flag = new bool[Model_n];
+            bool[] blink_flag = new bool[NPC_n];
 
             int timer = 0;
 
             while (min + n_count <= max)
             {
-                //Model Loop
-                for (int i = 0; i < Model_n; i++)
+                //NPC Loop
+                for (int i = 0; i < NPC_n; i++)
                 {
                     if (remain_frame[i] > 0)
                         remain_frame[i]--;
@@ -597,7 +597,7 @@ namespace SMEncounterRNGTool
             int[] tmptimer = new int[2];
             if (showdelay)
             {
-                for (int tmp = max - (int)Model.Value * delaytime; tmp <= max; tmp++)
+                for (int tmp = max - (int)(NPC.Value + 1) * delaytime; tmp <= max; tmp++)
                 {
                     tmptimer = CalcFrame(tmp, max);
                     if ((tmptimer[0] + tmptimer[1] > delaytime) && (tmptimer[0] <= delaytime))
@@ -691,7 +691,7 @@ namespace SMEncounterRNGTool
 
             //Blink flag history
             int blink_flag = 0;
-            int UnsafeRange = 41 * ((int)Model.Value - 1);
+            int UnsafeRange = 41 * (int)NPC.Value;
             if (UnsafeRange == 0)
             {
                 for (int i = 0; i < min - 2; i++)
@@ -734,7 +734,7 @@ namespace SMEncounterRNGTool
             {
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
 
-                if (Model.Value == 1)
+                if (NPC.Value == 0)
                 {
                     switch (blink_flag)
                     {
@@ -781,11 +781,11 @@ namespace SMEncounterRNGTool
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
-            var st = CreateModelStatus(sfmt);
+            var st = CreateNPCStatus(sfmt);
             var setting = getSettings();
             var rng = getRNGSettings();
 
-            RNGSearch.ResetModelStatus();
+            RNGSearch.ResetNPCStatus();
             RNGSearch.CreateBuffer(sfmt);
 
             if (IsEvent)
@@ -823,11 +823,11 @@ namespace SMEncounterRNGTool
             DGV.CurrentCell = null;
         }
 
-        private ModelStatus CreateModelStatus(SFMT sfmt)
+        private NPCStatus CreateNPCStatus(SFMT sfmt)
         {
-            ModelStatus.Modelnumber = (int)Model.Value;
-            ModelStatus.smft = (SFMT)sfmt.DeepCopy();
-            return new ModelStatus();
+            NPCStatus.npcnumber = (int)NPC.Value + 1;
+            NPCStatus.smft = (SFMT)sfmt.DeepCopy();
+            return new NPCStatus();
         }
 
         private SearchSetting getSettings()
@@ -869,7 +869,7 @@ namespace SMEncounterRNGTool
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
             RNGSearch.ConsiderBlink = ConsiderBlink.Checked;
-            RNGSearch.Modelnumber = (int)Model.Value;
+            RNGSearch.npcnumber = (int)NPC.Value + 1;
             RNGSearch.IsSolgaleo = Poke.SelectedIndex == SearchSetting.Solgaleo_index;
             RNGSearch.IsLunala = Poke.SelectedIndex == SearchSetting.Lunala_index;
 
@@ -1003,7 +1003,7 @@ namespace SMEncounterRNGTool
             string frameadvance = result.frameshift.ToString("+#;-#;0");
             if (ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
             {
-                RNGSearch.Resetindex(); RNGSearch.ResetModelStatus();
+                RNGSearch.Resetindex(); RNGSearch.ResetNPCStatus();
                 frameadvance = (IsEvent) ? rng.getframeshift(e).ToString("+#;-#;0") : rng.getframeshift().ToString("+#;-#;0");
             }
 
@@ -1054,7 +1054,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++)
                 BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
-            Model.Value = SearchSetting.ModelNumber[Poke.SelectedIndex - 1];
+            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex - 1];
             if (Poke.SelectedIndex >= UB_StartIndex)
             {
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
