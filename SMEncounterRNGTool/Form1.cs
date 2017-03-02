@@ -413,6 +413,7 @@ namespace SMEncounterRNGTool
             ConsiderDelay_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
 
+            Reset_Click(null, null);
             GenderRatio.Visible = UB.Visible = Honey.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
@@ -596,9 +597,7 @@ namespace SMEncounterRNGTool
                 }
             }
             else
-            {
                 CalcTime_Output(min, max);
-            }
         }
 
         private void CalcTime_Output(int min, int max)
@@ -794,7 +793,7 @@ namespace SMEncounterRNGTool
                 RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
-                
+
                 if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
 
                 result.realtime = i;
@@ -895,50 +894,35 @@ namespace SMEncounterRNGTool
 
             if (setting.Skip)
                 return true;
-
             if (ShinyOnly.Checked && !result.Shiny)
                 return false;
-
             if (BlinkOnly.Checked && result.Blink < 5)
                 return false;
-
             if (SafeFOnly.Checked && result.Blink < 0)
                 return false;
-
             if (ByIVs.Checked && !setting.validIVs(result.IVs))
                 return false;
-
             if (ByStats.Checked && !setting.validStatus(result, setting))
                 return false;
-
             if (!setting.mezapa_check(result.IVs))
                 return false;
-
             if (setting.Nature != -1 && setting.Nature != result.Nature)
+                return false;
+            if (setting.Gender != 0 && setting.Gender != result.Gender)
+                return false;
+            if (setting.Ability != 0 && setting.Ability != result.Ability)
                 return false;
 
             if (Wild.Checked)
             {
                 if (setting.Lv != 0 && setting.Lv != result.Lv)
                     return false;
-
                 if (EncounteredOnly.Checked && result.Encounter >= Encounter_th.Value)
                     return false;
-
                 if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
-
-                if (!UB.Checked || result.UbValue >= UB_th.Value)
-                {
-                    if (setting.Slot[0] && !setting.Slot[result.Slot])
-                        return false;
-
-                    if (setting.Gender != 0 && setting.Gender != result.Gender)
-                        return false;
-
-                    if (setting.Ability != 0 && setting.Ability != result.Ability)
-                        return false;
-                }
+                if (setting.Slot[0] && !setting.Slot[result.Slot])
+                    return false;
             }
 
             return true;
