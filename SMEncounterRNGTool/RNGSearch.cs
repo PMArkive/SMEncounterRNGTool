@@ -116,6 +116,8 @@ namespace SMEncounterRNGTool
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
+                if ((IsSolgaleo || IsLunala) && npcnumber == 5)
+                    npcnumber = 7;// return the original value
             }
 
             // Encounter
@@ -379,7 +381,10 @@ namespace SMEncounterRNGTool
             if (IsSolgaleo || IsLunala)
             {
                 int crydelay = IsSolgaleo ? 79 : 76;
-                time_elapse(delaytime - crydelay);
+
+                time_elapse(46);
+                if (npcnumber == 7) Rearrange();
+                time_elapse(delaytime - crydelay - 46);
                 Advance(1);     //Cry Inside Time Delay
                 time_elapse(crydelay);
             }
@@ -392,6 +397,18 @@ namespace SMEncounterRNGTool
             bool sync = (int)(getrand() % 100) >= 50;
             time_elapse(3);
             return sync;
+        }
+
+        //NPC # change when screen turns black
+        private static void Rearrange()
+        {
+            npcnumber = 5;//2 guys offline...
+            int[] order = new int[5] { 0, 1, 2, 5, 6 };
+            for (int i = 0; i < 5; i++)
+            {
+                remain_frame[i] = remain_frame[order[i]];
+                blink_flag[i] = blink_flag[order[i]];
+            }
         }
 
         // n/30s elapsed
@@ -422,5 +439,6 @@ namespace SMEncounterRNGTool
                 }
             }
         }
+
     }
 }

@@ -510,15 +510,13 @@ namespace SMEncounterRNGTool
         private void YourID_CheckedChanged(object sender, EventArgs e)
         {
             if (IsEvent)
-                Timedelay.Value = (YourID.Checked) ? 62 : 0;
+                Timedelay.Value = YourID.Checked ? 62 : 0;
         }
 
         private void Fix3v_CheckedChanged(object sender, EventArgs e)
         {
             if (IsEvent)
-            {
                 IVsCount.Value = Fix3v.Checked ? 3 : 0;
-            }
         }
         #endregion
 
