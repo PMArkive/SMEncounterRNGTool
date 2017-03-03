@@ -38,6 +38,8 @@
         public const int AlwaysSync_Index = 8;
         public static bool ShinyLocked(int index)
         {
+            if (index == 0)
+                return false;
             if (index < TypeNull_index)
                 return true;
             if (index > TypeNull_index && index < UB_StartIndex - 2)
