@@ -621,7 +621,7 @@ namespace SMEncounterRNGTool
             Ability.SelectedIndex = 0;
             Slot.Text = "";
 
-            if (ByIVs.Checked)
+            if (ByIVs.Checked && Wild.Checked && Lv_Search.Value <= Lv_max.Value)
                 Lv_Search.Value = 0;
             for (int i = 0; i < 6; i++)
             {
