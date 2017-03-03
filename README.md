@@ -5,26 +5,34 @@ Great thanks to:<br>
 @Real96: Who give me good suggestions and help me test the tool<br>
 And ALL Pokemon RNG Researcher<br>
 
-## Supporting the following Pokemon:
+## Following Pokemon are supported:
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
 - Any Wild Pokemon appear in SM (Can be shiny)
 - Pokemon given by NPC (Can be shiny): Type:Null, Porygon, Aerodactyl
 - Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
 
-## Marks under Blink Column
-- ★: One person on the map will blink soon, a warning for nearby frames.
-- ?: The spread might be affected by the history of NPC status so it's unsafe. 
-- -: The safe frames the tool can 100% predict.
+## Usage
+### With emtimer/EonTimer
+1. Select the `Pokemon` you would like to RNG.
+2. Find your `Seed` via the clock hands sequence on Continue Screen
+3. Set up the `Filters` and make a `Search`
+4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
+5. Put your current frame into the first box of `Timing Range`. The tool will automately change the value when you are using the `Tool Kit` Tab
+6. Click `Calc` and get the timer setting, set the timer.
+7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
+8. Start the dialogue until the final screen (See below), wait for the timer.
+9. When the timer is done, click A at the same time, recieve or battle with the Pokemon.
+10. If the Pokemon is not the one you want, calibarte the Pre-Timer and try again
 
-### Tips for NTRer when RNG with large NPCs number<br>
- 1. Arrive at the final screen before clicking A<br>
- 2. Pause at a "Safe Frame" (first only check "Safe F Only" to find safe frame zone)<br>
- 3. Put your current frame number in the first box of "frame range" and check "Create Timeline"<br>
- 4. Click "Search", now you can see the game will follow timeline the tool created.<br>
- 5. Now all the frame in the timeline are without ? marks, they're all SAFE and ACCESSIBLE!!<br>
- 6. Just change the filters and make another search as usual.<br>
- <br>
-Warning: Do NOT change the "Starting Frame" of timeline when you are following it.
+### With PokeCalcNTR
+ 1. Select the `Pokemon` you would like to RNG.
+ 2. Start the game with PokeCalcNTR, click A until you get to the final screen (See below).
+ 3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
+ 4. Put your current frame number in the first box of `Frame range` and check `Create Timeline`
+ 5. Click `Search`, you will see the game will follow timeline the tool created.
+ 6. Now all the frame in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
+ 7. Just change the `Filters` and make another search as usual.
+ Warning: Do NOT change the `Starting Frame` of timeline when you are following it.
 
 ## Final screen when pressing A
 Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box.<br>
@@ -34,6 +42,11 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Solgaleo/Lunala: No dialogue, stand in front of it
 - UBs & wild Pokemon: "Use this item" (Honey)
 - Type:Null, Porygon, Aerodactyl, Magearna, Munchlax, Machamp and other event Pokemon: "You received xxx!"
+
+## Marks under Blink Column
+- ★: One person on the map will blink soon, a warning for nearby frames.
+- ?: The spread might be affected by the history of NPC status so it's unsafe. 
+- -: The safe frames the tool can 100% predict.
 
 ## Some Parameters:
 
