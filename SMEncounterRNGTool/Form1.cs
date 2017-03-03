@@ -701,10 +701,15 @@ namespace SMEncounterRNGTool
                     if ((Randlist[0] & 0x7F) == 0)
                     {
                         if (blink_flag == 0)
+                        {
                             blink_flag = Unsaferange[Checkafter(Randlist)];
+                            if (i >= min) blinkflaglist[i - min] = 1;
+                        }
                         else
-                            blink_flag = Math.Max(Unsaferange[1], blink_flag);
-                        if (i >= min) blinkflaglist[i - min] = 1;
+                        {
+                            blink_flag = Unsaferange[1];
+                            if (i >= min) blinkflaglist[i - min] = 3;
+                        }
                     }
                     else if (blink_flag > 0)
                     {
@@ -901,7 +906,7 @@ namespace SMEncounterRNGTool
                 return false;
             if (BlinkOnly.Checked && result.Blink < 5)
                 return false;
-            if (SafeFOnly.Checked && result.Blink < 0)
+            if (SafeFOnly.Checked && result.Blink > 1)
                 return false;
             if (ByIVs.Checked && !setting.validIVs(result.IVs))
                 return false;
@@ -944,6 +949,7 @@ namespace SMEncounterRNGTool
                 case 0: BlinkFlag = "-"; break;
                 case 1: BlinkFlag = "★"; break;
                 case 2: BlinkFlag = "?"; break;
+                case 3: BlinkFlag = "?★"; break;
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
             string PSV = result.PSV.ToString("D4");
