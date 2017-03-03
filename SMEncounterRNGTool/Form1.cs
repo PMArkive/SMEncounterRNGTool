@@ -46,7 +46,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> EventIV = new List<NumericUpDown>();
         List<CheckBox> EventIVLocked = new List<CheckBox>();
         RNGSearch.EventRule e = new RNGSearch.EventRule();
-        private string version = "1.03";
+        private string version = "1.05";
 
         #region Translation
         private string curlanguage;

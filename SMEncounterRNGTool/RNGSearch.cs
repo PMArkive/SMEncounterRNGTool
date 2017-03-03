@@ -382,9 +382,9 @@ namespace SMEncounterRNGTool
             {
                 int crydelay = IsSolgaleo ? 79 : 76;
 
-                time_elapse(46);
+                time_elapse(delaytime - crydelay - 19);
                 if (modelnumber == 7) Rearrange();
-                time_elapse(delaytime - crydelay - 46);
+                time_elapse(19);
                 Advance(1);     //Cry Inside Time Delay
                 time_elapse(crydelay);
             }
