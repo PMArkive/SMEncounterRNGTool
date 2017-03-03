@@ -658,18 +658,82 @@ namespace SMEncounterRNGTool
                 StationarySearch();
         }
 
+        private byte[] getblinkflaglist(int min, int max, SFMT sfmt)
+        {
+            byte[] blinkflaglist = new byte[max - min + 1];
+            int Model_n = ModelNumber;
+            SFMT st = (SFMT)sfmt.DeepCopy();
+            int blink_flag = 0;
+
+            if (Model_n == 1)
+            {
+                ulong rand;
+                for (int i = 0; i < min - 2; i++)
+                    st.NextUInt64();
+                if ((int)(st.NextUInt64() & 0x7F) == 0)
+                    blinkflaglist[0] = (int)(st.NextUInt64() % 3) == 0 ? (byte)36 : (byte)30;
+                else if ((int)(st.NextUInt64() & 0x7F) == 0)
+                    blink_flag = 1;
+                for (int i = min; i <= max; i++)
+                {
+                    rand = st.NextUInt64();
+                    if (blink_flag == 1)
+                    {
+                        blinkflaglist[i - min] = 5;
+                        blinkflaglist[++i - min] = (int)(rand % 3) == 0 ? (byte)36 : (byte)30;
+                        blink_flag = 0; rand = st.NextUInt64();
+                    }
+                    if ((int)(rand & 0x7F) == 0)
+                        blink_flag = blinkflaglist[i - min] = 1;
+                }
+            }
+            else if (!Honey.Checked)
+            {
+                int[] Unsaferange = new int[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
+                List<ulong> Randlist = new List<ulong>();
+                int Min = Math.Max(min - Unsaferange[1], 418);
+                for (int i = 0; i < Min; i++)
+                    st.NextUInt64();
+                for (int i = 0; i <= (ModelNumber - 1) * 5 + 1; i++)
+                    Randlist.Add(st.NextUInt64());
+                for (int i = Min; i < max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
+                {
+                    if ((Randlist[0] & 0x7F) == 0)
+                    {
+                        if (blink_flag == 0)
+                            blink_flag = Unsaferange[Checkafter(Randlist)];
+                        else
+                            blink_flag = Math.Max(Unsaferange[1], blink_flag);
+                        if (i >= min) blinkflaglist[i - min] = 1;
+                    }
+                    else if (blink_flag > 0)
+                    {
+                        blink_flag--;
+                        if (i >= min) blinkflaglist[i - min] = 2;
+                    }
+                }
+            }
+            return blinkflaglist;
+        }
+
+        private byte Checkafter(List<ulong> Randlist)
+        {
+            for (int i = 1; i < Randlist.Count - 1; i++)
+                if ((Randlist[i] & 0x7F) == 0) return 1;
+            if (Randlist[Randlist.Count - 1] % 3 == 0) return 1;
+            return 0;
+        }
+
         private void StationarySearch()
         {
             int max, min;
             if (AroundTarget.Checked)
             {
-                min = (int)Time_max.Value - 100;
-                max = (int)Time_max.Value + 100;
+                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
             }
             else
             {
-                min = (int)Frame_min.Value;
-                max = (int)Frame_max.Value;
+                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
             }
 
             SFMT sfmt = new SFMT((uint)Seed.Value);
@@ -678,79 +742,21 @@ namespace SMEncounterRNGTool
 
             var setting = getSettings();
             var rng = getRNGSettings();
+            if (IsEvent) e = geteventsetting();
 
-            //Blink flag history
-            int blink_flag = 0;
-            int UnsafeRange = 41 * (int)NPC.Value;
-            if (UnsafeRange == 0)
-            {
-                for (int i = 0; i < min - 2; i++)
-                    sfmt.NextUInt64();
-                for (int i = 0; i < 2; i++)
-                {
-                    switch (blink_flag)
-                    {
-                        case 0:
-                            if ((sfmt.NextUInt64() & 0x7F) == 0) blink_flag = 1; break;
-                        case 1:
-                            blink_flag = (sfmt.NextUInt64() % 3) == 0 ? 36 : 30; break;
-                    }
-                }
-            }
-            else if (!Honey.Checked)
-            {
-                for (int i = 0; i < Math.Max(418, min - UnsafeRange); i++)
-                    sfmt.NextUInt64();
-                for (int i = Math.Max(418, min - UnsafeRange); i < min; i++)
-                {
-                    if ((sfmt.NextUInt64() & 0x7F) == 0)
-                        blink_flag = UnsafeRange;
-                    else
-                    if (blink_flag > 0) blink_flag--;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < min; i++)
-                    sfmt.NextUInt64();
-            }
+            byte[] Blinkflaglist = getblinkflaglist(min, max, sfmt);
+
+            for (int i = 0; i < min; i++)
+                sfmt.NextUInt64();
 
             RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
-
-            if (IsEvent)
-                e = geteventsetting();
 
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+                result.Blink = Blinkflaglist[i - min];
 
                 if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
-
-                if (NPC.Value == 0)
-                {
-                    switch (blink_flag)
-                    {
-                        case 0:
-                            if (result.Blink == 1) blink_flag = 1; break;
-                        case 1:
-                            blink_flag = (result.row_r % 3) == 0 ? 36 : 30; result.Blink = 5; break;
-                        default:
-                            result.Blink = blink_flag; blink_flag = 0; break;
-                    }
-                }
-                else if (!Honey.Checked)
-                {
-                    if (result.Blink == 1)
-                    {
-                        if (blink_flag > 0) result.Blink = -2;
-                        blink_flag = UnsafeRange;
-                    }
-                    else if (blink_flag > 0)
-                    {
-                        blink_flag--;
-                        result.Blink = -1;
-                    }
-                }
 
                 if (!frameMatch(result, setting))
                     continue;
@@ -775,13 +781,10 @@ namespace SMEncounterRNGTool
 
             var st = CreateNPCStatus(sfmt);
             var setting = getSettings();
-
             var rng = getRNGSettings();
             RNGSearch.ResetModelStatus();
             RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
-
-            if (IsEvent)
-                e = geteventsetting();
+            if (IsEvent) e = geteventsetting();
 
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
@@ -934,14 +937,13 @@ namespace SMEncounterRNGTool
             string true_nature = SearchSetting.naturestr[result.Nature];
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             if ((result.UbValue < UB_th.Value) && (ConsiderDelay.Checked) && (!ShowResultsAfterDelay.Checked))
-                result.Blink = -1;
+                result.Blink = 2;
             string BlinkFlag = "";
             switch (result.Blink)
             {
-                case -2: BlinkFlag = "?★"; break;
-                case -1: BlinkFlag = "?"; break;
                 case 0: BlinkFlag = "-"; break;
                 case 1: BlinkFlag = "★"; break;
+                case 2: BlinkFlag = "?"; break;
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
             string PSV = result.PSV.ToString("D4");

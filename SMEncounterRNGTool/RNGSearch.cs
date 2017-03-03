@@ -44,14 +44,14 @@ namespace SMEncounterRNGTool
         public class RNGResult
         {
             public int Nature;
-            public int Clock;
+            public byte Clock;
             public uint PID, EC, PSV;
             public ulong row_r;
             public int[] IVs;
             public int[] p_Status;
             public bool Shiny;
             public bool Synchronize;
-            public int Blink;
+            public byte Blink;
             public int frameshift;
 
             public int Encounter = -1;
@@ -82,8 +82,7 @@ namespace SMEncounterRNGTool
             index = 0;
 
             st.row_r = Rand[0];
-            st.Clock = (int)(st.row_r % 17);
-            st.Blink = (int)(st.row_r & 0x7F) > 0 ? 0 : 1;
+            st.Clock = (byte)(st.row_r % 17);
 
             // Reset model Status
             if (!createtimeline || Honey)
@@ -225,8 +224,7 @@ namespace SMEncounterRNGTool
             index = 0;
 
             st.row_r = Rand[0];
-            st.Clock = (int)(st.row_r % 17);
-            st.Blink = (int)(st.row_r & 0x7F) > 0 ? 0 : 1;
+            st.Clock = (byte)(st.row_r % 17);
 
             // Reset model Status
             if (!createtimeline)
