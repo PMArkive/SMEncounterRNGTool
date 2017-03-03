@@ -38,10 +38,10 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 ## Some Parameters:
 
 #### UB Rate(%):
-See [Here](UB Rate.md)
+See [Here](parameters/UB Rate.md)
 
 #### Pre-Honey Correction:
-See [Here](Pre-Honey Correction.md)
+See [Here](parameters/Pre-Honey Correction.md)
 
 #### Event Pokemon Setting:
-See [Here](Event Pokemon Setting.md)
+See [Here](parameters/Event Pokemon Setting.md)
