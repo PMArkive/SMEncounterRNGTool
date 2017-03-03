@@ -921,7 +921,7 @@ namespace SMEncounterRNGTool
                     return false;
                 if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
-                if (setting.Slot[0] && !setting.Slot[result.Slot])
+                if (setting.Slot[0] && (result.Slot < 0 || !setting.Slot[result.Slot]))
                     return false;
             }
 

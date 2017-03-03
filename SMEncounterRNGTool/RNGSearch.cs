@@ -83,7 +83,7 @@ namespace SMEncounterRNGTool
 
             st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
-            st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
+            st.Blink = (int)(st.row_r & 0x7F) > 0 ? 0 : 1;
 
             // Reset model Status
             if (!createtimeline || Honey)
@@ -226,7 +226,7 @@ namespace SMEncounterRNGTool
 
             st.row_r = Rand[0];
             st.Clock = (int)(st.row_r % 17);
-            st.Blink = ((int)(st.row_r & 0x7F)) > 0 ? 0 : 1;
+            st.Blink = (int)(st.row_r & 0x7F) > 0 ? 0 : 1;
 
             // Reset model Status
             if (!createtimeline)

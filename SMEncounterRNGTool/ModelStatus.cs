@@ -44,5 +44,11 @@
             }
             return cnt;
         }
+
+        public static void frameshift(int n)
+        {
+            for (int i = 0; i < n; i++)
+                smft.NextInt64();
+        }
     }
 }
