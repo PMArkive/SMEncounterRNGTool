@@ -9,7 +9,7 @@ And ALL Pokemon RNG Researcher<br>
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
 - Any Wild Pokemon appear in SM (Can be shiny)
 - Pokemon given by NPC (Can be shiny): Type:Null, Porygon, Aerodactyl
-- Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
+- Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
 
 ## Usage
 ### With emtimer/EonTimer
@@ -17,12 +17,12 @@ And ALL Pokemon RNG Researcher<br>
 2. Find your `Seed` via the clock hands sequence on Continue Screen
 3. Set up the `Filters` and make a `Search`
 4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
-5. Put your current frame into the first box of `Timing Range`. The tool will automately change the value when you are using the `Tool Kit` Tab
-6. Click `Calc` and get the timer setting, set the timer.
+5. Put your current frame into the first box of `Timing Range`. The tool will automatically change the value when you are using the `Tool Kit` Tab
+6. Click `Calc` and get the timer setting, set the timer. 
 7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
 8. Start the dialogue until the final screen (See below), wait for the timer.
-9. When the timer is done, click A at the same time, recieve or battle with the Pokemon.
-10. If the Pokemon is not the one you want, calibarte the Pre-Timer and try again
+9. When the timer is done, click A at the same time, receive or battle with the Pokemon.
+10. If the Pokemon is not the one you want, calibrate the Pre-Timer and try again
 
 ### With PokeCalcNTR
  1. Select the `Pokemon` you would like to RNG.
