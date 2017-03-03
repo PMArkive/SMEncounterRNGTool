@@ -135,9 +135,9 @@ namespace SMEncounterRNGTool
             }
 
             //UB is determined above
-            bool lengendary = IsUB || !Wild;
-            bool ShinyLocked_S = IsUB || ShinyLocked;
-            if (lengendary)
+            bool Listed = IsUB || !Wild;
+            bool IsShinyLocked = IsUB || ShinyLocked;
+            if (Listed)
                 st.Lv = PokeLv;
 
             // Wild Normal Pokemon
@@ -158,7 +158,7 @@ namespace SMEncounterRNGTool
 
             //PID
             int roll_count = ShinyCharm ? 3 : 1;
-            if (lengendary) roll_count = 1;
+            if (Listed) roll_count = 1;
             for (int i = 0; i < roll_count; i++)
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
@@ -169,7 +169,7 @@ namespace SMEncounterRNGTool
                     break;
                 }
             }
-            if (ShinyLocked_S && st.PSV == TSV)
+            if (IsShinyLocked && st.PSV == TSV)
             {
                 st.PID = st.PID ^ 0x10000000;
                 st.PSV = st.PSV ^ 0x100;
@@ -232,8 +232,11 @@ namespace SMEncounterRNGTool
 
             // ---Start here when press A button---
 
-            if (Considerdelay)
-                st.frameshift = getframeshift(e);
+            st.frameshift = getframeshift(e);
+            if (!Considerdelay)
+            {
+                Resetindex(); ResetModelStatus();
+            }
 
             //Encryption Constant & PID
             if (e.PIDType < 3) // =3 Fixed
@@ -351,7 +354,7 @@ namespace SMEncounterRNGTool
         public int getframeshift()
         {
             if (!Wild)
-                ButtonPressDelay();         //4-6F
+                ButtonPressDelay();          //4-6F
             if (Honey)
                 index += PreDelayCorrection; //Pre-HoneyCorrection
             time_delay();
@@ -397,7 +400,7 @@ namespace SMEncounterRNGTool
             return sync;
         }
 
-        //model # change when screen turns black
+        //model # changes when screen turns black
         private static void Rearrange()
         {
             modelnumber = 5;//2 guys offline...
