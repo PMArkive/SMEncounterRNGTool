@@ -272,7 +272,7 @@ namespace SMEncounterRNGTool
                 }
                 st.Shiny = true;
             }
-            
+
             //IV
             st.IVs = (int[])e.IVs.Clone();
             int cnt = e.IVsCount;
@@ -290,14 +290,13 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand() & 0x1F);
 
             //Ability
-            st.Ability = e.AbilityLocked? e.Ability : (int)(getrand() & 1) + 1;
+            st.Ability = e.AbilityLocked ? e.Ability : (int)(getrand() & 1) + 1;
 
             //Nature
             st.Nature = e.NatureLocked ? e.Nature : (int)(getrand() % 25);
 
             //Gender
-            st.Gender = e.GenderLocked ? e.Gender :　((int)(getrand() % 100) >= 50) ? 1 : 2;
-
+            st.Gender = (e.GenderLocked || nogender) ? e.Gender : (int)(getrand() % 252) >= gender_ratio ? 1 : 2;
             return st;
         }
 

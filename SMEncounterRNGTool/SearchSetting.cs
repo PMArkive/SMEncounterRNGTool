@@ -137,7 +137,7 @@
             };
 
         public static string[] genderstr = { "-", "♂", "♀" };
-        public static string[] abilitystr = { "-", "1", "2","H" };
+        public static string[] abilitystr = { "-", "1", "2", "H" };
         #endregion
 
         public int Nature = -1;
