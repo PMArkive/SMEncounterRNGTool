@@ -976,13 +976,6 @@ namespace SMEncounterRNGTool
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
             string PSV = result.PSV.ToString("D4");
-            string Ability = "";
-            switch (result.Ability)
-            {
-                case 0: Ability = "-";break;
-                case 3: Ability = "H";break;
-                default: Ability = result.Ability.ToString(); break;
-            }
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
@@ -1009,10 +1002,7 @@ namespace SMEncounterRNGTool
                 time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
             }
 
-            if (IsEvent)
-            {
-                if (!OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
-            }
+            if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
@@ -1027,7 +1017,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], Ability, Item, Encounter,
+                true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], SearchSetting.abilitystr[result.Ability], Item, Encounter,
                 randstr, PID, EC, time
                 );
 

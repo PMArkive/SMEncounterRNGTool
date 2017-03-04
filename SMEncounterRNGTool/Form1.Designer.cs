@@ -2606,7 +2606,7 @@
             this.BySaveScreen.AutoSize = true;
             this.BySaveScreen.BackColor = System.Drawing.Color.White;
             this.BySaveScreen.Checked = true;
-            this.BySaveScreen.Location = new System.Drawing.Point(36, 168);
+            this.BySaveScreen.Location = new System.Drawing.Point(29, 168);
             this.BySaveScreen.Name = "BySaveScreen";
             this.BySaveScreen.Size = new System.Drawing.Size(146, 17);
             this.BySaveScreen.TabIndex = 29;
@@ -2618,7 +2618,7 @@
             // 
             this.QRInput.AutoSize = true;
             this.QRInput.BackColor = System.Drawing.Color.White;
-            this.QRInput.Location = new System.Drawing.Point(443, 168);
+            this.QRInput.Location = new System.Drawing.Point(436, 168);
             this.QRInput.Name = "QRInput";
             this.QRInput.Size = new System.Drawing.Size(137, 17);
             this.QRInput.TabIndex = 30;
@@ -2648,7 +2648,7 @@
             this.InputBox.Controls.Add(this.button2);
             this.InputBox.Controls.Add(this.button3);
             this.InputBox.Controls.Add(this.button15);
-            this.InputBox.Location = new System.Drawing.Point(18, 15);
+            this.InputBox.Location = new System.Drawing.Point(11, 15);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(856, 137);
             this.InputBox.TabIndex = 29;
@@ -2894,7 +2894,7 @@
             this.QRBox.Controls.Add(this.QRSearch);
             this.QRBox.Controls.Add(this.L_QRresult);
             this.QRBox.Controls.Add(this.QRList);
-            this.QRBox.Location = new System.Drawing.Point(424, 182);
+            this.QRBox.Location = new System.Drawing.Point(417, 182);
             this.QRBox.Name = "QRBox";
             this.QRBox.Size = new System.Drawing.Size(450, 243);
             this.QRBox.TabIndex = 7;
@@ -2951,7 +2951,7 @@
             this.SearchSeedBox.Controls.Add(this.L_SeedResult);
             this.SearchSeedBox.Controls.Add(this.SeedResults);
             this.SearchSeedBox.Controls.Add(this.Clock_List);
-            this.SearchSeedBox.Location = new System.Drawing.Point(18, 182);
+            this.SearchSeedBox.Location = new System.Drawing.Point(11, 182);
             this.SearchSeedBox.Name = "SearchSeedBox";
             this.SearchSeedBox.Size = new System.Drawing.Size(400, 243);
             this.SearchSeedBox.TabIndex = 6;
