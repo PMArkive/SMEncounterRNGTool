@@ -1065,7 +1065,7 @@ namespace SMEncounterRNGTool
             switch (Poke.SelectedIndex)
             {
                 case 1:
-                    ConsiderBlink.Checked = false; GenderRatio.Visible = true;
+                    ConsiderBlink.Checked = false;
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
                     Fix3v.Checked = false; Timedelay.Value = YourID.Checked ? 62 : 0;
                     break;

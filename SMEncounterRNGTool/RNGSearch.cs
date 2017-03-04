@@ -298,7 +298,7 @@ namespace SMEncounterRNGTool
             if (e.GenderLocked)
                 st.Gender = 0;
             else
-                st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
+                st.Gender = ((int)(getrand() % 100) >= 50) ? 1 : 2;
 
             return st;
         }
