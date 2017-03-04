@@ -144,3 +144,6 @@ NatureLocked = Nature Locked
 GenderLocked = Gender Locked
 B_Open = Import from .wc7 File
 OtherInfo = Other Information
+L_E_Ability = Ability
+L_E_Nature = Nature
+L_E_Gender = Gender

@@ -73,8 +73,11 @@ namespace SMEncounterRNGTool
             public bool YourID;
             public int PIDType;
             public bool AbilityLocked;
+            public byte Ability;
             public bool NatureLocked;
+            public byte Nature;
             public bool GenderLocked;
+            public byte Gender;
             public bool OtherInfo;
             public int TID = -1;
             public int SID = -1;
@@ -287,18 +290,13 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand() & 0x1F);
 
             //Ability
-            if (!e.AbilityLocked)
-                st.Ability = (int)(getrand() & 1) + 1;
+            st.Ability = e.AbilityLocked? e.Ability : (int)(getrand() & 1) + 1;
 
             //Nature
-            if (!e.NatureLocked)
-                st.Nature = (int)(currentrand() % 25);
+            st.Nature = e.NatureLocked ? e.Nature : (int)(getrand() % 25);
 
             //Gender
-            if (e.GenderLocked)
-                st.Gender = 0;
-            else
-                st.Gender = ((int)(getrand() % 100) >= 50) ? 1 : 2;
+            st.Gender = e.GenderLocked ? e.Gender :　((int)(getrand() % 100) >= 50) ? 1 : 2;
 
             return st;
         }

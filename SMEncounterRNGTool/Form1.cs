@@ -92,7 +92,7 @@ namespace SMEncounterRNGTool
                 HiddenPower.Items[i] = SearchSetting.hpstr[i];
 
             for (int i = 0; i < SearchSetting.naturestr.Length; i++)
-                Nature.Items[i + 1] = SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
+                Event_Nature.Items[i + 1] = Nature.Items[i + 1] = SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
 
             Poke.Items[1] = EVENT_STR[lindex];
             for (int i = 1; i < SearchSetting.pokedex.GetLength(0); i++)
@@ -155,12 +155,14 @@ namespace SMEncounterRNGTool
 
             Nature.Items.Add("-");
             SyncNature.Items.Add("-");
+            Event_Nature.Items.Add("-");
             HiddenPower.Items.Add("-");
             Poke.Items.Add("-");
             foreach (string t in SearchSetting.naturestr)
             {
                 Nature.Items.Add("");
                 SyncNature.Items.Add("");
+                Event_Nature.Items.Add("");
             }
             for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
                 Poke.Items.Add("");
@@ -168,7 +170,11 @@ namespace SMEncounterRNGTool
                 HiddenPower.Items.Add("");
 
             foreach (string t in SearchSetting.genderstr)
+            {
                 Gender.Items.Add(t);
+                Event_Gender.Items.Add(t);
+            }
+
 
             for (int i = 0; i < 6; i++)
                 EventIV[i].Enabled = false;
@@ -192,8 +198,11 @@ namespace SMEncounterRNGTool
             HiddenPower.SelectedIndex = 0;
             Nature.SelectedIndex = 0;
             SyncNature.SelectedIndex = 0;
+            Event_Nature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
+            Event_Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
+            Event_Ability.SelectedIndex = 0;
             Event_PIDType.SelectedIndex = 0;
 
             Seed.Value = Properties.Settings.Default.Seed;
@@ -967,7 +976,13 @@ namespace SMEncounterRNGTool
                 default: BlinkFlag = result.Blink.ToString(); break;
             }
             string PSV = result.PSV.ToString("D4");
-            string Ability = result.Ability.ToString();
+            string Ability = "";
+            switch (result.Ability)
+            {
+                case 0: Ability = "-";break;
+                case 3: Ability = "H";break;
+                default: Ability = result.Ability.ToString(); break;
+            }
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
             string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
@@ -996,8 +1011,6 @@ namespace SMEncounterRNGTool
 
             if (IsEvent)
             {
-                if (e.AbilityLocked) Ability = "-";
-                if (e.NatureLocked) true_nature = "-";
                 if (!OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
             }
 
@@ -1106,6 +1119,9 @@ namespace SMEncounterRNGTool
                 GenderLocked = GenderLocked.Checked,
                 OtherInfo = OtherInfo.Checked,
                 EC = (uint)Event_EC.Value,
+                Ability = (byte)Event_Ability.SelectedIndex,
+                Nature = (byte)(Event_Nature.SelectedIndex - 1),
+                Gender = (byte)Event_Gender.SelectedIndex
             };
             if (e.YourID)
                 e.TSV = (uint)TSV.Value;
@@ -1225,9 +1241,12 @@ namespace SMEncounterRNGTool
                 if (CardType != 0) return false;
                 byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
                 byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB4, 0xB2, 0xB3 };
-                AbilityLocked.Checked = Data[0xA2] < 2;
+                AbilityLocked.Checked = Data[0xA2] < 3;
+                Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : 0;
                 NatureLocked.Checked = Data[0xA0] != 0xFF;
+                Event_Nature.SelectedIndex = NatureLocked.Checked ? Data[0xA0] + 1 : 0;
                 GenderLocked.Checked = Data[0xA1] != 3;
+                Event_Gender.SelectedIndex = GenderLocked.Checked ? (Data[0xA1] + 1) % 3 : 0;
                 for (int i = 0; i < 6; i++)
                 {
                     if (Data[Stats_index[i]] != 0xFF)
@@ -1249,6 +1268,7 @@ namespace SMEncounterRNGTool
                 Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;
+                Lv_Search.Value = Data[0xD0];
                 br.Close();
             }
             catch
@@ -1270,7 +1290,24 @@ namespace SMEncounterRNGTool
                 if (!ReadWc7(files[0]))
                     Error(FILEERRORSTR[lindex]);
         }
-        #endregion
 
+        private void NatureLocked_CheckedChanged(object sender, EventArgs e)
+        {
+            Event_Nature.Enabled = NatureLocked.Checked;
+            if (!NatureLocked.Checked) Event_Nature.SelectedIndex = 0;
+        }
+
+        private void GenderLocked_CheckedChanged(object sender, EventArgs e)
+        {
+            Event_Gender.Enabled = GenderLocked.Checked;
+            if (!GenderLocked.Checked) Event_Gender.SelectedIndex = 0;
+        }
+
+        private void AbilityLocked_CheckedChanged(object sender, EventArgs e)
+        {
+            Event_Ability.Enabled = AbilityLocked.Checked;
+            if (!GenderLocked.Checked) Event_Ability.SelectedIndex = 0;
+        }
+        #endregion
     }
 }
