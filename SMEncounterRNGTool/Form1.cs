@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.IO;
 using System.Windows.Forms;
 using static PKHeX.Util;
 
@@ -56,6 +57,7 @@ namespace SMEncounterRNGTool
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
         private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
+        private static readonly string[] FILEERRORSTR = { "Invalid file for event Pokemon", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
         {
             { "Random PID", "Random Nonshiny", "Random Shiny","Specified"},
@@ -1176,5 +1178,53 @@ namespace SMEncounterRNGTool
         }
 
         #endregion
+
+        private void B_Open_Click(object sender, EventArgs e)
+        {
+            // Displays an OpenFileDialog so the user can select a Cursor.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Gen7 Wonder Card Files|*.wc7";
+            openFileDialog1.Title = "Select a Wonder Card File";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                if (!ReadWc7(openFileDialog1.FileName))
+                    Error(FILEERRORSTR[lindex]);
+        }
+
+        private bool ReadWc7(string filename)
+        {
+            try
+            {
+                BinaryReader br = new BinaryReader(File.Open(filename, FileMode.Open));
+                byte[] Data = br.ReadBytes(0x108);
+                byte CardType = Data[0x51];
+                if (CardType != 0) return false;
+                byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
+                byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB4, 0xB2, 0xB3 };
+                AbilityLocked.Checked = Data[0xA2] < 2;
+                NatureLocked.Checked = Data[0xA0] != 0xFF;
+                GenderLocked.Checked = Data[0xA1] != 3;
+                for (int i = 0; i < 6; i++)
+                {
+                    if (Data[Stats_index[i]] != 0xFF)
+                    {
+                        EventIV[i].Value = Data[Stats_index[i]];
+                        EventIVLocked[i].Checked = true;
+                    }
+                    else
+                        EventIVLocked[i].Checked = false;
+                }
+                // TID = BitConverter.ToUInt16(Data, 0x68),
+                // SID = BitConverter.ToUInt16(Data, 0x6A),
+                // PID = BitConverter.ToUInt32(Data, 0xD4),
+                Event_PID.SelectedIndex = PIDType_Order[Data[0xA3]];
+                YourID.Checked = Data[0xB5] == 3;
+                br.Close();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

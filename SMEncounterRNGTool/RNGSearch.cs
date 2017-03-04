@@ -68,6 +68,10 @@ namespace SMEncounterRNGTool
         public class EventRule
         {
             public int[] IVs;
+            public int TID = -1;
+            public int SID = -1;
+            public uint PID;
+            public int EC = -1;
             public int IVsCount;
             public bool YourID;
             public int PIDType;

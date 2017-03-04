@@ -185,6 +185,7 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
+            this.B_Open = new System.Windows.Forms.Button();
             this.Event_PID = new System.Windows.Forms.ComboBox();
             this.YourID = new System.Windows.Forms.CheckBox();
             this.AbilityLocked = new System.Windows.Forms.CheckBox();
@@ -2076,6 +2077,7 @@
             // 
             // EventSetting
             // 
+            this.EventSetting.Controls.Add(this.B_Open);
             this.EventSetting.Controls.Add(this.Event_PID);
             this.EventSetting.Controls.Add(this.YourID);
             this.EventSetting.Controls.Add(this.AbilityLocked);
@@ -2103,12 +2105,22 @@
             this.EventSetting.Controls.Add(this.EventIV2);
             this.EventSetting.Controls.Add(this.EventIV1);
             this.EventSetting.Controls.Add(this.EventIV0);
-            this.EventSetting.Location = new System.Drawing.Point(891, 15);
+            this.EventSetting.Location = new System.Drawing.Point(880, 15);
             this.EventSetting.Name = "EventSetting";
-            this.EventSetting.Size = new System.Drawing.Size(320, 257);
+            this.EventSetting.Size = new System.Drawing.Size(331, 296);
             this.EventSetting.TabIndex = 31;
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
+            // 
+            // B_Open
+            // 
+            this.B_Open.Location = new System.Drawing.Point(185, 248);
+            this.B_Open.Name = "B_Open";
+            this.B_Open.Size = new System.Drawing.Size(122, 27);
+            this.B_Open.TabIndex = 29;
+            this.B_Open.Text = "从文件导入(.wc7)";
+            this.B_Open.UseVisualStyleBackColor = true;
+            this.B_Open.Click += new System.EventHandler(this.B_Open_Click);
             // 
             // Event_PID
             // 
@@ -2117,7 +2129,7 @@
             "",
             "",
             ""});
-            this.Event_PID.Location = new System.Drawing.Point(195, 126);
+            this.Event_PID.Location = new System.Drawing.Point(209, 118);
             this.Event_PID.Name = "Event_PID";
             this.Event_PID.Size = new System.Drawing.Size(98, 21);
             this.Event_PID.TabIndex = 49;
@@ -2125,7 +2137,7 @@
             // YourID
             // 
             this.YourID.AutoSize = true;
-            this.YourID.Location = new System.Drawing.Point(195, 98);
+            this.YourID.Location = new System.Drawing.Point(209, 90);
             this.YourID.Name = "YourID";
             this.YourID.Size = new System.Drawing.Size(49, 17);
             this.YourID.TabIndex = 48;
@@ -2138,7 +2150,7 @@
             this.AbilityLocked.AutoSize = true;
             this.AbilityLocked.Checked = true;
             this.AbilityLocked.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AbilityLocked.Location = new System.Drawing.Point(195, 158);
+            this.AbilityLocked.Location = new System.Drawing.Point(209, 150);
             this.AbilityLocked.Name = "AbilityLocked";
             this.AbilityLocked.Size = new System.Drawing.Size(74, 17);
             this.AbilityLocked.TabIndex = 47;
@@ -2148,7 +2160,7 @@
             // L_IVsCount
             // 
             this.L_IVsCount.AutoSize = true;
-            this.L_IVsCount.Location = new System.Drawing.Point(192, 39);
+            this.L_IVsCount.Location = new System.Drawing.Point(206, 31);
             this.L_IVsCount.Name = "L_IVsCount";
             this.L_IVsCount.Size = new System.Drawing.Size(50, 13);
             this.L_IVsCount.TabIndex = 46;
@@ -2158,7 +2170,7 @@
             // 
             this.IVsCount.AccessibleName = "";
             this.IVsCount.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IVsCount.Location = new System.Drawing.Point(195, 64);
+            this.IVsCount.Location = new System.Drawing.Point(209, 56);
             this.IVsCount.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2171,7 +2183,7 @@
             // GenderLocked
             // 
             this.GenderLocked.AutoSize = true;
-            this.GenderLocked.Location = new System.Drawing.Point(195, 218);
+            this.GenderLocked.Location = new System.Drawing.Point(209, 210);
             this.GenderLocked.Name = "GenderLocked";
             this.GenderLocked.Size = new System.Drawing.Size(74, 17);
             this.GenderLocked.TabIndex = 44;
@@ -2181,7 +2193,7 @@
             // NatureLocked
             // 
             this.NatureLocked.AutoSize = true;
-            this.NatureLocked.Location = new System.Drawing.Point(195, 188);
+            this.NatureLocked.Location = new System.Drawing.Point(209, 180);
             this.NatureLocked.Name = "NatureLocked";
             this.NatureLocked.Size = new System.Drawing.Size(74, 17);
             this.NatureLocked.TabIndex = 43;
@@ -2191,7 +2203,7 @@
             // L_IVLock
             // 
             this.L_IVLock.AutoSize = true;
-            this.L_IVLock.Location = new System.Drawing.Point(132, 39);
+            this.L_IVLock.Location = new System.Drawing.Point(146, 31);
             this.L_IVLock.Name = "L_IVLock";
             this.L_IVLock.Size = new System.Drawing.Size(31, 13);
             this.L_IVLock.TabIndex = 42;
@@ -2200,7 +2212,7 @@
             // Event_IV_Fix5
             // 
             this.Event_IV_Fix5.AutoSize = true;
-            this.Event_IV_Fix5.Location = new System.Drawing.Point(148, 219);
+            this.Event_IV_Fix5.Location = new System.Drawing.Point(162, 211);
             this.Event_IV_Fix5.Name = "Event_IV_Fix5";
             this.Event_IV_Fix5.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix5.TabIndex = 41;
@@ -2210,7 +2222,7 @@
             // Event_IV_Fix4
             // 
             this.Event_IV_Fix4.AutoSize = true;
-            this.Event_IV_Fix4.Location = new System.Drawing.Point(148, 189);
+            this.Event_IV_Fix4.Location = new System.Drawing.Point(162, 181);
             this.Event_IV_Fix4.Name = "Event_IV_Fix4";
             this.Event_IV_Fix4.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix4.TabIndex = 40;
@@ -2220,7 +2232,7 @@
             // Event_IV_Fix3
             // 
             this.Event_IV_Fix3.AutoSize = true;
-            this.Event_IV_Fix3.Location = new System.Drawing.Point(148, 159);
+            this.Event_IV_Fix3.Location = new System.Drawing.Point(162, 151);
             this.Event_IV_Fix3.Name = "Event_IV_Fix3";
             this.Event_IV_Fix3.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix3.TabIndex = 39;
@@ -2230,7 +2242,7 @@
             // Event_IV_Fix2
             // 
             this.Event_IV_Fix2.AutoSize = true;
-            this.Event_IV_Fix2.Location = new System.Drawing.Point(148, 129);
+            this.Event_IV_Fix2.Location = new System.Drawing.Point(162, 121);
             this.Event_IV_Fix2.Name = "Event_IV_Fix2";
             this.Event_IV_Fix2.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix2.TabIndex = 38;
@@ -2240,7 +2252,7 @@
             // Event_IV_Fix1
             // 
             this.Event_IV_Fix1.AutoSize = true;
-            this.Event_IV_Fix1.Location = new System.Drawing.Point(148, 99);
+            this.Event_IV_Fix1.Location = new System.Drawing.Point(162, 91);
             this.Event_IV_Fix1.Name = "Event_IV_Fix1";
             this.Event_IV_Fix1.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix1.TabIndex = 37;
@@ -2250,7 +2262,7 @@
             // Event_IV_Fix0
             // 
             this.Event_IV_Fix0.AutoSize = true;
-            this.Event_IV_Fix0.Location = new System.Drawing.Point(148, 69);
+            this.Event_IV_Fix0.Location = new System.Drawing.Point(162, 61);
             this.Event_IV_Fix0.Name = "Event_IV_Fix0";
             this.Event_IV_Fix0.Size = new System.Drawing.Size(15, 14);
             this.Event_IV_Fix0.TabIndex = 8;
@@ -2260,7 +2272,7 @@
             // L_Event_IV
             // 
             this.L_Event_IV.AutoSize = true;
-            this.L_Event_IV.Location = new System.Drawing.Point(72, 39);
+            this.L_Event_IV.Location = new System.Drawing.Point(86, 31);
             this.L_Event_IV.Name = "L_Event_IV";
             this.L_Event_IV.Size = new System.Drawing.Size(43, 13);
             this.L_Event_IV.TabIndex = 36;
@@ -2269,7 +2281,7 @@
             // L_Event_S
             // 
             this.L_Event_S.AutoSize = true;
-            this.L_Event_S.Location = new System.Drawing.Point(24, 219);
+            this.L_Event_S.Location = new System.Drawing.Point(38, 211);
             this.L_Event_S.Name = "L_Event_S";
             this.L_Event_S.Size = new System.Drawing.Size(31, 13);
             this.L_Event_S.TabIndex = 35;
@@ -2278,7 +2290,7 @@
             // L_Event_C
             // 
             this.L_Event_C.AutoSize = true;
-            this.L_Event_C.Location = new System.Drawing.Point(24, 159);
+            this.L_Event_C.Location = new System.Drawing.Point(38, 151);
             this.L_Event_C.Name = "L_Event_C";
             this.L_Event_C.Size = new System.Drawing.Size(31, 13);
             this.L_Event_C.TabIndex = 33;
@@ -2287,7 +2299,7 @@
             // L_Event_B
             // 
             this.L_Event_B.AutoSize = true;
-            this.L_Event_B.Location = new System.Drawing.Point(24, 129);
+            this.L_Event_B.Location = new System.Drawing.Point(38, 121);
             this.L_Event_B.Name = "L_Event_B";
             this.L_Event_B.Size = new System.Drawing.Size(31, 13);
             this.L_Event_B.TabIndex = 32;
@@ -2296,7 +2308,7 @@
             // L_Event_H
             // 
             this.L_Event_H.AutoSize = true;
-            this.L_Event_H.Location = new System.Drawing.Point(24, 69);
+            this.L_Event_H.Location = new System.Drawing.Point(38, 61);
             this.L_Event_H.Name = "L_Event_H";
             this.L_Event_H.Size = new System.Drawing.Size(22, 13);
             this.L_Event_H.TabIndex = 30;
@@ -2305,7 +2317,7 @@
             // L_Event_A
             // 
             this.L_Event_A.AutoSize = true;
-            this.L_Event_A.Location = new System.Drawing.Point(24, 99);
+            this.L_Event_A.Location = new System.Drawing.Point(38, 91);
             this.L_Event_A.Name = "L_Event_A";
             this.L_Event_A.Size = new System.Drawing.Size(31, 13);
             this.L_Event_A.TabIndex = 31;
@@ -2314,7 +2326,7 @@
             // L_Event_D
             // 
             this.L_Event_D.AutoSize = true;
-            this.L_Event_D.Location = new System.Drawing.Point(24, 189);
+            this.L_Event_D.Location = new System.Drawing.Point(38, 181);
             this.L_Event_D.Name = "L_Event_D";
             this.L_Event_D.Size = new System.Drawing.Size(31, 13);
             this.L_Event_D.TabIndex = 34;
@@ -2324,7 +2336,7 @@
             // 
             this.EventIV5.AccessibleName = "";
             this.EventIV5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EventIV5.Location = new System.Drawing.Point(75, 214);
+            this.EventIV5.Location = new System.Drawing.Point(89, 206);
             this.EventIV5.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2338,7 +2350,7 @@
             // 
             this.EventIV4.AccessibleName = "";
             this.EventIV4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EventIV4.Location = new System.Drawing.Point(75, 184);
+            this.EventIV4.Location = new System.Drawing.Point(89, 176);
             this.EventIV4.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2352,7 +2364,7 @@
             // 
             this.EventIV3.AccessibleName = "";
             this.EventIV3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EventIV3.Location = new System.Drawing.Point(75, 154);
+            this.EventIV3.Location = new System.Drawing.Point(89, 146);
             this.EventIV3.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2366,7 +2378,7 @@
             // 
             this.EventIV2.AccessibleName = "";
             this.EventIV2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EventIV2.Location = new System.Drawing.Point(75, 124);
+            this.EventIV2.Location = new System.Drawing.Point(89, 116);
             this.EventIV2.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2380,7 +2392,7 @@
             // 
             this.EventIV1.AccessibleName = "";
             this.EventIV1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EventIV1.Location = new System.Drawing.Point(75, 94);
+            this.EventIV1.Location = new System.Drawing.Point(89, 86);
             this.EventIV1.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2394,7 +2406,7 @@
             // 
             this.EventIV0.AccessibleName = "";
             this.EventIV0.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EventIV0.Location = new System.Drawing.Point(75, 64);
+            this.EventIV0.Location = new System.Drawing.Point(89, 56);
             this.EventIV0.Maximum = new decimal(new int[] {
             31,
             0,
@@ -3211,6 +3223,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
+        private System.Windows.Forms.Button B_Open;
     }
 }
 
