@@ -68,16 +68,18 @@ namespace SMEncounterRNGTool
         public class EventRule
         {
             public int[] IVs;
-            public int TID = -1;
-            public int SID = -1;
-            public uint PID;
-            public int EC = -1;
+            public uint TSV;
             public int IVsCount;
             public bool YourID;
             public int PIDType;
             public bool AbilityLocked;
             public bool NatureLocked;
             public bool GenderLocked;
+            public bool OtherInfo;
+            public int TID = -1;
+            public int SID = -1;
+            public uint EC = 0;
+            public uint PID = 0;
         }
 
         public RNGResult Generate()
@@ -97,7 +99,7 @@ namespace SMEncounterRNGTool
             st.frameshift = getframeshift();
             if (!Considerdelay)
             {
-                Resetindex();ResetModelStatus();
+                Resetindex(); ResetModelStatus();
             }
 
             // UB using honey
@@ -242,26 +244,32 @@ namespace SMEncounterRNGTool
                 Resetindex(); ResetModelStatus();
             }
 
-            //Encryption Constant & PID
-            if (e.PIDType < 3) // =3 Fixed
-            {
-                st.EC = (uint)(getrand() & 0xFFFFFFFF);
-                st.PID = (uint)(getrand() & 0xFFFFFFFF);
-                st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
-                if (st.PSV == TSV && e.PIDType < 2)
-                {
-                    if (e.PIDType == 0) // Random
-                        st.Shiny = true;
-                    else if (e.PIDType == 1) // Random NonShiny
-                    {
-                        st.PID = st.PID ^ 0x10000000;
-                        st.PSV = st.PSV ^ 0x100;
-                    }
-                }
-                else if (e.PIDType == 2)// Random Shiny
-                    st.Shiny = true;
-            }
+            //Encryption Constant
+            st.EC = e.EC > 0 ? e.EC : (uint)(getrand() & 0xFFFFFFFF);
 
+            //PID
+            st.PID = e.PIDType == 3 ? e.PID : (uint)(getrand() & 0xFFFFFFFF);
+            st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+            if (st.PSV == e.TSV && e.PIDType < 2)
+            {
+                if (e.PIDType == 0) // Random
+                    st.Shiny = true;
+                else if (e.PIDType == 1) // Random NonShiny
+                {
+                    st.PID = st.PID ^ 0x10000000;
+                    st.PSV = st.PSV ^ 0x100;
+                }
+            }
+            else if (e.PIDType == 2)// Random Shiny
+            {
+                if (e.OtherInfo)
+                {
+                    st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
+                    st.PSV = e.TSV;
+                }
+                st.Shiny = true;
+            }
+            
             //IV
             st.IVs = (int[])e.IVs.Clone();
             int cnt = e.IVsCount;
@@ -287,7 +295,7 @@ namespace SMEncounterRNGTool
                 st.Nature = (int)(currentrand() % 25);
 
             //Gender
-            if (nogender || e.GenderLocked)
+            if (e.GenderLocked)
                 st.Gender = 0;
             else
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
@@ -299,7 +307,7 @@ namespace SMEncounterRNGTool
         private static int index;
         public static void Resetindex() { index = 0; }
 
-        public static void CreateBuffer(SFMT sfmt,bool CalcDelay)
+        public static void CreateBuffer(SFMT sfmt, bool CalcDelay)
         {
             int RandBuffSize = 200;
             if (CalcDelay)

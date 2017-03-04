@@ -143,3 +143,4 @@ NatureLocked = 固定性格
 GenderLocked = 固定性别
 AbilityLocked = 固定特性
 B_Open = 从文件导入（.wc7）
+OtherInfo = 其他信息

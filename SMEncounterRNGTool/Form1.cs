@@ -86,7 +86,7 @@ namespace SMEncounterRNGTool
             string[] species = getStringList("Species", curlanguage);
 
             for (int i = 0; i < 4; i++)
-                Event_PID.Items[i] = PIDTYPE_STR[lindex, i];
+                Event_PIDType.Items[i] = PIDTYPE_STR[lindex, i];
 
             for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
                 HiddenPower.Items[i] = SearchSetting.hpstr[i];
@@ -194,7 +194,7 @@ namespace SMEncounterRNGTool
             SyncNature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
-            Event_PID.SelectedIndex = 0;
+            Event_PIDType.SelectedIndex = 0;
 
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
@@ -521,6 +521,18 @@ namespace SMEncounterRNGTool
         {
             if (IsEvent)
                 IVsCount.Value = Fix3v.Checked ? 3 : 0;
+        }
+
+        private void OtherInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            Event_EC.Enabled = Event_PID.Enabled = Event_TID.Enabled = Event_SID.Enabled = OtherInfo.Checked;
+        }
+
+        private void Event_PIDType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!OtherInfo.Checked)
+                Event_EC.Value = (Event_PIDType.SelectedIndex == 3) ? 0x12 : 0;
+            L_PID.Visible = Event_PID.Visible = Event_PIDType.SelectedIndex == 3;
         }
         #endregion
 
@@ -986,7 +998,7 @@ namespace SMEncounterRNGTool
             {
                 if (e.AbilityLocked) Ability = "-";
                 if (e.NatureLocked) true_nature = "-";
-                if (e.PIDType > 1) { PID = "-"; PSV = "-"; EC = "-"; }
+                if (!OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
             }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
@@ -1083,16 +1095,28 @@ namespace SMEncounterRNGTool
                 Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
                 IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
             }
-            return new RNGSearch.EventRule
+            RNGSearch.EventRule e = new RNGSearch.EventRule
             {
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (int)IVsCount.Value,
                 YourID = YourID.Checked,
-                PIDType = Event_PID.SelectedIndex,
+                PIDType = Event_PIDType.SelectedIndex,
                 AbilityLocked = AbilityLocked.Checked,
                 NatureLocked = NatureLocked.Checked,
                 GenderLocked = GenderLocked.Checked,
+                OtherInfo = OtherInfo.Checked,
+                EC = (uint)Event_EC.Value,
             };
+            if (e.YourID)
+                e.TSV = (uint)TSV.Value;
+            else
+            {
+                e.TID = (int)Event_TID.Value;
+                e.SID = (int)Event_SID.Value;
+                e.TSV = (uint)(e.TID ^ e.SID) >> 4;
+                e.PID = (uint)Event_PID.Value;
+            }
+            return e;
         }
 
         private void SetTargetFrame_Click(object sender, EventArgs e)
@@ -1212,13 +1236,19 @@ namespace SMEncounterRNGTool
                         EventIVLocked[i].Checked = true;
                     }
                     else
+                    {
+                        EventIV[i].Value = 0;
                         EventIVLocked[i].Checked = false;
+                    }
                 }
-                // TID = BitConverter.ToUInt16(Data, 0x68),
-                // SID = BitConverter.ToUInt16(Data, 0x6A),
-                // PID = BitConverter.ToUInt32(Data, 0xD4),
-                Event_PID.SelectedIndex = PIDType_Order[Data[0xA3]];
+                Event_TID.Value = BitConverter.ToUInt16(Data, 0x68);
+                Event_SID.Value = BitConverter.ToUInt16(Data, 0x6A);
+                Event_PIDType.SelectedIndex = PIDType_Order[Data[0xA3]];
+                if (Event_PIDType.SelectedIndex == 3)
+                    Event_PID.Value = BitConverter.ToUInt32(Data, 0xD4);
+                Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
                 YourID.Checked = Data[0xB5] == 3;
+                OtherInfo.Checked = true;
                 br.Close();
             }
             catch
@@ -1241,5 +1271,6 @@ namespace SMEncounterRNGTool
                     Error(FILEERRORSTR[lindex]);
         }
         #endregion
+
     }
 }
