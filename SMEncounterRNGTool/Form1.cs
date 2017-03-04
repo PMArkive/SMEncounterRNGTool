@@ -1179,6 +1179,7 @@ namespace SMEncounterRNGTool
 
         #endregion
 
+        #region WC7 Import
         private void B_Open_Click(object sender, EventArgs e)
         {
             // Displays an OpenFileDialog so the user can select a Cursor.
@@ -1226,5 +1227,19 @@ namespace SMEncounterRNGTool
             }
             return true;
         }
+
+        private void DropEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void DragDropWC(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length == 1)
+                if (!ReadWc7(files[0]))
+                    Error(FILEERRORSTR[lindex]);
+        }
+        #endregion
     }
 }

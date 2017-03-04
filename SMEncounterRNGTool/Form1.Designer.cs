@@ -2061,6 +2061,7 @@
             // 
             // SearchTool
             // 
+            this.SearchTool.AllowDrop = true;
             this.SearchTool.Controls.Add(this.EventSetting);
             this.SearchTool.Controls.Add(this.BySaveScreen);
             this.SearchTool.Controls.Add(this.QRInput);
@@ -2074,6 +2075,8 @@
             this.SearchTool.TabIndex = 0;
             this.SearchTool.Text = "辅助工具";
             this.SearchTool.UseVisualStyleBackColor = true;
+            this.SearchTool.DragDrop += new System.Windows.Forms.DragEventHandler(this.DragDropWC);
+            this.SearchTool.DragEnter += new System.Windows.Forms.DragEventHandler(this.DropEnter);
             // 
             // EventSetting
             // 
