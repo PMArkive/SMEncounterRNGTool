@@ -719,7 +719,7 @@ namespace SMEncounterRNGTool
                     st.NextUInt64();
                 for (int i = 0; i <= (ModelNumber - 1) * 5 + 1; i++)
                     Randlist.Add(st.NextUInt64());
-                for (int i = Min; i < max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
+                for (int i = Min; i <= max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
                 {
                     if ((Randlist[0] & 0x7F) == 0)
                     {
@@ -801,7 +801,10 @@ namespace SMEncounterRNGTool
         {
             SFMT sfmt = new SFMT((uint)Seed.Value);
 
-            for (int i = 0; i < (int)Frame_min.Value; i++)
+            int start_frame = (int)Frame_min.Value;
+            byte start_flag = getblinkflaglist(start_frame, start_frame, sfmt)[0];
+
+            for (int i = 0; i < start_frame; i++)
                 sfmt.NextUInt64();
 
             List<DataGridViewRow> list = new List<DataGridViewRow>();
@@ -825,6 +828,7 @@ namespace SMEncounterRNGTool
 
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
 
+                if (i == 0) result.Blink = start_flag;
                 if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
 
                 result.realtime = i;
@@ -959,6 +963,8 @@ namespace SMEncounterRNGTool
             return true;
         }
 
+        private static readonly string[] blinkmarks = new string[] { "-", "★", "?", "? ★" };
+
         private DataGridViewRow getRow_Sta(int i, RNGSearch rng, RNGSearch.RNGResult result, DataGridView dgv)
         {
             int d = i - (int)Time_max.Value;
@@ -966,15 +972,7 @@ namespace SMEncounterRNGTool
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             if ((result.UbValue < UB_th.Value) && (ConsiderDelay.Checked) && (!ShowResultsAfterDelay.Checked))
                 result.Blink = 2;
-            string BlinkFlag = "";
-            switch (result.Blink)
-            {
-                case 0: BlinkFlag = "-"; break;
-                case 1: BlinkFlag = "★"; break;
-                case 2: BlinkFlag = "?"; break;
-                case 3: BlinkFlag = "?★"; break;
-                default: BlinkFlag = result.Blink.ToString(); break;
-            }
+            string BlinkFlag = result.Blink < 4 ? blinkmarks[result.Blink] : result.Blink.ToString();
             string PSV = result.PSV.ToString("D4");
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
             string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
