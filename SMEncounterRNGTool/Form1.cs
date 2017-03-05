@@ -511,11 +511,11 @@ namespace SMEncounterRNGTool
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
             TimeSpan.Enabled = CreateTimeline.Checked;
-            ShowResultsAfterDelay.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            AroundTarget.Enabled = ShowResultsAfterDelay.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
             Frame_max.Visible = label7.Visible = !CreateTimeline.Checked;
             L_StartingPoint.Visible = CreateTimeline.Checked;
             if (CreateTimeline.Checked)
-                BlinkOnly.Checked = SafeFOnly.Checked = false;
+                AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
             ShowResultsAfterDelay.Checked = true;
         }
 
@@ -819,10 +819,11 @@ namespace SMEncounterRNGTool
 
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
-            int frameadvance = 0;
+            int frameadvance, Currentframe;
 
             for (int i = 0; i <= totaltime; i++)
             {
+                Currentframe = frame;
                 RNGSearch.remain_frame = (int[])st.remain_frame.Clone();
                 RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
@@ -844,7 +845,7 @@ namespace SMEncounterRNGTool
                 if (!frameMatch(result, setting))
                     continue;
 
-                list.Add(getRow_Sta(frame - frameadvance, rng, result, DGV));
+                list.Add(getRow_Sta(Currentframe, rng, result, DGV));
 
                 if (list.Count > 100000) break;
             }
