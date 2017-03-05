@@ -454,7 +454,7 @@ namespace SMEncounterRNGTool
             }
             else
             {
-                Correction.Value = 0;
+                Correction.Value = 1;
                 if (Wild.Checked) Timedelay.Value = 0;
             }
 
@@ -710,7 +710,7 @@ namespace SMEncounterRNGTool
                         blink_flag = blinkflaglist[i - min] = 1;
                 }
             }
-            else if (!Honey.Checked)
+            else
             {
                 int[] Unsaferange = new int[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
                 List<ulong> Randlist = new List<ulong>();

@@ -46,4 +46,6 @@ Exeggutor Island|3|0
 Poni Wilds - Grass|10|0
 Poni Wilds - Surfing|10|1
 Ancient Poni Path|20|3?
-
+Vast Poni Canyon - Inside|6|3?
+Vast Poni Canyon - Top|1|0
+Vast Poni Canyon - Under Tree|15|0
