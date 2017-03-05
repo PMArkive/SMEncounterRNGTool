@@ -129,7 +129,8 @@ namespace SMEncounterRNGTool
             }
 
             // Encounter
-            if (Wild && !Honey)
+            bool SpecialWild = Wild && !Honey && Encounter_th == 100;
+            if (Wild && !Honey && !SpecialWild)
                 st.Encounter = (int)(getrand() % 100);
 
             // UB w/o Honey
@@ -150,7 +151,7 @@ namespace SMEncounterRNGTool
 
             // Wild Normal Pokemon
             bool IsWild = Wild && !IsUB;
-            if (IsWild)
+            if (IsWild && !SpecialWild)
             {
                 st.Slot = getslot((int)(getrand() % 100));
                 st.Lv = (int)(getrand() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
@@ -218,6 +219,10 @@ namespace SMEncounterRNGTool
                 st.Gender = 0;
             else
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
+
+            //SpecialWild
+            if (SpecialWild)
+                Advance(0);
 
             //Item
             if (IsWild)
