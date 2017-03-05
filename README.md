@@ -15,20 +15,20 @@ And ALL Pokemon RNG Researcher<br>
 ### With emtimer/EonTimer
 1. Select the `Pokemon` you would like to RNG.
 2. Find your `Seed` via the clock hands sequence on Continue Screen
-3. Set up the `Filters` and make a `Search`
+3. Set up the `Filters` and click `Search`
 4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
-5. Put your current frame into the first box of `Timing Range`. The tool will automatically change the value when you are using the `Tool Kit` Tab
+5. Put your current frame into the first box of `Timing Range`. (The tool will automatically set this value when you are using the `Tool Kit` Tab)
 6. Click `Calc` and get the timer setting, set the timer. 
 7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
-8. Start the dialogue until the final screen (See below), wait for the timer.
+8. Start the dialogue until the [final screen](#final-screen-when-pressing-a), wait for the timer.
 9. When the timer is done, click A at the same time, receive or battle with the Pokemon.
 10. If the Pokemon is not the one you want, calibrate the Pre-Timer and try again
 
 ### With PokeCalcNTR
  1. Select the `Pokemon` you would like to RNG.
- 2. Start the game with PokeCalcNTR, click A until you get to the final screen (See below).
+ 2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a)).
  3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
- 4. Put your current frame number in the first box of `Frame range` and check `Create Timeline`
+ 4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
  5. Click `Search`, you will see the game will follow timeline the tool created.
  6. Now all the frame in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
  7. Just change the `Filters` and make another search as usual.
@@ -49,12 +49,6 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - -: The safe frames the tool can 100% predict.
 
 ## Some Parameters:
-
-#### UB Rate(%):
-See [Here](parameters/UB Rate.md)
-
-#### Pre-Honey Correction:
-See [Here](parameters/Pre-Honey Correction.md)
-
-#### Event Pokemon Setting:
-See [Here](parameters/Event Pokemon Setting.md)
+- [UB Rate(%)](parameters/UB Rate.md)
+- [Pre-Honey Correction](parameters/Pre-Honey Correction.md)
+- [Event Pokemon Setting](parameters/Event Pokemon Setting.md)

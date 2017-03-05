@@ -10,7 +10,7 @@ Location|Correction
 Wela Volcano Park - Bottom|9
 **Diglett's Tunnel**|**13**
 **Melemele Meadow**|**5**
-**Verdant Cavern\***|**5**
+**Verdant Cavern***|**5**
 **Lush Jungle - South**|**7**
 Memorial Hill|12
 Haina Desert|1
