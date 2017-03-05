@@ -364,8 +364,12 @@ namespace SMEncounterRNGTool
         {
             if (!Wild)
                 ButtonPressDelay();          //4-6F
-            if (Honey)
-                index += PreDelayCorrection; //Pre-HoneyCorrection
+            if (Honey)                          
+            {
+                ResetModelStatus();
+                time_elapse(1);              //Blink process also occurs when loading map
+                index = PreDelayCorrection;  //Pre-HoneyCorrection
+            }
             time_delay();
             return index;
         }

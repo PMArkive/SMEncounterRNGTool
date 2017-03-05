@@ -36,7 +36,7 @@ Location|Correction|Least NPCs Number
 :---:|:---:|:---:
 Haina Desert|1|0
 Malie Garden|26|0
-Mount Lanakila|1|0
+Mount Lanakila - Mountainside|1|0
 
 ### Poni Island
 Location|Correction|Least NPCs Number
@@ -45,3 +45,5 @@ Resolution Cave|1|0
 Exeggutor Island|3|0
 Poni Wilds - Grass|10|0
 Poni Wilds - Surfing|10|1
+Ancient Poni Path|20|3?
+
