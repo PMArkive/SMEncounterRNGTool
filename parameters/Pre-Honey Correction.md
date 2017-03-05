@@ -14,7 +14,7 @@ Verdant Cavern*|5
 Lush Jungle|7
 Haina Desert|1
 Malie Garden|26
-Resolution Cave|1
+Resolution Cave - B1F|1
 Ten Carat Hill - Farthest Hollow|1
 
 ### Melemele Island
@@ -41,12 +41,11 @@ Mount Lanakila - Mountainside|1|0
 ### Poni Island
 Location|Correction|Least NPCs #
 :---|:---:|:---:
-Resolution Cave|1|0
 Exeggutor Island|3|0
-Poni Wilds - Grass|10|0
-Poni Wilds - Surfing|10|1
-Ancient Poni Path|20|3**
-Vast Poni Canyon - Inside|6|1**
+Poni Wilds - Grass|9*-10|0
+Poni Wilds - Surfing|10*-11|1
+Ancient Poni Path|20|3
+Vast Poni Canyon - Inside|6|1
 Vast Poni Canyon - Top|1|0
 Vast Poni Canyon - 2F|4|0
 Vast Poni Canyon - 3F|8|0
@@ -55,6 +54,9 @@ Vast Poni Canyon - B1F Walking|8|0
 Vast Poni Canyon - B1F Surfing|9|1
 Poni Grove|4|0
 Poni Plains|5*-9|1
+Poni Meadow|5|0
+Resolution Cave - 1F|3|0
+Resolution Cave - B1F|1|0
 Poni Gauntlet|11|4
 
 \* Clear all special spots<br>
