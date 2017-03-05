@@ -191,8 +191,10 @@
             this.L_E_Nature = new System.Windows.Forms.Label();
             this.Event_Gender = new System.Windows.Forms.ComboBox();
             this.Event_Nature = new System.Windows.Forms.ComboBox();
+            this.Event_PID = new SMEncounterRNGTool.HexNumericUpdown();
             this.L_PID = new System.Windows.Forms.Label();
             this.L_EC = new System.Windows.Forms.Label();
+            this.Event_EC = new SMEncounterRNGTool.HexNumericUpdown();
             this.Event_SID = new System.Windows.Forms.NumericUpDown();
             this.Event_TID = new System.Windows.Forms.NumericUpDown();
             this.OtherInfo = new System.Windows.Forms.CheckBox();
@@ -269,8 +271,6 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.Event_PID = new SMEncounterRNGTool.HexNumericUpdown();
-            this.Event_EC = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -322,6 +322,8 @@
             this.DGVMenuStrip.SuspendLayout();
             this.SearchTool.SuspendLayout();
             this.EventSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).BeginInit();
@@ -336,8 +338,6 @@
             this.SearchSeedBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -478,7 +478,7 @@
             this.Lv_max.Size = new System.Drawing.Size(35, 22);
             this.Lv_max.TabIndex = 65;
             this.Lv_max.Value = new decimal(new int[] {
-            19,
+            20,
             0,
             0,
             0});
@@ -534,7 +534,7 @@
             this.Lv_min.Size = new System.Drawing.Size(35, 22);
             this.Lv_min.TabIndex = 60;
             this.Lv_min.Value = new decimal(new int[] {
-            16,
+            17,
             0,
             0,
             0});
@@ -2056,33 +2056,33 @@
             this.SHControlPanel,
             this.HighLightFrameAfter});
             this.DGVMenuStrip.Name = "MenuStrip1";
-            this.DGVMenuStrip.Size = new System.Drawing.Size(195, 92);
+            this.DGVMenuStrip.Size = new System.Drawing.Size(205, 92);
             // 
             // SetStartFrame
             // 
             this.SetStartFrame.Name = "SetStartFrame";
-            this.SetStartFrame.Size = new System.Drawing.Size(194, 22);
+            this.SetStartFrame.Size = new System.Drawing.Size(204, 22);
             this.SetStartFrame.Text = "设为计时起点";
             this.SetStartFrame.Click += new System.EventHandler(this.SetStartFrame_Click);
             // 
             // SetTargetFrame
             // 
             this.SetTargetFrame.Name = "SetTargetFrame";
-            this.SetTargetFrame.Size = new System.Drawing.Size(194, 22);
+            this.SetTargetFrame.Size = new System.Drawing.Size(204, 22);
             this.SetTargetFrame.Text = "设为目标帧";
             this.SetTargetFrame.Click += new System.EventHandler(this.SetTargetFrame_Click);
             // 
             // SHControlPanel
             // 
             this.SHControlPanel.Name = "SHControlPanel";
-            this.SHControlPanel.Size = new System.Drawing.Size(194, 22);
+            this.SHControlPanel.Size = new System.Drawing.Size(204, 22);
             this.SHControlPanel.Text = "显示/隐藏控制面板";
             this.SHControlPanel.Click += new System.EventHandler(this.HideControlPanel);
             // 
             // HighLightFrameAfter
             // 
             this.HighLightFrameAfter.Name = "HighLightFrameAfter";
-            this.HighLightFrameAfter.Size = new System.Drawing.Size(194, 22);
+            this.HighLightFrameAfter.Size = new System.Drawing.Size(204, 22);
             this.HighLightFrameAfter.Text = "选中甜甜蜜后所击中帧";
             this.HighLightFrameAfter.Click += new System.EventHandler(this.HighLightFrameAfter_Click);
             // 
@@ -2212,6 +2212,19 @@
             this.Event_Nature.Size = new System.Drawing.Size(58, 21);
             this.Event_Nature.TabIndex = 61;
             // 
+            // Event_PID
+            // 
+            this.Event_PID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Event_PID.Enabled = false;
+            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_PID.Hexadecimal = true;
+            this.Event_PID.Location = new System.Drawing.Point(216, 367);
+            this.Event_PID.Name = "Event_PID";
+            this.Event_PID.Size = new System.Drawing.Size(77, 22);
+            this.Event_PID.TabIndex = 59;
+            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Event_PID.Visible = false;
+            // 
             // L_PID
             // 
             this.L_PID.AutoSize = true;
@@ -2230,6 +2243,18 @@
             this.L_EC.Size = new System.Drawing.Size(21, 13);
             this.L_EC.TabIndex = 57;
             this.L_EC.Text = "EC";
+            // 
+            // Event_EC
+            // 
+            this.Event_EC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Event_EC.Enabled = false;
+            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_EC.Hexadecimal = true;
+            this.Event_EC.Location = new System.Drawing.Point(61, 367);
+            this.Event_EC.Name = "Event_EC";
+            this.Event_EC.Size = new System.Drawing.Size(77, 22);
+            this.Event_EC.TabIndex = 8;
+            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Event_SID
             // 
@@ -3094,31 +3119,6 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
-            // Event_PID
-            // 
-            this.Event_PID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Event_PID.Enabled = false;
-            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Event_PID.Hexadecimal = true;
-            this.Event_PID.Location = new System.Drawing.Point(216, 367);
-            this.Event_PID.Name = "Event_PID";
-            this.Event_PID.Size = new System.Drawing.Size(77, 22);
-            this.Event_PID.TabIndex = 59;
-            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Event_PID.Visible = false;
-            // 
-            // Event_EC
-            // 
-            this.Event_EC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Event_EC.Enabled = false;
-            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Event_EC.Hexadecimal = true;
-            this.Event_EC.Location = new System.Drawing.Point(61, 367);
-            this.Event_EC.Name = "Event_EC";
-            this.Event_EC.Size = new System.Drawing.Size(77, 22);
-            this.Event_EC.TabIndex = 8;
-            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3195,6 +3195,8 @@
             this.SearchTool.PerformLayout();
             this.EventSetting.ResumeLayout(false);
             this.EventSetting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).EndInit();
@@ -3212,8 +3214,6 @@
             this.SearchSeedBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

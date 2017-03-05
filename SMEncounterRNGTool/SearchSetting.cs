@@ -21,6 +21,7 @@
             { 142, 80, 105, 65, 60, 75, 130},   //Aerodactyl
             { 137, 65, 60, 70, 85, 75, 40},     //Porygon
             { 142, 0, 0, 0, 0, 0, 0},           //Fossil 
+            { 739, 47, 82, 57, 42, 47, 63},     //Crabrawler
             { 793, 109, 53, 47, 127, 131, 103}, //Nihilego
             { 794, 107, 139, 139, 53, 53, 79 }, //Buzzwole
             { 795, 71, 137, 37, 137, 37, 151 }, //Pheromosa
@@ -36,7 +37,7 @@
         public const int TypeNull_index = 9;
         public const int Zygarde_index = 11;
         public const int Fossil_index = 15;
-        public const int UB_StartIndex = 16;
+        public const int UB_StartIndex = 17;
         public const int AlwaysSync_Index = 8;
         public static bool ShinyLocked(int index)
         {
@@ -56,6 +57,7 @@
             55,55,5,
             40,50,50,50,
             40,30,15, //Stationary
+            0,
             55,65,60,65,65,60,70,75        //UB
         };
 
@@ -66,6 +68,7 @@
             6,6,3,
             8,6,3,3,
             3,4,1, //Stationary
+            1,
             0,0,0,0,0,0,0,0        //UB
         };
 
@@ -76,6 +79,7 @@
             288,282,34,
             34,34,32,32,
             34,34,40,
+            8,
         };
 
         public readonly static int[] UB_rate =

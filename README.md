@@ -9,6 +9,8 @@ And ALL Pokemon RNG Researcher<br>
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
 - Any Wild Pokemon appear in SM (Can be shiny)
 - Pokemon given by NPC (Can be shiny): Type:Null, Porygon, Aerodactyl
+- Fossil Pokemon (Can be shiny): Cranidos, Tirtouga, Archen, Shieldon
+- Crabrawlers underneath Berry Trees (Can be shiny)
 - Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
 
 ## Usage
@@ -41,7 +43,8 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Zygarde: "Zygarde has gone into a Poke Ball!"
 - Solgaleo/Lunala: No dialogue, stand in front of it
 - UBs & wild Pokemon: "Use this item" (Honey)
-- Type:Null, Porygon, Aerodactyl, Magearna, Munchlax, Machamp and other event Pokemon: "You received xxx!"
+- Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
+- Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.

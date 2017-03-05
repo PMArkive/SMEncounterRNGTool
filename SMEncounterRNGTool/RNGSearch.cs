@@ -18,7 +18,7 @@ namespace SMEncounterRNGTool
 
         public bool Wild, Honey, UB;
         public int Lv_max, Lv_min;
-        public int UB_th;
+        public int UB_th, Encounter_th;
         public bool IsUB = false;
         public bool nogender;
         public int gender_ratio;
@@ -146,8 +146,7 @@ namespace SMEncounterRNGTool
             //UB is determined above
             bool Listed = IsUB || !Wild;
             bool IsShinyLocked = IsUB || ShinyLocked;
-            if (Listed)
-                st.Lv = PokeLv;
+            if (Listed) st.Lv = PokeLv;
 
             // Wild Normal Pokemon
             bool IsWild = Wild && !IsUB;
@@ -364,7 +363,7 @@ namespace SMEncounterRNGTool
         {
             if (!Wild)
                 ButtonPressDelay();          //4-6F
-            if (Honey)                          
+            if (Honey)
             {
                 ResetModelStatus();
                 time_elapse(1);              //Blink process also occurs when loading map

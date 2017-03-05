@@ -922,6 +922,7 @@ namespace SMEncounterRNGTool
                 Lv_min = (int)Lv_min.Value,
                 Lv_max = (int)Lv_max.Value,
                 UB_th = (int)UB_th.Value,
+                Encounter_th = (int)Encounter_th.Value,
                 ShinyLocked = SearchSetting.ShinyLocked(Poke.SelectedIndex),
             };
             return rng;
@@ -1043,16 +1044,19 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Save();
 
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
-            Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
-            if (Poke.SelectedIndex == 0) Wild.Checked = true;
+            Stationary.Checked = Poke.SelectedIndex < UB_StartIndex - 1;
+            if (Poke.SelectedIndex == 0 || Poke.SelectedIndex == UB_StartIndex - 1) Wild.Checked = true;
             Method_CheckedChanged(null, null);
-            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
+            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex - 1);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             //Enable
             ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex < 2) || (Poke.SelectedIndex >= UB_StartIndex);
             //1
             L_EventInstruction.Visible = IsEvent;
+            //Crabrawler
+            if (Poke.SelectedIndex == UB_StartIndex - 1) Honey.Checked = false;
+            Encounter_th.Enabled = Poke.SelectedIndex != UB_StartIndex - 1;
 
             if (Poke.SelectedIndex == 0) return;
             ConsiderDelay.Checked = true;
@@ -1085,6 +1089,8 @@ namespace SMEncounterRNGTool
                 case Fossil_index:
                     Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
                     L_gender.Visible = Gender.Visible = true; break;
+                case Fossil_index + 1:
+                    Encounter_th.Value = 100; ConsiderBlink.Checked = false; break;
             }
         }
 
