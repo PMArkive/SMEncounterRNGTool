@@ -57,6 +57,7 @@ namespace SMEncounterRNGTool
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
         private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
+        private static readonly string[] FOSSIL_STR = { "<Fossil>", "<化石>" };
         private static readonly string[] FILEERRORSTR = { "Invalid file for event Pokemon", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
         {
@@ -99,6 +100,7 @@ namespace SMEncounterRNGTool
                 Poke.Items[i + 1] = species[SearchSetting.pokedex[i, 0]];
             Poke.Items[SearchSetting.Zygarde_index] += "-10%";
             Poke.Items[SearchSetting.Zygarde_index + 1] += "-50%";
+            Poke.Items[SearchSetting.Fossil_index] = FOSSIL_STR[lindex];
         }
         #endregion
 
@@ -1034,12 +1036,14 @@ namespace SMEncounterRNGTool
         {
             const int UB_StartIndex = SearchSetting.UB_StartIndex;
             const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
+            const int Fossil_index = SearchSetting.Fossil_index;
             //General
             Properties.Settings.Default.Pokemon = (byte)Poke.SelectedIndex;
             Properties.Settings.Default.Save();
 
             UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex;
+            if (Poke.SelectedIndex == 0) Wild.Checked = true;
             Method_CheckedChanged(null, null);
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
@@ -1071,12 +1075,15 @@ namespace SMEncounterRNGTool
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
                     Fix3v.Checked = false; Timedelay.Value = YourID.Checked ? 62 : 0;
                     break;
-                case UB_StartIndex - 2:
+                case Fossil_index - 2:
                     Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
                     L_gender.Visible = Gender.Visible = true; break;
-                case UB_StartIndex - 1:
+                case Fossil_index - 1:
                     Fix3v.Checked = false;
                     L_Ability.Visible = Ability.Visible = true; break;
+                case Fossil_index:
+                    Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
+                    L_gender.Visible = Gender.Visible = true; break;
             }
         }
 
