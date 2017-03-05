@@ -6,11 +6,11 @@
 
 ### UB
 Location|Correction
-:---:|:---:
+:---|:---:
 Wela Volcano Park|9
 Diglett's Tunnel|13
 Melemele Meadow|5
-Verdant Cavern|5
+Verdant Cavern*|5
 Lush Jungle|7
 Haina Desert|1
 Malie Garden|26
@@ -18,34 +18,44 @@ Resolution Cave|1
 Ten Carat Hill - Farthest Hollow|1
 
 ### Melemele Island
-Location|Correction|Least NPCs Number
-:---:|:---:|:---:
-Verdant Cavern|5|0
+Location|Correction|Least NPCs #
+:---|:---:|:---:
+Verdant Cavern*|5|0
 Melemele Meadow|5|0
 Ten Carat Hill - Farthest Hollow|1|0
 
 ### Akala Island
-Location|Correction|Least NPCs Number
-:---:|:---:|:---:
+Location|Correction|Least NPCs #
+:---|:---:|:---:
 Wela Volcano Park|9|0
 Diglett's Tunnel|13|0
 Lush Jungle|7|0
 
 ### Ula'ula Island
-Location|Correction|Least NPCs Number
-:---:|:---:|:---:
+Location|Correction|Least NPCs #
+:---|:---:|:---:
 Haina Desert|1|0
 Malie Garden|26|0
 Mount Lanakila - Mountainside|1|0
 
 ### Poni Island
-Location|Correction|Least NPCs Number
-:---:|:---:|:---:
+Location|Correction|Least NPCs #
+:---|:---:|:---:
 Resolution Cave|1|0
 Exeggutor Island|3|0
 Poni Wilds - Grass|10|0
 Poni Wilds - Surfing|10|1
-Ancient Poni Path|20|3?
-Vast Poni Canyon - Inside|6|3?
+Ancient Poni Path|20|3**
+Vast Poni Canyon - Inside|6|1**
 Vast Poni Canyon - Top|1|0
+Vast Poni Canyon - 2F|4|0
+Vast Poni Canyon - 3F|8|0
 Vast Poni Canyon - Under Tree|15|0
+Vast Poni Canyon - B1F Walking|8|0
+Vast Poni Canyon - B1F Surfing|9|1
+Poni Grove|4|0
+Poni Plains|5*-9|1
+Poni Gauntlet|11|4
+
+\* Clear all special spots<br>
+\*\* Remain to be confirmed 
