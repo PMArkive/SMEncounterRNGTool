@@ -420,7 +420,6 @@ namespace SMEncounterRNGTool
 
             Fix3v.Checked = Stationary.Checked;
             GenderRatio.SelectedIndex = Stationary.Checked ? 0 : 1;
-            label10.Text = Wild.Checked ? "F" : "+4F   1F=1/60s";
 
             UB_CheckedChanged(null, null);
             ConsiderDelay_CheckedChanged(null, null);
@@ -460,6 +459,7 @@ namespace SMEncounterRNGTool
                 if (Wild.Checked) Timedelay.Value = 0;
             }
 
+            label10.Text = Honey.Checked ? "F" : "+4F   1F=1/60s";
             L_Correction.Visible = Correction.Visible = Honey.Checked;
             Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
         }
@@ -513,12 +513,13 @@ namespace SMEncounterRNGTool
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
             TimeSpan.Enabled = CreateTimeline.Checked;
-            AroundTarget.Enabled = ShowResultsAfterDelay.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            AroundTarget.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            ShowResultsAfterDelay.Enabled = !CreateTimeline.Checked && ConsiderDelay.Checked;
             Frame_max.Visible = label7.Visible = !CreateTimeline.Checked;
             L_StartingPoint.Visible = CreateTimeline.Checked;
             if (CreateTimeline.Checked)
                 AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
-            ShowResultsAfterDelay.Checked = true;
+            ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
         }
 
 
@@ -646,7 +647,7 @@ namespace SMEncounterRNGTool
             Ability.SelectedIndex = 0;
             Slot.Text = "";
 
-            if (ByIVs.Checked && Wild.Checked && Lv_Search.Value <= Lv_max.Value)
+            if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Lv_Search.Value <= Lv_max.Value))
                 Lv_Search.Value = 0;
             for (int i = 0; i < 6; i++)
             {

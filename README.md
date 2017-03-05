@@ -26,7 +26,7 @@ And ALL Pokemon RNG Researcher<br>
 
 ### With PokeCalcNTR
  1. Select the `Pokemon` you would like to RNG.
- 2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a)).
+ 2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
  3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
  4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
  5. Click `Search`, you will see the game will follow timeline the tool created.
