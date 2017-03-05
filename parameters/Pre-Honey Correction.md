@@ -7,15 +7,17 @@
 ### UB
 Location|Correction
 :---|:---:
-Wela Volcano Park|9
-Diglett's Tunnel|13
-Melemele Meadow|5
-Verdant Cavern*|5
-Lush Jungle|7
+Wela Volcano Park - Bottom|9
+**Diglett's Tunnel**|**13**
+**Melemele Meadow**|**5**
+**Verdant Cavern\***|**5**
+**Lush Jungle - South**|**7**
+Memorial Hill|12
 Haina Desert|1
-Malie Garden|26
-Resolution Cave - B1F|1
-Ten Carat Hill - Farthest Hollow|1
+**Malie Garden**|**26**
+Route 17|2+12
+**Resolution Cave - B1F**|**1**
+**Ten Carat Hill - Farthest Hollow**|**1**
 
 ### Melemele Island
 Location|Correction|Least NPCs #
@@ -27,9 +29,10 @@ Ten Carat Hill - Farthest Hollow|1|0
 ### Akala Island
 Location|Correction|Least NPCs #
 :---|:---:|:---:
-Wela Volcano Park|9|0
+Wela Volcano Park - Bottom|9|0
 Diglett's Tunnel|13|0
-Lush Jungle|7|0
+Lush Jungle - South|7|0
+Memorial Hill|12|1
 
 ### Ula'ula Island
 Location|Correction|Least NPCs #
@@ -37,6 +40,7 @@ Location|Correction|Least NPCs #
 Haina Desert|1|0
 Malie Garden|26|0
 Mount Lanakila - Mountainside|1|0
+Route 17|2+12|1+3
 
 ### Poni Island
 Location|Correction|Least NPCs #
@@ -54,7 +58,7 @@ Vast Poni Canyon - B1F Walking|8|0
 Vast Poni Canyon - B1F Surfing|9|1
 Poni Grove|4|0
 Poni Plains|5*-9|1
-Poni Meadow|5|0
+Poni Meadow|2+3|0
 Resolution Cave - 1F|3|0
 Resolution Cave - B1F|1|0
 Poni Gauntlet|11|4
