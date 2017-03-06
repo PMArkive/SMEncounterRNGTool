@@ -2,7 +2,7 @@
 186F = 3.1s
 
 ## Pre-Honey Correction
-`Correction` of seed frame number in this tool. There are some random numbers consumption while loading the map before the honey animation, which varies from place to place.
+`Correction` for seed frame advance in this tool. There is a random numbers consumption while loading the map before the honey animation, which varies from place to place.
 
 ### UB
 Location|Correction
