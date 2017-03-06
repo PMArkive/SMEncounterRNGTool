@@ -213,6 +213,7 @@ namespace SMEncounterRNGTool
             }
             else
                 index++;
+            if (AlwaysSynchro && Synchro_Stat == -1) index++;
 
             //Gender
             if (nogender || IsUB)
