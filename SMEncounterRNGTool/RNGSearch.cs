@@ -363,14 +363,14 @@ namespace SMEncounterRNGTool
 
         public int getframeshift()
         {
-            if (!Wild)
-                ButtonPressDelay();          //4-6F
             if (Honey)
             {
                 ResetModelStatus();
                 time_elapse(1);              //Blink process also occurs when loading map
                 index = PreDelayCorrection;  //Pre-HoneyCorrection
             }
+            else
+                ButtonPressDelay();          //4-6F
             time_delay();
             return index;
         }

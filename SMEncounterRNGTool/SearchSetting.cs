@@ -79,7 +79,7 @@
             288,282,34,
             34,34,32,32,
             34,34,40,
-            8,
+            4,
         };
 
         public readonly static int[] UB_rate =
