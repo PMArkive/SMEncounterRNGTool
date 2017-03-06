@@ -333,7 +333,8 @@ namespace SMEncounterRNGTool
         private int getUBValue()
         {
             int UbValue = (int)(getrand() % 100);
-            Fix3v = IsUB = UbValue < UB_th;
+            IsUB = UbValue < UB_th;
+            if (IsUB) Fix3v = true;
             return UbValue;
         }
 
@@ -395,7 +396,6 @@ namespace SMEncounterRNGTool
             if (IsSolgaleo || IsLunala)
             {
                 int crydelay = IsSolgaleo ? 79 : 76;
-
                 time_elapse(delaytime - crydelay - 19);
                 if (modelnumber == 7) Rearrange();
                 time_elapse(19);
