@@ -122,7 +122,7 @@ namespace SMEncounterRNGTool
             }
             else if (!Wild)
             {
-                if (AlwaysSynchro)
+                if (AlwaysSynchro && Synchro_Stat > -1)
                     st.Synchronize = true;
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
@@ -213,7 +213,6 @@ namespace SMEncounterRNGTool
             }
             else
                 index++;
-            if (AlwaysSynchro && Synchro_Stat == -1) index++;
 
             //Gender
             if (nogender || IsUB)
