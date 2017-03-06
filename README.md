@@ -7,11 +7,12 @@ And ALL Pokemon RNG Researcher<br>
 
 ## Following Pokemon are supported:
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
-- Any Wild Pokemon appear in SM (Can be shiny)
-- Pokemon given by NPC (Can be shiny): Type:Null, Porygon, Aerodactyl
-- Fossil Pokemon (Can be shiny): Cranidos, Tirtouga, Archen, Shieldon
-- Crabrawlers underneath Berry Trees (Can be shiny)
 - Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
+- Pokemon given by NPC: Type:Null, Porygon, Aerodactyl
+- Any Wild Pokemonx appear in SM
+- Fossil Pokemon: Cranidos, Tirtouga, Archen, Shieldon
+- Crabrawlers underneath Berry Trees
+- SM Starters: _PokeCalcNTR Only, select `<Fossil>`, change `# of NPCs` to 5. (This function will not be added to this tool.)_
 
 ## Usage
 ### With emtimer/EonTimer
@@ -45,6 +46,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - UBs & wild Pokemon: "Use this item" (Honey)
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
+- Starters: "Having accepted on another, you'll surely be friends for life"
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
