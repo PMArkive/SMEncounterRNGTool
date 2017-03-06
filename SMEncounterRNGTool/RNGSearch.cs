@@ -122,8 +122,8 @@ namespace SMEncounterRNGTool
             }
             else if (!Wild)
             {
-                if (AlwaysSynchro && Synchro_Stat > -1)
-                    st.Synchronize = true;
+                if (AlwaysSynchro)
+                { if (Synchro_Stat > -1) st.Synchronize = true; }
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
             }

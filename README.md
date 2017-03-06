@@ -12,7 +12,7 @@ And ALL Pokemon RNG Researcher<br>
 - Any Wild Pokemonx appear in SM
 - Fossil Pokemon: Cranidos, Tirtouga, Archen, Shieldon
 - Crabrawlers underneath Berry Trees
-- SM Starters: _PokeCalcNTR Only, select `<Fossil>`, change `# of NPCs` to 5. (This function will not be added to this tool.)_
+- SM Starters: _PokeCalcNTR Only, select `<Fossil>`, change `# of NPCs` to 5. (This function will not be added)_
 
 ## Usage
 ### With emtimer/EonTimer
