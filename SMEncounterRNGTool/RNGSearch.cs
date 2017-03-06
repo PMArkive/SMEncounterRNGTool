@@ -220,10 +220,6 @@ namespace SMEncounterRNGTool
             else
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
-            //SpecialWild
-            if (SpecialWild)
-                Advance(0);
-
             //Item
             if (IsWild)
                 st.Item = (int)(getrand() % 100);
