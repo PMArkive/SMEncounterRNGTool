@@ -37,8 +37,12 @@ Memorial Hill|12|1
 ### Ula'ula Island
 Location|Correction|Least NPCs #
 :---|:---:|:---:
-Haina Desert|1|0
+Malie City - Outer Cape|9|4
 Malie Garden|26|0
+Route 10|19|2
+Mount Hokulani|16|0
+Route 11|19|2
+Haina Desert|1|0
 Mount Lanakila - Mountainside|1|0
 Route 17|2+12|1+3
 
