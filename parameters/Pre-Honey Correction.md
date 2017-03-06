@@ -41,10 +41,22 @@ Malie City - Outer Cape|9|4
 Malie Garden|26|0
 Route 10|19|2
 Mount Hokulani|16|0
-Route 11|19|2
+Route 11|10|2
+Route 12|11|0
+Secluded Shore - Surfing|12|1
+Blush Mountain|3|1
 Haina Desert|1|0
+Tapu Village|11|0
+Route 14 - Surfing|12|1
+Thrifty Megamart|1|0
+Route 15 - Walking|20|3
+Route 15 - Surfing|21|1
+Route 16|10|0
+Ula'ula Meadow|2+6|0
+Route 17|2+12|0+2
 Mount Lanakila - Mountainside|1|0
-Route 17|2+12|1+3
+Mount Lanakila - Cave|1|0
+Mount Lanakila - Mid-Point|1|0
 
 ### Poni Island
 Location|Correction|Least NPCs #
