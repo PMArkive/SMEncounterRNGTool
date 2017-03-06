@@ -94,7 +94,7 @@ namespace SMEncounterRNGTool
             st.Clock = (byte)(st.row_r % 17);
 
             // Reset model Status
-            if (!createtimeline || Honey)
+            if (!createtimeline)
                 ResetModelStatus();
 
             // ---Start here when press A button---
