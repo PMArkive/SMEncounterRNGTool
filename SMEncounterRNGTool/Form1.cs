@@ -686,7 +686,7 @@ namespace SMEncounterRNGTool
 
         private byte[] getblinkflaglist(int min, int max, SFMT sfmt)
         {
-            byte[] blinkflaglist = new byte[max - min + 1];
+            byte[] blinkflaglist = new byte[max - min + 2];
             int Model_n = ModelNumber;
             SFMT st = (SFMT)sfmt.DeepCopy();
             int blink_flag = 0;
