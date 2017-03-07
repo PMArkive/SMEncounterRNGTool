@@ -23,10 +23,20 @@ Route 17|2+12
 Location|Correction|Least NPCs #
 :---|:---:|:---:
 Route 1|15|0/0/2
+Route 1 - Hau'oli Outskirts|23|1
+Route 1 - Trainer School|9|0
+Melemele Sea - East|9|1
+Melemele Sea - West|5|1
 Route 2|21|0/1
-Route 3|15|0
+Route 3|15|0/1
+Hau'oli City- Shopping District|27|
+Hau'oli City- Beachfront|17|
 Verdant Cavern*|5|0
 Melemele Meadow|5|0
+Seaward Cave|1|0
+Kala'e bay - Walking|1|0
+Kala'e bay - Surfing|2|1
+Ten Carat Hill - Cave|2|0
 Ten Carat Hill - Farthest Hollow|1|0
 
 ### Akala Island
@@ -83,5 +93,5 @@ Resolution Cave - B1F|1|0
 Poni Gauntlet|11|4
 
 \* Clear all special spots<br>
-\*\* Remain to be confirmed 
+\*\* Remain to be confirmed <br>
 Some area may have multiple encounter tables, so the least npcs number might be different. For the details of encounter slots please visit serebii.net.<br>
