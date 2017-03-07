@@ -9,7 +9,7 @@ And ALL Pokemon RNG Researcher<br>
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
 - Event Pokemon via Mystery Gift: Magearna, Munchlax, Machamp, lunar shiny Magikarp etc.
 - Pokemon given by NPC: Type:Null, Porygon, Aerodactyl
-- Any Wild Pokemonx appear in SM
+- Any Wild Pokemon appear in SM
 - Fossil Pokemon: Cranidos, Tirtouga, Archen, Shieldon
 - Crabrawlers underneath Berry Trees
 - SM Starters: _PokeCalcNTR Only, select `<Fossil>`, change `# of NPCs` to 5. (This function will not be added)_
@@ -33,7 +33,7 @@ And ALL Pokemon RNG Researcher<br>
  3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
  4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
  5. Click `Search`, you will see the game will follow timeline the tool created.
- 6. Now all the frame in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
+ 6. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
  7. Just change the `Filters` and make another search as usual.
  Warning: Do NOT change the `Starting Frame` of timeline when you are following it.
 
@@ -43,7 +43,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Tapus: Tapus' cry screen before the battle starts
 - Zygarde: "Zygarde has gone into a Poke Ball!"
 - Solgaleo/Lunala: No dialogue, stand in front of it
-- UBs & wild Pokemon: "Use this item" (Honey)
+- UBs & wild Pokemon: "Use this item" (Honey). If you would like to find the timing of entering bag, please add 6*(NPC+1) to `Correction`.
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 - Starters: "Having accepted on another, you'll surely be friends for life"
@@ -51,7 +51,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
 - ?: The spread might be affected by the history of NPC status so it's unsafe. 
-- -: The safe frames the tool can 100% predict.
+- -: The safe frames can be 100% predicted.
 
 ## Some Parameters:
 - [UB Rate(%)](parameters/UB Rate.md)

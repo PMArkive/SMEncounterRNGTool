@@ -2,7 +2,7 @@
 186F = 3.1s
 
 ## Pre-Honey Correction
-`Correction` for seed frame advance in this tool. There is a random numbers consumption while loading the map before the honey animation, which varies from place to place.
+`Correction` for seed frame advance in this tool. There is a random numbers consumption while loading the map before the honey animation, which varies from place to place.<br>
 
 ### UB
 Location|Correction
@@ -30,8 +30,8 @@ Melemele Sea - West|5|1
 Route 2|21|0/1
 Verdant Cavern|5*-10|0
 Route 3|15|0/1
-Hau'oli City- Shopping District|27|1
-Hau'oli City- Beachfront|17|2
+Hau'oli City- Shopping District|27|0
+Hau'oli City- Beachfront|17|1
 Melemele Meadow|5|0
 Seaward Cave|1|0
 Kala'e bay - Walking|1|0
@@ -95,3 +95,4 @@ Poni Gauntlet|11|4
 \* Clear all special spots<br>
 \*\* Remain to be confirmed <br>
 Some area may have multiple encounter tables, so the least npcs number might be different. For the details of encounter slots please visit serebii.net.<br>
+Specific Spots please visit [here](http://pokerng.forumcommunity.net/?t=59574488) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.

@@ -109,6 +109,7 @@ namespace SMEncounterRNGTool
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
+            //Fishing
             if (Wild && fishing)
             {
                 st.Encounter = (int)(getrand() % 100);
