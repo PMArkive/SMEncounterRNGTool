@@ -28,10 +28,10 @@ Route 1 - Trainer School|9|0
 Melemele Sea - East|9|1
 Melemele Sea - West|5|1
 Route 2|21|0/1
+Verdant Cavern|5*-10|0
 Route 3|15|0/1
-Hau'oli City- Shopping District|27|
-Hau'oli City- Beachfront|17|
-Verdant Cavern*|5|0
+Hau'oli City- Shopping District|27|1
+Hau'oli City- Beachfront|17|2
 Melemele Meadow|5|0
 Seaward Cave|1|0
 Kala'e bay - Walking|1|0
