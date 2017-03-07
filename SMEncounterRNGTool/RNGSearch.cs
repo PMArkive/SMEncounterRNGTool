@@ -23,7 +23,7 @@ namespace SMEncounterRNGTool
         public bool nogender;
         public int gender_ratio;
 
-        public static bool createtimeline;
+        public static bool Considerhistory;
         public static bool Considerdelay;
         public static int PreDelayCorrection = 0;
         public static int delaytime = 93; //For honey 186F =3.1s
@@ -94,7 +94,7 @@ namespace SMEncounterRNGTool
             st.Clock = (byte)(st.row_r % 17);
 
             // Reset model Status
-            if (!createtimeline)
+            if (!Considerhistory)
                 ResetModelStatus();
 
             // ---Start here when press A button---
@@ -236,7 +236,7 @@ namespace SMEncounterRNGTool
             st.Clock = (byte)(st.row_r % 17);
 
             // Reset model Status
-            if (!createtimeline)
+            if (!Considerhistory)
                 ResetModelStatus();
 
             // ---Start here when press A button---
@@ -251,26 +251,24 @@ namespace SMEncounterRNGTool
             st.EC = e.EC > 0 ? e.EC : (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
-            st.PID = e.PIDType == 3 ? e.PID : (uint)(getrand() & 0xFFFFFFFF);
-            st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
-            if (st.PSV == e.TSV && e.PIDType < 2)
+            switch (e.PIDType)
             {
-                if (e.PIDType == 0) // Random
-                    st.Shiny = true;
-                else if (e.PIDType == 1) // Random NonShiny
-                {
-                    st.PID = st.PID ^ 0x10000000;
-                    st.PSV = st.PSV ^ 0x100;
-                }
-            }
-            else if (e.PIDType == 2)// Random Shiny
-            {
-                if (e.OtherInfo)
-                {
-                    st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
-                    st.PSV = e.TSV;
-                }
-                st.Shiny = true;
+                case 0: //Random PID
+                    st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+                    if (st.PSV == e.TSV) st.Shiny = true;
+                    break;
+                case 1: //Random NonShiny
+                    st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+                    if (st.PSV == e.TSV)
+                    {
+                        st.PID = st.PID ^ 0x10000000; st.PSV = st.PSV ^ 0x100;
+                    }
+                    break;
+                case 2: //Random Shiny
+                    st.Shiny = true; st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = e.TSV;
+                    if (e.OtherInfo) st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
+                    break;
+                case 3: st.PID = e.PID; break;//Specified
             }
 
             //IV

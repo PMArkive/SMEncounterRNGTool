@@ -897,7 +897,7 @@ namespace SMEncounterRNGTool
                 case 4: gender_threshold = 189; break;
             }
 
-            RNGSearch.createtimeline = CreateTimeline.Checked;
+            RNGSearch.Considerhistory = CreateTimeline.Checked;
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
