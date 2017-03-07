@@ -19,9 +19,14 @@ Route 17|2+12
 **Resolution Cave - B1F**|**1**
 **Ten Carat Hill - Farthest Hollow**|**1**
 
+Some area may have multiple encounter tables, so the least npcs number might be different. For the details of encounter slots please visit serebii.net.<br>
+
 ### Melemele Island
 Location|Correction|Least NPCs #
 :---|:---:|:---:
+Route 1|15|0/0/2
+Route 2|21|0/1
+Route 3|15|0
 Verdant Cavern*|5|0
 Melemele Meadow|5|0
 Ten Carat Hill - Farthest Hollow|1|0
@@ -42,9 +47,9 @@ Malie Garden|26|0
 Route 10|19|2
 Mount Hokulani|16|0
 Route 11|10|2
-Route 12|11|0
+Route 12|11|0/1
 Secluded Shore - Surfing|12|1
-Blush Mountain|3|1
+Blush Mountain|3|1/1
 Haina Desert|1|0
 Tapu Village|11|0
 Route 14 - Surfing|12|1
@@ -73,7 +78,7 @@ Vast Poni Canyon - Under Tree|15|0
 Vast Poni Canyon - B1F Walking|8|0
 Vast Poni Canyon - B1F Surfing|9|1
 Poni Grove|4|0
-Poni Plains|5*-9|1
+Poni Plains|5*-9|1/1/1/1
 Poni Meadow|2+3|0
 Resolution Cave - 1F|3|0
 Resolution Cave - B1F|1|0
