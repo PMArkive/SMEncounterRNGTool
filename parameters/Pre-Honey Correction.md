@@ -19,8 +19,6 @@ Route 17|2+12
 **Resolution Cave - B1F**|**1**
 **Ten Carat Hill - Farthest Hollow**|**1**
 
-Some area may have multiple encounter tables, so the least npcs number might be different. For the details of encounter slots please visit serebii.net.<br>
-
 ### Melemele Island
 Location|Correction|Least NPCs #
 :---|:---:|:---:
@@ -58,7 +56,7 @@ Route 15 - Walking|20|3
 Route 15 - Surfing|21|1
 Route 16|10|0
 Ula'ula Meadow|2+6|0
-Route 17|2+12|0+2
+Route 17\*\*|2+12|0+2
 Mount Lanakila - Mountainside|1|0
 Mount Lanakila - Cave|1|0
 Mount Lanakila - Mid-Point|1|0
@@ -86,3 +84,4 @@ Poni Gauntlet|11|4
 
 \* Clear all special spots<br>
 \*\* Remain to be confirmed 
+Some area may have multiple encounter tables, so the least npcs number might be different. For the details of encounter slots please visit serebii.net.<br>
