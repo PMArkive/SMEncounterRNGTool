@@ -58,7 +58,7 @@ namespace SMEncounterRNGTool
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
         private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
         private static readonly string[] FOSSIL_STR = { "<Fossil>", "<化石>" };
-        private static readonly string[] FILEERRORSTR = { "Invalid file for event Pokemon", "文件格式不正确" };
+        private static readonly string[] FILEERRORSTR = { "Invalid file!", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
         {
             { "Random PID", "Random Nonshiny", "Random Shiny","Specified"},
@@ -426,7 +426,7 @@ namespace SMEncounterRNGTool
             Honey_CheckedChanged(null, null);
 
             Reset_Click(null, null);
-            GenderRatio.Visible = UB.Visible = Honey.Visible = Wild.Checked;
+            GenderRatio.Visible = Honey.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
         }
@@ -452,6 +452,7 @@ namespace SMEncounterRNGTool
             {
                 Timedelay.Value = 186;
                 ConsiderDelay.Checked = true;
+                Fishing.Checked = false;
             }
             else
             {
@@ -462,6 +463,13 @@ namespace SMEncounterRNGTool
             label10.Text = Honey.Checked ? "F" : "+4F   1F=1/60s";
             L_Correction.Visible = Correction.Visible = Honey.Checked;
             Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
+        }
+
+
+        private void Fishing_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Fishing.Checked)
+            { Honey.Checked = false; Encounter_th.Value = 100; }
         }
 
         private void ConsiderDelay_CheckedChanged(object sender, EventArgs e)
@@ -509,7 +517,6 @@ namespace SMEncounterRNGTool
                 ConsiderBlink.Checked = false;
         }
 
-
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
             TimeSpan.Enabled = CreateTimeline.Checked;
@@ -521,7 +528,6 @@ namespace SMEncounterRNGTool
                 AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
             ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
         }
-
 
         private void YourID_CheckedChanged(object sender, EventArgs e)
         {
@@ -924,6 +930,7 @@ namespace SMEncounterRNGTool
                 UB_th = (int)UB_th.Value,
                 Encounter_th = (int)Encounter_th.Value,
                 ShinyLocked = SearchSetting.ShinyLocked(Poke.SelectedIndex),
+                fishing = Fishing.Checked,
             };
             return rng;
         }
@@ -1043,14 +1050,14 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Pokemon = (byte)Poke.SelectedIndex;
             Properties.Settings.Default.Save();
 
-            UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
+            UB.Visible = UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
             Stationary.Checked = Poke.SelectedIndex < UB_StartIndex - 1;
             if (Poke.SelectedIndex == 0 || Poke.SelectedIndex == UB_StartIndex - 1) Wild.Checked = true;
             Method_CheckedChanged(null, null);
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index) && (Poke.SelectedIndex < UB_StartIndex - 1);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             //Enable
-            ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
+            Fishing.Visible = ConsiderBlink.Enabled = Stationary.Enabled = Wild.Enabled = AlwaysSynced.Enabled = Poke.SelectedIndex == 0;
             Fix3v.Enabled = (Poke.SelectedIndex < 2) || (Poke.SelectedIndex >= UB_StartIndex);
             //1
             L_EventInstruction.Visible = IsEvent;
@@ -1090,7 +1097,7 @@ namespace SMEncounterRNGTool
                     Fix3v.Checked = false; GenderRatio.SelectedIndex = 2;
                     L_gender.Visible = Gender.Visible = true; break;
                 case Fossil_index + 1:
-                    Encounter_th.Value = 100; ConsiderBlink.Checked = false; break;
+                    Encounter_th.Value = 101; ConsiderBlink.Checked = false; break;
             }
         }
 
@@ -1312,5 +1319,6 @@ namespace SMEncounterRNGTool
             if (!GenderLocked.Checked) Event_Ability.SelectedIndex = 0;
         }
         #endregion
+
     }
 }

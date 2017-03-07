@@ -16,7 +16,7 @@ namespace SMEncounterRNGTool
 
         public int PokeLv;
 
-        public bool Wild, Honey, UB;
+        public bool Wild, Honey, UB, fishing;
         public int Lv_max, Lv_min;
         public int UB_th, Encounter_th;
         public bool IsUB = false;
@@ -109,6 +109,12 @@ namespace SMEncounterRNGTool
             if (Wild && UB && Honey)
                 st.UbValue = getUBValue();
 
+            if (Wild && fishing)
+            {
+                st.Encounter = (int)(getrand() % 100);
+                time_elapse(12);
+            }
+
             //Synchronize
             if (Wild && !IsUB)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
@@ -129,8 +135,8 @@ namespace SMEncounterRNGTool
             }
 
             // Encounter
-            bool SpecialWild = Wild && !Honey && Encounter_th == 100;
-            if (Wild && !Honey && !SpecialWild)
+            bool SpecialWild = Wild && !Honey && Encounter_th == 101;
+            if (Wild && !Honey && !SpecialWild && !fishing)
                 st.Encounter = (int)(getrand() % 100);
 
             // UB w/o Honey

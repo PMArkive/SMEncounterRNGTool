@@ -26,6 +26,7 @@ SearchTool = Tool Kit
 Condition = Conditions
 L_Poke = Pokemon
 UB = UB
+Fishing = Fishing
 Honey = Honey
 Wild = Wild
 Stationary = Stationary
