@@ -17,7 +17,7 @@ And ALL Pokemon RNG Researcher<br>
 ## Usage
 ### With emtimer/EonTimer
 1. Select the `Pokemon` you would like to RNG. (For Solgaleo/Lunala, you need to test the NPCs number first)
-2. Find your `Seed` via the clock hands sequence on Continue Screen
+2. Find your `Seed` via the clock hands sequence on Continue ScreenWhen you get something on your hook
 3. Set up the `Filters` and click `Search`
 4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
 5. Put your current frame into the first box of `Timing Range`. (The tool will automatically set this value when you are using the `Tool Kit` Tab)
@@ -46,6 +46,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 - Starters: "Having accepted on another, you'll surely be friends for life"
+- Fishing: When you get something on your hook (Unstable)
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
