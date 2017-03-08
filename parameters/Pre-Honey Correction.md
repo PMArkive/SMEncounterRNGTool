@@ -53,9 +53,15 @@ Lush Jungle - Cave|2|0
 Brooklet Hill - Walking|5-7|1
 Brooklet Hill - Surfing|6|2
 Brooklet Hill - Totem's Den|3|1
+Route 6|9|2/2
+Route 7 - Surfing|9|1
 Wela Volcano Park - Bottom|9|0
+Route 8 - Walking|15*-16|0
+Route 8 - Surfing|16*-17|3
+Hano Beach**|24*-26|1
 Diglett's Tunnel|13|0
 Memorial Hill|12|1
+Akala Outskirts|7|2
 
 ### Ula'ula Island
 Location|Correction|Least NPCs #
