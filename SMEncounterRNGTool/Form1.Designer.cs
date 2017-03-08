@@ -1415,6 +1415,7 @@
             this.L_IVRange.Size = new System.Drawing.Size(67, 13);
             this.L_IVRange.TabIndex = 73;
             this.L_IVRange.Text = "个体值范围";
+            this.L_IVRange.DoubleClick += new System.EventHandler(this.L_IVRange_Click);
             // 
             // ivmin0
             // 

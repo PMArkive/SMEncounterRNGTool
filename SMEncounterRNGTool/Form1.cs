@@ -1227,6 +1227,11 @@ namespace SMEncounterRNGTool
             Result_Text.Text = NORESULT_STR[lindex];
         }
 
+        private void L_IVRange_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 6; i++)
+                IVup[i].Value = IVlow[i].Value;
+        }
         #endregion
 
         #region WC7 Import
@@ -1319,6 +1324,5 @@ namespace SMEncounterRNGTool
             if (!GenderLocked.Checked) Event_Ability.SelectedIndex = 0;
         }
         #endregion
-
     }
 }
