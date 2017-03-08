@@ -1,5 +1,5 @@
 ﻿# SMEncounterRNGTool
-A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated. Especially for those who are using PokeCalcNTR.<br>
+A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.<br>
 Great thanks to:<br>
 @quan_dra: Whom I borrowed some code from<br>
 @Real96: Who give me good suggestions and help me test the tool<br>
@@ -42,7 +42,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Tapus: Tapus' cry screen before the battle starts
 - Zygarde: "Zygarde has gone into a Poke Ball!"
 - Solgaleo/Lunala: No dialogue, stand in front of it
-- UBs & wild Pokemon: "Use this item" (Honey). If you would like to find the timing of entering bag, please add 6*(NPC+1) to `Correction`.
+- UBs & wild Pokemon: "Use this item" (Honey). 
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 - Starters: "Having accepted on another, you'll surely be friends for life"
@@ -55,5 +55,6 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 
 ## Some Parameters:
 - [UB Rate(%)](parameters/UB Rate.md)
-- [Pre-Honey Correction](parameters/Pre-Honey Correction.md)
+- [Pre-Honey Correction](parameters/Pre-Honey Correction.md) <br>
+If you would like to find the timing of entering bag, please add 6*(NPC+1) to `Correction`.
 - [Event Pokemon Setting](parameters/Event Pokemon Setting.md)
