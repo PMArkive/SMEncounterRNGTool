@@ -44,14 +44,14 @@ Ten Carat Hill - Farthest Hollow|1|0
 Location|Correction|Least NPCs #
 :---|:---:|:---:
 Route 4|6|1
-Paniola Ranch|23|3
-Route 5|21*-23|0/2
+Paniola Ranch|23|2
+Route 5|21*-23|0/1
 Lush Jungle - South|7|0
 Lush Jungle - West|2|0
 Lush Jungle - North|2|0
 Lush Jungle - Cave|2|0
 Brooklet Hill - Walking|5-7|1
-Brooklet Hill - Surfing|6|2
+Brooklet Hill - Surfing|6|1
 Brooklet Hill - Totem's Den|3|1
 Route 6|9|2/2
 Route 7 - Surfing|9|1

@@ -1217,14 +1217,13 @@ namespace SMEncounterRNGTool
                 string tmp = sfmt.NextInt64().ToString("X16");
                 if (tmp.Contains(CurrSeed.Text))
                 {
-                    Result_Text.Text = $"{i} F";
                     Frame_min.Value = i;
                     Reset_Click(null, null);
                     CalcList_Click(null, null);
                     return;
                 }
             }
-            Result_Text.Text = NORESULT_STR[lindex];
+            Error(NORESULT_STR[lindex]);
         }
 
         private void L_IVRange_Click(object sender, EventArgs e)
