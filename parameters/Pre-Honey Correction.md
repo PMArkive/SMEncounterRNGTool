@@ -32,6 +32,7 @@ Verdant Cavern|5*-10|0
 Route 3|15|0/1
 Hau'oli City- Shopping District|27|0
 Hau'oli City- Beachfront|17|1
+Hau'oli Cemetery|6|3
 Melemele Meadow|5|0
 Seaward Cave|1|0
 Kala'e bay - Walking|1|0
@@ -42,9 +43,18 @@ Ten Carat Hill - Farthest Hollow|1|0
 ### Akala Island
 Location|Correction|Least NPCs #
 :---|:---:|:---:
+Route 4|6|1
+Paniola Ranch|23|3
+Route 5|21*-23|0/2
+Lush Jungle - South|7|0
+Lush Jungle - West|2|0
+Lush Jungle - North|2|0
+Lush Jungle - Cave|2|0
+Brooklet Hill - Walking|5-7|1
+Brooklet Hill - Surfing|6|2
+Brooklet Hill - Totem's Den|3|1
 Wela Volcano Park - Bottom|9|0
 Diglett's Tunnel|13|0
-Lush Jungle - South|7|0
 Memorial Hill|12|1
 
 ### Ula'ula Island
