@@ -220,8 +220,7 @@ namespace SMEncounterRNGTool
 
             ByIVs.Checked = true;
             BySaveScreen.Checked = true;
-
-            Advanced_CheckedChanged(null, null);
+            
             SearchMethod_CheckedChanged(null, null);
             NPC_ValueChanged(null, null);
             CreateTimeline_CheckedChanged(null, null);
@@ -401,7 +400,6 @@ namespace SMEncounterRNGTool
         {
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
-            SearchByRand.Visible = Advanced.Checked;
         }
 
         private void Seed_ValueChanged(object sender, EventArgs e)
