@@ -53,7 +53,7 @@ Lush Jungle - Cave|2|0
 Brooklet Hill - Walking|5-7|1
 Brooklet Hill - Surfing|6|1
 Brooklet Hill - Totem's Den|3|1
-Route 6|9|2/2
+Route 6|11|2/2
 Route 7 - Surfing|9|1
 Wela Volcano Park - Bottom|9|0
 Route 8 - Walking|15*-16|0
