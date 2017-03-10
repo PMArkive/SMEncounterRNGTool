@@ -50,7 +50,7 @@
             return false;
         }
 
-        public readonly static int[] PokeLevel =
+        public readonly static byte[] PokeLevel =
         {
             100,
             60,60,60,60,

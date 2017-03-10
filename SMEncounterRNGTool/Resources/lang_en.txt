@@ -26,6 +26,7 @@ SearchTool = Tool Kit
 Condition = Conditions
 L_Poke = Pokemon
 UB = UB
+SOS = SOS Chaining
 Fishing = Fishing
 Honey = Honey
 Wild = Wild
@@ -112,8 +113,8 @@ dgv_PID = PID
 dgv_EC = EC
 dgv_time = Time
 ---
-SearchByRand = Search by Current Seed
-SearchByCurrSeed = Search
+SOSSetting = SOS Chaining Setting
+L_ChainLength = Chain Length
 ---------------------TabPage2----------------------------------
 InputBox = InputBox
 Back = Back

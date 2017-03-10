@@ -58,7 +58,7 @@ Route 7 - Surfing|11|1
 Wela Volcano Park - Bottom|9|0
 Route 8 - Walking|15*-16|0
 Route 8 - Surfing|16*-17|3
-Hano Beach**|24*-26|1
+Hano Beach|24*-26|1
 Diglett's Tunnel|13|0
 Memorial Hill|12|1
 Akala Outskirts|7|2

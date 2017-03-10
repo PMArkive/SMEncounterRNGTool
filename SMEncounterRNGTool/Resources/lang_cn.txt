@@ -26,6 +26,7 @@ SearchTool = 辅助工具
 Condition = 条件设置
 L_Poke = 宝可梦
 UB = UB
+SOS = 帮手连锁
 Fishing = 钓鱼
 Honey = 甜甜蜜
 Wild = 野生
@@ -34,7 +35,7 @@ AlwaysSynced = 必定同步
 Fix3v = 固定3V
 L_SyncNature = 同步性格
 L_UB_th = UB出现率
-L_Encounter_th = 遇敌率
+L_Encounter_th = 出现率
 L_Lv = 等级范围
 L_EventInstruction = 配信宝可梦的其他设置在“辅助工具”标签页
 ---
@@ -112,8 +113,8 @@ dgv_PID = PID
 dgv_EC = 加密常数
 dgv_time = 时间
 ---
-SearchByRand = 通过当前乱数值检索
-SearchByCurrSeed = 检索
+SOSSetting = 帮手连锁设置
+L_ChainLength = 连锁数
 ---------------------TabPage2----------------------------------
 InputBox = 输入
 Back = 后退

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SMEncounterRNGTool
 {
@@ -14,14 +15,16 @@ namespace SMEncounterRNGTool
         public bool ShinyLocked;
         public bool ShinyCharm;
 
-        public int PokeLv;
+        public byte PokeLv;
 
-        public bool Wild, Honey, UB, fishing;
-        public int Lv_max, Lv_min;
-        public int UB_th, Encounter_th;
+        public bool Wild, Honey, UB, fishing, SOS;
+        public byte Lv_max, Lv_min;
+        public byte ChainLength = 0;
+        public byte UB_th, Encounter_th;
         public bool IsUB = false;
         public bool nogender;
-        public int gender_ratio;
+        public byte gender_ratio;
+        public byte sosdelay;
 
         public static bool Considerhistory;
         public static bool Considerdelay;
@@ -49,6 +52,7 @@ namespace SMEncounterRNGTool
             public ulong row_r;
             public int[] IVs;
             public int[] p_Status;
+            public bool[] SOSIVs;
             public bool Shiny;
             public bool Synchronize;
             public byte Blink;
@@ -89,6 +93,8 @@ namespace SMEncounterRNGTool
         {
             RNGResult st = new RNGResult();
             index = 0;
+            int cnt;
+            st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
 
             st.row_r = Rand[0];
             st.Clock = (byte)(st.row_r % 17);
@@ -100,6 +106,7 @@ namespace SMEncounterRNGTool
             // ---Start here when press A button---
 
             st.frameshift = getframeshift();
+
             if (!Considerdelay)
             {
                 Resetindex(); ResetModelStatus();
@@ -117,7 +124,7 @@ namespace SMEncounterRNGTool
             }
 
             //Synchronize
-            if (Wild && !IsUB)
+            if (Wild && !IsUB && !SOS)
                 st.Synchronize = (int)(getrand() % 100) >= 50;
             else if (IsUB)
             {
@@ -136,7 +143,7 @@ namespace SMEncounterRNGTool
             }
 
             // Encounter
-            bool SpecialWild = Wild && !Honey && Encounter_th == 101;
+            bool SpecialWild = (Wild && !Honey && Encounter_th == 101) || SOS;
             if (Wild && !Honey && !SpecialWild && !fishing)
                 st.Encounter = (int)(getrand() % 100);
 
@@ -166,15 +173,32 @@ namespace SMEncounterRNGTool
             }
 
             //Something
-            if (!AlwaysSynchro)
+            if (!AlwaysSynchro && !SOS)
                 Advance(60);
+
+            // SOS IV
+            if (SOS && sosdelay > 0)
+            {
+                st.SOSIVs = new bool[6];
+                cnt = getperfectivcount();
+                while (cnt > 0)
+                {
+                    int ran = (int)(getrand() % 6);
+                    if (!st.SOSIVs[ran])
+                    {
+                        st.SOSIVs[ran] = true;
+                        cnt--;
+                    }
+                }
+                time_elapse(sosdelay);
+            }
 
             //Encryption Constant
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
-            int roll_count = ShinyCharm ? 3 : 1;
-            if (Listed) roll_count = 1;
+            int roll_count = (ShinyCharm && !Listed) ? 3 : 1;
+            if (SOS) roll_count += AddtionPIDRollCount();
             for (int i = 0; i < roll_count; i++)
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
@@ -193,8 +217,7 @@ namespace SMEncounterRNGTool
             }
 
             //IV
-            st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
-            int cnt = Fix3v ? 3 : 0;
+            cnt = Fix3v ? 3 : 0;
             while (cnt > 0)
             {
                 int ran = (int)(getrand() % 6);
@@ -207,6 +230,9 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
+            if (SOS && sosdelay > 0)
+                for (int i = 0; i < 6; i++)
+                    if (st.SOSIVs[i]) st.IVs[i] = 31;
 
             //Ability
             if (IsWild || AlwaysSynchro)
@@ -222,10 +248,9 @@ namespace SMEncounterRNGTool
                 index++;
 
             //Gender
+            st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
             if (nogender || IsUB)
                 st.Gender = 0;
-            else
-                st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
             //Item
             if (IsWild)
@@ -335,37 +360,6 @@ namespace SMEncounterRNGTool
             index += d;
         }
 
-        private int getUBValue()
-        {
-            int UbValue = (int)(getrand() % 100);
-            IsUB = UbValue < UB_th;
-            if (IsUB) Fix3v = true;
-            return UbValue;
-        }
-
-        public static int getslot(int rand)
-        {
-            if (rand < 20)
-                return 1;
-            if (rand < 40)
-                return 2;
-            if (rand < 50)
-                return 3;
-            if (rand < 60)
-                return 4;
-            if (rand < 70)
-                return 5;
-            if (rand < 80)
-                return 6;
-            if (rand < 90)
-                return 7;
-            if (rand < 95)
-                return 8;
-            if (rand < 99)
-                return 9;
-            return 10;
-        }
-
         public int getframeshift()
         {
             if (Honey)
@@ -442,14 +436,12 @@ namespace SMEncounterRNGTool
 
                     if (remain_frame[i] == 0)
                     {
-                        //Blinking
-                        if (blink_flag[i])
+                        if (blink_flag[i])                      //Blinking
                         {
                             remain_frame[i] = (int)(getrand() % 3) == 0 ? 36 : 30;
                             blink_flag[i] = false;
                         }
-                        //Not Blinking
-                        else if ((int)(getrand() & 0x7F) == 0)
+                        else if ((int)(getrand() & 0x7F) == 0)  //Not Blinking
                         {
                             remain_frame[i] = 5;
                             blink_flag[i] = true;
@@ -457,6 +449,53 @@ namespace SMEncounterRNGTool
                     }
                 }
             }
+        }
+
+        private int getUBValue()
+        {
+            int UbValue = (int)(getrand() % 100);
+            IsUB = UbValue < UB_th;
+            if (IsUB) Fix3v = true;
+            return UbValue;
+        }
+
+        public static int getslot(int rand)
+        {
+            if (rand < 20) return 1;
+            if (rand < 40) return 2;
+            if (rand < 50) return 3;
+            if (rand < 60) return 4;
+            if (rand < 70) return 5;
+            if (rand < 80) return 6;
+            if (rand < 90) return 7;
+            if (rand < 95) return 8;
+            if (rand < 99) return 9;
+            return 10;
+        }
+
+        private int AddtionPIDRollCount()
+        {
+            if (ChainLength < 12) return 0;
+            if (ChainLength < 22) return 4;
+            if (ChainLength < 32) return 8;
+            return 12;
+        }
+
+        private int getperfectivcount()
+        {
+            if (ChainLength < 5) return 0;
+            if (ChainLength < 10) return 1;
+            if (ChainLength < 20) return 2;
+            if (ChainLength < 30) return 3;
+            return 4;
+        }
+
+        private int getHAthershold()
+        {
+            if (ChainLength < 10) return 0;
+            if (ChainLength < 20) return 5;
+            if (ChainLength < 30) return 10;
+            return 15;
         }
 
     }

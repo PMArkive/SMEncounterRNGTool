@@ -2,8 +2,8 @@
 
 A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.<br>
 Great thanks to:<br>
-@quan_dra: Whom I borrowed some code from<br>
-@Real96: Who give me good suggestions and help me test the tool<br>
+@quan_dra for original code<br>
+@Real96 for good suggestions and testing the tool<br>
 And ALL Pokemon RNG Researcher<br>
 
 ## Following Pokemon are supported:
@@ -57,5 +57,5 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 ## Some Parameters:
 - [UB Rate(%)](parameters/UB Rate.md)
 - [Pre-Honey Correction](parameters/Pre-Honey Correction.md) <br>
-If you would like to find the timing of entering bag, please add 6*(NPC+1) to `Correction`.
+If you would like to find the timing of entering bag, please add 6*(NPC+1) to `Correction` in most of the cases.
 - [Event Pokemon Setting](parameters/Event Pokemon Setting.md)
