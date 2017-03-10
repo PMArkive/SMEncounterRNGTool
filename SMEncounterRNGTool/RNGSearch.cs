@@ -248,9 +248,10 @@ namespace SMEncounterRNGTool
                 index++;
 
             //Gender
-            st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
             if (nogender || IsUB)
                 st.Gender = 0;
+            else
+                st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
             //Item
             if (IsWild)
