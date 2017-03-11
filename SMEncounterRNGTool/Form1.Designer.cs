@@ -192,10 +192,8 @@
             this.L_E_Nature = new System.Windows.Forms.Label();
             this.Event_Gender = new System.Windows.Forms.ComboBox();
             this.Event_Nature = new System.Windows.Forms.ComboBox();
-            this.Event_PID = new SMEncounterRNGTool.HexNumericUpdown();
             this.L_PID = new System.Windows.Forms.Label();
             this.L_EC = new System.Windows.Forms.Label();
-            this.Event_EC = new SMEncounterRNGTool.HexNumericUpdown();
             this.Event_SID = new System.Windows.Forms.NumericUpDown();
             this.Event_TID = new System.Windows.Forms.NumericUpDown();
             this.OtherInfo = new System.Windows.Forms.CheckBox();
@@ -272,6 +270,8 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.Event_PID = new SMEncounterRNGTool.HexNumericUpdown();
+            this.Event_EC = new SMEncounterRNGTool.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -324,8 +324,6 @@
             this.DGVMenuStrip.SuspendLayout();
             this.SearchTool.SuspendLayout();
             this.EventSetting.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).BeginInit();
@@ -340,6 +338,8 @@
             this.SearchSeedBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -2240,14 +2240,6 @@
             this.Event_Nature.Size = new System.Drawing.Size(58, 21);
             this.Event_Nature.TabIndex = 61;
             // 
-            // Event_PID
-            // 
-            this.Event_PID.Hexadecimal = true;
-            this.Event_PID.Location = new System.Drawing.Point(0, 0);
-            this.Event_PID.Name = "Event_PID";
-            this.Event_PID.Size = new System.Drawing.Size(120, 20);
-            this.Event_PID.TabIndex = 68;
-            // 
             // L_PID
             // 
             this.L_PID.AutoSize = true;
@@ -2266,14 +2258,6 @@
             this.L_EC.Size = new System.Drawing.Size(21, 13);
             this.L_EC.TabIndex = 57;
             this.L_EC.Text = "EC";
-            // 
-            // Event_EC
-            // 
-            this.Event_EC.Hexadecimal = true;
-            this.Event_EC.Location = new System.Drawing.Point(0, 0);
-            this.Event_EC.Name = "Event_EC";
-            this.Event_EC.Size = new System.Drawing.Size(120, 20);
-            this.Event_EC.TabIndex = 69;
             // 
             // Event_SID
             // 
@@ -3138,6 +3122,28 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // Event_PID
+            // 
+            this.Event_PID.Enabled = false;
+            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_PID.Hexadecimal = true;
+            this.Event_PID.Location = new System.Drawing.Point(216, 367);
+            this.Event_PID.Name = "Event_PID";
+            this.Event_PID.Size = new System.Drawing.Size(77, 22);
+            this.Event_PID.TabIndex = 68;
+            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Event_EC
+            // 
+            this.Event_EC.Enabled = false;
+            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_EC.Hexadecimal = true;
+            this.Event_EC.Location = new System.Drawing.Point(61, 367);
+            this.Event_EC.Name = "Event_EC";
+            this.Event_EC.Size = new System.Drawing.Size(77, 22);
+            this.Event_EC.TabIndex = 69;
+            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3215,8 +3221,6 @@
             this.SearchTool.PerformLayout();
             this.EventSetting.ResumeLayout(false);
             this.EventSetting.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).EndInit();
@@ -3234,6 +3238,8 @@
             this.SearchSeedBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
