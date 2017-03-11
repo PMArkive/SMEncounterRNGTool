@@ -51,7 +51,6 @@ namespace SMEncounterRNGTool
             public ulong row_r;
             public int[] IVs;
             public int[] p_Status;
-            public bool[] SOSIVs = new bool[6];
             public bool Shiny;
             public bool Synchronize;
             public byte Blink;
@@ -211,9 +210,6 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
-            if (false)
-                for (int i = 0; i < 6; i++)
-                    if (st.SOSIVs[i]) st.IVs[i] = 31;
 
             //Ability
             if (IsWild || AlwaysSynchro)

@@ -947,7 +947,6 @@ namespace SMEncounterRNGTool
                 fishing = Fishing.Checked,
                 SOS = SOS.Checked,
                 ChainLength = (byte)ChainLength.Value,
-                sosdelay = (byte)sosdelay.Value,
             };
             return rng;
         }
