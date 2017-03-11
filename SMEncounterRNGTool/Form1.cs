@@ -1079,6 +1079,7 @@ namespace SMEncounterRNGTool
             //
             if (Poke.SelectedIndex == Fossil_index + 1) Honey.Checked = false;
 
+            if (Poke.SelectedIndex == 0) return; 
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UB_StartIndex - 1);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             Fix3v.Checked = (Poke.SelectedIndex > 1 && Poke.SelectedIndex < Fossil_index - 2);
