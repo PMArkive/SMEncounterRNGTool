@@ -51,7 +51,7 @@ namespace SMEncounterRNGTool
             public ulong row_r;
             public int[] IVs;
             public int[] p_Status;
-            public bool[] SOSIVs;
+            public bool[] SOSIVs = new bool[6];
             public bool Shiny;
             public bool Synchronize;
             public byte Blink;
@@ -178,7 +178,7 @@ namespace SMEncounterRNGTool
 
             //PID
             int roll_count = (ShinyCharm && !Listed) ? 3 : 1;
-            if (SOS) roll_count += AddtionPIDRollCount();
+            if (SOS) roll_count += AddtionalPIDRollCount();
             for (int i = 0; i < roll_count; i++)
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
@@ -455,7 +455,7 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
-        private int AddtionPIDRollCount()
+        private int AddtionalPIDRollCount()
         {
             if (ChainLength < 11) return 0;
             if (ChainLength < 21) return 4;
