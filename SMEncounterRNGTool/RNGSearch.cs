@@ -254,7 +254,7 @@ namespace SMEncounterRNGTool
                 st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
 
             //Item
-            if (IsWild)
+            if (IsWild && !SOS)
                 st.Item = (int)(getrand() % 100);
 
             return st;
@@ -476,9 +476,9 @@ namespace SMEncounterRNGTool
 
         private int AddtionPIDRollCount()
         {
-            if (ChainLength < 12) return 0;
-            if (ChainLength < 22) return 4;
-            if (ChainLength < 32) return 8;
+            if (ChainLength < 11) return 0;
+            if (ChainLength < 21) return 4;
+            if (ChainLength < 31) return 8;
             return 12;
         }
 
