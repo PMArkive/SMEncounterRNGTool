@@ -24,7 +24,6 @@ namespace SMEncounterRNGTool
         public bool IsUB = false;
         public bool nogender;
         public byte gender_ratio;
-        public byte sosdelay;
 
         public static bool Considerhistory;
         public static bool Considerdelay;
@@ -93,8 +92,6 @@ namespace SMEncounterRNGTool
         {
             RNGResult st = new RNGResult();
             index = 0;
-            int cnt;
-            st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
 
             st.row_r = Rand[0];
             st.Clock = (byte)(st.row_r % 17);
@@ -176,23 +173,6 @@ namespace SMEncounterRNGTool
             if (!AlwaysSynchro && !SOS)
                 Advance(60);
 
-            // SOS IV
-            if (SOS && sosdelay > 0)
-            {
-                st.SOSIVs = new bool[6];
-                cnt = getperfectivcount();
-                while (cnt > 0)
-                {
-                    int ran = (int)(getrand() % 6);
-                    if (!st.SOSIVs[ran])
-                    {
-                        st.SOSIVs[ran] = true;
-                        cnt--;
-                    }
-                }
-                time_elapse(sosdelay);
-            }
-
             //Encryption Constant
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
@@ -217,7 +197,8 @@ namespace SMEncounterRNGTool
             }
 
             //IV
-            cnt = Fix3v ? 3 : 0;
+            st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
+            int cnt = Fix3v ? 3 : 0;
             while (cnt > 0)
             {
                 int ran = (int)(getrand() % 6);
@@ -230,7 +211,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
-            if (SOS && sosdelay > 0)
+            if (false)
                 for (int i = 0; i < 6; i++)
                     if (st.SOSIVs[i]) st.IVs[i] = 31;
 
