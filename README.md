@@ -1,10 +1,10 @@
-﻿# SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
+# SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
 
-A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.<br>
-Great thanks to:<br>
-@quan_dra for original code<br>
-@Real96 for good suggestions and testing the tool<br>
-And ALL Pokemon RNG Researcher<br>
+A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.
+Great thanks to
+**quan_dra** for original code 
+**Real96** for good suggestions and testing the tool
+And ALL Pokemon RNG Researcher 
 
 ## Following Pokemon are supported:
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
@@ -29,17 +29,19 @@ And ALL Pokemon RNG Researcher<br>
 10. If the Pokemon is not the one you want, find the frame you actully hit, put it in the Time Calculator, calibrate the Pre-Timer and try again
 
 ### With PokeCalcNTR
- 1. Select the `Pokemon` you would like to RNG.
- 2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
- 3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
- 4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
- 5. Click `Search`, you will see the game will follow timeline the tool created.
- 6. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
- 7. Just change the `Filters` and make another search as usual.<br>
- Warning: Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame`(before checking `Create Timeline`) of your previous timeline as the `Starting Frame`.
+1.  Select the `Pokemon` you would like to RNG.
+2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
+3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
+4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
+5. Click `Search`, you will see the game will follow timeline the tool created.
+6. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
+7. Just change the `Filters` and make another search as usual.  
+
+   Warning: Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame`(before checking `Create Timeline`) of your previous timeline as the `Starting Frame`.
 
 ## Final screen when pressing A
-Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box.<br>
+Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box. 
+
 - Tapus: Tapus' cry screen before the battle starts
 - Zygarde: "Zygarde has gone into a Poke Ball!"
 - Solgaleo/Lunala: No dialogue, stand in front of it
@@ -48,6 +50,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 - Starters: "Having accepted on another, you'll surely be friends for life"
 - Fishing: When you get something on your hook (Unstable)
+- SOS: When you "Use" Adrenaline Orbs (Unstable)
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
@@ -56,6 +59,6 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 
 ## Some Parameters:
 - [UB Rate(%)](parameters/UB Rate.md)
-- [Pre-Honey Correction](parameters/Pre-Honey Correction.md) <br>
-If you would like to find the timing of entering bag, please add 6*(NPC+1) to `Correction` in most of the cases.
-- [Event Pokemon Setting](parameters/Event Pokemon Setting.md)
+- [Pre-Honey Correction](parameters/Pre-Honey Correction.md) 
+  If you would like to find the timing of entering bag, please add 6$\times$ (# of NPCs + 1) to `Correction` in most of the cases.
+- [Event Pokemon Setting](parameters/Event Pokemon Setting.md) 
