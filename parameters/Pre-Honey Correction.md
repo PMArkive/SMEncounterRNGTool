@@ -70,7 +70,7 @@ Malie City - Outer Cape|9|4
 Malie Garden|26|0
 Route 10|19|2
 Mount Hokulani|16|0
-Route 11|10|2
+Route 11|10|0
 Route 12|11|0/1
 Secluded Shore - Surfing|12|1
 Blush Mountain|3|1/1
@@ -78,7 +78,7 @@ Haina Desert|1|0
 Tapu Village|11|0
 Route 14 - Surfing|12|1
 Thrifty Megamart|1|0
-Route 15 - Walking|20|3
+Route 15 - Walking|20|1
 Route 15 - Surfing|21|1
 Route 16|10|0
 Ula'ula Meadow|2+6|0
@@ -110,5 +110,4 @@ Poni Gauntlet|11|4
 
 \* Clear all special spots<br>
 \*\* Remain to be confirmed <br>
-Some area may have multiple encounter tables, so the least npcs number might be different. For the details of encounter slots please visit serebii.net.<br>
-Specific Spots please visit [here](http://pokerng.forumcommunity.net/?t=59574488) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.
+Specific spots and encounter tables please visit [here](http://pokerng.forumcommunity.net/?t=59574488) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.

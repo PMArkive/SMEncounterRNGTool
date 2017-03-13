@@ -8,3 +8,4 @@ Birthday Pikachu | | |Random Nonshiny|√|√| |
 Sapporo Vulpix | | |Random Nonshiny|√| | |
 Lunar Magikarp | | |Random Shiny|√| | | 
 Saori's Machamp |Atk=31 Locked| |Random Nonshiny|√|√|√
+Pokemon with You Pikachu | | |Random Nonshiny|√| | |√

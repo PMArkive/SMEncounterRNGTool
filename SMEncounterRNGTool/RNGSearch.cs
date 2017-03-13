@@ -139,7 +139,7 @@ namespace SMEncounterRNGTool
             }
 
             // Encounter
-            bool SpecialWild = (Wild && !Honey && Encounter_th == 101) || SOS;
+            bool SpecialWild = Wild && !Honey && (Encounter_th == 101 || SOS);
             if (Wild && !Honey && !SpecialWild && !fishing)
                 st.Encounter = (int)(getrand() % 100);
 
