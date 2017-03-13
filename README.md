@@ -1,4 +1,4 @@
-﻿MEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
+﻿#SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
 
 A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.  
 Great thanks to  
@@ -29,13 +29,13 @@ And ALL Pokemon RNG Researcher
 10. If the Pokemon is not the one you want, find the frame you actully hit, put it in the Time Calculator, calibrate the Pre-Timer and try again
 
 ### With PokeCalcNTR
-1.  Select the `Pokemon` you would like to RNG.
-2.  Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
-3.  Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
-4.  Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
-5.  Click `Search`, you will see the game will follow timeline the tool created.
-6.  Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
-7.  Just change the `Filters` and make another search as usual. 
+1. Select the `Pokemon` you would like to RNG.
+2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
+3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
+4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
+5. Click `Search`, you will see the game will follow timeline the tool created.
+6. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
+7. Just change the `Filters` and make another search as usual. 
 
     ***Warning:*** Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame`(before checking `Create Timeline`) of your previous timeline as the `Starting Frame`.
 
