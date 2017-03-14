@@ -56,8 +56,9 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - ?: The spread might be affected by the history of NPC status so it's unsafe. 
 - -: The safe frames can be 100% predicted.
 
-## Some Parameters:
+## Useful References
 - [UB Rate(%) and No NPC Spots](parameters/UB Rate and Spots.md) 
 - [Pre-Honey Correction](parameters/Pre-Honey Correction.md)  
   If you would like to find the timing of entering bag, please add `6 x (# of NPCs + 1)` to `Correction` in most of the cases.
 - [Event Pokemon Setting](parameters/Event Pokemon Setting.md) 
+- [Gen VII Events Contribution Thread](https://projectpokemon.org/forums/forums/topic/39400-gen-vii-events-contribution-thread/) 
