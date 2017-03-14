@@ -94,7 +94,7 @@
 
         #endregion
         #region calc_data
-        public readonly double[,] natures_mag =
+        public readonly static double[,] natures_mag =
         {
             { 1, 1, 1, 1, 1, 1 },
             { 1, 1.1, 0.9, 1, 1, 1 },

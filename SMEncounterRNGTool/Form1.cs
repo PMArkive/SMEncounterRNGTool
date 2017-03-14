@@ -1027,7 +1027,7 @@ namespace SMEncounterRNGTool
                     Item = "-";
                 time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
             }
-            
+
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
@@ -1049,6 +1049,21 @@ namespace SMEncounterRNGTool
 
             if (result.Shiny)
                 row.DefaultCellStyle.BackColor = Color.LightCyan;
+
+            Font BlodFont = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
+            for (int k = 0; k < 6; k++)
+            {
+                if (Status[k] < 1)
+                {
+                    row.Cells[3 + k].Style.Font = BlodFont;
+                    row.Cells[3 + k].Style.ForeColor = Color.OrangeRed;
+                }
+                else if (Status[k] > 29)
+                {
+                    row.Cells[3 + k].Style.Font = BlodFont;
+                    row.Cells[3 + k].Style.ForeColor = Color.MediumSeaGreen;
+                }
+            }
 
             return row;
         }
@@ -1079,7 +1094,7 @@ namespace SMEncounterRNGTool
             //
             if (Poke.SelectedIndex == Fossil_index + 1) Honey.Checked = false;
 
-            if (Poke.SelectedIndex == 0) return; 
+            if (Poke.SelectedIndex == 0) return;
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UB_StartIndex - 1);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             Fix3v.Checked = (Poke.SelectedIndex > 1 && Poke.SelectedIndex < Fossil_index - 2);
@@ -1102,8 +1117,9 @@ namespace SMEncounterRNGTool
             switch (Poke.SelectedIndex)
             {
                 case 1:
-                    ConsiderBlink.Checked = false; GenderRatio.Visible = true;
+                    GenderRatio.SelectedIndex = 1;
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
+                    ConsiderBlink.Checked = false; GenderRatio.Visible = true;
                     Timedelay.Value = YourID.Checked ? 62 : 0;
                     break;
                 case Fossil_index - 2:
