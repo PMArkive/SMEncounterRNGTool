@@ -564,7 +564,7 @@ namespace SMEncounterRNGTool
         {
             if (!OtherInfo.Checked)
                 Event_EC.Value = (Event_PIDType.SelectedIndex == 3) ? 0x12 : 0;
-            L_PID.Visible = Event_PID.Visible = Event_PIDType.SelectedIndex == 3;
+            L_EC.Visible = Event_EC.Visible = L_PID.Visible = Event_PID.Visible = Event_PIDType.SelectedIndex == 3;
         }
         #endregion
 
@@ -1049,7 +1049,7 @@ namespace SMEncounterRNGTool
 
             if (result.Shiny)
                 row.DefaultCellStyle.BackColor = Color.LightCyan;
-            
+
             row.Cells[24].Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             Font BoldFont = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
             for (int k = 0; k < 6; k++)
@@ -1294,6 +1294,7 @@ namespace SMEncounterRNGTool
                 if (Event_PIDType.SelectedIndex == 3)
                     Event_PID.Value = BitConverter.ToUInt32(Data, 0xD4);
                 Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
+                if (Event_EC.Value > 0) Event_EC.Visible = L_EC.Visible = true;
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;
                 Lv_Search.Value = Data[0xD0];
