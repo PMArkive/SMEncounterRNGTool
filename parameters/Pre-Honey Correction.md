@@ -110,4 +110,4 @@
 
 \* Clear all special spots  
 \*\* Remain to be confirmed  
-Specific spots and encounter tables please visit [here](http://pokerng.forumcommunity.net/?t=59574488) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.
+Specific spots and encounter tables please visit [here](UB Rate and Spots.md) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.

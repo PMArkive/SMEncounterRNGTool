@@ -57,7 +57,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - -: The safe frames can be 100% predicted.
 
 ## Some Parameters:
-- [UB Rate(%)](parameters/UB Rate.md)
+- [UB Rate(%) and No NPC Spots](parameters/UB Rate and Spots.md) 
 - [Pre-Honey Correction](parameters/Pre-Honey Correction.md)  
   If you would like to find the timing of entering bag, please add `6 x (# of NPCs + 1)` to `Correction` in most of the cases.
 - [Event Pokemon Setting](parameters/Event Pokemon Setting.md) 
