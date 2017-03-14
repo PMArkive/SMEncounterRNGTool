@@ -19,7 +19,7 @@
 ![alt text](http://i.imgur.com/AQxWRJN.png "Melemele Meadow")
 
 ### Verdant Cavern
-*clear all rustling spots
+*clear all rustling spots  
 ![alt text](http://i.imgur.com/wFrDx9o.png "Verdant Cavern")
 
 ### Lush Jungle
