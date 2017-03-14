@@ -1028,6 +1028,7 @@ namespace SMEncounterRNGTool
                 time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
             }
 
+            time = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString() + " " + (result.row_r % 100).ToString();
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");

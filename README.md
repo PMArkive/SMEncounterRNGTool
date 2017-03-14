@@ -1,4 +1,4 @@
-﻿#SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
+#SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
 
 A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.  
 Great thanks to  
@@ -18,7 +18,7 @@ And ALL Pokemon RNG Researcher
 ## Usage
 ### With emtimer/EonTimer
 1. Select the `Pokemon` you would like to RNG. (For Solgaleo/Lunala, you need to test the NPCs number first)
-2. Find your `Seed` via the clock hands sequence on Continue ScreenWhen you get something on your hook
+2. Find your `Seed` via the clock hands sequence on Continue Screen
 3. Set up the `Filters` and click `Search`
 4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
 5. Put your current frame into the first box of `Timing Range`. (The tool will automatically set this value when you are using the `Tool Kit` Tab)
@@ -35,8 +35,7 @@ And ALL Pokemon RNG Researcher
 4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
 5. Click `Search`, you will see the game will follow timeline the tool created.
 6. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
-7. Just change the `Filters` and make another search as usual. 
-
+7. Just change the `Filters` and make another search as usual.  
     ***Warning:*** Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame`(before checking `Create Timeline`) of your previous timeline as the `Starting Frame`.
 
 ## Final screen when pressing A
@@ -60,5 +59,5 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 ## Some Parameters:
 - [UB Rate(%)](parameters/UB Rate.md)
 - [Pre-Honey Correction](parameters/Pre-Honey Correction.md)  
-  If you would like to find the timing of entering bag, please add 6$\times$ (# of NPCs + 1) to `Correction` in most of the cases.
+  If you would like to find the timing of entering bag, please add `6 x (# of NPCs + 1)` to `Correction` in most of the cases.
 - [Event Pokemon Setting](parameters/Event Pokemon Setting.md) 
