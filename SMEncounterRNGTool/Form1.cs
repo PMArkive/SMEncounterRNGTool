@@ -1025,7 +1025,7 @@ namespace SMEncounterRNGTool
                     Item = "5%";
                 else
                     Item = "-";
-                time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
+                time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + " s" : "-";
             }
 
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
@@ -1049,18 +1049,19 @@ namespace SMEncounterRNGTool
 
             if (result.Shiny)
                 row.DefaultCellStyle.BackColor = Color.LightCyan;
-
-            Font BlodFont = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
+            
+            row.Cells[24].Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Font BoldFont = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
             for (int k = 0; k < 6; k++)
             {
                 if (Status[k] < 1)
                 {
-                    row.Cells[3 + k].Style.Font = BlodFont;
+                    row.Cells[3 + k].Style.Font = BoldFont;
                     row.Cells[3 + k].Style.ForeColor = Color.OrangeRed;
                 }
                 else if (Status[k] > 29)
                 {
-                    row.Cells[3 + k].Style.Font = BlodFont;
+                    row.Cells[3 + k].Style.Font = BoldFont;
                     row.Cells[3 + k].Style.ForeColor = Color.MediumSeaGreen;
                 }
             }
