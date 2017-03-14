@@ -1003,9 +1003,9 @@ namespace SMEncounterRNGTool
             string BlinkFlag = result.Blink < 4 ? blinkmarks[result.Blink] : result.Blink.ToString();
             string PSV = result.PSV.ToString("D4");
             string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
-            string Slot = (result.Slot == -1) ? "-" : result.Slot.ToString();
-            string Lv = (result.Lv == -1) ? "-" : result.Lv.ToString();
-            string Item = (result.Item == -1) ? "-" : result.Item.ToString();
+            string Slot = (result.Slot == 0) ? "-" : result.Slot.ToString();
+            string Lv = (result.Lv == 0) ? "-" : result.Lv.ToString();
+            string Item = (result.Item == 100) ? "-" : result.Item.ToString();
             string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
             string randstr = result.row_r.ToString("X16");
             string PID = result.PID.ToString("X8");
@@ -1027,8 +1027,7 @@ namespace SMEncounterRNGTool
                     Item = "-";
                 time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + "s" : "-";
             }
-
-            time = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString() + " " + (result.row_r % 100).ToString();
+            
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
@@ -1140,9 +1139,9 @@ namespace SMEncounterRNGTool
             RNGSearch.EventRule e = new RNGSearch.EventRule
             {
                 IVs = (int[])IVs.Clone(),
-                IVsCount = (int)IVsCount.Value,
+                IVsCount = (byte)IVsCount.Value,
                 YourID = YourID.Checked,
-                PIDType = Event_PIDType.SelectedIndex,
+                PIDType = (byte)Event_PIDType.SelectedIndex,
                 AbilityLocked = AbilityLocked.Checked,
                 NatureLocked = NatureLocked.Checked,
                 GenderLocked = GenderLocked.Checked,

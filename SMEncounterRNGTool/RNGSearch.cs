@@ -57,12 +57,12 @@ namespace SMEncounterRNGTool
             public int frameshift;
 
             public int Encounter = -1;
-            public int Gender;
-            public int Ability = 1;
-            public int UbValue = 100;
-            public int Slot = -1;
-            public int Lv = -1;
-            public int Item = 100;
+            public byte Gender;
+            public byte Ability = 1;
+            public byte UbValue = 100;
+            public byte Slot = 0;
+            public byte Lv = 0;
+            public byte Item = 100;
 
             public int realtime = -1;
         }
@@ -71,9 +71,9 @@ namespace SMEncounterRNGTool
         {
             public int[] IVs;
             public uint TSV;
-            public int IVsCount;
+            public byte IVsCount;
             public bool YourID;
-            public int PIDType;
+            public byte PIDType;
             public bool AbilityLocked;
             public byte Ability;
             public bool NatureLocked;
@@ -164,7 +164,7 @@ namespace SMEncounterRNGTool
             if (IsWild && !SpecialWild)
             {
                 st.Slot = getslot((int)(getrand() % 100));
-                st.Lv = (int)(getrand() % (ulong)(Lv_max - Lv_min + 1)) + Lv_min;
+                st.Lv = (byte)(getrand() % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
                 Advance(1);
             }
 
@@ -213,7 +213,7 @@ namespace SMEncounterRNGTool
 
             //Ability
             if (IsWild || AlwaysSynchro)
-                st.Ability = (int)(getrand() & 1) + 1;
+                st.Ability = (byte)((getrand() & 1) + 1);
 
             //Nature
             st.Nature = (int)(currentrand() % 25);
@@ -228,11 +228,11 @@ namespace SMEncounterRNGTool
             if (nogender || IsUB)
                 st.Gender = 0;
             else
-                st.Gender = ((int)(getrand() % 252) >= gender_ratio) ? 1 : 2;
+                st.Gender = (byte)((int)(getrand() % 252) >= gender_ratio ? 1 : 2);
 
             //Item
             if (IsWild && !SOS)
-                st.Item = (int)(getrand() % 100);
+                st.Item = (byte)(getrand() % 100);
 
             return st;
         }
@@ -298,13 +298,13 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand() & 0x1F);
 
             //Ability
-            st.Ability = e.AbilityLocked ? e.Ability : (int)(getrand() & 1) + 1;
+            st.Ability = e.AbilityLocked ? e.Ability : (byte)((getrand() & 1) + 1);
 
             //Nature
             st.Nature = e.NatureLocked ? e.Nature : (int)(getrand() % 25);
 
             //Gender
-            st.Gender = (e.GenderLocked || nogender) ? e.Gender : (int)(getrand() % 252) >= gender_ratio ? 1 : 2;
+            st.Gender = (e.GenderLocked || nogender) ? e.Gender : (byte)(getrand() % 252 >= gender_ratio ? 1 : 2);
             return st;
         }
 
@@ -429,15 +429,15 @@ namespace SMEncounterRNGTool
             }
         }
 
-        private int getUBValue()
+        private byte getUBValue()
         {
-            int UbValue = (int)(getrand() % 100);
+            byte UbValue = (byte)(getrand() % 100);
             IsUB = UbValue < UB_th;
             if (IsUB) Fix3v = true;
             return UbValue;
         }
 
-        public static int getslot(int rand)
+        public static byte getslot(int rand)
         {
             if (rand < 20) return 1;
             if (rand < 40) return 2;
@@ -451,7 +451,7 @@ namespace SMEncounterRNGTool
             return 10;
         }
 
-        private int AddtionalPIDRollCount()
+        private byte AddtionalPIDRollCount()
         {
             if (ChainLength < 11) return 0;
             if (ChainLength < 21) return 4;
@@ -459,7 +459,7 @@ namespace SMEncounterRNGTool
             return 12;
         }
 
-        private int getperfectivcount()
+        private byte getperfectivcount()
         {
             if (ChainLength < 5) return 0;
             if (ChainLength < 10) return 1;
@@ -468,7 +468,7 @@ namespace SMEncounterRNGTool
             return 4;
         }
 
-        private int getHAthershold()
+        private byte getHAthershold()
         {
             if (ChainLength < 10) return 0;
             if (ChainLength < 20) return 5;
