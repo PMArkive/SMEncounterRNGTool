@@ -1,4 +1,4 @@
-#SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
+# SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
 
 A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.  
 Great thanks to  
@@ -13,7 +13,9 @@ And ALL Pokemon RNG Researcher
 - Any Wild Pokemon appear in SM
 - Fossil Pokemon: Cranidos, Tirtouga, Archen, Shieldon
 - Crabrawlers underneath Berry Trees
-- SM Starters: _PokeCalcNTR Only, select `<Fossil>`, change `# of NPCs` to 5. (This function will not be added)_
+- SM Starters: _PokeCalcNTR Only (This function will not be added)_
+- Pokemon Caught by fishing
+- SOS: _PokeCalcNTR Only (WIP)_
 
 ## Usage
 ### With emtimer/EonTimer
@@ -26,7 +28,7 @@ And ALL Pokemon RNG Researcher
 7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
 8. Start the dialogue until the [final screen](#final-screen-when-pressing-a), wait for the timer.
 9. When the timer is done, click A at the same time, receive or battle with the Pokemon.
-10. If the Pokemon is not the one you want, find the frame you actully hit, put it in the Time Calculator, calibrate the Pre-Timer and try again
+10. If the Pokemon is not the one you want, find the frame you actually hit, put it in the Time Calculator, calibrate the Pre-Timer and try again
 
 ### With PokeCalcNTR
 1. Select the `Pokemon` you would like to RNG.
@@ -47,7 +49,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - UBs & wild Pokemon: "Use this item" (Honey). 
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
-- Starters: "Having accepted on another, you'll surely be friends for life"
+- Starters: "Having accepted on another, you'll surely be friends for life" (select `<Fossil>`, put 5 in `# of NPCs`)
 - Fishing: When you get something on your hook (Unstable)
 - SOS: When you "Use" Adrenaline Orbs (Unstable)
 
@@ -57,8 +59,8 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - -: The safe frames can be 100% predicted.
 
 ## Useful References
-- [UB Rate(%) and No NPC Spots](parameters/UB Rate and Spots.md) 
-- [Pre-Honey Correction](parameters/Pre-Honey Correction.md)  
-  If you would like to find the timing of entering bag, please add `6 x (# of NPCs + 1)` to `Correction` in most of the cases.
-- [Event Pokemon Setting](parameters/Event Pokemon Setting.md) 
+- [UB Rate(%) and No NPC Spots](parameters/UB%20Rate%20and%20Spots.md) 
+- [Pre-Honey Correction](parameters/Pre-Honey%20Correction.md)  
+  If you would like to find the timing of entering bag, in most of the cases, adding `6 x (# of NPCs + 1)` to `Correction` works.
+- [Event Pokemon Setting](parameters/Event%20Pokemon%20Setting.md) 
 - [Gen VII Events Contribution Thread](https://projectpokemon.org/forums/forums/topic/39400-gen-vii-events-contribution-thread/) 

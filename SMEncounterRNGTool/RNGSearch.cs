@@ -49,7 +49,7 @@ namespace SMEncounterRNGTool
             public uint PID, EC, PSV;
             public ulong row_r;
             public int[] IVs;
-            public int[] Status;
+            public int[] Stats;
             public bool Shiny;
             public bool Synchronize;
             public byte Blink;

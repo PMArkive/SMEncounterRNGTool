@@ -150,7 +150,7 @@
         public int HPType = -1;
         public int Ability = -1;
         public int Gender = -1;
-        public int[] IVup, IVlow, BS, Status;
+        public int[] IVup, IVlow, BS, Stats;
         public bool Skip;
         public int Lv;
         public bool[] Slot;
@@ -164,24 +164,24 @@
             return true;
         }
 
-        public bool CheckStatus(RNGSearch.RNGResult result)
+        public bool CheckStats(RNGSearch.RNGResult result)
         {
             for (int i = 0; i < 6; i++)
-                if (Status[i] != 0 && Status[i] != result.Status[i])
+                if (Stats[i] != 0 && Stats[i] != result.Stats[i])
                     return false;
             return true;
         }
 
-        public void getStatus(RNGSearch.RNGResult result)
+        public void getStats(RNGSearch.RNGResult result)
         {
             int[] IV = new int[6];
-            result.Status = new int[6];
+            result.Stats = new int[6];
             for (int i = 0; i < 6; i++)
                 IV[i] = result.IVs[i];
 
-            result.Status[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
+            result.Stats[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
             for (int i = 1; i < 6; i++)
-                result.Status[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
+                result.Stats[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
         }
 
         public bool CheckHiddenPower(int[] IV)

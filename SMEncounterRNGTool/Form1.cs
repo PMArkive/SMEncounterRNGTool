@@ -887,7 +887,7 @@ namespace SMEncounterRNGTool
             int[] IVup = { (int)ivmax0.Value, (int)ivmax1.Value, (int)ivmax2.Value, (int)ivmax3.Value, (int)ivmax4.Value, (int)ivmax5.Value, };
             int[] IVlow = { (int)ivmin0.Value, (int)ivmin1.Value, (int)ivmin2.Value, (int)ivmin3.Value, (int)ivmin4.Value, (int)ivmin5.Value, };
             int[] BS = { (int)BS_0.Value, (int)BS_1.Value, (int)BS_2.Value, (int)BS_3.Value, (int)BS_4.Value, (int)BS_5.Value, };
-            int[] Status = { (int)Stat0.Value, (int)Stat1.Value, (int)Stat2.Value, (int)Stat3.Value, (int)Stat4.Value, (int)Stat5.Value, };
+            int[] Stats = { (int)Stat0.Value, (int)Stat1.Value, (int)Stat2.Value, (int)Stat3.Value, (int)Stat4.Value, (int)Stat5.Value, };
 
             return new SearchSetting
             {
@@ -899,7 +899,7 @@ namespace SMEncounterRNGTool
                 IVlow = IVlow,
                 IVup = IVup,
                 BS = BS,
-                Status = Status,
+                Stats = Stats,
                 Skip = DisableFilters.Checked,
                 Lv = (int)Lv_Search.Value,
             };
@@ -952,7 +952,7 @@ namespace SMEncounterRNGTool
 
         private bool frameMatch(RNGSearch.RNGResult result, SearchSetting setting)
         {
-            setting.getStatus(result);
+            setting.getStats(result);
 
             if (setting.Skip)
                 return true;
@@ -964,7 +964,7 @@ namespace SMEncounterRNGTool
                 return false;
             if (ByIVs.Checked && !setting.CheckIVs(result))
                 return false;
-            if (ByStats.Checked && !setting.CheckStatus(result))
+            if (ByStats.Checked && !setting.CheckStats(result))
                 return false;
             if (!setting.CheckHiddenPower(result.IVs))
                 return false;
@@ -1032,7 +1032,7 @@ namespace SMEncounterRNGTool
             string frameadvance = result.frameshift.ToString("+#;-#;0");
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
-                Status = result.Status;
+                Status = result.Stats;
             else
                 Status = result.IVs;
 
