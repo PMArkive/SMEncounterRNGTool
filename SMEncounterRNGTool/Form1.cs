@@ -66,7 +66,6 @@ namespace SMEncounterRNGTool
         };
 
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
-        private bool IsEvent { get { return Poke.SelectedIndex == 1; } }
 
         private void ChangeLanguage(object sender, EventArgs e)
         {
@@ -679,8 +678,8 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Search
-
         private int ModelNumber { get { return (int)NPC.Value + 1; } }
+        private bool IsEvent { get { return Poke.SelectedIndex == 1; } }
 
         private void CalcList_Click(object sender, EventArgs e)
         {
@@ -1124,13 +1123,11 @@ namespace SMEncounterRNGTool
                     Timedelay.Value = YourID.Checked ? 62 : 0;
                     break;
                 case Fossil_index - 2:
+                case Fossil_index:
                     GenderRatio.SelectedIndex = 2;
                     GenderRatio.Visible = L_gender.Visible = Gender.Visible = true; break;
                 case Fossil_index - 1:
                     L_Ability.Visible = Ability.Visible = true; break;
-                case Fossil_index:
-                    GenderRatio.SelectedIndex = 2;
-                    GenderRatio.Visible = L_gender.Visible = Gender.Visible = true; break;
                 case Fossil_index + 1:
                     Encounter_th.Value = 101; ConsiderBlink.Checked = false; break;
             }

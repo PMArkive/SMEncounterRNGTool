@@ -190,8 +190,8 @@ namespace SMEncounterRNGTool
             }
             if (IsShinyLocked && st.PSV == TSV)
             {
-                st.PID = st.PID ^ 0x10000000;
-                st.PSV = st.PSV ^ 0x100;
+                st.PID ^= 0x10000000;
+                st.PSV ^= 0x100;
                 st.Shiny = false;
             }
 
@@ -271,7 +271,7 @@ namespace SMEncounterRNGTool
                     st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
                     if (st.PSV == e.TSV)
                     {
-                        st.PID = st.PID ^ 0x10000000; st.PSV = st.PSV ^ 0x100;
+                        st.PID ^= 0x10000000; st.PSV ^= 0x100;
                     }
                     break;
                 case 2: //Random Shiny
