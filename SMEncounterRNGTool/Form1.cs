@@ -952,7 +952,7 @@ namespace SMEncounterRNGTool
 
         private bool frameMatch(RNGSearch.RNGResult result, SearchSetting setting)
         {
-            setting.getStatus(result, setting);
+            setting.getStatus(result);
 
             if (setting.Skip)
                 return true;
@@ -964,7 +964,7 @@ namespace SMEncounterRNGTool
                 return false;
             if (ByIVs.Checked && !setting.validIVs(result.IVs))
                 return false;
-            if (ByStats.Checked && !setting.validStatus(result, setting))
+            if (ByStats.Checked && !setting.validStatus(result))
                 return false;
             if (!setting.mezapa_check(result.IVs))
                 return false;
@@ -1032,7 +1032,7 @@ namespace SMEncounterRNGTool
             string frameadvance = result.frameshift.ToString("+#;-#;0");
             int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
-                Status = result.p_Status;
+                Status = result.Status;
             else
                 Status = result.IVs;
 
@@ -1053,12 +1053,12 @@ namespace SMEncounterRNGTool
             Font BoldFont = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
             for (int k = 0; k < 6; k++)
             {
-                if (Status[k] < 1)
+                if (result.IVs[k] < 1)
                 {
                     row.Cells[3 + k].Style.Font = BoldFont;
                     row.Cells[3 + k].Style.ForeColor = Color.OrangeRed;
                 }
-                else if (Status[k] > 29)
+                else if (result.IVs[k] > 29)
                 {
                     row.Cells[3 + k].Style.Font = BoldFont;
                     row.Cells[3 + k].Style.ForeColor = Color.MediumSeaGreen;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SMEncounterRNGTool
 {
@@ -50,7 +49,7 @@ namespace SMEncounterRNGTool
             public uint PID, EC, PSV;
             public ulong row_r;
             public int[] IVs;
-            public int[] p_Status;
+            public int[] Status;
             public bool Shiny;
             public bool Synchronize;
             public byte Blink;
@@ -347,7 +346,7 @@ namespace SMEncounterRNGTool
                 index = PreDelayCorrection;  //Pre-HoneyCorrection
             }
             else
-                ButtonPressDelay();          //4-6F
+                ButtonPressDelay();          //4F
             time_delay();
             return index;
         }

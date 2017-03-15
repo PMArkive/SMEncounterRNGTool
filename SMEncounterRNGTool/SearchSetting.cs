@@ -150,7 +150,7 @@
         public int HPType = -1;
         public int Ability = -1;
         public int Gender = -1;
-        public int[] IVup, IVlow, BS, Status, p_Status;
+        public int[] IVup, IVlow, BS, Status;
         public bool Skip;
         public int Lv;
         public bool[] Slot;
@@ -164,29 +164,24 @@
             return true;
         }
 
-        public bool validStatus(RNGSearch.RNGResult result, SearchSetting setting)
+        public bool validStatus(RNGSearch.RNGResult result)
         {
             for (int i = 0; i < 6; i++)
-                if (setting.Status[i] != 0 && setting.Status[i] != p_Status[i])
+                if (Status[i] != 0 && Status[i] != result.Status[i])
                     return false;
             return true;
         }
 
-        public void getStatus(RNGSearch.RNGResult result, SearchSetting setting)
+        public void getStatus(RNGSearch.RNGResult result)
         {
-            setting.p_Status = new int[6];
             int[] IV = new int[6];
-
+            result.Status = new int[6];
             for (int i = 0; i < 6; i++)
                 IV[i] = result.IVs[i];
 
-            p_Status[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
+            result.Status[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
             for (int i = 1; i < 6; i++)
-                p_Status[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
-
-            result.p_Status = setting.p_Status;
-
-            return;
+                result.Status[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
         }
 
         public bool mezapa_check(int[] IV)
