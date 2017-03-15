@@ -156,15 +156,15 @@
         public bool[] Slot;
 
 
-        public bool validIVs(int[] IV)
+        public bool CheckIVs(RNGSearch.RNGResult result)
         {
             for (int i = 0; i < 6; i++)
-                if (IVlow[i] > IV[i] || IV[i] > IVup[i])
+                if (IVlow[i] > result.IVs[i] || result.IVs[i] > IVup[i])
                     return false;
             return true;
         }
 
-        public bool validStatus(RNGSearch.RNGResult result)
+        public bool CheckStatus(RNGSearch.RNGResult result)
         {
             for (int i = 0; i < 6; i++)
                 if (Status[i] != 0 && Status[i] != result.Status[i])
@@ -184,7 +184,7 @@
                 result.Status[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
         }
 
-        public bool mezapa_check(int[] IV)
+        public bool CheckHiddenPower(int[] IV)
         {
             if (HPType == -1)
                 return true;

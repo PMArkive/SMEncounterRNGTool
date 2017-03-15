@@ -962,11 +962,11 @@ namespace SMEncounterRNGTool
                 return false;
             if (SafeFOnly.Checked && result.Blink > 1)
                 return false;
-            if (ByIVs.Checked && !setting.validIVs(result.IVs))
+            if (ByIVs.Checked && !setting.CheckIVs(result))
                 return false;
-            if (ByStats.Checked && !setting.validStatus(result))
+            if (ByStats.Checked && !setting.CheckStatus(result))
                 return false;
-            if (!setting.mezapa_check(result.IVs))
+            if (!setting.CheckHiddenPower(result.IVs))
                 return false;
             if (setting.Nature != -1 && setting.Nature != result.Nature)
                 return false;
