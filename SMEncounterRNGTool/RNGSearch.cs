@@ -26,7 +26,7 @@ namespace SMEncounterRNGTool
 
         public static bool Considerhistory;
         public static bool Considerdelay;
-        public static int PreDelayCorrection = 0;
+        public static int PreDelayCorrection;
         public static int delaytime = 93; //For honey 186F =3.1s
         public static bool ConsiderBlink = true;
         public static int modelnumber;
@@ -59,8 +59,8 @@ namespace SMEncounterRNGTool
             public byte Gender;
             public byte Ability = 1;
             public byte UbValue = 100;
-            public byte Slot = 0;
-            public byte Lv = 0;
+            public byte Slot;
+            public byte Lv;
             public byte Item = 100;
 
             public int realtime = -1;
@@ -82,8 +82,8 @@ namespace SMEncounterRNGTool
             public bool OtherInfo;
             public int TID = -1;
             public int SID = -1;
-            public uint EC = 0;
-            public uint PID = 0;
+            public uint EC;
+            public uint PID;
         }
 
         public RNGResult Generate()

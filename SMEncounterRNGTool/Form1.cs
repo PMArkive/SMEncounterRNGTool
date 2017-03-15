@@ -191,7 +191,7 @@ namespace SMEncounterRNGTool
             string TimeResultInstructText = "";
             switch (lang)
             {
-                case 0: TimeResultInstructText = "Format: Time in Frame (Time in Second) <Frame Lifetime>"; break;
+                case 0: TimeResultInstructText = "Format: Time in Frame (Time in Second) <Target Frame Lifetime>"; break;
                 case 1: TimeResultInstructText = "格式：帧数 (秒数) <持续时间>"; break;
             }
             TimeResult.Items.Add(TimeResultInstructText);
