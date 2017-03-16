@@ -37,6 +37,7 @@
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.SOSSetting = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.L_ChainLength = new System.Windows.Forms.Label();
             this.ChainLength = new System.Windows.Forms.NumericUpDown();
             this.Condition = new System.Windows.Forms.GroupBox();
@@ -154,31 +155,6 @@
             this.Frame_max = new System.Windows.Forms.NumericUpDown();
             this.Frame_min = new System.Windows.Forms.NumericUpDown();
             this.DGV = new System.Windows.Forms.DataGridView();
-            this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_H = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_B = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SetStartFrame = new System.Windows.Forms.ToolStripMenuItem();
             this.SetTargetFrame = new System.Windows.Forms.ToolStripMenuItem();
@@ -272,7 +248,32 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.label11 = new System.Windows.Forms.Label();
+            this.dgv_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_deviation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_blink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_H = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_B = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_S = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_nature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_synced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_needle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_psv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ubvalue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_encounter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_rand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_EC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_research = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -396,6 +397,15 @@
             this.SOSSetting.TabStop = false;
             this.SOSSetting.Text = "连锁设置";
             this.SOSSetting.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(166, 35);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 66;
+            this.label11.Text = "WIP";
             // 
             // L_ChainLength
             // 
@@ -1900,7 +1910,8 @@
             this.dgv_rand,
             this.dgv_pid,
             this.dgv_EC,
-            this.dgv_time});
+            this.dgv_time,
+            this.dgv_research});
             this.DGV.ContextMenuStrip = this.DGVMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -1927,156 +1938,6 @@
             this.DGV.Size = new System.Drawing.Size(1208, 338);
             this.DGV.TabIndex = 2;
             this.DGV.DoubleClick += new System.EventHandler(this.SetTargetFrame_Click);
-            // 
-            // dgv_Frame
-            // 
-            this.dgv_Frame.HeaderText = "帧数";
-            this.dgv_Frame.Name = "dgv_Frame";
-            this.dgv_Frame.Width = 60;
-            // 
-            // dgv_deviation
-            // 
-            this.dgv_deviation.HeaderText = "偏差";
-            this.dgv_deviation.Name = "dgv_deviation";
-            this.dgv_deviation.Width = 60;
-            // 
-            // dgv_blink
-            // 
-            this.dgv_blink.HeaderText = "眨眼";
-            this.dgv_blink.Name = "dgv_blink";
-            this.dgv_blink.Width = 40;
-            // 
-            // dgv_H
-            // 
-            this.dgv_H.HeaderText = "HP";
-            this.dgv_H.Name = "dgv_H";
-            this.dgv_H.Width = 30;
-            // 
-            // dgv_A
-            // 
-            this.dgv_A.HeaderText = "Atk";
-            this.dgv_A.Name = "dgv_A";
-            this.dgv_A.Width = 30;
-            // 
-            // dgv_B
-            // 
-            this.dgv_B.HeaderText = "Def";
-            this.dgv_B.Name = "dgv_B";
-            this.dgv_B.Width = 30;
-            // 
-            // dgv_C
-            // 
-            this.dgv_C.HeaderText = "SpA";
-            this.dgv_C.Name = "dgv_C";
-            this.dgv_C.Width = 30;
-            // 
-            // dgv_D
-            // 
-            this.dgv_D.HeaderText = "SpD";
-            this.dgv_D.Name = "dgv_D";
-            this.dgv_D.Width = 30;
-            // 
-            // dgv_S
-            // 
-            this.dgv_S.HeaderText = "Spe";
-            this.dgv_S.Name = "dgv_S";
-            this.dgv_S.Width = 30;
-            // 
-            // dgv_nature
-            // 
-            this.dgv_nature.HeaderText = "性格";
-            this.dgv_nature.Name = "dgv_nature";
-            this.dgv_nature.Width = 55;
-            // 
-            // dgv_synced
-            // 
-            this.dgv_synced.HeaderText = "同步";
-            this.dgv_synced.Name = "dgv_synced";
-            this.dgv_synced.Width = 45;
-            // 
-            // dgv_needle
-            // 
-            this.dgv_needle.HeaderText = "针";
-            this.dgv_needle.Name = "dgv_needle";
-            this.dgv_needle.Width = 35;
-            // 
-            // dgv_psv
-            // 
-            this.dgv_psv.HeaderText = "PSV";
-            this.dgv_psv.Name = "dgv_psv";
-            this.dgv_psv.Width = 40;
-            // 
-            // dgv_delay
-            // 
-            this.dgv_delay.HeaderText = "延迟";
-            this.dgv_delay.Name = "dgv_delay";
-            this.dgv_delay.Width = 40;
-            // 
-            // dgv_ubvalue
-            // 
-            this.dgv_ubvalue.HeaderText = "UB";
-            this.dgv_ubvalue.Name = "dgv_ubvalue";
-            this.dgv_ubvalue.Width = 35;
-            // 
-            // dgv_slot
-            // 
-            this.dgv_slot.HeaderText = "种类";
-            this.dgv_slot.Name = "dgv_slot";
-            this.dgv_slot.Width = 40;
-            // 
-            // dgv_lv
-            // 
-            this.dgv_lv.HeaderText = "Lv";
-            this.dgv_lv.Name = "dgv_lv";
-            this.dgv_lv.Width = 30;
-            // 
-            // dgv_gender
-            // 
-            this.dgv_gender.HeaderText = "性别";
-            this.dgv_gender.Name = "dgv_gender";
-            this.dgv_gender.Width = 45;
-            // 
-            // dgv_ability
-            // 
-            this.dgv_ability.HeaderText = "特性";
-            this.dgv_ability.Name = "dgv_ability";
-            this.dgv_ability.Width = 45;
-            // 
-            // dgv_item
-            // 
-            this.dgv_item.HeaderText = "道具";
-            this.dgv_item.Name = "dgv_item";
-            this.dgv_item.Width = 45;
-            // 
-            // dgv_encounter
-            // 
-            this.dgv_encounter.HeaderText = "遇敌";
-            this.dgv_encounter.Name = "dgv_encounter";
-            this.dgv_encounter.Width = 45;
-            // 
-            // dgv_rand
-            // 
-            this.dgv_rand.HeaderText = "乱数值";
-            this.dgv_rand.Name = "dgv_rand";
-            this.dgv_rand.Width = 125;
-            // 
-            // dgv_pid
-            // 
-            this.dgv_pid.HeaderText = "PID";
-            this.dgv_pid.Name = "dgv_pid";
-            this.dgv_pid.Width = 65;
-            // 
-            // dgv_EC
-            // 
-            this.dgv_EC.HeaderText = "加密常数";
-            this.dgv_EC.Name = "dgv_EC";
-            this.dgv_EC.Width = 65;
-            // 
-            // dgv_time
-            // 
-            this.dgv_time.HeaderText = "时间";
-            this.dgv_time.Name = "dgv_time";
-            this.dgv_time.Width = 70;
             // 
             // DGVMenuStrip
             // 
@@ -3149,14 +3010,162 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
-            // label11
+            // dgv_Frame
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(166, 35);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 13);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "WIP";
+            this.dgv_Frame.HeaderText = "帧数";
+            this.dgv_Frame.Name = "dgv_Frame";
+            this.dgv_Frame.Width = 60;
+            // 
+            // dgv_deviation
+            // 
+            this.dgv_deviation.HeaderText = "偏差";
+            this.dgv_deviation.Name = "dgv_deviation";
+            this.dgv_deviation.Width = 60;
+            // 
+            // dgv_blink
+            // 
+            this.dgv_blink.HeaderText = "眨眼";
+            this.dgv_blink.Name = "dgv_blink";
+            this.dgv_blink.Width = 40;
+            // 
+            // dgv_H
+            // 
+            this.dgv_H.HeaderText = "HP";
+            this.dgv_H.Name = "dgv_H";
+            this.dgv_H.Width = 30;
+            // 
+            // dgv_A
+            // 
+            this.dgv_A.HeaderText = "Atk";
+            this.dgv_A.Name = "dgv_A";
+            this.dgv_A.Width = 30;
+            // 
+            // dgv_B
+            // 
+            this.dgv_B.HeaderText = "Def";
+            this.dgv_B.Name = "dgv_B";
+            this.dgv_B.Width = 30;
+            // 
+            // dgv_C
+            // 
+            this.dgv_C.HeaderText = "SpA";
+            this.dgv_C.Name = "dgv_C";
+            this.dgv_C.Width = 30;
+            // 
+            // dgv_D
+            // 
+            this.dgv_D.HeaderText = "SpD";
+            this.dgv_D.Name = "dgv_D";
+            this.dgv_D.Width = 30;
+            // 
+            // dgv_S
+            // 
+            this.dgv_S.HeaderText = "Spe";
+            this.dgv_S.Name = "dgv_S";
+            this.dgv_S.Width = 30;
+            // 
+            // dgv_nature
+            // 
+            this.dgv_nature.HeaderText = "性格";
+            this.dgv_nature.Name = "dgv_nature";
+            this.dgv_nature.Width = 55;
+            // 
+            // dgv_synced
+            // 
+            this.dgv_synced.HeaderText = "同步";
+            this.dgv_synced.Name = "dgv_synced";
+            this.dgv_synced.Width = 45;
+            // 
+            // dgv_needle
+            // 
+            this.dgv_needle.HeaderText = "针";
+            this.dgv_needle.Name = "dgv_needle";
+            this.dgv_needle.Width = 35;
+            // 
+            // dgv_psv
+            // 
+            this.dgv_psv.HeaderText = "PSV";
+            this.dgv_psv.Name = "dgv_psv";
+            this.dgv_psv.Width = 40;
+            // 
+            // dgv_delay
+            // 
+            this.dgv_delay.HeaderText = "延迟";
+            this.dgv_delay.Name = "dgv_delay";
+            this.dgv_delay.Width = 40;
+            // 
+            // dgv_ubvalue
+            // 
+            this.dgv_ubvalue.HeaderText = "UB";
+            this.dgv_ubvalue.Name = "dgv_ubvalue";
+            this.dgv_ubvalue.Width = 35;
+            // 
+            // dgv_slot
+            // 
+            this.dgv_slot.HeaderText = "种类";
+            this.dgv_slot.Name = "dgv_slot";
+            this.dgv_slot.Width = 40;
+            // 
+            // dgv_lv
+            // 
+            this.dgv_lv.HeaderText = "Lv";
+            this.dgv_lv.Name = "dgv_lv";
+            this.dgv_lv.Width = 30;
+            // 
+            // dgv_gender
+            // 
+            this.dgv_gender.HeaderText = "性别";
+            this.dgv_gender.Name = "dgv_gender";
+            this.dgv_gender.Width = 45;
+            // 
+            // dgv_ability
+            // 
+            this.dgv_ability.HeaderText = "特性";
+            this.dgv_ability.Name = "dgv_ability";
+            this.dgv_ability.Width = 45;
+            // 
+            // dgv_item
+            // 
+            this.dgv_item.HeaderText = "道具";
+            this.dgv_item.Name = "dgv_item";
+            this.dgv_item.Width = 45;
+            // 
+            // dgv_encounter
+            // 
+            this.dgv_encounter.HeaderText = "遇敌";
+            this.dgv_encounter.Name = "dgv_encounter";
+            this.dgv_encounter.Width = 45;
+            // 
+            // dgv_rand
+            // 
+            this.dgv_rand.HeaderText = "乱数值";
+            this.dgv_rand.Name = "dgv_rand";
+            this.dgv_rand.Width = 125;
+            // 
+            // dgv_pid
+            // 
+            this.dgv_pid.HeaderText = "PID";
+            this.dgv_pid.Name = "dgv_pid";
+            this.dgv_pid.Width = 65;
+            // 
+            // dgv_EC
+            // 
+            this.dgv_EC.HeaderText = "加密常数";
+            this.dgv_EC.Name = "dgv_EC";
+            this.dgv_EC.Width = 65;
+            // 
+            // dgv_time
+            // 
+            this.dgv_time.HeaderText = "时间";
+            this.dgv_time.Name = "dgv_time";
+            this.dgv_time.Width = 70;
+            // 
+            // dgv_research
+            // 
+            this.dgv_research.HeaderText = "Research";
+            this.dgv_research.Name = "dgv_research";
+            this.dgv_research.Visible = false;
+            this.dgv_research.Width = 60;
             // 
             // Form1
             // 
@@ -3475,6 +3484,7 @@
         private System.Windows.Forms.GroupBox SOSSetting;
         private System.Windows.Forms.NumericUpDown ChainLength;
         private System.Windows.Forms.Label L_ChainLength;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_deviation;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_blink;
@@ -3500,7 +3510,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_research;
     }
 }
 

@@ -397,6 +397,7 @@ namespace SMEncounterRNGTool
 
         private void Advanced_CheckedChanged(object sender, EventArgs e)
         {
+            dgv_research.Visible = Advanced.Checked;
             Properties.Settings.Default.Advance = Advanced.Checked;
             Properties.Settings.Default.Save();
         }
@@ -1043,11 +1044,13 @@ namespace SMEncounterRNGTool
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
 
+            string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " +(result.row_r % 100).ToString("D2");
+
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
                 true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], SearchSetting.abilitystr[result.Ability], Item, Encounter,
-                randstr, PID, EC, time
+                randstr, PID, EC, time, research
                 );
 
             if (result.Shiny)
