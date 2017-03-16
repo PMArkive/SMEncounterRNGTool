@@ -683,6 +683,8 @@ namespace SMEncounterRNGTool
 
         private void CalcList_Click(object sender, EventArgs e)
         {
+            if (IsEvent && NatureLocked.Checked && Event_Nature.SelectedIndex == 0)
+                Event_Nature.SelectedIndex = 1;
             if (ivmin0.Value > ivmax0.Value)
                 Error(SETTINGERROR_STR[lindex] + L_H.Text);
             else if (ivmin1.Value > ivmax1.Value)
@@ -1272,9 +1274,13 @@ namespace SMEncounterRNGTool
                 Event_Nature.SelectedIndex = NatureLocked.Checked ? Data[0xA0] + 1 : 0;
                 GenderLocked.Checked = Data[0xA1] != 3;
                 Event_Gender.SelectedIndex = GenderLocked.Checked ? (Data[0xA1] + 1) % 3 : 0;
+                Poke.SelectedIndex = 1;
+                if (Data[0xA1] == 2) GenderRatio.SelectedIndex = 0;
+                Fix3v.Checked = Data[Stats_index[0]] == 0xFE;
+                IVsCount.Value = Data[Stats_index[0]] == 0xFE ? 3 : 0;
                 for (int i = 0; i < 6; i++)
                 {
-                    if (Data[Stats_index[i]] != 0xFF)
+                    if (Data[Stats_index[i]] < 0xFE)
                     {
                         EventIV[i].Value = Data[Stats_index[i]];
                         EventIVLocked[i].Checked = true;
