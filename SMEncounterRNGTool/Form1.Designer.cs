@@ -272,6 +272,7 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -385,6 +386,7 @@
             // 
             // SOSSetting
             // 
+            this.SOSSetting.Controls.Add(this.label11);
             this.SOSSetting.Controls.Add(this.L_ChainLength);
             this.SOSSetting.Controls.Add(this.ChainLength);
             this.SOSSetting.Location = new System.Drawing.Point(817, 218);
@@ -3147,6 +3149,15 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(166, 35);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 66;
+            this.label11.Text = "WIP";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3489,6 +3500,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_EC;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
+        private System.Windows.Forms.Label label11;
     }
 }
 
