@@ -47,7 +47,7 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> EventIV = new List<NumericUpDown>();
         List<CheckBox> EventIVLocked = new List<CheckBox>();
         RNGSearch.EventRule e = new RNGSearch.EventRule();
-        private string version = "1.08";
+        private string version = "1.09";
 
         #region Translation
         private string curlanguage;
@@ -535,6 +535,7 @@ namespace SMEncounterRNGTool
 
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
+            dgv_time.Visible = CreateTimeline.Checked;
             TimeSpan.Enabled = CreateTimeline.Checked;
             AroundTarget.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
             ShowResultsAfterDelay.Enabled = !CreateTimeline.Checked && ConsiderDelay.Checked;
