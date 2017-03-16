@@ -196,7 +196,7 @@ namespace SMEncounterRNGTool
 
             //IV
             st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
-            int cnt = Fix3v ? 3 : 0;
+            int cnt = (IsUB ? true : Fix3v) ? 3 : 0;
             while (cnt > 0)
             {
                 int ran = (int)(getrand() % 6);
@@ -432,7 +432,6 @@ namespace SMEncounterRNGTool
         {
             byte UbValue = (byte)(getrand() % 100);
             IsUB = UbValue < UB_th;
-            Fix3v = IsUB;
             return UbValue;
         }
 
