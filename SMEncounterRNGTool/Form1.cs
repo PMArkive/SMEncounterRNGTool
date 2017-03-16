@@ -429,6 +429,7 @@ namespace SMEncounterRNGTool
             Reset_Click(null, null);
 
             GenderRatio.Visible = Honey.Visible = Wild.Checked;
+            dgv_slot.Visible = dgv_item.Visible = dgv_lv.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
         }
@@ -442,14 +443,14 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
+            dgv_ubvalue.Visible = UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
             if (!UB.Checked)
                 UBOnly.Checked = false;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
         {
-            L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
+            dgv_encounter.Visible = L_Encounter_th.Visible = Encounter_th.Visible = EncounteredOnly.Visible = !Honey.Checked && Wild.Checked;
             if (Honey.Checked)
             {
                 Timedelay.Value = 186;
@@ -487,6 +488,7 @@ namespace SMEncounterRNGTool
         {
             ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
             Timedelay.Enabled = ShowResultsAfterDelay.Enabled = HighLightFrameAfter.Enabled = ConsiderDelay.Checked;
+            dgv_delay.Visible = ConsiderDelay.Checked;
         }
 
         private void UBOnly_CheckedChanged(object sender, EventArgs e)
