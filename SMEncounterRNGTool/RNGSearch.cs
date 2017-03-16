@@ -7,7 +7,7 @@ namespace SMEncounterRNGTool
         // Search Settings
 
         public bool AlwaysSynchro;
-        public int Synchro_Stat;
+        public byte Synchro_Stat;
         public bool Fix3v;
 
         public int TSV;
@@ -44,7 +44,7 @@ namespace SMEncounterRNGTool
 
         public class RNGResult
         {
-            public int Nature;
+            public byte Nature;
             public byte Clock;
             public uint PID, EC, PSV;
             public ulong row_r;
@@ -132,7 +132,7 @@ namespace SMEncounterRNGTool
             else if (!Wild)
             {
                 if (AlwaysSynchro)
-                { if (Synchro_Stat > -1) st.Synchronize = true; }
+                { if (Synchro_Stat < 25) st.Synchronize = true; }
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
             }
@@ -215,10 +215,10 @@ namespace SMEncounterRNGTool
                 st.Ability = (byte)((getrand() & 1) + 1);
 
             //Nature
-            st.Nature = (int)(currentrand() % 25);
+            st.Nature = (byte)(currentrand() % 25);
             if (st.Synchronize)
             {
-                if (Synchro_Stat >= 0) st.Nature = Synchro_Stat;
+                if (Synchro_Stat < 25) st.Nature = Synchro_Stat;
             }
             else
                 index++;
@@ -300,7 +300,7 @@ namespace SMEncounterRNGTool
             st.Ability = e.AbilityLocked ? e.Ability : (byte)((getrand() & 1) + 1);
 
             //Nature
-            st.Nature = e.NatureLocked ? e.Nature : (int)(getrand() % 25);
+            st.Nature = e.NatureLocked ? e.Nature : (byte)(getrand() % 25);
 
             //Gender
             st.Gender = (e.GenderLocked || nogender) ? e.Gender : (byte)(getrand() % 252 >= gender_ratio ? 1 : 2);

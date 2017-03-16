@@ -929,7 +929,7 @@ namespace SMEncounterRNGTool
 
             var rng = new RNGSearch
             {
-                Synchro_Stat = SyncNature.SelectedIndex - 1,
+                Synchro_Stat = (byte)(SyncNature.SelectedIndex - 1),
                 TSV = (int)TSV.Value,
                 AlwaysSynchro = AlwaysSynced.Checked,
                 Honey = Honey.Checked,
