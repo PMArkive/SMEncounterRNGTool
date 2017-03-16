@@ -1267,7 +1267,7 @@ namespace SMEncounterRNGTool
                 byte CardType = Data[0x51];
                 if (CardType != 0) return false;
                 byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
-                byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB4, 0xB2, 0xB3 };
+                byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB3, 0xB4, 0xB2 };
                 AbilityLocked.Checked = Data[0xA2] < 3;
                 Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : 0;
                 NatureLocked.Checked = Data[0xA0] != 0xFF;
