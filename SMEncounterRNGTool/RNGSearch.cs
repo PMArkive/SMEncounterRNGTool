@@ -432,7 +432,7 @@ namespace SMEncounterRNGTool
         {
             byte UbValue = (byte)(getrand() % 100);
             IsUB = UbValue < UB_th;
-            if (IsUB) Fix3v = true;
+            Fix3v = IsUB;
             return UbValue;
         }
 
