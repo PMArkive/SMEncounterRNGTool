@@ -1283,10 +1283,16 @@ namespace SMEncounterRNGTool
                 Poke.SelectedIndex = 1;
                 if (Data[0xA1] == 2) GenderRatio.SelectedIndex = 0;
                 Fix3v.Checked = Data[Stats_index[0]] == 0xFE;
-                IVsCount.Value = Data[Stats_index[0]] == 0xFE ? 3 : 0;
+                switch (Data[Stats_index[0]])
+                {
+                    case 0xFE: IVsCount.Value = 3; break;
+                    case 0xFD: IVsCount.Value = 2; break;
+                    // Maybe more rules here
+                    default: IVsCount.Value = 0; break;
+                }
                 for (int i = 0; i < 6; i++)
                 {
-                    if (Data[Stats_index[i]] < 0xFE)
+                    if (Data[Stats_index[i]] < 0xFD)
                     {
                         EventIV[i].Value = Data[Stats_index[i]];
                         EventIVLocked[i].Checked = true;
@@ -1339,6 +1345,7 @@ namespace SMEncounterRNGTool
         {
             Event_Gender.Enabled = GenderLocked.Checked;
             if (!GenderLocked.Checked) Event_Gender.SelectedIndex = 0;
+            if (IsEvent) GenderRatio.Enabled = !GenderLocked.Checked;
         }
 
         private void AbilityLocked_CheckedChanged(object sender, EventArgs e)
