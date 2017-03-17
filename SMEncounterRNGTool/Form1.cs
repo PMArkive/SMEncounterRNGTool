@@ -1095,7 +1095,7 @@ namespace SMEncounterRNGTool
             Method_CheckedChanged(null, null);
             //Enable
             SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = Poke.SelectedIndex == 0;
-            Fix3v.Enabled = (Poke.SelectedIndex < 2 || Poke.SelectedIndex >= UB_StartIndex);
+            GenderRatio.Enabled = Fix3v.Enabled = Poke.SelectedIndex < 2 || Poke.SelectedIndex >= UB_StartIndex;
             Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != UB_StartIndex - 1;
             //Event
             L_EventInstruction.Visible = IsEvent;
