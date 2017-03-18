@@ -72,6 +72,7 @@ namespace SMEncounterRNGTool
             public uint TSV;
             public byte IVsCount;
             public bool YourID;
+            public bool IsEgg;
             public byte PIDType;
             public bool AbilityLocked;
             public byte Ability;
@@ -354,7 +355,7 @@ namespace SMEncounterRNGTool
         public int getframeshift(EventRule e)
         {
             ButtonPressDelay();
-            if (e.YourID)
+            if (e.YourID && !e.IsEgg)
             {
                 Advance(10);
                 time_delay();

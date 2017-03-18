@@ -548,8 +548,14 @@ namespace SMEncounterRNGTool
 
         private void YourID_CheckedChanged(object sender, EventArgs e)
         {
-            if (IsEvent)
+            if (IsEvent && !IsEgg.Checked)
                 Timedelay.Value = YourID.Checked ? 62 : 0;
+        }
+
+        private void IsEgg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsEvent && YourID.Checked)
+                Timedelay.Value = IsEgg.Checked ? 0 : 62;
         }
 
         private void Fix3v_CheckedChanged(object sender, EventArgs e)
@@ -1045,7 +1051,7 @@ namespace SMEncounterRNGTool
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
 
-            string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " +(result.row_r % 100).ToString("D2");
+            string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " + (result.row_r % 100).ToString("D2");
 
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
@@ -1128,7 +1134,7 @@ namespace SMEncounterRNGTool
                     GenderRatio.SelectedIndex = 1;
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
                     ConsiderBlink.Checked = false; GenderRatio.Visible = true;
-                    Timedelay.Value = YourID.Checked ? 62 : 0;
+                    Timedelay.Value = (YourID.Checked && !IsEgg.Checked) ? 62 : 0;
                     break;
                 case Fossil_index - 2:
                 case Fossil_index:
@@ -1171,7 +1177,8 @@ namespace SMEncounterRNGTool
                 EC = (uint)Event_EC.Value,
                 Ability = (byte)Event_Ability.SelectedIndex,
                 Nature = (byte)(Event_Nature.SelectedIndex - 1),
-                Gender = (byte)Event_Gender.SelectedIndex
+                Gender = (byte)Event_Gender.SelectedIndex,
+                IsEgg = IsEgg.Checked
             };
             if (e.YourID)
                 e.TSV = (uint)TSV.Value;
@@ -1255,7 +1262,6 @@ namespace SMEncounterRNGTool
         #region WC7 Import
         private void B_Open_Click(object sender, EventArgs e)
         {
-            // Displays an OpenFileDialog so the user can select a Cursor.
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "Gen7 Wonder Card Files|*.wc7";
             openFileDialog1.Title = "Select a Wonder Card File";
@@ -1310,6 +1316,7 @@ namespace SMEncounterRNGTool
                     Event_PID.Value = BitConverter.ToUInt32(Data, 0xD4);
                 Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
                 if (Event_EC.Value > 0) Event_EC.Visible = L_EC.Visible = true;
+                IsEgg.Checked = Data[0xD1] == 1;
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;
                 Lv_Search.Value = Data[0xD0];
