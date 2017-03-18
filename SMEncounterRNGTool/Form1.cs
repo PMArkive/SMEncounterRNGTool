@@ -535,7 +535,7 @@ namespace SMEncounterRNGTool
 
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_time.Visible = CreateTimeline.Checked;
+            dgv_time.Visible = CreateTimeline.Checked || Modification.Checked;
             TimeSpan.Enabled = CreateTimeline.Checked;
             AroundTarget.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
             ShowResultsAfterDelay.Enabled = !CreateTimeline.Checked && ConsiderDelay.Checked;
@@ -548,6 +548,7 @@ namespace SMEncounterRNGTool
 
         private void Modification_CheckedChanged(object sender, EventArgs e)
         {
+            dgv_time.Visible = CreateTimeline.Checked || Modification.Checked;
             if (Modification.Checked)
                 CreateTimeline.Checked = false;
         }
@@ -853,12 +854,14 @@ namespace SMEncounterRNGTool
                 min = (int)Frame_min.Value; max = (int)Frame_max.Value;
             }
 
+            int StartFrame = (int)Frame_min.Value;
+
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
             byte[] Blinkflaglist = getblinkflaglist(min, max, sfmt);
 
-            for (int i = 0; i < min; i++)
+            for (int i = 0; i < StartFrame; i++)
                 sfmt.NextUInt64();
             var st = CreateNPCStatus(sfmt);
             var setting = getSettings();
@@ -871,8 +874,8 @@ namespace SMEncounterRNGTool
             int[] remain_frame;
             bool[] blink_flag;
 
-
-            for (int i = min; i <= max;)
+            int realtime = 0;
+            for (int i = StartFrame; i <= max;)
             {
                 remain_frame = (int[])st.remain_frame.Clone();
                 blink_flag = (bool[])st.blink_flag.Clone();
@@ -883,17 +886,18 @@ namespace SMEncounterRNGTool
                     RNGSearch.remain_frame = (int[])remain_frame.Clone();
                     RNGSearch.blink_flag = (bool[])blink_flag.Clone();
                     RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
-                    result.Blink = Blinkflaglist[i - min];
+                    result.realtime = realtime;
                     if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
                     RNGSearch.Rand.RemoveAt(0);
                     RNGSearch.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
-                    if (!frameMatch(result, setting))
+                    if (i <= min || i > max || !frameMatch(result, setting))
                         continue;
-
+                    result.Blink = Blinkflaglist[i - min - 1];
                     list.Add(getRow_Sta(i - 1, rng, result, DGV));
                 }
+                realtime++;
                 if (list.Count > 100000) break;
             }
             DGV.Rows.AddRange(list.ToArray());
@@ -1091,7 +1095,7 @@ namespace SMEncounterRNGTool
             string randstr = result.row_r.ToString("X16");
             string PID = result.PID.ToString("X8");
             string EC = result.EC.ToString("X8");
-            string time = (CreateTimeline.Checked) ? (2 * result.realtime).ToString() + "F" : "-";
+            string time = (CreateTimeline.Checked || Modification.Checked) ? (2 * result.realtime).ToString() + "F" : "-";
 
             if (!Advanced.Checked)
             {
@@ -1106,7 +1110,7 @@ namespace SMEncounterRNGTool
                     Item = "5%";
                 else
                     Item = "-";
-                time = (CreateTimeline.Checked) ? ((float)result.realtime / 30).ToString("F") + " s" : "-";
+                time = (CreateTimeline.Checked || Modification.Checked) ? ((float)result.realtime / 30).ToString("F") + " s" : "-";
             }
 
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
