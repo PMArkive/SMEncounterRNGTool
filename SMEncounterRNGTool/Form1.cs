@@ -465,7 +465,7 @@ namespace SMEncounterRNGTool
             }
             label10.Text = Honey.Checked ? "F" : "+4F   1F=1/60s";
             L_Correction.Visible = Correction.Visible = Honey.Checked;
-            Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
+            Modification.Enabled = Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
         }
 
 
