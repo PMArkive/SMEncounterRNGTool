@@ -33,7 +33,6 @@ namespace SMEncounterRNGTool
                 return;
             foreach (var box in ((NumericUpDown)ctrl).Controls.OfType<TextBox>())
             {
-                // クリップボードへコピー
                 box.Undo();
                 break;
             }

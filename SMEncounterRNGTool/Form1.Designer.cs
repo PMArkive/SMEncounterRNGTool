@@ -273,9 +273,9 @@
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
             this.Modification = new System.Windows.Forms.CheckBox();
-            this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
-            this.Event_PID = new SMEncounterRNGTool.HexNumericUpdown();
-            this.Event_EC = new SMEncounterRNGTool.HexNumericUpdown();
+            this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
+            this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
+            this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -3303,7 +3303,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage SearchTool;
         private System.Windows.Forms.TabPage SearchTarget;
-        private HexNumericUpdown Seed;
+        private Controls.HexNumericUpdown Seed;
         private System.Windows.Forms.NumericUpDown TSV;
         private System.Windows.Forms.Label L_Seed;
         private System.Windows.Forms.Label L_TSV;
@@ -3499,10 +3499,10 @@
         private System.Windows.Forms.NumericUpDown Event_SID;
         private System.Windows.Forms.NumericUpDown Event_TID;
         private System.Windows.Forms.CheckBox OtherInfo;
-        private HexNumericUpdown Event_PID;
+        private Controls.HexNumericUpdown Event_PID;
         private System.Windows.Forms.Label L_PID;
         private System.Windows.Forms.Label L_EC;
-        private HexNumericUpdown Event_EC;
+        private Controls.HexNumericUpdown Event_EC;
         private System.Windows.Forms.Label L_E_Gender;
         private System.Windows.Forms.Label L_E_Nature;
         private System.Windows.Forms.ComboBox Event_Gender;

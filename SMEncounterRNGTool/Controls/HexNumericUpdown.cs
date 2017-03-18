@@ -1,8 +1,9 @@
-﻿namespace SMEncounterRNGTool
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace SMEncounterRNGTool.Controls
 {
-    using System;
-    using System.ComponentModel;
-    using System.Windows.Forms;
 
     public class HexNumericUpdown : NumericUpDown
     {

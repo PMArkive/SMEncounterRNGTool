@@ -68,7 +68,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="HexNumericUpdown.cs">
+    <Compile Include="Controls\HexNumericUpdown.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
