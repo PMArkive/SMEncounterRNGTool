@@ -60,8 +60,8 @@ namespace SMEncounterRNGTool
         private static readonly string[] FILEERRORSTR = { "Invalid file!", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
         {
-            { "Random PID", "Random Nonshiny", "Random Shiny","Specified"},
-            { "随机PID", "随机不闪", "随机闪","固定"}
+            { "Random", "Nonshiny", "Shiny","Specified"},
+            { "随机", "必不闪", "必闪","特定"}
         };
 
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
@@ -464,7 +464,7 @@ namespace SMEncounterRNGTool
             }
             label10.Text = Honey.Checked ? "F" : "+4F   1F=1/60s";
             L_Correction.Visible = Correction.Visible = Honey.Checked;
-            Modification.Enabled = Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
+            Modification.Visible = Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
         }
 
 
@@ -572,7 +572,7 @@ namespace SMEncounterRNGTool
 
         private void OtherInfo_CheckedChanged(object sender, EventArgs e)
         {
-            Event_EC.Enabled = Event_PID.Enabled = Event_TID.Enabled = Event_SID.Enabled = OtherInfo.Checked;
+            L_Event_TSV.Visible = L_Event_G7TID.Visible = Event_EC.Enabled = Event_PID.Enabled = Event_TID.Enabled = Event_SID.Enabled = OtherInfo.Checked;
         }
 
         private void Event_PIDType_SelectedIndexChanged(object sender, EventArgs e)
@@ -1345,16 +1345,16 @@ namespace SMEncounterRNGTool
 
         private bool ReadWc7(string filename)
         {
+            BinaryReader br = new BinaryReader(File.Open(filename, FileMode.Open));
             try
             {
-                BinaryReader br = new BinaryReader(File.Open(filename, FileMode.Open));
                 byte[] Data = br.ReadBytes(0x108);
                 byte CardType = Data[0x51];
                 if (CardType != 0) return false;
                 byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
                 byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB3, 0xB4, 0xB2 };
                 AbilityLocked.Checked = Data[0xA2] < 3;
-                Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : 0;
+                Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : Data[0xA2] - 3;
                 NatureLocked.Checked = Data[0xA0] != 0xFF;
                 Event_Nature.SelectedIndex = NatureLocked.Checked ? Data[0xA0] + 1 : 0;
                 GenderLocked.Checked = Data[0xA1] != 3;
@@ -1397,9 +1397,19 @@ namespace SMEncounterRNGTool
             }
             catch
             {
+                br.Close();
                 return false;
             }
             return true;
+        }
+
+        private void IDChanged(object sender, EventArgs e)
+        {
+            L_Event_G7TID.Text = "G7TID:  "; L_Event_TSV.Text = "TSV:   ";
+            uint G7TID = ((uint)Event_TID.Value + ((uint)Event_SID.Value << 16)) % 1000000;
+            uint TSV = ((uint)Event_TID.Value ^ (uint)Event_SID.Value) >> 4;
+            L_Event_G7TID.Text += G7TID.ToString("D6");
+            L_Event_TSV.Text += TSV.ToString("D4");
         }
 
         private void DropEnter(object sender, DragEventArgs e)
@@ -1430,10 +1440,21 @@ namespace SMEncounterRNGTool
 
         private void AbilityLocked_CheckedChanged(object sender, EventArgs e)
         {
-            Event_Ability.Enabled = AbilityLocked.Checked;
-            if (!GenderLocked.Checked) Event_Ability.SelectedIndex = 0;
+            Event_Ability.Items.Clear();
+            if (AbilityLocked.Checked)
+            {
+                Event_Ability.Items.Add("-");
+                Event_Ability.Items.Add("1");
+                Event_Ability.Items.Add("2");
+                Event_Ability.Items.Add("H");
+            }
+            else
+            {
+                Event_Ability.Items.Add("1/2");
+                Event_Ability.Items.Add("1/2/H");
+            }
+            Event_Ability.SelectedIndex = 0;
         }
         #endregion
-
     }
 }

@@ -298,7 +298,7 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand() & 0x1F);
 
             //Ability
-            st.Ability = e.AbilityLocked ? e.Ability : (byte)((getrand() & 1) + 1);
+            st.Ability = e.AbilityLocked ? e.Ability : (byte)(e.Ability == 0 ? (getrand() & 1) + 1 : getrand() % 3 + 1);
 
             //Nature
             st.Nature = e.NatureLocked ? e.Nature : (byte)(getrand() % 25);
