@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchTarget = new System.Windows.Forms.TabPage();
@@ -188,6 +188,7 @@
             this.HighLightFrameAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchTool = new System.Windows.Forms.TabPage();
             this.EventSetting = new System.Windows.Forms.GroupBox();
+            this.IsEgg = new System.Windows.Forms.CheckBox();
             this.L_E_Ability = new System.Windows.Forms.Label();
             this.Event_Ability = new System.Windows.Forms.ComboBox();
             this.L_E_Gender = new System.Windows.Forms.Label();
@@ -271,7 +272,7 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
-            this.IsEgg = new System.Windows.Forms.CheckBox();
+            this.Modification = new System.Windows.Forms.CheckBox();
             this.Seed = new SMEncounterRNGTool.HexNumericUpdown();
             this.Event_PID = new SMEncounterRNGTool.HexNumericUpdown();
             this.Event_EC = new SMEncounterRNGTool.HexNumericUpdown();
@@ -1693,6 +1694,7 @@
             // 
             // RNGInfo
             // 
+            this.RNGInfo.Controls.Add(this.Modification);
             this.RNGInfo.Controls.Add(this.L_StartingPoint);
             this.RNGInfo.Controls.Add(this.L_TimeSpan);
             this.RNGInfo.Controls.Add(this.ConsiderBlink);
@@ -1762,6 +1764,8 @@
             // ShowResultsAfterDelay
             // 
             this.ShowResultsAfterDelay.AutoSize = true;
+            this.ShowResultsAfterDelay.Checked = true;
+            this.ShowResultsAfterDelay.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ShowResultsAfterDelay.Location = new System.Drawing.Point(10, 68);
             this.ShowResultsAfterDelay.Name = "ShowResultsAfterDelay";
             this.ShowResultsAfterDelay.Size = new System.Drawing.Size(110, 17);
@@ -1792,9 +1796,9 @@
             // 
             // CalcList
             // 
-            this.CalcList.Location = new System.Drawing.Point(284, 96);
+            this.CalcList.Location = new System.Drawing.Point(296, 96);
             this.CalcList.Name = "CalcList";
-            this.CalcList.Size = new System.Drawing.Size(104, 28);
+            this.CalcList.Size = new System.Drawing.Size(92, 28);
             this.CalcList.TabIndex = 41;
             this.CalcList.Text = "检索";
             this.CalcList.UseVisualStyleBackColor = true;
@@ -1877,14 +1881,14 @@
             this.DGV.AllowUserToResizeColumns = false;
             this.DGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Frame,
@@ -1914,24 +1918,24 @@
             this.dgv_time,
             this.dgv_research});
             this.DGV.ContextMenuStrip = this.DGVMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV.DefaultCellStyle = dataGridViewCellStyle5;
             this.DGV.Location = new System.Drawing.Point(3, 303);
             this.DGV.Name = "DGV";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV.RowHeadersWidth = 18;
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
@@ -2203,6 +2207,17 @@
             this.EventSetting.TabIndex = 31;
             this.EventSetting.TabStop = false;
             this.EventSetting.Text = "配信设置";
+            // 
+            // IsEgg
+            // 
+            this.IsEgg.AutoSize = true;
+            this.IsEgg.Location = new System.Drawing.Point(261, 90);
+            this.IsEgg.Name = "IsEgg";
+            this.IsEgg.Size = new System.Drawing.Size(38, 17);
+            this.IsEgg.TabIndex = 70;
+            this.IsEgg.Text = "蛋";
+            this.IsEgg.UseVisualStyleBackColor = true;
+            this.IsEgg.CheckedChanged += new System.EventHandler(this.IsEgg_CheckedChanged);
             // 
             // L_E_Ability
             // 
@@ -3131,16 +3146,18 @@
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
-            // IsEgg
+            // Modification
             // 
-            this.IsEgg.AutoSize = true;
-            this.IsEgg.Location = new System.Drawing.Point(261, 90);
-            this.IsEgg.Name = "IsEgg";
-            this.IsEgg.Size = new System.Drawing.Size(38, 17);
-            this.IsEgg.TabIndex = 70;
-            this.IsEgg.Text = "蛋";
-            this.IsEgg.UseVisualStyleBackColor = true;
-            this.IsEgg.CheckedChanged += new System.EventHandler(this.IsEgg_CheckedChanged);
+            this.Modification.AutoSize = true;
+            this.Modification.Checked = true;
+            this.Modification.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Modification.Location = new System.Drawing.Point(307, 68);
+            this.Modification.Name = "Modification";
+            this.Modification.Size = new System.Drawing.Size(50, 17);
+            this.Modification.TabIndex = 69;
+            this.Modification.Text = "修正";
+            this.Modification.UseVisualStyleBackColor = true;
+            this.Modification.CheckedChanged += new System.EventHandler(this.Modification_CheckedChanged);
             // 
             // Seed
             // 
@@ -3525,6 +3542,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_research;
         private System.Windows.Forms.CheckBox IsEgg;
+        private System.Windows.Forms.CheckBox Modification;
     }
 }
 

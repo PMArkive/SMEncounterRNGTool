@@ -28,7 +28,8 @@ And ALL Pokemon RNG Researcher
 7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
 8. Start the dialogue until the [final screen](#final-screen-when-pressing-a), wait for the timer.
 9. When the timer is done, click A at the same time, receive or battle with the Pokemon.
-10. If the Pokemon is not the one you want, find the frame you actually hit, put it in the Time Calculator, calibrate the Pre-Timer and try again
+10. If the Pokemon is not the one you want, find the frame you actually hit, put it in the Time Calculator, calibrate the Pre-Timer and try again  
+    ***Tips:*** For better results, please keep `Modification` checked while searching.
 
 ### With PokeCalcNTR
 1. Select the `Pokemon` you would like to RNG.
@@ -49,7 +50,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - UBs & wild Pokemon: "Use this item" (Honey). 
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
-- Starters: "Having accepted on another, you'll surely be friends for life" (select `<Fossil>`, put 5 in `# of NPCs`)
+- Starters: "Having accepted on another, you'll surely be friends for life" (Select `<Fossil>`, put 5 in `# of NPCs`)
 - Fishing: When you get something on your hook (Unstable)
 - SOS: When you "Use" Adrenaline Orbs (Unstable)
 
@@ -61,6 +62,6 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 ## Useful References
 - [UB Rate(%) and No NPC Spots](parameters/UB%20Rate%20and%20Spots.md) 
 - [Pre-Honey Correction](parameters/Pre-Honey%20Correction.md)  
-  If you would like to find the timing of entering bag, in most of the cases, adding `6 x (# of NPCs + 1)` to `Correction` works.
+  If you would like to find the timing of entering bag, in most of the cases, please add `6 x (# of NPCs + 1)` to `Correction`.
 - [Event Pokemon Setting](parameters/Event%20Pokemon%20Setting.md) 
 - [Gen VII Events Contribution Thread](https://projectpokemon.org/forums/forums/topic/39400-gen-vii-events-contribution-thread/) 

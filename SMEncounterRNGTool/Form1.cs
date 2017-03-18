@@ -542,8 +542,14 @@ namespace SMEncounterRNGTool
             Frame_max.Visible = label7.Visible = !CreateTimeline.Checked;
             L_StartingPoint.Visible = CreateTimeline.Checked;
             if (CreateTimeline.Checked)
-                AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
+                Modification.Checked = AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
             ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
+        }
+
+        private void Modification_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Modification.Checked)
+                CreateTimeline.Checked = false;
         }
 
         private void YourID_CheckedChanged(object sender, EventArgs e)
@@ -711,6 +717,8 @@ namespace SMEncounterRNGTool
                 createtimeline();
             else if (Frame_min.Value > Frame_max.Value)
                 Error(SETTINGERROR_STR[lindex] + L_frame.Text);
+            else if (Modification.Checked)
+                ConsiderHistoryStationarySearch();
             else
                 StationarySearch();
         }
@@ -831,6 +839,68 @@ namespace SMEncounterRNGTool
             DGV.CurrentCell = null;
         }
 
+        private void ConsiderHistoryStationarySearch()
+        {
+            SFMT sfmt = new SFMT((uint)Seed.Value);
+
+            int max, min;
+            if (AroundTarget.Checked)
+            {
+                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
+            }
+            else
+            {
+                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
+            }
+
+            List<DataGridViewRow> list = new List<DataGridViewRow>();
+            DGV.Rows.Clear();
+
+            byte[] Blinkflaglist = getblinkflaglist(min, max, sfmt);
+
+            for (int i = 0; i < min; i++)
+                sfmt.NextUInt64();
+            var st = CreateNPCStatus(sfmt);
+            var setting = getSettings();
+            var rng = getRNGSettings();
+            RNGSearch.ResetModelStatus();
+            RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
+            if (IsEvent) e = geteventsetting();
+
+            int frameadvance;
+            int[] remain_frame;
+            bool[] blink_flag;
+
+
+            for (int i = min; i <= max;)
+            {
+                remain_frame = (int[])st.remain_frame.Clone();
+                blink_flag = (bool[])st.blink_flag.Clone();
+                frameadvance = st.NextState();
+
+                while (frameadvance > 0)
+                {
+                    RNGSearch.remain_frame = (int[])remain_frame.Clone();
+                    RNGSearch.blink_flag = (bool[])blink_flag.Clone();
+                    RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+                    result.Blink = Blinkflaglist[i - min];
+                    if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
+                    RNGSearch.Rand.RemoveAt(0);
+                    RNGSearch.Rand.Add(sfmt.NextUInt64());
+                    frameadvance--;
+                    i++;
+                    if (!frameMatch(result, setting))
+                        continue;
+
+                    list.Add(getRow_Sta(i - 1, rng, result, DGV));
+                }
+                if (list.Count > 100000) break;
+            }
+            DGV.Rows.AddRange(list.ToArray());
+            DGV.CurrentCell = null;
+        }
+
+
         private void createtimeline()
         {
             SFMT sfmt = new SFMT((uint)Seed.Value);
@@ -928,7 +998,7 @@ namespace SMEncounterRNGTool
                 case 4: gender_threshold = 189; break;
             }
 
-            RNGSearch.Considerhistory = CreateTimeline.Checked;
+            RNGSearch.Considerhistory = CreateTimeline.Checked || Modification.Checked;
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;

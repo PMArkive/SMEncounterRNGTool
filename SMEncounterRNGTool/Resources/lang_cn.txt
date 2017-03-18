@@ -75,6 +75,7 @@ L_StartingPoint = <-- 时间线起点
 ShowResultsAfterDelay = 显示延时后结果
 ConsiderBlink = 考虑眨眼影响（同步）
 CreateTimeline = 生成时间线
+Modification = 修正
 L_TimeSpan = 时间长度/秒
 ---
 TimeBox = 时间计算

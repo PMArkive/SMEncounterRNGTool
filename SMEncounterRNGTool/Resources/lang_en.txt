@@ -75,6 +75,7 @@ L_StartingPoint = <-- Starting Frame
 ShowResultsAfterDelay = Show Results after Delay
 ConsiderBlink = Consider Blinking (Sync)
 CreateTimeline = Create Timeline
+Modification = Modification
 L_TimeSpan = Time Length/s
 ---
 TimeBox = Time Calculator
