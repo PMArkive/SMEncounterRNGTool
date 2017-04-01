@@ -58,13 +58,6 @@ namespace SMEncounterRNGTool
             return data;
         }
 
-        internal static readonly byte[] NPC =
-        {
-        };
-        internal static readonly byte[] CorrectionList =
-        {
-        };
-
         internal static readonly EncounterArea[] EncounterSun = getEncounter(Properties.Resources.encounter_sn,"sm");
         internal static readonly EncounterArea[] EncounterMoon = getEncounter(Properties.Resources.encounter_mn, "sm");
 

@@ -64,6 +64,7 @@
     <Compile Include="Controls\ComboItem.cs" />
     <Compile Include="Encounter\EncounterArea.cs" />
     <Compile Include="Encounter\EncounterSlot.cs" />
+    <Compile Include="Encounter\LocationTable.cs" />
     <Compile Include="Encounter\PersonalInfo.cs" />
     <Compile Include="Encounter\PersonalInfoSM.cs" />
     <Compile Include="Encounter\PersonalTable.cs" />
