@@ -1,4 +1,6 @@
-﻿namespace SMEncounterRNGTool
+﻿using System.Linq;
+
+namespace SMEncounterRNGTool
 {
 
     class SearchSetting
@@ -170,6 +172,7 @@
         public int Ability = -1;
         public int Gender = -1;
         public int[] IVup, IVlow, BS, Stats;
+        public byte PerfectIVs;
         public bool Skip;
         public int Lv;
         public bool[] Slot;
@@ -180,6 +183,8 @@
             for (int i = 0; i < 6; i++)
                 if (IVlow[i] > result.IVs[i] || result.IVs[i] > IVup[i])
                     return false;
+            if (result.IVs.Where(e => e == 31).Count() < PerfectIVs)
+                return false;
             return true;
         }
 

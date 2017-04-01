@@ -1072,6 +1072,7 @@ namespace SMEncounterRNGTool
                 Stats = Stats,
                 Skip = DisableFilters.Checked,
                 Lv = (int)Lv_Search.Value,
+                PerfectIVs = (byte)PerfectIVs.Value,
             };
         }
 
