@@ -248,11 +248,11 @@ namespace SMEncounterRNGTool
 
             for (byte i = 0; i < locationlist.Length; i++)
                 Locationlist.Add(new Controls.ComboItem { Text = location[locationlist[i]], Value = locationlist[i] });
-            Location.DisplayMember = "Text";
-            Location.ValueMember = "Value";
-            Location.DataSource = new BindingSource(Locationlist, null);
+            MetLocation.DisplayMember = "Text";
+            MetLocation.ValueMember = "Value";
+            MetLocation.DataSource = new BindingSource(Locationlist, null);
 
-            if (Location.SelectedValue == null || Location.SelectedIndex < 0) Location.SelectedIndex = 0;
+            if (MetLocation.SelectedValue == null || MetLocation.SelectedIndex < 0) MetLocation.SelectedIndex = 0;
 
                 LoadSpecies();
         }
@@ -261,7 +261,7 @@ namespace SMEncounterRNGTool
         {
             try
             {
-                ea = (GameVersion.SelectedIndex == 0 ? EncounterArea.EncounterSun : EncounterArea.EncounterMoon).FirstOrDefault(e => e.Location == (int)Location.SelectedValue);
+                ea = (GameVersion.SelectedIndex == 0 ? EncounterArea.EncounterSun : EncounterArea.EncounterMoon).FirstOrDefault(e => e.Location == (int)MetLocation.SelectedValue);
                 var List = ea.Slots.Select(slot => new Controls.ComboItem { Text = species[slot.Species], Value = slot.Species, });
 
                 SlotSpecies.DisplayMember = "Text";
@@ -483,8 +483,8 @@ namespace SMEncounterRNGTool
 
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Poke.SelectedIndex >= UBIndex && Location.SelectedIndex >= 0)
-                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UBIndex][Location.SelectedIndex];
+            if (Poke.SelectedIndex >= UBIndex && MetLocation.SelectedIndex >= 0)
+                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UBIndex][MetLocation.SelectedIndex];
             LoadSpecies();
         }
 
@@ -1473,6 +1473,11 @@ namespace SMEncounterRNGTool
                     Event_PID.Value = BitConverter.ToUInt32(Data, 0xD4);
                 Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
                 if (Event_EC.Value > 0) Event_EC.Visible = L_EC.Visible = true;
+                int sp = BitConverter.ToUInt16(Data, 0x82);
+                L_EventSpecies.Text = L_Species.Text + ": " + species[sp];
+                L_EventSpecies.Visible = true;
+                int form = Data[0x84];
+                setBS(sp,form);
                 IsEgg.Checked = Data[0xD1] == 1;
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;
