@@ -6,30 +6,30 @@
         #region pokedex
         public readonly static int[,] pokedex =
         {
-            { 151, 100, 100, 100, 100, 100, 100},   //Event
-            { 785, 70, 115, 85, 95, 75, 130},   //Tapu Koko
-            { 786, 70, 85, 75, 130, 115, 95},   //Tapu Lele
-            { 787, 70, 130, 115, 85, 95, 75},   //Tapu Bulu
-            { 788, 70, 75, 115, 95, 130, 85},   //Tapu Fini
-            { 791, 137, 137, 107, 113, 89, 97}, //Solgaleo
-            { 792, 137, 113, 89, 137, 107, 97}, //Lunala
-            { 789, 43, 29, 31, 29, 31, 37},     //Cosmog
-            { 772, 95, 95, 95, 95, 95, 59},     //Type:Null
-            { 801, 80, 95, 115, 130, 115, 65},  //Magearna
-            { 718, 54, 100, 71, 61, 85, 115},   //Zygarde-10%
-            { 718, 108, 100, 121, 81, 95, 95},  //Zygarde-50%
-            { 142, 80, 105, 65, 60, 75, 130},   //Aerodactyl
-            { 137, 65, 60, 70, 85, 75, 40},     //Porygon
-            { 142, 0, 0, 0, 0, 0, 0},           //Fossil 
-            { 739, 47, 82, 57, 42, 47, 63},     //Crabrawler
-            { 793, 109, 53, 47, 127, 131, 103}, //Nihilego
-            { 794, 107, 139, 139, 53, 53, 79 }, //Buzzwole
-            { 795, 71, 137, 37, 137, 37, 151 }, //Pheromosa
-            { 796, 83, 89, 71, 173, 71, 83 },   //Xurkitree
-            { 797, 97, 101, 103, 107, 101, 61 },//Celesteela
-            { 798, 59, 181, 131, 59, 31, 109 }, //Kartana
-            { 799, 223, 101, 53, 97, 53, 43 },  //Guzzlord
-            { 800, 97, 107, 101, 127, 89, 79 }, //Necrozma
+            { 151, 0 },//Event
+            { 785, 0 },//Tapu Koko
+            { 786, 0 },//Tapu Lele
+            { 787, 0 },//Tapu Bulu
+            { 788, 0 },//Tapu Fini
+            { 791, 0 },//Solgaleo
+            { 792, 0 },//Lunala
+            { 789, 0 },//Cosmog
+            { 772, 0 },//Type:Null
+            { 801, 0 },//Magearna
+            { 718, 2 },//Zygarde-10%
+            { 718, 3 },//Zygarde-50%
+            { 142, 0 },//Aerodactyl
+            { 137, 0 },//Porygon
+            { 142, 0 },//Fossil 
+            { 739, 0 },//Crabrawler
+            { 793, 0 },//Nihilego
+            { 794, 0 },//Buzzwole
+            { 795, 0 },//Pheromosa
+            { 796, 0 },//Xurkitree
+            { 797, 0 },//Celesteela
+            { 798, 0 },//Kartana
+            { 799, 0 },//Guzzlord
+            { 800, 0 },//Necrozma
         };
 
         public const int Solgaleo_index = 6;
@@ -90,6 +90,18 @@
         public readonly static int[] honeycorrection =
         {
             13,5,5,7,26,26,1,1,
+        };
+
+        public readonly static byte[][] UBLocation =
+        {
+            new byte[]{100 ,082},
+            new byte[]{040},
+            new byte[]{046},
+            new byte[]{090,076},
+            new byte[]{134,124},
+            new byte[]{134,120},
+            new byte[]{182},
+            new byte[]{036},
         };
 
         #endregion

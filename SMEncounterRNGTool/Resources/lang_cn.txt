@@ -17,6 +17,7 @@
 ---------------------Global Setting------------------------
 L_Seed = Seed
 L_TSV = TSV
+L_GameVersion = 游戏版本
 ShinyCharm = 闪耀护符
 Advanced = 高级模式
 SearchTarget = 目标检索
@@ -116,6 +117,11 @@ dgv_time = 时间
 ---
 SOSSetting = 帮手连锁设置
 L_ChainLength = 连锁数
+---
+WildEncounterSetting = 野生草丛遇敌设置
+L_Location = 地点
+L_GameTime = 时段
+L_Species = 种类
 ---------------------TabPage2----------------------------------
 InputBox = 输入
 Back = 后退

@@ -36,6 +36,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
+            this.WildEncounterSetting = new System.Windows.Forms.GroupBox();
+            this.SlotSpecies = new System.Windows.Forms.ComboBox();
+            this.Location = new System.Windows.Forms.ComboBox();
+            this.L_Species = new System.Windows.Forms.Label();
+            this.L_Location = new System.Windows.Forms.Label();
             this.SOSSetting = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.L_ChainLength = new System.Windows.Forms.Label();
@@ -266,12 +271,15 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
+            this.L_GameVersion = new System.Windows.Forms.Label();
+            this.GameVersion = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
+            this.WildEncounterSetting.SuspendLayout();
             this.SOSSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChainLength)).BeginInit();
             this.Condition.SuspendLayout();
@@ -369,6 +377,7 @@
             // 
             // ControlPanel
             // 
+            this.ControlPanel.Controls.Add(this.WildEncounterSetting);
             this.ControlPanel.Controls.Add(this.SOSSetting);
             this.ControlPanel.Controls.Add(this.Condition);
             this.ControlPanel.Controls.Add(this.TimeBox);
@@ -380,14 +389,64 @@
             this.ControlPanel.Size = new System.Drawing.Size(1211, 298);
             this.ControlPanel.TabIndex = 43;
             // 
+            // WildEncounterSetting
+            // 
+            this.WildEncounterSetting.Controls.Add(this.SlotSpecies);
+            this.WildEncounterSetting.Controls.Add(this.Location);
+            this.WildEncounterSetting.Controls.Add(this.L_Species);
+            this.WildEncounterSetting.Controls.Add(this.L_Location);
+            this.WildEncounterSetting.Location = new System.Drawing.Point(817, 163);
+            this.WildEncounterSetting.Name = "WildEncounterSetting";
+            this.WildEncounterSetting.Size = new System.Drawing.Size(388, 61);
+            this.WildEncounterSetting.TabIndex = 74;
+            this.WildEncounterSetting.TabStop = false;
+            this.WildEncounterSetting.Text = "野外遇敌设置";
+            this.WildEncounterSetting.Visible = false;
+            // 
+            // SlotSpecies
+            // 
+            this.SlotSpecies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SlotSpecies.Location = new System.Drawing.Point(257, 27);
+            this.SlotSpecies.Name = "SlotSpecies";
+            this.SlotSpecies.Size = new System.Drawing.Size(74, 21);
+            this.SlotSpecies.TabIndex = 78;
+            this.SlotSpecies.SelectedIndexChanged += new System.EventHandler(this.SlotSpecies_SelectedIndexChanged);
+            // 
+            // Location
+            // 
+            this.Location.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Location.Location = new System.Drawing.Point(73, 27);
+            this.Location.Name = "Location";
+            this.Location.Size = new System.Drawing.Size(116, 21);
+            this.Location.TabIndex = 77;
+            this.Location.SelectedIndexChanged += new System.EventHandler(this.Location_SelectedIndexChanged);
+            // 
+            // L_Species
+            // 
+            this.L_Species.AutoSize = true;
+            this.L_Species.Location = new System.Drawing.Point(210, 31);
+            this.L_Species.Name = "L_Species";
+            this.L_Species.Size = new System.Drawing.Size(31, 13);
+            this.L_Species.TabIndex = 66;
+            this.L_Species.Text = "种类";
+            // 
+            // L_Location
+            // 
+            this.L_Location.AutoSize = true;
+            this.L_Location.Location = new System.Drawing.Point(11, 31);
+            this.L_Location.Name = "L_Location";
+            this.L_Location.Size = new System.Drawing.Size(31, 13);
+            this.L_Location.TabIndex = 66;
+            this.L_Location.Text = "地点";
+            // 
             // SOSSetting
             // 
             this.SOSSetting.Controls.Add(this.label11);
             this.SOSSetting.Controls.Add(this.L_ChainLength);
             this.SOSSetting.Controls.Add(this.ChainLength);
-            this.SOSSetting.Location = new System.Drawing.Point(817, 218);
+            this.SOSSetting.Location = new System.Drawing.Point(817, 230);
             this.SOSSetting.Name = "SOSSetting";
-            this.SOSSetting.Size = new System.Drawing.Size(388, 73);
+            this.SOSSetting.Size = new System.Drawing.Size(388, 61);
             this.SOSSetting.TabIndex = 73;
             this.SOSSetting.TabStop = false;
             this.SOSSetting.Text = "连锁设置";
@@ -396,7 +455,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(166, 35);
+            this.label11.Location = new System.Drawing.Point(166, 29);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 66;
@@ -405,7 +464,7 @@
             // L_ChainLength
             // 
             this.L_ChainLength.AutoSize = true;
-            this.L_ChainLength.Location = new System.Drawing.Point(11, 35);
+            this.L_ChainLength.Location = new System.Drawing.Point(11, 29);
             this.L_ChainLength.Name = "L_ChainLength";
             this.L_ChainLength.Size = new System.Drawing.Size(43, 13);
             this.L_ChainLength.TabIndex = 66;
@@ -415,7 +474,7 @@
             // 
             this.ChainLength.AccessibleName = "";
             this.ChainLength.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChainLength.Location = new System.Drawing.Point(87, 32);
+            this.ChainLength.Location = new System.Drawing.Point(87, 26);
             this.ChainLength.Maximum = new decimal(new int[] {
             255,
             0,
@@ -719,7 +778,7 @@
             this.TimeBox.Controls.Add(this.L_NPC);
             this.TimeBox.Location = new System.Drawing.Point(817, 3);
             this.TimeBox.Name = "TimeBox";
-            this.TimeBox.Size = new System.Drawing.Size(388, 209);
+            this.TimeBox.Size = new System.Drawing.Size(388, 155);
             this.TimeBox.TabIndex = 10;
             this.TimeBox.TabStop = false;
             this.TimeBox.Text = "时间计算";
@@ -764,7 +823,7 @@
             this.TimeResult.FormattingEnabled = true;
             this.TimeResult.Location = new System.Drawing.Point(12, 90);
             this.TimeResult.Name = "TimeResult";
-            this.TimeResult.Size = new System.Drawing.Size(365, 108);
+            this.TimeResult.Size = new System.Drawing.Size(362, 56);
             this.TimeResult.TabIndex = 53;
             // 
             // L_Correction
@@ -3040,7 +3099,7 @@
             // 
             this.L_Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.L_Seed.AutoSize = true;
-            this.L_Seed.Location = new System.Drawing.Point(807, 14);
+            this.L_Seed.Location = new System.Drawing.Point(688, 14);
             this.L_Seed.Name = "L_Seed";
             this.L_Seed.Size = new System.Drawing.Size(32, 13);
             this.L_Seed.TabIndex = 2;
@@ -3088,18 +3147,40 @@
             this.Lang.Items.AddRange(new object[] {
             "English",
             "简体中文"});
-            this.Lang.Location = new System.Drawing.Point(716, 10);
+            this.Lang.Location = new System.Drawing.Point(599, 10);
             this.Lang.Name = "Lang";
             this.Lang.Size = new System.Drawing.Size(76, 21);
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // L_GameVersion
+            // 
+            this.L_GameVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.L_GameVersion.AutoSize = true;
+            this.L_GameVersion.Location = new System.Drawing.Point(810, 14);
+            this.L_GameVersion.Name = "L_GameVersion";
+            this.L_GameVersion.Size = new System.Drawing.Size(55, 13);
+            this.L_GameVersion.TabIndex = 9;
+            this.L_GameVersion.Text = "游戏版本";
+            // 
+            // GameVersion
+            // 
+            this.GameVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GameVersion.Items.AddRange(new object[] {
+            "Sun",
+            "Moon"});
+            this.GameVersion.Location = new System.Drawing.Point(882, 10);
+            this.GameVersion.Name = "GameVersion";
+            this.GameVersion.Size = new System.Drawing.Size(51, 21);
+            this.GameVersion.TabIndex = 81;
+            this.GameVersion.SelectedIndexChanged += new System.EventHandler(this.GameVersion_SelectedIndexChanged);
             // 
             // Seed
             // 
             this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(845, 9);
+            this.Seed.Location = new System.Drawing.Point(726, 9);
             this.Seed.Name = "Seed";
             this.Seed.Size = new System.Drawing.Size(78, 22);
             this.Seed.TabIndex = 0;
@@ -3137,6 +3218,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1249, 686);
+            this.Controls.Add(this.GameVersion);
+            this.Controls.Add(this.L_GameVersion);
             this.Controls.Add(this.Lang);
             this.Controls.Add(this.Advanced);
             this.Controls.Add(this.ShinyCharm);
@@ -3151,6 +3234,8 @@
             this.tabControl1.ResumeLayout(false);
             this.SearchTarget.ResumeLayout(false);
             this.ControlPanel.ResumeLayout(false);
+            this.WildEncounterSetting.ResumeLayout(false);
+            this.WildEncounterSetting.PerformLayout();
             this.SOSSetting.ResumeLayout(false);
             this.SOSSetting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChainLength)).EndInit();
@@ -3471,6 +3556,13 @@
         private System.Windows.Forms.Label L_Event_PID;
         private System.Windows.Forms.Label L_Event_G7TID;
         private System.Windows.Forms.Label L_Event_TSV;
+        private System.Windows.Forms.GroupBox WildEncounterSetting;
+        private System.Windows.Forms.Label L_Species;
+        private System.Windows.Forms.Label L_Location;
+        private System.Windows.Forms.ComboBox SlotSpecies;
+        private System.Windows.Forms.ComboBox Location;
+        private System.Windows.Forms.Label L_GameVersion;
+        private System.Windows.Forms.ComboBox GameVersion;
     }
 }
 

@@ -41,11 +41,14 @@ namespace SMEncounterRNGTool
 
         List<NumericUpDown> IVlow = new List<NumericUpDown>();
         List<NumericUpDown> IVup = new List<NumericUpDown>();
-        List<NumericUpDown> BS = new List<NumericUpDown>();
         List<NumericUpDown> Stat = new List<NumericUpDown>();
         List<NumericUpDown> EventIV = new List<NumericUpDown>();
         List<CheckBox> EventIVLocked = new List<CheckBox>();
         RNGSearch.EventRule e = new RNGSearch.EventRule();
+        EncounterArea ea = new EncounterArea();
+        List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
+        byte[] locationlist = EncounterArea.SMLocationList;
+
         private string version = "1.1.0";
 
         #region Translation
@@ -63,6 +66,12 @@ namespace SMEncounterRNGTool
             { "Random", "Nonshiny", "Shiny","Specified"},
             { "随机", "必不闪", "必闪","特定"}
         };
+        private static readonly string[,] GAMEVERSION_STR =
+        {
+            { "Sun", "Moon" },
+            { "太阳", "月亮" }
+        };
+        private static string[] location, species;
 
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
 
@@ -82,7 +91,11 @@ namespace SMEncounterRNGTool
 
             SearchSetting.naturestr = getStringList("Natures", curlanguage);
             SearchSetting.hpstr = getStringList("Types", curlanguage);
-            string[] species = getStringList("Species", curlanguage);
+            species = getStringList("Species", curlanguage);
+            location = getStringList("Location", curlanguage);
+
+            for (int i = 0; i < 2; i++)
+                GameVersion.Items[i] = GAMEVERSION_STR[lindex, i];
 
             for (int i = 0; i < 4; i++)
                 Event_PIDType.Items[i] = PIDTYPE_STR[lindex, i];
@@ -96,6 +109,9 @@ namespace SMEncounterRNGTool
             Poke.Items[1] = EVENT_STR[lindex];
             for (int i = 1; i < SearchSetting.pokedex.GetLength(0); i++)
                 Poke.Items[i + 1] = species[SearchSetting.pokedex[i, 0]];
+
+            RefreshLocation();
+
             Poke.Items[SearchSetting.Zygarde_index] += "-10%";
             Poke.Items[SearchSetting.Zygarde_index + 1] += "-50%";
             Poke.Items[SearchSetting.Fossil_index] = FOSSIL_STR[lindex];
@@ -124,13 +140,6 @@ namespace SMEncounterRNGTool
             IVup.Add(ivmax3);
             IVup.Add(ivmax4);
             IVup.Add(ivmax5);
-
-            BS.Add(BS_0);
-            BS.Add(BS_1);
-            BS.Add(BS_2);
-            BS.Add(BS_3);
-            BS.Add(BS_4);
-            BS.Add(BS_5);
 
             Stat.Add(Stat0);
             Stat.Add(Stat1);
@@ -174,8 +183,7 @@ namespace SMEncounterRNGTool
                 Gender.Items.Add(t);
                 Event_Gender.Items.Add(t);
             }
-
-
+            
             for (int i = 0; i < 6; i++)
                 EventIV[i].Enabled = false;
 
@@ -210,6 +218,7 @@ namespace SMEncounterRNGTool
             TSV.Value = Properties.Settings.Default.TSV;
             Advanced.Checked = Properties.Settings.Default.Advance;
             Poke.SelectedIndex = Properties.Settings.Default.Pokemon;
+            GameVersion.SelectedIndex = Properties.Settings.Default.IsSun ? 0 : 1;
 
             if (Properties.Settings.Default.ClockInput)
                 StartClockInput.Checked = true;
@@ -223,6 +232,65 @@ namespace SMEncounterRNGTool
             NPC_ValueChanged(null, null);
             CreateTimeline_CheckedChanged(null, null);
         }
+
+
+        private int UBIndex => SearchSetting.UB_StartIndex;
+
+        private void RefreshLocation()
+        {
+            Locationlist.Clear();
+            if (Poke.SelectedIndex == 0)
+                locationlist = EncounterArea.SMLocationList;
+            else if (Poke.SelectedIndex >= UBIndex)
+                locationlist = SearchSetting.UBLocation[Poke.SelectedIndex - UBIndex];
+            else
+                return;
+
+            for (byte i = 0; i < locationlist.Length; i++)
+                Locationlist.Add(new Controls.ComboItem { Text = location[locationlist[i]], Value = locationlist[i] });
+            Location.DisplayMember = "Text";
+            Location.ValueMember = "Value";
+            Location.DataSource = new BindingSource(Locationlist, null);
+
+            if (Location.SelectedValue == null || Location.SelectedIndex < 0 ) Location.SelectedIndex = 0;
+
+            LoadSpecies();
+        }
+
+        private void LoadSpecies()
+        {
+            try
+            {
+                ea = (GameVersion.SelectedIndex == 0 ? EncounterArea.EncounterSun : EncounterArea.EncounterMoon).FirstOrDefault(e => e.Location == (int)Location.SelectedValue);
+                var List = ea.Slots.Select(slot => new Controls.ComboItem { Text = species[slot.Species], Value = slot.Species, });
+
+                SlotSpecies.DisplayMember = "Text";
+                SlotSpecies.ValueMember = "Value";
+                SlotSpecies.DataSource = new BindingSource(List, null);
+            }
+            catch { }
+        }
+
+        private void LoadPersonalInfo()
+        {
+            if (SlotSpecies.SelectedValue == null) return;
+            var slot = ea.Slots.FirstOrDefault(e => e.Species == (int)SlotSpecies.SelectedValue);
+            Lv_min.Value = slot.LevelMin;
+            Lv_max.Value = slot.LevelMax;
+            setBS(slot.Species,slot.Form);
+        }
+
+        private void setBS(int Species, int Form)
+        {
+            var t = PersonalTable.SM.getFormeEntry(Species,Form);
+            BS_0.Value = t.HP;
+            BS_1.Value = t.ATK;
+            BS_2.Value = t.DEF;
+            BS_3.Value = t.SPA;
+            BS_4.Value = t.SPD;
+            BS_5.Value = t.SPE;
+        }
+
 
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)
@@ -407,6 +475,23 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Save();
         }
 
+        private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSpecies();
+            Properties.Settings.Default.IsSun = GameVersion.SelectedIndex == 0;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Location_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSpecies();
+        }
+
+        private void SlotSpecies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadPersonalInfo();
+        }
+
         private void Method_CheckedChanged(object sender, EventArgs e)
         {
             Honey.Checked = Wild.Checked;
@@ -427,8 +512,7 @@ namespace SMEncounterRNGTool
             ConsiderDelay_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
             Reset_Click(null, null);
-
-            GenderRatio.Visible = Honey.Visible = Wild.Checked;
+            WildEncounterSetting.Visible = GenderRatio.Visible = Honey.Visible = Wild.Checked;
             dgv_slot.Visible = dgv_item.Visible = dgv_lv.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
@@ -694,8 +778,8 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Search
-        private int ModelNumber { get { return (int)NPC.Value + 1; } }
-        private bool IsEvent { get { return Poke.SelectedIndex == 1; } }
+        private int ModelNumber => (int)NPC.Value + 1; 
+        private bool IsEvent => Poke.SelectedIndex == 1;
 
         private void CalcList_Click(object sender, EventArgs e)
         {
@@ -1161,45 +1245,47 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            const int UB_StartIndex = SearchSetting.UB_StartIndex;
             const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
             const int Fossil_index = SearchSetting.Fossil_index;
             //General
             Properties.Settings.Default.Pokemon = (byte)Poke.SelectedIndex;
             Properties.Settings.Default.Save();
 
-            UB.Visible = UB.Checked = Wild.Checked = Poke.SelectedIndex >= UB_StartIndex;
-            Stationary.Checked = Poke.SelectedIndex < UB_StartIndex - 1;
-            if (Poke.SelectedIndex == 0 || Poke.SelectedIndex == UB_StartIndex - 1) Wild.Checked = true;
+            UB.Visible = UB.Checked = Wild.Checked = Poke.SelectedIndex >= UBIndex;
+            Stationary.Checked = Poke.SelectedIndex < UBIndex - 1;
+            if (Poke.SelectedIndex == 0 || Poke.SelectedIndex == UBIndex - 1) Wild.Checked = true;
             Method_CheckedChanged(null, null);
+            RefreshLocation();
             //Enable
             SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = Poke.SelectedIndex == 0;
-            GenderRatio.Enabled = Fix3v.Enabled = Poke.SelectedIndex < 2 || Poke.SelectedIndex >= UB_StartIndex;
-            Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != UB_StartIndex - 1;
+            GenderRatio.Enabled = Fix3v.Enabled = Poke.SelectedIndex < 2 || Poke.SelectedIndex >= UBIndex;
+            Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != UBIndex - 1;
             //Event
             L_EventInstruction.Visible = IsEvent;
             //
             if (Poke.SelectedIndex == Fossil_index + 1) Honey.Checked = false;
 
             if (Poke.SelectedIndex == 0) return;
-            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UB_StartIndex - 1);
+            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UBIndex - 1);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             Fix3v.Checked = (Poke.SelectedIndex > 1 && Poke.SelectedIndex < Fossil_index - 2);
             ConsiderDelay.Checked = true;
             ConsiderBlink.Enabled = AlwaysSynced.Enabled = false;
 
-            for (int i = 0; i < 6; i++)
-                BS[i].Value = SearchSetting.pokedex[Poke.SelectedIndex - 1, i + 1];
+            setBS(SearchSetting.pokedex[Poke.SelectedIndex - 1, 0], SearchSetting.pokedex[Poke.SelectedIndex - 1, 1]);
             Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex - 1];
 
-            if (Poke.SelectedIndex >= UB_StartIndex)
+            if (Poke.SelectedIndex >= UBIndex)
             {
-                Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UB_StartIndex];
-                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UB_StartIndex];
+                Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UBIndex];
+                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UBIndex];
             }
             else
+            {
                 Timedelay.Value = SearchSetting.timedelay[Poke.SelectedIndex - 1];
+            }
+                
 
             switch (Poke.SelectedIndex)
             {

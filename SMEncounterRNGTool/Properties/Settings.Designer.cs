@@ -106,5 +106,17 @@ namespace SMEncounterRNGTool.Properties {
                 this["Pokemon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsSun {
+            get {
+                return ((bool)(this["IsSun"]));
+            }
+            set {
+                this["IsSun"] = value;
+            }
+        }
     }
 }

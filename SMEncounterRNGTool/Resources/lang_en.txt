@@ -17,6 +17,7 @@
 ---------------------Global Setting------------------------
 L_Seed = Seed
 L_TSV = TSV
+L_GameVersion = GameVersion
 ShinyCharm = Shiny Charm
 Advanced = Advanced
 SearchTarget = Target Search
@@ -116,6 +117,10 @@ dgv_time = Real Time
 ---
 SOSSetting = SOS Chaining Setting
 L_ChainLength = Chain Length
+---
+WildEncounterSetting = Wild Encounter Setting
+L_Location = Location
+L_Species = Species
 ---------------------TabPage2----------------------------------
 InputBox = InputBox
 Back = Back
