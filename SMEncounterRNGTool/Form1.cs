@@ -183,7 +183,7 @@ namespace SMEncounterRNGTool
                 Gender.Items.Add(t);
                 Event_Gender.Items.Add(t);
             }
-            
+
             for (int i = 0; i < 6; i++)
                 EventIV[i].Enabled = false;
 
@@ -252,9 +252,9 @@ namespace SMEncounterRNGTool
             Location.ValueMember = "Value";
             Location.DataSource = new BindingSource(Locationlist, null);
 
-            if (Location.SelectedValue == null || Location.SelectedIndex < 0 ) Location.SelectedIndex = 0;
+            if (Location.SelectedValue == null || Location.SelectedIndex < 0) Location.SelectedIndex = 0;
 
-            LoadSpecies();
+                LoadSpecies();
         }
 
         private void LoadSpecies()
@@ -273,16 +273,15 @@ namespace SMEncounterRNGTool
 
         private void LoadPersonalInfo()
         {
-            if (SlotSpecies.SelectedValue == null) return;
             var slot = ea.Slots.FirstOrDefault(e => e.Species == (int)SlotSpecies.SelectedValue);
             Lv_min.Value = slot.LevelMin;
             Lv_max.Value = slot.LevelMax;
-            setBS(slot.Species,slot.Form);
+            setBS(slot.Species, slot.Form);
         }
 
         private void setBS(int Species, int Form)
         {
-            var t = PersonalTable.SM.getFormeEntry(Species,Form);
+            var t = PersonalTable.SM.getFormeEntry(Species, Form);
             BS_0.Value = t.HP;
             BS_1.Value = t.ATK;
             BS_2.Value = t.DEF;
@@ -484,6 +483,8 @@ namespace SMEncounterRNGTool
 
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Poke.SelectedIndex >= UBIndex && Location.SelectedIndex >= 0)
+                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UBIndex][Location.SelectedIndex];
             LoadSpecies();
         }
 
@@ -778,7 +779,7 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Search
-        private int ModelNumber => (int)NPC.Value + 1; 
+        private int ModelNumber => (int)NPC.Value + 1;
         private bool IsEvent => Poke.SelectedIndex == 1;
 
         private void CalcList_Click(object sender, EventArgs e)
@@ -1263,7 +1264,7 @@ namespace SMEncounterRNGTool
             //Event
             L_EventInstruction.Visible = IsEvent;
             //
-            if (Poke.SelectedIndex == Fossil_index + 1) Honey.Checked = false;
+            if (Poke.SelectedIndex == Fossil_index + 1) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
 
             if (Poke.SelectedIndex == 0) return;
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UBIndex - 1);
@@ -1277,15 +1278,12 @@ namespace SMEncounterRNGTool
             NPC.Value = SearchSetting.NPC[Poke.SelectedIndex - 1];
 
             if (Poke.SelectedIndex >= UBIndex)
-            {
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UBIndex];
-                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UBIndex];
-            }
             else
             {
                 Timedelay.Value = SearchSetting.timedelay[Poke.SelectedIndex - 1];
             }
-                
+
 
             switch (Poke.SelectedIndex)
             {

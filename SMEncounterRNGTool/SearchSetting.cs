@@ -82,9 +82,16 @@
             4,
         };
 
-        public readonly static int[] UB_rate =
+        public readonly static int[][] UB_rate =
         {
-            80,30,50,15,30,30,80,5
+            new []{80,30},
+            new []{30},
+            new []{50},
+            new []{15,30}, //todo
+            new []{30,30}, //todo
+            new []{30},
+            new []{80},
+            new []{5},
         };
 
         public readonly static int[] honeycorrection =
@@ -94,12 +101,12 @@
 
         public readonly static byte[][] UBLocation =
         {
-            new byte[]{100 ,082},
+            new byte[]{100,082},
             new byte[]{040},
             new byte[]{046},
             new byte[]{090,076},
             new byte[]{134,124},
-            new byte[]{134,120},
+            new byte[]{134},
             new byte[]{182},
             new byte[]{036},
         };

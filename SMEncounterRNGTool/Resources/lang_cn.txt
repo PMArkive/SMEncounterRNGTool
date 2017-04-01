@@ -120,7 +120,6 @@ L_ChainLength = 连锁数
 ---
 WildEncounterSetting = 野生草丛遇敌设置
 L_Location = 地点
-L_GameTime = 时段
 L_Species = 种类
 ---------------------TabPage2----------------------------------
 InputBox = 输入
