@@ -65,9 +65,7 @@
     <Compile Include="Encounter\EncounterArea.cs" />
     <Compile Include="Encounter\EncounterSlot.cs" />
     <Compile Include="Encounter\PersonalInfo.cs" />
-    <Compile Include="Encounter\PersonalInfoBW.cs" />
     <Compile Include="Encounter\PersonalInfoSM.cs" />
-    <Compile Include="Encounter\PersonalInfoXY.cs" />
     <Compile Include="Encounter\PersonalTable.cs" />
     <Compile Include="Encounter\SlotType.cs" />
     <Compile Include="ModelStatus.cs" />

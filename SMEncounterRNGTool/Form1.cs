@@ -767,7 +767,7 @@ namespace SMEncounterRNGTool
             Ability.SelectedIndex = 0;
             Slot.Text = "";
 
-            if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Lv_Search.Value <= Lv_max.Value))
+            if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Lv_Search.Value <= Lv_max.Value) || Poke.SelectedIndex == 0)
                 Lv_Search.Value = 0;
             for (int i = 0; i < 6; i++)
             {
