@@ -5,7 +5,7 @@ namespace PKHeX.Core
 {
     public class PersonalInfoSM : PersonalInfo
     {
-        public new const int SIZE = 0x54;
+        public const int SIZE = 0x54;
         public PersonalInfoSM(byte[] data)
         {
             if (data.Length != SIZE)
