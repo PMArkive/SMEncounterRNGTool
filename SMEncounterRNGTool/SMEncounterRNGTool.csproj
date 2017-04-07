@@ -61,7 +61,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CheckBoxComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CheckBoxComboBox.Designer.cs">
+      <DependentUpon>Controls\CheckBoxComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ComboItem.cs" />
+    <Compile Include="Controls\GlassButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GlassButton.Designer.cs">
+      <DependentUpon>Controls\GlassButton.Designer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GlassComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GlassComboBox.Designer.cs" />
+    <Compile Include="Controls\GripBounds.cs" />
+    <Compile Include="Controls\NativeMethods.cs" />
+    <Compile Include="Controls\Popup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Popup.Designer.cs">
+      <DependentUpon>Controls\Popup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PopupComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PopupComboBox.Designer.cs">
+      <DependentUpon>Controls\PopupComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Encounter\EncounterArea.cs" />
     <Compile Include="Encounter\EncounterSlot.cs" />
     <Compile Include="Encounter\LocationTable.cs" />
@@ -117,7 +147,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\lang_en.txt" />
     <Content Include="Resources\pic_Clock_0.png" />
     <Content Include="Resources\pic_Clock_1.png" />
     <Content Include="Resources\pic_Clock_10.png" />
@@ -135,15 +164,15 @@
     <Content Include="Resources\pic_Clock_7.png" />
     <Content Include="Resources\pic_Clock_8.png" />
     <Content Include="Resources\pic_Clock_9.png" />
-    <Content Include="Resources\lang_cn.txt" />
-    <Content Include="Resources\text_Natures_cn.txt" />
-    <Content Include="Resources\text_Natures_en.txt" />
-    <Content Include="Resources\text_Location_en.txt" />
-    <Content Include="Resources\text_Location_cn.txt" />
-    <Content Include="Resources\text_Species_cn.txt" />
-    <Content Include="Resources\text_Species_en.txt" />
-    <Content Include="Resources\text_Types_cn.txt" />
-    <Content Include="Resources\text_Types_en.txt" />
+    <None Include="Resources\lang_cn.txt" />
+    <None Include="Resources\text_Natures_cn.txt" />
+    <None Include="Resources\text_Natures_en.txt" />
+    <None Include="Resources\text_Location_en.txt" />
+    <None Include="Resources\text_Location_cn.txt" />
+    <None Include="Resources\text_Species_cn.txt" />
+    <None Include="Resources\text_Species_en.txt" />
+    <None Include="Resources\text_Types_cn.txt" />
+    <None Include="Resources\text_Types_en.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

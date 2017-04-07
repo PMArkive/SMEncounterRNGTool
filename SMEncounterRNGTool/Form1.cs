@@ -54,6 +54,7 @@ namespace SMEncounterRNGTool
         #region Translation
         private string curlanguage;
         private static readonly string[] langlist = { "en", "cn" };
+        private static readonly string[] ANY_STR = { "Any", "任意" };
         private static readonly string[] NORESULT_STR = { "Not Found", "未找到" };
         private static readonly string[] NOSELECTION_STR = { "Please Select", "请选择" };
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
