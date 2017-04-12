@@ -13,54 +13,13 @@
 
         public int[] Stats => new[] { HP, ATK, DEF, SPE, SPA, SPD };
 
-        public abstract int EV_HP { get; set; }
-        public abstract int EV_ATK { get; set; }
-        public abstract int EV_DEF { get; set; }
-        public abstract int EV_SPE { get; set; }
-        public abstract int EV_SPA { get; set; }
-        public abstract int EV_SPD { get; set; }
-
         public abstract int[] Types { get; set; }
         public abstract int CatchRate { get; set; }
-        public virtual int EvoStage { get; set; }
         public abstract int[] Items { get; set; }
         public abstract int Gender { get; set; }
-        public abstract int HatchCycles { get; set; }
-        public abstract int BaseFriendship { get; set; }
-        public abstract int EXPGrowth { get; set; }
-        public abstract int[] EggGroups { get; set; }
         public abstract int [] Abilities { get; set; }
-        public abstract int EscapeRate { get; set; }
         public virtual int FormeCount { get; set; }
         protected internal virtual int FormStatsIndex { get; set; }
-        public virtual int FormeSprite { get; set; }
-        public abstract int BaseEXP { get; set; }
-        public abstract int Color { get; set; }
-
-        public virtual int Height { get; set; } = 0;
-        public virtual int Weight { get; set; } = 0;
-
-        public bool[] TMHM { get; protected set; }
-        public bool[] TypeTutors { get; protected set; }
-        public bool[][] SpecialTutors { get; protected set; } = new bool[0][];
-
-        protected static bool[] getBits(byte[] data)
-        {
-            bool[] r = new bool[data.Length<<3];
-            for (int i = 0; i < r.Length; i++)
-                r[i] = (data[i>>3] >> (i&7) & 0x1) == 1;
-            return r;
-        }
-        protected static byte[] setBits(bool[] bits)
-        {
-            byte[] data = new byte[bits.Length>>3];
-            for (int i = 0; i < bits.Length; i++)
-                data[i>>3] |= (byte)(bits[i] ? 1 << (i&0x7) : 0);
-            return data;
-        }
-
-        public void AddTMHM(byte[] data) => TMHM = getBits(data);
-        public void AddTypeTutors(byte[] data) => TypeTutors = getBits(data);
 
         // Data Manipulation
         public int FormeIndex(int species, int forme)
