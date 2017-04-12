@@ -556,7 +556,6 @@ namespace SMEncounterRNGTool
             Modification.Visible = Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
         }
 
-
         private void Fishing_CheckedChanged(object sender, EventArgs e)
         {
             if (Fishing.Checked)
@@ -984,9 +983,9 @@ namespace SMEncounterRNGTool
                     RNGSearch.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
+                    result.Blink = Blinkflaglist[i - min - 1];
                     if (i <= min || i > max || !frameMatch(result, setting))
                         continue;
-                    result.Blink = Blinkflaglist[i - min - 1];
                     list.Add(getRow_Sta(i - 1, rng, result, DGV));
                 }
                 realtime++;
@@ -995,7 +994,6 @@ namespace SMEncounterRNGTool
             DGV.Rows.AddRange(list.ToArray());
             DGV.CurrentCell = null;
         }
-
 
         private void createtimeline()
         {
