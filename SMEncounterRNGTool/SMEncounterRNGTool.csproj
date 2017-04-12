@@ -65,33 +65,36 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CheckBoxComboBox.Designer.cs">
-      <DependentUpon>Controls\CheckBoxComboBox.cs</DependentUpon>
+      <DependentUpon>CheckBoxComboBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ComboItem.cs" />
     <Compile Include="Controls\GlassButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\GlassButton.Designer.cs">
-      <DependentUpon>Controls\GlassButton.Designer.cs</DependentUpon>
+      <DependentUpon>GlassButton.Designer.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\GlassComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\GlassComboBox.Designer.cs" />
+    <Compile Include="Controls\GlassComboBox.Designer.cs">
+      <DependentUpon>GlassComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GripBounds.cs" />
     <Compile Include="Controls\NativeMethods.cs" />
     <Compile Include="Controls\Popup.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Popup.Designer.cs">
-      <DependentUpon>Controls\Popup.cs</DependentUpon>
+      <DependentUpon>Popup.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PopupComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\PopupComboBox.Designer.cs">
-      <DependentUpon>Controls\PopupComboBox.cs</DependentUpon>
+      <DependentUpon>PopupComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StringItem.cs" />
     <Compile Include="Encounter\EncounterArea.cs" />
     <Compile Include="Encounter\EncounterSlot.cs" />
     <Compile Include="Encounter\LocationTable.cs" />

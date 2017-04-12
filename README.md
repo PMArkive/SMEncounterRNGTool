@@ -4,6 +4,8 @@ A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Po
 Great thanks to  
 **quan_dra** for original code  
 **Real96** for good suggestions and testing the tool  
+**RNGReporter** for multi-selection control  
+**PKHex** for raw encounter file  
 And ALL Pokemon RNG Researcher  
 
 ## Following Pokemon are supported:

@@ -72,7 +72,6 @@ namespace SMEncounterRNGTool
             { "Sun", "Moon" },
             { "太阳", "月亮" }
         };
-        private static string[] location, species;
 
         private int lindex { get { return Lang.SelectedIndex; } set { Lang.SelectedIndex = value; } }
 
@@ -90,10 +89,18 @@ namespace SMEncounterRNGTool
             TranslateInterface(this, lang);
             Text = Text + $" v{version} @wwwwwwzx";
 
-            SearchSetting.naturestr = getStringList("Natures", curlanguage);
-            SearchSetting.hpstr = getStringList("Types", curlanguage);
-            species = getStringList("Species", curlanguage);
-            location = getStringList("Location", curlanguage);
+            StringItem.naturestr = getStringList("Natures", curlanguage);
+            StringItem.hpstr = getStringList("Types", curlanguage);
+            StringItem.species = getStringList("Species", curlanguage);
+            StringItem.location = getStringList("Location", curlanguage);
+
+            Nature.Items.Clear();
+            Nature.BlankText = ANY_STR[lindex];
+            Nature.Items.AddRange(StringItem.NatureList());
+
+            HiddenPower.Items.Clear();
+            HiddenPower.BlankText = ANY_STR[lindex];
+            HiddenPower.Items.AddRange(StringItem.HiddenPowerList());
 
             for (int i = 0; i < 2; i++)
                 GameVersion.Items[i] = GAMEVERSION_STR[lindex, i];
@@ -101,21 +108,24 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 4; i++)
                 Event_PIDType.Items[i] = PIDTYPE_STR[lindex, i];
 
-            for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
-                HiddenPower.Items[i] = SearchSetting.hpstr[i];
-
-            for (int i = 0; i < SearchSetting.naturestr.Length; i++)
-                Event_Nature.Items[i + 1] = Nature.Items[i + 1] = SyncNature.Items[i + 1] = SearchSetting.naturestr[i];
+            for (int i = 0; i < StringItem.naturestr.Length; i++)
+                Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
             Poke.Items[1] = EVENT_STR[lindex];
             for (int i = 1; i < SearchSetting.pokedex.GetLength(0); i++)
-                Poke.Items[i + 1] = species[SearchSetting.pokedex[i, 0]];
+                Poke.Items[i + 1] = StringItem.species[SearchSetting.pokedex[i, 0]];
 
             RefreshLocation();
 
             Poke.Items[SearchSetting.Zygarde_index] += "-10%";
             Poke.Items[SearchSetting.Zygarde_index + 1] += "-50%";
             Poke.Items[SearchSetting.Fossil_index] = FOSSIL_STR[lindex];
+
+            // display something upon loading
+            Nature.CheckBoxItems[0].Checked = true;
+            Nature.CheckBoxItems[0].Checked = false;
+            HiddenPower.CheckBoxItems[0].Checked = true;
+            HiddenPower.CheckBoxItems[0].Checked = false;
         }
         #endregion
 
@@ -163,23 +173,18 @@ namespace SMEncounterRNGTool
             EventIVLocked.Add(Event_IV_Fix4);
             EventIVLocked.Add(Event_IV_Fix5);
 
-            Nature.Items.Add("-");
             SyncNature.Items.Add("-");
             Event_Nature.Items.Add("-");
-            HiddenPower.Items.Add("-");
             Poke.Items.Add("-");
-            foreach (string t in SearchSetting.naturestr)
+            foreach (string t in StringItem.naturestr)
             {
-                Nature.Items.Add("");
                 SyncNature.Items.Add("");
                 Event_Nature.Items.Add("");
             }
             for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
                 Poke.Items.Add("");
-            for (int i = 1; i < SearchSetting.hpstr.Length - 1; i++)
-                HiddenPower.Items.Add("");
 
-            foreach (string t in SearchSetting.genderstr)
+            foreach (string t in StringItem.genderstr)
             {
                 Gender.Items.Add(t);
                 Event_Gender.Items.Add(t);
@@ -203,9 +208,7 @@ namespace SMEncounterRNGTool
                 case 1: TimeResultInstructText = "格式：帧数 (秒数) <持续时间>"; break;
             }
             TimeResult.Items.Add(TimeResultInstructText);
-
-            HiddenPower.SelectedIndex = 0;
-            Nature.SelectedIndex = 0;
+            
             SyncNature.SelectedIndex = 0;
             Event_Nature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
@@ -248,14 +251,14 @@ namespace SMEncounterRNGTool
                 return;
 
             for (byte i = 0; i < locationlist.Length; i++)
-                Locationlist.Add(new Controls.ComboItem { Text = location[locationlist[i]], Value = locationlist[i] });
+                Locationlist.Add(new Controls.ComboItem(StringItem.location[locationlist[i]], locationlist[i]));
             MetLocation.DisplayMember = "Text";
             MetLocation.ValueMember = "Value";
             MetLocation.DataSource = new BindingSource(Locationlist, null);
 
             if (MetLocation.SelectedValue == null || MetLocation.SelectedIndex < 0) MetLocation.SelectedIndex = 0;
 
-                LoadSpecies();
+            LoadSpecies();
         }
 
         private void LoadSpecies()
@@ -263,7 +266,7 @@ namespace SMEncounterRNGTool
             try
             {
                 ea = (GameVersion.SelectedIndex == 0 ? EncounterArea.EncounterSun : EncounterArea.EncounterMoon).FirstOrDefault(e => e.Location == (int)MetLocation.SelectedValue);
-                var List = ea.Slots.Select(slot => new Controls.ComboItem { Text = species[slot.Species], Value = slot.Species, });
+                var List = ea.Slots.Select(slot => new Controls.ComboItem(StringItem.species[slot.Species], slot.Species));
 
                 SlotSpecies.DisplayMember = "Text";
                 SlotSpecies.ValueMember = "Value";
@@ -443,7 +446,7 @@ namespace SMEncounterRNGTool
         }
         #endregion
 
-        #region validcheck
+        #region UILogic
         private void TSV_ValueChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.TSV = (short)TSV.Value;
@@ -586,7 +589,11 @@ namespace SMEncounterRNGTool
         private void SyncNature_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AlwaysSynced.Checked)
-                Nature.SelectedIndex = SyncNature.SelectedIndex;
+            {
+                Nature.ClearSelection();
+                if (SyncNature.SelectedIndex > 0)
+                    Nature.CheckBoxItems[SyncNature.SelectedIndex].Checked = true;
+            }
         }
 
         private void SearchMethod_CheckedChanged(object sender, EventArgs e)
@@ -762,8 +769,8 @@ namespace SMEncounterRNGTool
 
         private void Reset_Click(object sender, EventArgs e)
         {
-            HiddenPower.SelectedIndex = 0;
-            if (!AlwaysSynced.Checked) Nature.SelectedIndex = 0;
+            HiddenPower.ClearSelection();
+            if (!AlwaysSynced.Checked) Nature.ClearSelection();
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
             Slot.Text = "";
@@ -1062,8 +1069,8 @@ namespace SMEncounterRNGTool
 
             return new SearchSetting
             {
-                Nature = Nature.SelectedIndex - 1,
-                HPType = HiddenPower.SelectedIndex - 1,
+                Nature = Nature.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
+                HPType = HiddenPower.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
                 Gender = Gender.SelectedIndex,
                 Ability = Ability.SelectedIndex,
                 Slot = SearchSetting.TranslateSlot(Slot.Text),
@@ -1140,7 +1147,7 @@ namespace SMEncounterRNGTool
                 return false;
             if (!setting.CheckHiddenPower(result.IVs))
                 return false;
-            if (setting.Nature != -1 && setting.Nature != result.Nature)
+            if (!setting.CheckNature(result.Nature))
                 return false;
             if (setting.Gender != 0 && setting.Gender != result.Gender)
                 return false;
@@ -1167,7 +1174,7 @@ namespace SMEncounterRNGTool
         private DataGridViewRow getRow_Sta(int i, RNGSearch rng, RNGSearch.RNGResult result, DataGridView dgv)
         {
             int d = i - (int)Time_max.Value;
-            string true_nature = SearchSetting.naturestr[result.Nature];
+            string true_nature = StringItem.naturestr[result.Nature];
             string SynchronizeFlag = (result.Synchronize ? "O" : "X");
             if ((result.UbValue < UB_th.Value) && (ConsiderDelay.Checked) && (!ShowResultsAfterDelay.Checked))
                 result.Blink = 2;
@@ -1216,7 +1223,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, SearchSetting.genderstr[result.Gender], SearchSetting.abilitystr[result.Ability], Item, Encounter,
+                true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, StringItem.genderstr[result.Gender], StringItem.abilitystr[result.Ability], Item, Encounter,
                 randstr, PID, EC, time, research
                 );
 
@@ -1476,10 +1483,10 @@ namespace SMEncounterRNGTool
                 Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
                 if (Event_EC.Value > 0) Event_EC.Visible = L_EC.Visible = true;
                 int sp = BitConverter.ToUInt16(Data, 0x82);
-                L_EventSpecies.Text = L_Species.Text + ": " + species[sp];
+                L_EventSpecies.Text = L_Species.Text + ": " + StringItem.species[sp];
                 L_EventSpecies.Visible = true;
                 int form = Data[0x84];
-                setBS(sp,form);
+                setBS(sp, form);
                 IsEgg.Checked = Data[0xD1] == 1;
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;

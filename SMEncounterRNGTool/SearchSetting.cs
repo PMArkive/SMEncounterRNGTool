@@ -2,7 +2,6 @@
 
 namespace SMEncounterRNGTool
 {
-
     class SearchSetting
     {
         #region pokedex
@@ -144,31 +143,9 @@ namespace SMEncounterRNGTool
             { 1, 1, 1, 1, 1, 1}
         };
         #endregion
-        #region String Setting
-        public static string[] naturestr =
-        {
-            "勤奋", "怕寂寞", "勇敢", "固执",
-            "顽皮", "大胆", "坦率", "悠闲", "淘气",
-            "乐天", "胆小", "急躁", "认真", "爽朗",
-            "天真", "内敛", "慢吞吞", "冷静", "害羞",
-            "马虎", "温和", "温顺",
-            "自大", "慎重", "浮躁"
-            };
-        public static string[] hpstr =
-        {
-            "一般",
-            "格斗", "飞行", "毒", "地面", "岩石",
-            "虫", "幽灵", "钢", "火", "水",
-            "草", "电", "超能力", "冰", "龙",
-            "恶","妖精"
-            };
 
-        public static string[] genderstr = { "-", "♂", "♀" };
-        public static string[] abilitystr = { "-", "1", "2", "H" };
-        #endregion
-
-        public int Nature = -1;
-        public int HPType = -1;
+        public bool[] Nature = new bool[25];
+        public bool[] HPType = new bool[16];
         public int Ability = -1;
         public int Gender = -1;
         public int[] IVup, IVlow, BS, Stats;
@@ -196,6 +173,12 @@ namespace SMEncounterRNGTool
             return true;
         }
 
+        public bool CheckNature(int resultnature)
+        {
+            if (Nature.All(n => !n)) return true;
+            return Nature[resultnature];
+        }
+
         public void getStats(RNGSearch.RNGResult result)
         {
             int[] IV = new int[6];
@@ -210,10 +193,9 @@ namespace SMEncounterRNGTool
 
         public bool CheckHiddenPower(int[] IV)
         {
-            if (HPType == -1)
-                return true;
+            if (HPType.All(n => !n)) return true;
             var val = 15 * ((IV[0] & 1) + 2 * (IV[1] & 1) + 4 * (IV[2] & 1) + 8 * (IV[5] & 1) + 16 * (IV[3] & 1) + 32 * (IV[4] & 1)) / 63;
-            return val == HPType;
+            return HPType[val];
         }
 
         public static bool[] TranslateSlot(string slottext)

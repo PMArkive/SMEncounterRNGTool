@@ -33,6 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties1 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties2 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
@@ -102,8 +104,6 @@
             this.L_gender = new System.Windows.Forms.Label();
             this.Gender = new System.Windows.Forms.ComboBox();
             this.L_nature = new System.Windows.Forms.Label();
-            this.HiddenPower = new System.Windows.Forms.ComboBox();
-            this.Nature = new System.Windows.Forms.ComboBox();
             this.L_HP = new System.Windows.Forms.Label();
             this.L_S = new System.Windows.Forms.Label();
             this.L_C = new System.Windows.Forms.Label();
@@ -276,6 +276,8 @@
             this.L_GameVersion = new System.Windows.Forms.Label();
             this.GameVersion = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
+            this.HiddenPower = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
+            this.Nature = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
             this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
@@ -949,6 +951,8 @@
             // 
             // SearchSettingBox
             // 
+            this.SearchSettingBox.Controls.Add(this.HiddenPower);
+            this.SearchSettingBox.Controls.Add(this.Nature);
             this.SearchSettingBox.Controls.Add(this.SafeFOnly);
             this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.ShowStats);
@@ -968,8 +972,6 @@
             this.SearchSettingBox.Controls.Add(this.L_gender);
             this.SearchSettingBox.Controls.Add(this.Gender);
             this.SearchSettingBox.Controls.Add(this.L_nature);
-            this.SearchSettingBox.Controls.Add(this.HiddenPower);
-            this.SearchSettingBox.Controls.Add(this.Nature);
             this.SearchSettingBox.Controls.Add(this.L_HP);
             this.SearchSettingBox.Controls.Add(this.L_S);
             this.SearchSettingBox.Controls.Add(this.L_C);
@@ -1172,22 +1174,6 @@
             this.L_nature.Size = new System.Drawing.Size(31, 13);
             this.L_nature.TabIndex = 35;
             this.L_nature.Text = "性格";
-            // 
-            // HiddenPower
-            // 
-            this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.HiddenPower.Location = new System.Drawing.Point(302, 113);
-            this.HiddenPower.Name = "HiddenPower";
-            this.HiddenPower.Size = new System.Drawing.Size(74, 21);
-            this.HiddenPower.TabIndex = 32;
-            // 
-            // Nature
-            // 
-            this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Nature.Location = new System.Drawing.Point(302, 163);
-            this.Nature.Name = "Nature";
-            this.Nature.Size = new System.Drawing.Size(74, 21);
-            this.Nature.TabIndex = 8;
             // 
             // L_HP
             // 
@@ -3218,6 +3204,34 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // HiddenPower
+            // 
+            this.HiddenPower.BlankText = null;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.HiddenPower.CheckBoxProperties = checkBoxProperties1;
+            this.HiddenPower.DisplayMemberSingleItem = "";
+            this.HiddenPower.DropDownHeight = 400;
+            this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HiddenPower.FormattingEnabled = true;
+            this.HiddenPower.Location = new System.Drawing.Point(295, 113);
+            this.HiddenPower.Name = "HiddenPower";
+            this.HiddenPower.Size = new System.Drawing.Size(91, 21);
+            this.HiddenPower.TabIndex = 78;
+            // 
+            // Nature
+            // 
+            this.Nature.BlankText = "Any";
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Nature.CheckBoxProperties = checkBoxProperties2;
+            this.Nature.DisplayMemberSingleItem = "";
+            this.Nature.DropDownHeight = 400;
+            this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Nature.FormattingEnabled = true;
+            this.Nature.Location = new System.Drawing.Point(295, 164);
+            this.Nature.Name = "Nature";
+            this.Nature.Size = new System.Drawing.Size(91, 21);
+            this.Nature.TabIndex = 77;
+            // 
             // Event_PID
             // 
             this.Event_PID.Enabled = false;
@@ -3424,8 +3438,6 @@
         private System.Windows.Forms.NumericUpDown BS_2;
         private System.Windows.Forms.NumericUpDown BS_1;
         private System.Windows.Forms.NumericUpDown BS_0;
-        private System.Windows.Forms.ComboBox HiddenPower;
-        private System.Windows.Forms.ComboBox Nature;
         private System.Windows.Forms.Label L_nature;
         private System.Windows.Forms.Label L_HP;
         private System.Windows.Forms.CheckBox EncounteredOnly;
@@ -3595,6 +3607,8 @@
         private System.Windows.Forms.ComboBox GameVersion;
         private System.Windows.Forms.Label L_EventSpecies;
         private System.Windows.Forms.NumericUpDown PerfectIVs;
+        private Controls.CheckBoxComboBox Nature;
+        private Controls.CheckBoxComboBox HiddenPower;
     }
 }
 
