@@ -112,14 +112,14 @@ namespace SMEncounterRNGTool
                 Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
             Poke.Items[1] = EVENT_STR[lindex];
-            for (int i = 1; i < SearchSetting.pokedex.GetLength(0); i++)
-                Poke.Items[i + 1] = StringItem.species[SearchSetting.pokedex[i, 0]];
+            for (int i = 1; i < Pokemon.SpecForm.GetLength(0); i++)
+                Poke.Items[i + 1] = StringItem.species[Pokemon.SpecForm[i, 0]];
 
             RefreshLocation();
 
-            Poke.Items[SearchSetting.Zygarde_index] += "-10%";
-            Poke.Items[SearchSetting.Zygarde_index + 1] += "-50%";
-            Poke.Items[SearchSetting.Fossil_index] = FOSSIL_STR[lindex];
+            Poke.Items[Pokemon.Zygarde_index] += "-10%";
+            Poke.Items[Pokemon.Zygarde_index + 1] += "-50%";
+            Poke.Items[Pokemon.Fossil_index] = FOSSIL_STR[lindex];
 
             // display something upon loading
             Nature.CheckBoxItems[0].Checked = true;
@@ -178,7 +178,7 @@ namespace SMEncounterRNGTool
             Poke.Items.Add("-");
             SyncNature.Items.AddRange(StringItem.naturestr);
             Event_Nature.Items.AddRange(StringItem.naturestr);
-            for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
+            for (int i = 0; i < Pokemon.SpecForm.GetLength(0); i++)
                 Poke.Items.Add("");
             
             Gender.Items.AddRange(StringItem.genderstr);
@@ -235,14 +235,14 @@ namespace SMEncounterRNGTool
         }
 
 
-        private int UBIndex => SearchSetting.UB_StartIndex;
+        private int UBIndex => Pokemon.UB_StartIndex;
 
         private void RefreshLocation()
         {
             if (Poke.SelectedIndex == 0)
                 locationlist = EncounterArea.SMLocationList;
             else if (Poke.SelectedIndex >= UBIndex)
-                locationlist = SearchSetting.UBLocation[Poke.SelectedIndex - UBIndex];
+                locationlist = Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
             else
                 return;
 
@@ -482,7 +482,7 @@ namespace SMEncounterRNGTool
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Poke.SelectedIndex >= UBIndex && MetLocation.SelectedIndex >= 0)
-                UB_th.Value = SearchSetting.UB_rate[Poke.SelectedIndex - UBIndex][MetLocation.SelectedIndex];
+                UB_th.Value = Pokemon.UB_rate[Poke.SelectedIndex - UBIndex][MetLocation.SelectedIndex];
             LoadSpecies();
         }
 
@@ -654,6 +654,7 @@ namespace SMEncounterRNGTool
         {
             if (IsEvent)
                 IVsCount.Value = Fix3v.Checked ? 3 : 0;
+            PerfectIVs.Value = Fix3v.Checked ? 3 : 0;
         }
 
         private void OtherInfo_CheckedChanged(object sender, EventArgs e)
@@ -1052,14 +1053,14 @@ namespace SMEncounterRNGTool
             return new ModelStatus();
         }
 
-        private SearchSetting getSettings()
+        private Filters getSettings()
         {
             int[] IVup = { (int)ivmax0.Value, (int)ivmax1.Value, (int)ivmax2.Value, (int)ivmax3.Value, (int)ivmax4.Value, (int)ivmax5.Value, };
             int[] IVlow = { (int)ivmin0.Value, (int)ivmin1.Value, (int)ivmin2.Value, (int)ivmin3.Value, (int)ivmin4.Value, (int)ivmin5.Value, };
             int[] BS = { (int)BS_0.Value, (int)BS_1.Value, (int)BS_2.Value, (int)BS_3.Value, (int)BS_4.Value, (int)BS_5.Value, };
             int[] Stats = { (int)Stat0.Value, (int)Stat1.Value, (int)Stat2.Value, (int)Stat3.Value, (int)Stat4.Value, (int)Stat5.Value, };
 
-            return new SearchSetting
+            return new Filters
             {
                 Nature = Nature.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
                 HPType = HiddenPower.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
@@ -1093,8 +1094,8 @@ namespace SMEncounterRNGTool
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
             RNGSearch.ConsiderBlink = ConsiderBlink.Checked;
             RNGSearch.modelnumber = ModelNumber;
-            RNGSearch.IsSolgaleo = Poke.SelectedIndex == SearchSetting.Solgaleo_index;
-            RNGSearch.IsLunala = Poke.SelectedIndex == SearchSetting.Lunala_index;
+            RNGSearch.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
+            RNGSearch.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
 
             var rng = new RNGSearch
             {
@@ -1108,12 +1109,12 @@ namespace SMEncounterRNGTool
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,
                 nogender = GenderRatio.SelectedIndex == 0,
-                PokeLv = (Wild.Checked && Poke.SelectedIndex > 0) ? SearchSetting.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value,
+                PokeLv = (Wild.Checked && Poke.SelectedIndex > 0) ? Pokemon.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value,
                 Lv_min = (byte)Lv_min.Value,
                 Lv_max = (byte)Lv_max.Value,
                 UB_th = (byte)UB_th.Value,
                 Encounter_th = (byte)Encounter_th.Value,
-                ShinyLocked = SearchSetting.ShinyLocked(Poke.SelectedIndex),
+                ShinyLocked = Pokemon.ShinyLocked(Poke.SelectedIndex),
                 fishing = Fishing.Checked,
                 SOS = SOS.Checked,
                 ChainLength = (byte)ChainLength.Value,
@@ -1121,7 +1122,7 @@ namespace SMEncounterRNGTool
             return rng;
         }
 
-        private bool frameMatch(RNGSearch.RNGResult result, SearchSetting setting)
+        private bool frameMatch(RNGSearch.RNGResult result, Filters setting)
         {
             setting.getStats(result);
 
@@ -1247,8 +1248,8 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            const int AlwaysSync_Index = SearchSetting.AlwaysSync_Index;
-            const int Fossil_index = SearchSetting.Fossil_index;
+            const int AlwaysSync_Index = Pokemon.AlwaysSync_Index;
+            const int Fossil_index = Pokemon.Fossil_index;
             //General
             Properties.Settings.Default.Pokemon = (byte)Poke.SelectedIndex;
             Properties.Settings.Default.Save();
@@ -1274,14 +1275,14 @@ namespace SMEncounterRNGTool
             ConsiderDelay.Checked = true;
             ConsiderBlink.Enabled = AlwaysSynced.Enabled = false;
 
-            setBS(SearchSetting.pokedex[Poke.SelectedIndex - 1, 0], SearchSetting.pokedex[Poke.SelectedIndex - 1, 1]);
-            Lv_Search.Value = SearchSetting.PokeLevel[Poke.SelectedIndex - 1];
-            NPC.Value = SearchSetting.NPC[Poke.SelectedIndex - 1];
+            setBS(Pokemon.SpecForm[Poke.SelectedIndex - 1, 0], Pokemon.SpecForm[Poke.SelectedIndex - 1, 1]);
+            Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
+            NPC.Value = Pokemon.NPC[Poke.SelectedIndex - 1];
 
             if (Poke.SelectedIndex >= UBIndex)
-                Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UBIndex];
+                Correction.Value = Pokemon.honeycorrection[Poke.SelectedIndex - UBIndex];
             else
-                Timedelay.Value = SearchSetting.timedelay[Poke.SelectedIndex - 1];
+                Timedelay.Value = Pokemon.timedelay[Poke.SelectedIndex - 1];
 
             switch (Poke.SelectedIndex)
             {
