@@ -144,8 +144,8 @@ namespace SMEncounterRNGTool
         };
         #endregion
 
-        public bool[] Nature = new bool[25];
-        public bool[] HPType = new bool[16];
+        public bool[] Nature;
+        public bool[] HPType;
         public int Ability = -1;
         public int Gender = -1;
         public int[] IVup, IVlow, BS, Stats;
@@ -181,10 +181,8 @@ namespace SMEncounterRNGTool
 
         public void getStats(RNGSearch.RNGResult result)
         {
-            int[] IV = new int[6];
+            int[] IV = result.IVs;
             result.Stats = new int[6];
-            for (int i = 0; i < 6; i++)
-                IV[i] = result.IVs[i];
 
             result.Stats[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
             for (int i = 1; i < 6; i++)
@@ -198,26 +196,10 @@ namespace SMEncounterRNGTool
             return HPType[val];
         }
 
-        public static bool[] TranslateSlot(string slottext)
+        public bool CheckSlot(int slot)
         {
-            bool[] SlotArray = new bool[11];
-            if (slottext == "")
-                return SlotArray;
-            try
-            {
-                string[] slotstrarray = slottext.Split(' ', ',');
-                uint tmp;
-                for (int i = 0; i < slotstrarray.Length; i++)
-                {
-                    uint.TryParse(slotstrarray[i], out tmp);
-                    if ((tmp < 11) && (tmp > 0))
-                        SlotArray[tmp] = true;
-                }
-                SlotArray[0] = true; //Text is valid
-            }
-            catch
-            { }
-            return SlotArray;
+            if (Slot.All(n => !n)) return true;
+            return Slot[slot];
         }
     }
 }

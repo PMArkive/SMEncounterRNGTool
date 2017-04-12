@@ -35,6 +35,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties1 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties2 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties3 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
@@ -86,7 +87,6 @@
             this.L_NPC = new System.Windows.Forms.Label();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
             this.SafeFOnly = new System.Windows.Forms.CheckBox();
-            this.Slot = new System.Windows.Forms.TextBox();
             this.ShowStats = new System.Windows.Forms.CheckBox();
             this.BlinkOnly = new System.Windows.Forms.CheckBox();
             this.Reset = new System.Windows.Forms.Button();
@@ -276,6 +276,7 @@
             this.L_GameVersion = new System.Windows.Forms.Label();
             this.GameVersion = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
+            this.Slot = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
             this.HiddenPower = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
             this.Nature = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
             this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
@@ -951,10 +952,10 @@
             // 
             // SearchSettingBox
             // 
+            this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.HiddenPower);
             this.SearchSettingBox.Controls.Add(this.Nature);
             this.SearchSettingBox.Controls.Add(this.SafeFOnly);
-            this.SearchSettingBox.Controls.Add(this.Slot);
             this.SearchSettingBox.Controls.Add(this.ShowStats);
             this.SearchSettingBox.Controls.Add(this.BlinkOnly);
             this.SearchSettingBox.Controls.Add(this.Reset);
@@ -997,13 +998,6 @@
             this.SafeFOnly.TabIndex = 76;
             this.SafeFOnly.Text = "仅准确帧";
             this.SafeFOnly.UseVisualStyleBackColor = true;
-            // 
-            // Slot
-            // 
-            this.Slot.Location = new System.Drawing.Point(200, 61);
-            this.Slot.Name = "Slot";
-            this.Slot.Size = new System.Drawing.Size(74, 20);
-            this.Slot.TabIndex = 55;
             // 
             // ShowStats
             // 
@@ -3204,11 +3198,36 @@
             this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
             this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
+            // Slot
+            // 
+            this.Slot.BlankText = "-";
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Slot.CheckBoxProperties = checkBoxProperties1;
+            this.Slot.DisplayMemberSingleItem = "";
+            this.Slot.DropDownHeight = 200;
+            this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Slot.FormattingEnabled = true;
+            this.Slot.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.Slot.Location = new System.Drawing.Point(200, 62);
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(74, 21);
+            this.Slot.TabIndex = 79;
+            // 
             // HiddenPower
             // 
             this.HiddenPower.BlankText = null;
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.HiddenPower.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.HiddenPower.CheckBoxProperties = checkBoxProperties2;
             this.HiddenPower.DisplayMemberSingleItem = "";
             this.HiddenPower.DropDownHeight = 400;
             this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3221,8 +3240,8 @@
             // Nature
             // 
             this.Nature.BlankText = "Any";
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Nature.CheckBoxProperties = checkBoxProperties2;
+            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Nature.CheckBoxProperties = checkBoxProperties3;
             this.Nature.DisplayMemberSingleItem = "";
             this.Nature.DropDownHeight = 400;
             this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3512,7 +3531,6 @@
         private System.Windows.Forms.Label L_Encounter_th;
         private System.Windows.Forms.CheckBox ShowResultsAfterDelay;
         private System.Windows.Forms.CheckBox ConsiderDelay;
-        private System.Windows.Forms.TextBox Slot;
         private System.Windows.Forms.ContextMenuStrip DGVMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem SetTargetFrame;
         private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
@@ -3609,6 +3627,7 @@
         private System.Windows.Forms.NumericUpDown PerfectIVs;
         private Controls.CheckBoxComboBox Nature;
         private Controls.CheckBoxComboBox HiddenPower;
+        private Controls.CheckBoxComboBox Slot;
     }
 }
 

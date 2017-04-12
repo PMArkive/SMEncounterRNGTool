@@ -196,7 +196,7 @@ namespace SMEncounterRNGTool
             }
 
             //IV
-            st.IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
+            st.IVs = new[] { -1, -1, -1, -1, -1, -1 };
             int cnt = (IsUB ? true : Fix3v) ? 3 : 0;
             while (cnt > 0)
             {
@@ -394,7 +394,7 @@ namespace SMEncounterRNGTool
         private static void Rearrange()
         {
             modelnumber = 5;//2 guys offline...
-            int[] order = new int[5] { 0, 1, 2, 5, 6 };
+            int[] order = new[] { 0, 1, 2, 5, 6 };
             for (int i = 0; i < 5; i++)
             {
                 remain_frame[i] = remain_frame[order[i]];

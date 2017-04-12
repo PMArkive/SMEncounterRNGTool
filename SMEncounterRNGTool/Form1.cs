@@ -176,19 +176,13 @@ namespace SMEncounterRNGTool
             SyncNature.Items.Add("-");
             Event_Nature.Items.Add("-");
             Poke.Items.Add("-");
-            foreach (string t in StringItem.naturestr)
-            {
-                SyncNature.Items.Add("");
-                Event_Nature.Items.Add("");
-            }
+            SyncNature.Items.AddRange(StringItem.naturestr);
+            Event_Nature.Items.AddRange(StringItem.naturestr);
             for (int i = 0; i < SearchSetting.pokedex.GetLength(0); i++)
                 Poke.Items.Add("");
-
-            foreach (string t in StringItem.genderstr)
-            {
-                Gender.Items.Add(t);
-                Event_Gender.Items.Add(t);
-            }
+            
+            Gender.Items.AddRange(StringItem.genderstr);
+            Event_Gender.Items.AddRange(StringItem.genderstr);
 
             for (int i = 0; i < 6; i++)
                 EventIV[i].Enabled = false;
@@ -216,6 +210,9 @@ namespace SMEncounterRNGTool
             Ability.SelectedIndex = 0;
             Event_Ability.SelectedIndex = 0;
             Event_PIDType.SelectedIndex = 0;
+            
+            Slot.CheckBoxItems[0].Checked = true;
+            Slot.CheckBoxItems[0].Checked = false;
 
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
@@ -242,7 +239,6 @@ namespace SMEncounterRNGTool
 
         private void RefreshLocation()
         {
-            Locationlist.Clear();
             if (Poke.SelectedIndex == 0)
                 locationlist = EncounterArea.SMLocationList;
             else if (Poke.SelectedIndex >= UBIndex)
@@ -250,8 +246,7 @@ namespace SMEncounterRNGTool
             else
                 return;
 
-            for (byte i = 0; i < locationlist.Length; i++)
-                Locationlist.Add(new Controls.ComboItem(StringItem.location[locationlist[i]], locationlist[i]));
+            Locationlist = locationlist.Select(loc => new Controls.ComboItem(StringItem.location[loc], loc)).ToList();
             MetLocation.DisplayMember = "Text";
             MetLocation.ValueMember = "Value";
             MetLocation.DataSource = new BindingSource(Locationlist, null);
@@ -293,7 +288,6 @@ namespace SMEncounterRNGTool
             BS_4.Value = t.SPD;
             BS_5.Value = t.SPE;
         }
-
 
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)
@@ -770,9 +764,9 @@ namespace SMEncounterRNGTool
         {
             HiddenPower.ClearSelection();
             if (!AlwaysSynced.Checked) Nature.ClearSelection();
+            Slot.ClearSelection();
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
-            Slot.Text = "";
 
             if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Lv_Search.Value <= Lv_max.Value) || Poke.SelectedIndex == 0)
                 Lv_Search.Value = 0;
@@ -846,7 +840,7 @@ namespace SMEncounterRNGTool
             }
             else
             {
-                int[] Unsaferange = new int[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
+                int[] Unsaferange = new[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
                 List<ulong> Randlist = new List<ulong>();
                 int Min = Math.Max(min - Unsaferange[1], 418);
                 for (int i = 0; i < Min; i++)
@@ -1071,7 +1065,7 @@ namespace SMEncounterRNGTool
                 HPType = HiddenPower.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
                 Gender = Gender.SelectedIndex,
                 Ability = Ability.SelectedIndex,
-                Slot = SearchSetting.TranslateSlot(Slot.Text),
+                Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
                 IVlow = IVlow,
                 IVup = IVup,
                 BS = BS,
@@ -1160,7 +1154,7 @@ namespace SMEncounterRNGTool
                     return false;
                 if (UBOnly.Checked && result.UbValue >= UB_th.Value)
                     return false;
-                if (setting.Slot[0] && (result.Slot < 0 || !setting.Slot[result.Slot]))
+                if (!setting.CheckSlot(result.Slot))
                     return false;
             }
 
@@ -1207,7 +1201,7 @@ namespace SMEncounterRNGTool
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
-            int[] Status = new int[6] { 0, 0, 0, 0, 0, 0 };
+            int[] Status = new[] { 0, 0, 0, 0, 0, 0 };
             if (ShowStats.Checked)
                 Status = result.Stats;
             else
@@ -1287,10 +1281,7 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex >= UBIndex)
                 Correction.Value = SearchSetting.honeycorrection[Poke.SelectedIndex - UBIndex];
             else
-            {
                 Timedelay.Value = SearchSetting.timedelay[Poke.SelectedIndex - 1];
-            }
-
 
             switch (Poke.SelectedIndex)
             {
@@ -1313,7 +1304,7 @@ namespace SMEncounterRNGTool
 
         private RNGSearch.EventRule geteventsetting()
         {
-            int[] IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
+            int[] IVs = new[] { -1, -1, -1, -1, -1, -1 };
             int cnt = 0;
             for (int i = 0; i < 6; i++)
             {
@@ -1326,7 +1317,7 @@ namespace SMEncounterRNGTool
             if (IVsCount.Value > 0 && cnt + IVsCount.Value > 5)
             {
                 Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
-                IVs = new int[6] { -1, -1, -1, -1, -1, -1 };
+                IVs = new[] { -1, -1, -1, -1, -1, -1 };
             }
             RNGSearch.EventRule e = new RNGSearch.EventRule
             {
@@ -1516,9 +1507,8 @@ namespace SMEncounterRNGTool
         private void DragDropWC(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (files.Length == 1)
-                if (!ReadWc7(files[0]))
-                    Error(FILEERRORSTR[lindex]);
+            if (files.Length == 1 && !ReadWc7(files[0]))
+                Error(FILEERRORSTR[lindex]);
         }
 
         private void NatureLocked_CheckedChanged(object sender, EventArgs e)
@@ -1538,12 +1528,7 @@ namespace SMEncounterRNGTool
         {
             Event_Ability.Items.Clear();
             if (AbilityLocked.Checked)
-            {
-                Event_Ability.Items.Add("-");
-                Event_Ability.Items.Add("1");
-                Event_Ability.Items.Add("2");
-                Event_Ability.Items.Add("H");
-            }
+                Event_Ability.Items.AddRange(StringItem.abilitystr);
             else
             {
                 Event_Ability.Items.Add("1/2");
