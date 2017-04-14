@@ -978,8 +978,10 @@ namespace SMEncounterRNGTool
                     RNGSearch.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
+                    if (i <= min || i > max) 
+                        continue;
                     result.Blink = Blinkflaglist[i - min - 1];
-                    if (i <= min || i > max || !frameMatch(result, setting))
+                    if (!frameMatch(result, setting))
                         continue;
                     list.Add(getRow_Sta(i - 1, rng, result, DGV));
                 }
