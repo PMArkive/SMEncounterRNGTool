@@ -207,6 +207,7 @@ namespace SMEncounterRNGTool
             SyncNature.SelectedIndex = 0;
             Event_Nature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
+            GenderRatio.SelectedIndex = 0;
             Event_Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
             Event_Ability.SelectedIndex = 0;
@@ -292,6 +293,14 @@ namespace SMEncounterRNGTool
             BS_3.Value = t.SPA;
             BS_4.Value = t.SPD;
             BS_5.Value = t.SPE;
+            switch (t.Gender)
+            {
+                case 127: GenderRatio.SelectedIndex = 1; break;
+                case 031: GenderRatio.SelectedIndex = 2; break;
+                case 063: GenderRatio.SelectedIndex = 3; break;
+                case 191: GenderRatio.SelectedIndex = 4; break;
+                default: GenderRatio.SelectedIndex = 0; break;
+            }
         }
 
         #region SearchSeedfunction
@@ -521,13 +530,11 @@ namespace SMEncounterRNGTool
                 SOS.Visible = Fishing.Visible = Wild.Checked;
             }
 
-            GenderRatio.SelectedIndex = Stationary.Checked ? 0 : 1;
-
             UB_CheckedChanged(null, null);
             ConsiderDelay_CheckedChanged(null, null);
             Honey_CheckedChanged(null, null);
             Reset_Click(null, null);
-            WildEncounterSetting.Visible = GenderRatio.Visible = Honey.Visible = Wild.Checked;
+            WildEncounterSetting.Visible = Honey.Visible = Wild.Checked;
             dgv_slot.Visible = dgv_item.Visible = dgv_lv.Visible = Wild.Checked;
             label9.Visible = L_Lv.Visible = L_gender.Visible = L_Ability.Visible = L_Slot.Visible = Wild.Checked;
             Lv_min.Visible = Lv_max.Visible = Slot.Visible = Gender.Visible = Ability.Visible = Wild.Checked;
@@ -1305,15 +1312,13 @@ namespace SMEncounterRNGTool
             switch (Poke.SelectedIndex)
             {
                 case 1:
-                    GenderRatio.SelectedIndex = 1;
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
                     ConsiderBlink.Checked = false; GenderRatio.Visible = true;
                     Timedelay.Value = (YourID.Checked && !IsEgg.Checked) ? 62 : 0;
                     break;
                 case Fossil_index - 2:
                 case Fossil_index:
-                    GenderRatio.SelectedIndex = 2;
-                    GenderRatio.Visible = L_gender.Visible = Gender.Visible = true; break;
+                    L_gender.Visible = Gender.Visible = true; break;
                 case Fossil_index - 1:
                     L_Ability.Visible = Ability.Visible = true; break;
                 case Fossil_index + 1:
