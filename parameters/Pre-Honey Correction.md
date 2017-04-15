@@ -37,6 +37,8 @@
 | Seaward Cave                     |     1      |      0       |
 | Kala'e bay - Walking             |     1      |      0       |
 | Kala'e bay - Surfing             |     2      |      1       |
+| Ten Carat Hill Undersea Cave - Walking |     2      |      0       |
+| Ten Carat Hill Undersea Cave - Surfing |     2      |      1       |
 | Ten Carat Hill - Cave            |     2      |      0       |
 | Ten Carat Hill - Farthest Hollow |     1      |      0       |
 
