@@ -257,21 +257,26 @@ namespace SMEncounterRNGTool
 
         private void LoadSpecies()
         {
-            var List = slotspecies.Select( (SpecForm,i) => i > 0 
+            int tmp = SlotSpecies.SelectedIndex;
+            var List = slotspecies.Distinct().Select( (SpecForm,i) => i > 0 
                                             ? new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm)
                                             : new Controls.ComboItem("-", 0));
             SlotSpecies.DisplayMember = "Text";
             SlotSpecies.ValueMember = "Value";
             SlotSpecies.DataSource = new BindingSource(List, null);
+            if (0 <= tmp && tmp < SlotSpecies.Items.Count)
+                SlotSpecies.SelectedIndex = tmp;
         }
 
         private void LoadPersonalInfo()
         {
             int SpecForm = (int)SlotSpecies.SelectedValue;
-            int Slotidx = Array.IndexOf(slotspecies, SpecForm);
             byte[] Slottype = EncounterArea.SlotType[slotspecies[0]];
+            List<int> Slotidx = new List<int>();
+            for (int i = Array.IndexOf(slotspecies, SpecForm); i > -1; i = Array.IndexOf(slotspecies, SpecForm, i + 1))
+                Slotidx.Add(i);
             for (int i = 0; i < 10; i++)
-                Slot.CheckBoxItems[i+1].Checked = Slottype[i] == Slotidx;
+                Slot.CheckBoxItems[i + 1].Checked = Slotidx.Contains(Slottype[i]);
 
             setBS(SpecForm & 0x7FF, SpecForm >> 11);
         }
@@ -475,22 +480,14 @@ namespace SMEncounterRNGTool
         private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ea.SunMoonDifference)
-            {
-                int tmp = SlotSpecies.SelectedIndex;
                 LoadSpecies();
-                SlotSpecies.SelectedIndex = tmp;
-            }
             Properties.Settings.Default.IsSun = GameVersion.SelectedIndex == 0;
             Properties.Settings.Default.Save();
         }
         private void DayNight_CheckedChanged(object sender, EventArgs e)
         {
             if (ea.DayNightDifference)
-            {
-                int tmp = SlotSpecies.SelectedIndex;
                 LoadSpecies();
-                SlotSpecies.SelectedIndex = tmp;
-            }
         }
 
         private void Location_SelectedIndexChanged(object sender, EventArgs e)

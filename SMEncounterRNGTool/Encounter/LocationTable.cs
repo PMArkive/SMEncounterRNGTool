@@ -69,10 +69,12 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,3,3,4,5,6,3,7,7}, //20
             new byte[]{1,2,1,2,2,3,4,4,4,4}, //21
             new byte[]{1,2,1,1,1,1,1,1,1,1}, //22
+            new byte[]{1,2,1,3,4,5,6,5,7,7}, //23
+            new byte[]{1,2,1,1,2,2,2,3,4,4}, //24
         };
 
-        public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752, 425 };
-        public readonly static int[] NightList = new[] { 019, 020, 167, 168, 755, 283, 284, 200 };
+        public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752, 425, 174 };
+        public readonly static int[] NightList = new[] { 019, 020, 167, 168, 755, 283, 284, 200, 731 };
         public readonly static int[] SunList = new[] { 546, 766 };
         public readonly static int[] MoonList = new[] { 548, 765 };
     }
@@ -147,6 +149,13 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 046, // Verdant Cavern
+                Correction = 05,
+                LevelMin = 08, LevelMax = 11,
+                Species = new[] {6,041,050},
+            },
+            new EncounterArea
+            {
                 Location = 010, idx = 1,
                 Correction = 15, NPC = 0,
                 LevelMin = 09, LevelMax = 12,
@@ -182,6 +191,13 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 040, // Melemele Meadow
+                Correction = 05,
+                LevelMin = 09, LevelMax = 12,
+                Species = new[] {5,742,546,741,010,011,012},
+            },
+            new EncounterArea
+            {
                 Location = 042, idx = 1, mark = "Cave",
                 Correction = 01,
                 LevelMin = 09, LevelMax = 12,
@@ -208,7 +224,6 @@ namespace SMEncounterRNGTool
                 LevelMin = 15, LevelMax = 18,
                 Species = new[] {15,072,278,456},
             },
-
             new EncounterArea
             {
                 Location = 034, idx = 1, mark = "Cave", //Ten Carat Hill - Cave
@@ -223,36 +238,36 @@ namespace SMEncounterRNGTool
                 LevelMin = 10, LevelMax = 13,
                 Species = new[] {14,066,744,327,524,703},
             },
-            new EncounterArea
-            {
-                Location = 040, // Melemele Meadow
-                Correction = 05,
-                LevelMin = 09, LevelMax = 12,
-                Species = new[] {5,742,546,741,010,011,012},
-            },
-            new EncounterArea
-            {
-                Location = 046, // Verdant Cavern
-                Correction = 05,
-                LevelMin = 08, LevelMax = 11,
-                Species = new[] {6,041,050},
-            },
             #endregion
             #region  Akala
             new EncounterArea(),
             new EncounterArea
             {
-                Location = 076, //Memorial Hill
-                Correction = 12, NPC = 1,
-                LevelMin = 20, LevelMax = 23,
-                Species = new[] {7,092,708,041},
+                Location = 050, //4
+                Correction = 06, NPC = 1,
+                LevelMin = 11, LevelMax = 14,
+                Species = new[] {23,506,749,736,734,731,174,133},
             },
             new EncounterArea
             {
-                Location = 082, //Wela Volcano
-                Correction = 09,
-                LevelMin = 16, LevelMax = 19,
-                Species = new[] {8,757,661,104,240,115},
+                Location = 078,
+                Correction = 23, NPC = 2,
+                LevelMin = 12, LevelMax = 15,
+                Species = new[] {24,506,749,128,241},
+            },
+            new EncounterArea
+            {
+                Location = 052, idx = 1, //5
+                Correction = 21,
+                LevelMin = 14, LevelMax = 17,
+                Species = new[] {23,506,749,736,734,731,174,133},
+            },
+            new EncounterArea
+            {
+                Location = 052, idx = 2, //5
+                Correction = 21, NPC = 1,
+                LevelMin = 14, LevelMax = 17,
+                Species = new[] {23,506,741,736,734,731,174,133},
             },
             new EncounterArea
             {
@@ -284,10 +299,24 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 082, //Wela Volcano
+                Correction = 09,
+                LevelMin = 16, LevelMax = 19,
+                Species = new[] {8,757,661,104,240,115},
+            },
+            new EncounterArea
+            {
                 Location = 100, //Diglett's Tunnel
                 Correction = 13,
                 LevelMin = 19, LevelMax = 22,
                 Species = new[] {6,041,050},
+            },
+            new EncounterArea
+            {
+                Location = 076, //Memorial Hill
+                Correction = 12, NPC = 1,
+                LevelMin = 20, LevelMax = 23,
+                Species = new[] {7,092,708,041},
             },
             #endregion
             #region Ula'ula
