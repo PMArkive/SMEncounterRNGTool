@@ -48,7 +48,9 @@ namespace SMEncounterRNGTool
         List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
         int[] locationlist = LocationTable.SMLocationList;
         EncounterArea ea = new EncounterArea();
-        int[] slotspecies => ea.getSpecies(GameVersion.SelectedIndex > 0, Night.Checked);
+        bool IsMoon => GameVersion.SelectedIndex > 0;
+        bool IsNight => Night.Checked;
+        int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
 
         private string version = "1.1.0";
 
@@ -489,8 +491,12 @@ namespace SMEncounterRNGTool
         private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ea.SunMoonDifference)
+            {
                 LoadSpecies();
-            Properties.Settings.Default.IsSun = GameVersion.SelectedIndex == 0;
+                Lv_min.Value = IsMoon ? ea.LevelMinMoon : ea.LevelMin;
+                Lv_max.Value = IsMoon ? ea.LevelMaxMoon : ea.LevelMax;
+            }
+            Properties.Settings.Default.IsSun = !IsMoon;
             Properties.Settings.Default.Save();
         }
         private void DayNight_CheckedChanged(object sender, EventArgs e)
@@ -506,8 +512,8 @@ namespace SMEncounterRNGTool
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
-            Lv_min.Value = ea.LevelMin;
-            Lv_max.Value = ea.LevelMax;
+            Lv_min.Value = ea.SunMoonDifference && IsMoon ? ea.LevelMinMoon : ea.LevelMin;
+            Lv_max.Value = ea.SunMoonDifference && IsMoon ? ea.LevelMaxMoon : ea.LevelMax;
             LoadSpecies();
         }
 

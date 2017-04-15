@@ -122,7 +122,6 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 042, idx = 1, mark = "Cave",
-                Correction = 01,
                 LevelMin = 09,
                 Species = new[] {0,041,050,041,041},
             },
@@ -136,9 +135,8 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 014, idx = 1, mark = "Grass",
-                Correction = 01,
                 LevelMin = 15,
-                Species = new[] {21,734,278,371,079},
+                Species = new[] {22,734,278,278,371,079},
             },
             new EncounterArea
             {
@@ -157,7 +155,6 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 036, idx = 2, mark = "Grass", //Ten Carat Hill - Grass
-                Correction = 01,
                 LevelMin = 10,
                 Species = new[] {14,066,744,327,524,703},
             },
@@ -232,7 +229,7 @@ namespace SMEncounterRNGTool
                 Location = 086, idx = 2, mark = "Water",//Brooklet Hill
                 Correction = 05, NPC = 1,
                 LevelMin = 14,
-                Species = new[] {7,060,751,054},
+                Species = new[] {22,060,751,060,751,054},
             },
             new EncounterArea
             {
@@ -344,10 +341,127 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 136, // Ditto
+                Correction = 16,
+                LevelMin = 25,
+                Species = new[] {21,022,774,374,227,173,132},
+                Reverse = true, // Cleffa at night
+            },
+            new EncounterArea
+            {
+                Location = 108, //11
+                Correction = 10,
+                LevelMin = 24,
+                Species = new[] {12,735,732,046,775,674,166},
+            },
+            new EncounterArea
+            {
+                Location = 122, idx = 1,//12
+                Correction = 11,
+                LevelMin = 26,
+                Species = new[] {21,074,749,324,324,074,239},
+            },
+            new EncounterArea
+            {
+                Location = 122, idx = 2,//12
+                Correction = 11, NPC = 1,
+                LevelMin = 25,
+                Species = new[] {21,074,749,324,324,074,239},
+            },
+            new EncounterArea
+            {
+                Location = 110,
+                Correction = 12, NPC = 1,
+                LevelMin = 27,
+                Species = new[] {15,072,279,456},
+            },
+            new EncounterArea
+            {
+                Location = 138, idx = 1,
+                Correction = 3, NPC = 1,
+                LevelMin = 27, lvldiff = -1,
+                Species = new[] {7,074,749,737,324,776,777,239},
+            },
+            new EncounterArea
+            {
+                Location = 138, idx = 2,
+                Correction = 3, NPC = 1,
+                LevelMin = 27,
+                Species = new[] {7,074,749,737,324,776,777,239},
+            },
+            new EncounterArea
+            {
                 Location = 124, //Haina Desert
-                Correction = 01,
                 LevelMin = 28,
                 Species = new[] {0,551,051,551,051},
+            },
+            new EncounterArea
+            {
+                Location = 114, //Tapu Village
+                Correction = 11,
+                LevelMin = 28,
+                Species = new[] {22,735,279,359,037,361},
+            },
+            new EncounterArea
+            {
+                Location = 126, //14
+                Correction = 12, NPC = 1,
+                LevelMin = 28,
+                Species = new[] {15,072,279,456},
+            },
+            new EncounterArea
+            {
+                Location = 150, //Megamart
+                Correction = 1,
+                LevelMin = 29,
+                Species = new[] {28,093,042,707,778},
+            },
+            new EncounterArea
+            {
+                Location = 116, idx = 1, mark = "Grass", //15
+                Correction = 20, NPC = 1,
+                LevelMin = 30,
+                Species = new[] {22,735,279,279,279,079},
+            },
+            new EncounterArea
+            {
+                Location = 116, idx = 2, mark = "Water", //15
+                Correction = 21, NPC = 1,
+                LevelMin = 30,
+                Species = new[] {15,072,279,456},
+            },
+            new EncounterArea
+            {
+                Location = 118, //16
+                Correction = 10,
+                LevelMin = 30,
+                Species = new[] {22,735,279,279,279,079},
+            },
+            new EncounterArea
+            {
+                Location = 128, //Meadow
+                Correction = 08,
+                LevelMin = 31,
+                Species = new[] {22,734,546,741,741,166},
+            },
+            new EncounterArea
+            {
+                Location = 146, idx = 1,
+                LevelMin = 42,
+                Species = new[] {22,037,361,359,359,215},
+            },
+            new EncounterArea
+            {
+                Location = 146, idx = 2,
+                LevelMin = 42,
+                Species = new[] {22,042,361,359,780,215},
+                Reverse = true,
+            },
+            new EncounterArea
+            {
+                Location = 146, idx = 3,
+                LevelMin = 45, lvldiff = -3,
+                Species = new[] {22,037,361,359,359,215},
             },
             #endregion
             #region Poni
@@ -355,7 +469,6 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 182, //Resolution Cave
-                Correction = 01,
                 LevelMin = 54,
                 Species = new[] {0,041,050,041,041},
             },

@@ -18,33 +18,38 @@ namespace SMEncounterRNGTool
             }
             set { _mark = value; }
         }
+        
         public byte LevelMin;
         private byte _LevelMax;
         public byte LevelMax { get { return _LevelMax > 0 ? _LevelMax : (byte)(LevelMin + 3); } set { _LevelMax = value; } }
+        public short lvldiff; // Sun moon encounter area levels difference (Moon - Sun)
+        public byte LevelMinMoon => (byte)(LevelMin + lvldiff);
+        public byte LevelMaxMoon => (byte)(LevelMax + lvldiff);
 
         public int[] Species = new int[1];
-        private int[] _MoonSpecies;
-        public int[] MoonSpecies { get { return _MoonSpecies ?? Species; } set { _MoonSpecies = value; } }
+        public bool Reverse; // true if moon/night have more species
 
-        private readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752, 425, 174 };
-        private readonly static int[] NightList = new[] { 019, 020, 167, 168, 755, 283, 284, 200, 731 };
-        private readonly static int[] SunList = new[] { 546, 766 };
-        private readonly static int[] MoonList = new[] { 548, 765 };
+        private readonly static int[] DayList = { 734, 735, 165, 166, 046, 751, 752, 425, 174, /* Reversed from here */  173,};
+        private readonly static int[] NightList = { 019, 020, 167, 168, 755, 283, 284, 200, 731,/* Reversed from here */ 022,};
+        private readonly static int[] SunList = { 546, 766, 776, 037, /* Reversed from here */ 780, };
+        private readonly static int[] MoonList = { 548, 765, 324, 027, /* Reversed from here */ 359, };
         
         public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
-        public bool SunMoonDifference => Species.Any(i => SunList.Contains(i)) || _MoonSpecies != null;
+        public bool SunMoonDifference => Species.Any(i => SunList.Contains(i));
 
         public int[] getSpecies(bool IsMoon, bool IsNight)
         {
-            int[] table = (int[])(IsMoon ? MoonSpecies : Species).Clone();
-            if (IsNight && DayNightDifference) // Replace species
+            IsNight = IsNight ^ Reverse;
+            IsMoon = IsMoon ^ Reverse;
+            int[] table = (int[])Species.Clone();
+            if (IsNight && DayNightDifference) // Replace Day/Night species
                 for (int i = 1; i < table.Length; i++)
                 {
                     int idx = Array.IndexOf(DayList, table[i]);
                     if (idx > -1)
                         table[i] = NightList[idx];
                 }
-            if (IsMoon && SunMoonDifference)
+            if (IsMoon && SunMoonDifference)  // Replace Sun/Moonspecies
                 for (int i = 1; i < table.Length; i++)
                 {
                     int idx = Array.IndexOf(SunList, table[i]);
@@ -63,7 +68,7 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,3,1,4,5,6,5,7,7}, //4
             new byte[]{1,2,1,2,3,3,4,5,5,6}, //5
             new byte[]{1,2,3,4,5,6,2,6,6,6}, //6
-            new byte[]{1,2,1,2,1,2,3,3,3,3}, //7
+            new byte[]{1,2,1,3,4,5,6,7,7,7}, //7
             new byte[]{1,2,1,2,3,3,4,4,3,5}, //8
             new byte[]{1,2,3,4,5,6,6,7,8,8}, //9
             new byte[]{1,2,3,3,3,3,4,5,6,6}, //10
@@ -77,13 +82,14 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,3,4,5,5,2,2,2,2}, //18
             new byte[]{1,2,3,2,4,4,2,2,2,5}, //19
             new byte[]{1,2,3,3,4,5,6,3,7,7}, //20
-            new byte[]{1,2,1,2,2,3,4,4,4,4}, //21
+            new byte[]{1,2,1,2,3,4,5,6,6,6}, //21
             new byte[]{1,2,1,2,3,4,5,5,5,5}, //22
             new byte[]{1,2,1,3,4,5,6,5,7,7}, //23
             new byte[]{1,2,1,1,2,2,2,3,4,4}, //24
             new byte[]{1,2,3,3,4,4,3,4,4,4}, //25
             new byte[]{1,2,3,3,1,2,4,4,4,4}, //26
             new byte[]{1,2,1,2,3,3,4,4,5,5}, //27
+            new byte[]{1,2,1,2,1,2,3,3,4,4}, //28
         };
     }
 }
