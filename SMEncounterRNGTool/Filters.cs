@@ -75,9 +75,9 @@ namespace SMEncounterRNGTool
             int[] IV = result.IVs;
             result.Stats = new int[6];
 
-            result.Stats[0] = (((BS[0] * 2 + IV[0]) * Lv) / 100) + Lv + 10;
+            result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + Lv + 10;
             for (int i = 1; i < 6; i++)
-                result.Stats[i] = (int)(((((BS[i] * 2 + IV[i]) * Lv) / 100) + 5) * natures_mag[result.Nature, i]);
+                result.Stats[i] = (int)(((((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5) * natures_mag[result.Nature, i]);
         }
 
         public bool CheckHiddenPower(int[] IV)

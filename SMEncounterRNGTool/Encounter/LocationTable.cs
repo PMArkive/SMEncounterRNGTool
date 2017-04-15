@@ -62,6 +62,8 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,1,3,3,3,4,4,4,4}, //13
             new byte[]{1,2,1,3,4,4,5,5,5,5}, //14
             new byte[]{1,1,2,2,3,3,3,3,3,3}, //15
+            new byte[]{1,2,3,2,4,4,5,5,5,5}, //16
+            new byte[]{1,2,3,4,5,4,4,4,4,4}, //17
         };
 
         public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752 };
@@ -126,14 +128,28 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 034, idx = 1, mark = "Cv", //Ten Carat Hill - Cave
+                Location = 012, idx = 1,
+                Correction = 21, NPC = 0,
+                LevelMin = 07, LevelMax = 10,
+                Species = new[] {16,096,052,734,235,063},
+            },
+            new EncounterArea
+            {
+                Location = 012, idx = 2,
+                Correction = 21, NPC = 1,
+                LevelMin = 07, LevelMax = 10,
+                Species = new[] {17,742,058,734,021,235},
+            },
+            new EncounterArea
+            {
+                Location = 034, idx = 1, mark = "Cave", //Ten Carat Hill - Cave
                 Correction = 02,
                 LevelMin = 10, LevelMax = 13,
                 Species = new[] {13,041,052,524,703},
             },
             new EncounterArea
             {
-                Location = 036, idx = 2, mark = "Gs", //Ten Carat Hill - Grass
+                Location = 036, idx = 2, mark = "Grass", //Ten Carat Hill - Grass
                 Correction = 01,
                 LevelMin = 10, LevelMax = 13,
                 Species = new[] {14,066,744,327,524,703},
@@ -191,7 +207,7 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 090, idx = 4, mark = "Cv", //Lush Jungle - Cave
+                Location = 090, idx = 4, mark = "Cave", //Lush Jungle - Cave
                 Correction = 02,
                 LevelMin = 18, LevelMax = 21,
                 Species = new[] {6,041,050},

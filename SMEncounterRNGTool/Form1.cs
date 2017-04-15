@@ -252,9 +252,6 @@ namespace SMEncounterRNGTool
             MetLocation.ValueMember = "Value";
             MetLocation.DataSource = new BindingSource(Locationlist, null);
 
-            Lv_min.Value = ea.LevelMin;
-            Lv_max.Value = ea.LevelMax;
-
             LoadSpecies();
         }
 
@@ -503,6 +500,8 @@ namespace SMEncounterRNGTool
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
+            Lv_min.Value = ea.LevelMin;
+            Lv_max.Value = ea.LevelMax;
             LoadSpecies();
         }
 
