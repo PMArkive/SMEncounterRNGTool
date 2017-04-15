@@ -29,16 +29,7 @@ namespace PKHeX.Core
         public override int SPE { get { return Data[0x03]; } set { Data[0x03] = (byte)value; } }
         public override int SPA { get { return Data[0x04]; } set { Data[0x04] = (byte)value; } }
         public override int SPD { get { return Data[0x05]; } set { Data[0x05] = (byte)value; } }
-        public override int[] Types
-        {
-            get { return new int[] { Data[0x06], Data[0x07] }; }
-            set
-            {
-                if (value?.Length != 2) return;
-                Data[0x06] = (byte)value[0];
-                Data[0x07] = (byte)value[1];
-            }
-        }
+
         public override int CatchRate { get { return Data[0x08]; } set { Data[0x08] = (byte)value; } }
         private int EVYield { get { return BitConverter.ToUInt16(Data, 0x0A); } set { BitConverter.GetBytes((ushort)value).CopyTo(Data, 0x0A); } }
         public override int[] Items
@@ -53,6 +44,16 @@ namespace PKHeX.Core
             }
         }
         public override int Gender { get { return Data[0x12]; } set { Data[0x12] = (byte)value; } }
+        public override int[] EggGroups
+        {
+            get { return new int[] { Data[0x16], Data[0x17] }; }
+            set
+            {
+                if (value?.Length != 2) return;
+                Data[0x16] = (byte)value[0];
+                Data[0x17] = (byte)value[1];
+            }
+        }
         public override int[] Abilities
         {
             get { return new int[] { Data[0x18], Data[0x19], Data[0x1A] }; }

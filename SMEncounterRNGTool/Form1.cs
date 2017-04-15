@@ -301,6 +301,7 @@ namespace SMEncounterRNGTool
                 case 191: GenderRatio.SelectedIndex = 4; break;
                 default: GenderRatio.SelectedIndex = 0; break;
             }
+            Fix3v.Checked = t.EggGroups[0] == 0x0F; //Undiscovered Group
         }
 
         #region SearchSeedfunction
@@ -514,6 +515,10 @@ namespace SMEncounterRNGTool
         private void SlotSpecies_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadPersonalInfo();
+            if (SlotSpecies.SelectedIndex > 0 && (Lv_Search.Value > Lv_max.Value || Lv_Search.Value < Lv_min.Value))
+                Lv_Search.Value = 0;
+            if (SlotSpecies.SelectedIndex == 0 && Poke.SelectedIndex >= UBIndex)
+                Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
         }
 
         private void Method_CheckedChanged(object sender, EventArgs e)
@@ -562,6 +567,7 @@ namespace SMEncounterRNGTool
                 Timedelay.Value = 186;
                 ConsiderDelay.Checked = true;
                 SOS.Checked = Fishing.Checked = false;
+                GenderRatio.SelectedIndex = 1;
             }
             else
             {
@@ -1296,7 +1302,6 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex == 0) return;
             AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UBIndex - 1);
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
-            Fix3v.Checked = (Poke.SelectedIndex > 1 && Poke.SelectedIndex < Fossil_index - 2);
             ConsiderDelay.Checked = true;
             ConsiderBlink.Enabled = AlwaysSynced.Enabled = false;
 
@@ -1459,6 +1464,11 @@ namespace SMEncounterRNGTool
                 if (CardType != 0) return false;
                 byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
                 byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB3, 0xB4, 0xB2 };
+                int sp = BitConverter.ToUInt16(Data, 0x82);
+                L_EventSpecies.Text = L_Species.Text + ": " + StringItem.species[sp];
+                L_EventSpecies.Visible = true;
+                int form = Data[0x84];
+                setBS(sp, form); // Set Personal rule before wc7 rule
                 AbilityLocked.Checked = Data[0xA2] < 3;
                 Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : Data[0xA2] - 3;
                 NatureLocked.Checked = Data[0xA0] != 0xFF;
@@ -1495,11 +1505,6 @@ namespace SMEncounterRNGTool
                     Event_PID.Value = BitConverter.ToUInt32(Data, 0xD4);
                 Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
                 if (Event_EC.Value > 0) Event_EC.Visible = L_EC.Visible = true;
-                int sp = BitConverter.ToUInt16(Data, 0x82);
-                L_EventSpecies.Text = L_Species.Text + ": " + StringItem.species[sp];
-                L_EventSpecies.Visible = true;
-                int form = Data[0x84];
-                setBS(sp, form);
                 IsEgg.Checked = Data[0xD1] == 1;
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;
