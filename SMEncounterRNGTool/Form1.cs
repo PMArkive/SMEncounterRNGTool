@@ -243,7 +243,7 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex == 0)
                 locationlist = LocationTable.SMLocationList;
             else if (Poke.SelectedIndex >= UBIndex)
-                locationlist = null; //Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
+                locationlist = Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
             else
                 return;
 
@@ -260,7 +260,9 @@ namespace SMEncounterRNGTool
 
         private void LoadSpecies()
         {
-            var List = slotspecies.Skip(1).Select(SpecForm => new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm));
+            var List = slotspecies.Select( (SpecForm,i) => i > 0 
+                                            ? new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm)
+                                            : new Controls.ComboItem("-", 0));
             SlotSpecies.DisplayMember = "Text";
             SlotSpecies.ValueMember = "Value";
             SlotSpecies.DataSource = new BindingSource(List, null);
@@ -270,7 +272,7 @@ namespace SMEncounterRNGTool
         {
             int SpecForm = (int)SlotSpecies.SelectedValue;
             int Slotidx = Array.IndexOf(slotspecies, SpecForm);
-            int[] Slottype = EncounterArea.SlotType[slotspecies[0]];
+            byte[] Slottype = EncounterArea.SlotType[slotspecies[0]];
             for (int i = 0; i < 10; i++)
                 Slot.CheckBoxItems[i+1].Checked = Slottype[i] == Slotidx;
 
@@ -279,6 +281,8 @@ namespace SMEncounterRNGTool
 
         private void setBS(int Species, int Form)
         {
+            if (Species == 0)
+                return;
             var t = PersonalTable.SM.getFormeEntry(Species, Form);
             BS_0.Value = t.HP;
             BS_1.Value = t.ATK;
@@ -473,9 +477,23 @@ namespace SMEncounterRNGTool
 
         private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadSpecies();
+            if (ea.SunMoonDifference)
+            {
+                int tmp = SlotSpecies.SelectedIndex;
+                LoadSpecies();
+                SlotSpecies.SelectedIndex = tmp;
+            }
             Properties.Settings.Default.IsSun = GameVersion.SelectedIndex == 0;
             Properties.Settings.Default.Save();
+        }
+        private void DayNight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ea.DayNightDifference)
+            {
+                int tmp = SlotSpecies.SelectedIndex;
+                LoadSpecies();
+                SlotSpecies.SelectedIndex = tmp;
+            }
         }
 
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
@@ -1281,12 +1299,12 @@ namespace SMEncounterRNGTool
 
             setBS(Pokemon.SpecForm[Poke.SelectedIndex - 1, 0], Pokemon.SpecForm[Poke.SelectedIndex - 1, 1]);
             Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
-            NPC.Value = Pokemon.NPC[Poke.SelectedIndex - 1];
 
-            if (Poke.SelectedIndex >= UBIndex)
-                Correction.Value = Pokemon.honeycorrection[Poke.SelectedIndex - UBIndex];
-            else
+            if (Poke.SelectedIndex < UBIndex)
+            {
                 Timedelay.Value = Pokemon.timedelay[Poke.SelectedIndex - 1];
+                NPC.Value = Pokemon.NPC[Poke.SelectedIndex - 1];
+            }
 
             switch (Poke.SelectedIndex)
             {
@@ -1542,10 +1560,5 @@ namespace SMEncounterRNGTool
             Event_Ability.SelectedIndex = 0;
         }
         #endregion
-
-        private void DayNight_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadSpecies();
-        }
     }
 }

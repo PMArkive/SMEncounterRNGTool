@@ -67,7 +67,6 @@
             8,6,3,3,
             3,4,1, //Stationary
             1,
-            0,0,0,0,0,0,0,0        //UB
         };
 
         public readonly static int[] timedelay =
@@ -92,21 +91,16 @@
             new []{5},
         };
 
-        public readonly static int[] honeycorrection =
+        public readonly static int[][] UBLocation =
         {
-            13,5,5,7,26,26,1,1,
-        };
-
-        public readonly static byte[][] UBLocation =
-        {
-            new byte[]{100,082},
-            new byte[]{040},
-            new byte[]{046},
-            new byte[]{090,076},
-            new byte[]{134,124},
-            new byte[]{134},
-            new byte[]{182},
-            new byte[]{036},
+            new []{100,082},
+            new []{040},
+            new []{046},
+            new []{346,076},
+            new []{134,124},
+            new []{134},
+            new []{182},
+            new []{548},
         };
     }
 }
