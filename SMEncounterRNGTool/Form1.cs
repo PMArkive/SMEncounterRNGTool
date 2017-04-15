@@ -259,9 +259,8 @@ namespace SMEncounterRNGTool
         private void LoadSpecies()
         {
             int tmp = SlotSpecies.SelectedIndex;
-            var List = slotspecies.Distinct().Select( (SpecForm,i) => i > 0 
-                                            ? new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm)
-                                            : new Controls.ComboItem("-", 0));
+            var List = slotspecies.Skip(1).Distinct().Select(SpecForm =>  new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm));
+            List = new[] { new Controls.ComboItem("-", 0)}.Concat(List) ;
             SlotSpecies.DisplayMember = "Text";
             SlotSpecies.ValueMember = "Value";
             SlotSpecies.DataSource = new BindingSource(List, null);
@@ -567,7 +566,7 @@ namespace SMEncounterRNGTool
                 Timedelay.Value = 186;
                 ConsiderDelay.Checked = true;
                 SOS.Checked = Fishing.Checked = false;
-                GenderRatio.SelectedIndex = 1;
+                GenderRatio.SelectedIndex = 1; Fix3v.Checked = false;
             }
             else
             {

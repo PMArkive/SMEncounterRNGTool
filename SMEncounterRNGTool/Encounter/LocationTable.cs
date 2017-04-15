@@ -131,7 +131,7 @@ namespace SMEncounterRNGTool
                 Location = 042, idx = 2, mark = "Water",
                 Correction = 02, NPC = 1,
                 LevelMin = 15,
-                Species = new[] {22,041,054},
+                Species = new[] {14,041,054,041,041,041},
             },
             new EncounterArea
             {
@@ -152,7 +152,7 @@ namespace SMEncounterRNGTool
                 Location = 034, idx = 1, mark = "Cave", //Ten Carat Hill - Cave
                 Correction = 02,
                 LevelMin = 10,
-                Species = new[] {13,041,052,524,703},
+                Species = new[] {14,041,052,524,524,703},
             },
             new EncounterArea
             {
@@ -323,10 +323,10 @@ namespace SMEncounterRNGTool
             new EncounterArea(),
             new EncounterArea
             {
-                Location = 124, //Haina Desert
-                Correction = 01,
-                LevelMin = 28,
-                Species = new[] {0,551,051,551,051},
+                Location = 132, //Malie City
+                Correction = 09, NPC = 4,
+                LevelMin = 24,
+                Species = new[] {13,568,088,735,081},
             },
             new EncounterArea
             {
@@ -334,6 +334,20 @@ namespace SMEncounterRNGTool
                 Correction = 26,
                 LevelMin = 24,
                 Species = new[] {12,060,052,546,054,752,166},
+            },
+            new EncounterArea
+            {
+                Location = 106, //10
+                Correction = 19, NPC = 2,
+                LevelMin = 24,
+                Species = new[] {22,735,022,674,227,166},
+            },
+            new EncounterArea
+            {
+                Location = 124, //Haina Desert
+                Correction = 01,
+                LevelMin = 28,
+                Species = new[] {0,551,051,551,051},
             },
             #endregion
             #region Poni
