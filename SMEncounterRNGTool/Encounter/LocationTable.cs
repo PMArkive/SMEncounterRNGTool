@@ -50,11 +50,11 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,1,2,3,3,4,4,4,4}, //0
             new byte[]{1,2,1,3,4,5,6,6,7,7}, //1
             new byte[]{1,2,1,3,4,5,6,7,3,3}, //2
-            new byte[]{1,2,1,1,1,1,1,1,1,1}, //3
-            new byte[]{1,2,1,1,1,1,1,1,1,1}, //4
+            new byte[]{1,2,1,3,4,3,5,6,6,7}, //3
+            new byte[]{1,2,3,1,4,5,6,5,7,7}, //4
             new byte[]{1,2,1,2,3,3,4,5,5,6}, //5
-            new byte[]{1,2,1,1,1,1,1,1,1,1}, //6
-            new byte[]{1,2,1,1,1,1,1,1,1,1}, //7
+            new byte[]{1,2,3,4,5,6,2,6,6,6}, //6
+            new byte[]{1,2,1,2,1,2,3,3,3,3}, //7
             new byte[]{1,2,1,2,3,3,4,4,3,5}, //8
             new byte[]{1,2,3,4,5,6,6,7,8,8}, //9
             new byte[]{1,2,3,3,3,3,4,5,6,6}, //10
@@ -72,6 +72,9 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,1,1,1,1,1,1,1,1}, //22
             new byte[]{1,2,1,3,4,5,6,5,7,7}, //23
             new byte[]{1,2,1,1,2,2,2,3,4,4}, //24
+            new byte[]{1,2,3,3,4,4,3,4,4,4}, //25
+            new byte[]{1,2,3,3,1,2,4,4,4,4}, //26
+            new byte[]{1,2,1,2,3,3,4,4,5,5}, //27
         };
 
         public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752, 425, 174 };
@@ -261,14 +264,14 @@ namespace SMEncounterRNGTool
                 Location = 052, idx = 1, //5
                 Correction = 21,
                 LevelMin = 13,
-                Species = new[] {23,506,749,736,734,731,174,133},
+                Species = new[] {3,506,731,753,736,010,011,012},
             },
             new EncounterArea
             {
                 Location = 052, idx = 2, //5
                 Correction = 21, NPC = 1,
-                LevelMin = 13,
-                Species = new[] {23,506,741,736,734,731,174,133},
+                LevelMin = 18,
+                Species = new[] {4,753,732,438,736,010,011,012},
             },
             new EncounterArea
             {
@@ -300,6 +303,34 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 086, idx = 1, mark = "Grass1", //Brooklet Hill
+                Correction = 05, NPC = 1,
+                LevelMin = 14,
+                Species = new[] {6,506,054,751,060,278,046},
+            },
+            new EncounterArea
+            {
+                Location = 086, idx = 2, mark = "Water",//Brooklet Hill
+                Correction = 05, NPC = 1,
+                LevelMin = 14,
+                Species = new[] {7,060,751,054},
+            },
+            new EncounterArea
+            {
+                Location = 088, idx = 3, mark = "Grass2",//Brooklet Hill
+                Correction = 07, NPC = 1,
+                LevelMin = 14,
+                Species = new[] {25,751,060,054,278},
+            },
+            new EncounterArea
+            {
+                Location = 089, mark = "Water", //Brooklet Hill
+                Correction = 03, NPC = 1,
+                LevelMin = 14,
+                Species = new[] {15,072,278,456},
+            },
+            new EncounterArea
+            {
                 Location = 054, idx = 1, //6
                 Correction = 11, NPC = 2,
                 LevelMin = 14,
@@ -311,6 +342,34 @@ namespace SMEncounterRNGTool
                 Correction = 11, NPC = 2,
                 LevelMin = 14,
                 Species = new[] {23,506,741,736,734,731,174,133},
+            },
+            new EncounterArea
+            {
+                Location = 056, //7
+                Correction = 11, NPC = 1,
+                LevelMin = 16,
+                Species = new[] {26,072,456,278,771},
+            },
+            new EncounterArea
+            {
+                Location = 058, idx = 1, mark = "Grass",//8
+                Correction = 15,
+                LevelMin = 17,
+                Species = new[] {27,734,732,757,662,759},
+            },
+            new EncounterArea
+            {
+                Location = 058, idx = 2, mark = "Water",//8
+                Correction = 16, NPC = 3,
+                LevelMin = 17,
+                Species = new[] {15,072,278,456},
+            },
+            new EncounterArea
+            {
+                Location = 064,
+                Correction = 24, NPC = 1,
+                LevelMin = 21,
+                Species = new[] {26,072,456,278,771},
             },
             new EncounterArea
             {
@@ -332,6 +391,13 @@ namespace SMEncounterRNGTool
                 Correction = 12, NPC = 1,
                 LevelMin = 20,
                 Species = new[] {0,092,708,092,041},
+            },
+            new EncounterArea
+            {
+                Location = 094,
+                Correction = 07, NPC = 2,
+                LevelMin = 20,
+                Species = new[] {27,735,278,278,299,759},
             },
             #endregion
             #region Ula'ula
