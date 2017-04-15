@@ -4,42 +4,11 @@ namespace SMEncounterRNGTool
 {
     class Filters
     {
-        #region calc_data
-        public readonly static double[,] natures_mag =
-        {
-            { 1, 1, 1, 1, 1, 1 },
-            { 1, 1.1, 0.9, 1, 1, 1 },
-            { 1, 1.1, 1, 1, 1, 0.9 },
-            { 1, 1.1, 1, 0.9, 1, 1 },
-            { 1, 1.1, 1, 1, 0.9, 1 },
-            { 1, 0.9, 1.1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1.1, 1, 1, 0.9 },
-            { 1, 1, 1.1, 0.9, 1, 1 },
-            { 1, 1, 1.1, 1, 0.9, 1 },
-            { 1, 0.9, 1,1, 1, 1.1 },
-            { 1, 1, 0.9, 1,1, 1.1 },
-            { 1, 1,1, 1, 1, 1 },
-            { 1, 1,1, 0.9, 1, 1.1 },
-            { 1, 1,1, 1, 0.9, 1.1 },
-            { 1, 0.9, 1, 1.1, 1,1 },
-            { 1, 1, 0.9, 1.1, 1, 1 },
-            { 1, 1, 1, 1.1, 1, 0.9 },
-            { 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1.1, 0.9, 1 },
-            { 1, 0.9, 1,1, 1.1, 1 },
-            { 1, 1, 0.9, 1, 1.1, 1},
-            { 1, 1, 1, 1, 1.1, 0.9 },
-            { 1, 1, 1, 0.9, 1.1, 1 },
-            { 1, 1, 1, 1, 1, 1}
-        };
-        #endregion
-
         public bool[] Nature;
         public bool[] HPType;
         public int Ability = -1;
         public int Gender = -1;
-        public int[] IVup, IVlow, BS, Stats;
+        public int[] IVup, IVlow, Stats;
         public byte PerfectIVs;
         public bool Skip;
         public int Lv;
@@ -67,16 +36,6 @@ namespace SMEncounterRNGTool
         {
             if (Nature.All(n => !n)) return true;
             return Nature[resultnature];
-        }
-
-        public void getStats(RNGSearch.RNGResult result)
-        {
-            int[] IV = result.IVs;
-            result.Stats = new int[6];
-
-            result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + Lv + 10;
-            for (int i = 1; i < 6; i++)
-                result.Stats[i] = (int)(((((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5) * natures_mag[result.Nature, i]);
         }
 
         public bool CheckHiddenPower(int[] IV)

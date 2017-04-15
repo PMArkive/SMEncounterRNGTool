@@ -39,21 +39,60 @@ namespace SMEncounterRNGTool
         }
         #endregion
 
-        List<NumericUpDown> IVlow = new List<NumericUpDown>();
-        List<NumericUpDown> IVup = new List<NumericUpDown>();
-        List<NumericUpDown> Stat = new List<NumericUpDown>();
-        List<NumericUpDown> EventIV = new List<NumericUpDown>();
-        List<CheckBox> EventIVLocked = new List<CheckBox>();
-        RNGSearch.EventRule e = new RNGSearch.EventRule();
-        List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
-        int[] locationlist = LocationTable.SMLocationList;
-        EncounterArea ea = new EncounterArea();
-        bool IsMoon => GameVersion.SelectedIndex > 0;
-        bool IsNight => Night.Checked;
-        int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
+        #region Global Variable
+        private int[] IVup
+        {
+            get { return new[] { (int)ivmax0.Value, (int)ivmax1.Value, (int)ivmax2.Value, (int)ivmax3.Value, (int)ivmax4.Value, (int)ivmax5.Value, }; }
+            set
+            {
+                if (value.Length < 6) return;
+                ivmax0.Value = value[0]; ivmax1.Value = value[1]; ivmax2.Value = value[2];
+                ivmax3.Value = value[3]; ivmax4.Value = value[4]; ivmax5.Value = value[5];
+            }
+        }
+        private int[] IVlow
+        {
+            get { return new[] { (int)ivmin0.Value, (int)ivmin1.Value, (int)ivmin2.Value, (int)ivmin3.Value, (int)ivmin4.Value, (int)ivmin5.Value, }; }
+            set
+            {
+                if (value.Length < 6) return;
+                ivmin0.Value = value[0]; ivmin1.Value = value[1]; ivmin2.Value = value[2];
+                ivmin3.Value = value[3]; ivmin4.Value = value[4]; ivmin5.Value = value[5];
+            }
+        }
+        private int[] BS
+        {
+            get { return new[] { (int)BS_0.Value, (int)BS_1.Value, (int)BS_2.Value, (int)BS_3.Value, (int)BS_4.Value, (int)BS_5.Value, }; }
+            set
+            {
+                if (value.Length < 6) return;
+                BS_0.Value = value[0]; BS_1.Value = value[1]; BS_2.Value = value[2];
+                BS_3.Value = value[3]; BS_4.Value = value[4]; BS_5.Value = value[5];
+            }
+        }
+        private int[] Stats
+        {
+            get { return new[] { (int)Stat0.Value, (int)Stat1.Value, (int)Stat2.Value, (int)Stat3.Value, (int)Stat4.Value, (int)Stat5.Value, }; }
+            set
+            {
+                if (value.Length < 6) return;
+                Stat0.Value = value[0]; Stat1.Value = value[1]; Stat2.Value = value[2];
+                Stat3.Value = value[3]; Stat4.Value = value[4]; Stat5.Value = value[5];
+            }
+        }
+        private List<NumericUpDown> EventIV = new List<NumericUpDown>();
+        private List<CheckBox> EventIVLocked = new List<CheckBox>();
+        private RNGSearch.EventRule e = new RNGSearch.EventRule();
+        private static byte[] blinkflaglist;
+        private List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
+        private static int[] locationlist = LocationTable.SMLocationList;
+        private EncounterArea ea = new EncounterArea();
+        private bool IsMoon => GameVersion.SelectedIndex > 0;
+        private bool IsNight => Night.Checked;
+        private int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
 
         private string version = "1.1.0";
-
+        #endregion
         #region Translation
         private string curlanguage;
         private static readonly string[] langlist = { "en", "cn" };
@@ -140,27 +179,6 @@ namespace SMEncounterRNGTool
             Type dgvtype = typeof(DataGridView);
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
-
-            IVlow.Add(ivmin0);
-            IVlow.Add(ivmin1);
-            IVlow.Add(ivmin2);
-            IVlow.Add(ivmin3);
-            IVlow.Add(ivmin4);
-            IVlow.Add(ivmin5);
-
-            IVup.Add(ivmax0);
-            IVup.Add(ivmax1);
-            IVup.Add(ivmax2);
-            IVup.Add(ivmax3);
-            IVup.Add(ivmax4);
-            IVup.Add(ivmax5);
-
-            Stat.Add(Stat0);
-            Stat.Add(Stat1);
-            Stat.Add(Stat2);
-            Stat.Add(Stat3);
-            Stat.Add(Stat4);
-            Stat.Add(Stat5);
 
             EventIV.Add(EventIV0);
             EventIV.Add(EventIV1);
@@ -288,12 +306,7 @@ namespace SMEncounterRNGTool
             if (Species == 0)
                 return;
             var t = PersonalTable.SM.getFormeEntry(Species, Form);
-            BS_0.Value = t.HP;
-            BS_1.Value = t.ATK;
-            BS_2.Value = t.DEF;
-            BS_3.Value = t.SPA;
-            BS_4.Value = t.SPD;
-            BS_5.Value = t.SPE;
+            BS = new[] { t.HP, t.ATK, t.DEF, t.SPA, t.SPD, t.SPE };
             switch (t.Gender)
             {
                 case 127: GenderRatio.SelectedIndex = 1; break;
@@ -795,12 +808,10 @@ namespace SMEncounterRNGTool
 
             if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Lv_Search.Value <= Lv_max.Value) || Poke.SelectedIndex == 0)
                 Lv_Search.Value = 0;
-            for (int i = 0; i < 6; i++)
-            {
-                IVlow[i].Value = 0;
-                IVup[i].Value = 31;
-                Stat[i].Value = 0;
-            }
+
+            Stats = new int[6];
+            IVlow = new int[6];
+            IVup = new[] { 31, 31, 31, 31, 31, 31 };
         }
         #endregion
 
@@ -834,9 +845,9 @@ namespace SMEncounterRNGTool
                 StationarySearch();
         }
 
-        private byte[] getblinkflaglist(int min, int max, SFMT sfmt)
+        private void getblinkflaglist(int min, int max, SFMT sfmt)
         {
-            byte[] blinkflaglist = new byte[max - min + 2];
+            blinkflaglist = new byte[max - min + 2];
             int Model_n = ModelNumber;
             SFMT st = (SFMT)sfmt.DeepCopy();
             int blink_flag = 0;
@@ -894,7 +905,6 @@ namespace SMEncounterRNGTool
                     }
                 }
             }
-            return blinkflaglist;
         }
 
         private byte Checkafter(List<ulong> Randlist)
@@ -925,7 +935,7 @@ namespace SMEncounterRNGTool
             var rng = getRNGSettings();
             if (IsEvent) e = geteventsetting();
 
-            byte[] Blinkflaglist = getblinkflaglist(min, max, sfmt);
+            getblinkflaglist(min, max, sfmt);
 
             for (int i = 0; i < min; i++)
                 sfmt.NextUInt64();
@@ -935,9 +945,8 @@ namespace SMEncounterRNGTool
             for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
             {
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
-                result.Blink = Blinkflaglist[i - min];
 
-                if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
+                MarkResults(result, blinkidx: i - min);
 
                 if (!frameMatch(result, setting))
                     continue;
@@ -969,7 +978,7 @@ namespace SMEncounterRNGTool
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
-            byte[] Blinkflaglist = getblinkflaglist(min, max, sfmt);
+            getblinkflaglist(min, max, sfmt);
 
             for (int i = 0; i < StartFrame; i++)
                 sfmt.NextUInt64();
@@ -997,14 +1006,13 @@ namespace SMEncounterRNGTool
                     RNGSearch.blink_flag = (bool[])blink_flag.Clone();
                     RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
                     result.realtime = realtime;
-                    if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
                     RNGSearch.Rand.RemoveAt(0);
                     RNGSearch.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
                     if (i <= min || i > max)
                         continue;
-                    result.Blink = Blinkflaglist[i - min - 1];
+                    MarkResults(result, blinkidx: i - min - 1);
                     if (!frameMatch(result, setting))
                         continue;
                     list.Add(getRow_Sta(i - 1, rng, result, DGV));
@@ -1021,7 +1029,7 @@ namespace SMEncounterRNGTool
             SFMT sfmt = new SFMT((uint)Seed.Value);
 
             int start_frame = (int)Frame_min.Value;
-            byte start_flag = getblinkflaglist(start_frame, start_frame, sfmt)[0];
+            getblinkflaglist(start_frame, start_frame, sfmt);
 
             for (int i = 0; i < start_frame; i++)
                 sfmt.NextUInt64();
@@ -1047,11 +1055,8 @@ namespace SMEncounterRNGTool
                 RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+                MarkResults(result, blinkidx: i, realtime: i);
 
-                if (i == 0) result.Blink = start_flag;
-                if ((RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7) RNGSearch.modelnumber = 7;
-
-                result.realtime = i;
                 frameadvance = st.NextState();
                 frame += frameadvance;
 
@@ -1081,11 +1086,6 @@ namespace SMEncounterRNGTool
 
         private Filters getSettings()
         {
-            int[] IVup = { (int)ivmax0.Value, (int)ivmax1.Value, (int)ivmax2.Value, (int)ivmax3.Value, (int)ivmax4.Value, (int)ivmax5.Value, };
-            int[] IVlow = { (int)ivmin0.Value, (int)ivmin1.Value, (int)ivmin2.Value, (int)ivmin3.Value, (int)ivmin4.Value, (int)ivmin5.Value, };
-            int[] BS = { (int)BS_0.Value, (int)BS_1.Value, (int)BS_2.Value, (int)BS_3.Value, (int)BS_4.Value, (int)BS_5.Value, };
-            int[] Stats = { (int)Stat0.Value, (int)Stat1.Value, (int)Stat2.Value, (int)Stat3.Value, (int)Stat4.Value, (int)Stat5.Value, };
-
             return new Filters
             {
                 Nature = Nature.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
@@ -1095,7 +1095,6 @@ namespace SMEncounterRNGTool
                 Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
                 IVlow = IVlow,
                 IVup = IVup,
-                BS = BS,
                 Stats = Stats,
                 Skip = DisableFilters.Checked,
                 Lv = (int)Lv_Search.Value,
@@ -1122,6 +1121,7 @@ namespace SMEncounterRNGTool
             RNGSearch.modelnumber = ModelNumber;
             RNGSearch.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
             RNGSearch.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
+            RNGSearch.SolLunaReset = (RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7;
 
             var rng = new RNGSearch
             {
@@ -1148,10 +1148,27 @@ namespace SMEncounterRNGTool
             return rng;
         }
 
+        private void MarkResults(RNGSearch.RNGResult result, int blinkidx = -1, int realtime = -1)
+        {
+            // Mark realtime
+            if (realtime > -1)
+                result.realtime = realtime;
+            // Mark Blink
+            if (0 <= blinkidx && blinkidx < blinkflaglist.Length)
+                result.Blink = blinkflaglist[blinkidx];
+            // Mark stats
+            if (ByStats.Checked)
+            {
+                int[] IV = result.IVs;
+                result.Stats = new int[6];
+                result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + result.Lv + 10;
+                for (int i = 1; i < 6; i++)
+                    result.Stats[i] = (int)(((((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5) * Pokemon.NatureAdj[result.Nature, i]);
+            }
+        }
+
         private bool frameMatch(RNGSearch.RNGResult result, Filters setting)
         {
-            setting.getStats(result);
-
             if (setting.Skip)
                 return true;
             if (ShinyOnly.Checked && !result.Shiny)
@@ -1426,8 +1443,7 @@ namespace SMEncounterRNGTool
 
         private void L_IVRange_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 6; i++)
-                IVlow[i].Value = IVup[i].Value;
+            IVlow = IVup;
         }
         #endregion
 

@@ -48,6 +48,7 @@ namespace SMEncounterRNGTool
 
         public static bool IsSolgaleo;
         public static bool IsLunala;
+        public static bool SolLunaReset;
 
         public class RNGResult
         {
@@ -143,6 +144,8 @@ namespace SMEncounterRNGTool
                 { if (Synchro_Stat < 25) st.Synchronize = true; }
                 else if (ConsiderBlink)
                     st.Synchronize = blink_process();
+                if (SolLunaReset)
+                    modelnumber = 7;
             }
 
             // Encounter

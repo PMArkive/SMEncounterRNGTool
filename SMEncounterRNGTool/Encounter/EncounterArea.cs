@@ -8,8 +8,8 @@ namespace SMEncounterRNGTool
         public byte Location, idx;
         public int Locationidx => Location + (idx << 8);
         public byte NPC, Correction = 1;
-        private String _mark;
-        public String mark
+        private string _mark;
+        public string mark
         {
             get
             {
