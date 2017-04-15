@@ -3233,7 +3233,7 @@
             checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Slot.CheckBoxProperties = checkBoxProperties1;
             this.Slot.DisplayMemberSingleItem = "";
-            this.Slot.DropDownHeight = 200;
+            this.Slot.DropDownHeight = 260;
             this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Slot.FormattingEnabled = true;
             this.Slot.Items.AddRange(new object[] {

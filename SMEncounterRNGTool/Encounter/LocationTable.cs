@@ -64,6 +64,8 @@ namespace SMEncounterRNGTool
             new byte[]{1,1,2,2,3,3,3,3,3,3}, //15
             new byte[]{1,2,3,2,4,4,5,5,5,5}, //16
             new byte[]{1,2,3,4,5,4,4,4,4,4}, //17
+            new byte[]{1,2,3,4,5,5,2,2,2,2}, //18
+            new byte[]{1,2,3,2,4,4,2,2,2,5}, //19
         };
 
         public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752 };
@@ -139,6 +141,20 @@ namespace SMEncounterRNGTool
                 Correction = 21, NPC = 1,
                 LevelMin = 07, LevelMax = 10,
                 Species = new[] {17,742,058,734,021,235},
+            },
+            new EncounterArea
+            {
+                Location = 010, idx = 1,
+                Correction = 15, NPC = 0,
+                LevelMin = 09, LevelMax = 12,
+                Species = new[] {18,742,021,734,225,056},
+            },
+            new EncounterArea
+            {
+                Location = 010, idx = 2,
+                Correction = 15, NPC = 1,
+                LevelMin = 09, LevelMax = 12,
+                Species = new[] {19,742,021,734,056,371},
             },
             new EncounterArea
             {
