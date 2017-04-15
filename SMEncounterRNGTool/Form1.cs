@@ -260,7 +260,6 @@ namespace SMEncounterRNGTool
 
         private void LoadSpecies()
         {
-            ea = LocationTable.Table.FirstOrDefault(e => e.Locationidx == (int)MetLocation.SelectedValue);
             var List = slotspecies.Skip(1).Select(SpecForm => new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm));
             SlotSpecies.DisplayMember = "Text";
             SlotSpecies.ValueMember = "Value";
@@ -483,6 +482,9 @@ namespace SMEncounterRNGTool
         {
             if (Poke.SelectedIndex >= UBIndex && MetLocation.SelectedIndex >= 0)
                 UB_th.Value = Pokemon.UB_rate[Poke.SelectedIndex - UBIndex][MetLocation.SelectedIndex];
+            ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
+            NPC.Value = ea.NPC;
+            Correction.Value = ea.Correction;
             LoadSpecies();
         }
 

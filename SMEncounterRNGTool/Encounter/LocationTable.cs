@@ -4,12 +4,11 @@ namespace SMEncounterRNGTool
 {
     public class EncounterArea
     {
-        public byte Location, NPC, Correction = 1;
-        public byte idx;
+        public byte Location, idx, NPC, Correction = 1;
         public int Locationidx => Location + (idx << 8);
         public byte LevelMin, LevelMax;
         public EncounterType EnctrType = EncounterType.Grass;
-        public bool DayNightDifference = false;
+        public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
         public int[] MoonSpecies { get { return _MoonSpecies ?? Species; } set { _MoonSpecies = value; } }
         public int[] Species;
         private int[] _MoonSpecies;
@@ -29,7 +28,7 @@ namespace SMEncounterRNGTool
             return table;
         }
 
-        public static int[][] SlotType = new int[][]
+        public readonly static int[][] SlotType = new int[][]
         {
             new []{1,2,1,2,3,3,4,4,4,4},
             new []{1,2,1,3,4,5,6,6,7,7},
@@ -38,8 +37,8 @@ namespace SMEncounterRNGTool
             new []{1,2,1,2,3,3,2,2,2,2},
         };
 
-        public static int[] DayList = new[] { 734, 165, };
-        public static int[] NightList = new[] { 019, 167, };
+        public readonly static int[] DayList = new[] { 734, 165, };
+        public readonly static int[] NightList = new[] { 019, 167, };
     }
 
     class LocationTable
@@ -48,39 +47,41 @@ namespace SMEncounterRNGTool
         {
             new EncounterArea
             {
-                Location = 006, NPC = 00, Correction = 15,
-                idx = 1, LevelMin = 02, LevelMax = 03,
+                Location = 006, idx = 1,
+                NPC = 00, Correction = 15,
+                LevelMin = 02, LevelMax = 03,
                 Species = new[] {0,734,731,010,165},
-                DayNightDifference = true,
             },
             new EncounterArea
             {
-                Location = 006, NPC = 00, Correction = 15,
-                idx = 3, LevelMin = 03, LevelMax = 05,
+                Location = 006, idx = 3,
+                NPC = 00, Correction = 15,
+                LevelMin = 03, LevelMax = 05,
                 Species = new[] {1,734,731,736,010,011,165,172},
-                DayNightDifference = true,
             },
             new EncounterArea
             {
-                Location = 006, NPC = 00, Correction = 15,
-                idx = 4, LevelMin = 10, LevelMax = 13,
+                Location = 006, idx = 4,
+                NPC = 02, Correction = 15,
+                LevelMin = 10, LevelMax = 13,
                 Species = new[] {2,734,731,438,010,011,165,446},
-                DayNightDifference = true,
             },
             new EncounterArea
             {
-                Location = 007, NPC = 00, Correction = 15,
-                idx = 0, LevelMin = 05, LevelMax = 07,
+                Location = 007, // Outskirts
+                NPC = 01, Correction = 23,
+                LevelMin = 05, LevelMax = 07,
                 Species = new[] {3,734,278,079},
-                DayNightDifference = true,
             },
             new EncounterArea
             {
-                Location = 008, NPC = 00, Correction = 15,
-                idx = 6, LevelMin = 06, LevelMax = 08,
+                Location = 008, idx = 6, //Trainer School
+                NPC = 00, Correction = 09,
+                LevelMin = 06, LevelMax = 08,
                 Species = new[] {4,052,081,088},
             },
         };
+
         public readonly static int[] SMLocationList = Table.Select(t => t.Locationidx).ToArray();
     }
 
