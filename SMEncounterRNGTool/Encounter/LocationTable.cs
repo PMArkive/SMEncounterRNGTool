@@ -412,7 +412,6 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 150, //Megamart
-                Correction = 1,
                 LevelMin = 29,
                 Species = new[] {28,093,042,707,778},
             },
@@ -468,9 +467,142 @@ namespace SMEncounterRNGTool
             new EncounterArea(),
             new EncounterArea
             {
-                Location = 182, //Resolution Cave
+                Location = 184, // Exeggutor Island
+                Correction = 03,
+                LevelMin = 40,
+                Species = new[] {29,103,279,102,423},
+            },
+            new EncounterArea
+            {
+                Location = 158, idx = 1, mark = "Grass", // Poni Wilds
+                Correction = 09,
+                LevelMin = 40,
+                Species = new[] {5,735,279,210,423,102,102},
+            },
+            new EncounterArea
+            {
+                Location = 158, idx = 2, mark = "Water", // Poni Wilds
+                Correction = 10, NPC = 1,
+                LevelMin = 40,
+                Species = new[] {30,073,423,279,457,131},
+            },
+            new EncounterArea
+            {
+                Location = 160,
+                Correction = 20, NPC = 3,
+                LevelMin = 40,
+                Species = new[] {5,735,279,210,423,102,102},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 1, mark = "Inside",
+                Correction = 6, NPC = 1,
+                LevelMin = 41,
+                Species = new[] {14,042,051,525,525,703},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 2, mark = "Top",
+                LevelMin = 41,
+                Species = new[] {1,067,745,227,525,198,703,782},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 3, mark = "2F",
+                Correction = 4,
+                LevelMin = 41,
+                Species = new[] {14,042,051,525,525,703},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 4, mark = "3F",
+                Correction = 8,
+                LevelMin = 41,
+                Species = new[] {14,042,051,525,525,703},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 5, mark = "Under Tree",
+                Correction = 15,
+                LevelMin = 41,
+                Species = new[] {1,067,745,227,525,198,703,782},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 6, mark = "B1F-C",
+                Correction = 8,
+                LevelMin = 41,
+                Species = new[] {14,042,055,055,055},
+            },
+            new EncounterArea
+            {
+                Location = 174, idx = 7, mark = "B1F-W",
+                Correction = 9, NPC = 1,
+                LevelMin = 41,
+                Species = new[] {14,042,055,042,042,042},
+            },
+            new EncounterArea
+            {
+                Location = 164, // Poni Grove
+                Correction = 4,
+                LevelMin = 52,
+                Species = new[] {5,735,732,210,127,447,447},
+            },
+
+            new EncounterArea
+            {
+                Location = 166, idx = 1, // Poni Plains
+                Correction = 5, NPC = 1,
+                LevelMin = 54,
+                Species = new[] {7,735,279,732,546,128,241,546},
+            },
+            new EncounterArea
+            {
+                Location = 166, idx = 2, // Poni Plains
+                Correction = 5, NPC = 1,
+                LevelMin = 54,
+                Species = new[] {21,735,732,546,128,241,546},
+            },
+            new EncounterArea
+            {
+                Location = 166, idx = 3, // Poni Plains
+                Correction = 5, NPC = 1,
+                LevelMin = 54,
+                Species = new[] {7,735,097,732,546,128,241,546},
+            },
+            new EncounterArea
+            {
+                Location = 166, idx = 4, // Poni Plains
+                Correction = 5, NPC = 1,
+                LevelMin = 54,
+                Species = new[] {31,735,732,750,022,546,128,241},
+            },
+            new EncounterArea
+            {
+                Location = 156, // Meadow
+                Correction = 5,
+                LevelMin = 54,
+                Species = new[] {0,743,546,741,546},
+            },
+            new EncounterArea
+            {
+                Location = 182, idx = 1, mark = "1F", //Resolution Cave
+                Correction = 3,
                 LevelMin = 54,
                 Species = new[] {0,041,050,041,041},
+            },
+            new EncounterArea
+            {
+                Location = 182, idx = 2, mark = "B1F", //Resolution Cave
+                LevelMin = 54,
+                Species = new[] {0,041,050,041,041},
+            },
+            new EncounterArea
+            {
+                Location = 170, // Poni Gauntlet
+                Correction = 11, NPC = 4,
+                LevelMin = 56,
+                Species = new[] {27,735,279,210,055,760},
             },
             #endregion
         };

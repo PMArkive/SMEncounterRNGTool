@@ -29,11 +29,11 @@ namespace SMEncounterRNGTool
         public int[] Species = new int[1];
         public bool Reverse; // true if moon/night have more species
 
-        private readonly static int[] DayList = { 734, 735, 165, 166, 046, 751, 752, 425, 174, /* Reversed from here */  173, };
-        private readonly static int[] NightList = { 019, 020, 167, 168, 755, 283, 284, 200, 731,/* Reversed from here */ 022, };
+        private readonly static int[] DayList = { 734, 735, 165, 166, 046, 751, 752, 425, 745, 174, /* Reversed from here */  173, };
+        private readonly static int[] NightList = { 019, 020, 167, 168, 755, 283, 284, 200, 2793, 731,/* Reversed from here */ 022, };
         private readonly static int[] SunList = { 546, 766, 776, 037, /* Reversed from here */ 780, };
         private readonly static int[] MoonList = { 548, 765, 324, 027, /* Reversed from here */ 359, };
-        private readonly static int[] AlolanForms = { 019, 020, 027, 037, 050, 051, 052, 074, 075, 088, };
+        private readonly static int[] AlolanForms = { 019, 020, 027, 037, 050, 051, 052, 074, 075, 088, 103,};
 
         public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
         public bool SunMoonDifference => Species.Any(i => SunList.Contains(i));
@@ -95,6 +95,9 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,3,3,1,2,4,4,4,4}, //26
             new byte[]{1,2,1,2,3,3,4,4,5,5}, //27
             new byte[]{1,2,1,2,1,2,3,3,4,4}, //28
+            new byte[]{1,2,3,2,3,3,4,3,3,3}, //29
+            new byte[]{1,2,3,3,4,4,1,4,5,5}, //30
+            new byte[]{1,2,3,4,5,6,7,5,5,5}, //31
         };
     }
 }
