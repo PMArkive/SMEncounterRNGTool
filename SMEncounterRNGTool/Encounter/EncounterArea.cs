@@ -18,7 +18,7 @@ namespace SMEncounterRNGTool
             }
             set { _mark = value; }
         }
-        
+
         public byte LevelMin;
         private byte _LevelMax;
         public byte LevelMax { get { return _LevelMax > 0 ? _LevelMax : (byte)(LevelMin + 3); } set { _LevelMax = value; } }
@@ -29,11 +29,12 @@ namespace SMEncounterRNGTool
         public int[] Species = new int[1];
         public bool Reverse; // true if moon/night have more species
 
-        private readonly static int[] DayList = { 734, 735, 165, 166, 046, 751, 752, 425, 174, /* Reversed from here */  173,};
-        private readonly static int[] NightList = { 019, 020, 167, 168, 755, 283, 284, 200, 731,/* Reversed from here */ 022,};
+        private readonly static int[] DayList = { 734, 735, 165, 166, 046, 751, 752, 425, 174, /* Reversed from here */  173, };
+        private readonly static int[] NightList = { 019, 020, 167, 168, 755, 283, 284, 200, 731,/* Reversed from here */ 022, };
         private readonly static int[] SunList = { 546, 766, 776, 037, /* Reversed from here */ 780, };
         private readonly static int[] MoonList = { 548, 765, 324, 027, /* Reversed from here */ 359, };
-        
+        private readonly static int[] AlolanForms = { 019, 020, 027, 037, 050, 051, 052, 074, 075, 088, };
+
         public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
         public bool SunMoonDifference => Species.Any(i => SunList.Contains(i));
 
@@ -56,6 +57,10 @@ namespace SMEncounterRNGTool
                     if (idx > -1)
                         table[i] = MoonList[idx];
                 }
+            if (table.Any(i => AlolanForms.Contains(i))) // Replace with alolan form
+                for (int i = 1; i < table.Length; i++)
+                    if (AlolanForms.Contains(table[i]))
+                        table[i] += 2048;
             return table;
         }
 
