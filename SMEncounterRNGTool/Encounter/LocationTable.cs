@@ -16,7 +16,8 @@ namespace SMEncounterRNGTool
             }
             set { _mark = value; }
         }
-        public byte LevelMin, LevelMax;
+        public byte LevelMin, _LevelMax;
+        public byte LevelMax { get { return _LevelMax > 0 ? _LevelMax : (byte)(LevelMin + 3); } set { _LevelMax = value; }  }
         public EncounterType EnctrType = EncounterType.Grass;
         public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
         public bool SunMoonDifference => Species.Any(i => SunList.Contains(i)) || _MoonSpecies != null;
@@ -49,11 +50,11 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,1,2,3,3,4,4,4,4}, //0
             new byte[]{1,2,1,3,4,5,6,6,7,7}, //1
             new byte[]{1,2,1,3,4,5,6,7,3,3}, //2
-            new byte[]{1,2,1,2,2,2,3,3,3,3}, //3
-            new byte[]{1,2,1,2,3,3,2,2,2,2}, //4
+            new byte[]{1,2,1,1,1,1,1,1,1,1}, //3
+            new byte[]{1,2,1,1,1,1,1,1,1,1}, //4
             new byte[]{1,2,1,2,3,3,4,5,5,6}, //5
-            new byte[]{1,2,1,2,1,1,1,1,1,1}, //6
-            new byte[]{1,2,1,2,1,1,3,3,3,3}, //7
+            new byte[]{1,2,1,1,1,1,1,1,1,1}, //6
+            new byte[]{1,2,1,1,1,1,1,1,1,1}, //7
             new byte[]{1,2,1,2,3,3,4,4,3,5}, //8
             new byte[]{1,2,3,4,5,6,6,7,8,8}, //9
             new byte[]{1,2,3,3,3,3,4,5,6,6}, //10
@@ -102,7 +103,7 @@ namespace SMEncounterRNGTool
             {
                 Location = 006, idx = 3,
                 Correction = 15, NPC = 2,
-                LevelMin = 10, LevelMax = 13,
+                LevelMin = 10,
                 Species = new[] {2,734,731,438,010,011,165,446},
             },
             new EncounterArea
@@ -110,132 +111,132 @@ namespace SMEncounterRNGTool
                 Location = 007, // Outskirts
                 Correction = 23, NPC = 1,
                 LevelMin = 05, LevelMax = 07,
-                Species = new[] {3,734,278,079},
+                Species = new[] {0,734,278,278,079},
             },
             new EncounterArea
             {
                 Location = 008, idx = 4, //Trainer School
                 Correction = 09,
                 LevelMin = 06, LevelMax = 08,
-                Species = new[] {4,052,081,088},
+                Species = new[] {0,052,081,088,081},
             },
             new EncounterArea
             {
                 Location = 016, idx = 1, mark = "E",
                 Correction = 09, NPC = 1,
-                LevelMin = 15, LevelMax = 18,
+                LevelMin = 15,
                 Species = new[] {15,072,278,456},
             },
             new EncounterArea
             {
                 Location = 016, idx = 2, mark = "W",
                 Correction = 05, NPC = 1,
-                LevelMin = 15, LevelMax = 18,
+                LevelMin = 15,
                 Species = new[] {15,072,278,456},
             },
             new EncounterArea
             {
                 Location = 012, idx = 1,
                 Correction = 21, NPC = 0,
-                LevelMin = 07, LevelMax = 10,
+                LevelMin = 07,
                 Species = new[] {16,096,052,734,235,063},
             },
             new EncounterArea
             {
                 Location = 012, idx = 2,
                 Correction = 21, NPC = 1,
-                LevelMin = 07, LevelMax = 10,
+                LevelMin = 07,
                 Species = new[] {17,742,058,734,021,235},
             },
             new EncounterArea
             {
                 Location = 046, // Verdant Cavern
                 Correction = 05,
-                LevelMin = 08, LevelMax = 11,
-                Species = new[] {6,041,050},
+                LevelMin = 08,
+                Species = new[] {0,041,050,041,041},
             },
             new EncounterArea
             {
                 Location = 010, idx = 1,
                 Correction = 15, NPC = 0,
-                LevelMin = 09, LevelMax = 12,
+                LevelMin = 09,
                 Species = new[] {18,742,021,734,225,056},
             },
             new EncounterArea
             {
                 Location = 010, idx = 2,
                 Correction = 15, NPC = 1,
-                LevelMin = 09, LevelMax = 12,
+                LevelMin = 09,
                 Species = new[] {19,742,021,734,056,371},
             },
             new EncounterArea
             {
                 Location = 019,
                 Correction = 17, NPC = 1,
-                LevelMin = 15, LevelMax = 18,
+                LevelMin = 15,
                 Species = new[] {15,072,278,456},
             },
             new EncounterArea
             {
                 Location = 021,
                 Correction = 27,
-                LevelMin = 05, LevelMax = 08,
+                LevelMin = 05,
                 Species = new[] {20,734,278,063,088,081,052,172},
             },
             new EncounterArea
             {
                 Location = 038,
                 Correction = 06, NPC = 3,
-                LevelMin = 07, LevelMax = 10,
-                Species = new[] {7,092,425,041},
+                LevelMin = 07,
+                Species = new[] {0,092,425,092,041},
             },
             new EncounterArea
             {
                 Location = 040, // Melemele Meadow
                 Correction = 05,
-                LevelMin = 09, LevelMax = 12,
+                LevelMin = 09,
                 Species = new[] {5,742,546,741,010,011,012},
             },
             new EncounterArea
             {
                 Location = 042, idx = 1, mark = "Cave",
                 Correction = 01,
-                LevelMin = 09, LevelMax = 12,
-                Species = new[] {6,041,050},
+                LevelMin = 09,
+                Species = new[] {0,041,050,041,041},
             },
             new EncounterArea
             {
                 Location = 042, idx = 2, mark = "Water",
                 Correction = 02, NPC = 1,
-                LevelMin = 15, LevelMax = 18,
+                LevelMin = 15,
                 Species = new[] {22,041,054},
             },
             new EncounterArea
             {
                 Location = 014, idx = 1, mark = "Grass",
                 Correction = 01,
-                LevelMin = 15, LevelMax = 18,
+                LevelMin = 15,
                 Species = new[] {21,734,278,371,079},
             },
             new EncounterArea
             {
                 Location = 014, idx = 2, mark = "Water",
                 Correction = 02, NPC = 1,
-                LevelMin = 15, LevelMax = 18,
+                LevelMin = 15,
                 Species = new[] {15,072,278,456},
             },
             new EncounterArea
             {
                 Location = 034, idx = 1, mark = "Cave", //Ten Carat Hill - Cave
                 Correction = 02,
-                LevelMin = 10, LevelMax = 13,
+                LevelMin = 10,
                 Species = new[] {13,041,052,524,703},
             },
             new EncounterArea
             {
                 Location = 036, idx = 2, mark = "Grass", //Ten Carat Hill - Grass
                 Correction = 01,
-                LevelMin = 10, LevelMax = 13,
+                LevelMin = 10,
                 Species = new[] {14,066,744,327,524,703},
             },
             #endregion
@@ -245,78 +246,92 @@ namespace SMEncounterRNGTool
             {
                 Location = 050, //4
                 Correction = 06, NPC = 1,
-                LevelMin = 11, LevelMax = 14,
+                LevelMin = 11,
                 Species = new[] {23,506,749,736,734,731,174,133},
             },
             new EncounterArea
             {
                 Location = 078,
                 Correction = 23, NPC = 2,
-                LevelMin = 12, LevelMax = 15,
+                LevelMin = 12,
                 Species = new[] {24,506,749,128,241},
             },
             new EncounterArea
             {
                 Location = 052, idx = 1, //5
                 Correction = 21,
-                LevelMin = 14, LevelMax = 17,
+                LevelMin = 13,
                 Species = new[] {23,506,749,736,734,731,174,133},
             },
             new EncounterArea
             {
                 Location = 052, idx = 2, //5
                 Correction = 21, NPC = 1,
-                LevelMin = 14, LevelMax = 17,
+                LevelMin = 13,
                 Species = new[] {23,506,741,736,734,731,174,133},
             },
             new EncounterArea
             {
                 Location = 090, idx = 1, mark = "S",//Lush Jungle - S
                 Correction = 07,
-                LevelMin = 18, LevelMax = 21,
+                LevelMin = 18,
                 Species = new[] {9,753,732,438,010,011,046,766,764},
             },
             new EncounterArea
             {
                 Location = 090, idx = 2, mark = "W",//Lush Jungle - W
                 Correction = 02,
-                LevelMin = 18, LevelMax = 21,
+                LevelMin = 18,
                 Species = new[] {10,753,732,761,046,766,764},
             },
             new EncounterArea
             {
                 Location = 090, idx = 3, mark = "N",//Lush Jungle - N
                 Correction = 02,
-                LevelMin = 18, LevelMax = 21,
+                LevelMin = 18,
                 Species = new[] {11,753,732,046,127,764,766},
             },
             new EncounterArea
             {
                 Location = 090, idx = 4, mark = "Cave", //Lush Jungle - Cave
                 Correction = 02,
-                LevelMin = 18, LevelMax = 21,
-                Species = new[] {6,041,050},
+                LevelMin = 18,
+                Species = new[] {0,041,050,041,041},
+            },
+            new EncounterArea
+            {
+                Location = 054, idx = 1, //6
+                Correction = 11, NPC = 2,
+                LevelMin = 14,
+                Species = new[] {23,506,749,736,734,731,174,133},
+            },
+            new EncounterArea
+            {
+                Location = 054, idx = 2, //6
+                Correction = 11, NPC = 2,
+                LevelMin = 14,
+                Species = new[] {23,506,741,736,734,731,174,133},
             },
             new EncounterArea
             {
                 Location = 082, //Wela Volcano
                 Correction = 09,
-                LevelMin = 16, LevelMax = 19,
+                LevelMin = 16,
                 Species = new[] {8,757,661,104,240,115},
             },
             new EncounterArea
             {
                 Location = 100, //Diglett's Tunnel
                 Correction = 13,
-                LevelMin = 19, LevelMax = 22,
-                Species = new[] {6,041,050},
+                LevelMin = 19,
+                Species = new[] {0,041,050,041,041},
             },
             new EncounterArea
             {
                 Location = 076, //Memorial Hill
                 Correction = 12, NPC = 1,
-                LevelMin = 20, LevelMax = 23,
-                Species = new[] {7,092,708,041},
+                LevelMin = 20,
+                Species = new[] {0,092,708,092,041},
             },
             #endregion
             #region Ula'ula
@@ -325,14 +340,14 @@ namespace SMEncounterRNGTool
             {
                 Location = 124, //Haina Desert
                 Correction = 01,
-                LevelMin = 28, LevelMax = 31,
-                Species = new[] {6,551,051},
+                LevelMin = 28,
+                Species = new[] {0,551,051,551,051},
             },
             new EncounterArea
             {
                 Location = 134, //Malie Garden
                 Correction = 26,
-                LevelMin = 24, LevelMax = 27,
+                LevelMin = 24,
                 Species = new[] {12,060,052,546,054,752,166},
             },
             #endregion
@@ -342,8 +357,8 @@ namespace SMEncounterRNGTool
             {
                 Location = 182, //Resolution Cave
                 Correction = 01,
-                LevelMin = 54, LevelMax = 57,
-                Species = new[] {6,042,051},
+                LevelMin = 54,
+                Species = new[] {0,041,050,041,041},
             },
             #endregion
         };
