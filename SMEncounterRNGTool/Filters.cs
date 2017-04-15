@@ -45,7 +45,6 @@ namespace SMEncounterRNGTool
         public int Lv;
         public bool[] Slot;
 
-
         public bool CheckIVs(RNGSearch.RNGResult result)
         {
             for (int i = 0; i < 6; i++)

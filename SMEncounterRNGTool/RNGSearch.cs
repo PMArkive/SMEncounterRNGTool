@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace SMEncounterRNGTool
 {
@@ -18,9 +19,9 @@ namespace SMEncounterRNGTool
 
         public bool Wild, Honey, UB, fishing, SOS;
         public byte Lv_max, Lv_min;
-        public byte ChainLength = 0;
+        public byte ChainLength;
         public byte UB_th, Encounter_th;
-        public bool IsUB = false;
+        public bool IsUB;
         public bool nogender;
         public byte gender_ratio;
 
@@ -32,6 +33,12 @@ namespace SMEncounterRNGTool
         public static int modelnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
+        
+        //Generated Attributes
+        private bool SpecialWild => Wild && !Honey && (Encounter_th == 101 || SOS);
+        private bool Listed => IsUB || !Wild;
+        private bool IsShinyLocked => IsUB || ShinyLocked;
+        private bool IsWild => Wild && !IsUB;
 
         public static void ResetModelStatus()
         {
@@ -139,7 +146,6 @@ namespace SMEncounterRNGTool
             }
 
             // Encounter
-            bool SpecialWild = Wild && !Honey && (Encounter_th == 101 || SOS);
             if (Wild && !Honey && !SpecialWild && !fishing)
                 st.Encounter = (int)(getrand() % 100);
 
@@ -155,12 +161,9 @@ namespace SMEncounterRNGTool
             }
 
             //UB is determined above
-            bool Listed = IsUB || !Wild;
-            bool IsShinyLocked = IsUB || ShinyLocked;
             if (Listed) st.Lv = PokeLv;
 
             // Wild Normal Pokemon
-            bool IsWild = Wild && !IsUB;
             if (IsWild && !SpecialWild)
             {
                 st.Slot = getslot((int)(getrand() % 100));
@@ -197,16 +200,9 @@ namespace SMEncounterRNGTool
 
             //IV
             st.IVs = new[] { -1, -1, -1, -1, -1, -1 };
-            int cnt = (IsUB ? true : Fix3v) ? 3 : 0;
-            while (cnt > 0)
-            {
-                int ran = (int)(getrand() % 6);
-                if (st.IVs[ran] < 0)
-                {
-                    st.IVs[ran] = 31;
-                    cnt--;
-                }
-            }
+            int flawlesscount = (IsUB ? true : Fix3v) ? 3 : 0;
+            while (st.IVs.Count(iv => iv == 31) < flawlesscount)
+               st.IVs[(int)(getrand() % 6)] = 31;
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
@@ -474,6 +470,5 @@ namespace SMEncounterRNGTool
             if (ChainLength < 30) return 10;
             return 15;
         }
-
     }
 }

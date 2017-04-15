@@ -97,11 +97,11 @@ namespace SMEncounterRNGTool
 
             Nature.Items.Clear();
             Nature.BlankText = ANY_STR[lindex];
-            Nature.Items.AddRange(StringItem.NatureList());
+            Nature.Items.AddRange(StringItem.NatureList);
 
             HiddenPower.Items.Clear();
             HiddenPower.BlankText = ANY_STR[lindex];
-            HiddenPower.Items.AddRange(StringItem.HiddenPowerList());
+            HiddenPower.Items.AddRange(StringItem.HiddenPowerList);
 
             for (int i = 0; i < 2; i++)
                 GameVersion.Items[i] = GAMEVERSION_STR[lindex, i];
@@ -1313,6 +1313,8 @@ namespace SMEncounterRNGTool
                 Timedelay.Value = Pokemon.timedelay[Poke.SelectedIndex - 1];
                 NPC.Value = Pokemon.NPC[Poke.SelectedIndex - 1];
             }
+            else
+                Fix3v.Checked = false;
 
             switch (Poke.SelectedIndex)
             {
