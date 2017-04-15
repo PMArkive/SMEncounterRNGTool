@@ -451,7 +451,7 @@
             this.MetLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MetLocation.Location = new System.Drawing.Point(67, 27);
             this.MetLocation.Name = "MetLocation";
-            this.MetLocation.Size = new System.Drawing.Size(102, 21);
+            this.MetLocation.Size = new System.Drawing.Size(113, 21);
             this.MetLocation.TabIndex = 77;
             this.MetLocation.SelectedIndexChanged += new System.EventHandler(this.Location_SelectedIndexChanged);
             // 

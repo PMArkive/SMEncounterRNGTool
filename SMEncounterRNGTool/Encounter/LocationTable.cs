@@ -21,7 +21,7 @@ namespace SMEncounterRNGTool
         public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
         public bool SunMoonDifference => Species.Any(i => SunList.Contains(i)) || _MoonSpecies != null;
         public int[] MoonSpecies { get { return _MoonSpecies ?? Species; } set { _MoonSpecies = value; } }
-        public int[] Species;
+        public int[] Species = new int[1];
         private int[] _MoonSpecies;
 
         public int[] getSpecies(bool IsMoon, bool IsNight)
@@ -61,6 +61,7 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,3,4,5,5,6,6,6,6}, //12
             new byte[]{1,2,1,3,3,3,4,4,4,4}, //13
             new byte[]{1,2,1,3,4,4,5,5,5,5}, //14
+            new byte[]{1,1,2,2,3,3,3,3,3,3}, //15
         };
 
         public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752 };
@@ -114,25 +115,25 @@ namespace SMEncounterRNGTool
                 Location = 016, idx = 1, mark = "E",
                 Correction = 09, NPC = 1,
                 LevelMin = 15, LevelMax = 18,
-                Species = new[] {4,052,081,088},
+                Species = new[] {15,072,278,456},
             },
             new EncounterArea
             {
                 Location = 016, idx = 2, mark = "W",
                 Correction = 05, NPC = 1,
                 LevelMin = 15, LevelMax = 18,
-                Species = new[] {4,052,081,088},
+                Species = new[] {15,072,278,456},
             },
             new EncounterArea
             {
-                Location = 034, idx = 1,//Ten Carat Hill - Cave
+                Location = 034, idx = 1, mark = "Cv", //Ten Carat Hill - Cave
                 Correction = 02,
                 LevelMin = 10, LevelMax = 13,
                 Species = new[] {13,041,052,524,703},
             },
             new EncounterArea
             {
-                Location = 036, idx = 2,//Ten Carat Hill - Grass
+                Location = 036, idx = 2, mark = "Gs", //Ten Carat Hill - Grass
                 Correction = 01,
                 LevelMin = 10, LevelMax = 13,
                 Species = new[] {14,066,744,327,524,703},
@@ -152,7 +153,7 @@ namespace SMEncounterRNGTool
                 Species = new[] {6,041,050},
             },
 
-            // Akala
+            /*Akala*/ new EncounterArea(),
             new EncounterArea
             {
                 Location = 076, //Memorial Hill
@@ -190,7 +191,7 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 090, idx = 4,//Lush Jungle - Cave
+                Location = 090, idx = 4, mark = "Cv", //Lush Jungle - Cave
                 Correction = 02,
                 LevelMin = 18, LevelMax = 21,
                 Species = new[] {6,041,050},
@@ -203,7 +204,7 @@ namespace SMEncounterRNGTool
                 Species = new[] {6,041,050},
             },
 
-            //Ula'ula
+            /*Ula'ula*/ new EncounterArea(),
             new EncounterArea
             {
                 Location = 124, //Haina Desert
@@ -219,7 +220,7 @@ namespace SMEncounterRNGTool
                 Species = new[] {12,060,052,546,054,752,166},
             },
 
-            //Poni
+            /*Poni*/ new EncounterArea(),
             new EncounterArea
             {
                 Location = 182, //Resolution Cave
