@@ -10,6 +10,7 @@ namespace SMEncounterRNGTool
 
         public static string[] genderstr = { "-", "♂", "♀" };
         public static string[] abilitystr = { "-", "1", "2", "H" };
+        public static string[] eventabilitystr = { "1/2", "1/2/H" };
         public static string[] location, species;
 
         public static string getlocationstr(int locationidx)

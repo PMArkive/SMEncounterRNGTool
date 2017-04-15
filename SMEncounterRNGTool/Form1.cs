@@ -261,8 +261,8 @@ namespace SMEncounterRNGTool
         private void LoadSpecies()
         {
             int tmp = SlotSpecies.SelectedIndex;
-            var List = slotspecies.Skip(1).Distinct().Select(SpecForm =>  new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm));
-            List = new[] { new Controls.ComboItem("-", 0)}.Concat(List) ;
+            var List = slotspecies.Skip(1).Distinct().Select(SpecForm => new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm));
+            List = new[] { new Controls.ComboItem("-", 0) }.Concat(List);
             SlotSpecies.DisplayMember = "Text";
             SlotSpecies.ValueMember = "Value";
             SlotSpecies.DataSource = new BindingSource(List, null);
@@ -280,10 +280,10 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 10; i++)
                 Slot.CheckBoxItems[i + 1].Checked = Slotidx.Contains(Slottype[i]);
 
-            setBS(SpecForm & 0x7FF, SpecForm >> 11);
+            SetPersonalInfo(SpecForm & 0x7FF, SpecForm >> 11);
         }
 
-        private void setBS(int Species, int Form)
+        private void SetPersonalInfo(int Species, int Form)
         {
             if (Species == 0)
                 return;
@@ -363,40 +363,38 @@ namespace SMEncounterRNGTool
         private void SearchforSeed(object sender, EventArgs e)
         {
             var needle = Clock_List.Text.Split(',');
-            if (Clock_List.Text.Where(c => c == ',').Count() >= 7)
+            if (Clock_List.Text.Where(c => c == ',').Count() < 7)
             {
-                var text = "";
-                try
+                SeedResults.Text = "";
+                return;
+            }
+            var text = "";
+            try
+            {
+                SeedResults.Text = WAIT_STR[lindex];
+                var results = SFMTSeedAPI.request(Clock_List.Text);
+                if (results == null || results.Count() == 0)
+                    text = NORESULT_STR[lindex];
+                else
                 {
-                    SeedResults.Text = WAIT_STR[lindex];
-                    var results = SFMTSeedAPI.request(Clock_List.Text);
-                    if (results == null || results.Count() == 0)
+                    text = string.Join(" ", results.Select(r => r.seed));
+                    if (results.Count() == 1)
                     {
-                        text = NORESULT_STR[lindex];
+                        Time_min.Value = 418 + Clock_List.Text.Where(c => c == ',').Count();
+                        uint s0;
+                        if (uint.TryParse(text, NumberStyles.HexNumber, null, out s0))
+                            Seed.Value = s0;
                     }
-                    else
-                    {
-                        text = string.Join(" ", results.Select(r => r.seed));
-                        if (results.Count() == 1)
-                        {
-                            Time_min.Value = 418 + Clock_List.Text.Where(c => c == ',').Count();
-                            uint s0;
-                            if (uint.TryParse(text, NumberStyles.HexNumber, null, out s0))
-                                Seed.Value = s0;
-                        }
-                    }
-                }
-                catch (Exception exc)
-                {
-                    text = exc.Message;
-                }
-                finally
-                {
-                    SeedResults.Text = text;
                 }
             }
-            else
-                SeedResults.Text = "";
+            catch (Exception exc)
+            {
+                text = exc.Message;
+            }
+            finally
+            {
+                SeedResults.Text = text;
+            }
         }
 
         private void QRSearch_Click(object sender, EventArgs e)
@@ -586,11 +584,9 @@ namespace SMEncounterRNGTool
 
         private void Fishing_CheckedChanged(object sender, EventArgs e)
         {
-            if (Fishing.Checked)
-            {
-                SOS.Checked = Honey.Checked = false;
-                Encounter_th.Value = 100;
-            }
+            if (!Fishing.Checked) return;
+            SOS.Checked = Honey.Checked = false;
+            Encounter_th.Value = 100;
         }
 
         private void SOS_CheckedChanged(object sender, EventArgs e)
@@ -632,16 +628,10 @@ namespace SMEncounterRNGTool
 
         private void NPC_ValueChanged(object sender, EventArgs e)
         {
-            if (NPC.Value == 0)
-            {
-                BlinkOnly.Visible = true;
-                SafeFOnly.Visible = SafeFOnly.Checked = false;
-            }
-            else
-            {
-                SafeFOnly.Visible = true;
-                BlinkOnly.Visible = BlinkOnly.Checked = false;
-            }
+            var ControlON = NPC.Value == 0 ? BlinkOnly : SafeFOnly;
+            var ControlOFF = NPC.Value == 0 ? SafeFOnly : BlinkOnly;
+            ControlON.Visible = true;
+            ControlOFF.Visible = ControlOFF.Checked = false;
         }
 
         private void AlwaysSynced_CheckedChanged(object sender, EventArgs e)
@@ -785,7 +775,7 @@ namespace SMEncounterRNGTool
         private void CalcTime_Output(int min, int max)
         {
             int[] totaltime = CalcFrame(min, max);
-            float realtime = (float)totaltime[0] / 30;
+            double realtime = totaltime[0] / 30.0;
             string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
             switch (lindex)
             {
@@ -1145,7 +1135,7 @@ namespace SMEncounterRNGTool
                 Fix3v = Fix3v.Checked,
                 gender_ratio = gender_threshold,
                 nogender = GenderRatio.SelectedIndex == 0,
-                PokeLv = (Wild.Checked && Poke.SelectedIndex > 0) ? Pokemon.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value,
+                PokeLv = Wild.Checked && Poke.SelectedIndex > 0 ? Pokemon.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value,
                 Lv_min = (byte)Lv_min.Value,
                 Lv_max = (byte)Lv_max.Value,
                 UB_th = (byte)UB_th.Value,
@@ -1204,45 +1194,43 @@ namespace SMEncounterRNGTool
         {
             int d = i - (int)Time_max.Value;
             string true_nature = StringItem.naturestr[result.Nature];
-            string SynchronizeFlag = (result.Synchronize ? "O" : "X");
-            if ((result.UbValue < UB_th.Value) && (ConsiderDelay.Checked) && (!ShowResultsAfterDelay.Checked))
+            string SynchronizeFlag = result.Synchronize ? "O" : "X";
+            if (result.UbValue < UB_th.Value && ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
                 result.Blink = 2;
             string BlinkFlag = result.Blink < 4 ? blinkmarks[result.Blink] : result.Blink.ToString();
             string PSV = result.PSV.ToString("D4");
-            string Encounter = (result.Encounter == -1) ? "-" : result.Encounter.ToString();
-            string Slot = (result.Slot == 0) ? "-" : result.Slot.ToString();
-            string Lv = (result.Lv == 0) ? "-" : result.Lv.ToString();
-            string Item = (result.Item == 100) ? "-" : result.Item.ToString();
-            string UbValue = (result.UbValue == 100) ? "-" : result.UbValue.ToString();
+            string Encounter = result.Encounter == -1 ? "-" : result.Encounter.ToString();
+            string Slot = result.Slot == 0 ? "-" : result.Slot.ToString();
+            string Lv = result.Lv == 0 ? "-" : result.Lv.ToString();
+            string Item = result.Item == 100 ? "-" : result.Item.ToString();
+            string UbValue = result.UbValue == 100 ? "-" : result.UbValue.ToString();
             string randstr = result.row_r.ToString("X16");
             string PID = result.PID.ToString("X8");
             string EC = result.EC.ToString("X8");
-            string time = (CreateTimeline.Checked || Modification.Checked) ? (2 * result.realtime).ToString() + "F" : "-";
+            string time = CreateTimeline.Checked || Modification.Checked ? (2 * result.realtime).ToString() + "F" : "-";
 
             if (!Advanced.Checked)
             {
                 if (Encounter != "-")
-                    Encounter = (result.Encounter < Encounter_th.Value) ? "O" : "X";
+                    Encounter = result.Encounter < Encounter_th.Value ? "O" : "X";
                 if (UbValue != "-")
-                    UbValue = (result.UbValue < UB_th.Value) ? "O" : "X";
-                if (UbValue == "O") Slot = "UB";
+                    UbValue = result.UbValue < UB_th.Value ? "O" : "X";
+                if (UbValue == "O")
+                    Slot = "UB";
                 if (result.Item < 50)
                     Item = "50%";
                 else if (result.Item < 55)
                     Item = "5%";
                 else
                     Item = "-";
-                time = (CreateTimeline.Checked || Modification.Checked) ? ((float)result.realtime / 30).ToString("F") + " s" : "-";
+                time = CreateTimeline.Checked || Modification.Checked ? (result.realtime / 30.0).ToString("F") + " s" : "-";
             }
 
-            if (IsEvent && !OtherInfo.Checked && e.PIDType > 1) { PID = "-"; PSV = "-"; }
+            if (IsEvent && !OtherInfo.Checked && e.PIDType > 1)
+                PID = PSV = "-";
 
             string frameadvance = result.frameshift.ToString("+#;-#;0");
-            int[] Status = new[] { 0, 0, 0, 0, 0, 0 };
-            if (ShowStats.Checked)
-                Status = result.Stats;
-            else
-                Status = result.IVs;
+            int[] Status = ShowStats.Checked ? result.Stats : result.IVs;
 
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
@@ -1274,7 +1262,6 @@ namespace SMEncounterRNGTool
                     row.Cells[3 + k].Style.ForeColor = Color.MediumSeaGreen;
                 }
             }
-
             return row;
         }
 
@@ -1305,12 +1292,12 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex == Fossil_index + 1) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
 
             if (Poke.SelectedIndex == 0) return;
-            AlwaysSynced.Checked = (Poke.SelectedIndex >= AlwaysSync_Index && Poke.SelectedIndex < UBIndex - 1);
+            AlwaysSynced.Checked = AlwaysSync_Index <= Poke.SelectedIndex && Poke.SelectedIndex < UBIndex - 1;
             ConsiderBlink.Checked = !AlwaysSynced.Checked;
             ConsiderDelay.Checked = true;
             ConsiderBlink.Enabled = AlwaysSynced.Enabled = false;
 
-            setBS(Pokemon.SpecForm[Poke.SelectedIndex - 1, 0], Pokemon.SpecForm[Poke.SelectedIndex - 1, 1]);
+            SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex - 1, 0], Pokemon.SpecForm[Poke.SelectedIndex - 1, 1]);
             Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
 
             if (Poke.SelectedIndex < UBIndex)
@@ -1341,16 +1328,10 @@ namespace SMEncounterRNGTool
         private RNGSearch.EventRule geteventsetting()
         {
             int[] IVs = new[] { -1, -1, -1, -1, -1, -1 };
-            int cnt = 0;
             for (int i = 0; i < 6; i++)
-            {
                 if (EventIVLocked[i].Checked)
-                {
-                    cnt++;
                     IVs[i] = (int)EventIV[i].Value;
-                }
-            }
-            if (IVsCount.Value > 0 && cnt + IVsCount.Value > 5)
+            if (IVsCount.Value > 0 && IVs.Count(iv => iv >= 0) + IVsCount.Value > 5)
             {
                 Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
                 IVs = new[] { -1, -1, -1, -1, -1, -1 };
@@ -1471,18 +1452,18 @@ namespace SMEncounterRNGTool
                 if (CardType != 0) return false;
                 byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
                 byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB3, 0xB4, 0xB2 };
-                int sp = BitConverter.ToUInt16(Data, 0x82);
+                ushort sp = BitConverter.ToUInt16(Data, 0x82);
                 L_EventSpecies.Text = L_Species.Text + ": " + StringItem.species[sp];
                 L_EventSpecies.Visible = true;
-                int form = Data[0x84];
-                setBS(sp, form); // Set Personal rule before wc7 rule
+                Poke.SelectedIndex = 1; // Switch to <Event>, set to Mew
+                byte form = Data[0x84];
+                SetPersonalInfo(sp, form); // Set pkm personal rule before wc7 rule
                 AbilityLocked.Checked = Data[0xA2] < 3;
                 Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : Data[0xA2] - 3;
                 NatureLocked.Checked = Data[0xA0] != 0xFF;
                 Event_Nature.SelectedIndex = NatureLocked.Checked ? Data[0xA0] + 1 : 0;
                 GenderLocked.Checked = Data[0xA1] != 3;
                 Event_Gender.SelectedIndex = GenderLocked.Checked ? (Data[0xA1] + 1) % 3 : 0;
-                Poke.SelectedIndex = 1;
                 if (Data[0xA1] == 2) GenderRatio.SelectedIndex = 0;
                 Fix3v.Checked = Data[Stats_index[0]] == 0xFE;
                 switch (Data[Stats_index[0]])
@@ -1563,13 +1544,7 @@ namespace SMEncounterRNGTool
         private void AbilityLocked_CheckedChanged(object sender, EventArgs e)
         {
             Event_Ability.Items.Clear();
-            if (AbilityLocked.Checked)
-                Event_Ability.Items.AddRange(StringItem.abilitystr);
-            else
-            {
-                Event_Ability.Items.Add("1/2");
-                Event_Ability.Items.Add("1/2/H");
-            }
+            Event_Ability.Items.AddRange(AbilityLocked.Checked ? StringItem.abilitystr : StringItem.eventabilitystr);
             Event_Ability.SelectedIndex = 0;
         }
         #endregion
