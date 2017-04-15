@@ -61,26 +61,6 @@ namespace SMEncounterRNGTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] encounter_mn {
-            get {
-                object obj = ResourceManager.GetObject("encounter_mn", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] encounter_sn {
-            get {
-                object obj = ResourceManager.GetObject("encounter_sn", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ! Interface Customization File
         ///! lang_en.txt = English
         ///! lang_jp.txt = Japanese

@@ -26,7 +26,14 @@ namespace SMEncounterRNGTool
         public static string[] genderstr = { "-", "♂", "♀" };
         public static string[] abilitystr = { "-", "1", "2", "H" };
         public static string[] location, species;
-        
+
+        public static string getlocationstr(int locationidx)
+        {
+            int idx = locationidx >> 8;
+            string append = idx > 0 ? " - " + idx.ToString() : "";
+            return location[locationidx & 0xFF] + append;
+        }
+
         public static ComboItem[] NatureList()
         {
             return naturestr.Select((str, i) => new ComboItem(str, i)).ToArray();

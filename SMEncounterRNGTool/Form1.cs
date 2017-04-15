@@ -45,9 +45,10 @@ namespace SMEncounterRNGTool
         List<NumericUpDown> EventIV = new List<NumericUpDown>();
         List<CheckBox> EventIVLocked = new List<CheckBox>();
         RNGSearch.EventRule e = new RNGSearch.EventRule();
-        EncounterArea ea = new EncounterArea();
         List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
-        byte[] locationlist = EncounterArea.SMLocationList;
+        int[] locationlist = LocationTable.SMLocationList;
+        EncounterArea ea = new EncounterArea();
+        int[] slotspecies => ea.getSpecies(GameVersion.SelectedIndex > 0, Night.Checked);
 
         private string version = "1.1.0";
 
@@ -180,7 +181,7 @@ namespace SMEncounterRNGTool
             Event_Nature.Items.AddRange(StringItem.naturestr);
             for (int i = 0; i < Pokemon.SpecForm.GetLength(0); i++)
                 Poke.Items.Add("");
-            
+
             Gender.Items.AddRange(StringItem.genderstr);
             Event_Gender.Items.AddRange(StringItem.genderstr);
 
@@ -202,7 +203,7 @@ namespace SMEncounterRNGTool
                 case 1: TimeResultInstructText = "格式：帧数 (秒数) <持续时间>"; break;
             }
             TimeResult.Items.Add(TimeResultInstructText);
-            
+
             SyncNature.SelectedIndex = 0;
             Event_Nature.SelectedIndex = 0;
             Gender.SelectedIndex = 0;
@@ -210,7 +211,7 @@ namespace SMEncounterRNGTool
             Ability.SelectedIndex = 0;
             Event_Ability.SelectedIndex = 0;
             Event_PIDType.SelectedIndex = 0;
-            
+
             Slot.CheckBoxItems[0].Checked = true;
             Slot.CheckBoxItems[0].Checked = false;
 
@@ -240,42 +241,41 @@ namespace SMEncounterRNGTool
         private void RefreshLocation()
         {
             if (Poke.SelectedIndex == 0)
-                locationlist = EncounterArea.SMLocationList;
+                locationlist = LocationTable.SMLocationList;
             else if (Poke.SelectedIndex >= UBIndex)
-                locationlist = Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
+                locationlist = null; //Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
             else
                 return;
 
-            Locationlist = locationlist.Select(loc => new Controls.ComboItem(StringItem.location[loc], loc)).ToList();
+            Locationlist = locationlist.Select(loc => new Controls.ComboItem(StringItem.getlocationstr(loc), loc)).ToList();
             MetLocation.DisplayMember = "Text";
             MetLocation.ValueMember = "Value";
             MetLocation.DataSource = new BindingSource(Locationlist, null);
 
-            if (MetLocation.SelectedValue == null || MetLocation.SelectedIndex < 0) MetLocation.SelectedIndex = 0;
+            Lv_min.Value = ea.LevelMin;
+            Lv_max.Value = ea.LevelMax;
 
             LoadSpecies();
         }
 
         private void LoadSpecies()
         {
-            try
-            {
-                ea = (GameVersion.SelectedIndex == 0 ? EncounterArea.EncounterSun : EncounterArea.EncounterMoon).FirstOrDefault(e => e.Location == (int)MetLocation.SelectedValue);
-                var List = ea.Slots.Select(slot => new Controls.ComboItem(StringItem.species[slot.Species], slot.Species));
-
-                SlotSpecies.DisplayMember = "Text";
-                SlotSpecies.ValueMember = "Value";
-                SlotSpecies.DataSource = new BindingSource(List, null);
-            }
-            catch { }
+            ea = LocationTable.Table.FirstOrDefault(e => e.Locationidx == (int)MetLocation.SelectedValue);
+            var List = slotspecies.Skip(1).Select(SpecForm => new Controls.ComboItem(StringItem.species[SpecForm & 0x7FF], SpecForm));
+            SlotSpecies.DisplayMember = "Text";
+            SlotSpecies.ValueMember = "Value";
+            SlotSpecies.DataSource = new BindingSource(List, null);
         }
 
         private void LoadPersonalInfo()
         {
-            var slot = ea.Slots.FirstOrDefault(e => e.Species == (int)SlotSpecies.SelectedValue);
-            Lv_min.Value = slot.LevelMin;
-            Lv_max.Value = slot.LevelMax;
-            setBS(slot.Species, slot.Form);
+            int SpecForm = (int)SlotSpecies.SelectedValue;
+            int Slotidx = Array.IndexOf(slotspecies, SpecForm);
+            int[] Slottype = EncounterArea.SlotType[slotspecies[0]];
+            for (int i = 0; i < 10; i++)
+                Slot.CheckBoxItems[i+1].Checked = Slottype[i] == Slotidx;
+
+            setBS(SpecForm & 0x7FF, SpecForm >> 11);
         }
 
         private void setBS(int Species, int Form)
@@ -978,7 +978,7 @@ namespace SMEncounterRNGTool
                     RNGSearch.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
-                    if (i <= min || i > max) 
+                    if (i <= min || i > max)
                         continue;
                     result.Blink = Blinkflaglist[i - min - 1];
                     if (!frameMatch(result, setting))
@@ -1540,5 +1540,10 @@ namespace SMEncounterRNGTool
             Event_Ability.SelectedIndex = 0;
         }
         #endregion
+
+        private void DayNight_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadSpecies();
+        }
     }
 }

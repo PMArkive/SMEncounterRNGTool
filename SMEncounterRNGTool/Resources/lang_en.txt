@@ -121,6 +121,8 @@ L_ChainLength = Chain Length
 WildEncounterSetting = Wild Encounter Setting
 L_Location = Location
 L_Species = Species
+Day = Day
+Night = Night
 ---------------------TabPage2----------------------------------
 InputBox = InputBox
 Back = Back

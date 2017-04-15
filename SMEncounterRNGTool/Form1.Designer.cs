@@ -40,6 +40,8 @@
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.WildEncounterSetting = new System.Windows.Forms.GroupBox();
+            this.Night = new System.Windows.Forms.RadioButton();
+            this.Day = new System.Windows.Forms.RadioButton();
             this.SlotSpecies = new System.Windows.Forms.ComboBox();
             this.MetLocation = new System.Windows.Forms.ComboBox();
             this.L_Species = new System.Windows.Forms.Label();
@@ -397,6 +399,8 @@
             // 
             // WildEncounterSetting
             // 
+            this.WildEncounterSetting.Controls.Add(this.Night);
+            this.WildEncounterSetting.Controls.Add(this.Day);
             this.WildEncounterSetting.Controls.Add(this.SlotSpecies);
             this.WildEncounterSetting.Controls.Add(this.MetLocation);
             this.WildEncounterSetting.Controls.Add(this.L_Species);
@@ -409,10 +413,34 @@
             this.WildEncounterSetting.Text = "野外遇敌设置";
             this.WildEncounterSetting.Visible = false;
             // 
+            // Night
+            // 
+            this.Night.AutoSize = true;
+            this.Night.Location = new System.Drawing.Point(327, 37);
+            this.Night.Name = "Night";
+            this.Night.Size = new System.Drawing.Size(49, 17);
+            this.Night.TabIndex = 79;
+            this.Night.Text = "夜间";
+            this.Night.UseVisualStyleBackColor = true;
+            this.Night.CheckedChanged += new System.EventHandler(this.DayNight_CheckedChanged);
+            // 
+            // Day
+            // 
+            this.Day.AutoSize = true;
+            this.Day.Checked = true;
+            this.Day.Location = new System.Drawing.Point(327, 13);
+            this.Day.Name = "Day";
+            this.Day.Size = new System.Drawing.Size(49, 17);
+            this.Day.TabIndex = 73;
+            this.Day.TabStop = true;
+            this.Day.Text = "白天";
+            this.Day.UseVisualStyleBackColor = true;
+            this.Day.CheckedChanged += new System.EventHandler(this.DayNight_CheckedChanged);
+            // 
             // SlotSpecies
             // 
             this.SlotSpecies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SlotSpecies.Location = new System.Drawing.Point(257, 27);
+            this.SlotSpecies.Location = new System.Drawing.Point(233, 27);
             this.SlotSpecies.Name = "SlotSpecies";
             this.SlotSpecies.Size = new System.Drawing.Size(74, 21);
             this.SlotSpecies.TabIndex = 78;
@@ -423,14 +451,14 @@
             this.MetLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MetLocation.Location = new System.Drawing.Point(73, 27);
             this.MetLocation.Name = "MetLocation";
-            this.MetLocation.Size = new System.Drawing.Size(116, 21);
+            this.MetLocation.Size = new System.Drawing.Size(89, 21);
             this.MetLocation.TabIndex = 77;
             this.MetLocation.SelectedIndexChanged += new System.EventHandler(this.Location_SelectedIndexChanged);
             // 
             // L_Species
             // 
             this.L_Species.AutoSize = true;
-            this.L_Species.Location = new System.Drawing.Point(210, 31);
+            this.L_Species.Location = new System.Drawing.Point(186, 31);
             this.L_Species.Name = "L_Species";
             this.L_Species.Size = new System.Drawing.Size(31, 13);
             this.L_Species.TabIndex = 66;
@@ -3629,6 +3657,8 @@
         private Controls.CheckBoxComboBox Nature;
         private Controls.CheckBoxComboBox HiddenPower;
         private Controls.CheckBoxComboBox Slot;
+        private System.Windows.Forms.RadioButton Night;
+        private System.Windows.Forms.RadioButton Day;
     }
 }
 
