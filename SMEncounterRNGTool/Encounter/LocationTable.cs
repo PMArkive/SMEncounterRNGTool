@@ -66,19 +66,22 @@ namespace SMEncounterRNGTool
             new byte[]{1,2,3,4,5,4,4,4,4,4}, //17
             new byte[]{1,2,3,4,5,5,2,2,2,2}, //18
             new byte[]{1,2,3,2,4,4,2,2,2,5}, //19
+            new byte[]{1,2,3,3,4,5,6,3,7,7}, //20
+            new byte[]{1,2,1,2,2,3,4,4,4,4}, //21
+            new byte[]{1,2,1,1,1,1,1,1,1,1}, //22
         };
 
-        public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752 };
-        public readonly static int[] NightList = new[] { 019, 020, 167, 168, 755, 283, 284 };
-        public readonly static int[] SunList = new[] { 546, 766, };
-        public readonly static int[] MoonList = new[] { 548, 765, };
+        public readonly static int[] DayList = new[] { 734, 735, 165, 166, 046, 751, 752, 425 };
+        public readonly static int[] NightList = new[] { 019, 020, 167, 168, 755, 283, 284, 200 };
+        public readonly static int[] SunList = new[] { 546, 766 };
+        public readonly static int[] MoonList = new[] { 548, 765 };
     }
 
     class LocationTable
     {
         public readonly static EncounterArea[] Table =
         {
-            //MeleMele
+            #region MeleMele
             new EncounterArea
             {
                 Location = 006, idx = 1,
@@ -158,6 +161,56 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 019,
+                Correction = 17, NPC = 1,
+                LevelMin = 15, LevelMax = 18,
+                Species = new[] {15,072,278,456},
+            },
+            new EncounterArea
+            {
+                Location = 021,
+                Correction = 27,
+                LevelMin = 05, LevelMax = 08,
+                Species = new[] {20,734,278,063,088,081,052,172},
+            },
+            new EncounterArea
+            {
+                Location = 038,
+                Correction = 06, NPC = 3,
+                LevelMin = 07, LevelMax = 10,
+                Species = new[] {7,092,425,041},
+            },
+            new EncounterArea
+            {
+                Location = 042, idx = 1, mark = "Cave",
+                Correction = 01,
+                LevelMin = 09, LevelMax = 12,
+                Species = new[] {6,041,050},
+            },
+            new EncounterArea
+            {
+                Location = 042, idx = 2, mark = "Water",
+                Correction = 02, NPC = 1,
+                LevelMin = 15, LevelMax = 18,
+                Species = new[] {22,041,054},
+            },
+            new EncounterArea
+            {
+                Location = 014, idx = 1, mark = "Grass",
+                Correction = 01,
+                LevelMin = 15, LevelMax = 18,
+                Species = new[] {21,734,278,371,079},
+            },
+            new EncounterArea
+            {
+                Location = 014, idx = 2, mark = "Water",
+                Correction = 02, NPC = 1,
+                LevelMin = 15, LevelMax = 18,
+                Species = new[] {15,072,278,456},
+            },
+
+            new EncounterArea
+            {
                 Location = 034, idx = 1, mark = "Cave", //Ten Carat Hill - Cave
                 Correction = 02,
                 LevelMin = 10, LevelMax = 13,
@@ -184,8 +237,9 @@ namespace SMEncounterRNGTool
                 LevelMin = 08, LevelMax = 11,
                 Species = new[] {6,041,050},
             },
-
-            /*Akala*/ new EncounterArea(),
+            #endregion
+            #region  Akala
+            new EncounterArea(),
             new EncounterArea
             {
                 Location = 076, //Memorial Hill
@@ -235,8 +289,9 @@ namespace SMEncounterRNGTool
                 LevelMin = 19, LevelMax = 22,
                 Species = new[] {6,041,050},
             },
-
-            /*Ula'ula*/ new EncounterArea(),
+            #endregion
+            #region Ula'ula
+            new EncounterArea(),
             new EncounterArea
             {
                 Location = 124, //Haina Desert
@@ -251,8 +306,9 @@ namespace SMEncounterRNGTool
                 LevelMin = 24, LevelMax = 27,
                 Species = new[] {12,060,052,546,054,752,166},
             },
-
-            /*Poni*/ new EncounterArea(),
+            #endregion
+            #region Poni
+            new EncounterArea(),
             new EncounterArea
             {
                 Location = 182, //Resolution Cave
@@ -260,6 +316,7 @@ namespace SMEncounterRNGTool
                 LevelMin = 54, LevelMax = 57,
                 Species = new[] {6,042,051},
             },
+            #endregion
         };
 
         public readonly static int[] SMLocationList = Table.Select(t => t.Locationidx).ToArray();
