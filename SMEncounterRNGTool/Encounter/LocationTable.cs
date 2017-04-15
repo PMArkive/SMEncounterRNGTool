@@ -6,10 +6,20 @@ namespace SMEncounterRNGTool
     {
         public byte Location, idx, NPC, Correction = 1;
         public int Locationidx => Location + (idx << 8);
+        private String _mark;
+        public String mark
+        {
+            get
+            {
+                string tmp = _mark ?? (idx > 0 ? idx.ToString() : "");
+                return tmp == "" ? "" : $" ({tmp})";
+            }
+            set { _mark = value; }
+        }
         public byte LevelMin, LevelMax;
         public EncounterType EnctrType = EncounterType.Grass;
         public bool DayNightDifference => Species.Any(i => DayList.Contains(i));
-        public bool SunMoonDifference => Species.Any(i => SunList.Contains(i)) || _MoonSpecies == null;
+        public bool SunMoonDifference => Species.Any(i => SunList.Contains(i)) || _MoonSpecies != null;
         public int[] MoonSpecies { get { return _MoonSpecies ?? Species; } set { _MoonSpecies = value; } }
         public int[] Species;
         private int[] _MoonSpecies;
@@ -101,6 +111,20 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 016, idx = 1, mark = "E",
+                Correction = 09, NPC = 1,
+                LevelMin = 15, LevelMax = 18,
+                Species = new[] {4,052,081,088},
+            },
+            new EncounterArea
+            {
+                Location = 016, idx = 2, mark = "W",
+                Correction = 05, NPC = 1,
+                LevelMin = 15, LevelMax = 18,
+                Species = new[] {4,052,081,088},
+            },
+            new EncounterArea
+            {
                 Location = 034, idx = 1,//Ten Carat Hill - Cave
                 Correction = 02,
                 LevelMin = 10, LevelMax = 13,
@@ -145,21 +169,21 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 090, idx = 1,//Lush Jungle - S
+                Location = 090, idx = 1, mark = "S",//Lush Jungle - S
                 Correction = 07,
                 LevelMin = 18, LevelMax = 21,
                 Species = new[] {9,753,732,438,010,011,046,766,764},
             },
             new EncounterArea
             {
-                Location = 090, idx = 2,//Lush Jungle - W
+                Location = 090, idx = 2, mark = "W",//Lush Jungle - W
                 Correction = 02,
                 LevelMin = 18, LevelMax = 21,
                 Species = new[] {10,753,732,761,046,766,764},
             },
             new EncounterArea
             {
-                Location = 090, idx = 3,//Lush Jungle - N
+                Location = 090, idx = 3, mark = "N",//Lush Jungle - N
                 Correction = 02,
                 LevelMin = 18, LevelMax = 21,
                 Species = new[] {11,753,732,046,127,764,766},

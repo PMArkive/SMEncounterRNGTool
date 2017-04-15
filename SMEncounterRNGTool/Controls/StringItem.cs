@@ -29,9 +29,10 @@ namespace SMEncounterRNGTool
 
         public static string getlocationstr(int locationidx)
         {
+            int loc = locationidx & 0xFF;
             int idx = locationidx >> 8;
-            string append = idx > 0 ? " - " + idx.ToString() : "";
-            return location[locationidx & 0xFF] + append;
+            string append = LocationTable.Table.FirstOrDefault(t => t.Location == loc && t.idx == idx).mark;
+            return location[loc] + append;
         }
 
         public static ComboItem[] NatureList()
