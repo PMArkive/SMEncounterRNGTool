@@ -497,6 +497,8 @@ namespace SMEncounterRNGTool
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
+            RNGSearch.slottype = (byte)(ea.Locationidx == 1190 ? 1 : 0); // Poni Plains (4)
+
             Lv_min.Value = ea.SunMoonDifference && IsMoon ? ea.LevelMinMoon : ea.LevelMin;
             Lv_max.Value = ea.SunMoonDifference && IsMoon ? ea.LevelMaxMoon : ea.LevelMax;
             LoadSpecies();

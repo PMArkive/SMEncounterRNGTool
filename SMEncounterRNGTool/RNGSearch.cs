@@ -24,7 +24,8 @@ namespace SMEncounterRNGTool
         public bool IsUB;
         public bool nogender;
         public byte gender_ratio;
-
+        
+        public static byte slottype;
         public static bool Considerhistory;
         public static bool Considerdelay;
         public static int PreDelayCorrection;
@@ -33,7 +34,7 @@ namespace SMEncounterRNGTool
         public static int modelnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
-        
+
         //Generated Attributes
         private bool SpecialWild => Wild && !Honey && (Encounter_th == 101 || SOS);
         private bool Listed => IsUB || !Wild;
@@ -205,7 +206,7 @@ namespace SMEncounterRNGTool
             st.IVs = new[] { -1, -1, -1, -1, -1, -1 };
             int flawlesscount = (IsUB ? true : Fix3v) ? 3 : 0;
             while (st.IVs.Count(iv => iv == 31) < flawlesscount)
-               st.IVs[(int)(getrand() % 6)] = 31;
+                st.IVs[(int)(getrand() % 6)] = 31;
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
                     st.IVs[i] = (int)(getrand() & 0x1F);
@@ -437,17 +438,21 @@ namespace SMEncounterRNGTool
 
         public static byte getslot(int rand)
         {
-            if (rand < 20) return 1;
-            if (rand < 40) return 2;
-            if (rand < 50) return 3;
-            if (rand < 60) return 4;
-            if (rand < 70) return 5;
-            if (rand < 80) return 6;
-            if (rand < 90) return 7;
-            if (rand < 95) return 8;
-            if (rand < 99) return 9;
-            return 10;
+            byte[] SlotSplitter = SlotDistribution[slottype];
+            for (byte i = 1; i <= 10; i++)
+            {
+                rand -= SlotSplitter[i - 1];
+                if (rand < 0)
+                    return i;
+            }
+            return 10; // Never reach here
         }
+
+        private readonly static byte[][] SlotDistribution = new byte[][]
+        {
+            new byte[] { 20,20,10,10,10,10,10,5,4,1 },
+            new byte[] { 10,10,20,20,10,10,10,5,4,1 },
+        };
 
         private byte AddtionalPIDRollCount()
         {
