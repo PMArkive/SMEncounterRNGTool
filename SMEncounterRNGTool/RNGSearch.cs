@@ -24,7 +24,7 @@ namespace SMEncounterRNGTool
         public bool IsUB;
         public bool nogender;
         public byte gender_ratio;
-        
+
         public static byte slottype;
         public static bool Considerhistory;
         public static bool Considerdelay;
@@ -35,11 +35,14 @@ namespace SMEncounterRNGTool
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
-        //Generated Attributes
+        // Generated Attributes
         private bool SpecialWild => Wild && !Honey && (Encounter_th == 101 || SOS);
-        private bool Listed => IsUB || !Wild;
-        private bool IsShinyLocked => IsUB || ShinyLocked;
+        private bool Listed => !Wild || IsUB;
+        private bool IsShinyLocked => ShinyLocked || IsUB;
         private bool IsWild => Wild && !IsUB;
+        private bool NoGender => nogender || IsUB;
+        private int PIDroll_count => (ShinyCharm && !Listed ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
+        private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
 
         public static void ResetModelStatus()
         {
@@ -100,7 +103,6 @@ namespace SMEncounterRNGTool
         {
             RNGResult st = new RNGResult();
             index = 0;
-
             st.row_r = Rand[0];
             st.Clock = (byte)(st.row_r % 17);
 
@@ -110,82 +112,35 @@ namespace SMEncounterRNGTool
 
             // ---Start here when press A button---
 
+            // timedelay before generating
             st.frameshift = getframeshift();
 
+            // Reset status
             if (!Considerdelay)
             {
-                Resetindex(); ResetModelStatus();
+                Resetindex();
+                ResetModelStatus();
             }
 
-            // UB using honey
-            if (Wild && UB && Honey)
-                st.UbValue = getUBValue();
+            if (Wild)
+                GenerateWild(st); // Get sync/slot/encounter info
+            else
+                GenerateStationary(st); // Get sync info
 
-            //Fishing
-            if (Wild && fishing)
-            {
-                st.Encounter = (int)(getrand() % 100);
-                time_elapse(12);
-            }
-
-            //Synchronize
-            if (Wild && !IsUB && !SOS)
-                st.Synchronize = (int)(getrand() % 100) >= 50;
-            else if (IsUB)
-            {
-                if (ConsiderBlink)
-                {
-                    time_elapse(7);
-                    st.Synchronize = blink_process();
-                }
-            }
-            else if (!Wild)
-            {
-                if (AlwaysSynchro)
-                { if (Synchro_Stat < 25) st.Synchronize = true; }
-                else if (ConsiderBlink)
-                    st.Synchronize = blink_process();
-                if (SolLunaReset)
-                    modelnumber = 7;
-            }
-
-            // Encounter
-            if (Wild && !Honey && !SpecialWild && !fishing)
-                st.Encounter = (int)(getrand() % 100);
-
-            // UB w/o Honey
-            if (Wild && UB && !Honey)
-            {
-                st.UbValue = getUBValue();
-                if (IsUB)
-                {
-                    Advance(1);
-                    st.Synchronize = blink_process();
-                }
-            }
-
-            //UB is determined above
-            if (Listed) st.Lv = PokeLv;
-
-            // Wild Normal Pokemon
-            if (IsWild && !SpecialWild)
-            {
-                st.Slot = getslot((int)(getrand() % 100));
-                st.Lv = (byte)(getrand() % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
-                Advance(1);
-            }
+            if (Listed)
+                st.Lv = PokeLv;
 
             //Something
             if (!AlwaysSynchro && !SOS)
                 Advance(60);
 
+            //EC-PID-IVs-Nature Cap
+
             //Encryption Constant
             st.EC = (uint)(getrand() & 0xFFFFFFFF);
 
             //PID
-            int roll_count = (ShinyCharm && !Listed) ? 3 : 1;
-            if (SOS) roll_count += AddtionalPIDRollCount();
-            for (int i = 0; i < roll_count; i++)
+            for (int i = 0; i < PIDroll_count; i++)
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
                 st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
@@ -204,8 +159,7 @@ namespace SMEncounterRNGTool
 
             //IV
             st.IVs = new[] { -1, -1, -1, -1, -1, -1 };
-            int flawlesscount = (IsUB ? true : Fix3v) ? 3 : 0;
-            while (st.IVs.Count(iv => iv == 31) < flawlesscount)
+            while (st.IVs.Count(iv => iv == 31) < PerfectIVCount)
                 st.IVs[(int)(getrand() % 6)] = 31;
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
@@ -225,16 +179,80 @@ namespace SMEncounterRNGTool
                 index++;
 
             //Gender
-            if (nogender || IsUB)
-                st.Gender = 0;
-            else
-                st.Gender = (byte)((int)(getrand() % 252) >= gender_ratio ? 1 : 2);
+            st.Gender = (byte)(NoGender ? 0 : ((int)(getrand() % 252) >= gender_ratio ? 1 : 2));
 
             //Item
             if (IsWild && !SOS)
                 st.Item = (byte)(getrand() % 100);
 
             return st;
+        }
+        private void GenerateStationary(RNGResult st)
+        {
+            if (AlwaysSynchro)
+            {
+                if (Synchro_Stat < 25) st.Synchronize = true;
+                return;
+            }
+            if (ConsiderBlink)
+                st.Synchronize = blink_process();
+            if (SolLunaReset)
+                modelnumber = 7;
+        }
+        private void GenerateWild(RNGResult st)
+        {
+            if (Honey)
+                GenerateHoney(st);
+            else
+                GenerateNonHoney(st);
+
+            // Wild Normal Pokemon
+            if (IsWild && !SpecialWild)
+            {
+                st.Slot = getslot((int)(getrand() % 100));
+                st.Lv = (byte)(getrand() % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
+                Advance(1);
+            }
+        }
+        private void GenerateHoney(RNGResult st)
+        {
+            if (UB)
+                st.UbValue = getUBValue();
+            //Normal wild
+            if (!IsUB)
+            {
+                st.Synchronize = (int)(getrand() % 100) >= 50;
+                return;
+            }
+            // UB
+            if (ConsiderBlink)
+            {
+                time_elapse(7);
+                st.Synchronize = blink_process();
+            }
+        }
+        private void GenerateNonHoney(RNGResult st)
+        {
+            // Fishing Encounter
+            if (fishing)
+            {
+                st.Encounter = (int)(getrand() % 100);
+                time_elapse(12);
+            }
+            // Sync
+            if (!SOS)
+                st.Synchronize = (int)(getrand() % 100) >= 50;
+            // Encounter
+            if (!SpecialWild && !fishing)
+                st.Encounter = (int)(getrand() % 100);
+            if (!UB) return;
+            // UB
+            st.UbValue = getUBValue();
+            if (IsUB)
+            {
+                Advance(1);
+                st.Synchronize = blink_process();
+            }
         }
 
         public RNGResult GenerateEvent(EventRule e)
