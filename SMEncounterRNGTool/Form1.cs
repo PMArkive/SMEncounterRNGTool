@@ -38,8 +38,7 @@ namespace SMEncounterRNGTool
             }
         }
         #endregion
-
-        #region Global Variable
+        #region Controls Grouping
         private int[] IVup
         {
             get { return new[] { (int)ivmax0.Value, (int)ivmax1.Value, (int)ivmax2.Value, (int)ivmax3.Value, (int)ivmax4.Value, (int)ivmax5.Value, }; }
@@ -82,9 +81,11 @@ namespace SMEncounterRNGTool
         }
         private List<NumericUpDown> EventIV = new List<NumericUpDown>();
         private List<CheckBox> EventIVLocked = new List<CheckBox>();
+        private List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
+        #endregion
+        #region Global Variable
         private RNGSearch.EventRule e = new RNGSearch.EventRule();
         private static byte[] blinkflaglist;
-        private List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
         private static int[] locationlist = LocationTable.SMLocationList;
         private EncounterArea ea = new EncounterArea();
         private bool IsMoon => GameVersion.SelectedIndex > 0;
@@ -987,7 +988,7 @@ namespace SMEncounterRNGTool
                     i++;
                     if (i <= min || i > max)
                         continue;
-                    MarkResults(result, i - min - 1 , realtime);
+                    MarkResults(result, i - min - 1, realtime);
                     if (!frameMatch(result, setting))
                         continue;
                     list.Add(getRow_Sta(i - 1, rng, result, DGV));
@@ -1224,7 +1225,7 @@ namespace SMEncounterRNGTool
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dgv);
 
-            string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " + (result.row_r % 100).ToString("D2");
+            string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " + (result.row_r % 100).ToString("D2") + " " + (result.row_r % 252).ToString("D3");
 
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,

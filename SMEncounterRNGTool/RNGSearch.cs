@@ -393,7 +393,7 @@ namespace SMEncounterRNGTool
                     time_elapse(6);
                 ResetModelStatus();
                 time_elapse(1);              //Blink process also occurs when loading map
-                index += PreDelayCorrection;  //Pre-HoneyCorrection
+                index += PreDelayCorrection - modelnumber;  //Pre-HoneyCorrection
             }
             else
                 ButtonPressDelay();          //4F
