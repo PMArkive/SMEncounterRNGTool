@@ -169,9 +169,10 @@ namespace SMEncounterRNGTool
             st.Nature = (byte)(getrand % 25);
             if (st.Synchronize)
             {
-                index--; // no rand for nature
                 if (Synchro_Stat < 25)
                     st.Nature = Synchro_Stat;
+                if (AlwaysSynchro)
+                    index--; // No random # for nature
             }
 
             //Gender
