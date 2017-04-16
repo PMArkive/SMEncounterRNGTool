@@ -128,6 +128,8 @@ namespace SMEncounterRNGTool
             else
                 GenerateStationary(st); // Get sync info
 
+            st.Synchronize &= Synchro_Stat < 25; //Check if has Synchronizer
+
             //Something
             if (!AlwaysSynchro && !SOS)
                 Advance(60);
@@ -169,10 +171,8 @@ namespace SMEncounterRNGTool
             st.Nature = (byte)(getrand % 25);
             if (st.Synchronize)
             {
-                if (Synchro_Stat < 25)
-                    st.Nature = Synchro_Stat;
-                if (AlwaysSynchro)
-                    index--; // No random # for nature
+                st.Nature = Synchro_Stat;
+                index--; // No random # for nature
             }
 
             //Gender
@@ -188,7 +188,7 @@ namespace SMEncounterRNGTool
         {
             if (AlwaysSynchro)
             {
-                if (Synchro_Stat < 25) st.Synchronize = true;
+                st.Synchronize = true;
                 return;
             }
             st.Synchronize = blink_process();
