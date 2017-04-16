@@ -27,6 +27,7 @@ namespace SMEncounterRNGTool
 
         public static byte slottype;
         public static bool Considerhistory;
+        public static bool ConsiderBagEnteringTime;
         public static bool Considerdelay;
         public static int PreDelayCorrection;
         public static int delaytime = 93; //For honey 186F =3.1s
@@ -388,9 +389,11 @@ namespace SMEncounterRNGTool
         {
             if (Honey)
             {
+                if (ConsiderBagEnteringTime)
+                    time_elapse(6);
                 ResetModelStatus();
                 time_elapse(1);              //Blink process also occurs when loading map
-                index = PreDelayCorrection;  //Pre-HoneyCorrection
+                index += PreDelayCorrection;  //Pre-HoneyCorrection
             }
             else
                 ButtonPressDelay();          //4F

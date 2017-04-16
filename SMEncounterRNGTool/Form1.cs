@@ -563,12 +563,13 @@ namespace SMEncounterRNGTool
             }
             else
             {
+                EnterBagTime.Checked = false;
                 Correction.Value = 1;
                 if (Wild.Checked) Timedelay.Value = 0;
             }
             label10.Text = Honey.Checked ? "F" : "+4F   1F=1/60s";
-            L_Correction.Visible = Correction.Visible = Honey.Checked;
-            Modification.Visible = Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
+            EnterBagTime.Visible = L_Correction.Visible = Correction.Visible = Honey.Checked;
+            Timedelay.Enabled = ConsiderDelay.Enabled = !Honey.Checked;
         }
 
         private void Fishing_CheckedChanged(object sender, EventArgs e)
@@ -621,29 +622,26 @@ namespace SMEncounterRNGTool
             var ControlOFF = NPC.Value == 0 ? SafeFOnly : BlinkOnly;
             ControlON.Visible = true;
             ControlOFF.Visible = ControlOFF.Checked = false;
-        }
-
-        private void AlwaysSynced_CheckedChanged(object sender, EventArgs e)
-        {
+            Refinement.Visible = Refinement.Checked = NPC.Value != 0;
         }
 
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_time.Visible = CreateTimeline.Checked || Modification.Checked;
+            dgv_time.Visible = CreateTimeline.Checked || Refinement.Checked;
             TimeSpan.Enabled = CreateTimeline.Checked;
-            AroundTarget.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
+            Refinement.Enabled = AroundTarget.Enabled = BlinkOnly.Enabled = SafeFOnly.Enabled = !CreateTimeline.Checked;
             ShowResultsAfterDelay.Enabled = !CreateTimeline.Checked && ConsiderDelay.Checked;
             Frame_max.Visible = label7.Visible = !CreateTimeline.Checked;
             L_StartingPoint.Visible = CreateTimeline.Checked;
             if (CreateTimeline.Checked)
-                Modification.Checked = AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
+                Refinement.Checked = AroundTarget.Checked = BlinkOnly.Checked = SafeFOnly.Checked = false;
             ShowResultsAfterDelay.Checked = ConsiderDelay.Checked;
         }
 
         private void Modification_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_time.Visible = CreateTimeline.Checked || Modification.Checked;
-            if (Modification.Checked)
+            dgv_time.Visible = CreateTimeline.Checked || Refinement.Checked;
+            if (Refinement.Checked)
                 CreateTimeline.Checked = false;
         }
 
@@ -811,7 +809,7 @@ namespace SMEncounterRNGTool
                 createtimeline();
             else if (Frame_min.Value > Frame_max.Value)
                 Error(SETTINGERROR_STR[lindex] + L_frame.Text);
-            else if (Modification.Checked)
+            else if (Refinement.Checked)
                 ConsiderHistoryStationarySearch();
             else
                 StationarySearch();
@@ -860,7 +858,7 @@ namespace SMEncounterRNGTool
             int Min = Math.Max(min - Unsaferange[1], 418);
             for (int i = 0; i < Min; i++)
                 st.NextUInt64();
-            for (int i = 0; i <= (ModelNumber - 1) * 5 + 1; i++)
+            for (int i = 0; i <= (Model_n - 1) * 5 + 1; i++)
                 Randlist.Add(st.NextUInt64());
             for (int i = Min; i <= max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
             {
@@ -924,7 +922,7 @@ namespace SMEncounterRNGTool
             {
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
 
-                MarkResults(result, blinkidx: i - min);
+                MarkResults(result, i - min);
 
                 if (!frameMatch(result, setting))
                     continue;
@@ -1087,11 +1085,12 @@ namespace SMEncounterRNGTool
                 case 4: gender_threshold = 189; break;
             }
 
-            RNGSearch.Considerhistory = CreateTimeline.Checked || Modification.Checked;
+            RNGSearch.Considerhistory = CreateTimeline.Checked || Refinement.Checked;
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
             RNGSearch.modelnumber = ModelNumber;
+            RNGSearch.ConsiderBagEnteringTime = EnterBagTime.Checked;
             RNGSearch.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
             RNGSearch.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
             RNGSearch.SolLunaReset = (RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7;
@@ -1197,7 +1196,7 @@ namespace SMEncounterRNGTool
             string randstr = result.row_r.ToString("X16");
             string PID = result.PID.ToString("X8");
             string EC = result.EC.ToString("X8");
-            string time = CreateTimeline.Checked || Modification.Checked ? (2 * result.realtime).ToString() + "F" : "-";
+            string time = CreateTimeline.Checked || Refinement.Checked ? (2 * result.realtime).ToString() + "F" : "-";
 
             if (!Advanced.Checked)
             {
@@ -1213,7 +1212,7 @@ namespace SMEncounterRNGTool
                     Item = "5%";
                 else
                     Item = "-";
-                time = CreateTimeline.Checked || Modification.Checked ? (result.realtime / 30.0).ToString("F") + " s" : "-";
+                time = CreateTimeline.Checked || Refinement.Checked ? (result.realtime / 30.0).ToString("F") + " s" : "-";
             }
 
             if (IsEvent && !OtherInfo.Checked && e.PIDType > 1)

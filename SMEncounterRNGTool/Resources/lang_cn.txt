@@ -75,7 +75,8 @@ L_frame = 帧数范围
 L_StartingPoint = <-- 时间线起点
 ShowResultsAfterDelay = 显示延时后结果
 CreateTimeline = 生成时间线
-Modification = 考虑历史修正
+Refinement = 考虑历史修正
+EnterBagTime = 进背包时间 (+0.2s)
 L_TimeSpan = 时间长度/秒
 ---
 TimeBox = 时间计算

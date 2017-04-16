@@ -75,7 +75,8 @@ L_frame = Frame Range
 L_StartingPoint = <-- Starting Frame
 ShowResultsAfterDelay = Show Results after Delay
 CreateTimeline = Create Timeline
-Modification = Modification
+Refinement = "?" Frame Refinement
+EnterBagTime = EnterBagTime (+0.2s)
 L_TimeSpan = Time Length/s
 ---
 TimeBox = Time Calculator
