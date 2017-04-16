@@ -158,6 +158,13 @@ namespace SMEncounterRNGTool
                 LevelMin = 10,
                 Species = new[] {14,066,744,327,524,703},
             },
+            new EncounterArea
+            {
+                Location = 036, idx = 3, mark = "Water", //Ten Carat Hill - Water
+                Correction = 03, NPC = 1,
+                LevelMin = 15,
+                Species = new[] {14,041,054,041,041,041},
+            },
             #endregion
             #region  Akala
             new EncounterArea(),
