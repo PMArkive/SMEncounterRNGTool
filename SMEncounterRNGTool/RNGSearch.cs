@@ -106,6 +106,7 @@ namespace SMEncounterRNGTool
             index = 0;
             st.row_r = Rand[0];
             st.Clock = (byte)(st.row_r % 17);
+            st.Lv = PokeLv;
 
             // Reset model Status
             if (!Considerhistory)
@@ -128,9 +129,6 @@ namespace SMEncounterRNGTool
             else
                 GenerateStationary(st); // Get sync info
 
-            if (Listed)
-                st.Lv = PokeLv;
-
             //Something
             if (!AlwaysSynchro && !SOS)
                 Advance(60);
@@ -138,12 +136,12 @@ namespace SMEncounterRNGTool
             //EC-PID-IVs-Nature Cap
 
             //Encryption Constant
-            st.EC = (uint)(getrand() & 0xFFFFFFFF);
+            st.EC = (uint)(getrand & 0xFFFFFFFF);
 
             //PID
             for (int i = 0; i < PIDroll_count; i++)
             {
-                st.PID = (uint)(getrand() & 0xFFFFFFFF);
+                st.PID = (uint)(getrand & 0xFFFFFFFF);
                 if (st.PSV == TSV)
                 {
                     st.Shiny = true;
@@ -159,30 +157,30 @@ namespace SMEncounterRNGTool
             //IV
             st.IVs = new[] { -1, -1, -1, -1, -1, -1 };
             while (st.IVs.Count(iv => iv == 31) < PerfectIVCount)
-                st.IVs[(int)(getrand() % 6)] = 31;
+                st.IVs[(int)(getrand % 6)] = 31;
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
-                    st.IVs[i] = (int)(getrand() & 0x1F);
+                    st.IVs[i] = (int)(getrand & 0x1F);
 
             //Ability
             if (IsWild || AlwaysSynchro)
-                st.Ability = (byte)((getrand() & 1) + 1);
+                st.Ability = (byte)((getrand & 1) + 1);
 
             //Nature
-            st.Nature = (byte)(currentrand() % 25);
+            st.Nature = (byte)(getrand % 25);
             if (st.Synchronize)
             {
-                if (Synchro_Stat < 25) st.Nature = Synchro_Stat;
+                index--; // no rand for nature
+                if (Synchro_Stat < 25)
+                    st.Nature = Synchro_Stat;
             }
-            else
-                index++;
 
             //Gender
-            st.Gender = (byte)(NoGender ? 0 : ((int)(getrand() % 252) >= gender_ratio ? 1 : 2));
+            st.Gender = (byte)(NoGender ? 0 : ((int)(getrand % 252) >= gender_ratio ? 1 : 2));
 
             //Item
             if (IsWild && !SOS)
-                st.Item = (byte)(getrand() % 100);
+                st.Item = (byte)(getrand % 100);
 
             return st;
         }
@@ -208,8 +206,8 @@ namespace SMEncounterRNGTool
             // Wild Normal Pokemon
             if (IsWild && !SpecialWild)
             {
-                st.Slot = getslot((int)(getrand() % 100));
-                st.Lv = (byte)(getrand() % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
+                st.Slot = getslot((int)(getrand % 100));
+                st.Lv = (byte)(getrand % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
                 Advance(1);
             }
         }
@@ -220,7 +218,7 @@ namespace SMEncounterRNGTool
             //Normal wild
             if (!IsUB)
             {
-                st.Synchronize = (int)(getrand() % 100) >= 50;
+                st.Synchronize = (int)(getrand % 100) >= 50;
                 return;
             }
             // UB
@@ -235,15 +233,15 @@ namespace SMEncounterRNGTool
             // Fishing Encounter
             if (fishing)
             {
-                st.Encounter = (int)(getrand() % 100);
+                st.Encounter = (int)(getrand % 100);
                 time_elapse(12);
             }
             // Sync
             if (!SOS)
-                st.Synchronize = (int)(getrand() % 100) >= 50;
+                st.Synchronize = (int)(getrand % 100) >= 50;
             // Encounter
             if (!SpecialWild && !fishing)
-                st.Encounter = (int)(getrand() % 100);
+                st.Encounter = (int)(getrand % 100);
             if (!UB) return;
             // UB
             st.UbValue = getUBValue();
@@ -271,25 +269,26 @@ namespace SMEncounterRNGTool
             st.frameshift = getframeshift(e);
             if (!Considerdelay)
             {
-                Resetindex(); ResetModelStatus();
+                Resetindex();
+                ResetModelStatus();
             }
 
             //Encryption Constant
-            st.EC = e.EC > 0 ? e.EC : (uint)(getrand() & 0xFFFFFFFF);
+            st.EC = e.EC > 0 ? e.EC : (uint)(getrand & 0xFFFFFFFF);
 
             //PID
             switch (e.PIDType)
             {
                 case 0: //Random PID
-                    st.PID = (uint)(getrand() & 0xFFFFFFFF);
+                    st.PID = (uint)(getrand & 0xFFFFFFFF);
                     break;
                 case 1: //Random NonShiny
-                    st.PID = (uint)(getrand() & 0xFFFFFFFF);
+                    st.PID = (uint)(getrand & 0xFFFFFFFF);
                     if (st.PSV == e.TSV)
                         st.PID ^= 0x10000000;
                     break;
                 case 2: //Random Shiny
-                    st.PID = (uint)(getrand() & 0xFFFFFFFF); 
+                    st.PID = (uint)(getrand & 0xFFFFFFFF); 
                     if (e.OtherInfo)
                         st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
                     break;
@@ -302,7 +301,7 @@ namespace SMEncounterRNGTool
             int cnt = e.IVsCount;
             while (cnt > 0)
             {
-                int ran = (int)(getrand() % 6);
+                int ran = (int)(getrand % 6);
                 if (st.IVs[ran] < 0)
                 {
                     st.IVs[ran] = 31;
@@ -311,23 +310,25 @@ namespace SMEncounterRNGTool
             }
             for (int i = 0; i < 6; i++)
                 if (st.IVs[i] < 0)
-                    st.IVs[i] = (int)(getrand() & 0x1F);
+                    st.IVs[i] = (int)(getrand & 0x1F);
 
             //Ability
-            st.Ability = e.AbilityLocked ? e.Ability : (byte)(e.Ability == 0 ? (getrand() & 1) + 1 : getrand() % 3 + 1);
+            st.Ability = e.AbilityLocked ? e.Ability : (byte)(e.Ability == 0 ? (getrand & 1) + 1 : getrand % 3 + 1);
 
             //Nature
-            st.Nature = e.NatureLocked ? e.Nature : (byte)(getrand() % 25);
+            st.Nature = e.NatureLocked ? e.Nature : (byte)(getrand % 25);
 
             //Gender
-            st.Gender = (e.GenderLocked || nogender) ? e.Gender : (byte)(getrand() % 252 >= gender_ratio ? 1 : 2);
+            st.Gender = (e.GenderLocked || nogender) ? e.Gender : (byte)(getrand % 252 >= gender_ratio ? 1 : 2);
             return st;
         }
 
         public static List<ulong> Rand = new List<ulong>();
         private static int index;
-        public static void Resetindex() { index = 0; }
+        private static void Advance(int d) { index += d; }
+        private static ulong getrand => Rand[index++];
 
+        public static void Resetindex() { index = 0; }
         public static void CreateBuffer(SFMT sfmt, bool CalcDelay)
         {
             int RandBuffSize = 200;
@@ -339,19 +340,50 @@ namespace SMEncounterRNGTool
                 Rand.Add(sfmt.NextUInt64());
         }
 
-        private static ulong getrand()
+        // n/30s elapsed
+        private static void time_elapse(int n)
         {
-            return Rand[index++];
+            for (int totalframe = 0; totalframe < n; totalframe++)
+            {
+                for (int i = 0; i < modelnumber; i++)
+                {
+                    if (remain_frame[i] > 0)
+                        remain_frame[i]--;
+                    if (remain_frame[i] == 0)
+                    {
+                        if (blink_flag[i])                      //Blinking
+                        {
+                            remain_frame[i] = (int)(getrand % 3) == 0 ? 36 : 30;
+                            blink_flag[i] = false;
+                        }
+                        else if ((int)(getrand & 0x7F) == 0)  //Not Blinking
+                        {
+                            remain_frame[i] = 5;
+                            blink_flag[i] = true;
+                        }
+                    }
+                }
+            }
         }
 
-        private static ulong currentrand()
+        private static void ButtonPressDelay()
         {
-            return Rand[index];
+            time_elapse(2);
         }
 
-        private static void Advance(int d)
+        private static void time_delay()
         {
-            index += d;
+            if (IsSolgaleo || IsLunala)
+            {
+                int crydelay = IsSolgaleo ? 79 : 76;
+                time_elapse(delaytime - crydelay - 19);
+                if (modelnumber == 7) Rearrange();
+                time_elapse(19);
+                Advance(1);     //Cry Inside Time Delay
+                time_elapse(crydelay);
+            }
+            else
+                time_elapse(delaytime);
         }
 
         public int getframeshift()
@@ -379,29 +411,9 @@ namespace SMEncounterRNGTool
             return index;
         }
 
-        private static void ButtonPressDelay()
-        {
-            time_elapse(2);
-        }
-
-        private static void time_delay()
-        {
-            if (IsSolgaleo || IsLunala)
-            {
-                int crydelay = IsSolgaleo ? 79 : 76;
-                time_elapse(delaytime - crydelay - 19);
-                if (modelnumber == 7) Rearrange();
-                time_elapse(19);
-                Advance(1);     //Cry Inside Time Delay
-                time_elapse(crydelay);
-            }
-            else
-                time_elapse(delaytime);
-        }
-
         private static bool blink_process()
         {
-            bool sync = (int)(getrand() % 100) >= 50;
+            bool sync = (int)(getrand % 100) >= 50;
             time_elapse(3);
             return sync;
         }
@@ -417,37 +429,10 @@ namespace SMEncounterRNGTool
                 blink_flag[i] = blink_flag[order[i]];
             }
         }
-
-        // n/30s elapsed
-        private static void time_elapse(int n)
-        {
-            for (int totalframe = 0; totalframe < n; totalframe++)
-            {
-                for (int i = 0; i < modelnumber; i++)
-                {
-                    if (remain_frame[i] > 0)
-                        remain_frame[i]--;
-
-                    if (remain_frame[i] == 0)
-                    {
-                        if (blink_flag[i])                      //Blinking
-                        {
-                            remain_frame[i] = (int)(getrand() % 3) == 0 ? 36 : 30;
-                            blink_flag[i] = false;
-                        }
-                        else if ((int)(getrand() & 0x7F) == 0)  //Not Blinking
-                        {
-                            remain_frame[i] = 5;
-                            blink_flag[i] = true;
-                        }
-                    }
-                }
-            }
-        }
-
+        
         private byte getUBValue()
         {
-            byte UbValue = (byte)(getrand() % 100);
+            byte UbValue = (byte)(getrand % 100);
             IsUB = UbValue < UB_th;
             return UbValue;
         }
