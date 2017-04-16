@@ -30,18 +30,16 @@ namespace SMEncounterRNGTool
         public static bool Considerdelay;
         public static int PreDelayCorrection;
         public static int delaytime = 93; //For honey 186F =3.1s
-        public static bool ConsiderBlink = true;
         public static int modelnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
         // Generated Attributes
-        private bool SpecialWild => Wild && !Honey && (Encounter_th == 101 || SOS);
-        private bool Listed => !Wild || IsUB;
+        private bool SpecialWild => Encounter_th == 101 || SOS;
         private bool IsShinyLocked => ShinyLocked || IsUB;
         private bool IsWild => Wild && !IsUB;
         private bool NoGender => nogender || IsUB;
-        private int PIDroll_count => (ShinyCharm && !Listed ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
+        private int PIDroll_count => (ShinyCharm && IsWild ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
         private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
 
         public static void ResetModelStatus()
@@ -191,8 +189,7 @@ namespace SMEncounterRNGTool
                 if (Synchro_Stat < 25) st.Synchronize = true;
                 return;
             }
-            if (ConsiderBlink)
-                st.Synchronize = blink_process();
+            st.Synchronize = blink_process();
             if (SolLunaReset)
                 modelnumber = 7;
         }
@@ -215,21 +212,21 @@ namespace SMEncounterRNGTool
         {
             if (UB)
                 st.UbValue = getUBValue();
-            //Normal wild
+            // Normal wild
             if (!IsUB)
             {
                 st.Synchronize = (int)(getrand % 100) >= 50;
                 return;
             }
             // UB
-            if (ConsiderBlink)
-            {
-                time_elapse(7);
-                st.Synchronize = blink_process();
-            }
+            time_elapse(7);
+            st.Synchronize = blink_process();
         }
         private void GenerateNonHoney(RNGResult st)
         {
+            // SOS
+            if (SOS) return;
+
             // Fishing Encounter
             if (fishing)
             {
@@ -237,13 +234,14 @@ namespace SMEncounterRNGTool
                 time_elapse(12);
             }
             // Sync
-            if (!SOS)
-                st.Synchronize = (int)(getrand % 100) >= 50;
+            st.Synchronize = (int)(getrand % 100) >= 50;
+
             // Encounter
-            if (!SpecialWild && !fishing)
-                st.Encounter = (int)(getrand % 100);
-            if (!UB) return;
+            if (Encounter_th == 101 || fishing) return;
+            st.Encounter = (int)(getrand % 100);
+
             // UB
+            if (!UB) return;
             st.UbValue = getUBValue();
             if (IsUB)
             {
@@ -288,7 +286,7 @@ namespace SMEncounterRNGTool
                         st.PID ^= 0x10000000;
                     break;
                 case 2: //Random Shiny
-                    st.PID = (uint)(getrand & 0xFFFFFFFF); 
+                    st.PID = (uint)(getrand & 0xFFFFFFFF);
                     if (e.OtherInfo)
                         st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
                     break;
@@ -429,7 +427,7 @@ namespace SMEncounterRNGTool
                 blink_flag[i] = blink_flag[order[i]];
             }
         }
-        
+
         private byte getUBValue()
         {
             byte UbValue = (byte)(getrand % 100);

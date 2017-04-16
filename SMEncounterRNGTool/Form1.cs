@@ -625,10 +625,6 @@ namespace SMEncounterRNGTool
 
         private void AlwaysSynced_CheckedChanged(object sender, EventArgs e)
         {
-            if (Poke.SelectedIndex == 0)
-                ConsiderBlink.Enabled = !AlwaysSynced.Checked;
-            if (AlwaysSynced.Checked)
-                ConsiderBlink.Checked = ConsiderBlink.Enabled = false;
         }
 
         private void CreateTimeline_CheckedChanged(object sender, EventArgs e)
@@ -987,14 +983,13 @@ namespace SMEncounterRNGTool
                     RNGSearch.remain_frame = (int[])remain_frame.Clone();
                     RNGSearch.blink_flag = (bool[])blink_flag.Clone();
                     RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
-                    result.realtime = realtime;
                     RNGSearch.Rand.RemoveAt(0);
                     RNGSearch.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
                     if (i <= min || i > max)
                         continue;
-                    MarkResults(result, blinkidx: i - min - 1);
+                    MarkResults(result, i - min - 1 , realtime);
                     if (!frameMatch(result, setting))
                         continue;
                     list.Add(getRow_Sta(i - 1, rng, result, DGV));
@@ -1037,7 +1032,7 @@ namespace SMEncounterRNGTool
                 RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
 
                 RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
-                MarkResults(result, blinkidx: i, realtime: i);
+                MarkResults(result, i, i);
 
                 frameadvance = st.NextState();
                 frame += frameadvance;
@@ -1096,7 +1091,6 @@ namespace SMEncounterRNGTool
             RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSearch.PreDelayCorrection = (int)Correction.Value;
             RNGSearch.delaytime = (int)Timedelay.Value / 2;
-            RNGSearch.ConsiderBlink = ConsiderBlink.Checked;
             RNGSearch.modelnumber = ModelNumber;
             RNGSearch.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
             RNGSearch.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
@@ -1184,7 +1178,7 @@ namespace SMEncounterRNGTool
             return true;
         }
 
-        private static readonly string[] blinkmarks = new string[] { "-", "★", "?", "? ★" };
+        private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
 
         private DataGridViewRow getRow_Sta(int i, RNGSearch rng, RNGSearch.RNGResult result, DataGridView dgv)
         {
@@ -1289,9 +1283,8 @@ namespace SMEncounterRNGTool
 
             if (Poke.SelectedIndex == 0) return;
             AlwaysSynced.Checked = AlwaysSync_Index <= Poke.SelectedIndex && Poke.SelectedIndex < UBIndex - 1;
-            ConsiderBlink.Checked = !AlwaysSynced.Checked;
             ConsiderDelay.Checked = true;
-            ConsiderBlink.Enabled = AlwaysSynced.Enabled = false;
+            AlwaysSynced.Enabled = false;
 
             SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex - 1, 0], Pokemon.SpecForm[Poke.SelectedIndex - 1, 1]);
             Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
@@ -1308,7 +1301,6 @@ namespace SMEncounterRNGTool
             {
                 case 1:
                     L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
-                    ConsiderBlink.Checked = false; GenderRatio.Visible = true;
                     Timedelay.Value = (YourID.Checked && !IsEgg.Checked) ? 62 : 0;
                     break;
                 case Fossil_index - 2:
@@ -1317,7 +1309,7 @@ namespace SMEncounterRNGTool
                 case Fossil_index - 1:
                     L_Ability.Visible = Ability.Visible = true; break;
                 case Fossil_index + 1:
-                    Encounter_th.Value = 101; ConsiderBlink.Checked = false; break;
+                    Encounter_th.Value = 101; break;
             }
         }
 

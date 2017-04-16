@@ -153,7 +153,6 @@
             this.Modification = new System.Windows.Forms.CheckBox();
             this.L_StartingPoint = new System.Windows.Forms.Label();
             this.L_TimeSpan = new System.Windows.Forms.Label();
-            this.ConsiderBlink = new System.Windows.Forms.CheckBox();
             this.TimeSpan = new System.Windows.Forms.NumericUpDown();
             this.ShowResultsAfterDelay = new System.Windows.Forms.CheckBox();
             this.AroundTarget = new System.Windows.Forms.CheckBox();
@@ -1775,7 +1774,6 @@
             this.RNGInfo.Controls.Add(this.Modification);
             this.RNGInfo.Controls.Add(this.L_StartingPoint);
             this.RNGInfo.Controls.Add(this.L_TimeSpan);
-            this.RNGInfo.Controls.Add(this.ConsiderBlink);
             this.RNGInfo.Controls.Add(this.TimeSpan);
             this.RNGInfo.Controls.Add(this.ShowResultsAfterDelay);
             this.RNGInfo.Controls.Add(this.AroundTarget);
@@ -1822,16 +1820,6 @@
             this.L_TimeSpan.Size = new System.Drawing.Size(41, 13);
             this.L_TimeSpan.TabIndex = 67;
             this.L_TimeSpan.Text = "时长/s";
-            // 
-            // ConsiderBlink
-            // 
-            this.ConsiderBlink.AutoSize = true;
-            this.ConsiderBlink.Location = new System.Drawing.Point(158, 68);
-            this.ConsiderBlink.Name = "ConsiderBlink";
-            this.ConsiderBlink.Size = new System.Drawing.Size(146, 17);
-            this.ConsiderBlink.TabIndex = 63;
-            this.ConsiderBlink.Text = "考虑眨眼影响（同步）";
-            this.ConsiderBlink.UseVisualStyleBackColor = true;
             // 
             // TimeSpan
             // 
@@ -3565,7 +3553,6 @@
         private System.Windows.Forms.ToolStripMenuItem SHControlPanel;
         private System.Windows.Forms.ToolStripMenuItem HighLightFrameAfter;
         private System.Windows.Forms.NumericUpDown Timedelay;
-        private System.Windows.Forms.CheckBox ConsiderBlink;
         private System.Windows.Forms.CheckBox SafeFOnly;
         private System.Windows.Forms.NumericUpDown TimeSpan;
         private System.Windows.Forms.CheckBox CreateTimeline;
