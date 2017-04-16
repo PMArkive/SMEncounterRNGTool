@@ -24,7 +24,6 @@ namespace SMEncounterRNGTool
             {
                 var serializer = new DataContractJsonSerializer(typeof(Root));
                 root = (Root)serializer.ReadObject(ms);
-
             }
             if (root == null) return null;
             return root.results;

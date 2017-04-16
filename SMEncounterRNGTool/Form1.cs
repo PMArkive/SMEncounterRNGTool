@@ -213,7 +213,6 @@ namespace SMEncounterRNGTool
             if (lang < 0) lang = Array.IndexOf(langlist, "en");
 
             lindex = lang;
-
             ChangeLanguage(null, null);
 
             string TimeResultInstructText = "";
@@ -242,11 +241,7 @@ namespace SMEncounterRNGTool
             Advanced.Checked = Properties.Settings.Default.Advance;
             Poke.SelectedIndex = Properties.Settings.Default.Pokemon;
             GameVersion.SelectedIndex = Properties.Settings.Default.IsSun ? 0 : 1;
-
-            if (Properties.Settings.Default.ClockInput)
-                StartClockInput.Checked = true;
-            else
-                EndClockInput.Checked = true;
+            (Properties.Settings.Default.ClockInput ? StartClockInput : EndClockInput).Checked = true;
 
             ByIVs.Checked = true;
             BySaveScreen.Checked = true;
@@ -256,17 +251,13 @@ namespace SMEncounterRNGTool
             CreateTimeline_CheckedChanged(null, null);
         }
 
-
         private int UBIndex => Pokemon.UB_StartIndex;
 
         private void RefreshLocation()
         {
-            if (Poke.SelectedIndex == 0)
-                locationlist = LocationTable.SMLocationList;
-            else if (Poke.SelectedIndex >= UBIndex)
-                locationlist = Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
-            else
+            if (Poke.SelectedIndex < UBIndex && Poke.SelectedIndex != 0)
                 return;
+            locationlist = Poke.SelectedIndex == 0 ? LocationTable.SMLocationList : Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
 
             Locationlist = locationlist.Select(loc => new Controls.ComboItem(StringItem.getlocationstr(loc), loc)).ToList();
             MetLocation.DisplayMember = "Text";
@@ -288,7 +279,7 @@ namespace SMEncounterRNGTool
                 SlotSpecies.SelectedIndex = tmp;
         }
 
-        private void LoadPersonalInfo()
+        private void LoadSlotSpeciesInfo()
         {
             int SpecForm = (int)SlotSpecies.SelectedValue;
             byte[] Slottype = EncounterArea.SlotType[slotspecies[0]];
@@ -326,7 +317,7 @@ namespace SMEncounterRNGTool
 
         private void Back_Click(object sender, EventArgs e)
         {
-            TextBox tmp = (QRInput.Checked) ? QRList : Clock_List;
+            TextBox tmp = QRInput.Checked ? QRList : Clock_List;
             string str = tmp.Text;
             if (tmp.Text != "")
             {
@@ -340,18 +331,16 @@ namespace SMEncounterRNGTool
 
         private void Get_Clock_Number(object sender, EventArgs e)
         {
-            TextBox tmp = (QRInput.Checked) ? QRList : Clock_List;
+            TextBox tmp = QRInput.Checked ? QRList : Clock_List;
             string str = ((Button)sender).Name;
-            string number = str.Remove(0, str.IndexOf("button") + 6);
+            string n = str.Remove(0, str.IndexOf("button") + 6);
 
-            if (tmp.Text == "")
-                tmp.Text += Convert_Clock(number);
-            else
-                tmp.Text += "," + Convert_Clock(number);
+            if (tmp.Text != "") tmp.Text += ",";
+            tmp.Text += !EndClockInput.Checked || QRInput.Checked ? n : ((Convert.ToInt32(n) + 13) % 17).ToString();
 
             if (QRInput.Checked)
             {
-                if (QRList.Text.Where(c => c == ',').Count() < 3)
+                if (QRList.Text.Count(c => c == ',') < 3)
                     return;
                 QRSearch_Click(null, null);
             }
@@ -359,24 +348,9 @@ namespace SMEncounterRNGTool
                 SearchforSeed(null, null);
         }
 
-        private string Convert_Clock(string n)
-        {
-            int tmp = Convert.ToInt32(n);
-            if (EndClockInput.Checked && !QRInput.Checked)
-            {
-                if (tmp >= 4)
-                    tmp -= 4;
-                else
-                    tmp += 13;
-                n = tmp.ToString();
-            }
-            return n;
-        }
-
         private void SearchforSeed(object sender, EventArgs e)
         {
-            var needle = Clock_List.Text.Split(',');
-            if (Clock_List.Text.Where(c => c == ',').Count() < 7)
+            if (Clock_List.Text.Count(c => c == ',') < 7)
             {
                 SeedResults.Text = "";
                 return;
@@ -393,7 +367,7 @@ namespace SMEncounterRNGTool
                     text = string.Join(" ", results.Select(r => r.seed));
                     if (results.Count() == 1)
                     {
-                        Time_min.Value = 418 + Clock_List.Text.Where(c => c == ',').Count();
+                        Time_min.Value = 418 + Clock_List.Text.Count(c => c == ',');
                         uint s0;
                         if (uint.TryParse(text, NumberStyles.HexNumber, null, out s0))
                             Seed.Value = s0;
@@ -424,7 +398,7 @@ namespace SMEncounterRNGTool
                 int[] temp_List = new int[Clock_List.Length];
 
                 SFMT sfmt = new SFMT(InitialSeed);
-                SFMT seed = new SFMT(InitialSeed);
+                SFMT seed = new SFMT();
                 bool flag = false;
 
                 QRResult.Items.Clear();
@@ -530,7 +504,7 @@ namespace SMEncounterRNGTool
 
         private void SlotSpecies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadPersonalInfo();
+            LoadSlotSpeciesInfo();
             if (SlotSpecies.SelectedIndex > 0 && (Lv_Search.Value > Lv_max.Value || Lv_Search.Value < Lv_min.Value))
                 Lv_Search.Value = 0;
             if (SlotSpecies.SelectedIndex == 0 && Poke.SelectedIndex >= UBIndex)
@@ -761,7 +735,7 @@ namespace SMEncounterRNGTool
             return total_frame;
         }
 
-        private bool showdelay { get { return ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked; } }
+        private bool showdelay => ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;
 
         private void CalcTime_Click(object sender, EventArgs e)
         {
@@ -848,61 +822,67 @@ namespace SMEncounterRNGTool
         private void getblinkflaglist(int min, int max, SFMT sfmt)
         {
             blinkflaglist = new byte[max - min + 2];
-            int Model_n = ModelNumber;
             SFMT st = (SFMT)sfmt.DeepCopy();
-            int blink_flag = 0;
-
-            if (Model_n == 1)
-            {
-                ulong rand;
-                for (int i = 0; i < min - 2; i++)
-                    st.NextUInt64();
-                if ((int)(st.NextUInt64() & 0x7F) == 0)
-                    blinkflaglist[0] = (int)(st.NextUInt64() % 3) == 0 ? (byte)36 : (byte)30;
-                else if ((int)(st.NextUInt64() & 0x7F) == 0)
-                    blink_flag = 1;
-                for (int i = min; i <= max; i++)
-                {
-                    rand = st.NextUInt64();
-                    if (blink_flag == 1)
-                    {
-                        blinkflaglist[i - min] = 5;
-                        blinkflaglist[++i - min] = (int)(rand % 3) == 0 ? (byte)36 : (byte)30;
-                        blink_flag = 0; rand = st.NextUInt64();
-                    }
-                    if ((int)(rand & 0x7F) == 0)
-                        blink_flag = blinkflaglist[i - min] = 1;
-                }
-            }
+            if (ModelNumber == 1)
+                MarkNoNPCFlag(st, min, max);
             else
+                MarkMultipleNPCFlag(st, min, max);
+        }
+
+        private void MarkNoNPCFlag(SFMT st, int min, int max)
+        {
+            int blink_flag = 0;
+            ulong rand;
+            for (int i = 0; i < min - 2; i++)
+                st.NextUInt64();
+            if ((int)(st.NextUInt64() & 0x7F) == 0)
+                blinkflaglist[0] = (int)(st.NextUInt64() % 3) == 0 ? (byte)36 : (byte)30;
+            else if ((int)(st.NextUInt64() & 0x7F) == 0)
+                blink_flag = 1;
+            for (int i = min; i <= max; i++)
             {
-                int[] Unsaferange = new[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
-                List<ulong> Randlist = new List<ulong>();
-                int Min = Math.Max(min - Unsaferange[1], 418);
-                for (int i = 0; i < Min; i++)
-                    st.NextUInt64();
-                for (int i = 0; i <= (ModelNumber - 1) * 5 + 1; i++)
-                    Randlist.Add(st.NextUInt64());
-                for (int i = Min; i <= max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
+                rand = st.NextUInt64();
+                if (blink_flag == 1)
                 {
-                    if ((Randlist[0] & 0x7F) == 0)
+                    blinkflaglist[i - min] = 5;
+                    blinkflaglist[++i - min] = (int)(rand % 3) == 0 ? (byte)36 : (byte)30;
+                    blink_flag = 0; rand = st.NextUInt64();
+                }
+                if ((int)(rand & 0x7F) == 0)
+                    blink_flag = blinkflaglist[i - min] = 1;
+            }
+        }
+
+        private void MarkMultipleNPCFlag(SFMT st, int min, int max)
+        {
+            int Model_n = ModelNumber;
+            int blink_flag = 0;
+            int[] Unsaferange = new[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
+            List<ulong> Randlist = new List<ulong>();
+            int Min = Math.Max(min - Unsaferange[1], 418);
+            for (int i = 0; i < Min; i++)
+                st.NextUInt64();
+            for (int i = 0; i <= (ModelNumber - 1) * 5 + 1; i++)
+                Randlist.Add(st.NextUInt64());
+            for (int i = Min; i <= max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
+            {
+                if ((Randlist[0] & 0x7F) == 0)
+                {
+                    if (blink_flag == 0)
                     {
-                        if (blink_flag == 0)
-                        {
-                            blink_flag = Unsaferange[Checkafter(Randlist)];
-                            if (i >= min) blinkflaglist[i - min] = 1;
-                        }
-                        else
-                        {
-                            blink_flag = Unsaferange[1];
-                            if (i >= min) blinkflaglist[i - min] = 3;
-                        }
+                        blink_flag = Unsaferange[Checkafter(Randlist)];
+                        if (i >= min) blinkflaglist[i - min] = 1;
                     }
-                    else if (blink_flag > 0)
+                    else
                     {
-                        blink_flag--;
-                        if (i >= min) blinkflaglist[i - min] = 2;
+                        blink_flag = Unsaferange[1];
+                        if (i >= min) blinkflaglist[i - min] = 3;
                     }
+                }
+                else if (blink_flag > 0)
+                {
+                    blink_flag--;
+                    if (i >= min) blinkflaglist[i - min] = 2;
                 }
             }
         }
@@ -931,7 +911,7 @@ namespace SMEncounterRNGTool
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
-            var setting = getSettings();
+            var setting = FilterSettings;
             var rng = getRNGSettings();
             if (IsEvent) e = geteventsetting();
 
@@ -983,7 +963,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < StartFrame; i++)
                 sfmt.NextUInt64();
             var st = CreateNPCStatus(sfmt);
-            var setting = getSettings();
+            var setting = FilterSettings;
             var rng = getRNGSettings();
             RNGSearch.ResetModelStatus();
             RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
@@ -1038,7 +1018,7 @@ namespace SMEncounterRNGTool
             DGV.Rows.Clear();
 
             var st = CreateNPCStatus(sfmt);
-            var setting = getSettings();
+            var setting = FilterSettings;
             var rng = getRNGSettings();
             RNGSearch.ResetModelStatus();
             RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
@@ -1084,23 +1064,20 @@ namespace SMEncounterRNGTool
             return new ModelStatus();
         }
 
-        private Filters getSettings()
+        private Filters FilterSettings => new Filters
         {
-            return new Filters
-            {
-                Nature = Nature.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
-                HPType = HiddenPower.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
-                Gender = Gender.SelectedIndex,
-                Ability = Ability.SelectedIndex,
-                Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
-                IVlow = IVlow,
-                IVup = IVup,
-                Stats = Stats,
-                Skip = DisableFilters.Checked,
-                Lv = (int)Lv_Search.Value,
-                PerfectIVs = (byte)PerfectIVs.Value,
-            };
-        }
+            Nature = Nature.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
+            HPType = HiddenPower.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
+            Gender = Gender.SelectedIndex,
+            Ability = Ability.SelectedIndex,
+            Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
+            IVlow = IVlow,
+            IVup = IVup,
+            Stats = Stats,
+            Skip = DisableFilters.Checked,
+            Lv = (int)Lv_Search.Value,
+            PerfectIVs = (byte)PerfectIVs.Value,
+        };
 
         private RNGSearch getRNGSettings()
         {
