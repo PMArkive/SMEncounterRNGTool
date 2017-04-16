@@ -58,7 +58,8 @@ namespace SMEncounterRNGTool
         {
             public byte Nature;
             public byte Clock;
-            public uint PID, EC, PSV;
+            public uint PID, EC;
+            public uint PSV => ((PID >> 16) ^ (PID & 0xFFFF)) >> 4;
             public ulong row_r;
             public int[] IVs;
             public int[] Stats;
@@ -143,7 +144,6 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < PIDroll_count; i++)
             {
                 st.PID = (uint)(getrand() & 0xFFFFFFFF);
-                st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
                 if (st.PSV == TSV)
                 {
                     st.Shiny = true;
@@ -153,7 +153,6 @@ namespace SMEncounterRNGTool
             if (IsShinyLocked && st.PSV == TSV)
             {
                 st.PID ^= 0x10000000;
-                st.PSV ^= 0x100;
                 st.Shiny = false;
             }
 
@@ -282,22 +281,21 @@ namespace SMEncounterRNGTool
             switch (e.PIDType)
             {
                 case 0: //Random PID
-                    st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
-                    if (st.PSV == e.TSV) st.Shiny = true;
+                    st.PID = (uint)(getrand() & 0xFFFFFFFF);
                     break;
                 case 1: //Random NonShiny
-                    st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = ((st.PID >> 16) ^ (st.PID & 0xFFFF)) >> 4;
+                    st.PID = (uint)(getrand() & 0xFFFFFFFF);
                     if (st.PSV == e.TSV)
-                    {
-                        st.PID ^= 0x10000000; st.PSV ^= 0x100;
-                    }
+                        st.PID ^= 0x10000000;
                     break;
                 case 2: //Random Shiny
-                    st.Shiny = true; st.PID = (uint)(getrand() & 0xFFFFFFFF); st.PSV = e.TSV;
-                    if (e.OtherInfo) st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
+                    st.PID = (uint)(getrand() & 0xFFFFFFFF); 
+                    if (e.OtherInfo)
+                        st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
                     break;
                 case 3: st.PID = e.PID; break;//Specified
             }
+            st.Shiny = e.PIDType != 1 && (e.PIDType == 2 || st.PSV == e.TSV);
 
             //IV
             st.IVs = (int[])e.IVs.Clone();
