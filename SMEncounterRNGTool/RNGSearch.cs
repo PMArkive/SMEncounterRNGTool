@@ -69,11 +69,11 @@ namespace SMEncounterRNGTool
 
             public int Encounter = -1;
             public byte Gender;
-            public byte Ability = 1;
+            public byte Ability;
             public byte UbValue = 100;
             public byte Slot;
             public byte Lv;
-            public byte Item = 100;
+            public byte Item;
 
             public int realtime = -1;
         }
@@ -144,16 +144,11 @@ namespace SMEncounterRNGTool
             {
                 st.PID = (uint)(getrand & 0xFFFFFFFF);
                 if (st.PSV == TSV)
-                {
-                    st.Shiny = true;
                     break;
-                }
             }
             if (IsShinyLocked && st.PSV == TSV)
-            {
                 st.PID ^= 0x10000000;
-                st.Shiny = false;
-            }
+            st.Shiny = st.PSV == TSV;
 
             //IV
             st.IVs = new[] { -1, -1, -1, -1, -1, -1 };
@@ -164,23 +159,16 @@ namespace SMEncounterRNGTool
                     st.IVs[i] = (int)(getrand & 0x1F);
 
             //Ability
-            if (IsWild || AlwaysSynchro)
-                st.Ability = (byte)((getrand & 1) + 1);
+            st.Ability = (byte)(IsWild || AlwaysSynchro ? (getrand & 1) + 1 : 1);
 
             //Nature
-            st.Nature = (byte)(getrand % 25);
-            if (st.Synchronize)
-            {
-                st.Nature = Synchro_Stat;
-                index--; // No random # for nature
-            }
+            st.Nature = (byte)(st.Synchronize ? Synchro_Stat : getrand % 25);
 
             //Gender
             st.Gender = (byte)(NoGender ? 0 : ((int)(getrand % 252) >= gender_ratio ? 1 : 2));
 
             //Item
-            if (IsWild && !SOS)
-                st.Item = (byte)(getrand % 100);
+            st.Item = (byte)(IsWild && !SOS ? getrand % 100 : 100);
 
             return st;
         }
@@ -319,7 +307,7 @@ namespace SMEncounterRNGTool
             st.Nature = e.NatureLocked ? e.Nature : (byte)(getrand % 25);
 
             //Gender
-            st.Gender = (e.GenderLocked || nogender) ? e.Gender : (byte)(getrand % 252 >= gender_ratio ? 1 : 2);
+            st.Gender = e.GenderLocked || nogender ? e.Gender : (byte)(getrand % 252 >= gender_ratio ? 1 : 2);
             return st;
         }
 
