@@ -119,7 +119,7 @@
     <Compile Include="RNGResult.cs" />
     <Compile Include="SFMT.cs" />
     <Compile Include="SFMTSeedAPI.cs" />
-    <Compile Include="RNGSearch.cs" />
+    <Compile Include="RNGSetting.cs" />
     <Compile Include="Filters.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
