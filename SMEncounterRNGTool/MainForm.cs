@@ -100,8 +100,8 @@ namespace SMEncounterRNGTool
         private bool IsEvent => Poke.SelectedIndex == 1;
         private int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
 
-        private int ModelNumber => (int)NPC.Value + 1;
-        private int UBIndex => Pokemon.UB_StartIndex;
+        private byte ModelNumber => (byte)(NPC.Value + 1);
+        private byte UBIndex => Pokemon.UB_StartIndex;
         private bool ShowDelay => ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;
         #endregion
 
@@ -1069,7 +1069,7 @@ namespace SMEncounterRNGTool
             IVup = IVup,
             Stats = Stats,
             Skip = DisableFilters.Checked,
-            Lv = (int)Lv_Search.Value,
+            Lv = (byte)Lv_Search.Value,
             PerfectIVs = (byte)PerfectIVs.Value,
         };
 

@@ -27,7 +27,7 @@ namespace SMEncounterRNGTool
         public static bool Considerdelay;
         public static int PreDelayCorrection;
         public static int delaytime = 93; //For honey 186F =3.1s
-        public static int modelnumber;
+        public static byte modelnumber;
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
@@ -393,13 +393,13 @@ namespace SMEncounterRNGTool
         public static byte getslot(int rand)
         {
             byte[] SlotSplitter = SlotDistribution[slottype];
-            for (byte i = 1; i <= 10; i++)
+            for (byte i = 1; i <= 9; i++)
             {
                 rand -= SlotSplitter[i - 1];
                 if (rand < 0)
                     return i;
             }
-            return 10; // Never reach here
+            return 10;
         }
 
         private readonly static byte[][] SlotDistribution = new byte[][]

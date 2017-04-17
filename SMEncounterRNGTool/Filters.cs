@@ -11,7 +11,7 @@ namespace SMEncounterRNGTool
         public int[] IVup, IVlow, Stats;
         public byte PerfectIVs;
         public bool Skip;
-        public int Lv;
+        public byte Lv;
         public bool[] Slot;
 
         public bool CheckIVs(RNGResult result)

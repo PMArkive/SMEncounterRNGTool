@@ -30,13 +30,13 @@
             800,//Necrozma
         };
 
-        public const int Solgaleo_index = 6;
-        public const int Lunala_index = 7;
-        public const int TypeNull_index = 9;
-        public const int Zygarde_index = 11;
-        public const int Fossil_index = 15;
-        public const int UB_StartIndex = 17;
-        public const int AlwaysSync_Index = 8;
+        public const byte Solgaleo_index = 6;
+        public const byte Lunala_index = 7;
+        public const byte TypeNull_index = 9;
+        public const byte Zygarde_index = 11;
+        public const byte Fossil_index = 15;
+        public const byte UB_StartIndex = 17;
+        public const byte AlwaysSync_Index = 8;
         public static bool ShinyLocked(int index)
         {
             if (index == 0)
@@ -59,7 +59,7 @@
             55,65,60,65,65,60,70,75        //UB
         };
 
-        public readonly static int[] NPC =
+        public readonly static byte[] NPC =
         {
             4,
             0,0,0,1,//Tapus
@@ -79,16 +79,16 @@
             4,
         };
 
-        public readonly static int[][] UB_rate =
+        public readonly static byte[][] UB_rate =
         {
-            new []{80,30},
-            new []{30},
-            new []{50},
-            new []{15,30}, //todo
-            new []{30,30}, //todo
-            new []{30},
-            new []{80},
-            new []{5},
+            new byte[]{80,30},
+            new byte[]{30},
+            new byte[]{50},
+            new byte[]{15,30}, //todo
+            new byte[]{30,30}, //todo
+            new byte[]{30},
+            new byte[]{80},
+            new byte[]{5},
         };
 
         public readonly static int[][] UBLocation =
@@ -107,8 +107,8 @@
 
         public static void NatureAdjustment(int[] stats, int nature)
         {
-            int inc = Reorder[nature / 5];
-            int dec = Reorder[nature % 5];
+            byte inc = Reorder[nature / 5];
+            byte dec = Reorder[nature % 5];
             if (inc == dec)
                 return;
             stats[inc] = (int)(1.1 * stats[inc]);

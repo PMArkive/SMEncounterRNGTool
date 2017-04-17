@@ -3,7 +3,7 @@
     class ModelStatus
     {
         public static SFMT smft;
-        public static int Modelnumber;
+        public static byte Modelnumber;
         public int[] remain_frame;
         public bool[] blink_flag;
 
