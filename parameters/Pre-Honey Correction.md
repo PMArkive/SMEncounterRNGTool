@@ -20,27 +20,27 @@
 | **Ten Carat Hill - Farthest Hollow** |   **1**    |
 
 ### Melemele Island
-| Location                         | Correction | Least NPCs # |
-| :------------------------------- | :--------: | :----------: |
-| Route 1                          |     15     |    0/0/2     |
-| Route 1 - Hau'oli Outskirts      |     23     |      1       |
-| Route 1 - Trainer School         |     9      |      0       |
-| Melemele Sea - East              |     9      |      1       |
-| Melemele Sea - West              |     5      |      1       |
-| Route 2                          |     21     |     0/1      |
-| Verdant Cavern                   |   5*-10    |      0       |
-| Route 3                          |     15     |     0/1      |
-| Hau'oli City- Shopping District  |     27     |      0       |
-| Hau'oli City- Beachfront         |     17     |      1       |
-| Hau'oli Cemetery                 |     6      |      3       |
-| Melemele Meadow                  |     5      |      0       |
-| Seaward Cave                     |     1      |      0       |
-| Kala'e bay - Walking             |     1      |      0       |
-| Kala'e bay - Surfing             |     2      |      1       |
+| Location                               | Correction | Least NPCs # |
+| :------------------------------------- | :--------: | :----------: |
+| Route 1                                |     15     |    0/0/2     |
+| Route 1 - Hau'oli Outskirts            |     23     |      1       |
+| Route 1 - Trainer School               |     9      |      0       |
+| Melemele Sea - East                    |     9      |      1       |
+| Melemele Sea - West                    |     5      |      1       |
+| Route 2                                |     21     |     0/1      |
+| Verdant Cavern                         |   5*-10    |      0       |
+| Route 3                                |     15     |     0/1      |
+| Hau'oli City- Shopping District        |     27     |      0       |
+| Hau'oli City- Beachfront               |     17     |      1       |
+| Hau'oli Cemetery                       |     6      |      3       |
+| Melemele Meadow                        |     5      |      0       |
+| Seaward Cave                           |     1      |      0       |
+| Kala'e bay - Walking                   |     1      |      0       |
+| Kala'e bay - Surfing                   |     2      |      1       |
 | Ten Carat Hill Undersea Cave - Walking |     2      |      0       |
 | Ten Carat Hill Undersea Cave - Surfing |     2      |      1       |
-| Ten Carat Hill - Cave            |     2      |      0       |
-| Ten Carat Hill - Farthest Hollow |     1      |      0       |
+| Ten Carat Hill - Cave                  |     2      |      0       |
+| Ten Carat Hill - Farthest Hollow       |     1      |      0       |
 
 ### Akala Island
 | Location                    | Correction | Least NPCs # |
@@ -112,4 +112,4 @@
 
 \* Clear all special spots  
 \*\* Remain to be confirmed  
-Specific spots and encounter tables please visit [here](UB Rate and Spots.md) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.
+Specific spots and encounter tables please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.

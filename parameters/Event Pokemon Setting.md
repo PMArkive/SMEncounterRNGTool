@@ -12,3 +12,6 @@
 |    CoroCoro Charizard     |                          |         | Nonshiny  |        √        |       √        |       √        |
 | Melemele Island Tapu Koko | 3 perfect IVs guaranteed |         |   Shiny   |        √        |       √        |       √        |
 |        Easter Eggs        |                          | √ (Egg) |  Random   |        √        |                |                |
+|       Ash's Pikachu       |                          |         | Nonshiny  |        √        |       √        |       √        |
+|          Bewear           |                          |         | Nonshiny  |        √        |                |       √        |
+
