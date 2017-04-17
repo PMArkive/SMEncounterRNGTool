@@ -3,27 +3,23 @@ using System.Collections.Generic;
 
 namespace SMEncounterRNGTool
 {
-    class RNGSearch
+    class RNGSetting
     {
-        // Search Settings
+        // Background Info (Global variables)
+        public static bool AlwaysSynchro;
+        public static byte Synchro_Stat;
+        public static bool Fix3v;
+        public static int TSV;
+        public static bool ShinyLocked;
+        public static bool ShinyCharm;
+        public static byte PokeLv;
 
-        public bool AlwaysSynchro;
-        public byte Synchro_Stat;
-        public bool Fix3v;
-
-        public int TSV;
-        public bool ShinyLocked;
-        public bool ShinyCharm;
-
-        public byte PokeLv;
-
-        public bool Wild, Honey, UB, fishing, SOS;
-        public byte Lv_max, Lv_min;
-        public byte ChainLength;
-        public byte UB_th, Encounter_th;
-        public bool IsUB;
-        public bool nogender;
-        public byte gender_ratio;
+        public static bool Wild, Honey, UB, fishing, SOS;
+        public static byte Lv_max, Lv_min;
+        public static byte ChainLength;
+        public static byte UB_th, Encounter_th;
+        public static bool nogender;
+        public static byte gender_ratio;
 
         public static byte slottype;
         public static bool Considerhistory;
@@ -35,13 +31,16 @@ namespace SMEncounterRNGTool
         public static int[] remain_frame;
         public static bool[] blink_flag;
 
+        // Personal Info
+        public bool IsUB;
+
         // Generated Attributes
-        private bool SpecialWild => Encounter_th == 101 || SOS;
         private bool IsShinyLocked => ShinyLocked || IsUB;
         private bool IsWild => Wild && !IsUB;
         private bool NoGender => nogender || IsUB;
         private int PIDroll_count => (ShinyCharm && IsWild ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
         private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
+        private static bool SpecialWild => Encounter_th == 101 || SOS;
 
         public static void ResetModelStatus()
         {
@@ -53,53 +52,14 @@ namespace SMEncounterRNGTool
         public static bool IsLunala;
         public static bool SolLunaReset;
 
-        public class RNGResult
+        public RNGResult Generate(EventRule e = null)
         {
-            public byte Nature;
-            public byte Clock;
-            public uint PID, EC;
-            public uint PSV => ((PID >> 16) ^ (PID & 0xFFFF)) >> 4;
-            public ulong row_r;
-            public int[] IVs;
-            public int[] Stats;
-            public bool Shiny;
-            public bool Synchronize;
-            public byte Blink;
-            public int frameshift;
-
-            public int Encounter = -1;
-            public byte Gender;
-            public byte Ability;
-            public byte UbValue = 100;
-            public byte Slot;
-            public byte Lv;
-            public byte Item;
-
-            public int realtime = -1;
+            if (e == null)
+                return GenerateRegular();
+            return GenerateEvent(e);
         }
 
-        public class EventRule
-        {
-            public int[] IVs;
-            public uint TSV;
-            public byte IVsCount;
-            public bool YourID;
-            public bool IsEgg;
-            public byte PIDType;
-            public bool AbilityLocked;
-            public byte Ability;
-            public bool NatureLocked;
-            public byte Nature;
-            public bool GenderLocked;
-            public byte Gender;
-            public bool OtherInfo;
-            public int TID = -1;
-            public int SID = -1;
-            public uint EC;
-            public uint PID;
-        }
-
-        public RNGResult Generate()
+        public RNGResult GenerateRegular()
         {
             RNGResult st = new RNGResult();
             index = 0;
@@ -280,7 +240,9 @@ namespace SMEncounterRNGTool
                     if (e.OtherInfo)
                         st.PID = (uint)(((e.TID ^ e.SID ^ (st.PID & 0xFFFF)) << 16) + (st.PID & 0xFFFF));
                     break;
-                case 3: st.PID = e.PID; break;//Specified
+                case 3: //Specified
+                    st.PID = e.PID;
+                    break;
             }
             st.Shiny = e.PIDType != 1 && (e.PIDType == 2 || st.PSV == e.TSV);
 
@@ -374,7 +336,7 @@ namespace SMEncounterRNGTool
                 time_elapse(delaytime);
         }
 
-        public int getframeshift()
+        public static int getframeshift()
         {
             if (Honey)
             {
@@ -390,7 +352,7 @@ namespace SMEncounterRNGTool
             return index;
         }
 
-        public int getframeshift(EventRule e)
+        public static int getframeshift(EventRule e)
         {
             ButtonPressDelay();
             if (e.YourID && !e.IsEgg)
@@ -445,7 +407,7 @@ namespace SMEncounterRNGTool
             new byte[] { 10,10,20,20,10,10,10,5,4,1 },
         };
 
-        private byte AddtionalPIDRollCount()
+        private static byte AddtionalPIDRollCount()
         {
             if (ChainLength < 11) return 0;
             if (ChainLength < 21) return 4;
@@ -453,7 +415,7 @@ namespace SMEncounterRNGTool
             return 12;
         }
 
-        private byte getperfectivcount()
+        private static byte getperfectivcount()
         {
             if (ChainLength < 5) return 0;
             if (ChainLength < 10) return 1;
@@ -462,7 +424,7 @@ namespace SMEncounterRNGTool
             return 4;
         }
 
-        private byte getHAthershold()
+        private static byte getHAthershold()
         {
             if (ChainLength < 10) return 0;
             if (ChainLength < 20) return 5;

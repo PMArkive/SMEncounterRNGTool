@@ -84,7 +84,7 @@ namespace SMEncounterRNGTool
         private List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
         #endregion
         #region Global Variable
-        private RNGSearch.EventRule e = new RNGSearch.EventRule();
+        private EventRule e = new EventRule();
         private static byte[] blinkflaglist;
         private static int[] locationlist = LocationTable.SMLocationList;
         private EncounterArea ea = new EncounterArea();
@@ -500,7 +500,7 @@ namespace SMEncounterRNGTool
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
-            RNGSearch.slottype = (byte)(ea.Locationidx == 1190 ? 1 : 0); // Poni Plains (4)
+            RNGSetting.slottype = (byte)(ea.Locationidx == 1190 ? 1 : 0); // Poni Plains (4)
 
             Lv_min.Value = ea.SunMoonDifference && IsMoon ? ea.LevelMinMoon : ea.LevelMin;
             Lv_max.Value = ea.SunMoonDifference && IsMoon ? ea.LevelMaxMoon : ea.LevelMax;
@@ -741,7 +741,7 @@ namespace SMEncounterRNGTool
             TimeResult.Items.Clear();
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
-            int delaytime = RNGSearch.delaytime;
+            int delaytime = RNGSetting.delaytime;
             int[] tmptimer = new int[2];
             if (showdelay)
             {
@@ -910,20 +910,19 @@ namespace SMEncounterRNGTool
             List<DataGridViewRow> list = new List<DataGridViewRow>();
             DGV.Rows.Clear();
 
-            var setting = FilterSettings;
-            var rng = getRNGSettings();
-            if (IsEvent) e = geteventsetting();
-
             getblinkflaglist(min, max, sfmt);
 
             for (int i = 0; i < min; i++)
                 sfmt.NextUInt64();
 
-            RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
+            var setting = FilterSettings;
+            var rng = new RNGSetting();
+            e = IsEvent ? geteventsetting() : null;
+            RefreshRNGSettings(sfmt);
 
-            for (int i = min; i <= max; i++, RNGSearch.Rand.RemoveAt(0), RNGSearch.Rand.Add(sfmt.NextUInt64()))
+            for (int i = min; i <= max; i++, RNGSetting.Rand.RemoveAt(0), RNGSetting.Rand.Add(sfmt.NextUInt64()))
             {
-                RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+                RNGResult result = rng.Generate(e);
 
                 MarkResults(result, i - min);
 
@@ -962,11 +961,11 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < StartFrame; i++)
                 sfmt.NextUInt64();
             var st = CreateNPCStatus(sfmt);
+
             var setting = FilterSettings;
-            var rng = getRNGSettings();
-            RNGSearch.ResetModelStatus();
-            RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
-            if (IsEvent) e = geteventsetting();
+            var rng = new RNGSetting();
+            e = IsEvent ? geteventsetting() : null;
+            RefreshRNGSettings(sfmt);
 
             int frameadvance;
             int[] remain_frame;
@@ -981,11 +980,11 @@ namespace SMEncounterRNGTool
 
                 while (frameadvance > 0)
                 {
-                    RNGSearch.remain_frame = (int[])remain_frame.Clone();
-                    RNGSearch.blink_flag = (bool[])blink_flag.Clone();
-                    RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
-                    RNGSearch.Rand.RemoveAt(0);
-                    RNGSearch.Rand.Add(sfmt.NextUInt64());
+                    RNGSetting.remain_frame = (int[])remain_frame.Clone();
+                    RNGSetting.blink_flag = (bool[])blink_flag.Clone();
+                    RNGResult result = rng.Generate(e);
+                    RNGSetting.Rand.RemoveAt(0);
+                    RNGSetting.Rand.Add(sfmt.NextUInt64());
                     frameadvance--;
                     i++;
                     if (i <= min || i > max)
@@ -1017,10 +1016,9 @@ namespace SMEncounterRNGTool
 
             var st = CreateNPCStatus(sfmt);
             var setting = FilterSettings;
-            var rng = getRNGSettings();
-            RNGSearch.ResetModelStatus();
-            RNGSearch.CreateBuffer(sfmt, ConsiderDelay.Checked);
-            if (IsEvent) e = geteventsetting();
+            var rng = new RNGSetting();
+            e = IsEvent ? geteventsetting() : null;
+            RefreshRNGSettings(sfmt);
 
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
@@ -1029,10 +1027,10 @@ namespace SMEncounterRNGTool
             for (int i = 0; i <= totaltime; i++)
             {
                 Currentframe = frame;
-                RNGSearch.remain_frame = (int[])st.remain_frame.Clone();
-                RNGSearch.blink_flag = (bool[])st.blink_flag.Clone();
+                RNGSetting.remain_frame = (int[])st.remain_frame.Clone();
+                RNGSetting.blink_flag = (bool[])st.blink_flag.Clone();
 
-                RNGSearch.RNGResult result = IsEvent ? rng.GenerateEvent(e) : rng.Generate();
+                RNGResult result = rng.Generate(e);
                 MarkResults(result, i, i);
 
                 frameadvance = st.NextState();
@@ -1040,8 +1038,8 @@ namespace SMEncounterRNGTool
 
                 for (int j = 0; j < frameadvance; j++)
                 {
-                    RNGSearch.Rand.RemoveAt(0);
-                    RNGSearch.Rand.Add(sfmt.NextUInt64());
+                    RNGSetting.Rand.RemoveAt(0);
+                    RNGSetting.Rand.Add(sfmt.NextUInt64());
                 }
 
                 if (!frameMatch(result, setting))
@@ -1076,8 +1074,7 @@ namespace SMEncounterRNGTool
             Lv = (int)Lv_Search.Value,
             PerfectIVs = (byte)PerfectIVs.Value,
         };
-
-        private RNGSearch getRNGSettings()
+        private void RefreshRNGSettings(SFMT sfmt)
         {
             byte gender_threshold = 0;
             switch (GenderRatio.SelectedIndex)
@@ -1087,43 +1084,40 @@ namespace SMEncounterRNGTool
                 case 3: gender_threshold = 63; break;
                 case 4: gender_threshold = 189; break;
             }
-
-            RNGSearch.Considerhistory = CreateTimeline.Checked || Refinement.Checked;
-            RNGSearch.Considerdelay = ShowResultsAfterDelay.Checked;
-            RNGSearch.PreDelayCorrection = (int)Correction.Value;
-            RNGSearch.delaytime = (int)Timedelay.Value / 2;
-            RNGSearch.modelnumber = ModelNumber;
-            RNGSearch.ConsiderBagEnteringTime = EnterBagTime.Checked;
-            RNGSearch.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
-            RNGSearch.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
-            RNGSearch.SolLunaReset = (RNGSearch.IsSolgaleo || RNGSearch.IsLunala) && ModelNumber == 7;
-
-            var rng = new RNGSearch
-            {
-                Synchro_Stat = (byte)(SyncNature.SelectedIndex - 1),
-                TSV = (int)TSV.Value,
-                AlwaysSynchro = AlwaysSynced.Checked,
-                Honey = Honey.Checked,
-                UB = UB.Checked,
-                ShinyCharm = ShinyCharm.Checked,
-                Wild = Wild.Checked,
-                Fix3v = Fix3v.Checked,
-                gender_ratio = gender_threshold,
-                nogender = GenderRatio.SelectedIndex == 0,
-                PokeLv = Wild.Checked && Poke.SelectedIndex > 0 ? Pokemon.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value,
-                Lv_min = (byte)Lv_min.Value,
-                Lv_max = (byte)Lv_max.Value,
-                UB_th = (byte)UB_th.Value,
-                Encounter_th = (byte)Encounter_th.Value,
-                ShinyLocked = Pokemon.ShinyLocked(Poke.SelectedIndex),
-                fishing = Fishing.Checked,
-                SOS = SOS.Checked,
-                ChainLength = (byte)ChainLength.Value,
-            };
-            return rng;
+            RNGSetting.Considerhistory = CreateTimeline.Checked || Refinement.Checked;
+            RNGSetting.Considerdelay = ShowResultsAfterDelay.Checked;
+            RNGSetting.PreDelayCorrection = (int)Correction.Value;
+            RNGSetting.delaytime = (int)Timedelay.Value / 2;
+            RNGSetting.modelnumber = ModelNumber;
+            RNGSetting.ConsiderBagEnteringTime = EnterBagTime.Checked;
+            RNGSetting.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
+            RNGSetting.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
+            RNGSetting.SolLunaReset = (RNGSetting.IsSolgaleo || RNGSetting.IsLunala) && ModelNumber == 7;
+            RNGSetting.Synchro_Stat = (byte)(SyncNature.SelectedIndex - 1);
+            RNGSetting.TSV = (int)TSV.Value;
+            RNGSetting.AlwaysSynchro = AlwaysSynced.Checked;
+            RNGSetting.Honey = Honey.Checked;
+            RNGSetting.UB = UB.Checked;
+            RNGSetting.ShinyCharm = ShinyCharm.Checked;
+            RNGSetting.Wild = Wild.Checked;
+            RNGSetting.Fix3v = Fix3v.Checked;
+            RNGSetting.nogender = GenderRatio.SelectedIndex == 0;
+            RNGSetting.gender_ratio = gender_threshold;
+            RNGSetting.PokeLv = Wild.Checked && Poke.SelectedIndex > 0 ? Pokemon.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value;
+            RNGSetting.Lv_min = (byte)Lv_min.Value;
+            RNGSetting.Lv_max = (byte)Lv_max.Value;
+            RNGSetting.UB_th = (byte)UB_th.Value;
+            RNGSetting.Encounter_th = (byte)Encounter_th.Value;
+            RNGSetting.ShinyLocked = Pokemon.ShinyLocked(Poke.SelectedIndex);
+            RNGSetting.fishing = Fishing.Checked;
+            RNGSetting.SOS = SOS.Checked;
+            RNGSetting.ChainLength = (byte)ChainLength.Value;
+            
+            RNGSetting.ResetModelStatus();
+            RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
         }
 
-        private void MarkResults(RNGSearch.RNGResult result, int blinkidx = -1, int realtime = -1)
+        private void MarkResults(RNGResult result, int blinkidx = -1, int realtime = -1)
         {
             // Mark realtime
             if (realtime > -1)
@@ -1142,7 +1136,7 @@ namespace SMEncounterRNGTool
             }
         }
 
-        private bool frameMatch(RNGSearch.RNGResult result, Filters setting)
+        private bool frameMatch(RNGResult result, Filters setting)
         {
             if (setting.Skip)
                 return true;
@@ -1182,7 +1176,7 @@ namespace SMEncounterRNGTool
 
         private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
 
-        private DataGridViewRow getRow_Sta(int i, RNGSearch rng, RNGSearch.RNGResult result, DataGridView dgv)
+        private DataGridViewRow getRow_Sta(int i, RNGSetting rng, RNGResult result, DataGridView dgv)
         {
             int d = i - (int)Time_max.Value;
             string true_nature = StringItem.naturestr[result.Nature];
@@ -1315,7 +1309,7 @@ namespace SMEncounterRNGTool
             }
         }
 
-        private RNGSearch.EventRule geteventsetting()
+        private EventRule geteventsetting()
         {
             int[] IVs = new[] { -1, -1, -1, -1, -1, -1 };
             for (int i = 0; i < 6; i++)
@@ -1326,7 +1320,7 @@ namespace SMEncounterRNGTool
                 Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
                 IVs = new[] { -1, -1, -1, -1, -1, -1 };
             }
-            RNGSearch.EventRule e = new RNGSearch.EventRule
+            EventRule e = new EventRule
             {
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (byte)IVsCount.Value,

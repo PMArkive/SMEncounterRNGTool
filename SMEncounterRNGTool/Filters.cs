@@ -14,7 +14,7 @@ namespace SMEncounterRNGTool
         public int Lv;
         public bool[] Slot;
 
-        public bool CheckIVs(RNGSearch.RNGResult result)
+        public bool CheckIVs(RNGResult result)
         {
             for (int i = 0; i < 6; i++)
                 if (IVlow[i] > result.IVs[i] || result.IVs[i] > IVup[i])
@@ -24,7 +24,7 @@ namespace SMEncounterRNGTool
             return true;
         }
 
-        public bool CheckStats(RNGSearch.RNGResult result)
+        public bool CheckStats(RNGResult result)
         {
             for (int i = 0; i < 6; i++)
                 if (Stats[i] != 0 && Stats[i] != result.Stats[i])
