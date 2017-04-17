@@ -2,32 +2,32 @@
 {
     class Pokemon
     {
-        public readonly static int[,] SpecForm =
+        public readonly static int[] SpecForm =
         {
-            { 151, 0 },//Event
-            { 785, 0 },//Tapu Koko
-            { 786, 0 },//Tapu Lele
-            { 787, 0 },//Tapu Bulu
-            { 788, 0 },//Tapu Fini
-            { 791, 0 },//Solgaleo
-            { 792, 0 },//Lunala
-            { 789, 0 },//Cosmog
-            { 772, 0 },//Type:Null
-            { 801, 0 },//Magearna
-            { 718, 2 },//Zygarde-10%
-            { 718, 3 },//Zygarde-50%
-            { 142, 0 },//Aerodactyl
-            { 137, 0 },//Porygon
-            { 142, 0 },//Fossil 
-            { 739, 0 },//Crabrawler
-            { 793, 0 },//Nihilego
-            { 794, 0 },//Buzzwole
-            { 795, 0 },//Pheromosa
-            { 796, 0 },//Xurkitree
-            { 797, 0 },//Celesteela
-            { 798, 0 },//Kartana
-            { 799, 0 },//Guzzlord
-            { 800, 0 },//Necrozma
+            151,//Event
+            785,//Tapu Koko
+            786,//Tapu Lele
+            787,//Tapu Bulu
+            788,//Tapu Fini
+            791,//Solgaleo
+            792,//Lunala
+            789,//Cosmog
+            772,//Type:Null
+            801,//Magearna
+            718 + (2 << 11),//Zygarde-10%
+            718 + (3 << 11),//Zygarde-50%
+            142,//Aerodactyl
+            137,//Porygon
+            142,//Fossil 
+            739,//Crabrawler
+            793,//Nihilego
+            794,//Buzzwole
+            795,//Pheromosa
+            796,//Xurkitree
+            797,//Celesteela
+            798,//Kartana
+            799,//Guzzlord
+            800,//Necrozma
         };
 
         public const int Solgaleo_index = 6;
@@ -103,33 +103,16 @@
             new []{548},
         };
 
-        public readonly static double[,] NatureAdj =
+        public readonly static byte[] Reorder = { 1, 2, 5, 3, 4 };
+
+        public static void NatureAdjustment(int[] stats, int nature)
         {
-            { 1, 1, 1, 1, 1, 1 },
-            { 1, 1.1, 0.9, 1, 1, 1 },
-            { 1, 1.1, 1, 1, 1, 0.9 },
-            { 1, 1.1, 1, 0.9, 1, 1 },
-            { 1, 1.1, 1, 1, 0.9, 1 },
-            { 1, 0.9, 1.1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1.1, 1, 1, 0.9 },
-            { 1, 1, 1.1, 0.9, 1, 1 },
-            { 1, 1, 1.1, 1, 0.9, 1 },
-            { 1, 0.9, 1,1, 1, 1.1 },
-            { 1, 1, 0.9, 1,1, 1.1 },
-            { 1, 1,1, 1, 1, 1 },
-            { 1, 1,1, 0.9, 1, 1.1 },
-            { 1, 1,1, 1, 0.9, 1.1 },
-            { 1, 0.9, 1, 1.1, 1,1 },
-            { 1, 1, 0.9, 1.1, 1, 1 },
-            { 1, 1, 1, 1.1, 1, 0.9 },
-            { 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1.1, 0.9, 1 },
-            { 1, 0.9, 1,1, 1.1, 1 },
-            { 1, 1, 0.9, 1, 1.1, 1},
-            { 1, 1, 1, 1, 1.1, 0.9 },
-            { 1, 1, 1, 0.9, 1.1, 1 },
-            { 1, 1, 1, 1, 1, 1}
-        };
+            int inc = Reorder[nature / 5];
+            int dec = Reorder[nature % 5];
+            if (inc == dec)
+                return;
+            stats[inc] = (int)(1.1 * stats[inc]);
+            stats[dec] = (int)(0.9 * stats[dec]);
+        }
     }
 }

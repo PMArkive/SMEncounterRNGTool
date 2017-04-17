@@ -168,8 +168,8 @@ namespace SMEncounterRNGTool
                 Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
             Poke.Items[1] = EVENT_STR[lindex];
-            for (int i = 1; i < Pokemon.SpecForm.GetLength(0); i++)
-                Poke.Items[i + 1] = StringItem.species[Pokemon.SpecForm[i, 0]];
+            for (int i = 1; i < Pokemon.SpecForm.Length; i++)
+                Poke.Items[i + 1] = StringItem.species[Pokemon.SpecForm[i] & 0x7FF];
 
             RefreshLocation();
 
@@ -213,7 +213,7 @@ namespace SMEncounterRNGTool
             Poke.Items.Add("-");
             SyncNature.Items.AddRange(StringItem.naturestr);
             Event_Nature.Items.AddRange(StringItem.naturestr);
-            for (int i = 0; i < Pokemon.SpecForm.GetLength(0); i++)
+            for (int i = 0; i < Pokemon.SpecForm.Length; i++)
                 Poke.Items.Add("");
 
             Gender.Items.AddRange(StringItem.genderstr);
@@ -301,7 +301,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < 10; i++)
                 Slot.CheckBoxItems[i + 1].Checked = Slotidx.Contains(Slottype[i]);
 
-            SetPersonalInfo(SpecForm & 0x7FF, SpecForm >> 11);
+            SetPersonalInfo(SpecForm);
         }
 
         private void SetPersonalInfo(int Species, int Form)
@@ -320,6 +320,7 @@ namespace SMEncounterRNGTool
             }
             Fix3v.Checked = t.EggGroups[0] == 0x0F; //Undiscovered Group
         }
+        private void SetPersonalInfo(int SpecForm) => SetPersonalInfo(SpecForm & 0x7FF, SpecForm >> 11);
 
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)
@@ -1110,7 +1111,7 @@ namespace SMEncounterRNGTool
             RNGSetting.fishing = Fishing.Checked;
             RNGSetting.SOS = SOS.Checked;
             RNGSetting.ChainLength = (byte)ChainLength.Value;
-            
+
             RNGSetting.ResetModelStatus();
             RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
         }
@@ -1130,7 +1131,8 @@ namespace SMEncounterRNGTool
                 result.Stats = new int[6];
                 result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + result.Lv + 10;
                 for (int i = 1; i < 6; i++)
-                    result.Stats[i] = (int)(((((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5) * Pokemon.NatureAdj[result.Nature, i]);
+                    result.Stats[i] = (((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5;
+                Pokemon.NatureAdjustment(result.Stats, result.Nature);
             }
         }
 
@@ -1273,6 +1275,7 @@ namespace SMEncounterRNGTool
             Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != UBIndex - 1;
             //Event
             L_EventInstruction.Visible = IsEvent;
+            SyncNature.Enabled = !IsEvent;
             //
             if (Poke.SelectedIndex == Fossil_index + 1) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
 
@@ -1280,8 +1283,7 @@ namespace SMEncounterRNGTool
             AlwaysSynced.Checked = AlwaysSync_Index <= Poke.SelectedIndex && Poke.SelectedIndex < UBIndex - 1;
             ConsiderDelay.Checked = true;
             AlwaysSynced.Enabled = false;
-
-            SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex - 1, 0], Pokemon.SpecForm[Poke.SelectedIndex - 1, 1]);
+            SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex - 1]);
             Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
 
             if (Poke.SelectedIndex < UBIndex)

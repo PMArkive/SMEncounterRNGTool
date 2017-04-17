@@ -207,6 +207,7 @@ namespace SMEncounterRNGTool
 
             st.row_r = Rand[0];
             st.Clock = (byte)(st.row_r % 17);
+            st.Lv = PokeLv;
 
             // Reset model Status
             if (!Considerhistory)
