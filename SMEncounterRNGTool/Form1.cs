@@ -10,9 +10,9 @@ using static PKHeX.Util;
 
 namespace SMEncounterRNGTool
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -82,18 +82,29 @@ namespace SMEncounterRNGTool
         private List<NumericUpDown> EventIV = new List<NumericUpDown>();
         private List<CheckBox> EventIVLocked = new List<CheckBox>();
         private List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
+        private List<DataGridViewRow> dgvrowlist = new List<DataGridViewRow>();
         #endregion
+
         #region Global Variable
+        private string version = "1.1.0";
+
         private EventRule e = new EventRule();
+        private RNGSetting rng = new RNGSetting();
+        private Filters setting = new Filters();
+        private ModelStatus status = new ModelStatus();
         private static byte[] blinkflaglist;
         private static int[] locationlist = LocationTable.SMLocationList;
         private EncounterArea ea = new EncounterArea();
         private bool IsMoon => GameVersion.SelectedIndex > 0;
         private bool IsNight => Night.Checked;
+        private bool IsEvent => Poke.SelectedIndex == 1;
         private int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
 
-        private string version = "1.1.0";
+        private int ModelNumber => (int)NPC.Value + 1;
+        private int UBIndex => Pokemon.UB_StartIndex;
+        private bool ShowDelay => ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;
         #endregion
+
         #region Translation
         private string curlanguage;
         private static readonly string[] langlist = { "en", "cn" };
@@ -253,8 +264,6 @@ namespace SMEncounterRNGTool
             NPC_ValueChanged(null, null);
             CreateTimeline_CheckedChanged(null, null);
         }
-
-        private int UBIndex => Pokemon.UB_StartIndex;
 
         private void RefreshLocation()
         {
@@ -734,16 +743,14 @@ namespace SMEncounterRNGTool
             return total_frame;
         }
 
-        private bool showdelay => ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;
-
         private void CalcTime_Click(object sender, EventArgs e)
         {
             TimeResult.Items.Clear();
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
-            int delaytime = RNGSetting.delaytime;
+            int delaytime = (int)Timedelay.Value / 2;
             int[] tmptimer = new int[2];
-            if (showdelay)
+            if (ShowDelay)
             {
                 for (int tmp = max - ModelNumber * delaytime; tmp <= max; tmp++)
                 {
@@ -765,8 +772,8 @@ namespace SMEncounterRNGTool
             string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
             switch (lindex)
             {
-                case 0: str = "Set Eontimer for" + str + (showdelay ? $" Hit frame {max}" : ""); break;
-                case 1: str = "计时器设置为" + str + (showdelay ? $" 在 {max} 帧按A" : ""); break;
+                case 0: str = "Set Eontimer for" + str + (ShowDelay ? $" Hit frame {max}" : ""); break;
+                case 1: str = "计时器设置为" + str + (ShowDelay ? $" 在 {max} 帧按A" : ""); break;
             }
             TimeResult.Items.Add(str);
         }
@@ -789,8 +796,6 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Search
-        private int ModelNumber => (int)NPC.Value + 1;
-        private bool IsEvent => Poke.SelectedIndex == 1;
 
         private void CalcList_Click(object sender, EventArgs e)
         {
@@ -907,18 +912,13 @@ namespace SMEncounterRNGTool
             }
 
             SFMT sfmt = new SFMT((uint)Seed.Value);
-            List<DataGridViewRow> list = new List<DataGridViewRow>();
-            DGV.Rows.Clear();
 
             getblinkflaglist(min, max, sfmt);
 
             for (int i = 0; i < min; i++)
                 sfmt.NextUInt64();
 
-            var setting = FilterSettings;
-            var rng = new RNGSetting();
-            e = IsEvent ? geteventsetting() : null;
-            RefreshRNGSettings(sfmt);
+            Prepare(sfmt);
 
             for (int i = min; i <= max; i++, RNGSetting.Rand.RemoveAt(0), RNGSetting.Rand.Add(sfmt.NextUInt64()))
             {
@@ -929,11 +929,11 @@ namespace SMEncounterRNGTool
                 if (!frameMatch(result, setting))
                     continue;
 
-                list.Add(getRow_Sta(i, rng, result, DGV));
+                dgvrowlist.Add(getRow_Sta(i, rng, result, DGV));
 
-                if (list.Count > 100000) break;
+                if (dgvrowlist.Count > 100000) break;
             }
-            DGV.Rows.AddRange(list.ToArray());
+            DGV.Rows.AddRange(dgvrowlist.ToArray());
             DGV.CurrentCell = null;
         }
 
@@ -953,19 +953,12 @@ namespace SMEncounterRNGTool
 
             int StartFrame = (int)Frame_min.Value;
 
-            List<DataGridViewRow> list = new List<DataGridViewRow>();
-            DGV.Rows.Clear();
-
             getblinkflaglist(min, max, sfmt);
 
             for (int i = 0; i < StartFrame; i++)
                 sfmt.NextUInt64();
-            var st = CreateNPCStatus(sfmt);
 
-            var setting = FilterSettings;
-            var rng = new RNGSetting();
-            e = IsEvent ? geteventsetting() : null;
-            RefreshRNGSettings(sfmt);
+            Prepare(sfmt);
 
             int frameadvance;
             int[] remain_frame;
@@ -974,9 +967,9 @@ namespace SMEncounterRNGTool
             int realtime = 0;
             for (int i = StartFrame; i <= max;)
             {
-                remain_frame = (int[])st.remain_frame.Clone();
-                blink_flag = (bool[])st.blink_flag.Clone();
-                frameadvance = st.NextState();
+                remain_frame = (int[])status.remain_frame.Clone();
+                blink_flag = (bool[])status.blink_flag.Clone();
+                frameadvance = status.NextState();
 
                 while (frameadvance > 0)
                 {
@@ -992,12 +985,12 @@ namespace SMEncounterRNGTool
                     MarkResults(result, i - min - 1, realtime);
                     if (!frameMatch(result, setting))
                         continue;
-                    list.Add(getRow_Sta(i - 1, rng, result, DGV));
+                    dgvrowlist.Add(getRow_Sta(i - 1, rng, result, DGV));
                 }
                 realtime++;
-                if (list.Count > 100000) break;
+                if (dgvrowlist.Count > 100000) break;
             }
-            DGV.Rows.AddRange(list.ToArray());
+            DGV.Rows.AddRange(dgvrowlist.ToArray());
             DGV.CurrentCell = null;
         }
 
@@ -1011,14 +1004,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < start_frame; i++)
                 sfmt.NextUInt64();
 
-            List<DataGridViewRow> list = new List<DataGridViewRow>();
-            DGV.Rows.Clear();
-
-            var st = CreateNPCStatus(sfmt);
-            var setting = FilterSettings;
-            var rng = new RNGSetting();
-            e = IsEvent ? geteventsetting() : null;
-            RefreshRNGSettings(sfmt);
+            Prepare(sfmt);
 
             int totaltime = (int)TimeSpan.Value * 30;
             int frame = (int)Frame_min.Value;
@@ -1027,13 +1013,13 @@ namespace SMEncounterRNGTool
             for (int i = 0; i <= totaltime; i++)
             {
                 Currentframe = frame;
-                RNGSetting.remain_frame = (int[])st.remain_frame.Clone();
-                RNGSetting.blink_flag = (bool[])st.blink_flag.Clone();
+                RNGSetting.remain_frame = (int[])status.remain_frame.Clone();
+                RNGSetting.blink_flag = (bool[])status.blink_flag.Clone();
 
                 RNGResult result = rng.Generate(e);
                 MarkResults(result, i, i);
 
-                frameadvance = st.NextState();
+                frameadvance = status.NextState();
                 frame += frameadvance;
 
                 for (int j = 0; j < frameadvance; j++)
@@ -1045,12 +1031,23 @@ namespace SMEncounterRNGTool
                 if (!frameMatch(result, setting))
                     continue;
 
-                list.Add(getRow_Sta(Currentframe, rng, result, DGV));
+                dgvrowlist.Add(getRow_Sta(Currentframe, rng, result, DGV));
 
-                if (list.Count > 100000) break;
+                if (dgvrowlist.Count > 100000) break;
             }
-            DGV.Rows.AddRange(list.ToArray());
+            DGV.Rows.AddRange(dgvrowlist.ToArray());
             DGV.CurrentCell = null;
+        }
+
+        private void Prepare(SFMT sfmt)
+        {
+            dgvrowlist.Clear();
+            DGV.Rows.Clear();
+            status = CreateNPCStatus(sfmt);
+            setting = FilterSettings;
+            rng = new RNGSetting();
+            e = IsEvent ? geteventsetting() : null;
+            RefreshRNGSettings(sfmt);
         }
 
         private ModelStatus CreateNPCStatus(SFMT sfmt)
@@ -1074,6 +1071,7 @@ namespace SMEncounterRNGTool
             Lv = (int)Lv_Search.Value,
             PerfectIVs = (byte)PerfectIVs.Value,
         };
+
         private void RefreshRNGSettings(SFMT sfmt)
         {
             byte gender_threshold = 0;
@@ -1174,6 +1172,7 @@ namespace SMEncounterRNGTool
             return true;
         }
 
+
         private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
 
         private DataGridViewRow getRow_Sta(int i, RNGSetting rng, RNGResult result, DataGridView dgv)
@@ -1181,7 +1180,7 @@ namespace SMEncounterRNGTool
             int d = i - (int)Time_max.Value;
             string true_nature = StringItem.naturestr[result.Nature];
             string SynchronizeFlag = result.Synchronize ? "O" : "X";
-            if (result.UbValue < UB_th.Value && ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked)
+            if (result.UbValue < UB_th.Value && ShowDelay)
                 result.Blink = 2;
             string BlinkFlag = result.Blink < 4 ? blinkmarks[result.Blink] : result.Blink.ToString();
             string PSV = result.PSV.ToString("D4");
