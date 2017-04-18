@@ -23,29 +23,29 @@ And ALL Pokemon RNG Researcher.
 ## Usage
 ### With emtimer/EonTimer
 1. Select the `Pokemon` you would like to RNG.  
-For Solgaleo/Lunala, you need to test the NPCs number first.  
-For wild pokemon, use the blank setting of `Pokemon`, select your `GameVersion`, `Location` and `Species`.
+  For Solgaleo/Lunala, you need to test the NPCs number first.  
+  For wild pokemon, use the blank setting of `Pokemon`, select your `GameVersion`, `Location` and `Species`.
 2. Find your `Seed` via the clock hands sequence on Continue Screen
 3. Set up the `Filters` and click `Search`
 4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
-5. Put your current frame into the first box of `Timing Range`. (The tool will automatically set this value when you are using the `Tool Kit` Tab)
+5. Put your current frame into the first box of `Timing Range`. (The tool will automatically set this value if you are using the `Tool Kit` Tab)
 6. Click `Calc` and get the timer setting, set the timer. 
 7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
 8. Start the dialogue until the [final screen](#final-screen-when-pressing-a), wait for the timer.
 9. When the timer is done, click A at the same time, receive or battle with the Pokemon.
 10. If the Pokemon is not the one you want, find the frame you actually hit, put it in the `Time Calculator`, calibrate the Pre-Timer and try again  
-    ***Tips:*** For better results, please keep `"?" Frame Refinement` checked while searching.
+  ***Tips:*** For better results, please keep `"?" Frame Refinement` checked while searching.
 
 ### With PokeCalcNTR
 1. Select the `Pokemon` you would like to RNG.
 2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
 3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
 4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
-5. If you would like to find the timing of entering bag, please Check `EnterBagTime`.
+5. If you  you are using honey and would like to find the timing of entering bag, please check `EnterBagTime`.
 6. Click `Search`, you will see the game will follow timeline the tool created.
 7. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
 8. Just change the `Filters` and make another search as usual.  
-    ***Warning:*** Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame`(before checking `Create Timeline`) of your previous timeline as the `Starting Frame`.
+    ***Warning:*** Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame` ( "-" frames with `Create Timeline` unchecked) of your previous timeline as the `Starting Frame`.
 
 ## Final screen when pressing A
 Usually it's the last 'A' before the battle starts, or the special BLACK dialogue box. 
@@ -64,7 +64,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - ★: One person on the map will blink soon, a warning for nearby frames.
 - ?: The spread might be affected by the history of NPC status so it's unsafe.*
 - -: The safe frames can be 100% predicted.
-* Using "?" Frame Refinement will get better prediction.
+  \* Using `"?" Frame Refinement` will get better prediction.
 
 ## Useful References
 - [UB Rate(%) and No NPC Spots](parameters/UB%20Rate%20and%20Spots.md) 

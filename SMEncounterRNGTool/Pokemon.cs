@@ -4,6 +4,7 @@
     {
         public readonly static int[] SpecForm =
         {
+            0,
             151,//Event
             785,//Tapu Koko
             786,//Tapu Lele
@@ -32,11 +33,12 @@
 
         public const byte Solgaleo_index = 6;
         public const byte Lunala_index = 7;
+        public const byte AlwaysSync_Index = 8;
         public const byte TypeNull_index = 9;
         public const byte Zygarde_index = 11;
         public const byte Fossil_index = 15;
+        public const byte Crabrawler_index = 16;
         public const byte UB_StartIndex = 17;
-        public const byte AlwaysSync_Index = 8;
         public static bool ShinyLocked(int index)
         {
             if (index == 0)
@@ -50,33 +52,36 @@
 
         public readonly static byte[] PokeLevel =
         {
-            100,
-            60,60,60,60,
-            55,55,5,
-            40,50,50,50,
-            40,30,15, //Stationary
-            0,
-            55,65,60,65,65,60,70,75        //UB
+            0,                              //Blank
+            100,                            //Event
+            60,60,60,60,                    //Tapus
+            55,55,5,                        //Cosmog line
+            40,50,50,50,                    //Gift1
+            40,30,15,                       //Gift2
+            0,                              //Crabrawler
+            55,65,60,65,65,60,70,75         //UB
         };
 
         public readonly static byte[] NPC =
         {
-            4,
-            0,0,0,1,//Tapus
-            6,6,3,
-            8,6,3,3,
-            3,4,1, //Stationary
-            1,
+            0,             //Blank
+            4,             //Event
+            0,0,0,1,       //Tapus
+            6,6,3,         //Cosmog line
+            8,6,3,3,       //Gift1
+            3,4,1,         //Gift2
+            1,             //Crabrawler
         };
 
         public readonly static int[] timedelay =
         {
-            0,
-            0,0,0,0,
-            288,282,34,
-            34,34,32,32,
-            34,34,40,
-            4,
+            0,              //Blank
+            0,              //Event
+            0,0,0,0,        //Tapus
+            288,282,34,     //Cosmog Line
+            34,34,32,32,    //Gift1
+            34,34,40,       //Gift2
+            4,              //Cravrawler
         };
 
         public readonly static byte[][] UB_rate =

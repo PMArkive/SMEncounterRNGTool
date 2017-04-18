@@ -168,8 +168,8 @@ namespace SMEncounterRNGTool
                 Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
             Poke.Items[1] = EVENT_STR[lindex];
-            for (int i = 1; i < Pokemon.SpecForm.Length; i++)
-                Poke.Items[i + 1] = StringItem.species[Pokemon.SpecForm[i] & 0x7FF];
+            for (int i = 2; i < Pokemon.SpecForm.Length; i++)
+                Poke.Items[i] = StringItem.species[Pokemon.SpecForm[i] & 0x7FF];
 
             RefreshLocation();
 
@@ -213,7 +213,7 @@ namespace SMEncounterRNGTool
             Poke.Items.Add("-");
             SyncNature.Items.AddRange(StringItem.naturestr);
             Event_Nature.Items.AddRange(StringItem.naturestr);
-            for (int i = 0; i < Pokemon.SpecForm.Length; i++)
+            for (int i = 1; i < Pokemon.SpecForm.Length; i++)
                 Poke.Items.Add("");
 
             Gender.Items.AddRange(StringItem.genderstr);
@@ -523,7 +523,7 @@ namespace SMEncounterRNGTool
             if (SlotSpecies.SelectedIndex > 0 && (Lv_Search.Value > Lv_max.Value || Lv_Search.Value < Lv_min.Value))
                 Lv_Search.Value = 0;
             if (SlotSpecies.SelectedIndex == 0 && Poke.SelectedIndex >= UBIndex)
-                Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
+                Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex];
         }
 
         private void Method_CheckedChanged(object sender, EventArgs e)
@@ -734,19 +734,19 @@ namespace SMEncounterRNGTool
             TimeResult.Items.Clear();
             int min = (int)Time_min.Value;
             int max = (int)Time_max.Value;
-            int delaytime = (int)Timedelay.Value / 2;
-            int[] tmptimer = new int[2];
             if (!ShowDelay)
             {
                 CalcTime_Output(min, max);
                 return;
             }
+            int[] tmptimer = new int[2];
+            int delaytime = (int)Timedelay.Value / 2;
             for (int tmp = max - ModelNumber * delaytime; tmp <= max; tmp++)
             {
                 tmptimer = CalcFrame(tmp, max);
-                if ((tmptimer[0] + tmptimer[1] > delaytime) && (tmptimer[0] <= delaytime))
+                if (tmptimer[0] + tmptimer[1] > delaytime && tmptimer[0] <= delaytime)
                     CalcTime_Output(min, tmp - (int)Correction.Value);
-                if ((tmptimer[0] == delaytime) && (tmptimer[1] == 0))
+                if (tmptimer[0] == delaytime && tmptimer[1] == 0)
                     CalcTime_Output(min, tmp - (int)Correction.Value);
             }
         }
@@ -813,7 +813,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < min - 2; i++)
                 st.NextUInt64();
             if ((int)(st.NextUInt64() & 0x7F) == 0)
-                blinkflaglist[0] = (int)(st.NextUInt64() % 3) == 0 ? (byte)36 : (byte)30;
+                blinkflaglist[0] = (byte)((int)(st.NextUInt64() % 3) == 0 ? 36 : 30);
             else if ((int)(st.NextUInt64() & 0x7F) == 0)
                 blink_flag = 1;
             for (int i = min; i <= max; i++)
@@ -822,7 +822,7 @@ namespace SMEncounterRNGTool
                 if (blink_flag == 1)
                 {
                     blinkflaglist[i - min] = 5;
-                    blinkflaglist[++i - min] = (int)(rand % 3) == 0 ? (byte)36 : (byte)30;
+                    blinkflaglist[++i - min] = (byte)((int)(rand % 3) == 0 ? 36 : 30);
                     blink_flag = 0; st.NextUInt64(); // Reset and advance
                 }
                 if ((int)(rand & 0x7F) == 0)
@@ -920,7 +920,7 @@ namespace SMEncounterRNGTool
             RNGSetting.Fix3v = Fix3v.Checked;
             RNGSetting.nogender = GenderRatio.SelectedIndex == 0;
             RNGSetting.gender_ratio = gender_threshold;
-            RNGSetting.PokeLv = Wild.Checked && Poke.SelectedIndex > 0 ? Pokemon.PokeLevel[Poke.SelectedIndex - 1] : (byte)Lv_Search.Value;
+            RNGSetting.PokeLv = Wild.Checked && Poke.SelectedIndex > 0 ? Pokemon.PokeLevel[Poke.SelectedIndex] : (byte)Lv_Search.Value;
             RNGSetting.Lv_min = (byte)Lv_min.Value;
             RNGSetting.Lv_max = (byte)Lv_max.Value;
             RNGSetting.UB_th = (byte)UB_th.Value;
@@ -1212,27 +1212,30 @@ namespace SMEncounterRNGTool
             //Enable
             SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = Poke.SelectedIndex == 0;
             GenderRatio.Enabled = Fix3v.Enabled = Poke.SelectedIndex < 2 || Poke.SelectedIndex >= UBIndex;
-            Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != UBIndex - 1;
+            Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != Pokemon.Crabrawler_index;
             //Event
             L_EventInstruction.Visible = IsEvent;
             SyncNature.Enabled = !IsEvent;
             //
-            if (Poke.SelectedIndex == Fossil_index + 1) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
+            if (Poke.SelectedIndex == Pokemon.Crabrawler_index) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
 
             if (Poke.SelectedIndex == 0) return;
             AlwaysSynced.Checked = AlwaysSync_Index <= Poke.SelectedIndex && Poke.SelectedIndex < UBIndex - 1;
             ConsiderDelay.Checked = true;
             AlwaysSynced.Enabled = false;
-            SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex - 1]);
-            Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex - 1];
+            SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex]);
+            Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex];
 
             if (Poke.SelectedIndex < UBIndex)
             {
-                Timedelay.Value = Pokemon.timedelay[Poke.SelectedIndex - 1];
-                NPC.Value = Pokemon.NPC[Poke.SelectedIndex - 1];
+                Timedelay.Value = Pokemon.timedelay[Poke.SelectedIndex];
+                NPC.Value = Pokemon.NPC[Poke.SelectedIndex];
             }
             else
+            {
+                GenderRatio.SelectedIndex = 1;
                 Fix3v.Checked = false;
+            }
 
             switch (Poke.SelectedIndex)
             {

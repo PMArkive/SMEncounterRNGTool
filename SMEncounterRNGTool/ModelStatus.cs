@@ -2,11 +2,11 @@
 {
     class ModelStatus
     {
-        public SFMT smft;
+        public SFMT sfmt;
         public int cnt;
         public byte Modelnumber;
         public int[] remain_frame;
-        public ulong getrand { get { cnt++; return smft.NextUInt64(); } }
+        public ulong getrand { get { cnt++; return sfmt.NextUInt64(); } }
 
         public ModelStatus()
         {
@@ -15,7 +15,7 @@
 
         public ModelStatus(byte n, SFMT st)
         {
-            smft = (SFMT)st.DeepCopy();
+            sfmt = (SFMT)st.DeepCopy();
             Modelnumber = n;
             remain_frame = new int[n];
         }
@@ -45,7 +45,7 @@
         public void frameshift(int n)
         {
             for (int i = 0; i < n; i++)
-                smft.NextInt64();
+                sfmt.NextInt64();
         }
     }
 }
