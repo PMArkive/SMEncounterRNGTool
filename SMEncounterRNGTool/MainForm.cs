@@ -691,6 +691,7 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region TimerCalculateFunction
+
         private int[] CalcFrame(int min, int max)
         {
             uint InitialSeed = (uint)Seed.Value;
@@ -715,28 +716,6 @@ namespace SMEncounterRNGTool
             return total_frame;
         }
 
-        private void CalcTime_Click(object sender, EventArgs e)
-        {
-            TimeResult.Items.Clear();
-            int min = (int)Time_min.Value;
-            int max = (int)Time_max.Value;
-            int delaytime = (int)Timedelay.Value / 2;
-            int[] tmptimer = new int[2];
-            if (ShowDelay)
-            {
-                for (int tmp = max - ModelNumber * delaytime; tmp <= max; tmp++)
-                {
-                    tmptimer = CalcFrame(tmp, max);
-                    if ((tmptimer[0] + tmptimer[1] > delaytime) && (tmptimer[0] <= delaytime))
-                        CalcTime_Output(min, tmp - (int)Correction.Value);
-                    if ((tmptimer[0] == delaytime) && (tmptimer[1] == 0))
-                        CalcTime_Output(min, tmp - (int)Correction.Value);
-                }
-            }
-            else
-                CalcTime_Output(min, max);
-        }
-
         private void CalcTime_Output(int min, int max)
         {
             int[] totaltime = CalcFrame(min, max);
@@ -750,10 +729,32 @@ namespace SMEncounterRNGTool
             TimeResult.Items.Add(str);
         }
 
+        private void CalcTime_Click(object sender, EventArgs e)
+        {
+            TimeResult.Items.Clear();
+            int min = (int)Time_min.Value;
+            int max = (int)Time_max.Value;
+            int delaytime = (int)Timedelay.Value / 2;
+            int[] tmptimer = new int[2];
+            if (!ShowDelay)
+            {
+                CalcTime_Output(min, max);
+                return;
+            }
+            for (int tmp = max - ModelNumber * delaytime; tmp <= max; tmp++)
+            {
+                tmptimer = CalcFrame(tmp, max);
+                if ((tmptimer[0] + tmptimer[1] > delaytime) && (tmptimer[0] <= delaytime))
+                    CalcTime_Output(min, tmp - (int)Correction.Value);
+                if ((tmptimer[0] == delaytime) && (tmptimer[1] == 0))
+                    CalcTime_Output(min, tmp - (int)Correction.Value);
+            }
+        }
+
         private void Reset_Click(object sender, EventArgs e)
         {
-            HiddenPower.ClearSelection();
             if (!AlwaysSynced.Checked) Nature.ClearSelection();
+            HiddenPower.ClearSelection();
             Slot.ClearSelection();
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
@@ -838,24 +839,17 @@ namespace SMEncounterRNGTool
             int Min = Math.Max(min - Unsaferange[1], 418);
             for (int i = 0; i < Min; i++)
                 st.NextUInt64();
-            for (int i = 0; i <= (Model_n - 1) * 5 + 1; i++)
+            for (int i = 0; i <= (Model_n - 1) * 5 + 1; i++) // Create Buffer for checkafter
                 Randlist.Add(st.NextUInt64());
             for (int i = Min; i <= max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
             {
                 if ((Randlist[0] & 0x7F) == 0)
                 {
-                    if (blink_flag == 0)
-                    {
-                        blink_flag = Unsaferange[Checkafter(Randlist)];
-                        if (i >= min) blinkflaglist[i - min] = 1;
-                    }
-                    else
-                    {
-                        blink_flag = Unsaferange[1];
-                        if (i >= min) blinkflaglist[i - min] = 3;
-                    }
+                    blink_flag = Unsaferange[blink_flag == 0 ? Checkafter(Randlist) : 1];
+                    if (i >= min) blinkflaglist[i - min] = (byte)(blink_flag == 0 ? 1 : 3);
+                    continue;
                 }
-                else if (blink_flag > 0)
+                if (blink_flag > 0)
                 {
                     blink_flag--;
                     if (i >= min) blinkflaglist[i - min] = 2;
@@ -865,146 +859,10 @@ namespace SMEncounterRNGTool
 
         private byte Checkafter(List<ulong> Randlist)
         {
-            for (int i = 1; i < Randlist.Count - 1; i++)
-                if ((Randlist[i] & 0x7F) == 0) return 1;
-            if (Randlist[Randlist.Count - 1] % 3 == 0) return 1;
+            if (Randlist.Skip(1).Take(Randlist.Count - 2).Any(r => (r & 0x7F) == 0))
+                return 1;
+            if (Randlist.Last() % 3 == 0) return 1;
             return 0;
-        }
-
-        private void StationarySearch()
-        {
-            int max, min;
-            if (AroundTarget.Checked)
-            {
-                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
-            }
-            else
-            {
-                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
-            }
-
-            SFMT sfmt = new SFMT((uint)Seed.Value);
-
-            getblinkflaglist(min, max, sfmt);
-
-            for (int i = 0; i < min; i++)
-                sfmt.NextUInt64();
-
-            Prepare(sfmt);
-
-            for (int i = min; i <= max; i++, RNGSetting.Rand.RemoveAt(0), RNGSetting.Rand.Add(sfmt.NextUInt64()))
-            {
-                RNGResult result = rng.Generate(e);
-
-                MarkResults(result, i - min);
-
-                if (!frameMatch(result, setting))
-                    continue;
-
-                dgvrowlist.Add(getRow_Sta(i, rng, result, DGV));
-
-                if (dgvrowlist.Count > 100000) break;
-            }
-            DGV.Rows.AddRange(dgvrowlist.ToArray());
-            DGV.CurrentCell = null;
-        }
-
-        private void ConsiderHistoryStationarySearch()
-        {
-            SFMT sfmt = new SFMT((uint)Seed.Value);
-
-            int max, min;
-            if (AroundTarget.Checked)
-            {
-                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
-            }
-            else
-            {
-                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
-            }
-
-            int StartFrame = (int)Frame_min.Value;
-
-            getblinkflaglist(min, max, sfmt);
-
-            for (int i = 0; i < StartFrame; i++)
-                sfmt.NextUInt64();
-
-            Prepare(sfmt);
-
-            int frameadvance;
-            int[] remain_frame;
-
-            int realtime = 0;
-            for (int i = StartFrame; i <= max;)
-            {
-                remain_frame = (int[])status.remain_frame.Clone();
-                frameadvance = status.NextState();
-
-                while (frameadvance > 0)
-                {
-                    RNGSetting.remain_frame = (int[])remain_frame.Clone();
-                    RNGResult result = rng.Generate(e);
-                    RNGSetting.Rand.RemoveAt(0);
-                    RNGSetting.Rand.Add(sfmt.NextUInt64());
-                    frameadvance--;
-                    i++;
-                    if (i <= min || i > max)
-                        continue;
-                    MarkResults(result, i - min - 1, realtime);
-                    if (!frameMatch(result, setting))
-                        continue;
-                    dgvrowlist.Add(getRow_Sta(i - 1, rng, result, DGV));
-                }
-                realtime++;
-                if (dgvrowlist.Count > 100000) break;
-            }
-            DGV.Rows.AddRange(dgvrowlist.ToArray());
-            DGV.CurrentCell = null;
-        }
-
-        private void createtimeline()
-        {
-            SFMT sfmt = new SFMT((uint)Seed.Value);
-
-            int start_frame = (int)Frame_min.Value;
-            getblinkflaglist(start_frame, start_frame, sfmt);
-
-            for (int i = 0; i < start_frame; i++)
-                sfmt.NextUInt64();
-
-            Prepare(sfmt);
-
-            int totaltime = (int)TimeSpan.Value * 30;
-            int frame = (int)Frame_min.Value;
-            int frameadvance, Currentframe;
-
-            for (int i = 0; i <= totaltime; i++)
-            {
-                Currentframe = frame;
-                RNGSetting.remain_frame = (int[])status.remain_frame.Clone();
-
-                RNGResult result = rng.Generate(e);
-                MarkResults(result, i, i);
-
-                frameadvance = status.NextState();
-                frame += frameadvance;
-
-                for (int j = 0; j < frameadvance; j++)
-                {
-                    RNGSetting.Rand.RemoveAt(0);
-                    RNGSetting.Rand.Add(sfmt.NextUInt64());
-                }
-
-                if (!frameMatch(result, setting))
-                    continue;
-
-                dgvrowlist.Add(getRow_Sta(Currentframe, rng, result, DGV));
-
-                if (dgvrowlist.Count > 100000) break;
-            }
-            DGV.Rows.AddRange(dgvrowlist.ToArray());
-            DGV.CurrentCell = null;
         }
 
         private void Prepare(SFMT sfmt)
@@ -1134,7 +992,6 @@ namespace SMEncounterRNGTool
             return true;
         }
 
-
         private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
 
         private DataGridViewRow getRow_Sta(int i, RNGSetting rng, RNGResult result, DataGridView dgv)
@@ -1212,6 +1069,129 @@ namespace SMEncounterRNGTool
             return row;
         }
 
+        private void StationarySearch()
+        {
+            // Blinkflag
+            SFMT sfmt = new SFMT((uint)Seed.Value);
+            int max, min;
+            if (AroundTarget.Checked)
+            {
+                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
+            }
+            else
+            {
+                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
+            }
+            getblinkflaglist(min, max, sfmt);
+            // Advance
+            for (int i = 0; i < min; i++)
+                sfmt.NextUInt64();
+            // Prepare
+            Prepare(sfmt);
+            // Start
+            for (int i = min; i <= max; i++, RNGSetting.Rand.RemoveAt(0), RNGSetting.Rand.Add(sfmt.NextUInt64()))
+            {
+                RNGResult result = rng.Generate(e);
+                MarkResults(result, i - min);
+                if (!frameMatch(result, setting))
+                    continue;
+                dgvrowlist.Add(getRow_Sta(i, rng, result, DGV));
+                if (dgvrowlist.Count > 100000) break;
+            }
+            DGV.Rows.AddRange(dgvrowlist.ToArray());
+            DGV.CurrentCell = null;
+        }
+
+        private void ConsiderHistoryStationarySearch()
+        {
+            // Blinkflag
+            SFMT sfmt = new SFMT((uint)Seed.Value);
+            int max, min;
+            if (AroundTarget.Checked)
+            {
+                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
+            }
+            else
+            {
+                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
+            }
+            int StartFrame = (int)Frame_min.Value;
+            getblinkflaglist(min, max, sfmt);
+            // Advance
+            for (int i = 0; i < StartFrame; i++)
+                sfmt.NextUInt64();
+            // Prepare
+            Prepare(sfmt);
+            int frameadvance;
+            int[] remain_frame;
+            int realtime = 0;
+            // Start
+            for (int i = StartFrame; i <= max;)
+            {
+                remain_frame = (int[])status.remain_frame.Clone();
+                frameadvance = status.NextState();
+
+                while (frameadvance > 0)
+                {
+                    RNGSetting.remain_frame = (int[])remain_frame.Clone();
+                    RNGResult result = rng.Generate(e);
+                    RNGSetting.Rand.RemoveAt(0);
+                    RNGSetting.Rand.Add(sfmt.NextUInt64());
+                    frameadvance--;
+                    i++;
+                    if (i <= min || i > max)
+                        continue;
+                    MarkResults(result, i - min - 1, realtime);
+                    if (!frameMatch(result, setting))
+                        continue;
+                    dgvrowlist.Add(getRow_Sta(i - 1, rng, result, DGV));
+                }
+                realtime++;
+                if (dgvrowlist.Count > 100000) break;
+            }
+            DGV.Rows.AddRange(dgvrowlist.ToArray());
+            DGV.CurrentCell = null;
+        }
+
+        private void createtimeline()
+        {
+            // Blinkflag
+            SFMT sfmt = new SFMT((uint)Seed.Value);
+            int start_frame = (int)Frame_min.Value;
+            getblinkflaglist(start_frame, start_frame, sfmt);
+            // Advance
+            for (int i = 0; i < start_frame; i++)
+                sfmt.NextUInt64();
+            // Prepare
+            Prepare(sfmt);
+            int totaltime = (int)TimeSpan.Value * 30;
+            int frame = (int)Frame_min.Value;
+            int frameadvance, Currentframe;
+            // Start
+            for (int i = 0; i <= totaltime; i++)
+            {
+                Currentframe = frame;
+                RNGSetting.remain_frame = (int[])status.remain_frame.Clone();
+
+                RNGResult result = rng.Generate(e);
+                MarkResults(result, i, i);
+
+                frameadvance = status.NextState();
+                frame += frameadvance;
+                for (int j = 0; j < frameadvance; j++)
+                {
+                    RNGSetting.Rand.RemoveAt(0);
+                    RNGSetting.Rand.Add(sfmt.NextUInt64());
+                }
+
+                if (!frameMatch(result, setting))
+                    continue;
+                dgvrowlist.Add(getRow_Sta(Currentframe, rng, result, DGV));
+                if (dgvrowlist.Count > 100000) break;
+            }
+            DGV.Rows.AddRange(dgvrowlist.ToArray());
+            DGV.CurrentCell = null;
+        }
         #endregion
 
         #region Misc Function
