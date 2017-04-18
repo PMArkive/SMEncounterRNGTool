@@ -4,9 +4,10 @@ A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Po
 Great thanks to  
 **quan_dra** for original code  
 **Real96** for good suggestions and testing the tool  
+**Kaphotics** for discussion  
 **RNGReporter** for multi-selection control  
-**PKHex** for raw encounter file  
-And ALL Pokemon RNG Researcher  
+**PKHex** for Pokemon personal table and wc7 format  
+And ALL Pokemon RNG Researcher.
 
 ## Following Pokemon are supported:
 - Catchable Legendary Pokemon in SM: Tapus, UBs, Cosmog, Solgaleo, Lunala, Zygarde
@@ -16,12 +17,14 @@ And ALL Pokemon RNG Researcher
 - Fossil Pokemon: Cranidos, Tirtouga, Archen, Shieldon
 - Crabrawlers underneath Berry Trees
 - SM Starters: _PokeCalcNTR Only (This function will not be added)_
-- Pokemon Caught by fishing
-- SOS: _PokeCalcNTR Only (WIP)_
+- Pokemon Caught by fishing (Unstable)
+- SOS: _PokeCalcNTR Only (Unstable)_
 
 ## Usage
 ### With emtimer/EonTimer
-1. Select the `Pokemon` you would like to RNG. (For Solgaleo/Lunala, you need to test the NPCs number first)
+1. Select the `Pokemon` you would like to RNG.  
+For Solgaleo/Lunala, you need to test the NPCs number first.  
+For wild pokemon, use the blank setting of `Pokemon`, select your `GameVersion`, `Location` and `Species`.
 2. Find your `Seed` via the clock hands sequence on Continue Screen
 3. Set up the `Filters` and click `Search`
 4. Set your favorite spread as target frame, put the frame number in the second box of `Timing Range`.
@@ -30,17 +33,18 @@ And ALL Pokemon RNG Researcher
 7. Press A at the Continue Screen or press B to exit QR Scan, start the timer at the same time.
 8. Start the dialogue until the [final screen](#final-screen-when-pressing-a), wait for the timer.
 9. When the timer is done, click A at the same time, receive or battle with the Pokemon.
-10. If the Pokemon is not the one you want, find the frame you actually hit, put it in the Time Calculator, calibrate the Pre-Timer and try again  
-    ***Tips:*** For better results, please keep `Modification` checked while searching.
+10. If the Pokemon is not the one you want, find the frame you actually hit, put it in the `Time Calculator`, calibrate the Pre-Timer and try again  
+    ***Tips:*** For better results, please keep `"?" Frame Refinement` checked while searching.
 
 ### With PokeCalcNTR
 1. Select the `Pokemon` you would like to RNG.
 2. Start the game with PokeCalcNTR, click A until you get to the [final screen](#final-screen-when-pressing-a).
 3. Pause at a `Safe Frame` (first only check `Safe F Only` to find safe frame zone)
 4. Put your current frame number in the first box of `Frame Range` and check `Create Timeline`
-5. Click `Search`, you will see the game will follow timeline the tool created.
-6. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
-7. Just change the `Filters` and make another search as usual.  
+5. If you would like to find the timing of entering bag, please Check `EnterBagTime`.
+6. Click `Search`, you will see the game will follow timeline the tool created.
+7. Now all the frames in the timeline are without `?` marks, they're all SAFE and ACCESSIBLE!!
+8. Just change the `Filters` and make another search as usual.  
     ***Warning:*** Do NOT change the `Starting Frame` of timeline when you are following it, unless you set another `Safe Frame`(before checking `Create Timeline`) of your previous timeline as the `Starting Frame`.
 
 ## Final screen when pressing A
@@ -49,7 +53,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Tapus: Tapus' cry screen before the battle starts
 - Zygarde: "Zygarde has gone into a Poke Ball!"
 - Solgaleo/Lunala: No dialogue, stand in front of it
-- UBs & wild Pokemon: "Use this item" (Honey). 
+- UBs & wild Pokemon: "Use this item" (Honey) / Press A and enter the bag from X menu. 
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 - Starters: "Having accepted on another, you'll surely be friends for life" (Select `<Fossil>`, put 5 in `# of NPCs`)
@@ -58,12 +62,12 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
-- ?: The spread might be affected by the history of NPC status so it's unsafe. 
+- ?: The spread might be affected by the history of NPC status so it's unsafe.*
 - -: The safe frames can be 100% predicted.
+* Using "?" Frame Refinement will get better prediction.
 
 ## Useful References
 - [UB Rate(%) and No NPC Spots](parameters/UB%20Rate%20and%20Spots.md) 
 - [Pre-Honey Correction](parameters/Pre-Honey%20Correction.md)  
-  If you would like to find the timing of entering bag, in most of the cases, please add `6 x (# of NPCs + 1)` to `Correction`.
 - [Event Pokemon Setting](parameters/Event%20Pokemon%20Setting.md) 
 - [Gen VII Events Contribution Thread](https://projectpokemon.org/forums/forums/topic/39400-gen-vii-events-contribution-thread/) 
