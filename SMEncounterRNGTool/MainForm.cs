@@ -699,44 +699,15 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < min; i++)
                 sfmt.NextUInt64();
 
-            int n_count = 0;
-
-            int[] remain_frame = new int[ModelNumber];
             //total_frame[0] Start; total_frame[1] Duration
             int[] total_frame = new int[2];
-            bool[] blink_flag = new bool[ModelNumber];
-
+            int n_count = 0;
             int timer = 0;
+            status = new ModelStatus(ModelNumber, sfmt);
 
             while (min + n_count <= max)
             {
-                //NPC Loop
-                for (int i = 0; i < ModelNumber; i++)
-                {
-                    if (remain_frame[i] > 0)
-                        remain_frame[i]--;
-
-                    if (remain_frame[i] == 0)
-                    {
-                        //Blinking
-                        if (blink_flag[i])
-                        {
-                            remain_frame[i] = (int)(sfmt.NextUInt64() % 3) == 0 ? 36 : 30;
-                            n_count++;
-                            blink_flag[i] = false;
-                        }
-                        //Not Blinking
-                        else
-                        {
-                            if ((int)(sfmt.NextUInt64() & 0x7F) == 0)
-                            {
-                                remain_frame[i] = 5;
-                                blink_flag[i] = true;
-                            }
-                            n_count++;
-                        }
-                    }
-                }
+                n_count += status.NextState();
                 total_frame[timer]++;
                 if (min + n_count == max)
                     timer = 1;
@@ -963,19 +934,16 @@ namespace SMEncounterRNGTool
 
             int frameadvance;
             int[] remain_frame;
-            bool[] blink_flag;
 
             int realtime = 0;
             for (int i = StartFrame; i <= max;)
             {
                 remain_frame = (int[])status.remain_frame.Clone();
-                blink_flag = (bool[])status.blink_flag.Clone();
                 frameadvance = status.NextState();
 
                 while (frameadvance > 0)
                 {
                     RNGSetting.remain_frame = (int[])remain_frame.Clone();
-                    RNGSetting.blink_flag = (bool[])blink_flag.Clone();
                     RNGResult result = rng.Generate(e);
                     RNGSetting.Rand.RemoveAt(0);
                     RNGSetting.Rand.Add(sfmt.NextUInt64());
@@ -1015,7 +983,6 @@ namespace SMEncounterRNGTool
             {
                 Currentframe = frame;
                 RNGSetting.remain_frame = (int[])status.remain_frame.Clone();
-                RNGSetting.blink_flag = (bool[])status.blink_flag.Clone();
 
                 RNGResult result = rng.Generate(e);
                 MarkResults(result, i, i);
@@ -1044,18 +1011,11 @@ namespace SMEncounterRNGTool
         {
             dgvrowlist.Clear();
             DGV.Rows.Clear();
-            status = CreateNPCStatus(sfmt);
+            status = new ModelStatus(ModelNumber, sfmt);
             setting = FilterSettings;
             rng = new RNGSetting();
             e = IsEvent ? geteventsetting() : null;
             RefreshRNGSettings(sfmt);
-        }
-
-        private ModelStatus CreateNPCStatus(SFMT sfmt)
-        {
-            ModelStatus.Modelnumber = ModelNumber;
-            ModelStatus.smft = (SFMT)sfmt.DeepCopy();
-            return new ModelStatus();
         }
 
         private Filters FilterSettings => new Filters

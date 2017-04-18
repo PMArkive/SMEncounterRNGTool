@@ -29,7 +29,6 @@ namespace SMEncounterRNGTool
         public static int delaytime = 93; //For honey 186F =3.1s
         public static byte modelnumber;
         public static int[] remain_frame;
-        public static bool[] blink_flag;
 
         // Personal Info
         public bool IsUB;
@@ -45,7 +44,6 @@ namespace SMEncounterRNGTool
         public static void ResetModelStatus()
         {
             remain_frame = new int[modelnumber];
-            blink_flag = new bool[modelnumber];
         }
 
         public static bool IsSolgaleo;
@@ -298,21 +296,19 @@ namespace SMEncounterRNGTool
             {
                 for (int i = 0; i < modelnumber; i++)
                 {
-                    if (remain_frame[i] > 0)
-                        remain_frame[i]--;
-                    if (remain_frame[i] == 0)
+                    if (remain_frame[i] > 1)                       //Cooldown 2nd part
                     {
-                        if (blink_flag[i])                      //Blinking
-                        {
-                            remain_frame[i] = (int)(getrand % 3) == 0 ? 36 : 30;
-                            blink_flag[i] = false;
-                        }
-                        else if ((int)(getrand & 0x7F) == 0)  //Not Blinking
-                        {
-                            remain_frame[i] = 5;
-                            blink_flag[i] = true;
-                        }
+                        remain_frame[i]--;
+                        continue;
                     }
+                    if (remain_frame[i] < 0)                       //Cooldown 1st part
+                    {
+                        if (++remain_frame[i] == 0)                //Blinking
+                            remain_frame[i] = (int)(getrand % 3) == 0 ? 36 : 30;
+                        continue;
+                    }
+                    if ((int)(getrand & 0x7F) == 0)                //Not Blinking
+                        remain_frame[i] = -5;
                 }
             }
         }
@@ -377,10 +373,7 @@ namespace SMEncounterRNGTool
             modelnumber = 5;//2 guys offline...
             int[] order = new[] { 0, 1, 2, 5, 6 };
             for (int i = 0; i < 5; i++)
-            {
                 remain_frame[i] = remain_frame[order[i]];
-                blink_flag[i] = blink_flag[order[i]];
-            }
         }
 
         private byte getUBValue()

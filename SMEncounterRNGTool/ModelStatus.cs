@@ -2,50 +2,47 @@
 {
     class ModelStatus
     {
-        public static SFMT smft;
-        public static byte Modelnumber;
+        public SFMT smft;
+        public int cnt;
+        public byte Modelnumber;
         public int[] remain_frame;
-        public bool[] blink_flag;
+        public ulong getrand { get { cnt++; return smft.NextUInt64(); } }
 
         public ModelStatus()
         {
             remain_frame = new int[Modelnumber];
-            blink_flag = new bool[Modelnumber];
+        }
+
+        public ModelStatus(byte n, SFMT st)
+        {
+            smft = (SFMT)st.DeepCopy();
+            Modelnumber = n;
+            remain_frame = new int[n];
         }
 
         public int NextState()
         {
-            int cnt = 0;
+            cnt = 0;
             for (int i = 0; i < Modelnumber; i++)
             {
-                if (remain_frame[i] > 0)
-                    remain_frame[i]--;
-
-                if (remain_frame[i] == 0)
+                if (remain_frame[i] > 1)                       //Cooldown 2nd part
                 {
-                    //Blinking
-                    if (blink_flag[i])
-                    {
-                        remain_frame[i] = (int)(smft.NextUInt64() % 3) == 0 ? 36 : 30;
-                        cnt++;
-                        blink_flag[i] = false;
-                    }
-                    //Not Blinking
-                    else
-                    {
-                        if ((int)(smft.NextUInt64() & 0x7F) == 0)
-                        {
-                            remain_frame[i] = 5;
-                            blink_flag[i] = true;
-                        }
-                        cnt++;
-                    }
+                    remain_frame[i]--;
+                    continue;
                 }
+                if (remain_frame[i] < 0)                       //Cooldown 1st part
+                {
+                    if (++remain_frame[i] == 0)                //Blinking
+                        remain_frame[i] = (int)(getrand % 3) == 0 ? 36 : 30;
+                    continue;
+                }
+                if ((int)(getrand & 0x7F) == 0)                //Not Blinking
+                    remain_frame[i] = -5;
             }
             return cnt;
         }
 
-        public static void frameshift(int n)
+        public void frameshift(int n)
         {
             for (int i = 0; i < n; i++)
                 smft.NextInt64();
