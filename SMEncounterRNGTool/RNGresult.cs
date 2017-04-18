@@ -3,10 +3,10 @@
     public class RNGResult
     {
         public byte Nature;
-        public byte Clock;
         public uint PID, EC;
         public uint PSV => ((PID >> 16) ^ (PID & 0xFFFF)) >> 4;
         public ulong row_r;
+        public byte Clock => (byte)(row_r % 17);
         public int[] IVs;
         public int[] Stats;
         public bool Shiny;

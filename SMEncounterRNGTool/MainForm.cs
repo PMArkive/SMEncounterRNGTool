@@ -823,7 +823,7 @@ namespace SMEncounterRNGTool
                 {
                     blinkflaglist[i - min] = 5;
                     blinkflaglist[++i - min] = (int)(rand % 3) == 0 ? (byte)36 : (byte)30;
-                    blink_flag = 0; rand = st.NextUInt64();
+                    blink_flag = 0; st.NextUInt64(); // Reset and advance
                 }
                 if ((int)(rand & 0x7F) == 0)
                     blink_flag = blinkflaglist[i - min] = 1;
