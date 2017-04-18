@@ -37,11 +37,12 @@ namespace SMEncounterRNGTool
             if (Nature.All(n => !n)) return true;
             return Nature[resultnature];
         }
-
+        
+        public readonly static byte[] Reorder = { 0, 1, 2, 4, 5, 3 };
         public bool CheckHiddenPower(int[] IV)
         {
             if (HPType.All(n => !n)) return true;
-            var val = 15 * IV.Select((iv, i) => (iv & 1) << i).Sum() / 63;
+            var val = 15 * IV.Select((iv, i) => (iv & 1) << Reorder[i]).Sum() / 63;
             return HPType[val];
         }
 
