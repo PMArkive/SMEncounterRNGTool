@@ -44,11 +44,9 @@ namespace SMEncounterRNGTool
             if (Nature.All(n => !n)) return true;
             return Nature[resultnature];
         }
-        
-        public readonly static byte[] Reorder = { 0, 1, 2, 4, 5, 3 };
         public bool CheckHiddenPower(RNGResult result)
         {
-            var val = 15 * result.IVs.Select((iv, i) => (iv & 1) << Reorder[i]).Sum() / 63;
+            var val = Pokemon.getHiddenPowerValue(result.IVs);
             result.hiddenpower = (byte)val;
             if (HPType.All(n => !n)) return true;
             return HPType[val];
