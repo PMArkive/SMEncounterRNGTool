@@ -343,6 +343,7 @@ namespace SMEncounterRNGTool
                 if (ConsiderBagEnteringTime)
                     time_elapse(6);
                 ResetModelStatus();
+                if (route17) Advance(2);
                 time_elapse(1);              //Blink process also occurs when loading map
                 index += PreDelayCorrection - modelnumber;  //Pre-HoneyCorrection
             }
