@@ -93,7 +93,7 @@ namespace SMEncounterRNGTool
             new byte[]{50},
             new byte[]{15,30}, //todo
             new byte[]{30,30}, //todo
-            new byte[]{30},
+            new byte[]{30,30,30},
             new byte[]{80},
             new byte[]{5},
         };
@@ -105,7 +105,7 @@ namespace SMEncounterRNGTool
             new []{046},
             new []{346,076},
             new []{134,124},
-            new []{134},
+            new []{134,376,632},
             new []{694},
             new []{548},
         };
