@@ -452,6 +452,20 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
+                Location = 120, idx = 1, //17
+                Correction = 12,
+                LevelMin = 31,
+                Species = new[] {22,735,022,674,674,166},
+            },
+            new EncounterArea
+            {
+                Location = 120, idx = 2, //17
+                Correction = 12, NPC = 3,
+                LevelMin = 31,
+                Species = new[] {21,735,022,674,075,075,227},
+            },
+            new EncounterArea
+            {
                 Location = 146, idx = 1,
                 LevelMin = 42,
                 Species = new[] {22,037,361,359,359,215},

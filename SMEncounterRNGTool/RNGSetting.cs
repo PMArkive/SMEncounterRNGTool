@@ -30,6 +30,8 @@ namespace SMEncounterRNGTool
         public static byte modelnumber;
         public static int[] remain_frame;
 
+        public static bool route17, phase; //oddball
+
         // Personal Info
         public bool IsUB;
 
@@ -44,6 +46,7 @@ namespace SMEncounterRNGTool
         public static void ResetModelStatus()
         {
             remain_frame = new int[modelnumber];
+            phase = false;
         }
 
         public static bool IsSolgaleo;
@@ -280,7 +283,8 @@ namespace SMEncounterRNGTool
             int RandBuffSize = 200;
             if (CalcDelay)
                 RandBuffSize += modelnumber * delaytime;
-
+            if (route17)
+                RandBuffSize += 200;
             Rand.Clear();
             for (int i = 0; i < RandBuffSize; i++)
                 Rand.Add(sfmt.NextUInt64());
@@ -307,6 +311,8 @@ namespace SMEncounterRNGTool
                     if ((int)(getrand & 0x7F) == 0)                //Not Blinking
                         remain_frame[i] = -5;
                 }
+                if (route17 && (phase = !phase))
+                    Advance(2);
             }
         }
 

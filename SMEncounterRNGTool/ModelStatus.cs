@@ -8,6 +8,8 @@
         public int[] remain_frame;
         public ulong getrand { get { cnt++; return sfmt.NextUInt64(); } }
 
+        public bool route17, phase;
+
         public ModelStatus()
         {
             remain_frame = new int[Modelnumber];
@@ -38,6 +40,11 @@
                 }
                 if ((int)(getrand & 0x7F) == 0)                //Not Blinking
                     remain_frame[i] = -5;
+            }
+            if (route17 && (phase = !phase))
+            {
+                frameshift(2);
+                cnt += 2;
             }
             return cnt;
         }

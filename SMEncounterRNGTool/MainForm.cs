@@ -870,6 +870,8 @@ namespace SMEncounterRNGTool
             dgvrowlist.Clear();
             DGV.Rows.Clear();
             status = new ModelStatus(ModelNumber, sfmt);
+            if (ea.Location == 120) // Route 17
+                status.route17 = true;
             setting = FilterSettings;
             rng = new RNGSetting();
             e = IsEvent ? geteventsetting() : null;
@@ -929,6 +931,8 @@ namespace SMEncounterRNGTool
             RNGSetting.fishing = Fishing.Checked;
             RNGSetting.SOS = SOS.Checked;
             RNGSetting.ChainLength = (byte)ChainLength.Value;
+
+            RNGSetting.route17 = ea.Location == 120;
 
             RNGSetting.ResetModelStatus();
             RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
@@ -1125,15 +1129,18 @@ namespace SMEncounterRNGTool
             int frameadvance;
             int[] remain_frame;
             int realtime = 0;
+            bool phase;
             // Start
             for (int i = StartFrame; i <= max;)
             {
                 remain_frame = (int[])status.remain_frame.Clone();
+                phase = status.phase;
                 frameadvance = status.NextState();
 
                 while (frameadvance > 0)
                 {
                     RNGSetting.remain_frame = (int[])remain_frame.Clone();
+                    RNGSetting.phase = phase;
                     RNGResult result = rng.Generate(e);
                     RNGSetting.Rand.RemoveAt(0);
                     RNGSetting.Rand.Add(sfmt.NextUInt64());
@@ -1172,6 +1179,7 @@ namespace SMEncounterRNGTool
             {
                 Currentframe = frame;
                 RNGSetting.remain_frame = (int[])status.remain_frame.Clone();
+                RNGSetting.phase = status.phase;
 
                 RNGResult result = rng.Generate(e);
                 MarkResults(result, i, i);
