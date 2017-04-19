@@ -16,6 +16,7 @@ And ALL Pokemon RNG Researcher.
 - Any Wild Pokemon appear in SM
 - Fossil Pokemon: Cranidos, Tirtouga, Archen, Shieldon
 - Crabrawlers underneath Berry Trees
+- Gift Eevee egg from Nursery helpers
 - SM Starters: _PokeCalcNTR Only (This function will not be added)_
 - Pokemon Caught by fishing (Unstable)
 - SOS: _PokeCalcNTR Only (Unstable)_
@@ -56,18 +57,24 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - UBs & wild Pokemon: "Use this item" (Honey) / Press A and enter the bag from X menu. 
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
-- Starters: "Having accepted on another, you'll surely be friends for life" (Select `<Fossil>`, put 5 in `# of NPCs`)
+- Gift Eevee egg: "You received Egg!".  ( select `<Fossil>`, put 5 in `# of NPCs` and 4 in `Consider Time Delay`)
+- Starters: "Having accepted on another, you'll surely be friends for life".  ( select `<Fossil>`, put 5 in `# of NPCs`)
 - Fishing: When you get something on your hook (Unstable)
 - SOS: When you "Use" Adrenaline Orbs (Unstable)
 
 ## Marks under Blink Column
 - ★: One person on the map will blink soon, a warning for nearby frames.
-- ?: The spread might be affected by the history of NPC status so it's unsafe.*
 - -: The safe frames can be 100% predicted.
-  \* Using `"?" Frame Refinement` will get better prediction.
+### No NPC:
+- 5: This frame will survive for 5/30s
+- 30: This frame will survive for 1.0s
+- 36: This frame will survive for 1.2s
+### Multiple NPCs:
+- ?: The spread might be affected by the history of NPC blink status so it's unsafe.  
+  Using `"?" Frame Refinement` will get better prediction.
 
 ## Useful References
 - [UB Rate(%) and No NPC Spots](parameters/UB%20Rate%20and%20Spots.md) 
-- [Pre-Honey Correction](parameters/Pre-Honey%20Correction.md)  
+- [Pre-Honey Correction](parameters/Pre-Honey%20Correction.md)
 - [Event Pokemon Setting](parameters/Event%20Pokemon%20Setting.md) 
 - [Gen VII Events Contribution Thread](https://projectpokemon.org/forums/forums/topic/39400-gen-vii-events-contribution-thread/) 
