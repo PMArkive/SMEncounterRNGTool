@@ -1082,9 +1082,12 @@ namespace SMEncounterRNGTool
                 sfmt.NextUInt64();
             // Prepare
             Prepare(sfmt);
+            bool HasStageFrame = ModelNumber == 1;
             // Start
             for (int i = min; i <= max; i++, RNGSetting.Rand.RemoveAt(0), RNGSetting.Rand.Add(sfmt.NextUInt64()))
             {
+                if (HasStageFrame)
+                    RNGSetting.StageFrame = blinkflaglist[i - min] >= 5 ? blinkflaglist[i - min] : (byte)0;
                 RNGResult result = rng.Generate(e);
                 MarkResults(result, i - min);
                 if (!frameMatch(result, setting))

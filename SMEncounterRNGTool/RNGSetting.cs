@@ -34,6 +34,7 @@ namespace SMEncounterRNGTool
 
         // Personal Info
         public bool IsUB;
+        public static byte StageFrame;
 
         // Generated Attributes
         private bool IsShinyLocked => ShinyLocked || IsUB;
@@ -338,6 +339,8 @@ namespace SMEncounterRNGTool
 
         public static int getframeshift()
         {
+            if (StageFrame != 0)
+                remain_frame[0] = StageFrame > 5 ? StageFrame : -5; // mark blink cooldown
             if (Honey)
             {
                 if (ConsiderBagEnteringTime)
