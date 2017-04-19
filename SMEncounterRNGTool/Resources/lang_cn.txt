@@ -98,6 +98,7 @@ dgv_B = Def
 dgv_C = SpA
 dgv_D = SpD
 dgv_S = Spe
+dgv_hiddenpower = 觉醒
 dgv_nature = 性格
 dgv_synced = 同步
 dgv_needle = 针

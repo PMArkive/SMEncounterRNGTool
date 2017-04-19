@@ -946,16 +946,6 @@ namespace SMEncounterRNGTool
             // Mark Blink
             if (0 <= blinkidx && blinkidx < blinkflaglist.Length)
                 result.Blink = blinkflaglist[blinkidx];
-            // Mark stats
-            if (ByStats.Checked)
-            {
-                int[] IV = result.IVs;
-                result.Stats = new int[6];
-                result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + result.Lv + 10;
-                for (int i = 1; i < 6; i++)
-                    result.Stats[i] = (((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5;
-                Pokemon.NatureAdjustment(result.Stats, result.Nature);
-            }
         }
 
         private bool frameMatch(RNGResult result, Filters setting)
@@ -970,9 +960,9 @@ namespace SMEncounterRNGTool
                 return false;
             if (ByIVs.Checked && !setting.CheckIVs(result))
                 return false;
-            if (ByStats.Checked && !setting.CheckStats(result))
+            if (ByStats.Checked && !setting.CheckStats(result, BS))
                 return false;
-            if (!setting.CheckHiddenPower(result.IVs))
+            if (!setting.CheckHiddenPower(result))
                 return false;
             if (!setting.CheckNature(result.Nature))
                 return false;
@@ -1048,7 +1038,7 @@ namespace SMEncounterRNGTool
             row.SetValues(
                 i, d.ToString("+#;-#;0"), BlinkFlag,
                 Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, result.Clock, PSV, frameadvance, UbValue, Slot, Lv, StringItem.genderstr[result.Gender], StringItem.abilitystr[result.Ability], Item, Encounter,
+                true_nature, SynchronizeFlag, StringItem.hpstr[result.hiddenpower + 1], result.Clock, PSV, frameadvance, UbValue, Slot, Lv, StringItem.genderstr[result.Gender], StringItem.abilitystr[result.Ability], Item, Encounter,
                 randstr, PID, EC, time, research
                 );
 

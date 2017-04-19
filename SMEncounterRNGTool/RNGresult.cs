@@ -8,6 +8,7 @@
         public ulong row_r;
         public byte Clock => (byte)(row_r % 17);
         public int[] IVs;
+        public byte hiddenpower;
         public int[] Stats;
         public bool Shiny;
         public bool Synchronize;

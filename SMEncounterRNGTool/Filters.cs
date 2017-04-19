@@ -24,8 +24,15 @@ namespace SMEncounterRNGTool
             return true;
         }
 
-        public bool CheckStats(RNGResult result)
+        public bool CheckStats(RNGResult result, int[] BS)
         {
+            int[] IV = result.IVs;
+            result.Stats = new int[6];
+            result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + result.Lv + 10;
+            for (int i = 1; i < 6; i++)
+                result.Stats[i] = (((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5;
+            Pokemon.NatureAdjustment(result.Stats, result.Nature);
+
             for (int i = 0; i < 6; i++)
                 if (Stats[i] != 0 && Stats[i] != result.Stats[i])
                     return false;
@@ -39,10 +46,11 @@ namespace SMEncounterRNGTool
         }
         
         public readonly static byte[] Reorder = { 0, 1, 2, 4, 5, 3 };
-        public bool CheckHiddenPower(int[] IV)
+        public bool CheckHiddenPower(RNGResult result)
         {
+            var val = 15 * result.IVs.Select((iv, i) => (iv & 1) << Reorder[i]).Sum() / 63;
+            result.hiddenpower = (byte)val;
             if (HPType.All(n => !n)) return true;
-            var val = 15 * IV.Select((iv, i) => (iv & 1) << Reorder[i]).Sum() / 63;
             return HPType[val];
         }
 
