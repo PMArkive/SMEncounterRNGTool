@@ -694,7 +694,7 @@ namespace SMEncounterRNGTool
         private void MainRNGEgg_CheckedChanged(object sender, EventArgs e)
         {
             dgv_H.Visible = dgv_A.Visible = dgv_B.Visible = dgv_C.Visible = dgv_D.Visible = dgv_S.Visible = !MainRNGEgg.Checked;
-            dgv_ability.Visible = dgv_blink.Visible = dgv_EC.Visible = dgv_gender.Visible = dgv_hiddenpower.Visible = dgv_nature.Visible = dgv_synced.Visible = !MainRNGEgg.Checked;
+            dgv_ability.Visible = dgv_EC.Visible = dgv_gender.Visible = dgv_hiddenpower.Visible = dgv_nature.Visible = dgv_synced.Visible = !MainRNGEgg.Checked;
             if (MainRNGEgg.Checked)
             {
                 NPC.Value = 5;
@@ -968,12 +968,12 @@ namespace SMEncounterRNGTool
                 return true;
             if (ShinyOnly.Checked && !result.Shiny)
                 return false;
-            if (MainRNGEgg.Checked)
-                return true;
             if (BlinkOnly.Checked && result.Blink < 5)
                 return false;
             if (SafeFOnly.Checked && result.Blink > 1)
                 return false;
+            if (MainRNGEgg.Checked)
+                return true;
             if (ByIVs.Checked && !setting.CheckIVs(result))
                 return false;
             if (ByStats.Checked && !setting.CheckStats(result, BS))

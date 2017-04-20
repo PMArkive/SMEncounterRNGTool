@@ -279,7 +279,7 @@ namespace SMEncounterRNGTool
         {
             st.PID = (uint)(getrand & 0xFFFFFFFF);
             st.IVs = new int[6]; // Avoid Crash
-            if (st.PID == TSV) st.Shiny = true;
+            if (st.PSV == TSV) st.Shiny = true;
             return st;
         }
 
