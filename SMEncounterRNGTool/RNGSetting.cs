@@ -13,6 +13,7 @@ namespace SMEncounterRNGTool
         public static bool ShinyLocked;
         public static bool ShinyCharm;
         public static byte PokeLv;
+        public static bool IsMainRNGEgg;
 
         public static bool Wild, Honey, UB, fishing, SOS;
         public static byte Lv_max, Lv_min;
@@ -83,6 +84,9 @@ namespace SMEncounterRNGTool
                 Resetindex();
                 ResetModelStatus();
             }
+            
+            if (IsMainRNGEgg)  // Egg without shiny charm or m.m.
+                return GeneratePID(st);
 
             if (Wild)
                 GenerateWild(st); // Get sync/slot/encounter info
@@ -200,6 +204,13 @@ namespace SMEncounterRNGTool
                 st.Synchronize = blink_process();
             }
         }
+        public RNGResult GeneratePID(RNGResult st)
+        {
+            st.PID = (uint)(getrand & 0xFFFFFFFF);
+            st.IVs = new int[6]; // Avoid Crash
+            if (st.PSV == TSV) st.Shiny = true;
+            return st;
+        }
 
         public RNGResult GenerateEvent(EventRule e)
         {
@@ -220,9 +231,6 @@ namespace SMEncounterRNGTool
                 Resetindex();
                 ResetModelStatus();
             }
-
-            if (e.mainrngegg)
-                return GeneratePID(st);
 
             //Encryption Constant
             st.EC = e.EC > 0 ? e.EC : (uint)(getrand & 0xFFFFFFFF);
@@ -273,13 +281,6 @@ namespace SMEncounterRNGTool
 
             //Gender
             st.Gender = e.GenderLocked || nogender ? e.Gender : (byte)(getrand % 252 >= gender_ratio ? 1 : 2);
-            return st;
-        }
-        public RNGResult GeneratePID(RNGResult st)
-        {
-            st.PID = (uint)(getrand & 0xFFFFFFFF);
-            st.IVs = new int[6]; // Avoid Crash
-            if (st.PSV == TSV) st.Shiny = true;
             return st;
         }
 
@@ -369,7 +370,7 @@ namespace SMEncounterRNGTool
         public static int getframeshift(EventRule e)
         {
             ButtonPressDelay();
-            if (e.YourID && !e.IsEgg && !e.mainrngegg)
+            if (e.YourID && !e.IsEgg)
                 Advance(10);
             time_delay();
             return index;

@@ -697,7 +697,7 @@ namespace SMEncounterRNGTool
             dgv_ability.Visible = dgv_EC.Visible = dgv_gender.Visible = dgv_hiddenpower.Visible = dgv_nature.Visible = dgv_synced.Visible = !MainRNGEgg.Checked;
             if (MainRNGEgg.Checked)
             {
-                NPC.Value = 5;
+                NPC.Value = 4;
                 Timedelay.Value = 38;
             }
         }
@@ -888,7 +888,7 @@ namespace SMEncounterRNGTool
                 status.route17 = true;
             setting = FilterSettings;
             rng = new RNGSetting();
-            e = IsEvent || MainRNGEgg.Checked ? geteventsetting() : null;
+            e = IsEvent ? geteventsetting() : null;
             RefreshRNGSettings(sfmt);
         }
 
@@ -947,6 +947,7 @@ namespace SMEncounterRNGTool
             RNGSetting.ChainLength = (byte)ChainLength.Value;
 
             RNGSetting.route17 = ea.Location == 120;
+            RNGSetting.IsMainRNGEgg = MainRNGEgg.Checked;
 
             RNGSetting.ResetModelStatus();
             RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
@@ -1284,7 +1285,6 @@ namespace SMEncounterRNGTool
             }
             EventRule e = new EventRule
             {
-                mainrngegg = MainRNGEgg.Checked,
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (byte)IVsCount.Value,
                 YourID = YourID.Checked,
