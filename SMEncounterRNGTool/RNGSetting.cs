@@ -369,13 +369,9 @@ namespace SMEncounterRNGTool
         public static int getframeshift(EventRule e)
         {
             ButtonPressDelay();
-            if (e.YourID && !e.IsEgg)
-            {
+            if (e.YourID && !e.IsEgg && !e.mainrngegg)
                 Advance(10);
-                time_delay();
-            }
-            if (e.mainrngegg)
-                time_delay();
+            time_delay();
             return index;
         }
 
