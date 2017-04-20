@@ -86,7 +86,7 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Global Variable
-        private string version = "1.1.0";
+        private string version = "1.1.1";
 
         private EventRule e = new EventRule();
         private RNGSetting rng = new RNGSetting();
