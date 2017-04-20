@@ -221,6 +221,9 @@ namespace SMEncounterRNGTool
                 ResetModelStatus();
             }
 
+            if (e.mainrngegg)
+                return GeneratePID(st);
+
             //Encryption Constant
             st.EC = e.EC > 0 ? e.EC : (uint)(getrand & 0xFFFFFFFF);
 
@@ -270,6 +273,13 @@ namespace SMEncounterRNGTool
 
             //Gender
             st.Gender = e.GenderLocked || nogender ? e.Gender : (byte)(getrand % 252 >= gender_ratio ? 1 : 2);
+            return st;
+        }
+        public RNGResult GeneratePID(RNGResult st)
+        {
+            st.PID = (uint)(getrand & 0xFFFFFFFF);
+            st.IVs = new int[6]; // Avoid Crash
+            if (st.PID == TSV) st.Shiny = true;
             return st;
         }
 
@@ -364,6 +374,8 @@ namespace SMEncounterRNGTool
                 Advance(10);
                 time_delay();
             }
+            if (e.mainrngegg)
+                time_delay();
             return index;
         }
 

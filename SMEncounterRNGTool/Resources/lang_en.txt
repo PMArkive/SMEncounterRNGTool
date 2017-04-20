@@ -31,6 +31,7 @@ SOS = SOS Chaining
 Fishing = Fishing
 Honey = Honey
 Wild = Wild
+MainRNGEgg = Main RNG Egg
 Stationary = Stationary
 AlwaysSynced = Always Synced
 L_SyncNature = Sync Nature

@@ -31,6 +31,7 @@ SOS = 帮手连锁
 Fishing = 钓鱼
 Honey = 甜甜蜜
 Wild = 野生
+MainRNGEgg = 主乱数蛋
 Stationary = 定点
 AlwaysSynced = 必定同步
 Fix3v = 固定3V

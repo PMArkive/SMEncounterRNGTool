@@ -538,6 +538,8 @@ namespace SMEncounterRNGTool
             {
                 AlwaysSynced.Enabled = AlwaysSynced.Checked = Stationary.Checked;
                 SOS.Visible = Fishing.Visible = Wild.Checked;
+                MainRNGEgg.Visible = Stationary.Checked;
+                MainRNGEgg.Checked = false;
             }
 
             UB_CheckedChanged(null, null);
@@ -688,6 +690,18 @@ namespace SMEncounterRNGTool
                 Event_EC.Value = (Event_PIDType.SelectedIndex == 3) ? 0x12 : 0;
             L_EC.Visible = Event_EC.Visible = L_PID.Visible = Event_PID.Visible = Event_PIDType.SelectedIndex == 3;
         }
+
+        private void MainRNGEgg_CheckedChanged(object sender, EventArgs e)
+        {
+            dgv_H.Visible = dgv_A.Visible = dgv_B.Visible = dgv_C.Visible = dgv_D.Visible = dgv_S.Visible = !MainRNGEgg.Checked;
+            dgv_ability.Visible = dgv_blink.Visible = dgv_EC.Visible = dgv_gender.Visible = dgv_hiddenpower.Visible = dgv_nature.Visible = dgv_synced.Visible = !MainRNGEgg.Checked;
+            if (MainRNGEgg.Checked)
+            {
+                NPC.Value = 5;
+                Timedelay.Value = 38;
+            }
+        }
+
         #endregion
 
         #region TimerCalculateFunction
@@ -874,7 +888,7 @@ namespace SMEncounterRNGTool
                 status.route17 = true;
             setting = FilterSettings;
             rng = new RNGSetting();
-            e = IsEvent ? geteventsetting() : null;
+            e = IsEvent || MainRNGEgg.Checked ? geteventsetting() : null;
             RefreshRNGSettings(sfmt);
         }
 
@@ -954,6 +968,8 @@ namespace SMEncounterRNGTool
                 return true;
             if (ShinyOnly.Checked && !result.Shiny)
                 return false;
+            if (MainRNGEgg.Checked)
+                return true;
             if (BlinkOnly.Checked && result.Blink < 5)
                 return false;
             if (SafeFOnly.Checked && result.Blink > 1)
@@ -1221,6 +1237,7 @@ namespace SMEncounterRNGTool
             if (Poke.SelectedIndex == Pokemon.Crabrawler_index) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
 
             if (Poke.SelectedIndex == 0) return;
+            MainRNGEgg.Visible = MainRNGEgg.Checked = false;
             AlwaysSynced.Checked = AlwaysSync_Index <= Poke.SelectedIndex && Poke.SelectedIndex < UBIndex - 1;
             ConsiderDelay.Checked = true;
             AlwaysSynced.Enabled = false;
@@ -1267,6 +1284,7 @@ namespace SMEncounterRNGTool
             }
             EventRule e = new EventRule
             {
+                mainrngegg = MainRNGEgg.Checked,
                 IVs = (int[])IVs.Clone(),
                 IVsCount = (byte)IVsCount.Value,
                 YourID = YourID.Checked,

@@ -2,6 +2,7 @@
 {
     public class EventRule
     {
+        public bool mainrngegg;
         public int[] IVs;
         public uint TSV;
         public byte IVsCount;
