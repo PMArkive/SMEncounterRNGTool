@@ -8,7 +8,7 @@ namespace SMEncounterRNGTool
         public bool[] HPType;
         public int Ability = -1;
         public int Gender = -1;
-        public int[] IVup, IVlow, Stats;
+        public int[] IVup, IVlow, BS, Stats;
         public byte PerfectIVs;
         public bool Skip;
         public byte Lv;
@@ -24,7 +24,7 @@ namespace SMEncounterRNGTool
             return true;
         }
 
-        public bool CheckStats(RNGResult result, int[] BS)
+        public bool CheckStats(RNGResult result)
         {
             int[] IV = result.IVs;
             result.Stats = new int[6];
@@ -44,6 +44,7 @@ namespace SMEncounterRNGTool
             if (Nature.All(n => !n)) return true;
             return Nature[resultnature];
         }
+
         public bool CheckHiddenPower(RNGResult result)
         {
             var val = Pokemon.getHiddenPowerValue(result.IVs);

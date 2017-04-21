@@ -901,6 +901,7 @@ namespace SMEncounterRNGTool
             Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
             IVlow = IVlow,
             IVup = IVup,
+            BS = BS,
             Stats = Stats,
             Skip = DisableFilters.Checked,
             Lv = (byte)Lv_Search.Value,
@@ -948,6 +949,7 @@ namespace SMEncounterRNGTool
 
             RNGSetting.route17 = ea.Location == 120;
             RNGSetting.IsMainRNGEgg = MainRNGEgg.Checked;
+            RNGSetting.IsMinior = Poke.SelectedIndex == 0 && Wild.Checked && (int)SlotSpecies.SelectedValue == 774;
 
             RNGSetting.ResetModelStatus();
             RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
@@ -975,9 +977,7 @@ namespace SMEncounterRNGTool
                 return false;
             if (MainRNGEgg.Checked)
                 return true;
-            if (ByIVs.Checked && !setting.CheckIVs(result))
-                return false;
-            if (ByStats.Checked && !setting.CheckStats(result, BS))
+            if (ByIVs.Checked ? !setting.CheckIVs(result) : !setting.CheckStats(result))
                 return false;
             if (!setting.CheckHiddenPower(result))
                 return false;
@@ -1005,7 +1005,7 @@ namespace SMEncounterRNGTool
 
         private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
 
-        private DataGridViewRow getRow_Sta(int i, RNGSetting rng, RNGResult result, DataGridView dgv)
+        private DataGridViewRow getRow(int i, RNGResult result)
         {
             int d = i - (int)Time_max.Value;
             string true_nature = StringItem.naturestr[result.Nature];
@@ -1048,7 +1048,7 @@ namespace SMEncounterRNGTool
             int[] Status = ShowStats.Checked ? result.Stats : result.IVs;
 
             DataGridViewRow row = new DataGridViewRow();
-            row.CreateCells(dgv);
+            row.CreateCells(DGV);
 
             string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " + (result.row_r % 100).ToString("D2") + " " + (result.row_r % 252).ToString("D3");
 
@@ -1109,7 +1109,7 @@ namespace SMEncounterRNGTool
                 MarkResults(result, i - min);
                 if (!frameMatch(result, setting))
                     continue;
-                dgvrowlist.Add(getRow_Sta(i, rng, result, DGV));
+                dgvrowlist.Add(getRow(i, result));
                 if (dgvrowlist.Count > 100000) break;
             }
             DGV.Rows.AddRange(dgvrowlist.ToArray());
@@ -1161,7 +1161,7 @@ namespace SMEncounterRNGTool
                     MarkResults(result, i - min - 1, realtime);
                     if (!frameMatch(result, setting))
                         continue;
-                    dgvrowlist.Add(getRow_Sta(i - 1, rng, result, DGV));
+                    dgvrowlist.Add(getRow(i - 1, result));
                 }
                 realtime++;
                 if (dgvrowlist.Count > 100000) break;
@@ -1204,7 +1204,7 @@ namespace SMEncounterRNGTool
 
                 if (!frameMatch(result, setting))
                     continue;
-                dgvrowlist.Add(getRow_Sta(Currentframe, rng, result, DGV));
+                dgvrowlist.Add(getRow(Currentframe, result));
                 if (dgvrowlist.Count > 100000) break;
             }
             DGV.Rows.AddRange(dgvrowlist.ToArray());

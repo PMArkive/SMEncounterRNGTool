@@ -14,6 +14,7 @@ namespace SMEncounterRNGTool
         public static bool ShinyCharm;
         public static byte PokeLv;
         public static bool IsMainRNGEgg;
+        public static bool IsMinior;
 
         public static bool Wild, Honey, UB, fishing, SOS;
         public static byte Lv_max, Lv_min;
@@ -161,6 +162,7 @@ namespace SMEncounterRNGTool
                 st.Slot = getslot((int)(getrand % 100));
                 st.Lv = (byte)(getrand % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
                 Advance(1);
+                if (IsMinior) Advance(1);
             }
         }
         private void GenerateHoney(RNGResult st)
