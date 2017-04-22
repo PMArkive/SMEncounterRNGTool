@@ -40,8 +40,8 @@ namespace SMEncounterRNGTool
 
         public int[] getSpecies(bool IsMoon, bool IsNight)
         {
-            IsNight = IsNight ^ Reverse;
-            IsMoon = IsMoon ^ Reverse;
+            IsNight ^= Reverse;
+            IsMoon ^= Reverse;
             int[] table = (int[])Species.Clone();
             if (IsNight && DayNightDifference) // Replace Day/Night species
                 for (int i = 1; i < table.Length; i++)

@@ -629,5 +629,7 @@ namespace SMEncounterRNGTool
         };
 
         public readonly static int[] SMLocationList = Table.Select(t => t.Locationidx).ToArray();
+
+        public readonly static byte[] IslandScanLocationList = Pokemon.IslandScan.Select(pm => pm.Location).ToArray();
     }
 }

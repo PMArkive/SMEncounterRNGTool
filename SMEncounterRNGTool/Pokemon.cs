@@ -14,6 +14,7 @@ namespace SMEncounterRNGTool
         public byte NPC;
         public bool UB;
         public int[] UBLocation;
+        public byte Location;
         public byte[] UBRate;
         public bool ShinyLocked;
         public bool Syncable = true;
@@ -46,6 +47,7 @@ namespace SMEncounterRNGTool
 
         public static Pokemon[] getVersionList(bool IsMoon) => SpeciesList.Where(pm => IsMoon ? pm.InMoon : pm.InSun).ToArray();
 
+        #region table
         public readonly static Pokemon[] SpeciesList =
         {
             new Pokemon { Species = 000, Level = 00, Template = true, Wild = true,},    // Blank
@@ -76,6 +78,47 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 739, Level = 18, NPC = 1, Delay = 04, Wild = true,},    // Crabrawler
             new Pokemon { Species = 133, Level = 01, NPC = 5, Delay = 04, Gift = true, Syncable = false},    // Gift Eevee Egg
         };
+
+        public readonly static Pokemon[] IslandScan =
+        {
+            // QR Scan: Su/M/Tu/W/Th/F/Sa
+            // Melemele Island
+            new Pokemon { Species = 155, Level = 12, Location = 010, }, // Cyndaquil @ Route 3
+            new Pokemon { Species = 158, Level = 12, Location = 042, }, // Totodile @ Seaward Cave
+            new Pokemon { Species = 633, Level = 13, Location = 034, }, // Deino @ Ten Carat Hill
+            new Pokemon { Species = 116, Level = 18, Location = 014, }, // Horsea @ Kala'e Bay
+            new Pokemon { Species = 599, Level = 08, Location = 020, }, // Klink @ Hau'oli City
+            new Pokemon { Species = 152, Level = 10, Location = 012, }, // Chikorita @ Route 2
+            new Pokemon { Species = 607, Level = 10, Location = 038, }, // Litwick @ Hau'oli Cemetery
+                                                                                                                       
+            // Akala Island                                                                                            
+            new Pokemon { Species = 574, Level = 17, Location = 054, }, // Gothita @ Route 6
+            new Pokemon { Species = 363, Level = 19, Location = 056, }, // Spheal @ Route 7
+            new Pokemon { Species = 404, Level = 20, Location = 058, }, // Luxio @ Route 8
+            new Pokemon { Species = 679, Level = 23, Location = 094, }, // Honedge @ Akala Outskirts
+            new Pokemon { Species = 543, Level = 14, Location = 050, }, // Venipede @ Route 4
+            new Pokemon { Species = 069, Level = 16, Location = 052, }, // Bellsprout @ Route 5
+            new Pokemon { Species = 183, Level = 17, Location = 086, }, // Marill @ Brooklet Hill
+                                                                                                                       
+            // Ula'ula Island                                                                                          
+            new Pokemon { Species = 111, Level = 30, Location = 138, }, // Rhyhorn @ Blush Mountain
+            new Pokemon { Species = 220, Level = 31, Location = 114, }, // Swinub @ Tapu Village
+            new Pokemon { Species = 578, Level = 33, Location = 118, }, // Duosion @ Route 16
+            new Pokemon { Species = 315, Level = 34, Location = 128, }, // Roselia @ Ula'ula Meadow
+            new Pokemon { Species = 397, Level = 27, Location = 106, }, // Staravia @ Route 10
+            new Pokemon { Species = 288, Level = 27, Location = 108, }, // Vigoroth @ Route 11
+            new Pokemon { Species = 610, Level = 28, Location = 136, }, // Axew @ Mount Hokulani
+                                                                                                                       
+            // Poni Island                                                                                             
+            new Pokemon { Species = 604, Level = 55, Location = 164, }, // Eelektross @ Poni Grove
+            new Pokemon { Species = 534, Level = 57, Location = 166, }, // Conkeldurr @ Poni Plains
+            new Pokemon { Species = 468, Level = 59, Location = 170, }, // Togekiss @ Poni Gauntlet
+            new Pokemon { Species = 542, Level = 57, Location = 156, }, // Leavanny @ Poni Meadow
+            new Pokemon { Species = 497, Level = 43, Location = 184, }, // Serperior @ Exeggutor Island
+            new Pokemon { Species = 503, Level = 43, Location = 158, }, // Samurott @ Poni Wilds
+            new Pokemon { Species = 500, Level = 43, Location = 160, }, // Emboar @ Ancient Poni Path
+        };
+        #endregion
 
         #region formula
         public readonly static byte[] Reorder1 = { 1, 2, 5, 3, 4 };    // In-game index to Normal index
