@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace SMEncounterRNGTool.Controls
 {
-
     public class HexNumericUpdown : NumericUpDown
     {
         public HexNumericUpdown()
@@ -49,6 +49,24 @@ namespace SMEncounterRNGTool.Controls
             finally
             {
                 base.UserEdit = false;
+            }
+        }
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+            Select(0, Text.Length);
+        }
+
+        protected override void OnValidating(CancelEventArgs e)
+        {
+            base.OnValidating(e);
+            if (!string.IsNullOrEmpty(base.Text))
+                return;
+            foreach (var box in base.Controls.OfType<TextBox>())
+            {
+                box.Undo();
+                break;
             }
         }
     }

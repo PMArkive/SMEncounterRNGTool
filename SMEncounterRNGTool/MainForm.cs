@@ -16,28 +16,7 @@ namespace SMEncounterRNGTool
         {
             InitializeComponent();
         }
-        #region HexNumericFunction
-        private void NumericUpDown_Enter(object sender, EventArgs e)
-        {
-            NumericUpDown NumericUpDown = sender as NumericUpDown;
-            NumericUpDown.Select(0, NumericUpDown.Text.Length);
-        }
 
-        private void NumericUpDown_Check(object sender, CancelEventArgs e)
-        {
-            NumericUpDown NumericUpDown = sender as NumericUpDown;
-            Control ctrl = NumericUpDown;
-            if (ctrl == null)
-                return;
-            if (!string.IsNullOrEmpty(NumericUpDown.Text))
-                return;
-            foreach (var box in ((NumericUpDown)ctrl).Controls.OfType<TextBox>())
-            {
-                box.Undo();
-                break;
-            }
-        }
-        #endregion
         #region Controls Grouping
         private int[] IVup
         {
@@ -265,6 +244,7 @@ namespace SMEncounterRNGTool
             CreateTimeline_CheckedChanged(null, null);
         }
 
+        #region DataEntry
         private void RefreshLocation()
         {
             if (Poke.SelectedIndex < UBIndex && Poke.SelectedIndex != 0)
@@ -321,6 +301,7 @@ namespace SMEncounterRNGTool
             Fix3v.Checked = t.EggGroups[0] == 0x0F; //Undiscovered Group
         }
         private void SetPersonalInfo(int SpecForm) => SetPersonalInfo(SpecForm & 0x7FF, SpecForm >> 11);
+        #endregion
 
         #region SearchSeedfunction
         private void Clear_Click(object sender, EventArgs e)

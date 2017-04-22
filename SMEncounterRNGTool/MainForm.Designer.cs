@@ -3298,8 +3298,6 @@
             this.Seed.TabIndex = 0;
             this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
-            this.Seed.Enter += new System.EventHandler(this.NumericUpDown_Enter);
-            this.Seed.Validating += new System.ComponentModel.CancelEventHandler(this.NumericUpDown_Check);
             // 
             // L_GameVersion
             // 
