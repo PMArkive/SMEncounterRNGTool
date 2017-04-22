@@ -2409,7 +2409,7 @@
             this.IsEgg.TabIndex = 70;
             this.IsEgg.Text = "蛋";
             this.IsEgg.UseVisualStyleBackColor = true;
-            this.IsEgg.CheckedChanged += new System.EventHandler(this.IsEgg_CheckedChanged);
+            this.IsEgg.CheckedChanged += new System.EventHandler(this.Event_CheckedChanged);
             // 
             // Event_Ability
             // 
@@ -2582,7 +2582,7 @@
             this.YourID.TabIndex = 48;
             this.YourID.Text = "自ID";
             this.YourID.UseVisualStyleBackColor = true;
-            this.YourID.CheckedChanged += new System.EventHandler(this.YourID_CheckedChanged);
+            this.YourID.CheckedChanged += new System.EventHandler(this.Event_CheckedChanged);
             // 
             // AbilityLocked
             // 

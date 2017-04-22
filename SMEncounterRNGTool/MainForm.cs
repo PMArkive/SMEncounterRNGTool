@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -78,7 +77,7 @@ namespace SMEncounterRNGTool
         private bool IsNight => Night.Checked;
         private bool IsEvent => PK.IsEvent;
         private int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
-        private Pokemon[] PMDroplist;
+        private Pokemon[] PMDropdownlist;
         private Pokemon PK;
 
         private byte ModelNumber => (byte)(NPC.Value + 1);
@@ -151,7 +150,7 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < StringItem.naturestr.Length; i++)
                 Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
-            RefeshPokemonDroplist();
+            RefeshPokemonDropdownlist();
 
             RefreshLocation();
 
@@ -194,7 +193,6 @@ namespace SMEncounterRNGTool
             GenderRatio.DisplayMember = "Text";
             GenderRatio.ValueMember = "Value";
             GenderRatio.DataSource = new BindingSource(StringItem.GenderRatioList, null);
-            GenderRatio.SelectedIndex = 0;
 
             Gender.Items.AddRange(StringItem.genderstr);
             Event_Gender.Items.AddRange(StringItem.genderstr);
@@ -260,11 +258,11 @@ namespace SMEncounterRNGTool
             LoadSpecies();
         }
 
-        private void RefeshPokemonDroplist()
+        private void RefeshPokemonDropdownlist()
         {
             int tmp = Poke.SelectedIndex;
-            PMDroplist = Pokemon.getVersionList(GameVersion.SelectedIndex == 0);
-            var List = PMDroplist.Select(s => new Controls.ComboItem(s.ToString(), s.SpecForm));
+            PMDropdownlist = Pokemon.getVersionList(IsMoon);
+            var List = PMDropdownlist.Select(s => new Controls.ComboItem(s.ToString(), s.SpecForm));
             Poke.DisplayMember = "Text";
             Poke.ValueMember = "Value";
             Poke.DataSource = new BindingSource(List, null);
@@ -480,13 +478,7 @@ namespace SMEncounterRNGTool
 
         private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RefeshPokemonDroplist();
-            if (ea.SunMoonDifference)
-            {
-                LoadSpecies();
-                Lv_min.Value = IsMoon ? ea.LevelMinMoon : ea.LevelMin;
-                Lv_max.Value = IsMoon ? ea.LevelMaxMoon : ea.LevelMax;
-            }
+            RefeshPokemonDropdownlist();
             Properties.Settings.Default.IsSun = !IsMoon;
             Properties.Settings.Default.Save();
         }
@@ -555,7 +547,7 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked=  L_UB_th.Visible = UB_th.Visible = UB.Checked;
+            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked =  L_UB_th.Visible = UB_th.Visible = UB.Checked;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
@@ -652,22 +644,18 @@ namespace SMEncounterRNGTool
                 CreateTimeline.Checked = false;
         }
 
-        private void YourID_CheckedChanged(object sender, EventArgs e)
+        private void Event_CheckedChanged(object sender, EventArgs e)
         {
-            if (IsEvent && !IsEgg.Checked)
-                Timedelay.Value = YourID.Checked ? 62 : 0;
-        }
-
-        private void IsEgg_CheckedChanged(object sender, EventArgs e)
-        {
-            if (IsEvent && YourID.Checked)
-                Timedelay.Value = IsEgg.Checked ? 0 : 62;
+            if (IsEvent)
+            {
+                Timedelay.Value = YourID.Checked && !IsEgg.Checked ? 62 : 0;
+                IVsCount.Value = Fix3v.Checked ? 3 : 0;
+            }
         }
 
         private void Fix3v_CheckedChanged(object sender, EventArgs e)
         {
-            if (IsEvent)
-                IVsCount.Value = Fix3v.Checked ? 3 : 0;
+            Event_CheckedChanged(null, null);
             PerfectIVs.Value = Fix3v.Checked ? 3 : 0;
         }
 
@@ -693,7 +681,6 @@ namespace SMEncounterRNGTool
                 Timedelay.Value = 38;
             }
         }
-
         #endregion
 
         #region TimerCalculateFunction
@@ -927,6 +914,7 @@ namespace SMEncounterRNGTool
             RNGSetting.UB_th = (byte)UB_th.Value;
             RNGSetting.Encounter_th = (byte)Encounter_th.Value;
             RNGSetting.ShinyLocked = PK.ShinyLocked;
+
             RNGSetting.fishing = Fishing.Checked;
             RNGSetting.SOS = SOS.Checked;
             RNGSetting.ChainLength = (byte)ChainLength.Value;
@@ -1200,7 +1188,7 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PK = PMDroplist.FirstOrDefault(pm => pm.SpecForm == (int)Poke.SelectedValue) ?? Pokemon.SpeciesList[0];
+            PK = PMDropdownlist.FirstOrDefault(pm => pm.SpecForm == (int)Poke.SelectedValue) ?? Pokemon.SpeciesList[0];
             //General
             Properties.Settings.Default.PKM = (int)Poke.SelectedValue;
             Properties.Settings.Default.Save();
@@ -1212,12 +1200,12 @@ namespace SMEncounterRNGTool
             //Enable
             SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = PK.IsBlank;
             GenderRatio.Enabled = Fix3v.Enabled = PK.IsBlank || PK.IsEvent || PK.UB;
+            L_EventInstruction.Visible = PK.IsEvent;
             Honey.Enabled = Encounter_th.Enabled = !PK.IsCrabrawler;
             SyncNature.Enabled = PK.Syncable;
             AlwaysSynced.Checked = PK.AlwaysSync;
             if (!PK.Syncable)
                 SyncNature.SelectedIndex = 0;
-            L_EventInstruction.Visible = IsEvent;
             ConsiderDelay.Checked = true;
             AlwaysSynced.Enabled = false;
             if (PK.IsBlank)
@@ -1226,7 +1214,7 @@ namespace SMEncounterRNGTool
             if (PK.IsEvent)
             {
                 L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
-                Timedelay.Value = (YourID.Checked && !IsEgg.Checked) ? 62 : 0;
+                Event_CheckedChanged(null, null);
                 return;
             }
             Filter_Lv.Value = PK.Level;

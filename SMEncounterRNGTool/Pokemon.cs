@@ -44,10 +44,7 @@ namespace SMEncounterRNGTool
             }
         }
 
-        public static Pokemon[] getVersionList(bool IsSun)
-        {
-            return SpeciesList.Where(pm => IsSun ? pm.InSun : pm.InMoon).ToArray();
-        }
+        public static Pokemon[] getVersionList(bool IsMoon) => SpeciesList.Where(pm => IsMoon ? pm.InMoon : pm.InSun).ToArray();
 
         public readonly static Pokemon[] SpeciesList =
         {
