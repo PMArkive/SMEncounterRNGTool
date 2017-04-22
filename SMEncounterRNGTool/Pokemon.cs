@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using PKHeX.Core;
 
 namespace SMEncounterRNGTool
 {
     class Pokemon
     {
+        #region Property
         public short Species;
         public bool Template; // If it's a category
         public byte Form;
@@ -19,7 +19,7 @@ namespace SMEncounterRNGTool
         public bool Syncable = true;
         public byte Level;
         public bool? SunOnly;
-        
+
         public short SpecForm => (short)(Species + (Form << 11));
         public bool InSun => SunOnly ?? true;
         public bool InMoon => !SunOnly ?? true;
@@ -29,7 +29,6 @@ namespace SMEncounterRNGTool
         public bool IsCrabrawler => Species == 739;
         public bool IsBlank => Species == 0;
         public bool AlwaysSync => Gift;
-        public PersonalInfo info => PersonalTable.SM.getFormeEntry(Species, Form);
         public override string ToString()
         {
             switch (Species)
@@ -43,6 +42,7 @@ namespace SMEncounterRNGTool
                 default: return StringItem.species[Species];
             }
         }
+        #endregion
 
         public static Pokemon[] getVersionList(bool IsMoon) => SpeciesList.Where(pm => IsMoon ? pm.InMoon : pm.InSun).ToArray();
 
@@ -69,7 +69,7 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 797, Level = 65, UB = true, UBLocation = new []{134,124}, UBRate = new byte[]{30,30}, SunOnly = false,},    // Celesteela
             new Pokemon { Species = 798, Level = 60, UB = true, UBLocation = new []{134,376,632}, UBRate = new byte[]{30,30,30}, SunOnly = true,},    // Kartana
             new Pokemon { Species = 799, Level = 70, UB = true, UBLocation = new []{694}, UBRate = new byte[]{80},},    // Guzzlord
-            new Pokemon { Species = 800, Level = 75, UB = true, UBLocation = new []{548},UBRate = new byte[]{05},},    // Necrozma
+            new Pokemon { Species = 800, Level = 75, UB = true, UBLocation = new []{548}, UBRate = new byte[]{05},},    // Necrozma
             new Pokemon { Species = 722, Level = 05, NPC = 5, Delay = 40, Gift = true, Syncable = false, Template = true},    // Starters
             new Pokemon { Species = 142, Level = 40, NPC = 3, Delay = 34, Gift = true,},    // Aerodactyl
             new Pokemon { Species = 137, Level = 30, NPC = 4, Delay = 34, Gift = true,},    // Porygon
@@ -77,6 +77,7 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 133, Level = 01, NPC = 5, Delay = 04, Gift = true, Syncable = false},    // Gift Eevee Egg
         };
 
+        #region formula
         public readonly static byte[] Reorder1 = { 1, 2, 5, 3, 4 };    // In-game index to Normal index
         public readonly static byte[] Reorder2 = { 0, 1, 2, 4, 5, 3 }; // Normal index to In-Game index
 
@@ -94,5 +95,16 @@ namespace SMEncounterRNGTool
         {
             return 15 * IVs.Select((iv, i) => (iv & 1) << Reorder2[i]).Sum() / 63;
         }
+
+        public static int[] getStats(int[] IVs, int Nature, int Lv, int[] BS)
+        {
+            int[] Stats = new int[6];
+            Stats[0] = (((BS[0] * 2 + IVs[0]) * Lv) / 100) + Lv + 10;
+            for (int i = 1; i < 6; i++)
+                Stats[i] = (((BS[i] * 2 + IVs[i]) * Lv) / 100) + 5;
+            NatureAdjustment(Stats, Nature);
+            return Stats;
+        }
+        #endregion
     }
 }

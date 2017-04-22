@@ -13,8 +13,12 @@ namespace SMEncounterRNGTool
         public bool Skip;
         public byte Lv;
         public bool[] Slot;
+        public bool Wild;
+        public bool SafeFOnly, BlinkFOnly, ShinyOnly, EncounterOnly, UBOnly;
+        public byte Encounter_th, UB_th;
+        public bool MainRNGEgg;
 
-        public bool CheckIVs(RNGResult result)
+        private bool CheckIVs(RNGResult result)
         {
             for (int i = 0; i < 6; i++)
                 if (IVlow[i] > result.IVs[i] || result.IVs[i] > IVup[i])
@@ -24,28 +28,22 @@ namespace SMEncounterRNGTool
             return true;
         }
 
-        public bool CheckStats(RNGResult result)
+        private bool CheckStats(RNGResult result)
         {
-            int[] IV = result.IVs;
-            result.Stats = new int[6];
-            result.Stats[0] = (((BS[0] * 2 + IV[0]) * result.Lv) / 100) + result.Lv + 10;
-            for (int i = 1; i < 6; i++)
-                result.Stats[i] = (((BS[i] * 2 + IV[i]) * result.Lv) / 100) + 5;
-            Pokemon.NatureAdjustment(result.Stats, result.Nature);
-
+            result.Stats = Pokemon.getStats(result.IVs, result.Nature, result.Lv, BS);
             for (int i = 0; i < 6; i++)
                 if (Stats[i] != 0 && Stats[i] != result.Stats[i])
                     return false;
             return true;
         }
 
-        public bool CheckNature(int resultnature)
+        private bool CheckNature(int resultnature)
         {
             if (Nature.All(n => !n)) return true;
             return Nature[resultnature];
         }
 
-        public bool CheckHiddenPower(RNGResult result)
+        private bool CheckHiddenPower(RNGResult result)
         {
             var val = Pokemon.getHiddenPowerValue(result.IVs);
             result.hiddenpower = (byte)val;
@@ -53,10 +51,53 @@ namespace SMEncounterRNGTool
             return HPType[val];
         }
 
-        public bool CheckSlot(int slot)
+        private bool CheckSlot(int slot)
         {
             if (Slot.All(n => !n)) return true;
             return Slot[slot];
+        }
+
+        private bool CheckBlink(int blinkflag)
+        {
+            if (BlinkFOnly)
+                return blinkflag > 4;
+            if (SafeFOnly)
+                return blinkflag < 2;
+            return true;
+        }
+
+        public bool CheckResult(RNGResult result)
+        {
+            if (Skip)
+                return true;
+            if (ShinyOnly && !result.Shiny)
+                return false;
+            if (!CheckBlink(result.Blink))
+                return false;
+            if (MainRNGEgg)
+                return true;
+            if (BS == null ? !CheckIVs(result) : !CheckStats(result))
+                return false;
+            if (!CheckHiddenPower(result))
+                return false;
+            if (!CheckNature(result.Nature))
+                return false;
+            if (Gender != 0 && Gender != result.Gender)
+                return false;
+            if (Ability != 0 && Ability != result.Ability)
+                return false;
+            if (Wild)
+            {
+                if (Lv != 0 && Lv != result.Lv)
+                    return false;
+                if (EncounterOnly && result.Encounter >= Encounter_th)
+                    return false;
+                if (UBOnly && result.UbValue >= UB_th)
+                    return false;
+                if (!CheckSlot(result.Slot))
+                    return false;
+            }
+            return true;
         }
     }
 }

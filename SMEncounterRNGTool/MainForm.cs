@@ -547,7 +547,7 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked =  L_UB_th.Visible = UB_th.Visible = UB.Checked;
+            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked = L_UB_th.Visible = UB_th.Visible = UB.Checked;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
@@ -880,11 +880,20 @@ namespace SMEncounterRNGTool
             Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
             IVlow = IVlow,
             IVup = IVup,
-            BS = BS,
-            Stats = Stats,
+            BS = ByStats.Checked ? BS : null,
+            Stats = ByStats.Checked ? Stats : null,
+            Wild = Wild.Checked,
             Skip = DisableFilters.Checked,
             Lv = (byte)Filter_Lv.Value,
             PerfectIVs = (byte)PerfectIVs.Value,
+            SafeFOnly = SafeFOnly.Checked,
+            BlinkFOnly = BlinkOnly.Checked,
+            ShinyOnly = ShinyOnly.Checked,
+            EncounterOnly = EncounteredOnly.Checked,
+            Encounter_th = (byte)Encounter_th.Value,
+            UBOnly = UBOnly.Checked,
+            UB_th = (byte)UB_th.Value,
+            MainRNGEgg = MainRNGEgg.Checked,
         };
 
         private void RefreshRNGSettings(SFMT sfmt)
@@ -935,44 +944,6 @@ namespace SMEncounterRNGTool
             // Mark Blink
             if (0 <= blinkidx && blinkidx < blinkflaglist.Length)
                 result.Blink = blinkflaglist[blinkidx];
-        }
-
-        private bool frameMatch(RNGResult result, Filters setting)
-        {
-            if (setting.Skip)
-                return true;
-            if (ShinyOnly.Checked && !result.Shiny)
-                return false;
-            if (BlinkOnly.Checked && result.Blink < 5)
-                return false;
-            if (SafeFOnly.Checked && result.Blink > 1)
-                return false;
-            if (MainRNGEgg.Checked)
-                return true;
-            if (ByIVs.Checked ? !setting.CheckIVs(result) : !setting.CheckStats(result))
-                return false;
-            if (!setting.CheckHiddenPower(result))
-                return false;
-            if (!setting.CheckNature(result.Nature))
-                return false;
-            if (setting.Gender != 0 && setting.Gender != result.Gender)
-                return false;
-            if (setting.Ability != 0 && setting.Ability != result.Ability)
-                return false;
-
-            if (Wild.Checked)
-            {
-                if (setting.Lv != 0 && setting.Lv != result.Lv)
-                    return false;
-                if (EncounteredOnly.Checked && result.Encounter >= Encounter_th.Value)
-                    return false;
-                if (UBOnly.Checked && result.UbValue >= UB_th.Value)
-                    return false;
-                if (!setting.CheckSlot(result.Slot))
-                    return false;
-            }
-
-            return true;
         }
 
         private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
@@ -1079,7 +1050,7 @@ namespace SMEncounterRNGTool
                     RNGSetting.StageFrame = blinkflaglist[i - min] >= 5 ? blinkflaglist[i - min] : (byte)0;
                 RNGResult result = rng.Generate(e);
                 MarkResults(result, i - min);
-                if (!frameMatch(result, setting))
+                if (!setting.CheckResult(result))
                     continue;
                 dgvrowlist.Add(getRow(i, result));
                 if (dgvrowlist.Count > 100000) break;
@@ -1131,7 +1102,7 @@ namespace SMEncounterRNGTool
                     if (i <= min || i > max)
                         continue;
                     MarkResults(result, i - min - 1, realtime);
-                    if (!frameMatch(result, setting))
+                    if (!setting.CheckResult(result))
                         continue;
                     dgvrowlist.Add(getRow(i - 1, result));
                 }
@@ -1174,7 +1145,7 @@ namespace SMEncounterRNGTool
                     RNGSetting.Rand.Add(sfmt.NextUInt64());
                 }
 
-                if (!frameMatch(result, setting))
+                if (!setting.CheckResult(result))
                     continue;
                 dgvrowlist.Add(getRow(Currentframe, result));
                 if (dgvrowlist.Count > 100000) break;
@@ -1192,7 +1163,7 @@ namespace SMEncounterRNGTool
             //General
             Properties.Settings.Default.PKM = (int)Poke.SelectedValue;
             Properties.Settings.Default.Save();
-            
+
             Stationary.Checked = !(Wild.Checked = PK.Wild || PK.UB);
             UB.Visible = UB.Checked = PK.UB;
             Method_CheckedChanged(null, null);
