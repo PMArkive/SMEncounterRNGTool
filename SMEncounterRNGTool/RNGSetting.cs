@@ -20,8 +20,8 @@ namespace SMEncounterRNGTool
         public static byte Lv_max, Lv_min;
         public static byte ChainLength;
         public static byte UB_th, Encounter_th;
-        public static bool nogender;
-        public static byte gender_ratio;
+        public static bool randomgender;
+        public static byte gender;
 
         public static byte slottype;
         public static bool Considerhistory;
@@ -41,7 +41,8 @@ namespace SMEncounterRNGTool
         // Generated Attributes
         private bool IsShinyLocked => ShinyLocked || IsUB;
         private bool IsWild => Wild && !IsUB;
-        private bool NoGender => nogender || IsUB;
+        private bool RandomGender => randomgender && !IsUB;
+        private byte Gender => IsUB ? (byte)0 : gender;
         private int PIDroll_count => (ShinyCharm && IsWild ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
         private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
         private static bool SpecialWild => Encounter_th == 101 || SOS;
@@ -131,7 +132,7 @@ namespace SMEncounterRNGTool
             st.Nature = (byte)(st.Synchronize ? Synchro_Stat : getrand % 25);
 
             //Gender
-            st.Gender = (byte)(NoGender ? 0 : ((int)(getrand % 252) >= gender_ratio ? 1 : 2));
+            st.Gender = (byte)(RandomGender ? ((int)(getrand % 252) >= Gender ? 1 : 2) : Gender);
 
             //Item
             st.Item = (byte)(IsWild && !SOS ? getrand % 100 : 100);
@@ -282,7 +283,7 @@ namespace SMEncounterRNGTool
             st.Nature = e.NatureLocked ? e.Nature : (byte)(getrand % 25);
 
             //Gender
-            st.Gender = e.GenderLocked || nogender ? e.Gender : (byte)(getrand % 252 >= gender_ratio ? 1 : 2);
+            st.Gender = e.GenderLocked || !randomgender ? e.Gender : (byte)(getrand % 252 >= gender ? 1 : 2);
             return st;
         }
 

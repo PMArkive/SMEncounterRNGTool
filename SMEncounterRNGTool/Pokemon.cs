@@ -1,113 +1,83 @@
 ﻿using System.Linq;
+using PKHeX.Core;
 
 namespace SMEncounterRNGTool
 {
     class Pokemon
     {
-        public readonly static int[] SpecForm =
+        public short Species;
+        public bool Template; // If it's a category
+        public byte Form;
+        public bool Wild;
+        public bool Gift;
+        public short Delay;
+        public byte NPC;
+        public bool UB;
+        public int[] UBLocation;
+        public byte[] UBRate;
+        public bool ShinyLocked;
+        public bool Syncable = true;
+        public byte Level;
+        public bool? SunOnly;
+        
+        public short SpecForm => (short)(Species + (Form << 11));
+        public bool InSun => SunOnly ?? true;
+        public bool InMoon => !SunOnly ?? true;
+        public bool IsSolgaleo => Species == 791;
+        public bool IsLunala => Species == 792;
+        public bool IsEvent => Species == 151;
+        public bool IsCrabrawler => Species == 739;
+        public bool IsBlank => Species == 0;
+        public bool AlwaysSync => Gift;
+        public PersonalInfo info => PersonalTable.SM.getFormeEntry(Species, Form);
+        public override string ToString()
         {
-            0,
-            151,//Event
-            785,//Tapu Koko
-            786,//Tapu Lele
-            787,//Tapu Bulu
-            788,//Tapu Fini
-            791,//Solgaleo
-            792,//Lunala
-            789,//Cosmog
-            772,//Type:Null
-            801,//Magearna
-            718 + (2 << 11),//Zygarde-10%
-            718 + (3 << 11),//Zygarde-50%
-            142,//Aerodactyl
-            137,//Porygon
-            142,//Fossil 
-            739,//Crabrawler
-            793,//Nihilego
-            794,//Buzzwole
-            795,//Pheromosa
-            796,//Xurkitree
-            797,//Celesteela
-            798,//Kartana
-            799,//Guzzlord
-            800,//Necrozma
-        };
-
-        public const byte Solgaleo_index = 6;
-        public const byte Lunala_index = 7;
-        public const byte AlwaysSync_Index = 8;
-        public const byte TypeNull_index = 9;
-        public const byte Zygarde_index = 11;
-        public const byte Fossil_index = 15;
-        public const byte Crabrawler_index = 16;
-        public const byte UB_StartIndex = 17;
-        public static bool ShinyLocked(int index)
-        {
-            if (index == 0)
-                return false;
-            if (index < TypeNull_index)
-                return true;
-            if (index > TypeNull_index && index < Fossil_index - 2)
-                return true;
-            return false;
+            switch (Species)
+            {
+                case 0: return "-";
+                case 151: return StringItem.eventstr;
+                case 408: return StringItem.fossilstr;
+                case 722: return StringItem.starterstr;
+                case 133: return $"{StringItem.species[133]} ({StringItem.species[0]})";
+                case 718: return StringItem.species[718] + (Form == 2 ? "-10%" : "-50%");
+                default: return StringItem.species[Species];
+            }
         }
 
-        public readonly static byte[] PokeLevel =
+        public static Pokemon[] getVersionList(bool IsSun)
         {
-            0,                              //Blank
-            100,                            //Event
-            60,60,60,60,                    //Tapus
-            55,55,5,                        //Cosmog line
-            40,50,50,50,                    //Gift1
-            40,30,15,                       //Gift2
-            0,                              //Crabrawler
-            55,65,60,65,65,60,70,75         //UB
-        };
+            return SpeciesList.Where(pm => IsSun ? pm.InSun : pm.InMoon).ToArray();
+        }
 
-        public readonly static byte[] NPC =
+        public readonly static Pokemon[] SpeciesList =
         {
-            0,             //Blank
-            4,             //Event
-            0,0,0,1,       //Tapus
-            6,6,3,         //Cosmog line
-            8,6,3,3,       //Gift1
-            3,4,1,         //Gift2
-            1,             //Crabrawler
-        };
-
-        public readonly static int[] timedelay =
-        {
-            0,              //Blank
-            0,              //Event
-            0,0,0,0,        //Tapus
-            288,282,34,     //Cosmog Line
-            34,34,32,32,    //Gift1
-            34,34,40,       //Gift2
-            4,              //Cravrawler
-        };
-
-        public readonly static byte[][] UB_rate =
-        {
-            new byte[]{80,30},
-            new byte[]{30},
-            new byte[]{50},
-            new byte[]{15,30}, //todo
-            new byte[]{30,30}, //todo
-            new byte[]{30,30,30},
-            new byte[]{80},
-            new byte[]{5},
-        };
-
-        public readonly static int[][] UBLocation =
-        {
-            new []{100,082},
-            new []{040},
-            new []{046},
-            new []{346,076},
-            new []{134,124},
-            new []{134,376,632},
-            new []{694},
-            new []{548},
+            new Pokemon { Species = 000, Level = 00, Template = true, Wild = true,},    // Blank
+            new Pokemon { Species = 151, Level =100, Template = true, NPC = 4, Syncable = false, },        // Event
+            new Pokemon { Species = 785, Level = 60, ShinyLocked = true },              // Tapu Koko
+            new Pokemon { Species = 786, Level = 60, ShinyLocked = true },              // Tapu Lele
+            new Pokemon { Species = 787, Level = 60, ShinyLocked = true },              // Tapu Bulu
+            new Pokemon { Species = 788, Level = 60, ShinyLocked = true, NPC = 1, },    // Tapu Fini
+            new Pokemon { Species = 791, Level = 55, ShinyLocked = true, NPC = 6, Delay = 288, SunOnly = true},    // Solgaleo
+            new Pokemon { Species = 792, Level = 55, ShinyLocked = true, NPC = 6, Delay = 282, SunOnly = false},   // Lunala
+            new Pokemon { Species = 789, Level = 05, ShinyLocked = true, NPC = 3, Delay = 34, Gift = true},    // Cosmog
+            new Pokemon { Species = 772, Level = 40, NPC = 8, Delay = 34, Gift = true,},    // Type:Null
+            new Pokemon { Species = 801, Level = 50, ShinyLocked = true, NPC = 6, Delay = 34, Gift = true,},    // Magearna
+            new Pokemon { Species = 718, Level = 50, ShinyLocked = true, NPC = 3, Delay = 32, Gift = true, Form = 2,},    // Zygarde-10%
+            new Pokemon { Species = 718, Level = 50, ShinyLocked = true, NPC = 3, Delay = 32, Gift = true, Form = 3,},    // Zygarde-50%
+            new Pokemon { Species = 408, Level = 15, NPC = 1, Delay = 40, Gift = true, Template = true,},    // Fossil
+            new Pokemon { Species = 793, Level = 55, UB = true, UBLocation = new []{100,082}, UBRate = new byte[]{80,30},},    // Nihilego
+            new Pokemon { Species = 794, Level = 65, UB = true, UBLocation = new []{040}, UBRate = new byte[]{30}, SunOnly = true,},    // Buzzwole
+            new Pokemon { Species = 795, Level = 60, UB = true, UBLocation = new []{046}, UBRate = new byte[]{50}, SunOnly = false,},   // Pheromosa
+            new Pokemon { Species = 796, Level = 65, UB = true, UBLocation = new []{346,076}, UBRate = new byte[]{15,30},},    // Xurkitree
+            new Pokemon { Species = 797, Level = 65, UB = true, UBLocation = new []{134,124}, UBRate = new byte[]{30,30}, SunOnly = false,},    // Celesteela
+            new Pokemon { Species = 798, Level = 60, UB = true, UBLocation = new []{134,376,632}, UBRate = new byte[]{30,30,30}, SunOnly = true,},    // Kartana
+            new Pokemon { Species = 799, Level = 70, UB = true, UBLocation = new []{694}, UBRate = new byte[]{80},},    // Guzzlord
+            new Pokemon { Species = 800, Level = 75, UB = true, UBLocation = new []{548},UBRate = new byte[]{05},},    // Necrozma
+            new Pokemon { Species = 722, Level = 05, NPC = 5, Delay = 40, Gift = true, Syncable = false, Template = true},    // Starters
+            new Pokemon { Species = 142, Level = 40, NPC = 3, Delay = 34, Gift = true,},    // Aerodactyl
+            new Pokemon { Species = 137, Level = 30, NPC = 4, Delay = 34, Gift = true,},    // Porygon
+            new Pokemon { Species = 739, Level = 18, NPC = 1, Delay = 04, Wild = true,},    // Crabrawler
+            new Pokemon { Species = 133, Level = 01, NPC = 5, Delay = 04, Gift = true, Syncable = false},    // Gift Eevee Egg
         };
 
         public readonly static byte[] Reorder1 = { 1, 2, 5, 3, 4 };    // In-game index to Normal index

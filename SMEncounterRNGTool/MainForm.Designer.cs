@@ -102,7 +102,7 @@
             this.L_Slot = new System.Windows.Forms.Label();
             this.L_Lv_S = new System.Windows.Forms.Label();
             this.L_Ability = new System.Windows.Forms.Label();
-            this.Lv_Search = new System.Windows.Forms.NumericUpDown();
+            this.Filter_Lv = new System.Windows.Forms.NumericUpDown();
             this.Ability = new System.Windows.Forms.ComboBox();
             this.DisableFilters = new System.Windows.Forms.CheckBox();
             this.EncounteredOnly = new System.Windows.Forms.CheckBox();
@@ -282,9 +282,9 @@
             this.ShinyCharm = new System.Windows.Forms.CheckBox();
             this.Advanced = new System.Windows.Forms.CheckBox();
             this.Lang = new System.Windows.Forms.ComboBox();
-            this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.L_GameVersion = new System.Windows.Forms.Label();
             this.GameVersion = new System.Windows.Forms.ComboBox();
+            this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -303,7 +303,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Time_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).BeginInit();
             this.SearchSettingBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Lv_Search)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Filter_Lv)).BeginInit();
             this.IVPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PerfectIVs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ivmin0)).BeginInit();
@@ -561,6 +561,7 @@
             this.MainRNGEgg.TabIndex = 73;
             this.MainRNGEgg.Text = "主乱数蛋PID";
             this.MainRNGEgg.UseVisualStyleBackColor = true;
+            this.MainRNGEgg.Visible = false;
             this.MainRNGEgg.CheckedChanged += new System.EventHandler(this.MainRNGEgg_CheckedChanged);
             // 
             // SOS
@@ -633,12 +634,6 @@
             // GenderRatio
             // 
             this.GenderRatio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GenderRatio.Items.AddRange(new object[] {
-            "-",
-            "♂1：♀1",
-            "♂7：♀1",
-            "♂3：♀1",
-            "♂1：♀3"});
             this.GenderRatio.Location = new System.Drawing.Point(137, 66);
             this.GenderRatio.Name = "GenderRatio";
             this.GenderRatio.Size = new System.Drawing.Size(76, 21);
@@ -1006,7 +1001,7 @@
             this.SearchSettingBox.Controls.Add(this.L_Slot);
             this.SearchSettingBox.Controls.Add(this.L_Lv_S);
             this.SearchSettingBox.Controls.Add(this.L_Ability);
-            this.SearchSettingBox.Controls.Add(this.Lv_Search);
+            this.SearchSettingBox.Controls.Add(this.Filter_Lv);
             this.SearchSettingBox.Controls.Add(this.Ability);
             this.SearchSettingBox.Controls.Add(this.DisableFilters);
             this.SearchSettingBox.Controls.Add(this.EncounteredOnly);
@@ -1185,14 +1180,14 @@
             this.L_Ability.TabIndex = 64;
             this.L_Ability.Text = "特性";
             // 
-            // Lv_Search
+            // Filter_Lv
             // 
-            this.Lv_Search.AccessibleName = "IV_min";
-            this.Lv_Search.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lv_Search.Location = new System.Drawing.Point(318, 57);
-            this.Lv_Search.Name = "Lv_Search";
-            this.Lv_Search.Size = new System.Drawing.Size(44, 22);
-            this.Lv_Search.TabIndex = 67;
+            this.Filter_Lv.AccessibleName = "IV_min";
+            this.Filter_Lv.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Filter_Lv.Location = new System.Drawing.Point(318, 57);
+            this.Filter_Lv.Name = "Filter_Lv";
+            this.Filter_Lv.Size = new System.Drawing.Size(44, 22);
+            this.Filter_Lv.TabIndex = 67;
             // 
             // Ability
             // 
@@ -3287,18 +3282,6 @@
             this.Lang.TabIndex = 7;
             this.Lang.SelectedIndexChanged += new System.EventHandler(this.ChangeLanguage);
             // 
-            // Seed
-            // 
-            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Seed.Hexadecimal = true;
-            this.Seed.Location = new System.Drawing.Point(728, 9);
-            this.Seed.Name = "Seed";
-            this.Seed.Size = new System.Drawing.Size(78, 22);
-            this.Seed.TabIndex = 0;
-            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
-            // 
             // L_GameVersion
             // 
             this.L_GameVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3321,6 +3304,18 @@
             this.GameVersion.Size = new System.Drawing.Size(51, 21);
             this.GameVersion.TabIndex = 81;
             this.GameVersion.SelectedIndexChanged += new System.EventHandler(this.GameVersion_SelectedIndexChanged);
+            // 
+            // Seed
+            // 
+            this.Seed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Seed.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Seed.Hexadecimal = true;
+            this.Seed.Location = new System.Drawing.Point(728, 9);
+            this.Seed.Name = "Seed";
+            this.Seed.Size = new System.Drawing.Size(78, 22);
+            this.Seed.TabIndex = 0;
+            this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             // 
             // MainForm
             // 
@@ -3363,7 +3358,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NPC)).EndInit();
             this.SearchSettingBox.ResumeLayout(false);
             this.SearchSettingBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Lv_Search)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Filter_Lv)).EndInit();
             this.IVPanel.ResumeLayout(false);
             this.IVPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PerfectIVs)).EndInit();
@@ -3546,7 +3541,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label L_Slot;
         private System.Windows.Forms.Label L_Lv_S;
-        private System.Windows.Forms.NumericUpDown Lv_Search;
+        private System.Windows.Forms.NumericUpDown Filter_Lv;
         private System.Windows.Forms.CheckBox UBOnly;
         private System.Windows.Forms.NumericUpDown Correction;
         private System.Windows.Forms.NumericUpDown UB_th;

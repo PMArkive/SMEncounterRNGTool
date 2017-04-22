@@ -18,7 +18,7 @@ And ALL Pokemon RNG Researcher.
 - Crabrawlers underneath Berry Trees
 - Gift Eevee egg from Nursery helpers
 - Main RNG eggs. i.e. eggs without shiny charm or Masuda Method
-- SM Starters: _PokeCalcNTR Only (This function will not be added)_
+- SM Starters: _PokeCalcNTR Only _
 - Pokemon Caught by fishing (Unstable)
 - SOS: _PokeCalcNTR Only (Unstable)_
 
@@ -58,9 +58,9 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - UBs & wild Pokemon: "Use this item" (Honey) / Press A and enter the bag from X menu. 
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
-- Gift Eevee egg: "You received Egg!".  ( select `<Fossil>`, put 5 in `# of NPCs` and 4 in `Consider Time Delay`)
+- Gift Eevee egg: "You received Egg!". 
 - Main RNG egg: "But you want the Egg your Pokemon was holding. right?" ( Check `-`->`Stationary`->`Main RNG Egg` )
-- Starters: "Having accepted on another, you'll surely be friends for life".  ( select `<Fossil>`, put 5 in `# of NPCs`)
+- Starters: "Having accepted on another, you'll surely be friends for life".
 - Fishing: When you get something on your hook (Unstable)
 - SOS: When you "Use" Adrenaline Orbs (Unstable)
 

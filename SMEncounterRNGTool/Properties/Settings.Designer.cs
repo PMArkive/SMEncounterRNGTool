@@ -98,12 +98,12 @@ namespace SMEncounterRNGTool.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte Pokemon {
+        public int PKM {
             get {
-                return ((byte)(this["Pokemon"]));
+                return ((int)(this["PKM"]));
             }
             set {
-                this["Pokemon"] = value;
+                this["PKM"] = value;
             }
         }
         

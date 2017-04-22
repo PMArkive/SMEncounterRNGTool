@@ -20,7 +20,7 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">en</Value>
     </Setting>
-    <Setting Name="Pokemon" Type="System.Byte" Scope="User">
+    <Setting Name="PKM" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="IsSun" Type="System.Boolean" Scope="User">

@@ -76,11 +76,12 @@ namespace SMEncounterRNGTool
         private EncounterArea ea = new EncounterArea();
         private bool IsMoon => GameVersion.SelectedIndex > 0;
         private bool IsNight => Night.Checked;
-        private bool IsEvent => Poke.SelectedIndex == 1;
+        private bool IsEvent => PK.IsEvent;
         private int[] slotspecies => ea.getSpecies(IsMoon, IsNight);
+        private Pokemon[] PMDroplist;
+        private Pokemon PK;
 
         private byte ModelNumber => (byte)(NPC.Value + 1);
-        private byte UBIndex => Pokemon.UB_StartIndex;
         private bool ShowDelay => ConsiderDelay.Checked && !ShowResultsAfterDelay.Checked;
         #endregion
 
@@ -95,6 +96,7 @@ namespace SMEncounterRNGTool
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
         private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
         private static readonly string[] FOSSIL_STR = { "<Fossil>", "<化石>" };
+        private static readonly string[] STARTER_STR = { "<Starter>", "<御三家>" };
         private static readonly string[] FILEERRORSTR = { "Invalid file!", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
         {
@@ -127,6 +129,9 @@ namespace SMEncounterRNGTool
             StringItem.hpstr = getStringList("Types", curlanguage);
             StringItem.species = getStringList("Species", curlanguage);
             StringItem.location = getStringList("Location", curlanguage);
+            StringItem.eventstr = EVENT_STR[lindex];
+            StringItem.fossilstr = FOSSIL_STR[lindex];
+            StringItem.starterstr = STARTER_STR[lindex];
 
             Nature.Items.Clear();
             Nature.BlankText = ANY_STR[lindex];
@@ -146,15 +151,9 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < StringItem.naturestr.Length; i++)
                 Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
-            Poke.Items[1] = EVENT_STR[lindex];
-            for (int i = 2; i < Pokemon.SpecForm.Length; i++)
-                Poke.Items[i] = StringItem.species[Pokemon.SpecForm[i] & 0x7FF];
+            RefeshPokemonDroplist();
 
             RefreshLocation();
-
-            Poke.Items[Pokemon.Zygarde_index] += "-10%";
-            Poke.Items[Pokemon.Zygarde_index + 1] += "-50%";
-            Poke.Items[Pokemon.Fossil_index] = FOSSIL_STR[lindex];
 
             // display something upon loading
             Nature.CheckBoxItems[0].Checked = true;
@@ -189,11 +188,13 @@ namespace SMEncounterRNGTool
 
             SyncNature.Items.Add("-");
             Event_Nature.Items.Add("-");
-            Poke.Items.Add("-");
             SyncNature.Items.AddRange(StringItem.naturestr);
             Event_Nature.Items.AddRange(StringItem.naturestr);
-            for (int i = 1; i < Pokemon.SpecForm.Length; i++)
-                Poke.Items.Add("");
+
+            GenderRatio.DisplayMember = "Text";
+            GenderRatio.ValueMember = "Value";
+            GenderRatio.DataSource = new BindingSource(StringItem.GenderRatioList, null);
+            GenderRatio.SelectedIndex = 0;
 
             Gender.Items.AddRange(StringItem.genderstr);
             Event_Gender.Items.AddRange(StringItem.genderstr);
@@ -232,7 +233,7 @@ namespace SMEncounterRNGTool
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
             TSV.Value = Properties.Settings.Default.TSV;
             Advanced.Checked = Properties.Settings.Default.Advance;
-            Poke.SelectedIndex = Properties.Settings.Default.Pokemon;
+            Poke.SelectedValue = Properties.Settings.Default.PKM;
             GameVersion.SelectedIndex = Properties.Settings.Default.IsSun ? 0 : 1;
             (Properties.Settings.Default.ClockInput ? StartClockInput : EndClockInput).Checked = true;
 
@@ -247,9 +248,9 @@ namespace SMEncounterRNGTool
         #region DataEntry
         private void RefreshLocation()
         {
-            if (Poke.SelectedIndex < UBIndex && Poke.SelectedIndex != 0)
+            if (!PK.UB && !PK.IsBlank)
                 return;
-            locationlist = Poke.SelectedIndex == 0 ? LocationTable.SMLocationList : Pokemon.UBLocation[Poke.SelectedIndex - UBIndex];
+            locationlist = PK.IsBlank ? LocationTable.SMLocationList : PK.UBLocation;
 
             Locationlist = locationlist.Select(loc => new Controls.ComboItem(StringItem.getlocationstr(loc), loc)).ToList();
             MetLocation.DisplayMember = "Text";
@@ -257,6 +258,17 @@ namespace SMEncounterRNGTool
             MetLocation.DataSource = new BindingSource(Locationlist, null);
 
             LoadSpecies();
+        }
+
+        private void RefeshPokemonDroplist()
+        {
+            int tmp = Poke.SelectedIndex;
+            PMDroplist = Pokemon.getVersionList(GameVersion.SelectedIndex == 0);
+            var List = PMDroplist.Select(s => new Controls.ComboItem(s.ToString(), s.SpecForm));
+            Poke.DisplayMember = "Text";
+            Poke.ValueMember = "Value";
+            Poke.DataSource = new BindingSource(List, null);
+            Poke.SelectedIndex = 0 <= tmp && tmp < Poke.Items.Count ? tmp : 0;
         }
 
         private void LoadSpecies()
@@ -290,14 +302,13 @@ namespace SMEncounterRNGTool
                 return;
             var t = PersonalTable.SM.getFormeEntry(Species, Form);
             BS = new[] { t.HP, t.ATK, t.DEF, t.SPA, t.SPD, t.SPE };
-            switch (t.Gender)
-            {
-                case 127: GenderRatio.SelectedIndex = 1; break;
-                case 031: GenderRatio.SelectedIndex = 2; break;
-                case 063: GenderRatio.SelectedIndex = 3; break;
-                case 191: GenderRatio.SelectedIndex = 4; break;
-                default: GenderRatio.SelectedIndex = 0; break;
-            }
+            if (UBOnly.Checked)
+                return;
+            GenderRatio.SelectedValue = t.Gender;
+            if (FuncUtil.IsRandomGender(t.Gender))
+                Gender.Visible = L_gender.Visible = true;
+            if (t.Abilities[0] != t.Abilities[1])
+                Ability.Visible = L_Ability.Visible = true;
             Fix3v.Checked = t.EggGroups[0] == 0x0F; //Undiscovered Group
         }
         private void SetPersonalInfo(int SpecForm) => SetPersonalInfo(SpecForm & 0x7FF, SpecForm >> 11);
@@ -469,6 +480,7 @@ namespace SMEncounterRNGTool
 
         private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RefeshPokemonDroplist();
             if (ea.SunMoonDifference)
             {
                 LoadSpecies();
@@ -478,6 +490,7 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.IsSun = !IsMoon;
             Properties.Settings.Default.Save();
         }
+
         private void DayNight_CheckedChanged(object sender, EventArgs e)
         {
             if (ea.DayNightDifference)
@@ -486,8 +499,8 @@ namespace SMEncounterRNGTool
 
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Poke.SelectedIndex >= UBIndex && MetLocation.SelectedIndex >= 0)
-                UB_th.Value = Pokemon.UB_rate[Poke.SelectedIndex - UBIndex][MetLocation.SelectedIndex];
+            if (PK.UB && MetLocation.SelectedIndex >= 0)
+                UB_th.Value = PK.UBRate[MetLocation.SelectedIndex];
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
@@ -501,10 +514,10 @@ namespace SMEncounterRNGTool
         private void SlotSpecies_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadSlotSpeciesInfo();
-            if (SlotSpecies.SelectedIndex > 0 && (Lv_Search.Value > Lv_max.Value || Lv_Search.Value < Lv_min.Value))
-                Lv_Search.Value = 0;
-            if (SlotSpecies.SelectedIndex == 0 && Poke.SelectedIndex >= UBIndex)
-                Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex];
+            if (SlotSpecies.SelectedIndex > 0 && (Filter_Lv.Value > Lv_max.Value || Filter_Lv.Value < Lv_min.Value))
+                Filter_Lv.Value = 0;
+            if (SlotSpecies.SelectedIndex == 0 && PK.UB)
+                Filter_Lv.Value = PK.Level;
         }
 
         private void Method_CheckedChanged(object sender, EventArgs e)
@@ -515,7 +528,7 @@ namespace SMEncounterRNGTool
             else
                 EncounteredOnly.Checked = true;
 
-            if (Poke.SelectedIndex == 0)
+            if (PK.IsBlank)
             {
                 AlwaysSynced.Enabled = AlwaysSynced.Checked = Stationary.Checked;
                 SOS.Visible = Fishing.Visible = Wild.Checked;
@@ -542,9 +555,7 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_ubvalue.Visible = UBOnly.Visible = L_UB_th.Visible = UB_th.Visible = UB.Checked;
-            if (!UB.Checked)
-                UBOnly.Checked = false;
+            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked=  L_UB_th.Visible = UB_th.Visible = UB.Checked;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
@@ -754,8 +765,8 @@ namespace SMEncounterRNGTool
             Gender.SelectedIndex = 0;
             Ability.SelectedIndex = 0;
 
-            if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Lv_Search.Value <= Lv_max.Value) || Poke.SelectedIndex == 0)
-                Lv_Search.Value = 0;
+            if (ByIVs.Checked && Wild.Checked && (!UB.Checked || Filter_Lv.Value <= Lv_max.Value) || PK.IsBlank)
+                Filter_Lv.Value = 0;
 
             Stats = new int[6];
             IVlow = new int[6];
@@ -885,28 +896,20 @@ namespace SMEncounterRNGTool
             BS = BS,
             Stats = Stats,
             Skip = DisableFilters.Checked,
-            Lv = (byte)Lv_Search.Value,
+            Lv = (byte)Filter_Lv.Value,
             PerfectIVs = (byte)PerfectIVs.Value,
         };
 
         private void RefreshRNGSettings(SFMT sfmt)
         {
-            byte gender_threshold = 0;
-            switch (GenderRatio.SelectedIndex)
-            {
-                case 1: gender_threshold = 126; break;
-                case 2: gender_threshold = 30; break;
-                case 3: gender_threshold = 63; break;
-                case 4: gender_threshold = 189; break;
-            }
             RNGSetting.Considerhistory = CreateTimeline.Checked || Refinement.Checked;
             RNGSetting.Considerdelay = ShowResultsAfterDelay.Checked;
             RNGSetting.PreDelayCorrection = (int)Correction.Value;
             RNGSetting.delaytime = (int)Timedelay.Value / 2;
             RNGSetting.modelnumber = ModelNumber;
             RNGSetting.ConsiderBagEnteringTime = EnterBagTime.Checked;
-            RNGSetting.IsSolgaleo = Poke.SelectedIndex == Pokemon.Solgaleo_index;
-            RNGSetting.IsLunala = Poke.SelectedIndex == Pokemon.Lunala_index;
+            RNGSetting.IsSolgaleo = PK.IsSolgaleo;
+            RNGSetting.IsLunala = PK.IsLunala;
             RNGSetting.SolLunaReset = (RNGSetting.IsSolgaleo || RNGSetting.IsLunala) && ModelNumber == 7;
             RNGSetting.Synchro_Stat = (byte)(SyncNature.SelectedIndex - 1);
             RNGSetting.TSV = (int)TSV.Value;
@@ -916,21 +919,21 @@ namespace SMEncounterRNGTool
             RNGSetting.ShinyCharm = ShinyCharm.Checked;
             RNGSetting.Wild = Wild.Checked;
             RNGSetting.Fix3v = Fix3v.Checked;
-            RNGSetting.nogender = GenderRatio.SelectedIndex == 0;
-            RNGSetting.gender_ratio = gender_threshold;
-            RNGSetting.PokeLv = Wild.Checked && Poke.SelectedIndex > 0 ? Pokemon.PokeLevel[Poke.SelectedIndex] : (byte)Lv_Search.Value;
+            RNGSetting.randomgender = FuncUtil.IsRandomGender((int)GenderRatio.SelectedValue);
+            RNGSetting.gender = FuncUtil.getGenderRatio((int)GenderRatio.SelectedValue);
+            RNGSetting.PokeLv = PK.Level;
             RNGSetting.Lv_min = (byte)Lv_min.Value;
             RNGSetting.Lv_max = (byte)Lv_max.Value;
             RNGSetting.UB_th = (byte)UB_th.Value;
             RNGSetting.Encounter_th = (byte)Encounter_th.Value;
-            RNGSetting.ShinyLocked = Pokemon.ShinyLocked(Poke.SelectedIndex);
+            RNGSetting.ShinyLocked = PK.ShinyLocked;
             RNGSetting.fishing = Fishing.Checked;
             RNGSetting.SOS = SOS.Checked;
             RNGSetting.ChainLength = (byte)ChainLength.Value;
 
             RNGSetting.route17 = ea.Location == 120;
             RNGSetting.IsMainRNGEgg = MainRNGEgg.Checked;
-            RNGSetting.IsMinior = Poke.SelectedIndex == 0 && Wild.Checked && (int)SlotSpecies.SelectedValue == 774;
+            RNGSetting.IsMinior = PK.IsBlank && Wild.Checked && (int)SlotSpecies.SelectedValue == 774;
 
             RNGSetting.ResetModelStatus();
             RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
@@ -1197,60 +1200,47 @@ namespace SMEncounterRNGTool
 
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            const int AlwaysSync_Index = Pokemon.AlwaysSync_Index;
-            const int Fossil_index = Pokemon.Fossil_index;
+            PK = PMDroplist.FirstOrDefault(pm => pm.SpecForm == (int)Poke.SelectedValue) ?? Pokemon.SpeciesList[0];
             //General
-            Properties.Settings.Default.Pokemon = (byte)Poke.SelectedIndex;
+            Properties.Settings.Default.PKM = (int)Poke.SelectedValue;
             Properties.Settings.Default.Save();
-
-            UB.Visible = UB.Checked = Wild.Checked = Poke.SelectedIndex >= UBIndex;
-            Stationary.Checked = Poke.SelectedIndex < UBIndex - 1;
-            if (Poke.SelectedIndex == 0 || Poke.SelectedIndex == UBIndex - 1) Wild.Checked = true;
+            
+            Stationary.Checked = !(Wild.Checked = PK.Wild || PK.UB);
+            UB.Visible = UB.Checked = PK.UB;
             Method_CheckedChanged(null, null);
             RefreshLocation();
             //Enable
-            SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = Poke.SelectedIndex == 0;
-            GenderRatio.Enabled = Fix3v.Enabled = Poke.SelectedIndex < 2 || Poke.SelectedIndex >= UBIndex;
-            Honey.Enabled = Encounter_th.Enabled = Poke.SelectedIndex != Pokemon.Crabrawler_index;
-            //Event
+            SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = PK.IsBlank;
+            GenderRatio.Enabled = Fix3v.Enabled = PK.IsBlank || PK.IsEvent || PK.UB;
+            Honey.Enabled = Encounter_th.Enabled = !PK.IsCrabrawler;
+            SyncNature.Enabled = PK.Syncable;
+            AlwaysSynced.Checked = PK.AlwaysSync;
+            if (!PK.Syncable)
+                SyncNature.SelectedIndex = 0;
             L_EventInstruction.Visible = IsEvent;
-            SyncNature.Enabled = !IsEvent;
-            //
-            if (Poke.SelectedIndex == Pokemon.Crabrawler_index) { Honey.Checked = false; WildEncounterSetting.Visible = false; }
-
-            if (Poke.SelectedIndex == 0) return;
-            MainRNGEgg.Visible = MainRNGEgg.Checked = false;
-            AlwaysSynced.Checked = AlwaysSync_Index <= Poke.SelectedIndex && Poke.SelectedIndex < UBIndex - 1;
             ConsiderDelay.Checked = true;
             AlwaysSynced.Enabled = false;
-            SetPersonalInfo(Pokemon.SpecForm[Poke.SelectedIndex]);
-            Lv_Search.Value = Pokemon.PokeLevel[Poke.SelectedIndex];
-
-            if (Poke.SelectedIndex < UBIndex)
+            if (PK.IsBlank)
+                return;
+            MainRNGEgg.Visible = MainRNGEgg.Checked = false;
+            if (PK.IsEvent)
             {
-                Timedelay.Value = Pokemon.timedelay[Poke.SelectedIndex];
-                NPC.Value = Pokemon.NPC[Poke.SelectedIndex];
+                L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
+                Timedelay.Value = (YourID.Checked && !IsEgg.Checked) ? 62 : 0;
+                return;
             }
-            else
+            Filter_Lv.Value = PK.Level;
+            SetPersonalInfo(PK.SpecForm);
+            if (PK.UB)
+                return;
+            if (PK.IsCrabrawler)
             {
-                GenderRatio.SelectedIndex = 1;
-                Fix3v.Checked = false;
+                Honey.Checked = false;
+                WildEncounterSetting.Visible = false;
+                Encounter_th.Value = 101;
             }
-
-            switch (Poke.SelectedIndex)
-            {
-                case 1:
-                    L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
-                    Timedelay.Value = (YourID.Checked && !IsEgg.Checked) ? 62 : 0;
-                    break;
-                case Fossil_index - 2:
-                case Fossil_index:
-                    L_gender.Visible = Gender.Visible = true; break;
-                case Fossil_index - 1:
-                    L_Ability.Visible = Ability.Visible = true; break;
-                case Fossil_index + 1:
-                    Encounter_th.Value = 101; break;
-            }
+            Timedelay.Value = PK.Delay;
+            NPC.Value = PK.NPC;
         }
 
         private EventRule geteventsetting()
@@ -1423,7 +1413,7 @@ namespace SMEncounterRNGTool
                 IsEgg.Checked = Data[0xD1] == 1;
                 YourID.Checked = Data[0xB5] == 3;
                 OtherInfo.Checked = true;
-                Lv_Search.Value = Data[0xD0];
+                Filter_Lv.Value = Data[0xD0];
                 br.Close();
             }
             catch
