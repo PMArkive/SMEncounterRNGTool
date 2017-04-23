@@ -45,7 +45,7 @@ namespace SMEncounterRNGTool
         private bool NormalSlot => Wild && !IsUB && !IsIslandScan;
         private bool RandomGender => randomgender && !IsUB;
         private byte Gender => IsUB ? (byte)0 : gender;
-        private int PIDroll_count => (ShinyCharm && IsWild ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
+        private int PIDroll_count => (ShinyCharm && !IsShinyLocked && !AlwaysSynchro ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
         private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
         private bool SpecialWild => Encounter_th == 101 || SOS;
 
