@@ -117,7 +117,7 @@ dgv_PID = PID
 dgv_EC = EC
 dgv_time = Real Time
 ---
-SOSSetting = SOS Chaining Setting
+L_IslandScan = Island Scan
 L_ChainLength = Chain Length
 ---
 WildEncounterSetting = Wild Encounter Setting

@@ -152,8 +152,8 @@ namespace SMEncounterRNGTool
             for (int i = 0; i < StringItem.naturestr.Length; i++)
                 Event_Nature.Items[i + 1] = SyncNature.Items[i + 1] = StringItem.naturestr[i];
 
-            RefeshPokemonDropdownlist();
-
+            RefreshPokemonDropdownlist();
+            RefreshIslandPokemon();
             RefreshLocation();
 
             // display something upon loading
@@ -253,7 +253,7 @@ namespace SMEncounterRNGTool
             else if (PK.UB)
                 locationlist = PK.UBLocation;
             else if (PK.IslandScan)
-                locationlist = LocationTable.IslandScanLocationList;
+                locationlist = LocationTable.Table.Where(t => t.Location == PK.Location).Select(t => t.Locationidx).ToArray();
             else
                 return;
 
@@ -265,7 +265,7 @@ namespace SMEncounterRNGTool
             LoadSpecies();
         }
 
-        private void RefeshPokemonDropdownlist()
+        private void RefreshPokemonDropdownlist()
         {
             int tmp = Poke.SelectedIndex;
             PMDropdownlist = Pokemon.getVersionList(IsMoon);
@@ -274,6 +274,16 @@ namespace SMEncounterRNGTool
             Poke.ValueMember = "Value";
             Poke.DataSource = new BindingSource(List, null);
             Poke.SelectedIndex = 0 <= tmp && tmp < Poke.Items.Count ? tmp : 0;
+        }
+
+        private void RefreshIslandPokemon()
+        {
+            int tmp = Island_Poke.SelectedIndex;
+            var List = Pokemon.IslandScanSpecies.Select(s => new Controls.ComboItem(StringItem.species[s.Species], s.SpecForm));
+            Island_Poke.DisplayMember = "Text";
+            Island_Poke.ValueMember = "Value";
+            Island_Poke.DataSource = new BindingSource(List, null);
+            Island_Poke.SelectedIndex = 0 <= tmp && tmp < Poke.Items.Count ? tmp : 0;
         }
 
         private void LoadSpecies()
@@ -299,7 +309,7 @@ namespace SMEncounterRNGTool
                 Slot.CheckBoxItems[i + 1].Checked = Slotidx.Contains(Slottype[i]);
             if (PK.IslandScan && SlotSpecies.SelectedIndex == SlotSpecies.Items.Count - 1)
                 Filter_Lv.Value = PK.Level;
-                
+
             SetPersonalInfo(SpecForm);
         }
 
@@ -309,7 +319,7 @@ namespace SMEncounterRNGTool
                 return;
             var t = PersonalTable.SM.getFormeEntry(Species, Form);
             BS = new[] { t.HP, t.ATK, t.DEF, t.SPA, t.SPD, t.SPE };
-            if (UBOnly.Checked)
+            if (UBOnly.Checked && !PK.IslandScan)
                 return;
             GenderRatio.SelectedValue = t.Gender;
             if (FuncUtil.IsRandomGender(t.Gender))
@@ -487,7 +497,7 @@ namespace SMEncounterRNGTool
 
         private void GameVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RefeshPokemonDropdownlist();
+            RefreshPokemonDropdownlist();
             Properties.Settings.Default.IsSun = !IsMoon;
             Properties.Settings.Default.Save();
         }
@@ -984,7 +994,7 @@ namespace SMEncounterRNGTool
                 if (UbValue != "-")
                     UbValue = result.UbValue < UB_th.Value ? "O" : "X";
                 if (UbValue == "O")
-                    Slot = "UB";
+                    Slot = PK.IslandScan ? "QR" : "UB";
                 if (result.Item < 50)
                     Item = "50%";
                 else if (result.Item < 55)
@@ -1167,6 +1177,15 @@ namespace SMEncounterRNGTool
 
         #region Misc Function
 
+        private void Island_Poke_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PK = Pokemon.IslandScanSpecies.FirstOrDefault(pk => pk.Species == (int)Island_Poke.SelectedValue);
+            UB_th.Value = 50;
+            RefreshLocation();
+            Filter_Lv.Value = PK.Level;
+            SetPersonalInfo(PK.SpecForm);
+        }
+
         private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
             PK = PMDropdownlist.FirstOrDefault(pm => pm.SpecForm == (int)Poke.SelectedValue) ?? Pokemon.SpeciesList[0];
@@ -1176,13 +1195,13 @@ namespace SMEncounterRNGTool
 
             Stationary.Checked = !(Wild.Checked = PK.Wild || PK.UB);
             UB.Visible = UB.Checked = PK.UB || PK.IslandScan;
-            UB.Text = PK.IslandScan ? StringItem.islandscanstr : "UB";
             Method_CheckedChanged(null, null);
             RefreshLocation();
             //Enable
             SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = PK.IsBlank;
-            GenderRatio.Enabled = Fix3v.Enabled = PK.IsBlank || PK.IsEvent || PK.UB;
+            GenderRatio.Enabled = Fix3v.Enabled = PK.IsBlank || PK.IsEvent || PK.UB || PK.IslandScan;
             L_EventInstruction.Visible = PK.IsEvent;
+            IslandScanSetting.Visible = PK.IslandScan;
             Honey.Enabled = Encounter_th.Enabled = !PK.IsCrabrawler;
             SyncNature.Enabled = PK.Syncable;
             AlwaysSynced.Checked = PK.AlwaysSync;
@@ -1202,7 +1221,13 @@ namespace SMEncounterRNGTool
             Filter_Lv.Value = PK.Level;
             SetPersonalInfo(PK.SpecForm);
             if (PK.UB || PK.IslandScan)
+            {
+                //Island Scan and UB Text
+                UB.Text = PK.IslandScan ? StringItem.islandscanstr : "UB";
+                dgv_ubvalue.HeaderText = PK.IslandScan ? dgv_ubvalue.HeaderText.Replace("UB", "QR") : dgv_ubvalue.HeaderText.Replace("QR", "UB");
+                UBOnly.Text = PK.IslandScan ? UBOnly.Text.Replace("UB", "QR") : UBOnly.Text.Replace("QR", "UB");
                 return;
+            }
             if (PK.IsCrabrawler)
             {
                 Honey.Checked = false;

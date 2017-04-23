@@ -29,27 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties1 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties2 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties3 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties1 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
-            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties2 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
-            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties3 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
             this.WildEncounterSetting = new System.Windows.Forms.GroupBox();
+            this.IslandScanSetting = new System.Windows.Forms.Panel();
+            this.L_IslandScan = new System.Windows.Forms.Label();
+            this.Island_Poke = new System.Windows.Forms.ComboBox();
+            this.SOSSetting = new System.Windows.Forms.Panel();
+            this.ChainLength = new System.Windows.Forms.NumericUpDown();
+            this.L_ChainLength = new System.Windows.Forms.Label();
             this.Night = new System.Windows.Forms.RadioButton();
             this.Day = new System.Windows.Forms.RadioButton();
             this.SlotSpecies = new System.Windows.Forms.ComboBox();
             this.MetLocation = new System.Windows.Forms.ComboBox();
             this.L_Species = new System.Windows.Forms.Label();
             this.L_Location = new System.Windows.Forms.Label();
-            this.SOSSetting = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.L_ChainLength = new System.Windows.Forms.Label();
-            this.ChainLength = new System.Windows.Forms.NumericUpDown();
             this.Condition = new System.Windows.Forms.GroupBox();
             this.MainRNGEgg = new System.Windows.Forms.CheckBox();
             this.SOS = new System.Windows.Forms.CheckBox();
@@ -89,6 +91,9 @@
             this.NPC = new System.Windows.Forms.NumericUpDown();
             this.L_NPC = new System.Windows.Forms.Label();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
+            this.Slot = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
+            this.HiddenPower = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
+            this.Nature = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
             this.SafeFOnly = new System.Windows.Forms.CheckBox();
             this.ShowStats = new System.Windows.Forms.CheckBox();
             this.BlinkOnly = new System.Windows.Forms.CheckBox();
@@ -208,9 +213,11 @@
             this.Event_Gender = new System.Windows.Forms.ComboBox();
             this.Event_SID = new System.Windows.Forms.NumericUpDown();
             this.Event_Nature = new System.Windows.Forms.ComboBox();
+            this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.L_EC = new System.Windows.Forms.Label();
             this.L_SID = new System.Windows.Forms.Label();
             this.L_PID = new System.Windows.Forms.Label();
+            this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.Event_TID = new System.Windows.Forms.NumericUpDown();
             this.OtherInfo = new System.Windows.Forms.CheckBox();
             this.L_TID = new System.Windows.Forms.Label();
@@ -280,15 +287,11 @@
             this.L_GameVersion = new System.Windows.Forms.Label();
             this.GameVersion = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
-            this.Slot = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
-            this.HiddenPower = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
-            this.Nature = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
-            this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
-            this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
             this.WildEncounterSetting.SuspendLayout();
+            this.IslandScanSetting.SuspendLayout();
             this.SOSSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChainLength)).BeginInit();
             this.Condition.SuspendLayout();
@@ -340,6 +343,8 @@
             this.SearchTool.SuspendLayout();
             this.EventSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EventIV5)).BeginInit();
@@ -353,8 +358,6 @@
             this.SearchSeedBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -388,7 +391,6 @@
             // ControlPanel
             // 
             this.ControlPanel.Controls.Add(this.WildEncounterSetting);
-            this.ControlPanel.Controls.Add(this.SOSSetting);
             this.ControlPanel.Controls.Add(this.Condition);
             this.ControlPanel.Controls.Add(this.TimeBox);
             this.ControlPanel.Controls.Add(this.SearchSettingBox);
@@ -401,24 +403,88 @@
             // 
             // WildEncounterSetting
             // 
+            this.WildEncounterSetting.Controls.Add(this.IslandScanSetting);
+            this.WildEncounterSetting.Controls.Add(this.SOSSetting);
             this.WildEncounterSetting.Controls.Add(this.Night);
             this.WildEncounterSetting.Controls.Add(this.Day);
             this.WildEncounterSetting.Controls.Add(this.SlotSpecies);
             this.WildEncounterSetting.Controls.Add(this.MetLocation);
             this.WildEncounterSetting.Controls.Add(this.L_Species);
             this.WildEncounterSetting.Controls.Add(this.L_Location);
-            this.WildEncounterSetting.Location = new System.Drawing.Point(824, 163);
+            this.WildEncounterSetting.Location = new System.Drawing.Point(824, 175);
             this.WildEncounterSetting.Name = "WildEncounterSetting";
-            this.WildEncounterSetting.Size = new System.Drawing.Size(395, 61);
+            this.WildEncounterSetting.Size = new System.Drawing.Size(395, 116);
             this.WildEncounterSetting.TabIndex = 74;
             this.WildEncounterSetting.TabStop = false;
             this.WildEncounterSetting.Text = "野外遇敌设置";
             this.WildEncounterSetting.Visible = false;
             // 
+            // IslandScanSetting
+            // 
+            this.IslandScanSetting.Controls.Add(this.L_IslandScan);
+            this.IslandScanSetting.Controls.Add(this.Island_Poke);
+            this.IslandScanSetting.Location = new System.Drawing.Point(3, 57);
+            this.IslandScanSetting.Name = "IslandScanSetting";
+            this.IslandScanSetting.Size = new System.Drawing.Size(208, 54);
+            this.IslandScanSetting.TabIndex = 81;
+            this.IslandScanSetting.Visible = false;
+            // 
+            // L_IslandScan
+            // 
+            this.L_IslandScan.AutoSize = true;
+            this.L_IslandScan.Location = new System.Drawing.Point(11, 22);
+            this.L_IslandScan.Name = "L_IslandScan";
+            this.L_IslandScan.Size = new System.Drawing.Size(55, 13);
+            this.L_IslandScan.TabIndex = 74;
+            this.L_IslandScan.Text = "岛屿连锁";
+            // 
+            // Island_Poke
+            // 
+            this.Island_Poke.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Island_Poke.FormattingEnabled = true;
+            this.Island_Poke.Location = new System.Drawing.Point(83, 18);
+            this.Island_Poke.Name = "Island_Poke";
+            this.Island_Poke.Size = new System.Drawing.Size(100, 21);
+            this.Island_Poke.TabIndex = 74;
+            this.Island_Poke.SelectedIndexChanged += new System.EventHandler(this.Island_Poke_SelectedIndexChanged);
+            // 
+            // SOSSetting
+            // 
+            this.SOSSetting.Controls.Add(this.ChainLength);
+            this.SOSSetting.Controls.Add(this.L_ChainLength);
+            this.SOSSetting.Location = new System.Drawing.Point(228, 56);
+            this.SOSSetting.Name = "SOSSetting";
+            this.SOSSetting.Size = new System.Drawing.Size(159, 54);
+            this.SOSSetting.TabIndex = 80;
+            this.SOSSetting.Visible = false;
+            // 
+            // ChainLength
+            // 
+            this.ChainLength.AccessibleName = "";
+            this.ChainLength.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChainLength.Location = new System.Drawing.Point(88, 18);
+            this.ChainLength.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ChainLength.Name = "ChainLength";
+            this.ChainLength.Size = new System.Drawing.Size(44, 22);
+            this.ChainLength.TabIndex = 73;
+            // 
+            // L_ChainLength
+            // 
+            this.L_ChainLength.AutoSize = true;
+            this.L_ChainLength.Location = new System.Drawing.Point(6, 22);
+            this.L_ChainLength.Name = "L_ChainLength";
+            this.L_ChainLength.Size = new System.Drawing.Size(43, 13);
+            this.L_ChainLength.TabIndex = 66;
+            this.L_ChainLength.Text = "连锁数";
+            // 
             // Night
             // 
             this.Night.AutoSize = true;
-            this.Night.Location = new System.Drawing.Point(332, 37);
+            this.Night.Location = new System.Drawing.Point(332, 40);
             this.Night.Name = "Night";
             this.Night.Size = new System.Drawing.Size(49, 17);
             this.Night.TabIndex = 79;
@@ -430,7 +496,7 @@
             // 
             this.Day.AutoSize = true;
             this.Day.Checked = true;
-            this.Day.Location = new System.Drawing.Point(332, 13);
+            this.Day.Location = new System.Drawing.Point(332, 17);
             this.Day.Name = "Day";
             this.Day.Size = new System.Drawing.Size(49, 17);
             this.Day.TabIndex = 73;
@@ -474,51 +540,6 @@
             this.L_Location.Size = new System.Drawing.Size(31, 13);
             this.L_Location.TabIndex = 66;
             this.L_Location.Text = "地点";
-            // 
-            // SOSSetting
-            // 
-            this.SOSSetting.Controls.Add(this.label11);
-            this.SOSSetting.Controls.Add(this.L_ChainLength);
-            this.SOSSetting.Controls.Add(this.ChainLength);
-            this.SOSSetting.Location = new System.Drawing.Point(824, 230);
-            this.SOSSetting.Name = "SOSSetting";
-            this.SOSSetting.Size = new System.Drawing.Size(395, 61);
-            this.SOSSetting.TabIndex = 73;
-            this.SOSSetting.TabStop = false;
-            this.SOSSetting.Text = "连锁设置";
-            this.SOSSetting.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(166, 29);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 13);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "WIP";
-            // 
-            // L_ChainLength
-            // 
-            this.L_ChainLength.AutoSize = true;
-            this.L_ChainLength.Location = new System.Drawing.Point(11, 29);
-            this.L_ChainLength.Name = "L_ChainLength";
-            this.L_ChainLength.Size = new System.Drawing.Size(43, 13);
-            this.L_ChainLength.TabIndex = 66;
-            this.L_ChainLength.Text = "连锁数";
-            // 
-            // ChainLength
-            // 
-            this.ChainLength.AccessibleName = "";
-            this.ChainLength.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChainLength.Location = new System.Drawing.Point(87, 26);
-            this.ChainLength.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.ChainLength.Name = "ChainLength";
-            this.ChainLength.Size = new System.Drawing.Size(44, 22);
-            this.ChainLength.TabIndex = 73;
             // 
             // Condition
             // 
@@ -1024,6 +1045,59 @@
             this.SearchSettingBox.TabIndex = 3;
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
+            // 
+            // Slot
+            // 
+            this.Slot.BlankText = "-";
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Slot.CheckBoxProperties = checkBoxProperties1;
+            this.Slot.DisplayMemberSingleItem = "";
+            this.Slot.DropDownHeight = 260;
+            this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Slot.FormattingEnabled = true;
+            this.Slot.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.Slot.Location = new System.Drawing.Point(200, 62);
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(74, 21);
+            this.Slot.TabIndex = 79;
+            // 
+            // HiddenPower
+            // 
+            this.HiddenPower.BlankText = null;
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.HiddenPower.CheckBoxProperties = checkBoxProperties2;
+            this.HiddenPower.DisplayMemberSingleItem = "";
+            this.HiddenPower.DropDownHeight = 400;
+            this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HiddenPower.FormattingEnabled = true;
+            this.HiddenPower.Location = new System.Drawing.Point(295, 113);
+            this.HiddenPower.Name = "HiddenPower";
+            this.HiddenPower.Size = new System.Drawing.Size(91, 21);
+            this.HiddenPower.TabIndex = 78;
+            // 
+            // Nature
+            // 
+            this.Nature.BlankText = "Any";
+            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Nature.CheckBoxProperties = checkBoxProperties3;
+            this.Nature.DisplayMemberSingleItem = "";
+            this.Nature.DropDownHeight = 400;
+            this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Nature.FormattingEnabled = true;
+            this.Nature.Location = new System.Drawing.Point(295, 164);
+            this.Nature.Name = "Nature";
+            this.Nature.Size = new System.Drawing.Size(91, 21);
+            this.Nature.TabIndex = 77;
             // 
             // SafeFOnly
             // 
@@ -2406,6 +2480,18 @@
             this.Event_Nature.Size = new System.Drawing.Size(62, 21);
             this.Event_Nature.TabIndex = 61;
             // 
+            // Event_PID
+            // 
+            this.Event_PID.Enabled = false;
+            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_PID.Hexadecimal = true;
+            this.Event_PID.Location = new System.Drawing.Point(55, 373);
+            this.Event_PID.Name = "Event_PID";
+            this.Event_PID.Size = new System.Drawing.Size(77, 22);
+            this.Event_PID.TabIndex = 68;
+            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Event_PID.Visible = false;
+            // 
             // L_EC
             // 
             this.L_EC.AutoSize = true;
@@ -2434,6 +2520,18 @@
             this.L_PID.TabIndex = 58;
             this.L_PID.Text = "PID";
             this.L_PID.Visible = false;
+            // 
+            // Event_EC
+            // 
+            this.Event_EC.Enabled = false;
+            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_EC.Hexadecimal = true;
+            this.Event_EC.Location = new System.Drawing.Point(201, 374);
+            this.Event_EC.Name = "Event_EC";
+            this.Event_EC.Size = new System.Drawing.Size(77, 22);
+            this.Event_EC.TabIndex = 69;
+            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Event_EC.Visible = false;
             // 
             // Event_TID
             // 
@@ -3240,83 +3338,6 @@
             this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             // 
-            // Slot
-            // 
-            this.Slot.BlankText = "-";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Slot.CheckBoxProperties = checkBoxProperties1;
-            this.Slot.DisplayMemberSingleItem = "";
-            this.Slot.DropDownHeight = 260;
-            this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Slot.FormattingEnabled = true;
-            this.Slot.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.Slot.Location = new System.Drawing.Point(200, 62);
-            this.Slot.Name = "Slot";
-            this.Slot.Size = new System.Drawing.Size(74, 21);
-            this.Slot.TabIndex = 79;
-            // 
-            // HiddenPower
-            // 
-            this.HiddenPower.BlankText = null;
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.HiddenPower.CheckBoxProperties = checkBoxProperties2;
-            this.HiddenPower.DisplayMemberSingleItem = "";
-            this.HiddenPower.DropDownHeight = 400;
-            this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.HiddenPower.FormattingEnabled = true;
-            this.HiddenPower.Location = new System.Drawing.Point(295, 113);
-            this.HiddenPower.Name = "HiddenPower";
-            this.HiddenPower.Size = new System.Drawing.Size(91, 21);
-            this.HiddenPower.TabIndex = 78;
-            // 
-            // Nature
-            // 
-            this.Nature.BlankText = "Any";
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Nature.CheckBoxProperties = checkBoxProperties3;
-            this.Nature.DisplayMemberSingleItem = "";
-            this.Nature.DropDownHeight = 400;
-            this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Nature.FormattingEnabled = true;
-            this.Nature.Location = new System.Drawing.Point(295, 164);
-            this.Nature.Name = "Nature";
-            this.Nature.Size = new System.Drawing.Size(91, 21);
-            this.Nature.TabIndex = 77;
-            // 
-            // Event_PID
-            // 
-            this.Event_PID.Enabled = false;
-            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Event_PID.Hexadecimal = true;
-            this.Event_PID.Location = new System.Drawing.Point(55, 373);
-            this.Event_PID.Name = "Event_PID";
-            this.Event_PID.Size = new System.Drawing.Size(77, 22);
-            this.Event_PID.TabIndex = 68;
-            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Event_PID.Visible = false;
-            // 
-            // Event_EC
-            // 
-            this.Event_EC.Enabled = false;
-            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Event_EC.Hexadecimal = true;
-            this.Event_EC.Location = new System.Drawing.Point(201, 374);
-            this.Event_EC.Name = "Event_EC";
-            this.Event_EC.Size = new System.Drawing.Size(77, 22);
-            this.Event_EC.TabIndex = 69;
-            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Event_EC.Visible = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3340,6 +3361,8 @@
             this.ControlPanel.ResumeLayout(false);
             this.WildEncounterSetting.ResumeLayout(false);
             this.WildEncounterSetting.PerformLayout();
+            this.IslandScanSetting.ResumeLayout(false);
+            this.IslandScanSetting.PerformLayout();
             this.SOSSetting.ResumeLayout(false);
             this.SOSSetting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChainLength)).EndInit();
@@ -3400,6 +3423,8 @@
             this.EventSetting.ResumeLayout(false);
             this.EventSetting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EventIV5)).EndInit();
@@ -3416,8 +3441,6 @@
             this.SearchSeedBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3622,10 +3645,8 @@
         private System.Windows.Forms.ComboBox Event_Ability;
         private System.Windows.Forms.CheckBox Fishing;
         private System.Windows.Forms.CheckBox SOS;
-        private System.Windows.Forms.GroupBox SOSSetting;
         private System.Windows.Forms.NumericUpDown ChainLength;
         private System.Windows.Forms.Label L_ChainLength;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox IsEgg;
         private System.Windows.Forms.CheckBox Refinement;
         private System.Windows.Forms.Label L_Event_PID;
@@ -3674,6 +3695,10 @@
         private System.Windows.Forms.CheckBox MainRNGEgg;
         private System.Windows.Forms.Label L_GameVersion;
         private System.Windows.Forms.ComboBox GameVersion;
+        private System.Windows.Forms.Panel SOSSetting;
+        private System.Windows.Forms.Panel IslandScanSetting;
+        private System.Windows.Forms.ComboBox Island_Poke;
+        private System.Windows.Forms.Label L_IslandScan;
     }
 }
 
