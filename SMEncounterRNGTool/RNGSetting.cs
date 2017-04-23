@@ -42,11 +42,12 @@ namespace SMEncounterRNGTool
         // Generated Attributes
         private bool IsShinyLocked => ShinyLocked || IsUB;
         private bool IsWild => Wild && !IsUB;
+        private bool NormalSlot => Wild && !IsUB && !IsIslandScan;
         private bool RandomGender => randomgender && !IsUB;
         private byte Gender => IsUB ? (byte)0 : gender;
         private int PIDroll_count => (ShinyCharm && IsWild ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
         private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
-        private bool SpecialWild => Encounter_th == 101 || SOS || IsIslandScan;
+        private bool SpecialWild => Encounter_th == 101 || SOS;
 
         public static void ResetModelStatus()
         {
@@ -159,7 +160,7 @@ namespace SMEncounterRNGTool
                 GenerateNonHoney(st);
 
             // Wild Normal Pokemon
-            if (IsWild && !SpecialWild)
+            if (NormalSlot && !SpecialWild)
             {
                 st.Slot = getslot((int)(getrand % 100));
                 st.Lv = (byte)(getrand % (ulong)(Lv_max - Lv_min + 1) + Lv_min);
@@ -174,7 +175,7 @@ namespace SMEncounterRNGTool
             if (IslandScan)
                 st.SpecialEnctrValue = getScanValue();
             // Normal wild
-            if (!IsUB && !IsIslandScan)
+            if (NormalSlot)
             {
                 st.Synchronize = (int)(getrand % 100) >= 50;
                 return;

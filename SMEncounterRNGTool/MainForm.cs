@@ -233,8 +233,8 @@ namespace SMEncounterRNGTool
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
             TSV.Value = Properties.Settings.Default.TSV;
             Advanced.Checked = Properties.Settings.Default.Advance;
-            Poke.SelectedValue = Properties.Settings.Default.PKM;
             GameVersion.SelectedIndex = Properties.Settings.Default.IsSun ? 0 : 1;
+            Poke.SelectedValue = Properties.Settings.Default.PKM;
             (Properties.Settings.Default.ClockInput ? StartClockInput : EndClockInput).Checked = true;
 
             ByIVs.Checked = true;
@@ -283,7 +283,7 @@ namespace SMEncounterRNGTool
             Island_Poke.DisplayMember = "Text";
             Island_Poke.ValueMember = "Value";
             Island_Poke.DataSource = new BindingSource(List, null);
-            Island_Poke.SelectedIndex = 0 <= tmp && tmp < Poke.Items.Count ? tmp : 0;
+            Island_Poke.SelectedIndex = 0 <= tmp && tmp < Island_Poke.Items.Count ? tmp : 0;
         }
 
         private void LoadSpecies()

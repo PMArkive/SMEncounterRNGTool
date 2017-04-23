@@ -74,7 +74,8 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 798, Level = 60, UB = true, UBLocation = new []{134,376,632}, UBRate = new byte[]{30,30,30}, SunOnly = true,},    // Kartana
             new Pokemon { Species = 799, Level = 70, UB = true, UBLocation = new []{694}, UBRate = new byte[]{80},},    // Guzzlord
             new Pokemon { Species = 800, Level = 75, UB = true, UBLocation = new []{548}, UBRate = new byte[]{05},},    // Necrozma
-            new Pokemon { Species = 155, Location = 010, Template = true, Wild = true},    // Island Scan
+            new Pokemon { Species = 155, Level = 12, Location = 010, Template = true, Wild = true},    // Island Scan
+            new Pokemon { Species = 102, Level = 40, Form = 1 },    // Exeggutor
             new Pokemon { Species = 722, Level = 05, NPC = 5, Delay = 40, Gift = true, Syncable = false, Template = true},    // Starters
             new Pokemon { Species = 142, Level = 40, NPC = 3, Delay = 34, Gift = true,},    // Aerodactyl
             new Pokemon { Species = 137, Level = 30, NPC = 4, Delay = 34, Gift = true,},    // Porygon
