@@ -30,7 +30,7 @@ namespace SMEncounterRNGTool
         public bool IsEvent => Species == 151;
         public bool IsCrabrawler => Species == 739;
         public bool IsBlank => Species == 0;
-        public bool IslandScan => IslandScanSpecies.Any(t => t.Species == Species);
+        public bool QR => QRScanSpecies.Any(t => t.Species == Species);
         public bool AlwaysSync => Gift;
         public override string ToString()
         {
@@ -84,7 +84,7 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 133, Level = 01, NPC = 5, Delay = 04, Gift = true, Syncable = false},    // Gift Eevee Egg
         };
 
-        public readonly static Pokemon[] IslandScanSpecies =
+        public readonly static Pokemon[] QRScanSpecies =
         {
             // QR Scan: Su/M/Tu/W/Th/F/Sa
             // Melemele Island

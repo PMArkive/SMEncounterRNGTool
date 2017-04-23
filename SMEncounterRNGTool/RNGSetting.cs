@@ -16,7 +16,7 @@ namespace SMEncounterRNGTool
         public static bool IsMainRNGEgg;
         public static bool IsMinior;
 
-        public static bool Wild, Honey, UB, fishing, SOS, IslandScan;
+        public static bool Wild, Honey, UB, QR, fishing, SOS;
         public static byte Lv_max, Lv_min;
         public static byte ChainLength;
         public static byte Rate, Encounter_th;
@@ -36,13 +36,13 @@ namespace SMEncounterRNGTool
 
         // Personal Info
         public bool IsUB;
-        public bool IsIslandScan;
+        public bool IsQR;
         public static byte StageFrame;
 
         // Generated Attributes
         private bool IsShinyLocked => ShinyLocked || IsUB;
         private bool IsWild => Wild && !IsUB;
-        private bool NormalSlot => Wild && !IsUB && !IsIslandScan;
+        private bool NormalSlot => Wild && !IsUB && !IsQR;
         private bool RandomGender => randomgender && !IsUB;
         private byte Gender => IsUB ? (byte)0 : gender;
         private int PIDroll_count => (ShinyCharm && !IsShinyLocked && !AlwaysSynchro ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
@@ -103,8 +103,6 @@ namespace SMEncounterRNGTool
             //Something
             if (!AlwaysSynchro && !SOS)
                 Advance(60);
-
-            //EC-PID-IVs-Nature Cap
 
             //Encryption Constant
             st.EC = (uint)(getrand & 0xFFFFFFFF);
@@ -176,17 +174,15 @@ namespace SMEncounterRNGTool
         }
         private void GenerateHoney(RNGResult st)
         {
-            if (UB)
-                st.SpecialEnctrValue = getUBValue();
-            if (IslandScan)
-                st.SpecialEnctrValue = getScanValue();
+            if (UB || QR)
+                st.SpecialEnctrValue = UB ? getUBValue() : getQRValue();
             // Normal wild
             if (NormalSlot)
             {
                 st.Synchronize = (int)(getrand % 100) >= 50;
                 return;
             }
-            // UB & IslandScan
+            // UB & QRScan
             time_elapse(7);
             st.Synchronize = blink_process();
         }
@@ -209,9 +205,9 @@ namespace SMEncounterRNGTool
             st.Encounter = (int)(getrand % 100);
 
             // UB
-            if (!UB) return;
-            st.SpecialEnctrValue = getUBValue();
-            if (IsUB)
+            if (!UB && !QR) return;
+            st.SpecialEnctrValue = UB ? getUBValue() : getQRValue();
+            if (IsUB || IsQR)
             {
                 Advance(1);
                 st.Synchronize = blink_process();
@@ -352,7 +348,7 @@ namespace SMEncounterRNGTool
             {
                 int crydelay = IsSolgaleo ? 79 : 76;
                 time_elapse(delaytime - crydelay - 19);
-                if (modelnumber == 7) Rearrange();
+                if (modelnumber == 7) SolLunaRearrange();
                 time_elapse(19);
                 Advance(1);     //Cry Inside Time Delay
                 time_elapse(crydelay);
@@ -361,7 +357,7 @@ namespace SMEncounterRNGTool
             if (IsExeggutor)
             {
                 time_elapse(1);
-                if (modelnumber == 1) Rearrange2();
+                if (modelnumber == 1) ExeggutorRearrange();
                 time_elapse(42);
                 Advance(1);    //Cry Inside Time Delay
                 time_elapse(delaytime - 43);
@@ -406,7 +402,7 @@ namespace SMEncounterRNGTool
         }
 
         //model # changes when screen turns black
-        private static void Rearrange()
+        private static void SolLunaRearrange()
         {
             modelnumber = 5;//2 guys offline...
             int[] order = new[] { 0, 1, 2, 5, 6 };
@@ -415,7 +411,7 @@ namespace SMEncounterRNGTool
         }
 
         //Another type of change (Lillie)
-        private static void Rearrange2()
+        private static void ExeggutorRearrange()
         {
             modelnumber = 2;
             int tmp = remain_frame[0];
@@ -430,11 +426,11 @@ namespace SMEncounterRNGTool
             return UbValue;
         }
 
-        private byte getScanValue()
+        private byte getQRValue()
         {
-            byte ScanValue = (byte)(getrand % 100);
-            IsIslandScan = ScanValue < Rate;
-            return ScanValue;
+            byte QRValue = (byte)(getrand % 100);
+            IsQR = QRValue < Rate;
+            return QRValue;
         }
 
         public static byte getslot(int rand)
