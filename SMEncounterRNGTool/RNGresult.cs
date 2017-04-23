@@ -18,7 +18,7 @@
         public int Encounter = -1;
         public byte Gender;
         public byte Ability;
-        public byte UbValue = 100;
+        public byte SpecialEnctrValue = 100;
         public byte Slot;
         public byte Lv;
         public byte Item;

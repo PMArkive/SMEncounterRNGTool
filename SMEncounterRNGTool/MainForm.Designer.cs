@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties4 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties1 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
             SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties2 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
-            SMEncounterRNGTool.Controls.CheckBoxProperties checkBoxProperties3 = new SMEncounterRNGTool.Controls.CheckBoxProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SearchTarget = new System.Windows.Forms.TabPage();
             this.ControlPanel = new System.Windows.Forms.Panel();
@@ -73,7 +73,7 @@
             this.Fix3v = new System.Windows.Forms.CheckBox();
             this.L_Poke = new System.Windows.Forms.Label();
             this.Poke = new System.Windows.Forms.ComboBox();
-            this.UB_th = new System.Windows.Forms.NumericUpDown();
+            this.Special_th = new System.Windows.Forms.NumericUpDown();
             this.Encounter_th = new System.Windows.Forms.NumericUpDown();
             this.AlwaysSynced = new System.Windows.Forms.CheckBox();
             this.TimeBox = new System.Windows.Forms.GroupBox();
@@ -91,9 +91,6 @@
             this.NPC = new System.Windows.Forms.NumericUpDown();
             this.L_NPC = new System.Windows.Forms.Label();
             this.SearchSettingBox = new System.Windows.Forms.GroupBox();
-            this.Slot = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
-            this.HiddenPower = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
-            this.Nature = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
             this.SafeFOnly = new System.Windows.Forms.CheckBox();
             this.ShowStats = new System.Windows.Forms.CheckBox();
             this.BlinkOnly = new System.Windows.Forms.CheckBox();
@@ -213,11 +210,9 @@
             this.Event_Gender = new System.Windows.Forms.ComboBox();
             this.Event_SID = new System.Windows.Forms.NumericUpDown();
             this.Event_Nature = new System.Windows.Forms.ComboBox();
-            this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.L_EC = new System.Windows.Forms.Label();
             this.L_SID = new System.Windows.Forms.Label();
             this.L_PID = new System.Windows.Forms.Label();
-            this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.Event_TID = new System.Windows.Forms.NumericUpDown();
             this.OtherInfo = new System.Windows.Forms.CheckBox();
             this.L_TID = new System.Windows.Forms.Label();
@@ -287,6 +282,11 @@
             this.L_GameVersion = new System.Windows.Forms.Label();
             this.GameVersion = new System.Windows.Forms.ComboBox();
             this.Seed = new SMEncounterRNGTool.Controls.HexNumericUpdown();
+            this.Slot = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
+            this.HiddenPower = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
+            this.Nature = new SMEncounterRNGTool.Controls.CheckBoxComboBox();
+            this.Event_PID = new SMEncounterRNGTool.Controls.HexNumericUpdown();
+            this.Event_EC = new SMEncounterRNGTool.Controls.HexNumericUpdown();
             this.tabControl1.SuspendLayout();
             this.SearchTarget.SuspendLayout();
             this.ControlPanel.SuspendLayout();
@@ -297,7 +297,7 @@
             this.Condition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Special_th)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).BeginInit();
             this.TimeBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Timedelay)).BeginInit();
@@ -343,8 +343,6 @@
             this.SearchTool.SuspendLayout();
             this.EventSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EventIV5)).BeginInit();
@@ -358,6 +356,8 @@
             this.SearchSeedBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -563,7 +563,7 @@
             this.Condition.Controls.Add(this.Fix3v);
             this.Condition.Controls.Add(this.L_Poke);
             this.Condition.Controls.Add(this.Poke);
-            this.Condition.Controls.Add(this.UB_th);
+            this.Condition.Controls.Add(this.Special_th);
             this.Condition.Controls.Add(this.Encounter_th);
             this.Condition.Controls.Add(this.AlwaysSynced);
             this.Condition.Location = new System.Drawing.Point(7, 3);
@@ -781,15 +781,15 @@
             this.Poke.TabIndex = 36;
             this.Poke.SelectedIndexChanged += new System.EventHandler(this.Poke_SelectedIndexChanged);
             // 
-            // UB_th
+            // Special_th
             // 
-            this.UB_th.AccessibleName = "";
-            this.UB_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UB_th.Location = new System.Drawing.Point(352, 66);
-            this.UB_th.Name = "UB_th";
-            this.UB_th.Size = new System.Drawing.Size(44, 22);
-            this.UB_th.TabIndex = 67;
-            this.UB_th.Value = new decimal(new int[] {
+            this.Special_th.AccessibleName = "";
+            this.Special_th.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Special_th.Location = new System.Drawing.Point(352, 66);
+            this.Special_th.Name = "Special_th";
+            this.Special_th.Size = new System.Drawing.Size(44, 22);
+            this.Special_th.TabIndex = 67;
+            this.Special_th.Value = new decimal(new int[] {
             15,
             0,
             0,
@@ -1045,59 +1045,6 @@
             this.SearchSettingBox.TabIndex = 3;
             this.SearchSettingBox.TabStop = false;
             this.SearchSettingBox.Text = "个体检索";
-            // 
-            // Slot
-            // 
-            this.Slot.BlankText = "-";
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Slot.CheckBoxProperties = checkBoxProperties1;
-            this.Slot.DisplayMemberSingleItem = "";
-            this.Slot.DropDownHeight = 260;
-            this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Slot.FormattingEnabled = true;
-            this.Slot.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.Slot.Location = new System.Drawing.Point(200, 62);
-            this.Slot.Name = "Slot";
-            this.Slot.Size = new System.Drawing.Size(74, 21);
-            this.Slot.TabIndex = 79;
-            // 
-            // HiddenPower
-            // 
-            this.HiddenPower.BlankText = null;
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.HiddenPower.CheckBoxProperties = checkBoxProperties2;
-            this.HiddenPower.DisplayMemberSingleItem = "";
-            this.HiddenPower.DropDownHeight = 400;
-            this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.HiddenPower.FormattingEnabled = true;
-            this.HiddenPower.Location = new System.Drawing.Point(295, 113);
-            this.HiddenPower.Name = "HiddenPower";
-            this.HiddenPower.Size = new System.Drawing.Size(91, 21);
-            this.HiddenPower.TabIndex = 78;
-            // 
-            // Nature
-            // 
-            this.Nature.BlankText = "Any";
-            checkBoxProperties3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Nature.CheckBoxProperties = checkBoxProperties3;
-            this.Nature.DisplayMemberSingleItem = "";
-            this.Nature.DropDownHeight = 400;
-            this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Nature.FormattingEnabled = true;
-            this.Nature.Location = new System.Drawing.Point(295, 164);
-            this.Nature.Name = "Nature";
-            this.Nature.Size = new System.Drawing.Size(91, 21);
-            this.Nature.TabIndex = 77;
             // 
             // SafeFOnly
             // 
@@ -2054,14 +2001,14 @@
             this.DGV.AllowUserToResizeColumns = false;
             this.DGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Frame,
@@ -2092,24 +2039,24 @@
             this.dgv_time,
             this.dgv_research});
             this.DGV.ContextMenuStrip = this.DGVMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV.DefaultCellStyle = dataGridViewCellStyle5;
             this.DGV.Location = new System.Drawing.Point(3, 303);
             this.DGV.Name = "DGV";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DGV.RowHeadersWidth = 18;
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.Height = 21;
@@ -2480,18 +2427,6 @@
             this.Event_Nature.Size = new System.Drawing.Size(62, 21);
             this.Event_Nature.TabIndex = 61;
             // 
-            // Event_PID
-            // 
-            this.Event_PID.Enabled = false;
-            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Event_PID.Hexadecimal = true;
-            this.Event_PID.Location = new System.Drawing.Point(55, 373);
-            this.Event_PID.Name = "Event_PID";
-            this.Event_PID.Size = new System.Drawing.Size(77, 22);
-            this.Event_PID.TabIndex = 68;
-            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Event_PID.Visible = false;
-            // 
             // L_EC
             // 
             this.L_EC.AutoSize = true;
@@ -2520,18 +2455,6 @@
             this.L_PID.TabIndex = 58;
             this.L_PID.Text = "PID";
             this.L_PID.Visible = false;
-            // 
-            // Event_EC
-            // 
-            this.Event_EC.Enabled = false;
-            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Event_EC.Hexadecimal = true;
-            this.Event_EC.Location = new System.Drawing.Point(201, 374);
-            this.Event_EC.Name = "Event_EC";
-            this.Event_EC.Size = new System.Drawing.Size(77, 22);
-            this.Event_EC.TabIndex = 69;
-            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Event_EC.Visible = false;
             // 
             // Event_TID
             // 
@@ -3338,6 +3261,83 @@
             this.Seed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Seed.ValueChanged += new System.EventHandler(this.Seed_ValueChanged);
             // 
+            // Slot
+            // 
+            this.Slot.BlankText = "-";
+            checkBoxProperties4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Slot.CheckBoxProperties = checkBoxProperties4;
+            this.Slot.DisplayMemberSingleItem = "";
+            this.Slot.DropDownHeight = 260;
+            this.Slot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Slot.FormattingEnabled = true;
+            this.Slot.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.Slot.Location = new System.Drawing.Point(200, 62);
+            this.Slot.Name = "Slot";
+            this.Slot.Size = new System.Drawing.Size(74, 21);
+            this.Slot.TabIndex = 79;
+            // 
+            // HiddenPower
+            // 
+            this.HiddenPower.BlankText = null;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.HiddenPower.CheckBoxProperties = checkBoxProperties1;
+            this.HiddenPower.DisplayMemberSingleItem = "";
+            this.HiddenPower.DropDownHeight = 400;
+            this.HiddenPower.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HiddenPower.FormattingEnabled = true;
+            this.HiddenPower.Location = new System.Drawing.Point(295, 113);
+            this.HiddenPower.Name = "HiddenPower";
+            this.HiddenPower.Size = new System.Drawing.Size(91, 21);
+            this.HiddenPower.TabIndex = 78;
+            // 
+            // Nature
+            // 
+            this.Nature.BlankText = "Any";
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Nature.CheckBoxProperties = checkBoxProperties2;
+            this.Nature.DisplayMemberSingleItem = "";
+            this.Nature.DropDownHeight = 400;
+            this.Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Nature.FormattingEnabled = true;
+            this.Nature.Location = new System.Drawing.Point(295, 164);
+            this.Nature.Name = "Nature";
+            this.Nature.Size = new System.Drawing.Size(91, 21);
+            this.Nature.TabIndex = 77;
+            // 
+            // Event_PID
+            // 
+            this.Event_PID.Enabled = false;
+            this.Event_PID.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_PID.Hexadecimal = true;
+            this.Event_PID.Location = new System.Drawing.Point(55, 373);
+            this.Event_PID.Name = "Event_PID";
+            this.Event_PID.Size = new System.Drawing.Size(77, 22);
+            this.Event_PID.TabIndex = 68;
+            this.Event_PID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Event_PID.Visible = false;
+            // 
+            // Event_EC
+            // 
+            this.Event_EC.Enabled = false;
+            this.Event_EC.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Event_EC.Hexadecimal = true;
+            this.Event_EC.Location = new System.Drawing.Point(201, 374);
+            this.Event_EC.Name = "Event_EC";
+            this.Event_EC.Size = new System.Drawing.Size(77, 22);
+            this.Event_EC.TabIndex = 69;
+            this.Event_EC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Event_EC.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3370,7 +3370,7 @@
             this.Condition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_max)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Lv_min)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UB_th)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Special_th)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Encounter_th)).EndInit();
             this.TimeBox.ResumeLayout(false);
             this.TimeBox.PerformLayout();
@@ -3423,8 +3423,6 @@
             this.EventSetting.ResumeLayout(false);
             this.EventSetting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Event_SID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Event_TID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IVsCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EventIV5)).EndInit();
@@ -3441,6 +3439,8 @@
             this.SearchSeedBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TSV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Seed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_PID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Event_EC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3567,7 +3567,7 @@
         private System.Windows.Forms.NumericUpDown Filter_Lv;
         private System.Windows.Forms.CheckBox UBOnly;
         private System.Windows.Forms.NumericUpDown Correction;
-        private System.Windows.Forms.NumericUpDown UB_th;
+        private System.Windows.Forms.NumericUpDown Special_th;
         private System.Windows.Forms.Label L_Correction;
         private System.Windows.Forms.Panel StatPanel;
         private System.Windows.Forms.RadioButton ByIVs;

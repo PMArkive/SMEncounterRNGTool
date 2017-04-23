@@ -90,7 +90,7 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 158, Level = 12, Location = 042, }, // Totodile @ Seaward Cave
             new Pokemon { Species = 633, Level = 13, Location = 034, }, // Deino @ Ten Carat Hill
             new Pokemon { Species = 116, Level = 18, Location = 014, }, // Horsea @ Kala'e Bay
-            new Pokemon { Species = 599, Level = 08, Location = 020, }, // Klink @ Hau'oli City
+            new Pokemon { Species = 599, Level = 08, Location = 021, }, // Klink @ Hau'oli City
             new Pokemon { Species = 152, Level = 10, Location = 012, }, // Chikorita @ Route 2
             new Pokemon { Species = 607, Level = 10, Location = 038, }, // Litwick @ Hau'oli Cemetery
                                                                                                                        

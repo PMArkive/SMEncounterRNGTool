@@ -511,7 +511,7 @@ namespace SMEncounterRNGTool
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (PK.UB && MetLocation.SelectedIndex >= 0)
-                UB_th.Value = PK.UBRate[MetLocation.SelectedIndex];
+                Special_th.Value = PK.UBRate[MetLocation.SelectedIndex];
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
@@ -527,7 +527,7 @@ namespace SMEncounterRNGTool
             LoadSlotSpeciesInfo();
             if (SlotSpecies.SelectedIndex > 0 && (Filter_Lv.Value > Lv_max.Value || Filter_Lv.Value < Lv_min.Value))
                 Filter_Lv.Value = 0;
-            if (SlotSpecies.SelectedIndex == 0 && PK.UB)
+            if (SlotSpecies.SelectedIndex == 0 && (PK.UB || PK.IslandScan))
                 Filter_Lv.Value = PK.Level;
         }
 
@@ -566,7 +566,7 @@ namespace SMEncounterRNGTool
 
         private void UB_CheckedChanged(object sender, EventArgs e)
         {
-            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked = L_UB_th.Visible = UB_th.Visible = UB.Checked;
+            dgv_ubvalue.Visible = UBOnly.Visible = UBOnly.Checked = L_UB_th.Visible = Special_th.Visible = UB.Checked;
         }
 
         private void Honey_CheckedChanged(object sender, EventArgs e)
@@ -911,7 +911,7 @@ namespace SMEncounterRNGTool
             EncounterOnly = EncounteredOnly.Checked,
             Encounter_th = (byte)Encounter_th.Value,
             UBOnly = UBOnly.Checked,
-            UB_th = (byte)UB_th.Value,
+            UB_th = (byte)Special_th.Value,
             MainRNGEgg = MainRNGEgg.Checked,
         };
 
@@ -940,7 +940,7 @@ namespace SMEncounterRNGTool
             RNGSetting.PokeLv = PK.Level;
             RNGSetting.Lv_min = (byte)Lv_min.Value;
             RNGSetting.Lv_max = (byte)Lv_max.Value;
-            RNGSetting.Rate = (byte)UB_th.Value;
+            RNGSetting.Rate = (byte)Special_th.Value;
             RNGSetting.Encounter_th = (byte)Encounter_th.Value;
             RNGSetting.ShinyLocked = PK.ShinyLocked;
 
@@ -973,7 +973,7 @@ namespace SMEncounterRNGTool
             int d = i - (int)Time_max.Value;
             string true_nature = StringItem.naturestr[result.Nature];
             string SynchronizeFlag = result.Synchronize ? "O" : "X";
-            if (result.UbValue < UB_th.Value && ShowDelay)
+            if (result.SpecialEnctrValue < Special_th.Value && ShowDelay)
                 result.Blink = 2;
             string BlinkFlag = result.Blink < 4 ? blinkmarks[result.Blink] : result.Blink.ToString();
             string PSV = result.PSV.ToString("D4");
@@ -981,7 +981,7 @@ namespace SMEncounterRNGTool
             string Slot = result.Slot == 0 ? "-" : result.Slot.ToString();
             string Lv = result.Lv == 0 ? "-" : result.Lv.ToString();
             string Item = result.Item == 100 ? "-" : result.Item.ToString();
-            string UbValue = result.UbValue == 100 ? "-" : result.UbValue.ToString();
+            string UbValue = result.SpecialEnctrValue == 100 ? "-" : result.SpecialEnctrValue.ToString();
             string randstr = result.row_r.ToString("X16");
             string PID = result.PID.ToString("X8");
             string EC = result.EC.ToString("X8");
@@ -992,7 +992,7 @@ namespace SMEncounterRNGTool
                 if (Encounter != "-")
                     Encounter = result.Encounter < Encounter_th.Value ? "O" : "X";
                 if (UbValue != "-")
-                    UbValue = result.UbValue < UB_th.Value ? "O" : "X";
+                    UbValue = result.SpecialEnctrValue < Special_th.Value ? "O" : "X";
                 if (UbValue == "O")
                     Slot = PK.IslandScan ? "QR" : "UB";
                 if (result.Item < 50)
@@ -1180,7 +1180,7 @@ namespace SMEncounterRNGTool
         private void Island_Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
             PK = Pokemon.IslandScanSpecies.FirstOrDefault(pk => pk.Species == (int)Island_Poke.SelectedValue);
-            UB_th.Value = 50;
+            Special_th.Value = 50;
             RefreshLocation();
             Filter_Lv.Value = PK.Level;
             SetPersonalInfo(PK.SpecForm);

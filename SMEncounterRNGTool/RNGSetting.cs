@@ -170,9 +170,9 @@ namespace SMEncounterRNGTool
         private void GenerateHoney(RNGResult st)
         {
             if (UB)
-                st.UbValue = getUBValue();
+                st.SpecialEnctrValue = getUBValue();
             if (IslandScan)
-                st.UbValue = getScanValue();
+                st.SpecialEnctrValue = getScanValue();
             // Normal wild
             if (!IsUB && !IsIslandScan)
             {
@@ -203,7 +203,7 @@ namespace SMEncounterRNGTool
 
             // UB
             if (!UB) return;
-            st.UbValue = getUBValue();
+            st.SpecialEnctrValue = getUBValue();
             if (IsUB)
             {
                 Advance(1);

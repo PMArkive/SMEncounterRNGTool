@@ -92,7 +92,7 @@ namespace SMEncounterRNGTool
                     return false;
                 if (EncounterOnly && result.Encounter >= Encounter_th)
                     return false;
-                if (UBOnly && result.UbValue >= UB_th)
+                if (UBOnly && result.SpecialEnctrValue >= UB_th)
                     return false;
                 if (!CheckSlot(result.Slot))
                     return false;
