@@ -18,7 +18,8 @@ And ALL Pokemon RNG Researcher.
 - Crabrawlers underneath Berry Trees
 - Gift Eevee egg from Nursery helpers
 - Main RNG eggs. i.e. eggs without shiny charm or Masuda Method
-- SM Starters: _PokeCalcNTR Only _
+- Exeggutor attacking Lillie
+- SM Starters: _PokeCalcNTR Only_
 - Pokemon Caught by fishing (Unstable)
 - SOS: _PokeCalcNTR Only (Unstable)_
 
@@ -59,6 +60,7 @@ Usually it's the last 'A' before the battle starts, or the special BLACK dialogu
 - Type:Null, Porygon, Aerodactyl, Magearna, fossil Pokemon and event Pokemon: "You received xxx!"
 - Crabrawler: "There was a Pokemon feeding on the Berries and it leaped out at you!"
 - Gift Eevee egg: "You received Egg!". 
+- Lillie: "Ahhh! What is that, xxx?!"
 - Main RNG egg: "But you want the Egg your Pokemon was holding. right?" ( Check `-`->`Stationary`->`Main RNG Egg` )
 - Starters: "Having accepted on another, you'll surely be friends for life".
 - Fishing: When you get something on your hook (Unstable)

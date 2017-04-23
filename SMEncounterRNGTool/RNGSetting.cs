@@ -58,6 +58,7 @@ namespace SMEncounterRNGTool
         public static bool IsSolgaleo;
         public static bool IsLunala;
         public static bool SolLunaReset;
+        public static bool IsExeggutor;
 
         public RNGResult Generate(EventRule e = null)
         {
@@ -88,7 +89,7 @@ namespace SMEncounterRNGTool
                 Resetindex();
                 ResetModelStatus();
             }
-            
+
             if (IsMainRNGEgg)  // Egg without shiny charm or m.m.
                 return GeneratePID(st);
 
@@ -150,7 +151,12 @@ namespace SMEncounterRNGTool
             }
             st.Synchronize = blink_process();
             if (SolLunaReset)
+            {
                 modelnumber = 7;
+                return;
+            }
+            if (IsExeggutor)
+                modelnumber = 1;
         }
         private void GenerateWild(RNGResult st)
         {
@@ -302,7 +308,7 @@ namespace SMEncounterRNGTool
             int RandBuffSize = 200;
             if (CalcDelay)
                 RandBuffSize += modelnumber * delaytime;
-            if (route17)
+            if (route17 || IsExeggutor)
                 RandBuffSize += 200;
             Rand.Clear();
             for (int i = 0; i < RandBuffSize; i++)
@@ -350,9 +356,18 @@ namespace SMEncounterRNGTool
                 time_elapse(19);
                 Advance(1);     //Cry Inside Time Delay
                 time_elapse(crydelay);
+                return;
             }
-            else
-                time_elapse(delaytime);
+            if (IsExeggutor)
+            {
+                time_elapse(1);
+                if (modelnumber == 1) Rearrange2();
+                time_elapse(42);
+                Advance(1);    //Cry Inside Time Delay
+                time_elapse(delaytime - 43);
+                return;
+            }
+            time_elapse(delaytime);
         }
 
         public static int getframeshift()
@@ -397,6 +412,15 @@ namespace SMEncounterRNGTool
             int[] order = new[] { 0, 1, 2, 5, 6 };
             for (int i = 0; i < 5; i++)
                 remain_frame[i] = remain_frame[order[i]];
+        }
+
+        //Another type of change (Lillie)
+        private static void Rearrange2()
+        {
+            modelnumber = 2;
+            int tmp = remain_frame[0];
+            remain_frame = new int[2];
+            remain_frame[0] = tmp;
         }
 
         private byte getUBValue()

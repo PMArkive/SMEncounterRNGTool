@@ -173,6 +173,8 @@ namespace SMEncounterRNGTool
             System.Reflection.PropertyInfo dgvPropertyInfo = dgvtype.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             dgvPropertyInfo.SetValue(DGV, true, null);
 
+            int LastSelectedPKM = Properties.Settings.Default.PKM;
+
             EventIV.Add(EventIV0);
             EventIV.Add(EventIV1);
             EventIV.Add(EventIV2);
@@ -228,13 +230,12 @@ namespace SMEncounterRNGTool
 
             Slot.CheckBoxItems[0].Checked = true;
             Slot.CheckBoxItems[0].Checked = false;
-
             Seed.Value = Properties.Settings.Default.Seed;
             ShinyCharm.Checked = Properties.Settings.Default.ShinyCharm;
             TSV.Value = Properties.Settings.Default.TSV;
             Advanced.Checked = Properties.Settings.Default.Advance;
             GameVersion.SelectedIndex = Properties.Settings.Default.IsSun ? 0 : 1;
-            Poke.SelectedValue = Properties.Settings.Default.PKM;
+            Poke.SelectedValue = LastSelectedPKM;
             (Properties.Settings.Default.ClockInput ? StartClockInput : EndClockInput).Checked = true;
 
             ByIVs.Checked = true;
@@ -307,8 +308,6 @@ namespace SMEncounterRNGTool
                 Slotidx.Add(i);
             for (int i = 0; i < 10; i++)
                 Slot.CheckBoxItems[i + 1].Checked = Slotidx.Contains(Slottype[i]);
-            if (PK.IslandScan && SlotSpecies.SelectedIndex == SlotSpecies.Items.Count - 1)
-                Filter_Lv.Value = PK.Level;
 
             SetPersonalInfo(SpecForm);
         }
@@ -512,6 +511,8 @@ namespace SMEncounterRNGTool
         {
             if (PK.UB && MetLocation.SelectedIndex >= 0)
                 Special_th.Value = PK.UBRate[MetLocation.SelectedIndex];
+            if (PK.IslandScan && MetLocation.SelectedIndex >= 0)
+                Special_th.Value = 50;
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
@@ -926,6 +927,7 @@ namespace SMEncounterRNGTool
             RNGSetting.IsSolgaleo = PK.IsSolgaleo;
             RNGSetting.IsLunala = PK.IsLunala;
             RNGSetting.SolLunaReset = (RNGSetting.IsSolgaleo || RNGSetting.IsLunala) && ModelNumber == 7;
+            RNGSetting.IsExeggutor = PK.IsExeggutor;
             RNGSetting.Synchro_Stat = (byte)(SyncNature.SelectedIndex - 1);
             RNGSetting.TSV = (int)TSV.Value;
             RNGSetting.AlwaysSynchro = AlwaysSynced.Checked;
@@ -1180,7 +1182,6 @@ namespace SMEncounterRNGTool
         private void Island_Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
             PK = Pokemon.IslandScanSpecies.FirstOrDefault(pk => pk.Species == (int)Island_Poke.SelectedValue);
-            Special_th.Value = 50;
             RefreshLocation();
             Filter_Lv.Value = PK.Level;
             SetPersonalInfo(PK.SpecForm);
