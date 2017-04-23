@@ -71,7 +71,7 @@ namespace SMEncounterRNGTool
         private Filters setting = new Filters();
         private ModelStatus status = new ModelStatus();
         private static byte[] blinkflaglist;
-        private static int[] locationlist = LocationTable.SMLocationList;
+        private static int[] locationlist;
         private EncounterArea ea = new EncounterArea();
         private bool IsMoon => GameVersion.SelectedIndex > 0;
         private bool IsNight => Night.Checked;
@@ -96,6 +96,7 @@ namespace SMEncounterRNGTool
         private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
         private static readonly string[] FOSSIL_STR = { "<Fossil>", "<化石>" };
         private static readonly string[] STARTER_STR = { "<Starter>", "<御三家>" };
+        private static readonly string[] ISLAND_STR = { "Island Scan", "岛屿搜索" };
         private static readonly string[] FILEERRORSTR = { "Invalid file!", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
         {
@@ -131,6 +132,7 @@ namespace SMEncounterRNGTool
             StringItem.eventstr = EVENT_STR[lindex];
             StringItem.fossilstr = FOSSIL_STR[lindex];
             StringItem.starterstr = STARTER_STR[lindex];
+            StringItem.islandscanstr = ISLAND_STR[lindex];
 
             Nature.Items.Clear();
             Nature.BlankText = ANY_STR[lindex];
@@ -246,9 +248,14 @@ namespace SMEncounterRNGTool
         #region DataEntry
         private void RefreshLocation()
         {
-            if (!PK.UB && !PK.IsBlank)
+            if (PK.IsBlank)
+                locationlist = LocationTable.SMLocationList;
+            else if (PK.UB)
+                locationlist = PK.UBLocation;
+            else if (PK.IslandScan)
+                locationlist = LocationTable.IslandScanLocationList;
+            else
                 return;
-            locationlist = PK.IsBlank ? LocationTable.SMLocationList : PK.UBLocation;
 
             Locationlist = locationlist.Select(loc => new Controls.ComboItem(StringItem.getlocationstr(loc), loc)).ToList();
             MetLocation.DisplayMember = "Text";
@@ -290,7 +297,9 @@ namespace SMEncounterRNGTool
                 Slotidx.Add(i);
             for (int i = 0; i < 10; i++)
                 Slot.CheckBoxItems[i + 1].Checked = Slotidx.Contains(Slottype[i]);
-
+            if (PK.IslandScan && SlotSpecies.SelectedIndex == SlotSpecies.Items.Count - 1)
+                Filter_Lv.Value = PK.Level;
+                
             SetPersonalInfo(SpecForm);
         }
 
@@ -911,7 +920,8 @@ namespace SMEncounterRNGTool
             RNGSetting.TSV = (int)TSV.Value;
             RNGSetting.AlwaysSynchro = AlwaysSynced.Checked;
             RNGSetting.Honey = Honey.Checked;
-            RNGSetting.UB = UB.Checked;
+            RNGSetting.UB = PK.UB;
+            RNGSetting.IslandScan = PK.IslandScan;
             RNGSetting.ShinyCharm = ShinyCharm.Checked;
             RNGSetting.Wild = Wild.Checked;
             RNGSetting.Fix3v = Fix3v.Checked;
@@ -920,7 +930,7 @@ namespace SMEncounterRNGTool
             RNGSetting.PokeLv = PK.Level;
             RNGSetting.Lv_min = (byte)Lv_min.Value;
             RNGSetting.Lv_max = (byte)Lv_max.Value;
-            RNGSetting.UB_th = (byte)UB_th.Value;
+            RNGSetting.Rate = (byte)UB_th.Value;
             RNGSetting.Encounter_th = (byte)Encounter_th.Value;
             RNGSetting.ShinyLocked = PK.ShinyLocked;
 
@@ -1165,7 +1175,8 @@ namespace SMEncounterRNGTool
             Properties.Settings.Default.Save();
 
             Stationary.Checked = !(Wild.Checked = PK.Wild || PK.UB);
-            UB.Visible = UB.Checked = PK.UB;
+            UB.Visible = UB.Checked = PK.UB || PK.IslandScan;
+            UB.Text = PK.IslandScan ? StringItem.islandscanstr : "UB";
             Method_CheckedChanged(null, null);
             RefreshLocation();
             //Enable
@@ -1190,7 +1201,7 @@ namespace SMEncounterRNGTool
             }
             Filter_Lv.Value = PK.Level;
             SetPersonalInfo(PK.SpecForm);
-            if (PK.UB)
+            if (PK.UB || PK.IslandScan)
                 return;
             if (PK.IsCrabrawler)
             {

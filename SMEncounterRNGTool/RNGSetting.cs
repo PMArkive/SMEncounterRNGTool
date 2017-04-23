@@ -16,10 +16,10 @@ namespace SMEncounterRNGTool
         public static bool IsMainRNGEgg;
         public static bool IsMinior;
 
-        public static bool Wild, Honey, UB, fishing, SOS;
+        public static bool Wild, Honey, UB, fishing, SOS, IslandScan;
         public static byte Lv_max, Lv_min;
         public static byte ChainLength;
-        public static byte UB_th, Encounter_th;
+        public static byte Rate, Encounter_th;
         public static bool randomgender;
         public static byte gender;
 
@@ -36,6 +36,7 @@ namespace SMEncounterRNGTool
 
         // Personal Info
         public bool IsUB;
+        public bool IsIslandScan;
         public static byte StageFrame;
 
         // Generated Attributes
@@ -45,7 +46,7 @@ namespace SMEncounterRNGTool
         private byte Gender => IsUB ? (byte)0 : gender;
         private int PIDroll_count => (ShinyCharm && IsWild ? 3 : 1) + (SOS ? AddtionalPIDRollCount() : 0);
         private int PerfectIVCount => Fix3v || IsUB ? 3 : 0;
-        private static bool SpecialWild => Encounter_th == 101 || SOS;
+        private bool SpecialWild => Encounter_th == 101 || SOS || IsIslandScan;
 
         public static void ResetModelStatus()
         {
@@ -170,13 +171,15 @@ namespace SMEncounterRNGTool
         {
             if (UB)
                 st.UbValue = getUBValue();
+            if (IslandScan)
+                st.UbValue = getScanValue();
             // Normal wild
-            if (!IsUB)
+            if (!IsUB && !IsIslandScan)
             {
                 st.Synchronize = (int)(getrand % 100) >= 50;
                 return;
             }
-            // UB
+            // UB & IslandScan
             time_elapse(7);
             st.Synchronize = blink_process();
         }
@@ -398,8 +401,15 @@ namespace SMEncounterRNGTool
         private byte getUBValue()
         {
             byte UbValue = (byte)(getrand % 100);
-            IsUB = UbValue < UB_th;
+            IsUB = UbValue < Rate;
             return UbValue;
+        }
+
+        private byte getScanValue()
+        {
+            byte ScanValue = (byte)(getrand % 100);
+            IsIslandScan = ScanValue < Rate;
+            return ScanValue;
         }
 
         public static byte getslot(int rand)

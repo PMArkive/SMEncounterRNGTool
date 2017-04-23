@@ -29,6 +29,7 @@ namespace SMEncounterRNGTool
         public bool IsEvent => Species == 151;
         public bool IsCrabrawler => Species == 739;
         public bool IsBlank => Species == 0;
+        public bool IslandScan => IslandScanSpecies.Any(t => t.Species == Species);
         public bool AlwaysSync => Gift;
         public override string ToString()
         {
@@ -36,6 +37,7 @@ namespace SMEncounterRNGTool
             {
                 case 0: return "-";
                 case 151: return StringItem.eventstr;
+                case 155: return "<" + StringItem.islandscanstr + ">";
                 case 408: return StringItem.fossilstr;
                 case 722: return StringItem.starterstr;
                 case 133: return $"{StringItem.species[133]} ({StringItem.species[0]})";
@@ -72,6 +74,7 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 798, Level = 60, UB = true, UBLocation = new []{134,376,632}, UBRate = new byte[]{30,30,30}, SunOnly = true,},    // Kartana
             new Pokemon { Species = 799, Level = 70, UB = true, UBLocation = new []{694}, UBRate = new byte[]{80},},    // Guzzlord
             new Pokemon { Species = 800, Level = 75, UB = true, UBLocation = new []{548}, UBRate = new byte[]{05},},    // Necrozma
+            new Pokemon { Species = 155, Template = true, Wild = true},    // Island Scan
             new Pokemon { Species = 722, Level = 05, NPC = 5, Delay = 40, Gift = true, Syncable = false, Template = true},    // Starters
             new Pokemon { Species = 142, Level = 40, NPC = 3, Delay = 34, Gift = true,},    // Aerodactyl
             new Pokemon { Species = 137, Level = 30, NPC = 4, Delay = 34, Gift = true,},    // Porygon
@@ -79,7 +82,7 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 133, Level = 01, NPC = 5, Delay = 04, Gift = true, Syncable = false},    // Gift Eevee Egg
         };
 
-        public readonly static Pokemon[] IslandScan =
+        public readonly static Pokemon[] IslandScanSpecies =
         {
             // QR Scan: Su/M/Tu/W/Th/F/Sa
             // Melemele Island
