@@ -34,15 +34,19 @@ namespace SMEncounterRNGTool
         public bool AlwaysSync => Gift;
         public override string ToString()
         {
+            if (Template)
+                switch (Species)
+                {
+                    case 0: return "-";
+                    case 151: return "【" + StringItem.eventstr + "】";
+                    case 155: return "【" + StringItem.islandscanstr + "】";
+                    case 408: return "【" + StringItem.fossilstr + "】";
+                    case 722: return "【" + StringItem.starterstr + "】";
+                }
             switch (Species)
             {
-                case 0: return "-";
-                case 151: return StringItem.eventstr;
-                case 155: return "<" + StringItem.islandscanstr + ">";
-                case 408: return StringItem.fossilstr;
-                case 722: return StringItem.starterstr;
                 case 133: return $"{StringItem.species[133]} ({StringItem.species[0]})";
-                case 718: return StringItem.species[718] + (Form == 2 ? "-10%" : "-50%");
+                case 718: return StringItem.species[718] + (Form == 1 ? "-10%" : "-50%");
                 default: return StringItem.species[Species];
             }
         }
@@ -64,8 +68,8 @@ namespace SMEncounterRNGTool
             new Pokemon { Species = 789, Level = 05, ShinyLocked = true, NPC = 3, Delay = 34, Gift = true},    // Cosmog
             new Pokemon { Species = 772, Level = 40, NPC = 8, Delay = 34, Gift = true,},    // Type:Null
             new Pokemon { Species = 801, Level = 50, ShinyLocked = true, NPC = 6, Delay = 34, Gift = true,},    // Magearna
-            new Pokemon { Species = 718, Level = 50, ShinyLocked = true, NPC = 3, Delay = 32, Gift = true, Form = 2,},    // Zygarde-10%
-            new Pokemon { Species = 718, Level = 50, ShinyLocked = true, NPC = 3, Delay = 32, Gift = true, Form = 3,},    // Zygarde-50%
+            new Pokemon { Species = 718, Level = 50, ShinyLocked = true, NPC = 3, Delay = 32, Gift = true, Form = 1,},    // Zygarde-10%
+            new Pokemon { Species = 718, Level = 50, ShinyLocked = true, NPC = 3, Delay = 32, Gift = true, Form = 0,},    // Zygarde-50%
             new Pokemon { Species = 408, Level = 15, NPC = 1, Delay = 40, Gift = true, Template = true,},    // Fossil
             new Pokemon { Species = 793, Level = 55, UB = true, UBLocation = new []{100,082}, UBRate = new byte[]{80,30},},    // Nihilego
             new Pokemon { Species = 794, Level = 65, UB = true, UBLocation = new []{040}, UBRate = new byte[]{30}, SunOnly = true,},    // Buzzwole

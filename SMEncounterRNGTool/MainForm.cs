@@ -93,9 +93,9 @@ namespace SMEncounterRNGTool
         private static readonly string[] NOSELECTION_STR = { "Please Select", "请选择" };
         private static readonly string[] SETTINGERROR_STR = { "Error at ", "出错啦0.0 发生在" };
         private static readonly string[] WAIT_STR = { "Please Wait...", "请稍后..." };
-        private static readonly string[] EVENT_STR = { "<Event>", "<配信>" };
-        private static readonly string[] FOSSIL_STR = { "<Fossil>", "<化石>" };
-        private static readonly string[] STARTER_STR = { "<Starter>", "<御三家>" };
+        private static readonly string[] EVENT_STR = { "Event", "配信" };
+        private static readonly string[] FOSSIL_STR = { "Fossil", "化石" };
+        private static readonly string[] STARTER_STR = { "Starters", "御三家" };
         private static readonly string[] ISLAND_STR = { "Island Scan", "岛屿搜索" };
         private static readonly string[] FILEERRORSTR = { "Invalid file!", "文件格式不正确" };
         private static readonly string[,] PIDTYPE_STR =
@@ -280,7 +280,7 @@ namespace SMEncounterRNGTool
         private void RefreshIslandPokemon()
         {
             int tmp = Island_Poke.SelectedIndex;
-            var List = Pokemon.QRScanSpecies.Select(s => new Controls.ComboItem(StringItem.species[s.Species], s.SpecForm));
+            var List = Pokemon.QRScanSpecies.Select(s => new Controls.ComboItem(s.ToString(), s.SpecForm));
             Island_Poke.DisplayMember = "Text";
             Island_Poke.ValueMember = "Value";
             Island_Poke.DataSource = new BindingSource(List, null);
@@ -509,10 +509,8 @@ namespace SMEncounterRNGTool
 
         private void Location_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (PK.UB && MetLocation.SelectedIndex >= 0)
-                Special_th.Value = PK.UBRate[MetLocation.SelectedIndex];
-            if (PK.QR && MetLocation.SelectedIndex >= 0)
-                Special_th.Value = 50;
+            if (PK.UB || PK.QR)
+                Special_th.Value = PK.UB ? PK.UBRate[MetLocation.SelectedIndex] : 50;
             ea = LocationTable.Table.FirstOrDefault(t => t.Locationidx == (int)MetLocation.SelectedValue);
             NPC.Value = ea.NPC;
             Correction.Value = ea.Correction;
@@ -528,8 +526,11 @@ namespace SMEncounterRNGTool
             LoadSlotSpeciesInfo();
             if (SlotSpecies.SelectedIndex > 0 && (Filter_Lv.Value > Lv_max.Value || Filter_Lv.Value < Lv_min.Value))
                 Filter_Lv.Value = 0;
-            if (SlotSpecies.SelectedIndex == 0 && (PK.UB || PK.QR))
-                Filter_Lv.Value = PK.Level;
+            if (PK.UB || PK.QR)
+            {
+                if (SlotSpecies.SelectedIndex == 0) Filter_Lv.Value = PK.Level;
+                UBOnly.Checked = SlotSpecies.SelectedIndex == 0;
+            }
         }
 
         private void Method_CheckedChanged(object sender, EventArgs e)
@@ -923,6 +924,7 @@ namespace SMEncounterRNGTool
             RNGSetting.PreDelayCorrection = (int)Correction.Value;
             RNGSetting.delaytime = (int)Timedelay.Value / 2;
             RNGSetting.modelnumber = ModelNumber;
+            RNGSetting.Wild = Wild.Checked;
             RNGSetting.ConsiderBagEnteringTime = EnterBagTime.Checked;
             RNGSetting.IsSolgaleo = PK.IsSolgaleo;
             RNGSetting.IsLunala = PK.IsLunala;
@@ -935,7 +937,6 @@ namespace SMEncounterRNGTool
             RNGSetting.UB = PK.UB;
             RNGSetting.QR = PK.QR;
             RNGSetting.ShinyCharm = ShinyCharm.Checked;
-            RNGSetting.Wild = Wild.Checked;
             RNGSetting.Fix3v = Fix3v.Checked;
             RNGSetting.randomgender = FuncUtil.IsRandomGender((int)GenderRatio.SelectedValue);
             RNGSetting.gender = FuncUtil.getGenderRatio((int)GenderRatio.SelectedValue);

@@ -25,13 +25,13 @@ namespace SMEncounterRNGTool
 
         public static ComboItem[] GenderRatioList =
         {
-            new ComboItem("Genderless", 255),
-            new ComboItem("♂1：♀1", 127),
-            new ComboItem("♂7：♀1", 031),
-            new ComboItem("♂3：♀1", 063),
-            new ComboItem("♂1：♀3", 191),
-            new ComboItem("♂ Only", 000),
-            new ComboItem("♀ Only", 254),
+            new ComboItem("Genderless", 0xFF),
+            new ComboItem("♂1：♀1", 0x7F),
+            new ComboItem("♂7：♀1", 0x1F),
+            new ComboItem("♂3：♀1", 0x3F),
+            new ComboItem("♂1：♀3", 0xBF),
+            new ComboItem("♂ Only", 0x00),
+            new ComboItem("♀ Only", 0xFE),
         };
     }
 }
