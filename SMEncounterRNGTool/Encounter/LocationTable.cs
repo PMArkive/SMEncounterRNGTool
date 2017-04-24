@@ -335,7 +335,7 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 132, //Malie City
-                Correction = 09, NPC = 4,
+                Correction = 09, NPC = 5,
                 LevelMin = 24,
                 Species = new[] {13,568,088,735,081},
             },
