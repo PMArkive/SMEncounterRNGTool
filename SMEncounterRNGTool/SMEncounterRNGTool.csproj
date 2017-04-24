@@ -101,6 +101,15 @@
     <Compile Include="Encounter\PersonalInfoSM.cs" />
     <Compile Include="Encounter\PersonalTable.cs" />
     <Compile Include="EventRule.cs" />
+    <Compile Include="MainForm_Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm_ToolKit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm_Event.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModelStatus.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

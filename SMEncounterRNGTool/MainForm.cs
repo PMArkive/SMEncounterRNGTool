@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.IO;
 using System.Windows.Forms;
 using static PKHeX.Util;
 
@@ -57,10 +55,10 @@ namespace SMEncounterRNGTool
                 Stat3.Value = value[3]; Stat4.Value = value[4]; Stat5.Value = value[5];
             }
         }
-        private List<NumericUpDown> EventIV = new List<NumericUpDown>();
-        private List<CheckBox> EventIVLocked = new List<CheckBox>();
         private List<Controls.ComboItem> Locationlist = new List<Controls.ComboItem>();
         private List<DataGridViewRow> dgvrowlist = new List<DataGridViewRow>();
+        private NumericUpDown[] EventIV { get { return new[] { EventIV0, EventIV1, EventIV2, EventIV3, EventIV4, EventIV5, }; } }
+        private CheckBox[] EventIVLocked { get { return new[] { Event_IV_Fix0, Event_IV_Fix1, Event_IV_Fix2, Event_IV_Fix3, Event_IV_Fix4, Event_IV_Fix5, }; } }
         #endregion
 
         #region Global Variable
@@ -179,20 +177,6 @@ namespace SMEncounterRNGTool
             dgvPropertyInfo.SetValue(DGV, true, null);
 
             int LastSelectedPKM = Properties.Settings.Default.PKM;
-
-            EventIV.Add(EventIV0);
-            EventIV.Add(EventIV1);
-            EventIV.Add(EventIV2);
-            EventIV.Add(EventIV3);
-            EventIV.Add(EventIV4);
-            EventIV.Add(EventIV5);
-
-            EventIVLocked.Add(Event_IV_Fix0);
-            EventIVLocked.Add(Event_IV_Fix1);
-            EventIVLocked.Add(Event_IV_Fix2);
-            EventIVLocked.Add(Event_IV_Fix3);
-            EventIVLocked.Add(Event_IV_Fix4);
-            EventIVLocked.Add(Event_IV_Fix5);
 
             SyncNature.Items.Add("-");
             Event_Nature.Items.Add("-");
@@ -329,137 +313,65 @@ namespace SMEncounterRNGTool
             Fix3v.Checked = t.EggGroups[0] == 0x0F; //Undiscovered Group
         }
         private void SetPersonalInfo(int SpecForm) => SetPersonalInfo(SpecForm & 0x7FF, SpecForm >> 11);
-        #endregion
 
-        #region SearchSeedfunction
-        private void Clear_Click(object sender, EventArgs e)
+        private void Island_Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ((QRInput.Checked) ? QRList : Clock_List).Text = "";
+            PK = Pokemon.QRScanSpecies.FirstOrDefault(pk => pk.Species == (int)Island_Poke.SelectedValue);
+            RefreshLocation();
+            Filter_Lv.Value = PK.Level;
+            SetPersonalInfo(PK.SpecForm);
         }
 
-        private void Back_Click(object sender, EventArgs e)
+        private void Poke_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TextBox tmp = QRInput.Checked ? QRList : Clock_List;
-            string str = tmp.Text;
-            if (tmp.Text != "")
+            PK = PMDropdownlist.FirstOrDefault(pm => pm.SpecForm == (int)Poke.SelectedValue) ?? Pokemon.SpeciesList[0];
+            //General
+            Properties.Settings.Default.PKM = (int)Poke.SelectedValue;
+            Properties.Settings.Default.Save();
+
+            Stationary.Checked = !(Wild.Checked = PK.Wild || PK.UB);
+            UB.Visible = UB.Checked = PK.UB || PK.QR;
+            Method_CheckedChanged(null, null);
+            RefreshLocation();
+            //Enable
+            SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = PK.IsBlank;
+            GenderRatio.Enabled = Fix3v.Enabled = PK.IsBlank || PK.IsEvent || PK.UB || PK.QR;
+            L_EventInstruction.Visible = PK.IsEvent;
+            IslandScanSetting.Visible = PK.QR;
+            Honey.Enabled = Encounter_th.Enabled = !PK.IsCrabrawler;
+            SyncNature.Enabled = PK.Syncable;
+            AlwaysSynced.Checked = PK.AlwaysSync;
+            if (!PK.Syncable)
+                SyncNature.SelectedIndex = 0;
+            ConsiderDelay.Checked = true;
+            AlwaysSynced.Enabled = false;
+            if (PK.IsBlank)
+                return;
+            MainRNGEgg.Visible = MainRNGEgg.Checked = false;
+            if (PK.IsEvent)
             {
-                if (str.LastIndexOf(",") != -1)
-                    str = str.Remove(str.LastIndexOf(","));
-                else
-                    str = "";
-            }
-            tmp.Text = str;
-        }
-
-        private void Get_Clock_Number(object sender, EventArgs e)
-        {
-            TextBox tmp = QRInput.Checked ? QRList : Clock_List;
-            string str = ((Button)sender).Name;
-            string n = str.Remove(0, str.IndexOf("button") + 6);
-
-            if (tmp.Text != "") tmp.Text += ",";
-            tmp.Text += !EndClockInput.Checked || QRInput.Checked ? n : ((Convert.ToInt32(n) + 13) % 17).ToString();
-
-            if (QRInput.Checked)
-            {
-                if (QRList.Text.Count(c => c == ',') < 3)
-                    return;
-                QRSearch_Click(null, null);
-            }
-            else
-                SearchforSeed(null, null);
-        }
-
-        private void SearchforSeed(object sender, EventArgs e)
-        {
-            if (Clock_List.Text.Count(c => c == ',') < 7)
-            {
-                SeedResults.Text = "";
+                L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
+                Event_CheckedChanged(null, null);
                 return;
             }
-            var text = "";
-            try
+            Filter_Lv.Value = PK.Level;
+            SetPersonalInfo(PK.SpecForm);
+            if (PK.UB || PK.QR)
             {
-                SeedResults.Text = WAIT_STR[lindex];
-                var results = SFMTSeedAPI.request(Clock_List.Text);
-                if (results == null || results.Count() == 0)
-                    text = NORESULT_STR[lindex];
-                else
-                {
-                    text = string.Join(" ", results.Select(r => r.seed));
-                    if (results.Count() == 1)
-                    {
-                        Time_min.Value = 418 + Clock_List.Text.Count(c => c == ',');
-                        uint s0;
-                        if (uint.TryParse(text, NumberStyles.HexNumber, null, out s0))
-                            Seed.Value = s0;
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                text = exc.Message;
-            }
-            finally
-            {
-                SeedResults.Text = text;
-            }
-        }
-
-        private void QRSearch_Click(object sender, EventArgs e)
-        {
-            uint InitialSeed = (uint)Seed.Value;
-            int min = (int)Frame_min.Value;
-            int max = (int)Frame_max.Value;
-            if (QRList.Text == "")
+                //Island Scan and UB Text
+                UB.Text = PK.QR ? StringItem.islandscanstr : "UB";
+                dgv_ubvalue.HeaderText = PK.QR ? dgv_ubvalue.HeaderText.Replace("UB", "QR") : dgv_ubvalue.HeaderText.Replace("QR", "UB");
+                UBOnly.Text = PK.QR ? UBOnly.Text.Replace("UB", "QR") : UBOnly.Text.Replace("QR", "UB");
                 return;
-            string[] str = QRList.Text.Split(',');
-            try
-            {
-                int[] Clock_List = str.Select(s => int.Parse(s)).ToArray();
-                int[] temp_List = new int[Clock_List.Length];
-
-                SFMT sfmt = new SFMT(InitialSeed);
-                SFMT seed = new SFMT();
-                bool flag = false;
-
-                QRResult.Items.Clear();
-
-                for (int i = 0; i < min; i++)
-                    sfmt.NextUInt64();
-
-                int cnt = 0;
-                int tmp = 0;
-                for (int i = min; i <= max; i++, sfmt.NextUInt64())
-                {
-                    seed = (SFMT)sfmt.DeepCopy();
-
-                    for (int j = 0; j < Clock_List.Length; j++)
-                        temp_List[j] = (int)(seed.NextUInt64() % 17);
-
-                    if (temp_List.SequenceEqual(Clock_List))
-                        flag = true;
-
-                    if (flag)
-                    {
-                        flag = false;
-                        switch (lindex)
-                        {
-                            case 0: QRResult.Items.Add($"The last clock is at {i + Clock_List.Length - 1}F, you're at {i + Clock_List.Length + 1}F after quiting QR"); break;
-                            case 1: QRResult.Items.Add($"最后的指针在 {i + Clock_List.Length - 1} 帧，退出QR后在 {i + Clock_List.Length + 1} 帧"); break;
-                        }
-                        cnt++;
-                        tmp = i + Clock_List.Length + 1;
-                    }
-                }
-
-                if (cnt == 1)
-                    Time_min.Value = tmp;
             }
-            catch
+            if (PK.IsCrabrawler)
             {
-                Error(SETTINGERROR_STR[lindex] + L_QRList.Text);
+                Honey.Checked = false;
+                WildEncounterSetting.Visible = false;
+                Encounter_th.Value = 101;
             }
+            Timedelay.Value = PK.Delay;
+            NPC.Value = PK.NPC;
         }
         #endregion
 
@@ -473,12 +385,6 @@ namespace SMEncounterRNGTool
         private void ShinyCharm_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.ShinyCharm = ShinyCharm.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void ClockInput_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.ClockInput = StartClockInput.Checked;
             Properties.Settings.Default.Save();
         }
 
@@ -666,31 +572,10 @@ namespace SMEncounterRNGTool
                 CreateTimeline.Checked = false;
         }
 
-        private void Event_CheckedChanged(object sender, EventArgs e)
-        {
-            if (IsEvent)
-            {
-                Timedelay.Value = YourID.Checked && !IsEgg.Checked ? 62 : 0;
-                IVsCount.Value = Fix3v.Checked ? 3 : 0;
-            }
-        }
-
         private void Fix3v_CheckedChanged(object sender, EventArgs e)
         {
             Event_CheckedChanged(null, null);
             PerfectIVs.Value = Fix3v.Checked ? 3 : 0;
-        }
-
-        private void OtherInfo_CheckedChanged(object sender, EventArgs e)
-        {
-            L_Event_TSV.Visible = L_Event_G7TID.Visible = Event_EC.Enabled = Event_PID.Enabled = Event_TID.Enabled = Event_SID.Enabled = OtherInfo.Checked;
-        }
-
-        private void Event_PIDType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!OtherInfo.Checked)
-                Event_EC.Value = (Event_PIDType.SelectedIndex == 3) ? 0x12 : 0;
-            L_EC.Visible = Event_EC.Visible = L_PID.Visible = Event_PID.Visible = Event_PIDType.SelectedIndex == 3;
         }
 
         private void MainRNGEgg_CheckedChanged(object sender, EventArgs e)
@@ -701,68 +586,6 @@ namespace SMEncounterRNGTool
             {
                 NPC.Value = 4;
                 Timedelay.Value = 38;
-            }
-        }
-        #endregion
-
-        #region TimerCalculateFunction
-
-        private int[] CalcFrame(int min, int max)
-        {
-            uint InitialSeed = (uint)Seed.Value;
-            SFMT sfmt = new SFMT(InitialSeed);
-
-            for (int i = 0; i < min; i++)
-                sfmt.NextUInt64();
-
-            //total_frame[0] Start; total_frame[1] Duration
-            int[] total_frame = new int[2];
-            int n_count = 0;
-            int timer = 0;
-            status = new ModelStatus(ModelNumber, sfmt);
-
-            while (min + n_count <= max)
-            {
-                n_count += status.NextState();
-                total_frame[timer]++;
-                if (min + n_count == max)
-                    timer = 1;
-            }
-            return total_frame;
-        }
-
-        private void CalcTime_Output(int min, int max)
-        {
-            int[] totaltime = CalcFrame(min, max);
-            double realtime = totaltime[0] / 30.0;
-            string str = $" {totaltime[0] * 2}F ({realtime.ToString("F")}s) <{totaltime[1] * 2}F>. ";
-            switch (lindex)
-            {
-                case 0: str = "Set Eontimer for" + str + (ShowDelay ? $" Hit frame {max}" : ""); break;
-                case 1: str = "计时器设置为" + str + (ShowDelay ? $" 在 {max} 帧按A" : ""); break;
-            }
-            TimeResult.Items.Add(str);
-        }
-
-        private void CalcTime_Click(object sender, EventArgs e)
-        {
-            TimeResult.Items.Clear();
-            int min = (int)Time_min.Value;
-            int max = (int)Time_max.Value;
-            if (!ShowDelay)
-            {
-                CalcTime_Output(min, max);
-                return;
-            }
-            int[] tmptimer = new int[2];
-            int delaytime = (int)Timedelay.Value / 2;
-            for (int tmp = max - ModelNumber * delaytime; tmp <= max; tmp++)
-            {
-                tmptimer = CalcFrame(tmp, max);
-                if (tmptimer[0] + tmptimer[1] > delaytime && tmptimer[0] <= delaytime)
-                    CalcTime_Output(min, tmp - (int)Correction.Value);
-                if (tmptimer[0] == delaytime && tmptimer[1] == 0)
-                    CalcTime_Output(min, tmp - (int)Correction.Value);
             }
         }
 
@@ -780,687 +603,6 @@ namespace SMEncounterRNGTool
             Stats = new int[6];
             IVlow = new int[6];
             IVup = new[] { 31, 31, 31, 31, 31, 31 };
-        }
-        #endregion
-
-        #region Search
-
-        private void CalcList_Click(object sender, EventArgs e)
-        {
-            if (IsEvent && NatureLocked.Checked && Event_Nature.SelectedIndex == 0)
-                Event_Nature.SelectedIndex = 1;
-            if (ivmin0.Value > ivmax0.Value)
-                Error(SETTINGERROR_STR[lindex] + L_H.Text);
-            else if (ivmin1.Value > ivmax1.Value)
-                Error(SETTINGERROR_STR[lindex] + L_A.Text);
-            else if (ivmin2.Value > ivmax2.Value)
-                Error(SETTINGERROR_STR[lindex] + L_B.Text);
-            else if (ivmin3.Value > ivmax3.Value)
-                Error(SETTINGERROR_STR[lindex] + L_C.Text);
-            else if (ivmin4.Value > ivmax4.Value)
-                Error(SETTINGERROR_STR[lindex] + L_D.Text);
-            else if (ivmin5.Value > ivmax5.Value)
-                Error(SETTINGERROR_STR[lindex] + L_S.Text);
-            else if (CreateTimeline.Checked)
-                createtimeline();
-            else if (Frame_min.Value > Frame_max.Value)
-                Error(SETTINGERROR_STR[lindex] + L_frame.Text);
-            else if (Refinement.Checked)
-                ConsiderHistoryStationarySearch();
-            else
-                StationarySearch();
-        }
-
-        private void getblinkflaglist(int min, int max, SFMT sfmt)
-        {
-            blinkflaglist = new byte[max - min + 2];
-            SFMT st = (SFMT)sfmt.DeepCopy();
-            if (ModelNumber == 1)
-                MarkNoNPCFlag(st, min, max);
-            else
-                MarkMultipleNPCFlag(st, min, max);
-        }
-
-        private void MarkNoNPCFlag(SFMT st, int min, int max)
-        {
-            int blink_flag = 0;
-            ulong rand;
-            for (int i = 0; i < min - 2; i++)
-                st.NextUInt64();
-            if ((int)(st.NextUInt64() & 0x7F) == 0)
-                blinkflaglist[0] = (byte)((int)(st.NextUInt64() % 3) == 0 ? 36 : 30);
-            else if ((int)(st.NextUInt64() & 0x7F) == 0)
-                blink_flag = 1;
-            for (int i = min; i <= max; i++)
-            {
-                rand = st.NextUInt64();
-                if (blink_flag == 1)
-                {
-                    blinkflaglist[i - min] = 5;
-                    blinkflaglist[++i - min] = (byte)((int)(rand % 3) == 0 ? 36 : 30);
-                    blink_flag = 0; st.NextUInt64(); // Reset and advance
-                }
-                if ((int)(rand & 0x7F) == 0)
-                    blink_flag = blinkflaglist[i - min] = 1;
-            }
-        }
-
-        private void MarkMultipleNPCFlag(SFMT st, int min, int max)
-        {
-            int Model_n = ModelNumber;
-            int blink_flag = 0;
-            int[] Unsaferange = new[] { 35 * (Model_n - 1), 41 * (Model_n - 1) };
-            List<ulong> Randlist = new List<ulong>();
-            int Min = Math.Max(min - Unsaferange[1], 418);
-            for (int i = 0; i < Min; i++)
-                st.NextUInt64();
-            for (int i = 0; i <= (Model_n - 1) * 5 + 1; i++) // Create Buffer for checkafter
-                Randlist.Add(st.NextUInt64());
-            for (int i = Min; i <= max; i++, Randlist.RemoveAt(0), Randlist.Add(st.NextUInt64()))
-            {
-                if ((Randlist[0] & 0x7F) == 0)
-                {
-                    blink_flag = Unsaferange[blink_flag == 0 ? Checkafter(Randlist) : 1];
-                    if (i >= min) blinkflaglist[i - min] = (byte)(blink_flag == 0 ? 1 : 3);
-                    continue;
-                }
-                if (blink_flag > 0)
-                {
-                    blink_flag--;
-                    if (i >= min) blinkflaglist[i - min] = 2;
-                }
-            }
-        }
-
-        private byte Checkafter(List<ulong> Randlist)
-        {
-            if (Randlist.Skip(1).Take(Randlist.Count - 2).Any(r => (r & 0x7F) == 0))
-                return 1;
-            if (Randlist.Last() % 3 == 0) return 1;
-            return 0;
-        }
-
-        private void Prepare(SFMT sfmt)
-        {
-            dgvrowlist.Clear();
-            DGV.Rows.Clear();
-            status = new ModelStatus(ModelNumber, sfmt);
-            if (ea.Location == 120) // Route 17
-                status.route17 = true;
-            setting = FilterSettings;
-            rng = new RNGSetting();
-            e = IsEvent ? geteventsetting() : null;
-            RefreshRNGSettings(sfmt);
-        }
-
-        private Filters FilterSettings => new Filters
-        {
-            Nature = Nature.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
-            HPType = HiddenPower.CheckBoxItems.Skip(1).Select(e => e.Checked).ToArray(),
-            Gender = Gender.SelectedIndex,
-            Ability = Ability.SelectedIndex,
-            Slot = Slot.CheckBoxItems.Select(e => e.Checked).ToArray(),
-            IVlow = IVlow,
-            IVup = IVup,
-            BS = ByStats.Checked ? BS : null,
-            Stats = ByStats.Checked ? Stats : null,
-            Wild = Wild.Checked,
-            Skip = DisableFilters.Checked,
-            Lv = (byte)Filter_Lv.Value,
-            PerfectIVs = (byte)PerfectIVs.Value,
-            SafeFOnly = SafeFOnly.Checked,
-            BlinkFOnly = BlinkOnly.Checked,
-            ShinyOnly = ShinyOnly.Checked,
-            EncounterOnly = EncounteredOnly.Checked,
-            Encounter_th = (byte)Encounter_th.Value,
-            UBOnly = UBOnly.Checked,
-            UB_th = (byte)Special_th.Value,
-            MainRNGEgg = MainRNGEgg.Checked,
-        };
-
-        private void RefreshRNGSettings(SFMT sfmt)
-        {
-            RNGSetting.Considerhistory = CreateTimeline.Checked || Refinement.Checked;
-            RNGSetting.Considerdelay = ShowResultsAfterDelay.Checked;
-            RNGSetting.PreDelayCorrection = (int)Correction.Value;
-            RNGSetting.delaytime = (int)Timedelay.Value / 2;
-            RNGSetting.modelnumber = ModelNumber;
-            RNGSetting.Wild = Wild.Checked;
-            RNGSetting.ConsiderBagEnteringTime = EnterBagTime.Checked;
-            RNGSetting.IsSolgaleo = PK.IsSolgaleo;
-            RNGSetting.IsLunala = PK.IsLunala;
-            RNGSetting.SolLunaReset = (RNGSetting.IsSolgaleo || RNGSetting.IsLunala) && ModelNumber == 7;
-            RNGSetting.IsExeggutor = PK.IsExeggutor;
-            RNGSetting.Synchro_Stat = (byte)(SyncNature.SelectedIndex - 1);
-            RNGSetting.TSV = (int)TSV.Value;
-            RNGSetting.AlwaysSynchro = AlwaysSynced.Checked;
-            RNGSetting.Honey = Honey.Checked;
-            RNGSetting.UB = PK.UB;
-            RNGSetting.QR = PK.QR;
-            RNGSetting.ShinyCharm = ShinyCharm.Checked;
-            RNGSetting.Fix3v = Fix3v.Checked;
-            RNGSetting.randomgender = FuncUtil.IsRandomGender((int)GenderRatio.SelectedValue);
-            RNGSetting.gender = FuncUtil.getGenderRatio((int)GenderRatio.SelectedValue);
-            RNGSetting.PokeLv = PK.Level;
-            RNGSetting.Lv_min = (byte)Lv_min.Value;
-            RNGSetting.Lv_max = (byte)Lv_max.Value;
-            RNGSetting.Rate = (byte)Special_th.Value;
-            RNGSetting.Encounter_th = (byte)Encounter_th.Value;
-            RNGSetting.ShinyLocked = PK.ShinyLocked;
-
-            RNGSetting.fishing = Fishing.Checked;
-            RNGSetting.SOS = SOS.Checked;
-            RNGSetting.ChainLength = (byte)ChainLength.Value;
-
-            RNGSetting.route17 = ea.Location == 120;
-            RNGSetting.IsMainRNGEgg = MainRNGEgg.Checked;
-            RNGSetting.IsMinior = PK.IsBlank && Wild.Checked && (int)SlotSpecies.SelectedValue == 774;
-
-            RNGSetting.ResetModelStatus();
-            RNGSetting.CreateBuffer(sfmt, ConsiderDelay.Checked);
-        }
-
-        private void MarkResults(RNGResult result, int blinkidx = -1, int realtime = -1)
-        {
-            // Mark realtime
-            if (realtime > -1)
-                result.realtime = realtime;
-            // Mark Blink
-            if (0 <= blinkidx && blinkidx < blinkflaglist.Length)
-                result.Blink = blinkflaglist[blinkidx];
-        }
-
-        private static readonly string[] blinkmarks = { "-", "★", "?", "? ★" };
-
-        private DataGridViewRow getRow(int i, RNGResult result)
-        {
-            int d = i - (int)Time_max.Value;
-            string true_nature = StringItem.naturestr[result.Nature];
-            string SynchronizeFlag = result.Synchronize ? "O" : "X";
-            if (result.SpecialEnctrValue < Special_th.Value && ShowDelay)
-                result.Blink = 2;
-            string BlinkFlag = result.Blink < 4 ? blinkmarks[result.Blink] : result.Blink.ToString();
-            string PSV = result.PSV.ToString("D4");
-            string Encounter = result.Encounter == -1 ? "-" : result.Encounter.ToString();
-            string Slot = result.Slot == 0 ? "-" : result.Slot.ToString();
-            string Lv = result.Lv == 0 ? "-" : result.Lv.ToString();
-            string Item = result.Item == 100 ? "-" : result.Item.ToString();
-            string UbValue = result.SpecialEnctrValue == 100 ? "-" : result.SpecialEnctrValue.ToString();
-            string randstr = result.row_r.ToString("X16");
-            string PID = result.PID.ToString("X8");
-            string EC = result.EC.ToString("X8");
-            string time = CreateTimeline.Checked || Refinement.Checked ? (2 * result.realtime).ToString() + "F" : "-";
-
-            if (!Advanced.Checked)
-            {
-                if (Encounter != "-")
-                    Encounter = result.Encounter < Encounter_th.Value ? "O" : "X";
-                if (UbValue != "-")
-                    UbValue = result.SpecialEnctrValue < Special_th.Value ? "O" : "X";
-                if (UbValue == "O")
-                    Slot = PK.QR ? "QR" : "UB";
-                if (result.Item < 50)
-                    Item = "50%";
-                else if (result.Item < 55)
-                    Item = "5%";
-                else
-                    Item = "-";
-                time = CreateTimeline.Checked || Refinement.Checked ? (result.realtime / 30.0).ToString("F") + " s" : "-";
-            }
-
-            if (IsEvent && !OtherInfo.Checked && e.PIDType > 1)
-                PID = PSV = "-";
-
-            string frameadvance = result.frameshift.ToString("+#;-#;0");
-            int[] Status = ShowStats.Checked ? result.Stats : result.IVs;
-
-            DataGridViewRow row = new DataGridViewRow();
-            row.CreateCells(DGV);
-
-            string research = (result.row_r % 6).ToString() + " " + (result.row_r % 32).ToString("D2") + " " + (result.row_r % 100).ToString("D2") + " " + (result.row_r % 252).ToString("D3");
-
-            row.SetValues(
-                i, d.ToString("+#;-#;0"), BlinkFlag,
-                Status[0], Status[1], Status[2], Status[3], Status[4], Status[5],
-                true_nature, SynchronizeFlag, StringItem.hpstr[result.hiddenpower + 1], result.Clock, PSV, frameadvance, UbValue, Slot, Lv, StringItem.genderstr[result.Gender], StringItem.abilitystr[result.Ability], Item, Encounter,
-                randstr, PID, EC, time, research
-                );
-
-            if (result.Shiny)
-                row.DefaultCellStyle.BackColor = Color.LightCyan;
-
-            row.Cells[24].Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Font BoldFont = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
-            for (int k = 0; k < 6; k++)
-            {
-                if (result.IVs[k] < 1)
-                {
-                    row.Cells[3 + k].Style.Font = BoldFont;
-                    row.Cells[3 + k].Style.ForeColor = Color.OrangeRed;
-                }
-                else if (result.IVs[k] > 29)
-                {
-                    row.Cells[3 + k].Style.Font = BoldFont;
-                    row.Cells[3 + k].Style.ForeColor = Color.MediumSeaGreen;
-                }
-            }
-            return row;
-        }
-
-        private void StationarySearch()
-        {
-            // Blinkflag
-            SFMT sfmt = new SFMT((uint)Seed.Value);
-            int max, min;
-            if (AroundTarget.Checked)
-            {
-                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
-            }
-            else
-            {
-                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
-            }
-            getblinkflaglist(min, max, sfmt);
-            // Advance
-            for (int i = 0; i < min; i++)
-                sfmt.NextUInt64();
-            // Prepare
-            Prepare(sfmt);
-            bool HasStageFrame = ModelNumber == 1;
-            // Start
-            for (int i = min; i <= max; i++, RNGSetting.Rand.RemoveAt(0), RNGSetting.Rand.Add(sfmt.NextUInt64()))
-            {
-                if (HasStageFrame)
-                    RNGSetting.StageFrame = blinkflaglist[i - min] >= 5 ? blinkflaglist[i - min] : (byte)0;
-                RNGResult result = rng.Generate(e);
-                MarkResults(result, i - min);
-                if (!setting.CheckResult(result))
-                    continue;
-                dgvrowlist.Add(getRow(i, result));
-                if (dgvrowlist.Count > 100000) break;
-            }
-            DGV.Rows.AddRange(dgvrowlist.ToArray());
-            DGV.CurrentCell = null;
-        }
-
-        private void ConsiderHistoryStationarySearch()
-        {
-            // Blinkflag
-            SFMT sfmt = new SFMT((uint)Seed.Value);
-            int max, min;
-            if (AroundTarget.Checked)
-            {
-                min = (int)Time_max.Value - 100; max = (int)Time_max.Value + 100;
-            }
-            else
-            {
-                min = (int)Frame_min.Value; max = (int)Frame_max.Value;
-            }
-            int StartFrame = (int)Frame_min.Value;
-            getblinkflaglist(min, max, sfmt);
-            // Advance
-            for (int i = 0; i < StartFrame; i++)
-                sfmt.NextUInt64();
-            // Prepare
-            Prepare(sfmt);
-            int frameadvance;
-            int[] remain_frame;
-            int realtime = 0;
-            bool phase;
-            // Start
-            for (int i = StartFrame; i <= max;)
-            {
-                remain_frame = (int[])status.remain_frame.Clone();
-                phase = status.phase;
-                frameadvance = status.NextState();
-
-                while (frameadvance > 0)
-                {
-                    RNGSetting.remain_frame = (int[])remain_frame.Clone();
-                    RNGSetting.phase = phase;
-                    RNGResult result = rng.Generate(e);
-                    RNGSetting.Rand.RemoveAt(0);
-                    RNGSetting.Rand.Add(sfmt.NextUInt64());
-                    frameadvance--;
-                    i++;
-                    if (i <= min || i > max)
-                        continue;
-                    MarkResults(result, i - min - 1, realtime);
-                    if (!setting.CheckResult(result))
-                        continue;
-                    dgvrowlist.Add(getRow(i - 1, result));
-                }
-                realtime++;
-                if (dgvrowlist.Count > 100000) break;
-            }
-            DGV.Rows.AddRange(dgvrowlist.ToArray());
-            DGV.CurrentCell = null;
-        }
-
-        private void createtimeline()
-        {
-            // Blinkflag
-            SFMT sfmt = new SFMT((uint)Seed.Value);
-            int start_frame = (int)Frame_min.Value;
-            getblinkflaglist(start_frame, start_frame, sfmt);
-            // Advance
-            for (int i = 0; i < start_frame; i++)
-                sfmt.NextUInt64();
-            // Prepare
-            Prepare(sfmt);
-            int totaltime = (int)TimeSpan.Value * 30;
-            int frame = (int)Frame_min.Value;
-            int frameadvance, Currentframe;
-            // Start
-            for (int i = 0; i <= totaltime; i++)
-            {
-                Currentframe = frame;
-                RNGSetting.remain_frame = (int[])status.remain_frame.Clone();
-                RNGSetting.phase = status.phase;
-
-                RNGResult result = rng.Generate(e);
-                MarkResults(result, i, i);
-
-                frameadvance = status.NextState();
-                frame += frameadvance;
-                for (int j = 0; j < frameadvance; j++)
-                {
-                    RNGSetting.Rand.RemoveAt(0);
-                    RNGSetting.Rand.Add(sfmt.NextUInt64());
-                }
-
-                if (!setting.CheckResult(result))
-                    continue;
-                dgvrowlist.Add(getRow(Currentframe, result));
-                if (dgvrowlist.Count > 100000) break;
-            }
-            DGV.Rows.AddRange(dgvrowlist.ToArray());
-            DGV.CurrentCell = null;
-        }
-        #endregion
-
-        #region Misc Function
-
-        private void Island_Poke_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PK = Pokemon.QRScanSpecies.FirstOrDefault(pk => pk.Species == (int)Island_Poke.SelectedValue);
-            RefreshLocation();
-            Filter_Lv.Value = PK.Level;
-            SetPersonalInfo(PK.SpecForm);
-        }
-
-        private void Poke_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PK = PMDropdownlist.FirstOrDefault(pm => pm.SpecForm == (int)Poke.SelectedValue) ?? Pokemon.SpeciesList[0];
-            //General
-            Properties.Settings.Default.PKM = (int)Poke.SelectedValue;
-            Properties.Settings.Default.Save();
-
-            Stationary.Checked = !(Wild.Checked = PK.Wild || PK.UB);
-            UB.Visible = UB.Checked = PK.UB || PK.QR;
-            Method_CheckedChanged(null, null);
-            RefreshLocation();
-            //Enable
-            SOS.Visible = Fishing.Visible = Stationary.Enabled = Wild.Enabled = PK.IsBlank;
-            GenderRatio.Enabled = Fix3v.Enabled = PK.IsBlank || PK.IsEvent || PK.UB || PK.QR;
-            L_EventInstruction.Visible = PK.IsEvent;
-            IslandScanSetting.Visible = PK.QR;
-            Honey.Enabled = Encounter_th.Enabled = !PK.IsCrabrawler;
-            SyncNature.Enabled = PK.Syncable;
-            AlwaysSynced.Checked = PK.AlwaysSync;
-            if (!PK.Syncable)
-                SyncNature.SelectedIndex = 0;
-            ConsiderDelay.Checked = true;
-            AlwaysSynced.Enabled = false;
-            if (PK.IsBlank)
-                return;
-            MainRNGEgg.Visible = MainRNGEgg.Checked = false;
-            if (PK.IsEvent)
-            {
-                L_Ability.Visible = L_gender.Visible = Gender.Visible = Ability.Visible = true;
-                Event_CheckedChanged(null, null);
-                return;
-            }
-            Filter_Lv.Value = PK.Level;
-            SetPersonalInfo(PK.SpecForm);
-            if (PK.UB || PK.QR)
-            {
-                //Island Scan and UB Text
-                UB.Text = PK.QR ? StringItem.islandscanstr : "UB";
-                dgv_ubvalue.HeaderText = PK.QR ? dgv_ubvalue.HeaderText.Replace("UB", "QR") : dgv_ubvalue.HeaderText.Replace("QR", "UB");
-                UBOnly.Text = PK.QR ? UBOnly.Text.Replace("UB", "QR") : UBOnly.Text.Replace("QR", "UB");
-                return;
-            }
-            if (PK.IsCrabrawler)
-            {
-                Honey.Checked = false;
-                WildEncounterSetting.Visible = false;
-                Encounter_th.Value = 101;
-            }
-            Timedelay.Value = PK.Delay;
-            NPC.Value = PK.NPC;
-        }
-
-        private EventRule geteventsetting()
-        {
-            int[] IVs = new[] { -1, -1, -1, -1, -1, -1 };
-            for (int i = 0; i < 6; i++)
-                if (EventIVLocked[i].Checked)
-                    IVs[i] = (int)EventIV[i].Value;
-            if (IVsCount.Value > 0 && IVs.Count(iv => iv >= 0) + IVsCount.Value > 5)
-            {
-                Error(SETTINGERROR_STR[lindex] + L_IVsCount.Text);
-                IVs = new[] { -1, -1, -1, -1, -1, -1 };
-            }
-            EventRule e = new EventRule
-            {
-                IVs = (int[])IVs.Clone(),
-                IVsCount = (byte)IVsCount.Value,
-                YourID = YourID.Checked,
-                PIDType = (byte)Event_PIDType.SelectedIndex,
-                AbilityLocked = AbilityLocked.Checked,
-                NatureLocked = NatureLocked.Checked,
-                GenderLocked = GenderLocked.Checked,
-                OtherInfo = OtherInfo.Checked,
-                EC = (uint)Event_EC.Value,
-                Ability = (byte)Event_Ability.SelectedIndex,
-                Nature = (byte)(Event_Nature.SelectedIndex - 1),
-                Gender = (byte)Event_Gender.SelectedIndex,
-                IsEgg = IsEgg.Checked
-            };
-            if (e.YourID)
-                e.TSV = (uint)TSV.Value;
-            else
-            {
-                e.TID = (int)Event_TID.Value;
-                e.SID = (int)Event_SID.Value;
-                e.TSV = (uint)(e.TID ^ e.SID) >> 4;
-                e.PID = (uint)Event_PID.Value;
-            }
-            return e;
-        }
-
-        private void SetTargetFrame_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Time_max.Value = Convert.ToDecimal(DGV.CurrentRow.Cells[0].Value);
-            }
-            catch (NullReferenceException)
-            {
-                Error(NOSELECTION_STR[lindex]);
-            }
-        }
-
-        private void SetStartFrame_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Frame_min.Value = Convert.ToDecimal(DGV.CurrentRow.Cells[0].Value);
-            }
-            catch (NullReferenceException)
-            {
-                Error(NOSELECTION_STR[lindex]);
-            }
-        }
-
-        private void HideControlPanel(object sender, EventArgs e)
-        {
-            if (ControlPanel.Visible)
-            {
-                ControlPanel.Visible = false;
-                DGV.Height += ControlPanel.Height;
-                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y - ControlPanel.Height);
-            }
-            else
-            {
-                ControlPanel.Visible = true;
-                DGV.Height -= ControlPanel.Height;
-                DGV.Location = new Point(DGV.Location.X, DGV.Location.Y + ControlPanel.Height);
-            }
-        }
-
-        private void HighLightFrameAfter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int FrameAfter = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_Frame"].Value) + Convert.ToInt32(DGV.CurrentRow.Cells["dgv_delay"].Value);
-                int currentrowindex = DGV.CurrentRow.Index;
-                for (int i = Convert.ToInt32(DGV.CurrentRow.Cells["dgv_delay"].Value); i > 0; i--)
-                {
-                    if (FrameAfter == Convert.ToInt32(DGV.Rows[currentrowindex + i].Cells[0].Value))
-                    {
-                        DGV.Rows[currentrowindex + i].DefaultCellStyle.BackColor = Color.Yellow;
-                        return;
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }
-
-        private void L_IVRange_Click(object sender, EventArgs e)
-        {
-            IVlow = IVup;
-        }
-        #endregion
-
-        #region WC7 Import
-        private void B_Open_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Gen7 Wonder Card Files|*.wc7";
-            openFileDialog1.Title = "Select a Wonder Card File";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                if (!ReadWc7(openFileDialog1.FileName))
-                    Error(FILEERRORSTR[lindex]);
-        }
-
-        private bool ReadWc7(string filename)
-        {
-            BinaryReader br = new BinaryReader(File.Open(filename, FileMode.Open));
-            try
-            {
-                byte[] Data = br.ReadBytes(0x108);
-                byte CardType = Data[0x51];
-                if (CardType != 0) return false;
-                byte[] PIDType_Order = new byte[] { 3, 0, 2, 1 };
-                byte[] Stats_index = new byte[] { 0xAF, 0xB0, 0xB1, 0xB3, 0xB4, 0xB2 };
-                ushort sp = BitConverter.ToUInt16(Data, 0x82);
-                L_EventSpecies.Text = L_Species.Text + ": " + StringItem.species[sp];
-                L_EventSpecies.Visible = true;
-                Poke.SelectedIndex = 1; // Switch to <Event>, set to Mew
-                byte form = Data[0x84];
-                SetPersonalInfo(sp, form); // Set pkm personal rule before wc7 rule
-                AbilityLocked.Checked = Data[0xA2] < 3;
-                Event_Ability.SelectedIndex = AbilityLocked.Checked ? Data[0xA2] + 1 : Data[0xA2] - 3;
-                NatureLocked.Checked = Data[0xA0] != 0xFF;
-                Event_Nature.SelectedIndex = NatureLocked.Checked ? Data[0xA0] + 1 : 0;
-                GenderLocked.Checked = Data[0xA1] != 3;
-                Event_Gender.SelectedIndex = GenderLocked.Checked ? (Data[0xA1] + 1) % 3 : 0;
-                if (Data[0xA1] == 2) GenderRatio.SelectedIndex = 0;
-                Fix3v.Checked = Data[Stats_index[0]] == 0xFE;
-                switch (Data[Stats_index[0]])
-                {
-                    case 0xFE: IVsCount.Value = 3; break;
-                    case 0xFD: IVsCount.Value = 2; break;
-                    // Maybe more rules here
-                    default: IVsCount.Value = 0; break;
-                }
-                for (int i = 0; i < 6; i++)
-                {
-                    if (Data[Stats_index[i]] < 0xFD)
-                    {
-                        EventIV[i].Value = Data[Stats_index[i]];
-                        EventIVLocked[i].Checked = true;
-                    }
-                    else
-                    {
-                        EventIV[i].Value = 0;
-                        EventIVLocked[i].Checked = false;
-                    }
-                }
-                Event_TID.Value = BitConverter.ToUInt16(Data, 0x68);
-                Event_SID.Value = BitConverter.ToUInt16(Data, 0x6A);
-                Event_PIDType.SelectedIndex = PIDType_Order[Data[0xA3]];
-                if (Event_PIDType.SelectedIndex == 3)
-                    Event_PID.Value = BitConverter.ToUInt32(Data, 0xD4);
-                Event_EC.Value = BitConverter.ToUInt32(Data, 0x70);
-                if (Event_EC.Value > 0) Event_EC.Visible = L_EC.Visible = true;
-                IsEgg.Checked = Data[0xD1] == 1;
-                YourID.Checked = Data[0xB5] == 3;
-                OtherInfo.Checked = true;
-                Filter_Lv.Value = Data[0xD0];
-                br.Close();
-            }
-            catch
-            {
-                br.Close();
-                return false;
-            }
-            return true;
-        }
-
-        private void IDChanged(object sender, EventArgs e)
-        {
-            L_Event_G7TID.Text = "G7TID:  "; L_Event_TSV.Text = "TSV:   ";
-            uint G7TID = ((uint)Event_TID.Value + ((uint)Event_SID.Value << 16)) % 1000000;
-            uint TSV = ((uint)Event_TID.Value ^ (uint)Event_SID.Value) >> 4;
-            L_Event_G7TID.Text += G7TID.ToString("D6");
-            L_Event_TSV.Text += TSV.ToString("D4");
-        }
-
-        private void DropEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-        }
-
-        private void DragDropWC(object sender, DragEventArgs e)
-        {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (files.Length == 1 && !ReadWc7(files[0]))
-                Error(FILEERRORSTR[lindex]);
-        }
-
-        private void NatureLocked_CheckedChanged(object sender, EventArgs e)
-        {
-            Event_Nature.Enabled = NatureLocked.Checked;
-            if (!NatureLocked.Checked) Event_Nature.SelectedIndex = 0;
-        }
-
-        private void GenderLocked_CheckedChanged(object sender, EventArgs e)
-        {
-            Event_Gender.Enabled = GenderLocked.Checked;
-            if (!GenderLocked.Checked) Event_Gender.SelectedIndex = 0;
-            if (IsEvent) GenderRatio.Enabled = !GenderLocked.Checked;
-        }
-
-        private void AbilityLocked_CheckedChanged(object sender, EventArgs e)
-        {
-            Event_Ability.Items.Clear();
-            Event_Ability.Items.AddRange(AbilityLocked.Checked ? StringItem.abilitystr : StringItem.eventabilitystr);
-            Event_Ability.SelectedIndex = 0;
         }
         #endregion
     }
