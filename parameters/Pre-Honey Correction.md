@@ -15,11 +15,14 @@
 | Memorial Hill                        |     12     |
 | Haina Desert                         |     1      |
 | **Malie Garden**                     |   **26**   |
-| Route 17                             |    2+12    |
+| Route 17\*\*                         |     10     |
 | **Resolution Cave - B1F**            |   **1**    |
 | **Ten Carat Hill - Farthest Hollow** |   **1**    |
 
+Specific spots please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.
+
 ### Melemele Island
+
 | Location                               | Correction | Least NPCs # |
 | :------------------------------------- | :--------: | :----------: |
 | Route 1                                |     15     |    0/0/2     |
@@ -52,8 +55,8 @@
 | Lush Jungle - West          |     2      |      0       |
 | Lush Jungle - North         |     2      |      0       |
 | Lush Jungle - Cave          |     2      |      0       |
-| Brooklet Hill - Walking     |    5-7     |      1       |
-| Brooklet Hill - Surfing     |    6-8     |      1       |
+| Brooklet Hill - Walking     |    5/7     |      1       |
+| Brooklet Hill - Surfing     |    6/8     |      1       |
 | Brooklet Hill - Totem's Den |     3      |      1       |
 | Route 6                     |     11     |     2/2      |
 | Route 7 - Surfing           |     11     |      1       |
@@ -68,7 +71,7 @@
 ### Ula'ula Island
 | Location                      | Correction | Least NPCs # |
 | :---------------------------- | :--------: | :----------: |
-| Malie City - Outer Cape       |     9      |      2       |
+| Malie City - Outer Cape       |     9      |  2-5\*\*\*   |
 | Malie Garden                  |     26     |      0       |
 | Route 10                      |     19     |      2       |
 | Mount Hokulani                |     16     |      0       |
@@ -84,7 +87,7 @@
 | Route 15 - Surfing            |     21     |      1       |
 | Route 16                      |     10     |      0       |
 | Ula'ula Meadow                |    2+6     |      0       |
-| Route 17\*\*                  |    2+12    |     0+2      |
+| Route 17\*\*                  |     10     |     0/3      |
 | Mount Lanakila - Mountainside |     1      |      0       |
 | Mount Lanakila - Cave         |     1      |      0       |
 | Mount Lanakila - Mid-Point    |     1      |      0       |
@@ -111,5 +114,5 @@
 | Poni Gauntlet                  |     11     |      4       |
 
 \* Clear all special spots  
-\*\* Remain to be confirmed  
-Specific spots and encounter tables please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here](http://pokerng.forumcommunity.net/?t=59613020) for Wild Pokemon. Credit to Real96.
+\*\* The main rng will advance by 2 frames every 4/60sec.  
+\*\*\* After defeating the cleaners, the NPC number increase.

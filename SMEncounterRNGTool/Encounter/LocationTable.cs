@@ -233,8 +233,8 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 086, idx = 2, mark = "Water",//Brooklet Hill
-                Correction = 05, NPC = 1,
+                Location = 086, idx = 2, mark = "Water1",//Brooklet Hill
+                Correction = 08, NPC = 1,
                 LevelMin = 14,
                 Species = new[] {22,060,751,060,751,054},
             },
@@ -244,6 +244,13 @@ namespace SMEncounterRNGTool
                 Correction = 07, NPC = 1,
                 LevelMin = 14,
                 Species = new[] {25,751,060,054,278},
+            },
+            new EncounterArea
+            {
+                Location = 086, idx = 4, mark = "Water2",//Brooklet Hill
+                Correction = 06, NPC = 1,
+                LevelMin = 14,
+                Species = new[] {22,060,751,060,751,054},
             },
             new EncounterArea
             {
