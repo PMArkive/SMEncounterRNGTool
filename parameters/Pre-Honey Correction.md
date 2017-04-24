@@ -68,7 +68,7 @@
 ### Ula'ula Island
 | Location                      | Correction | Least NPCs # |
 | :---------------------------- | :--------: | :----------: |
-| Malie City - Outer Cape       |     9      |      4       |
+| Malie City - Outer Cape       |     9      |      2       |
 | Malie Garden                  |     26     |      0       |
 | Route 10                      |     19     |      2       |
 | Mount Hokulani                |     16     |      0       |
