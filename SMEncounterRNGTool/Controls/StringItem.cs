@@ -7,6 +7,7 @@ namespace SMEncounterRNGTool
     {
         public static string[] naturestr = new bool[25].Select(i => "").ToArray();
         public static string[] hpstr = new bool[18].Select(i => "").ToArray();
+        public static string[] genderratio = new bool[7].Select(i => "").ToArray();
 
         public static string[] genderstr = { "-", "♂", "♀" };
         public static string[] abilitystr = { "-", "1", "2", "H" };
@@ -23,15 +24,9 @@ namespace SMEncounterRNGTool
         public static ComboItem[] HiddenPowerList
             => hpstr.Skip(1).Take(16).Select((str, i) => new ComboItem(str, i)).ToArray();
 
-        public static ComboItem[] GenderRatioList =
-        {
-            new ComboItem("Genderless", 0xFF),
-            new ComboItem("♂1：♀1", 0x7F),
-            new ComboItem("♂7：♀1", 0x1F),
-            new ComboItem("♂3：♀1", 0x3F),
-            new ComboItem("♂1：♀3", 0xBF),
-            new ComboItem("♂ Only", 0x00),
-            new ComboItem("♀ Only", 0xFE),
-        };
+        private static byte[] genderratiodata = new byte[] { 0xFF, 0x7F, 0x1F, 0x3F, 0xBF, 0x00, 0xFE };
+
+        public static ComboItem[] GenderRatioList
+            => genderratio.Select((str, i) => new ComboItem(str, genderratiodata[i])).ToArray();
     }
 }

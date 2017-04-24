@@ -129,6 +129,7 @@ namespace SMEncounterRNGTool
             StringItem.hpstr = getStringList("Types", curlanguage);
             StringItem.species = getStringList("Species", curlanguage);
             StringItem.location = getStringList("Location", curlanguage);
+            StringItem.genderratio = getStringList("Genderratio",curlanguage);
             StringItem.eventstr = EVENT_STR[lindex];
             StringItem.fossilstr = FOSSIL_STR[lindex];
             StringItem.starterstr = STARTER_STR[lindex];
@@ -141,6 +142,10 @@ namespace SMEncounterRNGTool
             HiddenPower.Items.Clear();
             HiddenPower.BlankText = ANY_STR[lindex];
             HiddenPower.Items.AddRange(StringItem.HiddenPowerList);
+            
+            GenderRatio.DisplayMember = "Text";
+            GenderRatio.ValueMember = "Value";
+            GenderRatio.DataSource = new BindingSource(StringItem.GenderRatioList, null);
 
             for (int i = 0; i < 2; i++)
                 GameVersion.Items[i] = GAMEVERSION_STR[lindex, i];
@@ -193,10 +198,6 @@ namespace SMEncounterRNGTool
             Event_Nature.Items.Add("-");
             SyncNature.Items.AddRange(StringItem.naturestr);
             Event_Nature.Items.AddRange(StringItem.naturestr);
-
-            GenderRatio.DisplayMember = "Text";
-            GenderRatio.ValueMember = "Value";
-            GenderRatio.DataSource = new BindingSource(StringItem.GenderRatioList, null);
 
             Gender.Items.AddRange(StringItem.genderstr);
             Event_Gender.Items.AddRange(StringItem.genderstr);

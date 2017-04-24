@@ -168,6 +168,8 @@
     <Content Include="Resources\pic_Clock_7.png" />
     <Content Include="Resources\pic_Clock_8.png" />
     <Content Include="Resources\pic_Clock_9.png" />
+    <Content Include="Resources\text_Genderratio_cn.txt" />
+    <Content Include="Resources\text_Genderratio_en.txt" />
     <None Include="Resources\lang_cn.txt" />
     <None Include="Resources\text_Natures_cn.txt" />
     <None Include="Resources\text_Natures_en.txt" />

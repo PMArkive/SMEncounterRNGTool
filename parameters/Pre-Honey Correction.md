@@ -41,7 +41,7 @@ Specific spots please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here]
 | Kala'e bay - Walking                   |     1      |      0       |
 | Kala'e bay - Surfing                   |     2      |      1       |
 | Ten Carat Hill Undersea Cave - Walking |     2      |      0       |
-| Ten Carat Hill Undersea Cave - Surfing |     2      |      1       |
+| Ten Carat Hill Undersea Cave - Surfing |     3      |      1       |
 | Ten Carat Hill - Cave                  |     2      |      0       |
 | Ten Carat Hill - Farthest Hollow       |     1      |      0       |
 
@@ -71,7 +71,7 @@ Specific spots please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here]
 ### Ula'ula Island
 | Location                      | Correction | Least NPCs # |
 | :---------------------------- | :--------: | :----------: |
-| Malie City - Outer Cape       |     9      |  2-5\*\*\*   |
+| Malie City - Outer Cape       |     9      |  2-4\*\*\*   |
 | Malie Garden                  |     26     |      0       |
 | Route 10                      |     19     |      2       |
 | Mount Hokulani                |     16     |      0       |
