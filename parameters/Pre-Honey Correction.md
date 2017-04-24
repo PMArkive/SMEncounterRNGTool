@@ -53,7 +53,7 @@
 | Lush Jungle - North         |     2      |      0       |
 | Lush Jungle - Cave          |     2      |      0       |
 | Brooklet Hill - Walking     |    5-7     |      1       |
-| Brooklet Hill - Surfing     |     6      |      1       |
+| Brooklet Hill - Surfing     |    6-8     |      1       |
 | Brooklet Hill - Totem's Den |     3      |      1       |
 | Route 6                     |     11     |     2/2      |
 | Route 7 - Surfing           |     11     |      1       |
@@ -68,7 +68,7 @@
 ### Ula'ula Island
 | Location                      | Correction | Least NPCs # |
 | :---------------------------- | :--------: | :----------: |
-| Malie City - Outer Cape       |     9      |      4       |
+| Malie City - Outer Cape       |     9      |      2       |
 | Malie Garden                  |     26     |      0       |
 | Route 10                      |     19     |      2       |
 | Mount Hokulani                |     16     |      0       |
