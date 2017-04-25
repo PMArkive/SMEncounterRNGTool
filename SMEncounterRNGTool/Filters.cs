@@ -69,7 +69,11 @@ namespace SMEncounterRNGTool
         public bool CheckResult(RNGResult result)
         {
             if (Skip)
+            {
+                result.hiddenpower = (byte)Pokemon.getHiddenPowerValue(result.IVs);
+                if (BS != null) result.Stats = Pokemon.getStats(result.IVs, result.Nature, result.Lv, BS);
                 return true;
+            }
             if (ShinyOnly && !result.Shiny)
                 return false;
             if (!CheckBlink(result.Blink))

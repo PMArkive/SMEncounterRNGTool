@@ -227,7 +227,7 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 086, idx = 1, mark = "Grass1", //Brooklet Hill
-                Correction = 05, NPC = 1,
+                Correction = 07, NPC = 1,
                 LevelMin = 14,
                 Species = new[] {6,506,054,751,060,278,046},
             },
@@ -241,7 +241,7 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 088, idx = 3, mark = "Grass2",//Brooklet Hill
-                Correction = 07, NPC = 1,
+                Correction = 05, NPC = 1,
                 LevelMin = 14,
                 Species = new[] {25,751,060,054,278},
             },
@@ -335,7 +335,7 @@ namespace SMEncounterRNGTool
             new EncounterArea
             {
                 Location = 132, //Malie City
-                Correction = 09, NPC = 5,
+                Correction = 09, NPC = 4,
                 LevelMin = 24,
                 Species = new[] {13,568,088,735,081},
             },
