@@ -71,7 +71,7 @@ Specific spots please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here]
 ### Ula'ula Island
 | Location                      | Correction | Least NPCs # |
 | :---------------------------- | :--------: | :----------: |
-| Malie City - Outer Cape       |     9      |  2-5\*\*\*   |
+| Malie City - Outer Cape       |     9      |  2-4\*\*\*   |
 | Malie Garden                  |     26     |      0       |
 | Route 10                      |     19     |      2       |
 | Mount Hokulani                |     16     |      0       |
