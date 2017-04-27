@@ -160,7 +160,7 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 036, idx = 3, mark = "Water", //Ten Carat Hill - Water
+                Location = 034, idx = 3, mark = "Water", //Ten Carat Hill - Water
                 Correction = 03, NPC = 1,
                 LevelMin = 15,
                 Species = new[] {14,041,054,041,041,041},
@@ -240,14 +240,14 @@ namespace SMEncounterRNGTool
             },
             new EncounterArea
             {
-                Location = 088, idx = 3, mark = "Grass2",//Brooklet Hill
+                Location = 088, idx = 1, mark = "Grass2",//Brooklet Hill
                 Correction = 05, NPC = 1,
                 LevelMin = 14,
                 Species = new[] {25,751,060,054,278},
             },
             new EncounterArea
             {
-                Location = 086, idx = 4, mark = "Water2",//Brooklet Hill
+                Location = 088, idx = 2, mark = "Water2",//Brooklet Hill
                 Correction = 06, NPC = 1,
                 LevelMin = 14,
                 Species = new[] {22,060,751,060,751,054},
@@ -637,6 +637,6 @@ namespace SMEncounterRNGTool
 
         public readonly static int[] SMLocationList = Table.Select(t => t.Locationidx).ToArray();
 
-        public readonly static int[] QRLocationList = SMLocationList.Where(idx => Pokemon.QRScanSpecies.Skip(1).Select(pk => (int)pk.Location).Contains(idx & 0xFF)).ToArray();
+        public readonly static int[] QRLocationList = Pokemon.QRScanSpecies.Skip(1).SelectMany(pk => pk.Location).ToArray();
     }
 }
