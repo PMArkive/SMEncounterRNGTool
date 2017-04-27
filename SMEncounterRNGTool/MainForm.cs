@@ -62,7 +62,7 @@ namespace SMEncounterRNGTool
         #endregion
 
         #region Global Variable
-        private string version = "1.1.1";
+        private string version = "1.1.2";
 
         private EventRule e = new EventRule();
         private RNGSetting rng = new RNGSetting();
@@ -236,9 +236,7 @@ namespace SMEncounterRNGTool
         {
             if (PK.IsBlank)
                 locationlist = LocationTable.SMLocationList;
-            else if (PK.UB)
-                locationlist = PK.Location;
-            else if (PK.QR)
+            else if (PK.UB || PK.QR)
                 locationlist = PK.Template ? LocationTable.QRLocationList : PK.Location;
             else
                 return;
