@@ -636,5 +636,7 @@ namespace SMEncounterRNGTool
         };
 
         public readonly static int[] SMLocationList = Table.Select(t => t.Locationidx).ToArray();
+
+        public readonly static int[] QRLocationList = SMLocationList.Where(idx => Pokemon.QRScanSpecies.Skip(1).Select(pk => (int)pk.Location).Contains(idx & 0xFF)).ToArray();
     }
 }

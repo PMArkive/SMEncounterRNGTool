@@ -239,7 +239,7 @@ namespace SMEncounterRNGTool
             else if (PK.UB)
                 locationlist = PK.UBLocation;
             else if (PK.QR)
-                locationlist = LocationTable.Table.Where(t => t.Location == PK.Location).Select(t => t.Locationidx).ToArray();
+                locationlist = PK.Template ? LocationTable.QRLocationList : LocationTable.Table.Where(t => t.Location == PK.Location).Select(t => t.Locationidx).ToArray();
             else
                 return;
 
