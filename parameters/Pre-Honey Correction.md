@@ -87,7 +87,7 @@ Specific spots please visit [here](UB%20Rate%20and%20Spots.md) for UB and [here]
 | Route 15 - Surfing            |     21     |      1       |
 | Route 16                      |     10     |      0       |
 | Ula'ula Meadow                |    2+6     |      0       |
-| Route 17\*\*                  |     10     |     0/3      |
+| Route 17\*\*                  |     10     |     0/0      |
 | Mount Lanakila - Mountainside |     1      |      0       |
 | Mount Lanakila - Cave         |     1      |      0       |
 | Mount Lanakila - Mid-Point    |     1      |      0       |
