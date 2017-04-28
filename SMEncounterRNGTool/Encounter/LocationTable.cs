@@ -407,7 +407,7 @@ namespace SMEncounterRNGTool
             {
                 Location = 124, //Haina Desert
                 LevelMin = 28,
-                Species = new[] {0,551,051,551,051},
+                Species = new[] {0,551,051,551,551},
             },
             new EncounterArea
             {
@@ -617,13 +617,13 @@ namespace SMEncounterRNGTool
                 Location = 182, idx = 1, mark = "1F", //Resolution Cave
                 Correction = 3,
                 LevelMin = 54,
-                Species = new[] {0,041,050,041,041},
+                Species = new[] {0,042,051,042,042},
             },
             new EncounterArea
             {
                 Location = 182, idx = 2, mark = "B1F", //Resolution Cave
                 LevelMin = 54,
-                Species = new[] {0,041,050,041,041},
+                Species = new[] {0,042,051,042,042},
             },
             new EncounterArea
             {
