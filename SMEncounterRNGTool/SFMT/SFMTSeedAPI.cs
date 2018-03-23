@@ -12,7 +12,7 @@ namespace SMEncounterRNGTool
         static public List<Result> request(string needle)
         {
             Root root;
-            var url = $"http://49.212.217.137:19937/gen7/sfmt/seed?needle={needle}";
+            var url = $"https://rng-api.odanado.com/sm/sfmt/seed?needle={needle}";
 
             string jsonStr;
             using (var webClient = new WebClient())

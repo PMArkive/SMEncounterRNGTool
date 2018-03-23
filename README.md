@@ -1,5 +1,7 @@
 # SMEncounterRNGTool  [![Build status](https://ci.appveyor.com/api/projects/status/hv29i210qixas6kw?svg=true)](https://ci.appveyor.com/project/wwwwwwzx/smencounterrngtool)
 
+**I will no longer be working on this repo. Checkout [3DSRNGTool](https://github.com/wwwwwwzx/3DSRNGTool) for a faster and more functional Tool.**
+
 A tool for Pokemon Sun & Moon RNG (including ALL types of stationary and wild Pokemon). All button pressing and animation time delays were calibrated.  
 Great thanks to  
 **quan_dra** for original code  
